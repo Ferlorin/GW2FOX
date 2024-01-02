@@ -7,4 +7,4 @@
 
 
 All written with Open AI and Visual Studio 2022.
-Crashes, issus and errors!
+Crashes, issus and errors solved so far!
