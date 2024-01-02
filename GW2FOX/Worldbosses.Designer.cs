@@ -109,7 +109,7 @@
             // 
             Squadinfo.Font = new Font("Segoe UI", 15F);
             Squadinfo.Location = new Point(501, 229);
-            Squadinfo.MaxLength = 247;
+            Squadinfo.MaxLength = 226;
             Squadinfo.Multiline = true;
             Squadinfo.Name = "Squadinfo";
             Squadinfo.ScrollBars = ScrollBars.Vertical;

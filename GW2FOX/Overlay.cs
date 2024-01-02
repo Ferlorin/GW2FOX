@@ -26,16 +26,18 @@ namespace GW2FOX
             this.Opacity = 0.7;
             this.MouseDown += OnMouseDown;
             this.MouseMove += OnMouseMove;
-            this.Width = 255;
+            this.Width = 250;
             this.Height = 327;
+            this.AutoScroll = true;
+
 
             Panel listViewPanel = new Panel();
             listViewPanel.BackColor = Color.Transparent;
             this.FormBorderStyle = FormBorderStyle.Fixed3D;
 
             // Berechne die Größe des listViewPanel
-            int panelWidth = (int)(this.Width * 0.98);
-            int panelHeight = (int)(this.Height * 0.98);
+            int panelWidth = (int)(this.Width);
+            int panelHeight = (int)(this.Height * 10);
             listViewPanel.Size = new Size(panelWidth, panelHeight);
 
             listViewPanel.Location = new Point(0, 0);
@@ -43,13 +45,18 @@ namespace GW2FOX
             // Erstelle die ListView
             ListView overlayListView = CustomBossList; // Verwende CustomBossList statt listViewItems
             overlayListView.ForeColor = Color.Black;
-            overlayListView.Font = new Font("Segoe UI", 10, FontStyle.Bold | FontStyle.Regular);
+            overlayListView.Font = new Font("Segoe UI", 10, FontStyle.Bold);
             overlayListView.BackColor = this.BackColor;
             overlayListView.View = View.Details;
             overlayListView.Location = new Point(0, 0);
             overlayListView.Width = listViewPanel.Width;
-            overlayListView.Height = listViewPanel.Height;
-            overlayListView.Scrollable = false;
+
+            // Enable vertical scrollbar
+            overlayListView.Scrollable = true;
+
+            // Set the height considering the horizontal scrollbar
+            overlayListView.Height = listViewPanel.Height - SystemInformation.HorizontalScrollBarHeight;
+
             overlayListView.Enabled = true;
             overlayListView.ItemSelectionChanged += (sender, e) =>
             {

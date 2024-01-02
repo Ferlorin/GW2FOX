@@ -120,17 +120,15 @@
   <data name="Squadinfo.Text" xml:space="preserve">
     <value>
 
-• InstanceCheck: 
-    - right click on me &amp; join MapName 
-• Don’t cancel invites! 
-• No Triple Trouble
+• InstanceCheck:
+    - right click on me &amp; join map
+• Don’t cancel invites!
+• No 3ple Trouble
 • https://gw2-hub.000webhostapp.com
- 
-• GW2FOX: 
-  - Overlay Timer
-  - Guild Advertising Helper
-  - Leading Tool
-  - Repair Client</value>
+
+• GW2FOX:
+  - Overlay Timer, Guild Helper, Com Central, Repair GW2
+  on GitHub &amp; HP</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
