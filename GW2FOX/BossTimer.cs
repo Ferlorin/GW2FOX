@@ -10,8 +10,12 @@ namespace GW2FOX
 {
     public class BossTimer : IDisposable
     {
-        public static ListView CustomBossList;
+        public void StopTimer()
+        {
+            Stop();
+        }
 
+        public static ListView CustomBossList;
         private readonly ListView bossList;
         private readonly TimeZoneInfo mezTimeZone;
         private System.Threading.Timer timer;
@@ -29,6 +33,7 @@ namespace GW2FOX
         {
             timer.Change(0, 1000);
         }
+
         public void Stop()
         {
             timer.Change(Timeout.Infinite, Timeout.Infinite);

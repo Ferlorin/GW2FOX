@@ -37,7 +37,6 @@
             Symbols = new TextBox();
             button1 = new Button();
             button2 = new Button();
-            button3 = new Button();
             button4 = new Button();
             button5 = new Button();
             button6 = new Button();
@@ -78,6 +77,7 @@
             pictureBox3 = new PictureBox();
             pictureBox2 = new PictureBox();
             pictureBox4 = new PictureBox();
+            button3 = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
@@ -97,6 +97,7 @@
             // 
             Runinfo.Font = new Font("Segoe UI", 15F);
             Runinfo.Location = new Point(26, 229);
+            Runinfo.MaxLength = 199;
             Runinfo.Multiline = true;
             Runinfo.Name = "Runinfo";
             Runinfo.ScrollBars = ScrollBars.Vertical;
@@ -108,17 +109,19 @@
             // 
             Squadinfo.Font = new Font("Segoe UI", 15F);
             Squadinfo.Location = new Point(501, 229);
+            Squadinfo.MaxLength = 247;
             Squadinfo.Multiline = true;
             Squadinfo.Name = "Squadinfo";
             Squadinfo.ScrollBars = ScrollBars.Vertical;
             Squadinfo.Size = new Size(350, 100);
             Squadinfo.TabIndex = 2;
-            Squadinfo.Text = "\r\n\r\n• Check Instance by: \r\n    - right click- on me & join “MapName” \r\n• Don’t kick or cancel Invites!\r\n• No Triple Trouble\r\n• https://gw2-hub.000webhostapp.com\r\n";
+            Squadinfo.Text = resources.GetString("Squadinfo.Text");
             // 
             // Guild
             // 
             Guild.Font = new Font("Segoe UI", 15F);
             Guild.Location = new Point(976, 229);
+            Guild.MaxLength = 199;
             Guild.Multiline = true;
             Guild.Name = "Guild";
             Guild.ScrollBars = ScrollBars.Vertical;
@@ -130,6 +133,7 @@
             // 
             Welcome.Font = new Font("Segoe UI", 15F);
             Welcome.Location = new Point(1451, 229);
+            Welcome.MaxLength = 199;
             Welcome.Multiline = true;
             Welcome.Name = "Welcome";
             Welcome.ScrollBars = ScrollBars.Vertical;
@@ -169,16 +173,6 @@
             button2.Text = "Save";
             button2.UseVisualStyleBackColor = true;
             button2.Click += Saverun_Click;
-            // 
-            // button3
-            // 
-            button3.Location = new Point(857, 306);
-            button3.Name = "button3";
-            button3.Size = new Size(75, 23);
-            button3.TabIndex = 9;
-            button3.Text = "Save";
-            button3.UseVisualStyleBackColor = true;
-            button3.Click += Squadinfos_Click;
             // 
             // button4
             // 
@@ -607,12 +601,23 @@
             pictureBox4.TabIndex = 100;
             pictureBox4.TabStop = false;
             // 
+            // button3
+            // 
+            button3.Location = new Point(857, 306);
+            button3.Name = "button3";
+            button3.Size = new Size(75, 23);
+            button3.TabIndex = 101;
+            button3.Text = "Save";
+            button3.UseVisualStyleBackColor = true;
+            button3.Click += Savesquadmessage_Click;
+            // 
             // Worldbosses
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources.Background;
             ClientSize = new Size(1904, 1041);
+            Controls.Add(button3);
             Controls.Add(pictureBox4);
             Controls.Add(pictureBox2);
             Controls.Add(pictureBox3);
@@ -653,7 +658,6 @@
             Controls.Add(button6);
             Controls.Add(button5);
             Controls.Add(button4);
-            Controls.Add(button3);
             Controls.Add(button2);
             Controls.Add(button1);
             Controls.Add(Symbols);
@@ -685,7 +689,6 @@
         private TextBox Symbols;
         private Button button1;
         private Button button2;
-        private Button button3;
         private Button button4;
         private Button button5;
         private Button button6;
@@ -726,5 +729,6 @@
         private PictureBox pictureBox3;
         private PictureBox pictureBox2;
         private PictureBox pictureBox4;
+        private Button button3;
     }
 }

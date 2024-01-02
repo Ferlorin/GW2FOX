@@ -54,11 +54,11 @@ namespace GW2FOX
                 // Aktualisierten Inhalt zurück in die Datei schreiben
                 File.WriteAllLines(filePath, lines);
 
-                MessageBox.Show($"{sectionHeader} erfolgreich gespeichert.", "Erfolg", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show($"{sectionHeader} saved.", "Saved!", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Fehler beim Speichern von {sectionHeader}: {ex.Message}", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error {sectionHeader}: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         private void BringGw2ToFront()
@@ -311,6 +311,11 @@ namespace GW2FOX
         private void Pinata_Click(object sender, EventArgs e)
         {
             ShowAndHideForm(new Pinatas());
+        }
+
+        private void Savesquadmessage_Click(object sender, EventArgs e)
+        {
+            SaveTextToFile(Squadinfo.Text, "Squadinfo");
         }
     }
 }

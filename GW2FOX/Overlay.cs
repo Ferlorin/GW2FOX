@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -6,14 +7,17 @@ namespace GW2FOX
 {
     public partial class Overlay : Form
     {
+        public static ListView CustomBossList { get; private set; }
+
         private Point mouse_offset;
-        private ListView listViewItems;
 
         public Overlay(ListView listViewItems)
         {
             InitializeComponent();
 
-            // Configure the Overlay Form
+            CustomBossList = listViewItems; // Setze die statische Eigenschaft
+
+            // Konfiguriere das Overlay-Formular
             this.BackColor = Color.Black;
             this.TransparencyKey = Color.Black;
             this.TopMost = true;
@@ -26,17 +30,18 @@ namespace GW2FOX
             this.Height = 327;
 
             Panel listViewPanel = new Panel();
-            listViewPanel.BackColor = Color.Transparent; // Mache das Panel transparent
-            FormBorderStyle = FormBorderStyle.Fixed3D;
-            // Calculate the size of listViewPanel to be 2% smaller than the overlay
-            int panelWidth = (int)(this.Width);
-            int panelHeight = (int)(this.Height);
+            listViewPanel.BackColor = Color.Transparent;
+            this.FormBorderStyle = FormBorderStyle.Fixed3D;
+
+            // Berechne die Größe des listViewPanel
+            int panelWidth = (int)(this.Width * 0.98);
+            int panelHeight = (int)(this.Height * 0.98);
             listViewPanel.Size = new Size(panelWidth, panelHeight);
 
             listViewPanel.Location = new Point(0, 0);
 
-            // Create the ListView
-            ListView overlayListView = listViewItems;
+            // Erstelle die ListView
+            ListView overlayListView = CustomBossList; // Verwende CustomBossList statt listViewItems
             overlayListView.ForeColor = Color.Black;
             overlayListView.Font = new Font("Segoe UI", 10, FontStyle.Bold | FontStyle.Regular);
             overlayListView.BackColor = this.BackColor;
@@ -51,12 +56,12 @@ namespace GW2FOX
                 overlayListView.SelectedIndices.Clear();
             };
 
-            // Add the ListView to the ListView Panel
+            // Füge die ListView zum ListView Panel hinzu
             listViewPanel.Controls.Add(overlayListView);
             this.Controls.Add(listViewPanel);
             this.SizeGripStyle = SizeGripStyle.Show;
-            // Set up event handlers for moving the form
         }
+
         private void OnMouseDown(object sender, MouseEventArgs e)
         {
             mouse_offset = new Point(-e.X, -e.Y);
@@ -70,6 +75,11 @@ namespace GW2FOX
                 mousePos.Offset(mouse_offset.X, mouse_offset.Y);
                 Location = mousePos;
             }
+        }
+
+        public void CloseOverlay()
+        {
+            this.Close();
         }
     }
 }

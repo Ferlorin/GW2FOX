@@ -1,19 +1,31 @@
 using GW2FOX;
+using System;
+using System.Windows.Forms;
 
 namespace GW2FOX
 {
     internal static class Program
-    {
-        /// <summary>
-        ///  The main entry point for the application.
-        /// </summary>
-        [STAThread]
-        static void Main()
         {
-            // To customize application configuration such as set high DPI settings or default font,
-            // see https://aka.ms/applicationconfiguration.
+            private static Overlay overlayForm;
+            private static BossTimer bossTimer;
+            private static Main mainForm;
+
+            [STAThread]
+        static void Main()
+        {   
             ApplicationConfiguration.Initialize();
             Application.Run(new Main());
+        }
+        private static void MainForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+                // Stoppe den BossTimer, wenn die Main Form geschlossen wird
+        bossTimer.StopTimer();
+
+                // Schlieﬂe das Overlay Form
+        overlayForm.CloseOverlay();
+
+                // Schlieﬂe die Main Form
+        mainForm.Close();
         }
     }
 }

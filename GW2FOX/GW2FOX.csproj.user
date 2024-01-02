@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Compile Update="Baseform.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Behemoth.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Chak.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Clawofjormag.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Dbs.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Doppelganger.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Dragonstorm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Drakkar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Dwayna.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Eye.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Fireelemental.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Fireshaman.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forgedwithfire.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Inquestgolem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Jormag.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Junglewurm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Juundu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Karkaqueen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Lyssa.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Main.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Maw.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Megadestroyer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Metalconcert.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Ogrewars.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Overlay.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Pinatas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Pta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Rhendak.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Spellmaster.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Tarir.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Tequatl.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Thaida.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Theshatterer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Ulgoth.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Worldbosses.cs">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
+</Project>
