@@ -52,11 +52,11 @@ namespace GW2FOX
         {
             customBossList = new ListView();
             customBossList.View = View.Details;
-            customBossList.Columns.Add("Boss Name", 155);
+            customBossList.Columns.Add("Boss Name", 145);
             customBossList.Columns.Add("Time", 78);
             customBossList.Location = new Point(0, 0);
             customBossList.ForeColor = Color.White;
-            customBossList.Font = new Font("Times New Roman", 15);
+            new Font("Segoe UI", 10, FontStyle.Bold);
         }
 
         private void OpenForm(Form newForm)

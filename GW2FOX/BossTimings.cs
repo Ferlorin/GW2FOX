@@ -22,18 +22,18 @@ namespace GW2FOX
             AddBossEvent("The frozen Maw", "21:15:00", "WBs");
             AddBossEvent("The frozen Maw", "23:15:00", "WBs");
 
-            AddBossEvent("Fireshaman and his minions", "01:15:00", "WBs");
-            AddBossEvent("Fireshaman and his minions", "03:15:00", "WBs");
-            AddBossEvent("Fireshaman and his minions", "04:15:00", "WBs");
-            AddBossEvent("Fireshaman and his minions", "07:15:00", "WBs");
-            AddBossEvent("Fireshaman and his minions", "09:15:00", "WBs");
-            AddBossEvent("Fireshaman and his minions", "11:15:00", "WBs");
-            AddBossEvent("Fireshaman and his minions", "13:15:00", "WBs");
-            AddBossEvent("Fireshaman and his minions", "15:15:00", "WBs");
-            AddBossEvent("Fireshaman and his minions", "17:15:00", "WBs");
-            AddBossEvent("Fireshaman and his minions", "19:15:00", "WBs");
-            AddBossEvent("Fireshaman and his minions", "21:15:00", "WBs");
-            AddBossEvent("Fireshaman and his minions", "23:15:00", "WBs");
+            AddBossEvent("Fireshaman & minions", "01:15:00", "WBs");
+            AddBossEvent("Fireshaman & minions", "03:15:00", "WBs");
+            AddBossEvent("Fireshaman & minions", "04:15:00", "WBs");
+            AddBossEvent("Fireshaman & minions", "07:15:00", "WBs");
+            AddBossEvent("Fireshaman & minions", "09:15:00", "WBs");
+            AddBossEvent("Fireshaman & minions", "11:15:00", "WBs");
+            AddBossEvent("Fireshaman & minions", "13:15:00", "WBs");
+            AddBossEvent("Fireshaman & minions", "15:15:00", "WBs");
+            AddBossEvent("Fireshaman & minions", "17:15:00", "WBs");
+            AddBossEvent("Fireshaman & minions", "19:15:00", "WBs");
+            AddBossEvent("Fireshaman & minions", "21:15:00", "WBs");
+            AddBossEvent("Fireshaman & minions", "23:15:00", "WBs");
 
 
             AddBossEvent("LLLA - Timberline Falls", "01:20:00", "WBs");

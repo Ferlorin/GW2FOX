@@ -63,7 +63,7 @@ namespace GW2FOX
 
                         var pastBosses = BossTimings.Events
                             .Where(bossEvent =>
-                                bossEvent.Timing >= currentTime.Subtract(new TimeSpan(0, 14, 0)) && bossEvent.Timing < currentTime)
+                                bossEvent.Timing >= currentTime.Subtract(new TimeSpan(0, 14, 59)) && bossEvent.Timing < currentTime)
                             .ToList();
 
                         var allBosses = upcomingBosses.Concat(pastBosses).ToList();

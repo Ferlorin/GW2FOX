@@ -26,8 +26,8 @@ namespace GW2FOX
             this.Opacity = 0.7;
             this.MouseDown += OnMouseDown;
             this.MouseMove += OnMouseMove;
-            this.Width = 250;
-            this.Height = 327;
+            this.Width = 235;
+            this.Height = 310;
             this.AutoScroll = true;
 
 
