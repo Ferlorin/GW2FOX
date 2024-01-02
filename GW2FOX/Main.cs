@@ -1,8 +1,4 @@
-using System;
 using System.Diagnostics;
-using System.Drawing;
-using System.IO;
-using System.Windows.Forms;
 
 namespace GW2FOX
 {

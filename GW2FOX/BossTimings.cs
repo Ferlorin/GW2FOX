@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace GW2FOX
+﻿namespace GW2FOX
 {
     public static class BossTimings
     {
@@ -236,7 +233,60 @@ namespace GW2FOX
             AddBossEvent("Spellmaster Macsen", "21:10:00", "Maguuma");
             AddBossEvent("Spellmaster Macsen", "23:10:00", "Maguuma");
 
+            AddBossEvent("Dragon's Stand", "00:30:00", "Maguuma");
+            AddBossEvent("Dragon's Stand", "02:30:00", "Maguuma");
+            AddBossEvent("Dragon's Stand", "04:30:00", "Maguuma");
+            AddBossEvent("Dragon's Stand", "06:30:00", "Maguuma");
+            AddBossEvent("Dragon's Stand", "08:30:00", "Maguuma");
+            AddBossEvent("Dragon's Stand", "10:30:00", "Maguuma");
+            AddBossEvent("Dragon's Stand", "12:30:00", "Maguuma");
+            AddBossEvent("Dragon's Stand", "14:30:00", "Maguuma");
+            AddBossEvent("Dragon's Stand", "16:30:00", "Maguuma");
+            AddBossEvent("Dragon's Stand", "18:30:00", "Maguuma");
+            AddBossEvent("Dragon's Stand", "20:30:00", "Maguuma");
+            AddBossEvent("Dragon's Stand", "22:30:00", "Maguuma");
+
             //Desert
+            AddBossEvent("Palawadan", "00:45:00", "Desert");
+            AddBossEvent("Palawadan", "02:45:00", "Desert");
+            AddBossEvent("Palawadan", "04:45:00", "Desert");
+            AddBossEvent("Palawadan", "06:45:00", "Desert");
+            AddBossEvent("Palawadan", "08:45:00", "Desert");
+            AddBossEvent("Palawadan", "10:45:00", "Desert");
+            AddBossEvent("Palawadan", "12:45:00", "Desert");
+            AddBossEvent("Palawadan", "14:45:00", "Desert");
+            AddBossEvent("Palawadan", "16:45:00", "Desert");
+            AddBossEvent("Palawadan", "18:45:00", "Desert");
+            AddBossEvent("Palawadan", "20:45:00", "Desert");
+            AddBossEvent("Palawadan", "22:45:00", "Desert");
+
+            AddBossEvent("Thunderhead Keep", "00:45:00", "Desert");
+            AddBossEvent("Thunderhead Keep", "02:45:00", "Desert");
+            AddBossEvent("Thunderhead Keep", "04:45:00", "Desert");
+            AddBossEvent("Thunderhead Keep", "06:45:00", "Desert");
+            AddBossEvent("Thunderhead Keep", "08:45:00", "Desert");
+            AddBossEvent("Thunderhead Keep", "10:45:00", "Desert");
+            AddBossEvent("Thunderhead Keep", "12:45:00", "Desert");
+            AddBossEvent("Thunderhead Keep", "14:45:00", "Desert");
+            AddBossEvent("Thunderhead Keep", "16:45:00", "Desert");
+            AddBossEvent("Thunderhead Keep", "18:45:00", "Desert");
+            AddBossEvent("Thunderhead Keep", "20:45:00", "Desert");
+            AddBossEvent("Thunderhead Keep", "22:45:00", "Desert");
+
+            AddBossEvent("Serpents' Ire", "01:30:00", "Desert");
+            AddBossEvent("Serpents' Ire", "03:30:00", "Desert");
+            AddBossEvent("Serpents' Ire", "05:30:00", "Desert");
+            AddBossEvent("Serpents' Ire", "07:30:00", "Desert");
+            AddBossEvent("Serpents' Ire", "09:30:00", "Desert");
+            AddBossEvent("Serpents' Ire", "11:30:00", "Desert");
+            AddBossEvent("Serpents' Ire", "13:30:00", "Desert");
+            AddBossEvent("Serpents' Ire", "15:30:00", "Desert");
+            AddBossEvent("Serpents' Ire", "17:30:00", "Desert");
+            AddBossEvent("Serpents' Ire", "19:30:00", "Desert");
+            AddBossEvent("Serpents' Ire", "21:30:00", "Desert");
+            AddBossEvent("Serpents' Ire", "23:30:00", "Desert");
+
+
             AddBossEvent("Death-Branded Shatterer", "02:00:00", "Desert");
             AddBossEvent("Death-Branded Shatterer", "04:00:00", "Desert");
             AddBossEvent("Death-Branded Shatterer", "06:00:00", "Desert");
@@ -314,19 +364,19 @@ namespace GW2FOX
             AddBossEvent("Forged with Fire", "23:00:00", "Desert");
             AddBossEvent("Forged with Fire", "24:00:00", "Desert");
 
-            AddBossEvent("Pinata", "01:20:00", "Desert");
-            AddBossEvent("Pinata", "03:20:00", "Desert");
-            AddBossEvent("Pinata", "05:20:00", "Desert");
-            AddBossEvent("Pinata", "07:20:00", "Desert");
-            AddBossEvent("Pinata", "09:20:00", "Desert");
-            AddBossEvent("Pinata", "11:20:00", "Desert");
-            AddBossEvent("Pinata", "13:20:00", "Desert");
-            AddBossEvent("Pinata", "15:20:00", "Desert");
-            AddBossEvent("Pinata", "17:20:00", "Desert");
-            AddBossEvent("Pinata", "19:20:00", "Desert");
-            AddBossEvent("Pinata", "21:20:00", "Desert");
-            AddBossEvent("Pinata", "23:20:00", "Desert");
-            
+            AddBossEvent("Piñata", "01:20:00", "Desert");
+            AddBossEvent("Piñata", "03:20:00", "Desert");
+            AddBossEvent("Piñata", "05:20:00", "Desert");
+            AddBossEvent("Piñata", "07:20:00", "Desert");
+            AddBossEvent("Piñata", "09:20:00", "Desert");
+            AddBossEvent("Piñata", "11:20:00", "Desert");
+            AddBossEvent("Piñata", "13:20:00", "Desert");
+            AddBossEvent("Piñata", "15:20:00", "Desert");
+            AddBossEvent("Piñata", "17:20:00", "Desert");
+            AddBossEvent("Piñata", "19:20:00", "Desert");
+            AddBossEvent("Piñata", "21:20:00", "Desert");
+            AddBossEvent("Piñata", "23:20:00", "Desert");
+
         }
 
         public static void AddBossEvent(string bossName, string timing, string category)

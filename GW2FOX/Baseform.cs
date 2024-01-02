@@ -1,8 +1,4 @@
-﻿using System;
-using System.Drawing;
-using System.Windows.Forms;
-
-namespace GW2FOX
+﻿namespace GW2FOX
 {
     public class BaseForm : Form
     {
