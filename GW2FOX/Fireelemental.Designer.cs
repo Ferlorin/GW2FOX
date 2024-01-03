@@ -172,7 +172,7 @@ namespace GW2FOX
             Attentionfire.ScrollBars = ScrollBars.Vertical;
             Attentionfire.Size = new Size(600, 60);
             Attentionfire.TabIndex = 87;
-            Attentionfire.Text = "≪ATTENTION≫ World-Boss-Train │ ☠Lvl 15 │ “Fire Elemental” & “Steam Ogre” with Achievement “CleanUp Crew” │  ☣[&BI0AAAA=]☣ - Join us!\r\n";
+            Attentionfire.Text = "≪ATTENTION≫ Meta -Train │ ☠Lvl 15 │ “Fire Elemental” & “Steam Ogre” with Achievement “CleanUp Crew” │  ☣[&BI0AAAA=]☣ - Join us!\r\n";
             // 
             // Fireinstance
             // 

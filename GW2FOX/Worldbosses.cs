@@ -317,5 +317,25 @@ namespace GW2FOX
         {
             SaveTextToFile(Squadinfo.Text, "Squadinfo");
         }
+
+        private void SerpentsIre_Click(object sender, EventArgs e)
+        {
+            ShowAndHideForm(new SerpentsIre());
+        }
+
+        private void DragonsStand_Click(object sender, EventArgs e)
+        {
+            ShowAndHideForm(new DragonStand());
+        }
+
+        private void Palawadan_Click(object sender, EventArgs e)
+        {
+            ShowAndHideForm(new Palawadan());
+        }
+
+        private void ThunderheadKeep_Click(object sender, EventArgs e)
+        {
+            ShowAndHideForm(new ThunderheadPeaks());
+        }
     }
 }

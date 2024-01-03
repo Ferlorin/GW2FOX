@@ -144,7 +144,7 @@
             AttentionThaida.ScrollBars = ScrollBars.Vertical;
             AttentionThaida.Size = new Size(600, 60);
             AttentionThaida.TabIndex = 107;
-            AttentionThaida.Text = "≪ATTENTION≫ World-Boss-Train │ ☠Lvl 50 │ “Admiral Taidha Covington” │ ☣[&BKgBAAA=]☣ - Join us!\r\n\r\n";
+            AttentionThaida.Text = "≪ATTENTION≫ Meta -Train │ ☠Lvl 50 │ “Admiral Taidha Covington” │ ☣[&BKgBAAA=]☣ - Join us!\r\n\r\n";
             // 
             // Thaidainstance
             // 

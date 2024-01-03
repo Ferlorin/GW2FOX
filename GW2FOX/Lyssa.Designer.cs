@@ -104,6 +104,7 @@
             button8.TabIndex = 114;
             button8.Text = "Copy";
             button8.UseVisualStyleBackColor = true;
+            button8.Click += Lyssainstance_Click;
             // 
             // button7
             // 
@@ -113,6 +114,7 @@
             button7.TabIndex = 113;
             button7.Text = "Copy";
             button7.UseVisualStyleBackColor = true;
+            button7.Click += Lyssainfo_Click;
             // 
             // button5
             // 
@@ -173,7 +175,7 @@
             Attentionlyssa.ScrollBars = ScrollBars.Vertical;
             Attentionlyssa.Size = new Size(600, 60);
             Attentionlyssa.TabIndex = 107;
-            Attentionlyssa.Text = "≪ATTENTION≫ World-Boss-Train │ ☠Lvl 79 │ “Priestess of Lyssa” │ ☣[&BKsCAAA=]☣ - Join us!\r\n\r\n";
+            Attentionlyssa.Text = "≪ATTENTION≫ Meta -Train │ ☠Lvl 79 │ “Priestess of Lyssa” │ ☣[&BKsCAAA=]☣ - Join us!\r\n\r\n";
             // 
             // Lyssainstance
             // 

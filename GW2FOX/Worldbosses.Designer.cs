@@ -78,6 +78,10 @@
             pictureBox2 = new PictureBox();
             pictureBox4 = new PictureBox();
             button3 = new Button();
+            button41 = new Button();
+            button42 = new Button();
+            button43 = new Button();
+            button44 = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
@@ -103,7 +107,7 @@
             Runinfo.ScrollBars = ScrollBars.Vertical;
             Runinfo.Size = new Size(350, 100);
             Runinfo.TabIndex = 1;
-            Runinfo.Text = "≪World-Boss-Train» with the old [FOX]";
+            Runinfo.Text = "≪Meta -Train» with the old [FOX]";
             // 
             // Squadinfo
             // 
@@ -156,7 +160,7 @@
             // 
             button1.BackgroundImage = Properties.Resources.back;
             button1.FlatStyle = FlatStyle.Flat;
-            button1.Location = new Point(1794, 792);
+            button1.Location = new Point(1792, 869);
             button1.Name = "button1";
             button1.Size = new Size(100, 102);
             button1.TabIndex = 7;
@@ -577,7 +581,7 @@
             // pictureBox3
             // 
             pictureBox3.Image = Properties.Resources.Line;
-            pictureBox3.Location = new Point(12, 999);
+            pictureBox3.Location = new Point(12, 977);
             pictureBox3.Name = "pictureBox3";
             pictureBox3.Size = new Size(1880, 30);
             pictureBox3.TabIndex = 98;
@@ -611,12 +615,62 @@
             button3.UseVisualStyleBackColor = true;
             button3.Click += Savesquadmessage_Click;
             // 
+            // button41
+            // 
+            button41.BackgroundImage = (Image)resources.GetObject("button41.BackgroundImage");
+            button41.FlatStyle = FlatStyle.Flat;
+            button41.Location = new Point(802, 683);
+            button41.Name = "button41";
+            button41.Size = new Size(182, 46);
+            button41.TabIndex = 102;
+            button41.UseVisualStyleBackColor = true;
+            button41.Click += SerpentsIre_Click;
+            // 
+            // button42
+            // 
+            button42.BackgroundImage = (Image)resources.GetObject("button42.BackgroundImage");
+            button42.FlatStyle = FlatStyle.Flat;
+            button42.Location = new Point(616, 527);
+            button42.Name = "button42";
+            button42.Size = new Size(182, 46);
+            button42.TabIndex = 103;
+            button42.UseVisualStyleBackColor = true;
+            button42.Click += DragonsStand_Click;
+            // 
+            // button43
+            // 
+            button43.BackgroundImage = (Image)resources.GetObject("button43.BackgroundImage");
+            button43.FlatStyle = FlatStyle.Flat;
+            button43.Location = new Point(802, 735);
+            button43.Name = "button43";
+            button43.Size = new Size(182, 46);
+            button43.TabIndex = 104;
+            button43.UseVisualStyleBackColor = true;
+            button43.Click += Palawadan_Click;
+            // 
+            // button44
+            // 
+            button44.BackgroundImage = (Image)resources.GetObject("button44.BackgroundImage");
+            button44.FlatStyle = FlatStyle.Flat;
+            button44.Location = new Point(802, 787);
+            button44.Name = "button44";
+            button44.Size = new Size(182, 46);
+            button44.TabIndex = 105;
+            button44.UseVisualStyleBackColor = true;
+            button44.Click += ThunderheadKeep_Click;
+            // 
             // Worldbosses
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            AutoSize = true;
+            AutoSizeMode = AutoSizeMode.GrowAndShrink;
             BackgroundImage = Properties.Resources.Background;
             ClientSize = new Size(1904, 1041);
+            Controls.Add(button44);
+            Controls.Add(button43);
+            Controls.Add(button42);
+            Controls.Add(button41);
             Controls.Add(button3);
             Controls.Add(pictureBox4);
             Controls.Add(pictureBox2);
@@ -730,5 +784,9 @@
         private PictureBox pictureBox2;
         private PictureBox pictureBox4;
         private Button button3;
+        private Button button41;
+        private Button button42;
+        private Button button43;
+        private Button button44;
     }
 }

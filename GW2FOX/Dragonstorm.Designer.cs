@@ -170,7 +170,7 @@
             Attentiondragonstorm.ScrollBars = ScrollBars.Vertical;
             Attentiondragonstorm.Size = new Size(600, 60);
             Attentiondragonstorm.TabIndex = 107;
-            Attentiondragonstorm.Text = "≪ATTENTION≫ World-Boss-Train │ ☠Lvl 80 │ “Dragonstorm” │ ☣Join Squad☣ - Join us!\r\n\r\n";
+            Attentiondragonstorm.Text = "≪ATTENTION≫ Meta -Train │ ☠Lvl 80 │ “Dragonstorm” │ ☣Join Squad☣ - Join us!\r\n\r\n";
             // 
             // Dragonstormstance
             // 

@@ -159,7 +159,7 @@
             Attentioninquestgolem.ScrollBars = ScrollBars.Vertical;
             Attentioninquestgolem.Size = new Size(600, 60);
             Attentioninquestgolem.TabIndex = 107;
-            Attentioninquestgolem.Text = "≪ATTENTION≫ World-Boss-Train │ ☠Lvl 68 │ \"The Inquest’s Golem Mark II” │ ☣[&BJkGAAA=]☣ - Join us!\r\n\r\n";
+            Attentioninquestgolem.Text = "≪ATTENTION≫ Meta -Train │ ☠Lvl 68 │ \"The Inquest’s Golem Mark II” │ ☣[&BJkGAAA=]☣ - Join us!\r\n\r\n";
             // 
             // Inquestgoleminstance
             // 

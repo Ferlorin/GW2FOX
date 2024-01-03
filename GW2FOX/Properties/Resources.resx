@@ -208,9 +208,6 @@
   <data name="Doppelganger" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Doppelganger.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Tarir" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Tarir.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="Master_Tuning_Crystal" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Master_Tuning_Crystal.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -219,6 +216,9 @@
   </data>
   <data name="Symbol_of_the_Inquest" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Symbol_of_the_Inquest.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Dragonstorm" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Dragonstorm.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Timer" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Timer.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -232,8 +232,8 @@
   <data name="WBsheader2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\WBsheader2.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Dragonstorm" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Dragonstorm.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Tarir" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Tarir.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Inquestgolem" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Inquestgolem.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -246,6 +246,9 @@
   </data>
   <data name="Karka" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Karka.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SerpentsIre" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SerpentsIre.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Line" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Line.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -273,5 +276,8 @@
   </data>
   <data name="WBsheaderonetime" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\WBsheaderonetime.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DragonsStand" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DragonsStand.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

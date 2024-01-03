@@ -177,7 +177,7 @@
             AttentionUlgoth.ScrollBars = ScrollBars.Vertical;
             AttentionUlgoth.Size = new Size(600, 60);
             AttentionUlgoth.TabIndex = 107;
-            AttentionUlgoth.Text = "≪ATTENTION≫ World-Boss-Train │ ☠Lvl 43 │ Ulgoth Pre - 8min of ♞Sackfarm♞ │ ☣[&BJYAAAA=]☣ and ☣[&BJcAAAA=]☣\r\n\r\n - Join us!";
+            AttentionUlgoth.Text = "≪ATTENTION≫ Meta -Train │ ☠Lvl 43 │ Ulgoth Pre - 8min of ♞Sackfarm♞ │ ☣[&BJYAAAA=]☣ and ☣[&BJcAAAA=]☣\r\n\r\n - Join us!";
             // 
             // Ulgothinstance
             // 
@@ -291,7 +291,7 @@
             Coordinate.ScrollBars = ScrollBars.Vertical;
             Coordinate.Size = new Size(600, 60);
             Coordinate.TabIndex = 118;
-            Coordinate.Text = "≪ATTENTION≫ World-Boss-Train │ ☠Lvl 43 │ Ulgoth Pre at Com - Join us!";
+            Coordinate.Text = "≪ATTENTION≫ Meta -Train │ ☠Lvl 43 │ Ulgoth Pre at Com - Join us!";
             // 
             // button6
             // 

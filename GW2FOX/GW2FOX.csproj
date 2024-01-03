@@ -30,4 +30,34 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="ThunderheadPeaks.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Palawadan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="DragonsStand.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="SerpentsIre.cs">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="ThunderheadPeaks.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Palawadan.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Update="DragonsStand.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Update="SerpentsIre.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+
 </Project>

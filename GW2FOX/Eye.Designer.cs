@@ -175,7 +175,7 @@
             Attentioneye.ScrollBars = ScrollBars.Vertical;
             Attentioneye.Size = new Size(600, 60);
             Attentioneye.TabIndex = 107;
-            Attentioneye.Text = "≪ATTENTION≫ World-Boss-Train │ ☠Lvl 75 │ “Eye of Zhaitan” │ ☣[&BPgCAAA=]☣ - Join us!\r\n\r\n";
+            Attentioneye.Text = "≪ATTENTION≫ Meta -Train │ ☠Lvl 75 │ “Eye of Zhaitan” │ ☣[&BPgCAAA=]☣ - Join us!\r\n\r\n";
             // 
             // Eyeinstance
             // 

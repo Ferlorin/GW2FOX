@@ -171,7 +171,7 @@
             Attentionclaw.ScrollBars = ScrollBars.Vertical;
             Attentionclaw.Size = new Size(600, 60);
             Attentionclaw.TabIndex = 107;
-            Attentionclaw.Text = "≪ATTENTION≫ World-Boss-Train │ ☠Lvl 80 │ “The Claw of Jormag” with Achievement “Crash-Landing” (I tell you later what to do.) │ ☣[&BHoCAAA=]☣ → West to the Com - Join us!\r\n\r\n";
+            Attentionclaw.Text = "≪ATTENTION≫ Meta -Train │ ☠Lvl 80 │ “The Claw of Jormag” with Achievement “Crash-Landing” (I tell you later what to do.) │ ☣[&BHoCAAA=]☣ → West to the Com - Join us!\r\n\r\n";
             // 
             // Clawinstance
             // 

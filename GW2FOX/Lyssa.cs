@@ -221,5 +221,17 @@ namespace GW2FOX
             Clipboard.SetText(Lyssacost.Text);
             BringGw2ToFront();
         }
+
+        private void Lyssainfo_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetText(Lyssainfo.Text);
+            BringGw2ToFront();
+        }
+
+        private void Lyssainstance_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetText(Lyssainstance.Text);
+            BringGw2ToFront();
+        }
     }
 }

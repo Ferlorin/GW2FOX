@@ -159,7 +159,7 @@
             Attentiondrakkar.ScrollBars = ScrollBars.Vertical;
             Attentiondrakkar.Size = new Size(600, 60);
             Attentiondrakkar.TabIndex = 107;
-            Attentiondrakkar.Text = "≪ATTENTION≫ World-Boss-Train │ ☠Lvl 80 │ “Drakkar” │ ☣[&BOkBAAA=]☣ - Join us!";
+            Attentiondrakkar.Text = "≪ATTENTION≫ Meta -Train │ ☠Lvl 80 │ “Drakkar” │ ☣[&BOkBAAA=]☣ - Join us!";
             // 
             // Drakkarinstance
             // 

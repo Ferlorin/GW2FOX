@@ -158,7 +158,7 @@
             Attentiontequatl.ScrollBars = ScrollBars.Vertical;
             Attentiontequatl.Size = new Size(600, 60);
             Attentiontequatl.TabIndex = 107;
-            Attentiontequatl.Text = "≪ATTENTION≫ World-Boss-Train │ ☠Lvl 65 │ “Tequatl” with Achievements “Power Play & I found it” │  ☣[&BNABAAA=]☣ - Join us!\r\n";
+            Attentiontequatl.Text = "≪ATTENTION≫ Meta -Train │ ☠Lvl 65 │ “Tequatl” with Achievements “Power Play & I found it” │  ☣[&BNABAAA=]☣ - Join us!\r\n";
             // 
             // Tequatlinstance
             // 

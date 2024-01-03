@@ -168,7 +168,7 @@
             AttentionFireshaman.ScrollBars = ScrollBars.Vertical;
             AttentionFireshaman.Size = new Size(600, 60);
             AttentionFireshaman.TabIndex = 87;
-            AttentionFireshaman.Text = "≪ATTENTION≫ World-Boss-Train │ ☠Lvl 50 │ “Fire Shaman & his Minions” │ ☣[&BNwBAAA=]☣ - Join us!\r\n";
+            AttentionFireshaman.Text = "≪ATTENTION≫ Meta -Train │ ☠Lvl 50 │ “Fire Shaman & his Minions” │ ☣[&BNwBAAA=]☣ - Join us!\r\n";
             // 
             // Fireshamaninstance
             // 

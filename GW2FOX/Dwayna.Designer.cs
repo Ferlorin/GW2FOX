@@ -173,7 +173,7 @@
             Attentiondwayna.ScrollBars = ScrollBars.Vertical;
             Attentiondwayna.Size = new Size(600, 60);
             Attentiondwayna.TabIndex = 107;
-            Attentiondwayna.Text = "≪ATTENTION≫ World-Boss-Train │ ☠Lvl 79 │ “Statue of Dwayna” │ ☣[&BKsCAAA=]☣ - Join us!\r\n\r\n";
+            Attentiondwayna.Text = "≪ATTENTION≫ Meta -Train │ ☠Lvl 79 │ “Statue of Dwayna” │ ☣[&BKsCAAA=]☣ - Join us!\r\n\r\n";
             // 
             // Dwaynainstance
             // 

@@ -176,7 +176,7 @@
             Attentionrhendak.ScrollBars = ScrollBars.Vertical;
             Attentionrhendak.Size = new Size(600, 60);
             Attentionrhendak.TabIndex = 87;
-            Attentionrhendak.Text = "≪ATTENTION≫ World-Boss-Train │ ☠Lvl 28 │ “Rhendak the Crazed” │ ☣[&BNwAAAA=]☣ - Join us!\r\n";
+            Attentionrhendak.Text = "≪ATTENTION≫ Meta -Train │ ☠Lvl 28 │ “Rhendak the Crazed” │ ☣[&BNwAAAA=]☣ - Join us!\r\n";
             // 
             // Rhendakinstance
             // 

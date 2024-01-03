@@ -169,7 +169,7 @@
             Attentionjunglewurm.ScrollBars = ScrollBars.Vertical;
             Attentionjunglewurm.Size = new Size(600, 60);
             Attentionjunglewurm.TabIndex = 87;
-            Attentionjunglewurm.Text = "≪ATTENTION≫ World-Boss-Train │ ☠Lvl 15 │ “Great Jungle Wurm” with Achievement “Don’t feed the Beast!” │ ☣[&BD4BAAA=]☣ - Join us!\r\n";
+            Attentionjunglewurm.Text = "≪ATTENTION≫ Meta -Train │ ☠Lvl 15 │ “Great Jungle Wurm” with Achievement “Don’t feed the Beast!” │ ☣[&BD4BAAA=]☣ - Join us!\r\n";
             // 
             // Junglewurminstance
             // 

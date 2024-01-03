@@ -172,7 +172,7 @@
             Attentionmega.ScrollBars = ScrollBars.Vertical;
             Attentionmega.Size = new Size(600, 60);
             Attentionmega.TabIndex = 87;
-            Attentionmega.Text = "≪ATTENTION≫ World-Boss-Train │ ☠Lvl 66 │ “Megadestroyer” │ ☣[&BM0CAAA=]☣ - Join us!\r\n";
+            Attentionmega.Text = "≪ATTENTION≫ Meta -Train │ ☠Lvl 66 │ “Megadestroyer” │ ☣[&BM0CAAA=]☣ - Join us!\r\n";
             // 
             // Megainstance
             // 

@@ -185,7 +185,7 @@
             Attentionshatterer.ScrollBars = ScrollBars.Vertical;
             Attentionshatterer.Size = new Size(600, 60);
             Attentionshatterer.TabIndex = 105;
-            Attentionshatterer.Text = "≪ATTENTION≫ World-Boss-Train with [FOX] │ ☠Lvl 50 │ “The Shatterer” with Achievements “No-Fly Zone”, “Burns Blunder” & “Smash the Dragon” │ ☣[&BE4DAAA=]☣ - Join us!\r\n\r\n";
+            Attentionshatterer.Text = "≪ATTENTION≫ Meta -Train with [FOX] │ ☠Lvl 50 │ “The Shatterer” with Achievements “No-Fly Zone”, “Burns Blunder” & “Smash the Dragon” │ ☣[&BE4DAAA=]☣ - Join us!\r\n\r\n";
             // 
             // Shattererinstance
             // 

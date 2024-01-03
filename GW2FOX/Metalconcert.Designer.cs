@@ -144,7 +144,7 @@
             Attentionbehe.ScrollBars = ScrollBars.Vertical;
             Attentionbehe.Size = new Size(600, 60);
             Attentionbehe.TabIndex = 58;
-            Attentionbehe.Text = "≪ATTENTION≫ World-Boss-Train │ ☠Lvl 80 │ “A Concert for the Ages” │ ☣[&BPgLAAA=]☣ then run to ☣[&BBkMAAA=]☣ - Join us!";
+            Attentionbehe.Text = "≪ATTENTION≫ Meta -Train │ ☠Lvl 80 │ “A Concert for the Ages” │ ☣[&BPgLAAA=]☣ then run to ☣[&BBkMAAA=]☣ - Join us!";
             // 
             // Beheinstance
             // 

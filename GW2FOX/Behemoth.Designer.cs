@@ -160,7 +160,7 @@
             Attentionbehe.ScrollBars = ScrollBars.Vertical;
             Attentionbehe.Size = new Size(600, 60);
             Attentionbehe.TabIndex = 58;
-            Attentionbehe.Text = "≪ATTENTION≫ World-Boss-Train │ ☠Lvl 15 │ “Shadow Behemoth” │ ☣[&BIoAAAA=]☣ - Join us!";
+            Attentionbehe.Text = "≪ATTENTION≫ Meta -Train │ ☠Lvl 15 │ “Shadow Behemoth” │ ☣[&BIoAAAA=]☣ - Join us!";
             // 
             // Beheinstance
             // 
