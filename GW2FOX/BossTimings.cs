@@ -377,6 +377,7 @@
             AddBossEvent("Piñata", "21:20:00", "Desert");
             AddBossEvent("Piñata", "23:20:00", "Desert");
 
+
         }
 
         public static void AddBossEvent(string bossName, string timing, string category)
@@ -391,7 +392,7 @@
                 return null;
 
             // Index des nächsten Boss-Events in der Liste
-            int nextIndex = DateTime.Now.Hour % Events.Count;
+            int nextIndex = DateTime.Now.Day % Events.Count;
 
             return Events[nextIndex];
         }

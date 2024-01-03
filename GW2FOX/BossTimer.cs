@@ -50,7 +50,7 @@
 
                         var upcomingBosses = BossTimings.Events
                             .Where(bossEvent =>
-                                bossEvent.Timing > currentTime && bossEvent.Timing < currentTime.Add(new TimeSpan(2, 0, 0, 0)))
+                                bossEvent.Timing > currentTime && bossEvent.Timing < currentTime.Add(new TimeSpan(8, 0, 0)))
                             .ToList();
 
                         var pastBosses = BossTimings.Events

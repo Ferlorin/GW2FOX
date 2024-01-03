@@ -577,7 +577,7 @@
             // pictureBox3
             // 
             pictureBox3.Image = Properties.Resources.Line;
-            pictureBox3.Location = new Point(12, 939);
+            pictureBox3.Location = new Point(12, 999);
             pictureBox3.Name = "pictureBox3";
             pictureBox3.Size = new Size(1880, 30);
             pictureBox3.TabIndex = 98;
