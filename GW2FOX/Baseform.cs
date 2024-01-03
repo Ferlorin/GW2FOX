@@ -72,5 +72,12 @@
                 );
             }
         }
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            base.OnFormClosing(e);
+
+            // Beende das gesamte Programm, wenn ein Formular geschlossen wird
+            Application.Exit();
+        }
     }
 }
