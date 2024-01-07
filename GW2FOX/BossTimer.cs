@@ -1,23 +1,21 @@
-﻿namespace GW2FOX
+﻿using static GW2FOX.BossTimings;
+
+namespace GW2FOX
 {
     public class BossTimer : IDisposable
     {
-        public void StopTimer()
-        {
-            Stop();
-        }
+        private static readonly string TimeZoneId = "W. Europe Standard Time";
+        private static readonly Color DefaultFontColor = Color.Blue;
+        private static readonly Color PastBossFontColor = Color.OrangeRed;
 
-        public static ListView CustomBossList;
         private readonly ListView bossList;
         private readonly TimeZoneInfo mezTimeZone;
-        private System.Threading.Timer timer;
-        private List<BossEvent> nextBosses;
+        private readonly System.Threading.Timer timer;
 
         public BossTimer(ListView bossList)
         {
             this.bossList = bossList;
-            this.nextBosses = new List<BossEvent>();
-            this.mezTimeZone = TimeZoneInfo.FindSystemTimeZoneById("W. Europe Standard Time");
+            this.mezTimeZone = TimeZoneInfo.FindSystemTimeZoneById(TimeZoneId);
             this.timer = new System.Threading.Timer(TimerCallback, null, 0, 1000);
         }
 
@@ -33,62 +31,65 @@
 
         private void TimerCallback(object? state)
         {
-            UpdateBossList();
+            try
+            {
+                UpdateBossList();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Exception in TimerCallback: {ex}");
+                // Consider logging the exception
+            }
         }
 
         private void UpdateBossList()
         {
-            try
+            if (!bossList.IsHandleCreated) return;
+
+            bossList.BeginInvoke((MethodInvoker)delegate
             {
-                if (bossList.IsHandleCreated)
+                try
                 {
-                    bossList.BeginInvoke((MethodInvoker)delegate
+                    // Read the boss names from the configuration file
+                    List<string> bossNamesFromConfig = BossTimings.BossList23;
+
+                    DateTime currentTimeUtc = DateTime.UtcNow;
+                    DateTime currentTimeMez = TimeZoneInfo.ConvertTimeFromUtc(currentTimeUtc, mezTimeZone);
+                    TimeSpan currentTime = currentTimeMez.TimeOfDay;
+
+                    var upcomingBosses = BossTimings.Events
+                        .Where(bossEvent =>
+                            bossNamesFromConfig.Contains(bossEvent.BossName) &&
+                            bossEvent.Timing > currentTime && bossEvent.Timing < currentTime.Add(new TimeSpan(8, 0, 0)))
+                        .ToList();
+
+                    var pastBosses = BossTimings.Events
+                        .Where(bossEvent =>
+                            bossNamesFromConfig.Contains(bossEvent.BossName) &&
+                            bossEvent.Timing >= currentTime.Subtract(new TimeSpan(0, 14, 59)) && bossEvent.Timing < currentTime)
+                        .ToList();
+
+                    var allBosses = upcomingBosses.Concat(pastBosses).ToList();
+
+                    var allBossesSnapshot = allBosses.ToList();
+
+                    allBossesSnapshot.Sort((bossEvent1, bossEvent2) =>
+                        bossEvent1.Timing.CompareTo(bossEvent2.Timing));
+
+                    var listViewItems = new List<ListViewItem>();
+
+                    // Use a HashSet to keep track of added boss names
+                    HashSet<string> addedBossNames = new HashSet<string>();
+
+                    foreach (var bossEvent in allBossesSnapshot)
                     {
-                        DateTime currentTimeUtc = DateTime.UtcNow;
-                        DateTime currentTimeMez = TimeZoneInfo.ConvertTimeFromUtc(currentTimeUtc, mezTimeZone);
-                        TimeSpan currentTime = currentTimeMez.TimeOfDay;
-
-                        var upcomingBosses = BossTimings.Events
-                            .Where(bossEvent =>
-                                bossEvent.Timing > currentTime && bossEvent.Timing < currentTime.Add(new TimeSpan(8, 0, 0)))
-                            .ToList();
-
-                        var pastBosses = BossTimings.Events
-                            .Where(bossEvent =>
-                                bossEvent.Timing >= currentTime.Subtract(new TimeSpan(0, 14, 59)) && bossEvent.Timing < currentTime)
-                            .ToList();
-
-                        var allBosses = upcomingBosses.Concat(pastBosses).ToList();
-
-                        var allBossesSnapshot = allBosses.ToList();
-
-                        allBossesSnapshot.Sort((bossEvent1, bossEvent2) =>
-                            bossEvent1.Timing.CompareTo(bossEvent2.Timing));
-
-                        var listViewItems = new List<ListViewItem>();
-
-                        foreach (var bossEvent in allBossesSnapshot)
+                        // Check if the boss name is already added to avoid duplicates
+                        if (addedBossNames.Add(bossEvent.BossName))
                         {
                             TimeSpan remainingTime = bossEvent.Timing - currentTime;
                             string countdownFormat = $"{remainingTime.Hours:D2}:{remainingTime.Minutes:D2}:{remainingTime.Seconds:D2}";
 
-                            Color fontColor;
-
-                            if (bossEvent.Category == "Maguuma")
-                                fontColor = Color.LimeGreen;
-                            else if (bossEvent.Category == "Desert")
-                                fontColor = Color.DeepPink;
-                            else if (bossEvent.Category == "WBs")
-                                fontColor = Color.WhiteSmoke;
-                            else if (bossEvent.Category == "Ice")
-                                fontColor = Color.DeepSkyBlue;
-                            else
-                                fontColor = Color.Blue;
-
-                            if (pastBosses.Any(pastBoss => pastBoss.BossName == bossEvent.BossName && pastBoss.Timing == bossEvent.Timing))
-                            {
-                                fontColor = Color.OrangeRed;
-                            }
+                            Color fontColor = GetFontColor(bossEvent, pastBosses);
 
                             var listViewItem = new ListViewItem(new[] { bossEvent.BossName, countdownFormat });
                             listViewItem.ForeColor = fontColor;
@@ -96,8 +97,11 @@
 
                             listViewItems.Add(listViewItem);
                         }
+                    }
 
-                        bossList.BeginInvoke((MethodInvoker)delegate
+                    bossList.BeginInvoke((MethodInvoker)delegate
+                    {
+                        try
                         {
                             if (bossList.IsHandleCreated)
                             {
@@ -106,14 +110,63 @@
                                 bossList.Items.AddRange(listViewItems.ToArray());
                                 bossList.EndUpdate();
                             }
-                        });
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine($"Exception in bossList.BeginInvoke: {ex}");
+                            // Consider logging the exception
+                        }
                     });
                 }
-            }
-            catch (Exception ex)
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Exception in UpdateBossList: {ex}");
+                    // Consider logging the exception
+                }
+            });
+        }
+
+        private static Color GetFontColor(BossEvent bossEvent, List<BossEvent> pastBosses)
+        {
+            Color fontColor;
+
+            switch (bossEvent.Category)
             {
-                Console.WriteLine($"Exception in UpdateBossList: {ex}");
+                case "Maguuma":
+                    fontColor = Color.LimeGreen;
+                    break;
+                case "Desert":
+                    fontColor = Color.DeepPink;
+                    break;
+                case "WBs":
+                    fontColor = Color.WhiteSmoke;
+                    break;
+                case "Ice":
+                    fontColor = Color.DeepSkyBlue;
+                    break;
+                case "Cantha":
+                    fontColor = Color.Blue;
+                    break;
+                case "SotO":
+                    fontColor = Color.Yellow;
+                    break;
+                case "LWS2":
+                    fontColor = Color.LightYellow;
+                    break;
+                case "LWS3":
+                    fontColor = Color.ForestGreen;
+                    break;
+                default:
+                    fontColor = DefaultFontColor;
+                    break;
             }
+
+            if (pastBosses.Any(pastBoss => pastBoss.BossName == bossEvent.BossName && pastBoss.Timing == bossEvent.Timing))
+            {
+                fontColor = PastBossFontColor;
+            }
+
+            return fontColor;
         }
 
         public void Dispose()
@@ -126,14 +179,11 @@
         {
             if (disposing)
             {
-                // Freigabe von verwalteten Ressourcen
                 if (timer != null)
                 {
                     timer.Dispose();
                 }
             }
-
-            // Freigabe von nicht verwalteten Ressourcen (falls vorhanden)
         }
 
         ~BossTimer()
@@ -141,6 +191,4 @@
             Dispose(false);
         }
     }
-
-    // ... (andere Klassen und Methoden)
 }

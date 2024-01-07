@@ -579,5 +579,244 @@ namespace GW2FOX.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Sandstorm
+        {
+            get
+            {
+                object obj = ResourceManager.GetObject("Sandstorm", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        } 
+        
+        /// <summary>
+          ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+          /// </summary>
+        internal static System.Drawing.Bitmap Saidra_s_Haven
+        {
+            get
+            {
+                object obj = ResourceManager.GetObject("Saidra_s_Haven", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap New_Loamhurst
+        {
+            get
+            {
+                object obj = ResourceManager.GetObject("New_Loamhurst", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+
+        }
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Noran_s_Homestead
+        {
+            get
+            {
+                object obj = ResourceManager.GetObject("Noran_s_Homestead", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+
+        }
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Maws_of_Torment
+        {
+            get
+            {
+                object obj = ResourceManager.GetObject("Maws_of_Torment", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+
+        }
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap The_Oil_Floes
+        {
+            get
+            {
+                object obj = ResourceManager.GetObject("The_Oil_Floes", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+
+        }
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap OozePits
+        {
+            get
+            {
+                object obj = ResourceManager.GetObject("OozePits", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+
+        }
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Effigy
+        {
+            get
+            {
+                object obj = ResourceManager.GetObject("Effigy", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+
+        }
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap DoomloreShrine
+        {
+            get
+            {
+                object obj = ResourceManager.GetObject("DoomloreShrine", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+
+        }
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap StormsofWinter
+        {
+            get
+            {
+                object obj = ResourceManager.GetObject("StormsofWinter", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+
+        }
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap DefendJorasKeep
+        {
+            get
+            {
+                object obj = ResourceManager.GetObject("DefendJorasKeep", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+
+        }
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Aetherblade_Assault
+        {
+            get
+            {
+                object obj = ResourceManager.GetObject("Aetherblade_Assault", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+
+        }
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Kaineng_Blackout
+        {
+            get
+            {
+                object obj = ResourceManager.GetObject("Kaineng_Blackout", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+
+        }
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap GangWar
+        {
+            get
+            {
+                object obj = ResourceManager.GetObject("GangWar", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+
+        }
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Aspenwood
+        {
+            get
+            {
+                object obj = ResourceManager.GetObject("Aspenwood", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+
+        }
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Unlocking_the_Wizard_s_Tower
+        {
+            get
+            {
+                object obj = ResourceManager.GetObject("Unlocking_the_Wizard_s_Tower", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+
+        }
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Fly_by_Night
+        {
+            get
+            {
+                object obj = ResourceManager.GetObject("Fly_by_Night", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+
+        }
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap TheDefenseofAmnytas
+        {
+            get
+            {
+                object obj = ResourceManager.GetObject("TheDefenseofAmnytas", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+
+        }
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Battle_for_the_Jade_Sea
+        {
+            get
+            {
+                object obj = ResourceManager.GetObject("Battle_for_the_Jade_Sea", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+
+        }
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Convergences
+        {
+            get
+            {
+                object obj = ResourceManager.GetObject("Convergences", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+
+        }
     }
 }
