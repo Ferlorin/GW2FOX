@@ -1285,9 +1285,9 @@ namespace GW2FOX
             {
                 string bossName = checkBox.Text;
                 RemoveBossNameFromConfig(bossName);
-                
+
             }
-            
+
         }
 
         private void WriteConfigFile(string[] lines)
@@ -1869,7 +1869,7 @@ namespace GW2FOX
                 bossTimerInstance.UpdateBossList();
             }
         }
-    
+
 
         public void UpdateBossUIMixed()
         {
@@ -1877,8 +1877,8 @@ namespace GW2FOX
             ListView bossList = CustomBossList;
             if (bossList != null)
             {
-            BossTimer bossTimerInstance = new BossTimer(bossList);
-            bossTimerInstance.UpdateBossList();
+                BossTimer bossTimerInstance = new BossTimer(bossList);
+                bossTimerInstance.UpdateBossList();
             }
         }
         public void UpdateBossUIBosses()
