@@ -42,7 +42,7 @@ namespace GW2FOX
             }
         }
 
-        private void UpdateBossList()
+        public void UpdateBossList()
         {
             if (!bossList.IsHandleCreated) return;
 

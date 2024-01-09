@@ -7,11 +7,18 @@ namespace GW2FOX
         private Overlay overlay;
         private ListView customBossList;
         private BossTimer bossTimer;
+        private Worldbosses saveBossNamesToConfig;
 
         public Main()
         {
             InitializeComponent();
             this.Load += Main_Load;
+
+            customBossList = new ListView();
+            overlay = new Overlay(customBossList);
+            bossTimer = new BossTimer(customBossList);
+            saveBossNamesToConfig = new Worldbosses();
+
             InitializeCustomBossList();
             InitializeBossTimerAndOverlay();
         }
@@ -176,22 +183,31 @@ namespace GW2FOX
 
         private void CloseAll_Click(object sender, EventArgs e)
         {
-            // Close the program and terminate all background processes
-            this.Close();
-
-            if (bossTimer != null)
+            try
             {
-                bossTimer.Stop();
-                bossTimer.Dispose();
-            }
 
-            if (overlay != null)
+
+                // Stoppe den Timer und beende alle Hintergrundprozesse
+                if (bossTimer != null)
+                {
+                    bossTimer.Stop();
+                    bossTimer.Dispose();
+                }
+
+                if (overlay != null)
+                {
+                    overlay.Close();
+                    overlay.Dispose();
+                }
+
+                // Schlieﬂe das Programm
+                Application.Exit();
+            }
+            catch (Exception ex)
             {
-                overlay.Close();
-                overlay.Dispose();
+                MessageBox.Show($"Error closing the program: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
-            Application.Exit();
         }
+
     }
 }

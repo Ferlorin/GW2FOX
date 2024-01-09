@@ -149,6 +149,10 @@
             Flybynigtht = new CheckBox();
             Amnytas = new CheckBox();
             Convergence = new CheckBox();
+            button27 = new Button();
+            button42 = new Button();
+            button63 = new Button();
+            button65 = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
@@ -1464,6 +1468,46 @@
             Convergence.UseVisualStyleBackColor = false;
             Convergence.CheckedChanged += Convergence_CheckedChanged;
             // 
+            // button27
+            // 
+            button27.Location = new Point(12, 12);
+            button27.Name = "button27";
+            button27.Size = new Size(131, 23);
+            button27.TabIndex = 184;
+            button27.Text = "MetaInfusin";
+            button27.UseVisualStyleBackColor = true;
+            button27.Click += Meta_Click;
+            // 
+            // button42
+            // 
+            button42.Location = new Point(12, 41);
+            button42.Name = "button42";
+            button42.Size = new Size(130, 23);
+            button42.TabIndex = 185;
+            button42.Text = "Worldbosses";
+            button42.UseVisualStyleBackColor = true;
+            button42.Click += World_Click;
+            // 
+            // button63
+            // 
+            button63.Location = new Point(10, 99);
+            button63.Name = "button63";
+            button63.Size = new Size(131, 23);
+            button63.TabIndex = 186;
+            button63.Text = "ClearAll";
+            button63.UseVisualStyleBackColor = true;
+            button63.Click += ClearAll_Click;
+            // 
+            // button65
+            // 
+            button65.Location = new Point(11, 70);
+            button65.Name = "button65";
+            button65.Size = new Size(130, 23);
+            button65.TabIndex = 187;
+            button65.Text = "World + Meta";
+            button65.UseVisualStyleBackColor = true;
+            button65.Click += Mixed_Click;
+            // 
             // Worldbosses
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -1472,6 +1516,10 @@
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
             BackgroundImage = Properties.Resources.Background;
             ClientSize = new Size(1904, 1041);
+            Controls.Add(button65);
+            Controls.Add(button63);
+            Controls.Add(button42);
+            Controls.Add(button27);
             Controls.Add(WizzardsTower);
             Controls.Add(Flybynigtht);
             Controls.Add(Amnytas);
@@ -1726,5 +1774,9 @@
         private CheckBox Flybynigtht;
         private CheckBox Amnytas;
         private CheckBox Convergence;
+        private Button button27;
+        private Button button42;
+        private Button button63;
+        private Button button65;
     }
 }

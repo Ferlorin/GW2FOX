@@ -4,7 +4,7 @@
     {
         public static Dictionary<string, List<BossEvent>> BossEvents { get; } = new Dictionary<string, List<BossEvent>>();
         private static string filePath = "config.txt";
-        internal static List<string> BossList23 { get; } = new List<string>();
+        public static List<string> BossList23 { get; set; } = new List<string>();
         internal static List<BossEvent> Events = new List<BossEvent>();
 
         static BossTimings()
@@ -664,7 +664,7 @@
             }
         }
 
-        private static void SetBossListFromConfig()
+        public static void SetBossListFromConfig()
         {
             try
             {
@@ -695,8 +695,11 @@
                         .Select(name => name.Trim())  // Entferne führende und abschließende Leerzeichen
                         .ToArray();
 
-                    // Füge jeden Bossnamen zur BossList23 hinzu
-                    BossList23.AddRange(bossNames);
+                    // Erstelle eine neue List, um BossList23 zu ersetzen
+                    List<string> newBossList = new List<string>();
+
+                    // Füge jeden Bossnamen zur neuen Liste hinzu
+                    newBossList.AddRange(bossNames);
 
                     // Iteriere durch die Zeilen, um Timings zu extrahieren
                     for (int i = bossIndex + 1; i < lines.Length; i++)
@@ -713,7 +716,7 @@
                             {
                                 for (int j = 0; j < bossNames.Length; j++)
                                 {
-                                    // Füge das BossEvent zur Liste hinzu
+                                    // Füge das BossEvent zur neuen Liste hinzu
                                     AddBossEvent(bossNames[j], timings[j], "WBs");
                                 }
                             }
@@ -724,6 +727,9 @@
                             break; // Da wir die Timings gefunden haben, können wir die Schleife beenden
                         }
                     }
+
+                    // Jetzt kannst du die alte BossList23 durch die neue Liste ersetzen
+                    BossList23 = newBossList;
                 }
             }
             catch (Exception ex)
@@ -731,6 +737,7 @@
                 // Hier kann eine Fehlermeldung protokolliert oder geloggt werden, wenn gewünscht
             }
         }
+
 
 
         public static void AddBossEvent(string bossName, string timing, string category)

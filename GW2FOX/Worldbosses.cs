@@ -1,18 +1,26 @@
 ﻿using System.Diagnostics;
 using System.Runtime.InteropServices;
+using static GW2FOX.BossTimings;
+
 
 namespace GW2FOX
 {
     public partial class Worldbosses : BaseForm
     {
         private string filePath = "config.txt";
+        public static ListView? CustomBossList { get; private set; }
+        private Dictionary<string, CheckBox> bossCheckBoxMap;
 
         public Worldbosses()
         {
             InitializeComponent();
             Load += Worldbosses_Load_1;
+            this.Load += WorldBosses_Load;
+            this.FormClosing += WorldBosses_FormClosing;
+            bossCheckBoxMap = new Dictionary<string, CheckBox>();  // Verschiebe die Initialisierung hierhin
+            InitializeBossCheckBoxMap();
             SetCheckBoxesFromConfig();
-
+            UpdateBossUI();
         }
 
         private void Worldbosses_Load_1(object? sender, EventArgs e)
@@ -339,6 +347,988 @@ namespace GW2FOX
             ShowAndHideForm(new ThunderheadPeaks());
         }
 
+
+        private void Maw_CheckedChanged(object sender, EventArgs e)
+        {
+            // Der Name des Bosses
+            string bossName = "The frozen Maw";
+
+            // Setze den Trigger, um anzuzeigen, dass die Aktion vom Benutzer ausgelöst wurde
+
+
+            if (Maw.Checked)
+            {
+                // Wenn das Kontrollkästchen ausgewählt ist
+                SaveBossNameToConfig(bossName);
+            }
+            else
+            {
+                // Wenn das Kontrollkästchen nicht ausgewählt ist
+                RemoveBossNameFromConfig(bossName);
+            }
+
+
+        }
+
+
+        private void Behemoth_CheckedChanged(object sender, EventArgs e)
+        {
+            // Der Name des Bosses
+            string bossName = "Shadow Behemoth";
+
+
+
+            if (Behemoth.Checked)
+            {
+                // Wenn das Kontrollkästchen ausgewählt ist
+                SaveBossNameToConfig(bossName);
+            }
+            else
+            {
+                // Wenn das Kontrollkästchen nicht ausgewählt ist
+                RemoveBossNameFromConfig(bossName);
+            }
+
+        }
+
+
+        private void Fire_Elemental_CheckedChanged(object sender, EventArgs e)
+        {
+            string bossName = "Fire Elemental";
+
+
+
+            if (Fire_Elemental.Checked)
+            {
+                SaveBossNameToConfig(bossName);
+            }
+            else
+            {
+                RemoveBossNameFromConfig(bossName);
+            }
+
+        }
+
+        private void JungleWurm_CheckedChanged(object sender, EventArgs e)
+        {
+            string bossName = "Great Jungle Wurm";
+
+
+
+            if (JungleWurm.Checked)
+            {
+                SaveBossNameToConfig(bossName);
+            }
+            else
+            {
+                RemoveBossNameFromConfig(bossName);
+            }
+
+        }
+
+        private void Ulgoth_CheckedChanged(object sender, EventArgs e)
+        {
+            {
+                string bossName = "Ulgoth the Modniir";
+
+
+
+                if (Ulgoth.Checked)
+                {
+                    SaveBossNameToConfig(bossName);
+                }
+                else
+                {
+                    RemoveBossNameFromConfig(bossName);
+                }
+
+            }
+        }
+
+        private void Thaida_CheckedChanged(object sender, EventArgs e)
+        {
+            {
+                string bossName = "Taidha Covington";
+
+
+
+                if (Thaida.Checked)
+                {
+                    SaveBossNameToConfig(bossName);
+                }
+                else
+                {
+                    RemoveBossNameFromConfig(bossName);
+                }
+
+            }
+        }
+
+        private void Megadestroyer_CheckedChanged(object sender, EventArgs e)
+
+        {
+            string bossName = "Megadestroyer";
+
+
+
+            if (Megadestroyer.Checked)
+            {
+                SaveBossNameToConfig(bossName);
+            }
+            else
+            {
+                RemoveBossNameFromConfig(bossName);
+            }
+
+        }
+
+        private void MarkTwo_CheckedChanged(object sender, EventArgs e)
+        {
+            string bossName = "Inquest Golem Mark II";
+
+
+
+            if (MarkTwo.Checked)
+            {
+                SaveBossNameToConfig(bossName);
+            }
+            else
+            {
+                RemoveBossNameFromConfig(bossName);
+            }
+
+        }
+
+
+        private void Tequatl_CheckedChanged(object sender, EventArgs e)
+        {
+            string bossName = "Tequatl the Sunless";
+
+
+
+            if (Tequatl.Checked)
+            {
+                SaveBossNameToConfig(bossName);
+            }
+            else
+            {
+                RemoveBossNameFromConfig(bossName);
+            }
+
+        }
+
+        private void Shatterer_CheckedChanged(object sender, EventArgs e)
+        {
+            string bossName = "The Shatterer";
+
+
+
+            if (Shatterer.Checked)
+            {
+                SaveBossNameToConfig(bossName);
+            }
+            else
+            {
+                RemoveBossNameFromConfig(bossName);
+            }
+
+        }
+
+        private void Karka_CheckedChanged(object sender, EventArgs e)
+        {
+            string bossName = "Karka Queen";
+
+
+
+            if (Karka.Checked)
+            {
+                SaveBossNameToConfig(bossName);
+            }
+            else
+            {
+                RemoveBossNameFromConfig(bossName);
+            }
+
+        }
+
+
+        private void Claw_CheckedChanged(object sender, EventArgs e)
+        {
+            string bossName = "Claw of Jormag";
+
+
+
+            if (Claw.Checked)
+            {
+                SaveBossNameToConfig(bossName);
+            }
+            else
+            {
+                RemoveBossNameFromConfig(bossName);
+            }
+
+        }
+
+        private void Chak_CheckedChanged(object sender, EventArgs e)
+        {
+            string bossName = "Chak Gerent";
+
+
+
+            if (Chak.Checked)
+            {
+                SaveBossNameToConfig(bossName);
+            }
+            else
+            {
+                RemoveBossNameFromConfig(bossName);
+            }
+
+        }
+
+
+
+        private void Tarir_CheckedChanged(object sender, EventArgs e)
+        {
+            string bossName = "Battle in Tarir";
+
+
+
+            if (Tarir.Checked)
+            {
+                SaveBossNameToConfig(bossName);
+            }
+            else
+            {
+                RemoveBossNameFromConfig(bossName);
+            }
+
+        }
+
+        private void Mascen_CheckedChanged(object sender, EventArgs e)
+        {
+            string bossName = "Spellmaster Macsen";
+
+
+
+            if (Mascen.Checked)
+            {
+                SaveBossNameToConfig(bossName);
+            }
+            else
+            {
+                RemoveBossNameFromConfig(bossName);
+            }
+
+        }
+
+        private void DS_CheckedChanged(object sender, EventArgs e)
+        {
+            string bossName = "Dragon's Stand";
+
+
+
+            if (DS.Checked)
+            {
+                SaveBossNameToConfig(bossName);
+            }
+            else
+            {
+                RemoveBossNameFromConfig(bossName);
+            }
+
+        }
+
+        private void DBS_CheckedChanged(object sender, EventArgs e)
+        {
+            string bossName = "Death-Branded Shatterer";
+
+
+
+            if (DBS.Checked)
+            {
+                SaveBossNameToConfig(bossName);
+            }
+            else
+            {
+                RemoveBossNameFromConfig(bossName);
+            }
+
+        }
+
+        private void Junundu_CheckedChanged(object sender, EventArgs e)
+        {
+            string bossName = "Junundu Rising";
+
+
+
+            if (Junundu.Checked)
+            {
+                SaveBossNameToConfig(bossName);
+            }
+            else
+            {
+                RemoveBossNameFromConfig(bossName);
+            }
+
+        }
+
+
+        private void PTA_CheckedChanged(object sender, EventArgs e)
+        {
+            string bossName = "Path to Ascension";
+
+
+
+            if (PTA.Checked)
+            {
+                SaveBossNameToConfig(bossName);
+            }
+            else
+            {
+                RemoveBossNameFromConfig(bossName);
+            }
+
+        }
+
+
+        private void Doppelganger_CheckedChanged(object sender, EventArgs e)
+        {
+            string bossName = "Doppelganger";
+
+
+
+            if (Doppelganger.Checked)
+            {
+                SaveBossNameToConfig(bossName);
+            }
+            else
+            {
+                RemoveBossNameFromConfig(bossName);
+            }
+
+        }
+
+        private void Doggies_CheckedChanged(object sender, EventArgs e)
+        {
+            string bossName = "Forged with Fire";
+
+
+
+            if (Doggies.Checked)
+            {
+                SaveBossNameToConfig(bossName);
+            }
+            else
+            {
+                RemoveBossNameFromConfig(bossName);
+            }
+
+        }
+
+
+
+        private void Pinata_CheckedChanged(object sender, EventArgs e)
+        {
+            string bossName = "Choya Piñata";
+
+
+
+            if (Pinata.Checked)
+            {
+                SaveBossNameToConfig(bossName);
+            }
+            else
+            {
+                RemoveBossNameFromConfig(bossName);
+            }
+
+        }
+
+
+        private void SerpentsIre_CheckedChanged(object sender, EventArgs e)
+        {
+            string bossName = "Serpents' Ire";
+
+
+
+            if (SerpentsIre.Checked)
+            {
+                SaveBossNameToConfig(bossName);
+            }
+            else
+            {
+                RemoveBossNameFromConfig(bossName);
+            }
+
+        }
+
+
+        private void Palawadan_CheckedChanged(object sender, EventArgs e)
+        {
+            string bossName = "Palawadan";
+
+
+
+            if (Palawadan.Checked)
+            {
+                SaveBossNameToConfig(bossName);
+            }
+            else
+            {
+                RemoveBossNameFromConfig(bossName);
+            }
+
+        }
+
+        private void ThunderheadKeep_CheckedChanged(object sender, EventArgs e)
+        {
+            string bossName = "Thunderhead Keep";
+
+
+
+            if (ThunderheadKeep.Checked)
+            {
+                SaveBossNameToConfig(bossName);
+            }
+            else
+            {
+                RemoveBossNameFromConfig(bossName);
+            }
+
+        }
+
+
+        private void MawsOfTorment_CheckedChanged(object sender, EventArgs e)
+        {
+            string bossName = "Maws of Torment";
+
+
+
+            if (MawsOfTorment.Checked)
+            {
+                SaveBossNameToConfig(bossName);
+            }
+            else
+            {
+                RemoveBossNameFromConfig(bossName);
+            }
+
+        }
+
+
+        private void Oil_CheckedChanged(object sender, EventArgs e)
+        {
+            string bossName = "The Oil Floes";
+
+
+
+            if (Oil.Checked)
+            {
+                SaveBossNameToConfig(bossName);
+            }
+            else
+            {
+                RemoveBossNameFromConfig(bossName);
+            }
+
+        }
+
+
+        private void Drakkar_CheckedChanged(object sender, EventArgs e)
+        {
+            string bossName = "Drakkar";
+
+
+
+            if (Drakkar.Checked)
+            {
+                SaveBossNameToConfig(bossName);
+            }
+            else
+            {
+                RemoveBossNameFromConfig(bossName);
+            }
+
+        }
+
+
+        private void Metalconcert_CheckedChanged(object sender, EventArgs e)
+        {
+            string bossName = "Metal Concert";
+
+
+
+            if (Metalconcert.Checked)
+            {
+                SaveBossNameToConfig(bossName);
+            }
+            else
+            {
+                RemoveBossNameFromConfig(bossName);
+            }
+
+        }
+
+
+        private void Dragonstorm_CheckedChanged(object sender, EventArgs e)
+        {
+            string bossName = "Dragonstorm";
+
+
+
+            if (Dragonstorm.Checked)
+            {
+                SaveBossNameToConfig(bossName);
+            }
+            else
+            {
+                RemoveBossNameFromConfig(bossName);
+            }
+
+        }
+
+
+        private void OozePits_CheckedChanged(object sender, EventArgs e)
+        {
+            string bossName = "Ooze Pits";
+
+
+
+            if (OozePits.Checked)
+            {
+                SaveBossNameToConfig(bossName);
+            }
+            else
+            {
+                RemoveBossNameFromConfig(bossName);
+            }
+
+        }
+
+
+        private void Effigy_CheckedChanged(object sender, EventArgs e)
+        {
+            string bossName = "Effigy";
+
+
+
+            if (Effigy.Checked)
+            {
+                SaveBossNameToConfig(bossName);
+            }
+            else
+            {
+                RemoveBossNameFromConfig(bossName);
+            }
+
+        }
+
+
+        private void Doomlore_CheckedChanged(object sender, EventArgs e)
+        {
+            string bossName = "Doomlore Shrine";
+
+
+
+            if (Doomlore.Checked)
+            {
+                SaveBossNameToConfig(bossName);
+            }
+            else
+            {
+                RemoveBossNameFromConfig(bossName);
+            }
+
+        }
+
+
+        private void SormsOfWinter_CheckedChanged(object sender, EventArgs e)
+        {
+            string bossName = "Storms of Winter";
+
+
+
+            if (SormsOfWinter.Checked)
+            {
+                SaveBossNameToConfig(bossName);
+            }
+            else
+            {
+                RemoveBossNameFromConfig(bossName);
+            }
+
+        }
+
+
+        private void JorasKeep_CheckedChanged(object sender, EventArgs e)
+        {
+            string bossName = "Defend Jora's Keep";
+
+
+
+            if (JorasKeep.Checked)
+            {
+                SaveBossNameToConfig(bossName);
+            }
+            else
+            {
+                RemoveBossNameFromConfig(bossName);
+            }
+
+        }
+
+
+        private void Sandstorm_CheckedChanged(object sender, EventArgs e)
+        {
+            string bossName = "Sandstorm";
+
+
+
+            if (Sandstorm.Checked)
+            {
+                SaveBossNameToConfig(bossName);
+            }
+            else
+            {
+                RemoveBossNameFromConfig(bossName);
+            }
+
+        }
+
+        private void SaidrasHeaven_CheckedChanged(object sender, EventArgs e)
+        {
+            string bossName = "Saidra's Haven";
+
+
+
+            if (SaidrasHeaven.Checked)
+            {
+                SaveBossNameToConfig(bossName);
+            }
+            else
+            {
+                RemoveBossNameFromConfig(bossName);
+            }
+
+        }
+
+        private void Loamhurst_CheckedChanged(object sender, EventArgs e)
+        {
+            string bossName = "New Loamhurst";
+
+
+
+            if (Loamhurst.Checked)
+            {
+                SaveBossNameToConfig(bossName);
+            }
+            else
+            {
+                RemoveBossNameFromConfig(bossName);
+            }
+
+        }
+
+        private void Homestead_CheckedChanged(object sender, EventArgs e)
+        {
+            string bossName = "Noran's Homestead";
+
+
+
+            if (Homestead.Checked)
+            {
+                SaveBossNameToConfig(bossName);
+            }
+            else
+            {
+                RemoveBossNameFromConfig(bossName);
+            }
+
+        }
+
+
+        private void Atherblade_CheckedChanged(object sender, EventArgs e)
+        {
+            string bossName = "Aetherblade Assault";
+
+
+
+            if (Atherblade.Checked)
+            {
+                SaveBossNameToConfig(bossName);
+            }
+            else
+            {
+                RemoveBossNameFromConfig(bossName);
+            }
+
+        }
+
+
+
+        private void Blackout_CheckedChanged(object sender, EventArgs e)
+        {
+            string bossName = "Kaineng Blackout";
+
+
+
+            if (Blackout.Checked)
+            {
+                SaveBossNameToConfig(bossName);
+            }
+            else
+            {
+                RemoveBossNameFromConfig(bossName);
+            }
+
+        }
+
+        private void GangWar_CheckedChanged(object sender, EventArgs e)
+        {
+            string bossName = "Gang War";
+
+
+
+            if (GangWar.Checked)
+            {
+                SaveBossNameToConfig(bossName);
+            }
+            else
+            {
+                RemoveBossNameFromConfig(bossName);
+            }
+
+        }
+
+
+
+        private void Aspenwood_CheckedChanged(object sender, EventArgs e)
+        {
+            string bossName = "Aspenwood";
+
+
+
+            if (Aspenwood.Checked)
+            {
+                SaveBossNameToConfig(bossName);
+            }
+            else
+            {
+                RemoveBossNameFromConfig(bossName);
+            }
+
+        }
+
+        private void JadeSea_CheckedChanged(object sender, EventArgs e)
+        {
+            string bossName = "Battle for Jade Sea";
+
+
+
+            if (JadeSea.Checked)
+            {
+                SaveBossNameToConfig(bossName);
+            }
+            else
+            {
+                RemoveBossNameFromConfig(bossName);
+            }
+
+        }
+
+        private void WizzardsTower_CheckedChanged(object sender, EventArgs e)
+        {
+            string bossName = "Unlock'Wizard's Tower";
+
+
+
+            if (WizzardsTower.Checked)
+            {
+                SaveBossNameToConfig(bossName);
+            }
+            else
+            {
+                RemoveBossNameFromConfig(bossName);
+            }
+
+        }
+
+
+        private void Flybynigtht_CheckedChanged(object sender, EventArgs e)
+        {
+            string bossName = "Fly by Night";
+
+
+
+            if (Flybynigtht.Checked)
+            {
+                SaveBossNameToConfig(bossName);
+            }
+            else
+            {
+                RemoveBossNameFromConfig(bossName);
+            }
+
+        }
+
+
+        private void Amnytas_CheckedChanged(object sender, EventArgs e)
+        {
+            string bossName = "Defense of Amnytas";
+
+
+
+            if (Amnytas.Checked)
+            {
+                SaveBossNameToConfig(bossName);
+            }
+            else
+            {
+                RemoveBossNameFromConfig(bossName);
+            }
+
+        }
+
+        private void Convergence_CheckedChanged(object sender, EventArgs e)
+        {
+            string bossName = "Convergences";
+
+
+
+            if (Convergence.Checked)
+            {
+                SaveBossNameToConfig(bossName);
+            }
+            else
+            {
+                RemoveBossNameFromConfig(bossName);
+            }
+
+        }
+
+        private void InitializeBossCheckBoxMap()
+        {
+            bossCheckBoxMap = new Dictionary<string, CheckBox>
+        {
+        { "The frozen Maw", Maw },
+        { "Shadow Behemoth", Behemoth },
+        { "Fire Elemental", Fire_Elemental },
+        { "Great Jungle Wurm", JungleWurm },
+        { "Ulgoth the Modniir", Ulgoth },
+        { "Taidha Covington", Thaida },
+        { "Megadestroyer", Megadestroyer },
+        { "Inquest Golem Mark II", MarkTwo },
+        { "Tequatl the Sunless", Tequatl },
+        { "The Shatterer", Shatterer },
+        { "Karka Queen", Karka },
+        { "Claw of Jormag", Claw },
+        { "Chak Gerent", Chak },
+        { "Battle in Tarir", Tarir },
+        { "Spellmaster Macsen", Mascen },
+        { "Dragon's Stand", DS },
+        { "Death-Branded Shatterer", DBS },
+        { "Junundu Rising", Junundu },
+        { "Path to Ascension", PTA },
+        { "Doppelganger", Doppelganger },
+        { "Forged with Fire", Doggies },
+        { "Choya Piñata", Pinata },
+        { "Serpents' Ire", SerpentsIre },
+        { "Palawadan", Palawadan },
+        { "Thunderhead Keep", ThunderheadKeep },
+        { "Maws of Torment", MawsOfTorment },
+        { "The Oil Floes", Oil },
+        { "Drakkar", Drakkar },
+        { "Metal Concert", Metalconcert },
+        { "Dragonstorm", Dragonstorm },
+        { "Ooze Pits", OozePits },
+        { "Effigy", Effigy },
+        { "Doomlore Shrine", Doomlore },
+        { "Storms of Winter", SormsOfWinter },
+        { "Defend Jora's Keep", JorasKeep },
+        { "Sandstorm", Sandstorm },
+        { "Saidra's Haven", SaidrasHeaven },
+        { "New Loamhurst", Loamhurst },
+        { "Noran's Homestead", Homestead },
+        { "Aetherblade Assault", Atherblade },
+        { "Kaineng Blackout", Blackout },
+        { "Gang War", GangWar },
+        { "Aspenwood", Aspenwood },
+        { "Battle for Jade Sea", JadeSea },
+        { "Unlock'Wizard's Tower", WizzardsTower },
+        { "Fly by Night", Flybynigtht },
+        { "Defense of Amnytas", Amnytas },
+        { "Convergences", Convergence }
+        };
+        }
+
+        private CheckBox FindCheckBoxByBossName(string bossName)
+        {
+            // Use the dictionary to find the CheckBox corresponding to the bossName
+            return bossCheckBoxMap.TryGetValue(bossName, out var checkBox) ? checkBox : null;
+        }
+
+        private void BossCheckbox_CheckedChanged(object sender, EventArgs e)
+        {
+            CheckBox checkBox = (CheckBox)sender;
+
+            if (checkBox.Checked)
+            {
+                string bossName = checkBox.Text;
+                SaveBossNameToConfig(bossName);
+            }
+            else
+            {
+                string bossName = checkBox.Text;
+                RemoveBossNameFromConfig(bossName);
+            }
+        }
+
+        private void WriteConfigFile(string[] lines)
+        {
+            try
+            {
+
+                string configFilePath = "config.txt";
+
+                System.IO.File.WriteAllLines(configFilePath, lines);
+            }
+            catch (Exception ex)
+            {
+                // Hier könnten Sie den Fehler protokollieren oder loggen
+                Console.WriteLine($"Error writing to config file: {ex.Message}");
+                throw new Exception($"Error writing to config file: {ex.Message}");
+            }
+        }
+
+
+        private string[] ReadConfigFile()
+        {
+            try
+            {
+                string configFilePath = "config.txt";
+
+                // Überprüfen, ob die Datei existiert
+                if (File.Exists(configFilePath))
+                {
+                    // Read all lines from the file
+                    return System.IO.File.ReadAllLines(configFilePath);
+                }
+                else
+                {
+                    // Hier könnten Sie den Fehler protokollieren oder loggen
+                    Console.WriteLine($"Config file does not exist.");
+                    throw new FileNotFoundException("Config file not found.");
+                }
+            }
+            catch (Exception ex)
+            {
+                // Hier könnten Sie den Fehler protokollieren oder loggen
+                Console.WriteLine($"Error reading from config file: {ex.Message}");
+                throw new Exception($"Error reading from config file: {ex.Message}");
+            }
+        }
+
         private void RemoveBossNameFromConfig(string bossName)
         {
             try
@@ -380,6 +1370,8 @@ namespace GW2FOX
                     lines[bossIndex] = newBossLine;
                     File.WriteAllLines(filePath, lines);
 
+
+
                     // Setze das Häkchen im CheckBox-Control
                     CheckBox bossCheckBox = FindCheckBoxByBossName(bossName);
                     if (bossCheckBox != null)
@@ -387,8 +1379,7 @@ namespace GW2FOX
                         bossCheckBox.Checked = false;
                         bossCheckBox.Invalidate(); // Füge diese Zeile hinzu
                     }
-
-
+                    UpdateBossUI();
                 }
                 else
                 {
@@ -403,25 +1394,18 @@ namespace GW2FOX
         }
 
 
-
-
-        private bool userTriggeredSave = false;
-
         private void SaveBossNameToConfig(string bossName)
         {
             try
             {
-                // Nur fortfahren, wenn die Aktion vom Benutzer ausgelöst wurde
-                if (!userTriggeredSave)
+                // Vorhandenen Inhalt aus der Datei lesen
+                string[] lines = ReadConfigFile();
+
+                if (lines == null)
                 {
+                    // Fehler beim Lesen der Datei, abbrechen
                     return;
                 }
-
-                // Setze den Trigger zurück, um sicherzustellen, dass zukünftige Aufrufe ignoriert werden
-                userTriggeredSave = false;
-
-                // Vorhandenen Inhalt aus der Datei lesen
-                string[] lines = File.ReadAllLines(filePath);
 
                 // Index der Zeile mit dem Bossnamen finden
                 int bossIndex = -1;
@@ -447,24 +1431,25 @@ namespace GW2FOX
                         .Select(name => name.Trim())  // Entferne führende und abschließende Leerzeichen
                         .ToArray();
 
-                    // Überprüfen, ob der Name bereits vorhanden ist
-                    if (!bossNames.Contains(bossName))
+                    // Überprüfen, ob der Name bereits vorhanden ist (case-insensitive)
+                    bool nameExists = bossNames.Any(name => name.Equals(bossName, StringComparison.OrdinalIgnoreCase));
+
+                    if (!nameExists)
                     {
                         // Füge den Bossnamen hinzu
                         lines[bossIndex] = $"Bosses: \"{string.Join(", ", bossNames.Concat(new[] { bossName }).ToArray())}\"".Trim();
 
                         // Aktualisierten Inhalt zurück in die Datei schreiben
-                        File.WriteAllLines(filePath, lines);
+                        WriteConfigFile(lines);
 
-                        // Setze das Häkchen im CheckBox-Control
+                        // Setze das Häkchen im CheckBox-Control auf true
                         CheckBox bossCheckBox = FindCheckBoxByBossName(bossName);
                         if (bossCheckBox != null)
                         {
                             bossCheckBox.Checked = true;
                         }
-
-                        // Keine Meldung anzeigen
                     }
+                    UpdateBossUI();
                 }
                 else
                 {
@@ -478,14 +1463,12 @@ namespace GW2FOX
             }
         }
 
-
-
         private void SetCheckBoxesFromConfig()
         {
             try
             {
                 // Vorhandenen Inhalt aus der Datei lesen
-                string[] lines = File.ReadAllLines(filePath);
+                string[] lines = ReadConfigFile();
 
                 // Index der Zeile mit dem Bossnamen finden
                 int bossIndex = -1;
@@ -524,978 +1507,215 @@ namespace GW2FOX
             }
             catch (Exception ex)
             {
-                // Hier kann eine Fehlermeldung protokolliert oder geloggt werden, wenn gewünscht
+                // Hier könnte eine Fehlermeldung protokolliert oder geloggt werden, wenn gewünscht
+                Console.WriteLine($"Error setting checkboxes from config: {ex.Message}");
+            }
+        }
+        private void WorldBosses_Load(object sender, EventArgs e)
+        {
+            // Load and set checkboxes from config
+            SetCheckBoxesFromConfig();
+        }
+
+        private void WorldBosses_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            // Unsubscribe the event handlers to release resources
+            this.Load -= WorldBosses_Load;
+            this.FormClosing -= WorldBosses_FormClosing;
+        }
+
+        public void UpdateBossUI()
+        {
+            SetBossListFromConfig();
+            ListView bossList = CustomBossList;
+            if (bossList != null)
+            {
+                BossTimer bossTimerInstance = new BossTimer(bossList);
+                bossTimerInstance.UpdateBossList();
             }
         }
 
-
-        private void Maw_CheckedChanged(object sender, EventArgs e)
+        private void Meta_Click(object sender, EventArgs e)
         {
-            // Der Name des Bosses
-            string bossName = "The Frozen Maw";
-
-            // Setze den Trigger, um anzuzeigen, dass die Aktion vom Benutzer ausgelöst wurde
-            userTriggeredSave = true;
-
-            if (Maw.Checked)
+            try
             {
-                // Wenn das Kontrollkästchen ausgewählt ist
-                SaveBossNameToConfig(bossName);
-            }
-            else
-            {
-                // Wenn das Kontrollkästchen nicht ausgewählt ist
-                RemoveBossNameFromConfig(bossName);
-            }
+                // Uncheck all existing checkboxes
+                UncheckAllBossCheckboxes();
 
-            userTriggeredSave = false;
-        }
+                // Read the config file
+                string[] lines = ReadConfigFile();
 
-
-        private void Behemoth_CheckedChanged(object sender, EventArgs e)
-        {
-            // Der Name des Bosses
-            string bossName = "Shadow Behemoth";
-
-            userTriggeredSave = true;
-
-            if (Behemoth.Checked)
-            {
-                // Wenn das Kontrollkästchen ausgewählt ist
-                SaveBossNameToConfig(bossName);
-            }
-            else
-            {
-                // Wenn das Kontrollkästchen nicht ausgewählt ist
-                RemoveBossNameFromConfig(bossName);
-            }
-            userTriggeredSave = false;
-        }
-
-
-        private void Fire_Elemental_CheckedChanged(object sender, EventArgs e)
-        {
-            string bossName = "Fire Elemental";
-
-            userTriggeredSave = true;
-
-            if (Fire_Elemental.Checked)
-            {
-                SaveBossNameToConfig(bossName);
-            }
-            else
-            {
-                RemoveBossNameFromConfig(bossName);
-            }
-            userTriggeredSave = false;
-        }
-
-        private void JungleWurm_CheckedChanged(object sender, EventArgs e)
-        {
-            string bossName = "Great Jungle Wurm";
-
-            userTriggeredSave = true;
-
-            if (Fire_Elemental.Checked)
-            {
-                SaveBossNameToConfig(bossName);
-            }
-            else
-            {
-                RemoveBossNameFromConfig(bossName);
-            }
-            userTriggeredSave = false;
-        }
-
-        private void Ulgoth_CheckedChanged(object sender, EventArgs e)
-        {
-            {
-                string bossName = "Ulgoth the Modniir";
-
-                userTriggeredSave = true;
-
-                if (Fire_Elemental.Checked)
+                // Index of the line with the Meta bosses
+                int metaIndex = -1;
+                for (int i = 0; i < lines.Length; i++)
                 {
-                    SaveBossNameToConfig(bossName);
+                    if (lines[i].StartsWith("Meta:"))
+                    {
+                        metaIndex = i;
+                        break;
+                    }
+                }
+
+                // If Meta section is found, extract and check the checkboxes for Meta bosses
+                if (metaIndex != -1 && metaIndex < lines.Length)
+                {
+                    // Extract the bosses from the Meta line
+                    string metaBossLine = lines[metaIndex].Replace("Meta:", "").Trim();
+
+                    // Remove the outer quotes and split the bosses
+                    string[] metaBosses = metaBossLine
+                        .Trim('"')
+                        .Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+                        .Select(boss => boss.Trim())
+                        .ToArray();
+
+                    // Check the corresponding checkboxes for Meta bosses
+                    CheckBossCheckboxes(metaBosses);
+                    UpdateBossUI();
                 }
                 else
                 {
-                    RemoveBossNameFromConfig(bossName);
+                    MessageBox.Show($"Meta section not found in config.", "Not Found", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
-                userTriggeredSave = false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error loading Meta bosses: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        private void Thaida_CheckedChanged(object sender, EventArgs e)
+
+
+        private void UncheckAllBossCheckboxes()
         {
+            foreach (CheckBox checkBox in bossCheckBoxMap.Values)
             {
-                string bossName = "Taidha Covington";
+                checkBox.Checked = false;
+                checkBox.Invalidate(); // Invalidate to trigger redraw
+            }
+        }
 
-                userTriggeredSave = true;
 
-                if (Fire_Elemental.Checked)
+        private void CheckBossCheckboxes(string[] bossNames)
+        {
+            foreach (string bossName in bossNames)
+            {
+                CheckBox bossCheckBox = FindCheckBoxByBossName(bossName);
+                if (bossCheckBox != null)
                 {
-                    SaveBossNameToConfig(bossName);
+                    bossCheckBox.Checked = true;
+                }
+            }
+        }
+
+
+
+        private void World_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Uncheck all existing checkboxes
+                UncheckAllBossCheckboxes();
+
+                // Read the config file
+                string[] lines = ReadConfigFile();
+
+                // Index of the line with the World bosses
+                int worldIndex = -1;
+                for (int i = 0; i < lines.Length; i++)
+                {
+                    if (lines[i].StartsWith("World:"))
+                    {
+                        worldIndex = i;
+                        break;
+                    }
+                }
+
+                // If World section is found, extract and check the checkboxes for World bosses
+                if (worldIndex != -1 && worldIndex < lines.Length)
+                {
+                    // Extract the bosses from the World line
+                    string worldBossLine = lines[worldIndex].Replace("World:", "").Trim();
+
+                    // Remove the outer quotes and split the bosses
+                    string[] worldBosses = worldBossLine
+                        .Trim('"')
+                        .Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+                        .Select(boss => boss.Trim())
+                        .ToArray();
+
+                    // Check the corresponding checkboxes for World bosses
+                    CheckBossCheckboxes(worldBosses);
+                    UpdateBossUI();
                 }
                 else
                 {
-                    RemoveBossNameFromConfig(bossName);
+                    MessageBox.Show($"World section not found in config.", "Not Found", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
-                userTriggeredSave = false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error loading World bosses: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        private void Megadestroyer_CheckedChanged(object sender, EventArgs e)
-
+        private void ClearAll_Click(object sender, EventArgs e)
         {
-            string bossName = "Megadestroyer";
-
-            userTriggeredSave = true;
-
-            if (Fire_Elemental.Checked)
-            {
-                SaveBossNameToConfig(bossName);
-            }
-            else
-            {
-                RemoveBossNameFromConfig(bossName);
-            }
-            userTriggeredSave = false;
+            UncheckAllBossCheckboxes();
+            UpdateBossUI();
         }
 
-        private void MarkTwo_CheckedChanged(object sender, EventArgs e)
+        private void Mixed_Click(object sender, EventArgs e)
         {
-            string bossName = "Inquest Golem Mark II";
-
-            userTriggeredSave = true;
-
-            if (Fire_Elemental.Checked)
-            {
-                SaveBossNameToConfig(bossName);
-            }
-            else
-            {
-                RemoveBossNameFromConfig(bossName);
-            }
-            userTriggeredSave = false;
-        }
-
-
-        private void Tequatl_CheckedChanged(object sender, EventArgs e)
-        {
-            string bossName = "Tequatl the Sunless";
-
-            userTriggeredSave = true;
-
-            if (Fire_Elemental.Checked)
-            {
-                SaveBossNameToConfig(bossName);
-            }
-            else
-            {
-                RemoveBossNameFromConfig(bossName);
-            }
-            userTriggeredSave = false;
-        }
-
-        private void Shatterer_CheckedChanged(object sender, EventArgs e)
-        {
-            string bossName = "The Shatterer";
-
-            userTriggeredSave = true;
-
-            if (Fire_Elemental.Checked)
-            {
-                SaveBossNameToConfig(bossName);
-            }
-            else
-            {
-                RemoveBossNameFromConfig(bossName);
-            }
-            userTriggeredSave = false;
-        }
-
-        private void Karka_CheckedChanged(object sender, EventArgs e)
-        {
-            string bossName = "Karka Queen";
-
-            userTriggeredSave = true;
-
-            if (Fire_Elemental.Checked)
-            {
-                SaveBossNameToConfig(bossName);
-            }
-            else
-            {
-                RemoveBossNameFromConfig(bossName);
-            }
-            userTriggeredSave = false;
-        }
-
-
-        private void Claw_CheckedChanged(object sender, EventArgs e)
-        {
-            string bossName = "Claw of Jormag";
-
-            userTriggeredSave = true;
-
-            if (Fire_Elemental.Checked)
-            {
-                SaveBossNameToConfig(bossName);
-            }
-            else
-            {
-                RemoveBossNameFromConfig(bossName);
-            }
-            userTriggeredSave = false;
-        }
-
-        private void Chak_CheckedChanged(object sender, EventArgs e)
-        {
-            string bossName = "Chak Gerent";
-
-            userTriggeredSave = true;
-
-            if (Fire_Elemental.Checked)
-            {
-                SaveBossNameToConfig(bossName);
-            }
-            else
-            {
-                RemoveBossNameFromConfig(bossName);
-            }
-            userTriggeredSave = false;
-        }
-
-
-
-        private void Tarir_CheckedChanged(object sender, EventArgs e)
-        {
-            string bossName = "Battle in Tarir";
-
-            userTriggeredSave = true;
-
-            if (Fire_Elemental.Checked)
-            {
-                SaveBossNameToConfig(bossName);
-            }
-            else
-            {
-                RemoveBossNameFromConfig(bossName);
-            }
-            userTriggeredSave = false;
-        }
-
-        private void Mascen_CheckedChanged(object sender, EventArgs e)
-        {
-            string bossName = "Spellmaster Macsen";
-
-            userTriggeredSave = true;
-
-            if (Fire_Elemental.Checked)
-            {
-                SaveBossNameToConfig(bossName);
-            }
-            else
-            {
-                RemoveBossNameFromConfig(bossName);
-            }
-            userTriggeredSave = false;
-        }
-
-        private void DS_CheckedChanged(object sender, EventArgs e)
-        {
-            string bossName = "Dragon's Stand";
-
-            userTriggeredSave = true;
-
-            if (Fire_Elemental.Checked)
-            {
-                SaveBossNameToConfig(bossName);
-            }
-            else
-            {
-                RemoveBossNameFromConfig(bossName);
-            }
-            userTriggeredSave = false;
-        }
-
-        private void DBS_CheckedChanged(object sender, EventArgs e)
-        {
-            string bossName = "Death-Branded Shatterer";
-
-            userTriggeredSave = true;
-
-            if (Fire_Elemental.Checked)
-            {
-                SaveBossNameToConfig(bossName);
-            }
-            else
-            {
-                RemoveBossNameFromConfig(bossName);
-            }
-            userTriggeredSave = false;
-        }
-
-        private void Junundu_CheckedChanged(object sender, EventArgs e)
-        {
-            string bossName = "Junundu Rising";
-
-            userTriggeredSave = true;
-
-            if (Fire_Elemental.Checked)
-            {
-                SaveBossNameToConfig(bossName);
-            }
-            else
-            {
-                RemoveBossNameFromConfig(bossName);
-            }
-            userTriggeredSave = false;
-        }
-
-
-        private void PTA_CheckedChanged(object sender, EventArgs e)
-        {
-            string bossName = "Path to Ascension";
-
-            userTriggeredSave = true;
-
-            if (Fire_Elemental.Checked)
-            {
-                SaveBossNameToConfig(bossName);
-            }
-            else
-            {
-                RemoveBossNameFromConfig(bossName);
-            }
-            userTriggeredSave = false;
-        }
-
-
-        private void Doppelganger_CheckedChanged(object sender, EventArgs e)
-        {
-            string bossName = "Doppelganger";
-
-            userTriggeredSave = true;
-
-            if (Fire_Elemental.Checked)
-            {
-                SaveBossNameToConfig(bossName);
-            }
-            else
-            {
-                RemoveBossNameFromConfig(bossName);
-            }
-            userTriggeredSave = false;
-        }
-
-        private void Doggies_CheckedChanged(object sender, EventArgs e)
-        {
-            string bossName = "Forged with Fire";
-
-            userTriggeredSave = true;
-
-            if (Fire_Elemental.Checked)
-            {
-                SaveBossNameToConfig(bossName);
-            }
-            else
-            {
-                RemoveBossNameFromConfig(bossName);
-            }
-            userTriggeredSave = false;
-        }
-
-
-
-        private void Pinata_CheckedChanged(object sender, EventArgs e)
-        {
-            string bossName = "Choya Piñata";
-
-            userTriggeredSave = true;
-
-            if (Fire_Elemental.Checked)
-            {
-                SaveBossNameToConfig(bossName);
-            }
-            else
-            {
-                RemoveBossNameFromConfig(bossName);
-            }
-            userTriggeredSave = false;
-        }
-
-
-        private void SerpentsIre_CheckedChanged(object sender, EventArgs e)
-        {
-            string bossName = "Serpents' Ire";
-
-            userTriggeredSave = true;
-
-            if (Fire_Elemental.Checked)
-            {
-                SaveBossNameToConfig(bossName);
-            }
-            else
-            {
-                RemoveBossNameFromConfig(bossName);
-            }
-            userTriggeredSave = false;
-        }
-
-
-        private void Palawadan_CheckedChanged(object sender, EventArgs e)
-        {
-            string bossName = "Palawadan";
-
-            userTriggeredSave = true;
-
-            if (Fire_Elemental.Checked)
-            {
-                SaveBossNameToConfig(bossName);
-            }
-            else
-            {
-                RemoveBossNameFromConfig(bossName);
-            }
-            userTriggeredSave = false;
-        }
-
-        private void ThunderheadKeep_CheckedChanged(object sender, EventArgs e)
-        {
-            string bossName = "Thunderhead Keep";
-
-            userTriggeredSave = true;
-
-            if (Fire_Elemental.Checked)
-            {
-                SaveBossNameToConfig(bossName);
-            }
-            else
-            {
-                RemoveBossNameFromConfig(bossName);
-            }
-            userTriggeredSave = false;
-        }
-
-
-        private void MawsOfTorment_CheckedChanged(object sender, EventArgs e)
-        {
-            string bossName = "Maws of Torment";
-
-            userTriggeredSave = true;
-
-            if (Fire_Elemental.Checked)
-            {
-                SaveBossNameToConfig(bossName);
-            }
-            else
-            {
-                RemoveBossNameFromConfig(bossName);
-            }
-            userTriggeredSave = false;
-        }
-
-
-        private void Oil_CheckedChanged(object sender, EventArgs e)
-        {
-            string bossName = "The Oil Floes";
-
-            userTriggeredSave = true;
-
-            if (Fire_Elemental.Checked)
-            {
-                SaveBossNameToConfig(bossName);
-            }
-            else
-            {
-                RemoveBossNameFromConfig(bossName);
-            }
-            userTriggeredSave = false;
-        }
-
-
-        private void Drakkar_CheckedChanged(object sender, EventArgs e)
-        {
-            string bossName = "Drakkar";
-
-            userTriggeredSave = true;
-
-            if (Fire_Elemental.Checked)
-            {
-                SaveBossNameToConfig(bossName);
-            }
-            else
-            {
-                RemoveBossNameFromConfig(bossName);
-            }
-            userTriggeredSave = false;
-        }
-
-
-        private void Metalconcert_CheckedChanged(object sender, EventArgs e)
-        {
-            string bossName = "Metal Concert";
-
-            userTriggeredSave = true;
-
-            if (Fire_Elemental.Checked)
-            {
-                SaveBossNameToConfig(bossName);
-            }
-            else
-            {
-                RemoveBossNameFromConfig(bossName);
-            }
-            userTriggeredSave = false;
-        }
-
-
-        private void Dragonstorm_CheckedChanged(object sender, EventArgs e)
-        {
-            string bossName = "Dragonstorm";
-
-            userTriggeredSave = true;
-
-            if (Fire_Elemental.Checked)
-            {
-                SaveBossNameToConfig(bossName);
-            }
-            else
-            {
-                RemoveBossNameFromConfig(bossName);
-            }
-            userTriggeredSave = false;
-        }
-
-
-        private void OozePits_CheckedChanged(object sender, EventArgs e)
-        {
-            string bossName = "Ooze Pits";
-
-            userTriggeredSave = true;
-
-            if (Fire_Elemental.Checked)
-            {
-                SaveBossNameToConfig(bossName);
-            }
-            else
-            {
-                RemoveBossNameFromConfig(bossName);
-            }
-            userTriggeredSave = false;
-        }
-
-
-        private void Effigy_CheckedChanged(object sender, EventArgs e)
-        {
-            string bossName = "Effigy";
-
-            userTriggeredSave = true;
-
-            if (Fire_Elemental.Checked)
-            {
-                SaveBossNameToConfig(bossName);
-            }
-            else
-            {
-                RemoveBossNameFromConfig(bossName);
-            }
-            userTriggeredSave = false;
-        }
-
-
-        private void Doomlore_CheckedChanged(object sender, EventArgs e)
-        {
-            string bossName = "Doomlore Shrine";
-
-            userTriggeredSave = true;
-
-            if (Fire_Elemental.Checked)
-            {
-                SaveBossNameToConfig(bossName);
-            }
-            else
-            {
-                RemoveBossNameFromConfig(bossName);
-            }
-            userTriggeredSave = false;
-        }
-
-
-        private void SormsOfWinter_CheckedChanged(object sender, EventArgs e)
-        {
-            string bossName = "Storms of Winter";
-
-            userTriggeredSave = true;
-
-            if (Fire_Elemental.Checked)
-            {
-                SaveBossNameToConfig(bossName);
-            }
-            else
-            {
-                RemoveBossNameFromConfig(bossName);
-            }
-            userTriggeredSave = false;
-        }
-
-
-        private void JorasKeep_CheckedChanged(object sender, EventArgs e)
-        {
-            string bossName = "Defend Jora's Keep";
-
-            userTriggeredSave = true;
-
-            if (Fire_Elemental.Checked)
-            {
-                SaveBossNameToConfig(bossName);
-            }
-            else
-            {
-                RemoveBossNameFromConfig(bossName);
-            }
-            userTriggeredSave = false;
-        }
-
-
-        private void Sandstorm_CheckedChanged(object sender, EventArgs e)
-        {
-            string bossName = "Sandstorm";
-
-            userTriggeredSave = true;
-
-            if (Fire_Elemental.Checked)
-            {
-                SaveBossNameToConfig(bossName);
-            }
-            else
-            {
-                RemoveBossNameFromConfig(bossName);
-            }
-            userTriggeredSave = false;
-        }
-
-        private void SaidrasHeaven_CheckedChanged(object sender, EventArgs e)
-        {
-            string bossName = "Saidra's Haven";
-
-            userTriggeredSave = true;
-
-            if (Fire_Elemental.Checked)
-            {
-                SaveBossNameToConfig(bossName);
-            }
-            else
-            {
-                RemoveBossNameFromConfig(bossName);
-            }
-            userTriggeredSave = false;
-        }
-
-        private void Loamhurst_CheckedChanged(object sender, EventArgs e)
-        {
-            string bossName = "New Loamhurst";
-
-            userTriggeredSave = true;
-
-            if (Fire_Elemental.Checked)
-            {
-                SaveBossNameToConfig(bossName);
-            }
-            else
-            {
-                RemoveBossNameFromConfig(bossName);
-            }
-            userTriggeredSave = false;
-        }
-
-        private void Homestead_CheckedChanged(object sender, EventArgs e)
-        {
-            string bossName = "Noran's Homestead";
-
-            userTriggeredSave = true;
-
-            if (Fire_Elemental.Checked)
-            {
-                SaveBossNameToConfig(bossName);
-            }
-            else
-            {
-                RemoveBossNameFromConfig(bossName);
-            }
-            userTriggeredSave = false;
-        }
-
-
-        private void Atherblade_CheckedChanged(object sender, EventArgs e)
-        {
-            string bossName = "Aetherblade Assault";
-
-            userTriggeredSave = true;
-
-            if (Fire_Elemental.Checked)
-            {
-                SaveBossNameToConfig(bossName);
-            }
-            else
-            {
-                RemoveBossNameFromConfig(bossName);
-            }
-            userTriggeredSave = false;
-        }
-
-
-
-        private void Blackout_CheckedChanged(object sender, EventArgs e)
-        {
-            string bossName = "Kaineng Blackout";
-
-            userTriggeredSave = true;
-
-            if (Fire_Elemental.Checked)
-            {
-                SaveBossNameToConfig(bossName);
-            }
-            else
-            {
-                RemoveBossNameFromConfig(bossName);
-            }
-            userTriggeredSave = false;
-        }
-
-        private void GangWar_CheckedChanged(object sender, EventArgs e)
-        {
-            string bossName = "Gang War";
-
-            userTriggeredSave = true;
-
-            if (Fire_Elemental.Checked)
-            {
-                SaveBossNameToConfig(bossName);
-            }
-            else
-            {
-                RemoveBossNameFromConfig(bossName);
-            }
-            userTriggeredSave = false;
-        }
-
-
-
-        private void Aspenwood_CheckedChanged(object sender, EventArgs e)
-        {
-            string bossName = "Aspenwood";
-
-            userTriggeredSave = true;
-
-            if (Fire_Elemental.Checked)
-            {
-                SaveBossNameToConfig(bossName);
-            }
-            else
-            {
-                RemoveBossNameFromConfig(bossName);
-            }
-            userTriggeredSave = false;
-        }
-
-        private void JadeSea_CheckedChanged(object sender, EventArgs e)
-        {
-            string bossName = "Battle for Jade Sea";
-
-            userTriggeredSave = true;
-
-            if (Fire_Elemental.Checked)
-            {
-                SaveBossNameToConfig(bossName);
-            }
-            else
-            {
-                RemoveBossNameFromConfig(bossName);
-            }
-            userTriggeredSave = false;
-        }
-
-        private void WizzardsTower_CheckedChanged(object sender, EventArgs e)
-        {
-            string bossName = "Unlock'Wizard's Tower";
-
-            userTriggeredSave = true;
-
-            if (Fire_Elemental.Checked)
-            {
-                SaveBossNameToConfig(bossName);
-            }
-            else
-            {
-                RemoveBossNameFromConfig(bossName);
-            }
-            userTriggeredSave = false;
-        }
-
-
-        private void Flybynigtht_CheckedChanged(object sender, EventArgs e)
-        {
-            string bossName = "Fly by Night";
-
-            userTriggeredSave = true;
-
-            if (Fire_Elemental.Checked)
-            {
-                SaveBossNameToConfig(bossName);
-            }
-            else
-            {
-                RemoveBossNameFromConfig(bossName);
-            }
-            userTriggeredSave = false;
-        }
-
-
-        private void Amnytas_CheckedChanged(object sender, EventArgs e)
-        {
-            string bossName = "Defense of Amnytas";
-
-            userTriggeredSave = true;
-
-            if (Fire_Elemental.Checked)
-            {
-                SaveBossNameToConfig(bossName);
-            }
-            else
-            {
-                RemoveBossNameFromConfig(bossName);
-            }
-            userTriggeredSave = false;
-        }
-
-        private void Convergence_CheckedChanged(object sender, EventArgs e)
-        {
-            string bossName = "Convergences";
-
-            userTriggeredSave = true;
-
-            if (Fire_Elemental.Checked)
-            {
-                SaveBossNameToConfig(bossName);
-            }
-            else
-            {
-                RemoveBossNameFromConfig(bossName);
-            }
-            userTriggeredSave = false;
-        }
-
-        private CheckBox FindCheckBoxByBossName(string bossName)
-        {
-
-            switch (bossName)
-            {
-                case "The Frozen Maw":
-                    return Maw;
-                case "Shadow Behemoth":
-                    return Behemoth;
-                case "Fire Elemental":
-                    return Fire_Elemental;
-                case "Great Jungle Wurm":
-                    return JungleWurm;
-                case "Ulgoth the Modniir":
-                    return Ulgoth;
-                case "Taidha Covington":
-                    return Thaida;
-                case "Megadestroyer":
-                    return Megadestroyer;
-                case "Inquest Golem Mark II":
-                    return MarkTwo;
-                case "Tequatl the Sunless":
-                    return Tequatl;
-                case "The Shatterer":
-                    return Shatterer;
-                case "Karka Queen":
-                    return Karka;
-                case "Claw of Jormag":
-                    return Claw;
-                case "Chak Gerent":
-                    return Chak;
-                case "Battle in Tarir":
-                    return Tarir;
-                case "Spellmaster Macsen":
-                    return Mascen;
-                case "Dragon's Stand":
-                    return DS;
-                case "Death-Branded Shatterer":
-                    return DBS;
-                case "Junundu Rising":
-                    return Junundu;
-                case "Path to Ascension":
-                    return PTA;
-                case "Doppelganger":
-                    return Doppelganger;
-                case "Forged with Fire":
-                    return Doggies;
-                case "Choya Piñata":
-                    return Pinata;
-                case "Serpents' Ire":
-                    return SerpentsIre;
-                case "Palawadan":
-                    return Palawadan;
-                case "Thunderhead Keep":
-                    return ThunderheadKeep;
-                case "Maws of Torment":
-                    return MawsOfTorment;
-                case "The Oil Floes":
-                    return Oil;
-                case "Drakkar":
-                    return Drakkar;
-                case "Metal Concert":
-                    return Metalconcert;
-                case "Dragonstorm":
-                    return Dragonstorm;
-                case "Ooze Pits":
-                    return OozePits;
-                case "Effigy":
-                    return Effigy;
-                case "Doomlore Shrine":
-                    return Doomlore;
-                case "Storms of Winter":
-                    return SormsOfWinter;
-                case "Defend Jora's Keep":
-                    return JorasKeep;
-                case "Sandstorm":
-                    return Sandstorm;
-                case "Saidra's Haven":
-                    return SaidrasHeaven;
-                case "New Loamhurst":
-                    return Loamhurst;
-                case "Noran's Homestead":
-                    return Homestead;
-                case "Aetherblade Assault":
-                    return Atherblade;
-                case "Kaineng Blackout":
-                    return Blackout;
-                case "Gang War":
-                    return GangWar;
-                case "Aspenwood":
-                    return Aspenwood;
-                case "Battle for Jade Sea":
-                    return JadeSea;
-                case "Unlock'Wizard's Tower":
-                    return WizzardsTower;
-                case "Fly by Night":
-                    return Flybynigtht;
-                case "Defense of Amnytas":
-                    return Amnytas;
-                case "Convergences":
-                    return Convergence;
-
-                default:
-                    return null;
+            try
+            {
+                // Uncheck all existing checkboxes
+                UncheckAllBossCheckboxes();
+
+                // Read the config file
+                string[] lines = ReadConfigFile();
+
+                // Index of the line with the World bosses
+                int worldIndex = -1;
+                for (int i = 0; i < lines.Length; i++)
+                {
+                    if (lines[i].StartsWith("Mixed:"))
+                    {
+                        worldIndex = i;
+                        break;
+                    }
+                }
+
+                // If World section is found, extract and check the checkboxes for World bosses
+                if (worldIndex != -1 && worldIndex < lines.Length)
+                {
+                    // Extract the bosses from the World line
+                    string worldBossLine = lines[worldIndex].Replace("Mixed:", "").Trim();
+
+                    // Remove the outer quotes and split the bosses
+                    string[] worldBosses = worldBossLine
+                        .Trim('"')
+                        .Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+                        .Select(boss => boss.Trim())
+                        .ToArray();
+
+                    // Check the corresponding checkboxes for World bosses
+                    CheckBossCheckboxes(worldBosses);
+                    UpdateBossUI();
+                }
+                else
+                {
+                    MessageBox.Show($"World section not found in config.", "Not Found", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error loading Mixed bosses: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-
     }
+    
+
 }
+
 
