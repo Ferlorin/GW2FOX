@@ -14,13 +14,13 @@ namespace GW2FOX
         public Worldbosses()
         {
             InitializeComponent();
-            Load += Worldbosses_Load_1;
-            this.Load += WorldBosses_Load;
-            this.FormClosing += WorldBosses_FormClosing;
             bossCheckBoxMap = new Dictionary<string, CheckBox>();  // Verschiebe die Initialisierung hierhin
             InitializeBossCheckBoxMap();
             SetCheckBoxesFromConfig();
             UpdateBossUI();
+            Load += Worldbosses_Load_1;
+            this.Load += WorldBosses_Load;
+            this.FormClosing += WorldBosses_FormClosing;
         }
 
         private void Worldbosses_Load_1(object? sender, EventArgs e)
@@ -1524,17 +1524,6 @@ namespace GW2FOX
             this.FormClosing -= WorldBosses_FormClosing;
         }
 
-        public void UpdateBossUI()
-        {
-            SetBossListFromConfig();
-            ListView bossList = CustomBossList;
-            if (bossList != null)
-            {
-                BossTimer bossTimerInstance = new BossTimer(bossList);
-                bossTimerInstance.UpdateBossList();
-            }
-        }
-
         private void Meta_Click(object sender, EventArgs e)
         {
             try
@@ -1711,6 +1700,16 @@ namespace GW2FOX
             catch (Exception ex)
             {
                 MessageBox.Show($"Error loading Mixed bosses: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        public void UpdateBossUI()
+        {
+            SetBossListFromConfig();
+            ListView bossList = CustomBossList;
+            if (bossList != null)
+            {
+                BossTimer bossTimerInstance = new BossTimer(bossList);
+                bossTimerInstance.UpdateBossList();
             }
         }
     }
