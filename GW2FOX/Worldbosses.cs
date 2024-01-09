@@ -16,11 +16,15 @@ namespace GW2FOX
             InitializeComponent();
             bossCheckBoxMap = new Dictionary<string, CheckBox>();  // Verschiebe die Initialisierung hierhin
             InitializeBossCheckBoxMap();
-            SetCheckBoxesFromConfig();
-            UpdateBossUI();
+            SetCheckBoxesFromConfig_Bosses();
+            SetCheckBoxesFromConfig_Meta();
+            SetCheckBoxesFromConfig_World();
+            SetCheckBoxesFromConfig_Mixed();
+            UpdateBossUIMeta();
+            UpdateBossUIWorld();
+            UpdateBossUIMixed();
+            UpdateBossUIBosses();
             Load += Worldbosses_Load_1;
-            this.Load += WorldBosses_Load;
-            this.FormClosing += WorldBosses_FormClosing;
         }
 
         private void Worldbosses_Load_1(object? sender, EventArgs e)
@@ -1281,7 +1285,9 @@ namespace GW2FOX
             {
                 string bossName = checkBox.Text;
                 RemoveBossNameFromConfig(bossName);
+                
             }
+            
         }
 
         private void WriteConfigFile(string[] lines)
@@ -1379,7 +1385,9 @@ namespace GW2FOX
                         bossCheckBox.Checked = false;
                         bossCheckBox.Invalidate(); // Füge diese Zeile hinzu
                     }
-                    UpdateBossUI();
+                    UpdateBossUIBosses();
+
+
                 }
                 else
                 {
@@ -1448,8 +1456,9 @@ namespace GW2FOX
                         {
                             bossCheckBox.Checked = true;
                         }
+                        UpdateBossUIBosses();
                     }
-                    UpdateBossUI();
+
                 }
                 else
                 {
@@ -1463,7 +1472,7 @@ namespace GW2FOX
             }
         }
 
-        private void SetCheckBoxesFromConfig()
+        private void SetCheckBoxesFromConfig_Bosses()
         {
             try
             {
@@ -1501,6 +1510,7 @@ namespace GW2FOX
                         if (bossCheckBox != null)
                         {
                             bossCheckBox.Checked = true;
+                            UpdateBossUIBosses();
                         }
                     }
                 }
@@ -1511,17 +1521,155 @@ namespace GW2FOX
                 Console.WriteLine($"Error setting checkboxes from config: {ex.Message}");
             }
         }
-        private void WorldBosses_Load(object sender, EventArgs e)
+
+        private void SetCheckBoxesFromConfig_Meta()
         {
-            // Load and set checkboxes from config
-            SetCheckBoxesFromConfig();
+            try
+            {
+                // Vorhandenen Inhalt aus der Datei lesen
+                string[] lines = ReadConfigFile();
+
+                // Index der Zeile mit dem Bossnamen finden
+                int bossIndex = -1;
+                for (int i = 0; i < lines.Length; i++)
+                {
+                    if (lines[i].StartsWith("Meta:"))
+                    {
+                        bossIndex = i; // Die aktuelle Zeile enthält den Namen
+                        break;
+                    }
+                }
+
+                // Wenn der Bossname gefunden wird, setze die CheckBox-Stati
+                if (bossIndex != -1 && bossIndex < lines.Length)
+                {
+                    // Extrahiere die Bosse aus der Zeile zwischen den Anführungszeichen
+                    string bossLine = lines[bossIndex].Replace("Meta:", "").Trim();
+
+                    // Entferne die äußeren Anführungszeichen und teile die Bosse
+                    string[] bossNames = bossLine
+                        .Trim('"')  // Entferne äußere Anführungszeichen
+                        .Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+                        .Select(name => name.Trim())  // Entferne führende und abschließende Leerzeichen
+                        .ToArray();
+
+                    // Für jeden Bossnamen prüfen und CheckBox-Stati setzen
+                    foreach (string bossName in bossNames)
+                    {
+                        CheckBox bossCheckBox = FindCheckBoxByBossName(bossName);
+                        if (bossCheckBox != null)
+                        {
+                            bossCheckBox.Checked = true;
+                            UpdateBossUIBosses();
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Hier könnte eine Fehlermeldung protokolliert oder geloggt werden, wenn gewünscht
+                Console.WriteLine($"Error setting checkboxes from config: {ex.Message}");
+            }
         }
 
-        private void WorldBosses_FormClosing(object sender, FormClosingEventArgs e)
+        private void SetCheckBoxesFromConfig_World()
         {
-            // Unsubscribe the event handlers to release resources
-            this.Load -= WorldBosses_Load;
-            this.FormClosing -= WorldBosses_FormClosing;
+            try
+            {
+                // Vorhandenen Inhalt aus der Datei lesen
+                string[] lines = ReadConfigFile();
+
+                // Index der Zeile mit dem Bossnamen finden
+                int bossIndex = -1;
+                for (int i = 0; i < lines.Length; i++)
+                {
+                    if (lines[i].StartsWith("World:"))
+                    {
+                        bossIndex = i; // Die aktuelle Zeile enthält den Namen
+                        break;
+                    }
+                }
+
+                // Wenn der Bossname gefunden wird, setze die CheckBox-Stati
+                if (bossIndex != -1 && bossIndex < lines.Length)
+                {
+                    // Extrahiere die Bosse aus der Zeile zwischen den Anführungszeichen
+                    string bossLine = lines[bossIndex].Replace("World:", "").Trim();
+
+                    // Entferne die äußeren Anführungszeichen und teile die Bosse
+                    string[] bossNames = bossLine
+                        .Trim('"')  // Entferne äußere Anführungszeichen
+                        .Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+                        .Select(name => name.Trim())  // Entferne führende und abschließende Leerzeichen
+                        .ToArray();
+
+                    // Für jeden Bossnamen prüfen und CheckBox-Stati setzen
+                    foreach (string bossName in bossNames)
+                    {
+                        CheckBox bossCheckBox = FindCheckBoxByBossName(bossName);
+                        if (bossCheckBox != null)
+                        {
+                            bossCheckBox.Checked = true;
+                            UpdateBossUIBosses();
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Hier könnte eine Fehlermeldung protokolliert oder geloggt werden, wenn gewünscht
+                Console.WriteLine($"Error setting checkboxes from config: {ex.Message}");
+            }
+        }
+
+        private void SetCheckBoxesFromConfig_Mixed()
+        {
+            try
+            {
+                // Vorhandenen Inhalt aus der Datei lesen
+                string[] lines = ReadConfigFile();
+
+                // Index der Zeile mit dem Bossnamen finden
+                int bossIndex = -1;
+                for (int i = 0; i < lines.Length; i++)
+                {
+                    if (lines[i].StartsWith("Mixed:"))
+                    {
+                        bossIndex = i; // Die aktuelle Zeile enthält den Namen
+                        break;
+                    }
+                }
+
+                // Wenn der Bossname gefunden wird, setze die CheckBox-Stati
+                if (bossIndex != -1 && bossIndex < lines.Length)
+                {
+                    // Extrahiere die Bosse aus der Zeile zwischen den Anführungszeichen
+                    string bossLine = lines[bossIndex].Replace("Mixed:", "").Trim();
+
+                    // Entferne die äußeren Anführungszeichen und teile die Bosse
+                    string[] bossNames = bossLine
+                        .Trim('"')  // Entferne äußere Anführungszeichen
+                        .Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+                        .Select(name => name.Trim())  // Entferne führende und abschließende Leerzeichen
+                        .ToArray();
+
+                    // Für jeden Bossnamen prüfen und CheckBox-Stati setzen
+                    foreach (string bossName in bossNames)
+                    {
+                        CheckBox bossCheckBox = FindCheckBoxByBossName(bossName);
+                        if (bossCheckBox != null)
+                        {
+                            bossCheckBox.Checked = true;
+                            UpdateBossUIBosses();
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Hier könnte eine Fehlermeldung protokolliert oder geloggt werden, wenn gewünscht
+                Console.WriteLine($"Error setting checkboxes from config: {ex.Message}");
+            }
         }
 
         private void Meta_Click(object sender, EventArgs e)
@@ -1560,7 +1708,8 @@ namespace GW2FOX
 
                     // Check the corresponding checkboxes for Meta bosses
                     CheckBossCheckboxes(metaBosses);
-                    UpdateBossUI();
+                    UpdateBossUIMeta();
+
                 }
                 else
                 {
@@ -1635,7 +1784,7 @@ namespace GW2FOX
 
                     // Check the corresponding checkboxes for World bosses
                     CheckBossCheckboxes(worldBosses);
-                    UpdateBossUI();
+                    UpdateBossUIWorld();
                 }
                 else
                 {
@@ -1651,7 +1800,6 @@ namespace GW2FOX
         private void ClearAll_Click(object sender, EventArgs e)
         {
             UncheckAllBossCheckboxes();
-            UpdateBossUI();
         }
 
         private void Mixed_Click(object sender, EventArgs e)
@@ -1674,8 +1822,6 @@ namespace GW2FOX
                         break;
                     }
                 }
-
-                // If World section is found, extract and check the checkboxes for World bosses
                 if (worldIndex != -1 && worldIndex < lines.Length)
                 {
                     // Extract the bosses from the World line
@@ -1690,7 +1836,7 @@ namespace GW2FOX
 
                     // Check the corresponding checkboxes for World bosses
                     CheckBossCheckboxes(worldBosses);
-                    UpdateBossUI();
+                    UpdateBossUIMixed();
                 }
                 else
                 {
@@ -1702,9 +1848,42 @@ namespace GW2FOX
                 MessageBox.Show($"Error loading Mixed bosses: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        public void UpdateBossUI()
+        public void UpdateBossUIMeta()
         {
-            SetBossListFromConfig();
+            SetBossListFromConfig_Meta();
+            ListView bossList = CustomBossList;
+            if (bossList != null)
+            {
+                BossTimer bossTimerInstance = new BossTimer(bossList);
+                bossTimerInstance.UpdateBossList();
+            }
+        }
+
+        public void UpdateBossUIWorld()
+        {
+            SetBossListFromConfig_World();
+            ListView bossList = CustomBossList;
+            if (bossList != null)
+            {
+                BossTimer bossTimerInstance = new BossTimer(bossList);
+                bossTimerInstance.UpdateBossList();
+            }
+        }
+    
+
+        public void UpdateBossUIMixed()
+        {
+            SetBossListFromConfig_Mixed();
+            ListView bossList = CustomBossList;
+            if (bossList != null)
+            {
+            BossTimer bossTimerInstance = new BossTimer(bossList);
+            bossTimerInstance.UpdateBossList();
+            }
+        }
+        public void UpdateBossUIBosses()
+        {
+            SetBossListFromConfig_Bosses();
             ListView bossList = CustomBossList;
             if (bossList != null)
             {
@@ -1713,8 +1892,7 @@ namespace GW2FOX
             }
         }
     }
-    
-
 }
+
 
 
