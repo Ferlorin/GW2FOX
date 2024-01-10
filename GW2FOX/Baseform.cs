@@ -4,27 +4,31 @@
     {
         private Form previousPage;
 
+
+        public static ListView? CustomBossList { get; private set; }
+
         public BaseForm()
         {
 
         }
 
-        // Method to show and hide forms
+
         protected void ShowAndHideForm(Form newForm)
         {
-            // Save the reference to the previous form
             previousPage = this;
 
             newForm.Show();
             this.Hide();
         }
 
+
+
         // Method to navigate back to the previous page
         protected void NavigateBack()
+
         {
             if (previousPage != null)
             {
-                // Show the previous form and hide the current form
                 previousPage.Show();
                 this.Hide();
             }
@@ -76,7 +80,7 @@
         {
             base.OnFormClosing(e);
 
-            // Beende das gesamte Programm, wenn ein Formular geschlossen wird
+
             Application.Exit();
         }
     }

@@ -9,7 +9,7 @@
 
         static BossTimings()
         {
-            SetBossListFromConfig_Meta();
+            SetBossListFromConfig_Bosses();
 
 
             foreach (var bossName in BossList23)
@@ -664,154 +664,7 @@
             }
         }
 
-        public static void SetBossListFromConfig_World()
-        {
-            try
-            {
-                // Vorhandenen Inhalt aus der Datei lesen
-                string[] lines = File.ReadAllLines(filePath);
 
-                // Index der Zeile mit dem Bossnamen finden
-                int bossIndex = -1;
-                for (int i = 0; i < lines.Length; i++)
-                {
-                    if (lines[i].StartsWith("World: "))
-                    {
-                        bossIndex = i; // Die aktuelle Zeile enthält den Namen
-                        break;
-                    }
-                }
-
-                // Wenn der Bossname gefunden wird, setze die BossList23
-                if (bossIndex != -1 && bossIndex < lines.Length)
-                {
-                    // Extrahiere die Bosse aus der Zeile zwischen den Anführungszeichen
-                    string bossLine = lines[bossIndex].Replace("World:", "").Trim();
-
-                    // Entferne die äußeren Anführungszeichen und teile die Bosse
-                    string[] bossNames = bossLine
-                        .Trim('"')  // Entferne äußere Anführungszeichen
-                        .Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
-                        .Select(name => name.Trim())  // Entferne führende und abschließende Leerzeichen
-                        .ToArray();
-
-                    // Erstelle eine neue List, um BossList23 zu ersetzen
-                    List<string> newBossList = new List<string>();
-
-                    // Füge jeden Bossnamen zur neuen Liste hinzu
-                    newBossList.AddRange(bossNames);
-
-                    // Iteriere durch die Zeilen, um Timings zu extrahieren
-                    for (int i = bossIndex + 1; i < lines.Length; i++)
-                    {
-                        if (lines[i].StartsWith("Timings:"))
-                        {
-                            string timingLine = lines[i].Replace("Timings:", "").Trim();
-                            string[] timings = timingLine.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
-                                .Select(timing => timing.Trim())
-                                .ToArray();
-
-                            // Überprüfe, ob die Anzahl der Timings mit der Anzahl der Bosse übereinstimmt
-                            if (timings.Length == bossNames.Length)
-                            {
-                                for (int j = 0; j < bossNames.Length; j++)
-                                {
-                                    // Füge das BossEvent zur neuen Liste hinzu
-                                    AddBossEvent(bossNames[j], timings[j], "WBs");
-                                }
-                            }
-                            else
-                            {
-                                // Handle den Fall, wenn die Anzahl der Timings nicht mit der Anzahl der Bosse übereinstimmt
-                            }
-                            break; // Da wir die Timings gefunden haben, können wir die Schleife beenden
-                        }
-                    }
-
-                    // Jetzt kannst du die alte BossList23 durch die neue Liste ersetzen
-                    BossList23 = newBossList;
-                }
-            }
-            catch (Exception ex)
-            {
-                // Hier kann eine Fehlermeldung protokolliert oder geloggt werden, wenn gewünscht
-            }
-        }
-
-
-        public static void SetBossListFromConfig_Meta()
-        {
-            try
-            {
-                // Vorhandenen Inhalt aus der Datei lesen
-                string[] lines = File.ReadAllLines(filePath);
-
-                // Index der Zeile mit dem Bossnamen finden
-                int bossIndex = -1;
-                for (int i = 0; i < lines.Length; i++)
-                {
-                    if (lines[i].StartsWith("Meta:"))
-                    {
-                        bossIndex = i; // Die aktuelle Zeile enthält den Namen
-                        break;
-                    }
-                }
-
-                // Wenn der Bossname gefunden wird, setze die BossList23
-                if (bossIndex != -1 && bossIndex < lines.Length)
-                {
-                    // Extrahiere die Bosse aus der Zeile zwischen den Anführungszeichen
-                    string bossLine = lines[bossIndex].Replace("Meta:", "").Trim();
-
-                    // Entferne die äußeren Anführungszeichen und teile die Bosse
-                    string[] bossNames = bossLine
-                        .Trim('"')  // Entferne äußere Anführungszeichen
-                        .Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
-                        .Select(name => name.Trim())  // Entferne führende und abschließende Leerzeichen
-                        .ToArray();
-
-                    // Erstelle eine neue List, um BossList23 zu ersetzen
-                    List<string> newBossList = new List<string>();
-
-                    // Füge jeden Bossnamen zur neuen Liste hinzu
-                    newBossList.AddRange(bossNames);
-
-                    // Iteriere durch die Zeilen, um Timings zu extrahieren
-                    for (int i = bossIndex + 1; i < lines.Length; i++)
-                    {
-                        if (lines[i].StartsWith("Timings:"))
-                        {
-                            string timingLine = lines[i].Replace("Timings:", "").Trim();
-                            string[] timings = timingLine.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
-                                .Select(timing => timing.Trim())
-                                .ToArray();
-
-                            // Überprüfe, ob die Anzahl der Timings mit der Anzahl der Bosse übereinstimmt
-                            if (timings.Length == bossNames.Length)
-                            {
-                                for (int j = 0; j < bossNames.Length; j++)
-                                {
-                                    // Füge das BossEvent zur neuen Liste hinzu
-                                    AddBossEvent(bossNames[j], timings[j], "WBs");
-                                }
-                            }
-                            else
-                            {
-                                // Handle den Fall, wenn die Anzahl der Timings nicht mit der Anzahl der Bosse übereinstimmt
-                            }
-                            break; // Da wir die Timings gefunden haben, können wir die Schleife beenden
-                        }
-                    }
-
-                    // Jetzt kannst du die alte BossList23 durch die neue Liste ersetzen
-                    BossList23 = newBossList;
-                }
-            }
-            catch (Exception ex)
-            {
-                // Hier kann eine Fehlermeldung protokolliert oder geloggt werden, wenn gewünscht
-            }
-        }
 
         public static void SetBossListFromConfig_Bosses()
         {
@@ -888,84 +741,12 @@
         }
 
 
-        public static void SetBossListFromConfig_Mixed()
-        {
-            try
-            {
-                // Vorhandenen Inhalt aus der Datei lesen
-                string[] lines = File.ReadAllLines(filePath);
-
-                // Index der Zeile mit dem Bossnamen finden
-                int bossIndex = -1;
-                for (int i = 0; i < lines.Length; i++)
-                {
-                    if (lines[i].StartsWith("Mixed:"))
-                    {
-                        bossIndex = i; // Die aktuelle Zeile enthält den Namen
-                        break;
-                    }
-                }
-
-                // Wenn der Bossname gefunden wird, setze die BossList23
-                if (bossIndex != -1 && bossIndex < lines.Length)
-                {
-                    // Extrahiere die Bosse aus der Zeile zwischen den Anführungszeichen
-                    string bossLine = lines[bossIndex].Replace("Mixed:", "").Trim();
-
-                    // Entferne die äußeren Anführungszeichen und teile die Bosse
-                    string[] bossNames = bossLine
-                        .Trim('"')  // Entferne äußere Anführungszeichen
-                        .Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
-                        .Select(name => name.Trim())  // Entferne führende und abschließende Leerzeichen
-                        .ToArray();
-
-                    // Erstelle eine neue List, um BossList23 zu ersetzen
-                    List<string> newBossList = new List<string>();
-
-                    // Füge jeden Bossnamen zur neuen Liste hinzu
-                    newBossList.AddRange(bossNames);
-
-                    // Iteriere durch die Zeilen, um Timings zu extrahieren
-                    for (int i = bossIndex + 1; i < lines.Length; i++)
-                    {
-                        if (lines[i].StartsWith("Timings:"))
-                        {
-                            string timingLine = lines[i].Replace("Timings:", "").Trim();
-                            string[] timings = timingLine.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
-                                .Select(timing => timing.Trim())
-                                .ToArray();
-
-                            // Überprüfe, ob die Anzahl der Timings mit der Anzahl der Bosse übereinstimmt
-                            if (timings.Length == bossNames.Length)
-                            {
-                                for (int j = 0; j < bossNames.Length; j++)
-                                {
-                                    // Füge das BossEvent zur neuen Liste hinzu
-                                    AddBossEvent(bossNames[j], timings[j], "WBs");
-                                }
-                            }
-                            else
-                            {
-                                // Handle den Fall, wenn die Anzahl der Timings nicht mit der Anzahl der Bosse übereinstimmt
-                            }
-                            break; // Da wir die Timings gefunden haben, können wir die Schleife beenden
-                        }
-                    }
-
-                    // Jetzt kannst du die alte BossList23 durch die neue Liste ersetzen
-                    BossList23 = newBossList;
-                }
-            }
-            catch (Exception ex)
-            {
-                // Hier kann eine Fehlermeldung protokolliert oder geloggt werden, wenn gewünscht
-            }
-        }
-
         public static void AddBossEvent(string bossName, string timing, string category)
         {
             Events.Add(new BossEvent(bossName, timing, category));
         }
+
+
         public static List<BossEvent> GetFutureBossEvents()
         {
             // Wenn die Liste leer ist, null zurückgeben

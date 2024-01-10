@@ -12,6 +12,9 @@
 
             CustomBossList = listViewItems; // Setze die statische Eigenschaft
 
+            ListView overlayListView = CustomBossList; // Behalte nur diese Zeile
+            overlayListView.ForeColor = Color.Black;
+
             // Konfiguriere das Overlay-Formular
             this.BackColor = Color.Black;
             this.TransparencyKey = Color.Black;
@@ -38,7 +41,7 @@
             listViewPanel.Location = new Point(0, 0);
 
             // Erstelle die ListView
-            ListView overlayListView = CustomBossList; // Verwende CustomBossList statt listViewItems
+
             overlayListView.ForeColor = Color.Black;
             overlayListView.Font = new Font("Segoe UI", 10, FontStyle.Bold);
             overlayListView.BackColor = this.BackColor;
@@ -62,6 +65,25 @@
             listViewPanel.Controls.Add(overlayListView);
             this.Controls.Add(listViewPanel);
             this.SizeGripStyle = SizeGripStyle.Show;
+        }
+
+        private void OverlayListView_DrawItem(object sender, DrawListViewItemEventArgs e)
+        {
+            // Zeichne den Hintergrund
+            e.DrawBackground();
+
+            // Definiere den Text und die Schriftart
+            string text = e.Item.Text;
+            Font font = e.Item.Font;
+
+            // Definiere die Position des Textes mit schwarzer Umrandung
+            Point textLocation = new Point(e.Bounds.Left + 2, e.Bounds.Top + 2);
+
+            // Zeichne den Text mit dickerem schwarzen Rand
+            TextRenderer.DrawText(e.Graphics, text, font, textLocation, Color.Black, Color.Transparent, TextFormatFlags.Default);
+
+            // Zeichne den Text ohne Umrandung (darüber, um die Umrandung zu überlagern)
+            TextRenderer.DrawText(e.Graphics, text, font, textLocation, Color.White, Color.Transparent, TextFormatFlags.Default);
         }
 
         private void OnMouseDown(object sender, MouseEventArgs e)

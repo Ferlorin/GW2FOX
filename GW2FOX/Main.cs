@@ -7,7 +7,6 @@ namespace GW2FOX
         private Overlay overlay;
         private ListView customBossList;
         private BossTimer bossTimer;
-        private Worldbosses saveBossNamesToConfig;
 
         public Main()
         {
@@ -17,7 +16,7 @@ namespace GW2FOX
             customBossList = new ListView();
             overlay = new Overlay(customBossList);
             bossTimer = new BossTimer(customBossList);
-            saveBossNamesToConfig = new Worldbosses();
+
 
             InitializeCustomBossList();
             InitializeBossTimerAndOverlay();

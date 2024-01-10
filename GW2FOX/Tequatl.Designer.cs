@@ -183,7 +183,7 @@
             Tequatlinfo.ScrollBars = ScrollBars.Vertical;
             Tequatlinfo.Size = new Size(600, 60);
             Tequatlinfo.TabIndex = 105;
-            Tequatlinfo.Text = "☠Lvl 65 ≪Tequatl the Sunless≫ \r\n\r\n";
+            Tequatlinfo.Text = "☠Lvl 65 ≪Tequatl the Sunless≫  ☣[&BNABAAA=]☣ \r\n\r\n";
             // 
             // button1
             // 
