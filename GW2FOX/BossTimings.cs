@@ -148,12 +148,12 @@
                 AddBossEvent("Inquest Golem Mark II", "18:03:00", "WBs");
                 AddBossEvent("Inquest Golem Mark II", "21:03:00", "WBs");
 
+                AddBossEvent("Karka Queen", "00:00:00", "WBs");
                 AddBossEvent("Karka Queen", "03:00:00", "WBs");
                 AddBossEvent("Karka Queen", "07:00:00", "WBs");
                 AddBossEvent("Karka Queen", "11:30:00", "WBs");
-                AddBossEvent("Karka Queen", "15:00:00", "WBs");
+                AddBossEvent("Karka Queen", "16:00:00", "WBs");
                 AddBossEvent("Karka Queen", "19:00:00", "WBs");
-                AddBossEvent("Karka Queen", "23:00:00", "WBs");
 
                 AddBossEvent("Claw of Jormag", "03:30:00", "WBs");
                 AddBossEvent("Claw of Jormag", "06:30:00", "WBs");
