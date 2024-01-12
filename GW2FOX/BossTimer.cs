@@ -66,7 +66,7 @@ namespace GW2FOX
                     var pastBosses = BossTimings.Events
                         .Where(bossEvent =>
                             bossNamesFromConfig.Contains(bossEvent.BossName) &&
-                            bossEvent.Timing > currentTime.Add(new TimeSpan(1, 0, 0, 0)))
+                            bossEvent.Timing > currentTime.Subtract(new TimeSpan(0, 14, 59)) && bossEvent.Timing < currentTime)
                         .ToList();
 
                     // Combine all bosses
@@ -104,17 +104,40 @@ namespace GW2FOX
                         // Check if the boss with the adjusted timing is already added to avoid duplicates
                         if (addedBossNames.Add($"{bossEvent.BossName}_{adjustedTiming}"))
                         {
-                            TimeSpan remainingTime = GetRemainingTime(currentTimeMez, adjustedTiming, bossEvent);
+                            if (pastBosses.Contains(bossEvent) && currentTimeMez - adjustedTiming < new TimeSpan(0, 14, 59))
+                            {
+                                // Display only the boss name for past events within the time span of 00:14:59
+                                var listViewItem = new ListViewItem(new[] { bossEvent.BossName });
+                                listViewItem.ForeColor = GetFontColor(bossEvent, pastBosses);
+                                listViewItem.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+                                listViewItems.Add(listViewItem);
+                            }
+                            else
+                            {
+                                TimeSpan elapsedTime = adjustedTiming - currentTimeMez;
 
-                            string countdownFormat = $"{(int)remainingTime.TotalHours:D2}:{remainingTime.Minutes:D2}:{remainingTime.Seconds:D2}";
+                                // Änderung der Formatierung für den Countdown basierend auf der vergangenen Zeitspanne
+                                TimeSpan countdownTime = elapsedTime;
 
-                            Color fontColor = GetFontColor(bossEvent, pastBosses);
+                                string elapsedTimeFormat = $"{(int)elapsedTime.TotalHours:D2}:{elapsedTime.Minutes:D2}:{elapsedTime.Seconds:D2}";
 
-                            var listViewItem = new ListViewItem(new[] { bossEvent.BossName, countdownFormat });
-                            listViewItem.ForeColor = fontColor;
-                            listViewItem.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+                                Color fontColor = GetFontColor(bossEvent, pastBosses);
 
-                            listViewItems.Add(listViewItem);
+                                var listViewItem = new ListViewItem(new[] { bossEvent.BossName, elapsedTimeFormat });
+                                listViewItem.ForeColor = fontColor;
+
+                                // Neue Bedingung hinzufügen, um zu prüfen, ob ein Bossevent zur selben Zeit stattfindet wie ein anderes Bossevent derselben Kategorie
+                                if (HasSameTimeAndCategory(allBosses, bossEvent))
+                                {
+                                    listViewItem.Font = new Font("Segoe UI", 10, FontStyle.Italic | FontStyle.Bold);
+                                }
+                                else
+                                {
+                                    listViewItem.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+                                }
+
+                                listViewItems.Add(listViewItem);
+                            }
                         }
                     }
 
@@ -127,9 +150,22 @@ namespace GW2FOX
             });
         }
 
+
+        private bool HasSameTimeAndCategory(List<BossEvent> allBosses, BossEvent currentBossEvent)
+        {
+            return allBosses.Any(bossEvent =>
+                bossEvent != currentBossEvent &&
+                bossEvent.Timing == currentBossEvent.Timing &&
+                bossEvent.Category == currentBossEvent.Category &&
+                bossEvent.BossName != currentBossEvent.BossName);
+        }
+
+
+
         private DateTime GetAdjustedTiming(DateTime currentTimeMez, TimeSpan bossTiming)
         {
             DateTime adjustedTiming = currentTimeMez.Date + bossTiming;
+
 
             while (adjustedTiming < currentTimeMez)
             {

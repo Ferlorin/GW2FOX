@@ -149,7 +149,7 @@
             Attentionogrewars.ScrollBars = ScrollBars.Vertical;
             Attentionogrewars.Size = new Size(600, 60);
             Attentionogrewars.TabIndex = 107;
-            Attentionogrewars.Text = "≪ATTENTION≫ Meta -Train │ ☠Lvl 50 │ “Ogre Wars” │ ☣[&BIoAAAA=]☣ - Join us!\r\n\r\n";
+            Attentionogrewars.Text = "≪ATTENTION≫ Meta -Train │ ☠Lvl 50 │ “Ogre Wars” │ ☣[&BDwEAAA=]☣ - Join us!\r\n\r\n";
             // 
             // Ogrewarsinstance
             // 
