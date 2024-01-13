@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Threading;
-using System.Windows.Forms;
-using System.Linq;
-
-namespace GW2FOX
+﻿namespace GW2FOX
 {
     public class BaseForm : Form
     {
@@ -68,29 +61,21 @@ namespace GW2FOX
 
         public void Timer_Click(object sender, EventArgs e)
         {
-          InitializeCustomBossList();
-          InitializeBossTimerAndOverlay();
-             
-                bossTimer.Start();
-                overlay.Show();
-            
+            InitializeCustomBossList();
+            InitializeBossTimerAndOverlay();
+
+            bossTimer.Start();
+            overlay.Show();
+
         }
 
         protected void ShowAndHideForm(Form newForm)
         {
-            previousPage = this;
+
             newForm.Show();
             this.Hide();
         }
 
-        protected void NavigateBack()
-        {
-            if (previousPage != null)
-            {
-                previousPage.Show();
-                this.Hide();
-            }
-        }
 
         protected void AdjustWindowSize()
         {

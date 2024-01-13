@@ -12,19 +12,22 @@ namespace GW2FOX
         public Worldbosses()
         {
             InitializeComponent();
-            bossCheckBoxMap = new Dictionary<string, CheckBox>();  // Verschiebe die Initialisierung hierhin
+            bossCheckBoxMap = new Dictionary<string, CheckBox>();
             InitializeBossCheckBoxMap();
+            InitializeBossTimerAndOverlay();
             UpdateBossUIBosses();
 
             Load += Worldbosses_Load_1;
         }
+        private new void InitializeBossTimerAndOverlay()
+        {
+            base.InitializeBossTimerAndOverlay();
+        }
 
         private void Worldbosses_Load_1(object? sender, EventArgs e)
         {
-            // Initialisierungscode
-            WindowState = FormWindowState.Maximized;
 
-            // Setze die Häkchen automatisch nach dem Laden der Seite
+            WindowState = FormWindowState.Maximized;
             SetBossListFromConfig_Bosses();
         }
 
@@ -1902,22 +1905,10 @@ namespace GW2FOX
             }
         }
 
-        private void Timer_Click(object sender, EventArgs e)
+        private new void Timer_Click(object sender, EventArgs e)
         {
-            // Hier kannst du den Timer-Code für die Weltbosses-Seite implementieren
-            if (CustomBossList == null || CustomBossList.IsDisposed)
-            {
-                InitializeCustomBossList();
-            }
-
-            if (overlay == null || overlay.IsDisposed)
-            {
-                InitializeBossTimerAndOverlay();
-            }
-
-            bossTimer.Start();
-            
-
+            base.Timer_Click(sender, e);
+            // Additional logic specific to Timer_Click in Main class, if any
         }
     }
 

@@ -1,9 +1,6 @@
 // Main.cs
 
-using System;
 using System.Diagnostics;
-using System.IO;
-using System.Windows.Forms;
 
 namespace GW2FOX
 {
@@ -41,7 +38,7 @@ namespace GW2FOX
             // Additional logic specific to Timer_Click in Main class, if any
         }
 
-        
+
         // Füge diese Methode hinzu, um Ausnahmen zu behandeln und Details anzuzeigen
         private void HandleException(Exception ex)
         {
