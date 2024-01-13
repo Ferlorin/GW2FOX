@@ -180,7 +180,8 @@ namespace GW2FOX
 
         private void Backtomain_Click(object sender, EventArgs e)
         {
-            ShowAndHideForm(new Worldbosses());
+            this.Owner.Show();
+            this.Dispose();
         }
 
         private void Inquestgoleminfo_Click(object sender, EventArgs e)
@@ -255,10 +256,7 @@ namespace GW2FOX
             BringGw2ToFront();
         }
 
-        private void Back_Click(object sender, EventArgs e)
-        {
-            ShowAndHideForm(new Worldbosses());
-        }
+        
 
         private void Squadinfo_Click(object sender, EventArgs e)
         {

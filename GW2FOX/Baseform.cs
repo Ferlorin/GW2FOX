@@ -59,19 +59,24 @@
 
         public void Timer_Click(object sender, EventArgs e)
         {
-            InitializeCustomBossList();
-            InitializeBossTimerAndOverlay();
+            if (this is Main)
+            {
+                InitializeCustomBossList();
+                InitializeBossTimerAndOverlay();
 
-            bossTimer.Start();
-            overlay.Show();
-
+                bossTimer.Start();
+                overlay.Show();
+            }
         }
 
         protected void ShowAndHideForm(Form newForm)
         {
-
+            newForm.Owner = this;
             newForm.Show();
-            this.Hide();
+            if (this is not Worldbosses)
+            {
+                this.Dispose();
+            }
         }
 
 
@@ -106,6 +111,7 @@
                 );
             }
         }
+
         protected void HandleException(Exception ex, string methodName)
         {
             Console.WriteLine($"Exception in {methodName}: {ex}");
@@ -113,11 +119,17 @@
 
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
+            _globalKeyboardHook.KeyPressed -= GlobalKeyboardHook_KeyPressed;
             bossTimer.Dispose(); // Dispose of the BossTimer first
             base.OnFormClosing(e);
             Application.Exit();
         }
-
+        
+        protected void Back_Click(object sender, EventArgs e)
+        {
+            this.Owner.Show();
+            this.Dispose();
+        }
 
 
         public class BossTimer : IDisposable
@@ -154,10 +166,7 @@
                 try
                 {
                     if (!bossList.IsHandleCreated) return; // Check before accessing
-                    bossList.BeginInvoke((MethodInvoker)delegate
-                    {
-                        UpdateBossList();
-                    });
+                    bossList.BeginInvoke((MethodInvoker)delegate { UpdateBossList(); });
                 }
                 catch (Exception ex)
                 {
@@ -183,13 +192,15 @@
                         var upcomingBosses = BossTimings.Events
                             .Where(bossEvent =>
                                 bossNamesFromConfig.Contains(bossEvent.BossName) &&
-                                bossEvent.Timing > currentTime && bossEvent.Timing < currentTime.Add(new TimeSpan(8, 0, 0)))
+                                bossEvent.Timing > currentTime &&
+                                bossEvent.Timing < currentTime.Add(new TimeSpan(8, 0, 0)))
                             .ToList();
 
                         var pastBosses = BossTimings.Events
                             .Where(bossEvent =>
                                 bossNamesFromConfig.Contains(bossEvent.BossName) &&
-                                bossEvent.Timing > currentTime.Subtract(new TimeSpan(0, 14, 59)) && bossEvent.Timing < currentTime)
+                                bossEvent.Timing > currentTime.Subtract(new TimeSpan(0, 14, 59)) &&
+                                bossEvent.Timing < currentTime)
                             .ToList();
 
                         var allBosses = upcomingBosses.Concat(pastBosses).ToList();
@@ -220,7 +231,8 @@
 
                             if (addedBossNames.Add($"{bossEvent.BossName}_{adjustedTiming}"))
                             {
-                                if (pastBosses.Contains(bossEvent) && currentTimeMez - adjustedTiming < new TimeSpan(0, 14, 59))
+                                if (pastBosses.Contains(bossEvent) &&
+                                    currentTimeMez - adjustedTiming < new TimeSpan(0, 14, 59))
                                 {
                                     var listViewItem = new ListViewItem(new[] { bossEvent.BossName });
                                     listViewItem.ForeColor = GetFontColor(bossEvent, pastBosses);
@@ -232,11 +244,13 @@
                                     TimeSpan elapsedTime = adjustedTiming - currentTimeMez;
                                     TimeSpan countdownTime = elapsedTime;
 
-                                    string elapsedTimeFormat = $"{(int)elapsedTime.TotalHours:D2}:{elapsedTime.Minutes:D2}:{elapsedTime.Seconds:D2}";
+                                    string elapsedTimeFormat =
+                                        $"{(int)elapsedTime.TotalHours:D2}:{elapsedTime.Minutes:D2}:{elapsedTime.Seconds:D2}";
 
                                     Color fontColor = GetFontColor(bossEvent, pastBosses);
 
-                                    var listViewItem = new ListViewItem(new[] { bossEvent.BossName, elapsedTimeFormat });
+                                    var listViewItem = new ListViewItem(new[]
+                                        { bossEvent.BossName, elapsedTimeFormat });
                                     listViewItem.ForeColor = fontColor;
 
                                     if (HasSameTimeAndCategory(allBosses, bossEvent))
@@ -349,7 +363,8 @@
                         break;
                 }
 
-                if (pastBosses.Any(pastBoss => pastBoss.BossName == bossEvent.BossName && pastBoss.Timing == bossEvent.Timing))
+                if (pastBosses.Any(pastBoss =>
+                        pastBoss.BossName == bossEvent.BossName && pastBoss.Timing == bossEvent.Timing))
                 {
                     fontColor = PastBossFontColor;
                 }

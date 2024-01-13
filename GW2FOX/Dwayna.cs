@@ -277,9 +277,6 @@ namespace GW2FOX
             BringGw2ToFront();
         }
 
-        private void Back_Click(object sender, EventArgs e)
-        {
-            ShowAndHideForm(new Worldbosses());
-        }
+        
     }
 }
