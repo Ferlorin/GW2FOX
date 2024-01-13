@@ -182,20 +182,21 @@ namespace GW2FOX
         {
             try
             {
-                // Stoppe den Timer und beende alle Hintergrundprozesse
+                // Stop the Timer and dispose of the BossTimer
                 if (bossTimer != null)
                 {
                     bossTimer.Stop();
-                    bossTimer.Dispose();
+                    bossTimer.Dispose(); // Dispose of the BossTimer
                 }
 
+                // Close the Overlay and dispose of it
                 if (overlay != null)
                 {
                     overlay.Close();
-                    overlay.Dispose();
+                    overlay.Dispose(); // Dispose of the Overlay
                 }
 
-                // Schlieﬂe das Programm
+                // Close the program
                 Application.Exit();
             }
             catch (Exception ex)
@@ -203,5 +204,6 @@ namespace GW2FOX
                 HandleException(ex);
             }
         }
+
     }
 }

@@ -107,7 +107,8 @@
 
         public void CloseOverlay()
         {
-            this.Close();
+            this.Dispose(); // Rufe Dispose auf, um Ressourcen freizugeben
         }
+
     }
 }

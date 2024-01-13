@@ -68,25 +68,12 @@ namespace GW2FOX
 
         public void Timer_Click(object sender, EventArgs e)
         {
-            try
-            {
-                if (CustomBossList == null || CustomBossList.IsDisposed)
-                {
-                    InitializeCustomBossList();
-                }
-
-                if (overlay == null || overlay.IsDisposed)
-                {
-                    InitializeBossTimerAndOverlay();
-                }
-
+          InitializeCustomBossList();
+          InitializeBossTimerAndOverlay();
+             
                 bossTimer.Start();
                 overlay.Show();
-            }
-            catch (Exception ex)
-            {
-                HandleException(ex, "Timer_Click");
-            }
+            
         }
 
         protected void ShowAndHideForm(Form newForm)
@@ -143,10 +130,11 @@ namespace GW2FOX
 
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
-            bossTimer.Dispose(); // Rufe Dispose-Methode des BossTimer auf
+            bossTimer.Dispose(); // Dispose of the BossTimer first
             base.OnFormClosing(e);
             Application.Exit();
         }
+
 
 
         public class BossTimer : IDisposable
@@ -182,6 +170,7 @@ namespace GW2FOX
             {
                 try
                 {
+                    if (!bossList.IsHandleCreated) return; // Check before accessing
                     bossList.BeginInvoke((MethodInvoker)delegate
                     {
                         UpdateBossList();
@@ -192,6 +181,7 @@ namespace GW2FOX
                     HandleException(ex, "TimerCallback");
                 }
             }
+
 
             public void UpdateBossList()
             {

@@ -1916,7 +1916,8 @@ namespace GW2FOX
             }
 
             bossTimer.Start();
-            overlay.Show();
+            
+
         }
     }
 
