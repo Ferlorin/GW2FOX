@@ -15,8 +15,7 @@
             InitializeCustomBossList();
             overlay = new Overlay(customBossList);
             bossTimer = new BossTimer(customBossList);
-
-
+            InitializeGlobalKeyboardHook();
         }
 
         protected void InitializeBossTimerAndOverlay()
@@ -24,7 +23,6 @@
             bossTimer = new BossTimer(customBossList);
             overlay = new Overlay(customBossList);
             overlay.WindowState = FormWindowState.Normal;
-            InitializeGlobalKeyboardHook();
         }
 
         private void InitializeGlobalKeyboardHook()
