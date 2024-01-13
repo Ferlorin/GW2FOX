@@ -14,6 +14,11 @@
             InitializeCustomBossList(); // Initialize customBossList before using it
             overlay = new Overlay(customBossList);
             bossTimer = new BossTimer(customBossList);
+            // Setze KeyPreview auf true, um Tastatureingaben auf Form-Ebene zu erfassen
+            this.KeyPreview = true;
+
+            // Füge das KeyDown-Event hinzu
+            this.KeyDown += BaseForm_KeyDown;
         }
         protected void InitializeBossTimerAndOverlay()
         {
@@ -21,6 +26,17 @@
             // overlay = new Overlay(customBossList);
             bossTimer = new BossTimer(customBossList);
             overlay.WindowState = FormWindowState.Normal;
+        }
+
+
+        private void BaseForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            // Überprüfe, ob "ALT + T" gedrückt wurde
+            if (e.Alt && e.KeyCode == Keys.T)
+            {
+                // Rufe die Timer_Click-Methode auf
+                Timer_Click(sender, e);
+            }
         }
 
         protected void InitializeCustomBossList()
