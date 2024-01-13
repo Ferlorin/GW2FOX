@@ -1902,7 +1902,22 @@ namespace GW2FOX
             }
         }
 
+        private void Timer_Click(object sender, EventArgs e)
+        {
+            // Hier kannst du den Timer-Code für die Weltbosses-Seite implementieren
+            if (CustomBossList == null || CustomBossList.IsDisposed)
+            {
+                InitializeCustomBossList();
+            }
 
+            if (overlay == null || overlay.IsDisposed)
+            {
+                InitializeBossTimerAndOverlay();
+            }
+
+            bossTimer.Start();
+            overlay.Show();
+        }
     }
 
 

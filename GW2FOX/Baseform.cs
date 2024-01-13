@@ -3,15 +3,59 @@
     public class BaseForm : Form
     {
         private Form previousPage;
-
+        protected Overlay overlay;
+        protected ListView customBossList;
+        protected BossTimer bossTimer;
 
         public static ListView? CustomBossList { get; private set; }
 
         public BaseForm()
         {
+            InitializeCustomBossList(); // Initialize customBossList before using it
+            overlay = new Overlay(customBossList);
+            bossTimer = new BossTimer(customBossList);
+        }
+        protected void InitializeBossTimerAndOverlay()
+        {
+            // Hier solltest du entscheiden, ob overlay erneut erstellt werden soll
+            // overlay = new Overlay(customBossList);
+            bossTimer = new BossTimer(customBossList);
+            overlay.WindowState = FormWindowState.Normal;
+        }
+
+        protected void InitializeCustomBossList()
+        {
+            customBossList = new ListView();
+            customBossList.View = View.Details;
+            customBossList.Columns.Add("Boss Name", 145);
+            customBossList.Columns.Add("Time", 78);
+            customBossList.Location = new Point(0, 0);
+            customBossList.ForeColor = Color.White;
+            customBossList.Font = new Font("Segoe UI", 10, FontStyle.Bold);
 
         }
 
+        // Füge dies zu deiner BaseForm-Klasse hinzu
+        public void UpdateCustomBossList(ListView updatedList)
+        {
+            CustomBossList = updatedList;
+        }
+
+        protected void Timer_Click(object sender, EventArgs e)
+        {
+            if (CustomBossList == null || CustomBossList.IsDisposed)
+            {
+                InitializeCustomBossList();
+            }
+
+            if (overlay == null || overlay.IsDisposed)
+            {
+                InitializeBossTimerAndOverlay();
+            }
+
+            bossTimer.Start();
+            overlay.Show();
+        }
 
         protected void ShowAndHideForm(Form newForm)
         {
@@ -67,6 +111,11 @@
                     workingArea.Top + (workingArea.Height - this.Height) / 2
                 );
             }
+            if (this.Height > workingArea.Height)
+            {
+                this.Height = workingArea.Height;
+            }
+
 
             if (this.Bottom > workingArea.Bottom)
             {

@@ -806,20 +806,22 @@
 
             return allBossTimings;
         }
+    }
 
-        public class BossEvent
-        {
-            public string BossName { get; }
-            public TimeSpan Timing { get; }
-            public string Category { get; }
-            public TimeSpan Duration { get; set; } // Hinzugefügte Eigenschaft
-
-            public BossEvent(string bossName, string timing, string category)
+    public class BossEvent
             {
-                BossName = bossName;
-                Timing = TimeSpan.Parse(timing);
-                Category = category;
+                public string BossName { get; }
+                public TimeSpan Timing { get; }
+                public string Category { get; }
+                public TimeSpan Duration { get; set; } // Hinzugefügte Eigenschaft
+
+                public BossEvent(string bossName, string timing, string category)
+                {
+                    BossName = bossName;
+                    Timing = TimeSpan.Parse(timing);
+                    Category = category;
+                }
             }
         }
-    }
-}
+
+

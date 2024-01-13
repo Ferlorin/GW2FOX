@@ -1,4 +1,9 @@
-﻿using static GW2FOX.BossTimings;
+﻿using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
+using System.Threading;
+using System.Windows.Forms;
 
 namespace GW2FOX
 {
@@ -11,12 +16,14 @@ namespace GW2FOX
         private readonly ListView bossList;
         private readonly TimeZoneInfo mezTimeZone;
         private readonly System.Threading.Timer timer;
+        
 
         public BossTimer(ListView bossList)
         {
             this.bossList = bossList;
             this.mezTimeZone = TimeZoneInfo.FindSystemTimeZoneById(TimeZoneId);
             this.timer = new System.Threading.Timer(TimerCallback, null, 0, 1000);
+
         }
 
         public void Start()
@@ -33,7 +40,10 @@ namespace GW2FOX
         {
             try
             {
-                UpdateBossList();
+                bossList.BeginInvoke((MethodInvoker)delegate
+                {
+                    UpdateBossList();
+                });
             }
             catch (Exception ex)
             {

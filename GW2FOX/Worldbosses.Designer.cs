@@ -153,6 +153,7 @@
             button42 = new Button();
             button63 = new Button();
             button65 = new Button();
+            button66 = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
@@ -1508,6 +1509,16 @@
             button65.UseVisualStyleBackColor = true;
             button65.Click += Mixed_Click;
             // 
+            // button66
+            // 
+            button66.Location = new Point(11, 128);
+            button66.Name = "button66";
+            button66.Size = new Size(130, 23);
+            button66.TabIndex = 188;
+            button66.Text = "Timer Overlay";
+            button66.UseVisualStyleBackColor = true;
+            button66.Click += Timer_Click;
+            // 
             // Worldbosses
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -1516,6 +1527,7 @@
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
             BackgroundImage = Properties.Resources.Background;
             ClientSize = new Size(1904, 1041);
+            Controls.Add(button66);
             Controls.Add(button65);
             Controls.Add(button63);
             Controls.Add(button42);
@@ -1778,5 +1790,6 @@
         private Button button42;
         private Button button63;
         private Button button65;
+        private Button button66;
     }
 }

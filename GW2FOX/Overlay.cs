@@ -6,11 +6,15 @@
 
         private Point mouse_offset;
 
+
         public Overlay(ListView listViewItems)
         {
             InitializeComponent();
-
-            CustomBossList = listViewItems; // Setze die statische Eigenschaft
+            if (this.Owner is BaseForm baseForm)
+            {
+                baseForm.UpdateCustomBossList(listViewItems);
+            };
+            CustomBossList = listViewItems;
 
             ListView overlayListView = CustomBossList; // Behalte nur diese Zeile
             overlayListView.ForeColor = Color.Black;

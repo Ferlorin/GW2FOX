@@ -15,11 +15,15 @@ namespace GW2FOX
 
             customBossList = new ListView();
             overlay = new Overlay(customBossList);
-            bossTimer = new BossTimer(customBossList);
-
-
+            bossTimer = new BossTimer(customBossList); // Pass the ListView directly
             InitializeCustomBossList();
             InitializeBossTimerAndOverlay();
+        }
+
+
+        public ListView GetCustomBossList()
+        {
+            return customBossList;
         }
 
         private void InitializeBossTimerAndOverlay()
