@@ -13,6 +13,7 @@ namespace GW2FOX
         protected Overlay overlay;
         protected ListView customBossList;
         protected BossTimer bossTimer;
+        private GlobalKeyboardHook _globalKeyboardHook; // Füge dies hinzu
 
         public static ListView CustomBossList { get; private set; } = new ListView();
 
@@ -21,11 +22,8 @@ namespace GW2FOX
             InitializeCustomBossList();
             overlay = new Overlay(customBossList);
             bossTimer = new BossTimer(customBossList);
-            // Setze KeyPreview auf true, um Tastatureingaben auf Form-Ebene zu erfassen
-            this.KeyPreview = true;
 
-            // Füge das KeyDown-Event hinzu
-            this.KeyDown += BaseForm_KeyDown;
+
         }
 
         protected void InitializeBossTimerAndOverlay()
@@ -33,13 +31,19 @@ namespace GW2FOX
             bossTimer = new BossTimer(customBossList);
             overlay = new Overlay(customBossList);
             overlay.WindowState = FormWindowState.Normal;
+            InitializeGlobalKeyboardHook();
         }
 
+        private void InitializeGlobalKeyboardHook()
+        {
+            _globalKeyboardHook = new GlobalKeyboardHook();
+            _globalKeyboardHook.KeyPressed += GlobalKeyboardHook_KeyPressed;
+        }
 
-        private void BaseForm_KeyDown(object sender, KeyEventArgs e)
+        private void GlobalKeyboardHook_KeyPressed(object sender, KeyPressedEventArgs e)
         {
             // Überprüfe, ob "ALT + T" gedrückt wurde
-            if (e.Alt && e.KeyCode == Keys.T)
+            if (Control.ModifierKeys == Keys.Alt && e.Key == Keys.T)
             {
                 // Rufe die Timer_Click-Methode auf
                 Timer_Click(sender, e);
@@ -139,9 +143,11 @@ namespace GW2FOX
 
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
+            bossTimer.Dispose(); // Rufe Dispose-Methode des BossTimer auf
             base.OnFormClosing(e);
             Application.Exit();
         }
+
 
         public class BossTimer : IDisposable
         {

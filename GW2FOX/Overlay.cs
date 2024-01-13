@@ -68,7 +68,7 @@
             // Füge die ListView zum ListView Panel hinzu
             listViewPanel.Controls.Add(overlayListView);
             this.Controls.Add(listViewPanel);
-            this.SizeGripStyle = SizeGripStyle.Show;
+           
         }
 
         private void OverlayListView_DrawItem(object sender, DrawListViewItemEventArgs e)

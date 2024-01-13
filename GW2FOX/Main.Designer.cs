@@ -36,6 +36,7 @@
             button5 = new Button();
             button1 = new Button();
             button2 = new Button();
+            textBox1 = new TextBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -108,12 +109,21 @@
             button2.UseVisualStyleBackColor = true;
             button2.Click += CloseAll_Click;
             // 
+            // textBox1
+            // 
+            textBox1.Location = new Point(507, 310);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(47, 23);
+            textBox1.TabIndex = 13;
+            textBox1.Text = "ALT + T";
+            // 
             // Main
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources.Background;
             ClientSize = new Size(784, 391);
+            Controls.Add(textBox1);
             Controls.Add(button2);
             Controls.Add(button1);
             Controls.Add(button5);
@@ -127,6 +137,7 @@
             Text = "GW2FOX";
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -138,5 +149,6 @@
         private Button button5;
         private Button button1;
         private Button button2;
+        private TextBox textBox1;
     }
 }
