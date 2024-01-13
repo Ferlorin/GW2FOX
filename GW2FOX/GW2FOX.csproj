@@ -31,18 +31,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="ThunderheadPeaks.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Palawadan.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="DragonsStand.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="SerpentsIre.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Update="ThunderheadPeaks.cs" />
+    <Compile Update="Palawadan.cs" />
+    <Compile Update="DragonsStand.cs" />
+    <Compile Update="SerpentsIre.cs" />
   </ItemGroup>
 
   <ItemGroup>

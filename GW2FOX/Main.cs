@@ -1,60 +1,54 @@
+// Main.cs
+
+using System;
 using System.Diagnostics;
+using System.IO;
+using System.Windows.Forms;
 
 namespace GW2FOX
 {
     public partial class Main : BaseForm
     {
-        private Overlay overlay;
-        private ListView customBossList;
-        private BossTimer bossTimer;
-
         public Main()
         {
             InitializeComponent();
             this.Load += Main_Load;
-
-            customBossList = new ListView();
-            overlay = new Overlay(customBossList);
-            bossTimer = new BossTimer(customBossList); // Pass the ListView directly
             InitializeCustomBossList();
             InitializeBossTimerAndOverlay();
         }
 
-
-        public ListView GetCustomBossList()
-        {
-            return customBossList;
-        }
-
-        private void InitializeBossTimerAndOverlay()
-        {
-            bossTimer = new BossTimer(customBossList);
-            overlay = new Overlay(customBossList);
-            overlay.WindowState = FormWindowState.Normal;
-        }
-
-        private void Timer_Click(object sender, EventArgs e)
-        {
-            if (customBossList == null || customBossList.IsDisposed)
-            {
-                InitializeCustomBossList();
-            }
-
-            if (overlay == null || overlay.IsDisposed)
-            {
-                InitializeBossTimerAndOverlay();
-            }
-
-            bossTimer.Start();
-            overlay.Show();
-        }
-
         private void Main_Load(object? sender, EventArgs e)
         {
-            AdjustWindowSize(); // Call the method to adjust the window size
+            try
+            {
+                AdjustWindowSize();
+            }
+            catch (Exception ex)
+            {
+                HandleException(ex);
+            }
         }
 
-        private void InitializeCustomBossList()
+        private new void InitializeBossTimerAndOverlay()
+        {
+            base.InitializeBossTimerAndOverlay();
+            // Additional initialization specific to Main class, if any
+        }
+
+        private new void Timer_Click(object sender, EventArgs e)
+        {
+            base.Timer_Click(sender, e);
+            // Additional logic specific to Timer_Click in Main class, if any
+        }
+
+        
+        // Füge diese Methode hinzu, um Ausnahmen zu behandeln und Details anzuzeigen
+        private void HandleException(Exception ex)
+        {
+            MessageBox.Show($"An error occurred: {ex.Message}\n\nStack Trace: {ex.StackTrace}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        private new void InitializeCustomBossList() // new hinzugefügt
         {
             customBossList = new ListView();
             customBossList.View = View.Details;
@@ -188,8 +182,6 @@ namespace GW2FOX
         {
             try
             {
-
-
                 // Stoppe den Timer und beende alle Hintergrundprozesse
                 if (bossTimer != null)
                 {
@@ -208,9 +200,8 @@ namespace GW2FOX
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error closing the program: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                HandleException(ex);
             }
         }
-
     }
 }

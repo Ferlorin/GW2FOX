@@ -19,6 +19,9 @@
     <Compile Update="Doppelganger.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="DragonsStand.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Dragonstorm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -76,6 +79,9 @@
     <Compile Update="Overlay.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Palawadan.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Pinatas.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -83,6 +89,9 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Rhendak.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="SerpentsIre.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Spellmaster.cs">
@@ -98,6 +107,9 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Theshatterer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="ThunderheadPeaks.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Ulgoth.cs">
