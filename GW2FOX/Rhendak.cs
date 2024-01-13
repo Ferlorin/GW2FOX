@@ -205,10 +205,7 @@ namespace GW2FOX
         [return: MarshalAs(UnmanagedType.Bool)]
         private static extern bool SetForegroundWindow(IntPtr hWnd);
 
-        private void Back_Click(object sender, EventArgs e)
-        {
-            ShowAndHideForm(new Worldbosses());
-        }
+        
 
         private void Runinfo_Click(object sender, EventArgs e)
         {

@@ -274,10 +274,6 @@ namespace GW2FOX
             BringGw2ToFront();
         }
 
-        private void Back_Click(object sender, EventArgs e)
-        {
-            ShowAndHideForm(new Main());
-        }
 
         private void Chak_Click(object sender, EventArgs e)
         {
@@ -1342,6 +1338,7 @@ namespace GW2FOX
                     }
                 }
 
+
                 // Wenn der Bossname gefunden wird, ihn hinzufügen
                 if (bossIndex != -1 && bossIndex < lines.Length)
                 {
@@ -1368,7 +1365,7 @@ namespace GW2FOX
 
                         // Setze das Häkchen im CheckBox-Control auf true
                         CheckBox bossCheckBox = FindCheckBoxByBossName(bossName);
-                        if (bossCheckBox != null)
+                        if (bossCheckBox != null) 
                         {
                             bossCheckBox.Checked = true;
                         }
@@ -1378,8 +1375,11 @@ namespace GW2FOX
                 }
                 else
                 {
-                    // Wenn der Abschnitt "Bosses:" nicht gefunden wird, gibt es nichts zu hinzufügen
-                    MessageBox.Show($"Bosses section not found in config.", "Not Found", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    //This will create a new section
+                    SaveTextToFile("", "Bosses");
+                    SaveBossNameToConfig(bossName);
+                    // // Wenn der Abschnitt "Bosses:" nicht gefunden wird, gibt es nichts zu hinzufügen
+                    // MessageBox.Show($"Bosses section not found in config.", "Not Found", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             catch (Exception ex)
@@ -1465,6 +1465,19 @@ namespace GW2FOX
                 }
                 else
                 {
+                    Console.WriteLine($"Config file does not exist. Will try to create it");
+                    try
+                    {
+                        var fileStream = File.Create(configFilePath);
+                        fileStream.Close();
+                        return ReadConfigFile();
+                    }
+                    catch (Exception ex)
+                    {
+                        // Log or handle the exception, but don't call ReadConfigFile recursively
+                        Console.WriteLine($"Error creating config file: {ex.Message}");
+                        throw; // Re-throw the exception to prevent infinite recursion
+                    }
                     // Log or handle the case where the file is not found
                     Console.WriteLine($"Config file does not exist.");
                     throw new FileNotFoundException("Config file not found.");
@@ -1539,8 +1552,10 @@ namespace GW2FOX
                 }
                 else
                 {
+                    SaveTextToFile("", "Bosses");
+                    SaveBossNameToConfig(bossName);
                     // Wenn der Abschnitt "Bosses:" nicht gefunden wird, gibt es nichts zu entfernen
-                    MessageBox.Show($"Bosses section not found in config.", "Not Found", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    // MessageBox.Show($"Bosses section not found in config.", "Not Found", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             catch (Exception ex)
@@ -1593,7 +1608,9 @@ namespace GW2FOX
                 }
                 else
                 {
-                    MessageBox.Show($"Meta section not found in config.", "Not Found", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    SaveTextToFile("", "Meta");
+                    Meta_Click(sender, e);
+                    // MessageBox.Show($"Meta section not found in config.", "Not Found", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             catch (Exception ex)
@@ -1746,7 +1763,10 @@ namespace GW2FOX
                 }
                 else
                 {
-                    MessageBox.Show($"World section not found in config.", "Not Found", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    //This will create a new section
+                    SaveTextToFile("", "World");
+                    World_Click(sender, e);   
+                    // MessageBox.Show($"World section not found in config.", "Not Found", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             catch (Exception ex)
@@ -1803,7 +1823,9 @@ namespace GW2FOX
                 }
                 else
                 {
-                    MessageBox.Show($"Mixed section not found in config.", "Not Found", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    SaveTextToFile("", "Mixed");
+                    Mixed_Click(sender, e);
+                    // MessageBox.Show($"Mixed section not found in config.", "Not Found", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             catch (Exception ex)

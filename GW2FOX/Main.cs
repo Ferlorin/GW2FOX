@@ -60,7 +60,7 @@ namespace GW2FOX
         {
             newForm.Owner = this;
             newForm.Show();
-            this.Hide();
+            // this.Dispose();
         }
 
         private void Fox_Click(object sender, EventArgs e)

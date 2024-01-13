@@ -1,5 +1,3 @@
-﻿using static GW2FOX.BossTimings;
-
 namespace GW2FOX
 {
     public class BaseForm : Form
@@ -59,18 +57,26 @@ namespace GW2FOX
 
         public void Timer_Click(object sender, EventArgs e)
         {
-            InitializeCustomBossList();
-            InitializeBossTimerAndOverlay();
+            if (this is Main)
+            {
+                InitializeCustomBossList();
+                InitializeBossTimerAndOverlay();
 
-            bossTimer.Start();
-            overlay.Show();
+                bossTimer.Start();
+                overlay.Show();
+            }
         }
 
         protected void ShowAndHideForm(Form newForm)
         {
+            newForm.Owner = this;
             newForm.Show();
-            this.Hide();
+            if (this is not Worldbosses)
+            {
+                this.Dispose();
+            }
         }
+
 
         protected void AdjustWindowSize()
         {
@@ -103,7 +109,6 @@ namespace GW2FOX
                 );
             }
         }
-
         protected void HandleException(Exception ex, string methodName)
         {
             Console.WriteLine($"Exception in {methodName}: {ex}");
@@ -111,10 +116,17 @@ namespace GW2FOX
 
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
-            bossTimer.Dispose();
+            bossTimer.Dispose(); // Dispose of the BossTimer first
             base.OnFormClosing(e);
             Application.Exit();
         }
+        
+        protected void Back_Click(object sender, EventArgs e)
+        {
+            this.Owner.Show();
+            this.Dispose();
+        }
+
 
         public class BossTimer : IDisposable
         {
@@ -155,6 +167,7 @@ namespace GW2FOX
                     // Consider logging the exception
                 }
             }
+
 
             public void UpdateBossList()
             {
@@ -265,7 +278,6 @@ namespace GW2FOX
                     }
                 });
             }
-
 
             private bool HasSameTimeAndCategory(List<BossEvent> allBosses, BossEvent currentBossEvent)
             {
