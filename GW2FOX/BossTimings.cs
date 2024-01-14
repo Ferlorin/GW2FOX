@@ -480,7 +480,20 @@
                 AddBossEvent("Junundu Rising", "08:30:00", "Desert");
                 AddBossEvent("Junundu Rising", "09:30:00", "Desert");
                 AddBossEvent("Junundu Rising", "10:30:00", "Desert");
-                AddBossEvent("Junundu Rising", "11:30:00", "Desert");
+                AddBossEvent("Junundu Rising", "12:30:00", "Desert");
+                AddBossEvent("Junundu Rising", "13:30:00", "Desert");
+                AddBossEvent("Junundu Rising", "14:30:00", "Desert");
+                AddBossEvent("Junundu Rising", "15:30:00", "Desert");
+                AddBossEvent("Junundu Rising", "16:30:00", "Desert");
+                AddBossEvent("Junundu Rising", "17:30:00", "Desert");
+                AddBossEvent("Junundu Rising", "18:30:00", "Desert");
+                AddBossEvent("Junundu Rising", "19:30:00", "Desert");
+                AddBossEvent("Junundu Rising", "20:30:00", "Desert");
+                AddBossEvent("Junundu Rising", "21:30:00", "Desert");
+                AddBossEvent("Junundu Rising", "22:30:00", "Desert");
+                AddBossEvent("Junundu Rising", "23:30:00", "Desert");
+              
+
 
                 AddBossEvent("Path to Ascension", "00:30:00", "Desert");
                 AddBossEvent("Path to Ascension", "02:30:00", "Desert");
