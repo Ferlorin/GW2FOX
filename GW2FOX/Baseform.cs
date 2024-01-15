@@ -2,7 +2,7 @@
 {
     public class BaseForm : Form
     {
-        private Form previousPage;
+        
         protected Overlay overlay;
         protected ListView customBossList;
         protected BossTimer bossTimer;
@@ -141,19 +141,19 @@
 
             public void Start()
             {
-                timer.Enabled = true; // Starte den Timer
+                timer.Enabled = true;
             }
 
             public void Stop()
             {
-                timer.Enabled = false; // Stoppe den Timer
+                timer.Enabled = false;
             }
 
             private void TimerCallback(object? sender, EventArgs e)
             {
                 try
                 {
-                    if (!bossList.IsHandleCreated) return; // Check before accessing
+                    if (!bossList.IsHandleCreated) return;
                     bossList.BeginInvoke((MethodInvoker)delegate
                     {
                         UpdateBossList();
@@ -181,10 +181,12 @@
                         TimeSpan currentTime = currentTimeMez.TimeOfDay;
 
                         var upcomingBosses = BossTimings.Events
-                            .Where(bossEvent =>
-                                bossNamesFromConfig.Contains(bossEvent.BossName) &&
-                                bossEvent.Timing > currentTime && bossEvent.Timing < currentTime.Add(new TimeSpan(8, 0, 0)))
-                            .ToList();
+                        .Where(bossEvent =>
+                            bossNamesFromConfig.Contains(bossEvent.BossName) &&
+                            (bossEvent.Timing > currentTime && bossEvent.Timing < currentTime.Add(new TimeSpan(8, 0, 0)) ||
+                            bossEvent.Timing.Add(bossEvent.RepeatInterval) > currentTime && bossEvent.Timing.Add(bossEvent.RepeatInterval) < currentTime.Add(new TimeSpan(8, 0, 0))))
+                        .ToList();
+
 
                         var pastBosses = BossTimings.Events
                             .Where(bossEvent =>
@@ -216,7 +218,8 @@
 
                         foreach (var bossEvent in allBosses)
                         {
-                            DateTime adjustedTiming = GetAdjustedTiming(currentTimeMez, bossEvent.Timing);
+                            // Rufe GetAdjustedTiming auf, um adjustedTiming zu erhalten
+                            DateTime adjustedTiming = GetAdjustedTiming(currentTimeMez, bossEvent.Timing, bossEvent.RepeatInterval);
 
                             if (addedBossNames.Add($"{bossEvent.BossName}_{adjustedTiming}"))
                             {
@@ -271,17 +274,18 @@
                     bossEvent.BossName != currentBossEvent.BossName);
             }
 
-            private DateTime GetAdjustedTiming(DateTime currentTimeMez, TimeSpan bossTiming)
+            private DateTime GetAdjustedTiming(DateTime currentTimeMez, TimeSpan bossTiming, TimeSpan repeatInterval)
             {
                 DateTime adjustedTiming = currentTimeMez.Date + bossTiming;
 
                 while (adjustedTiming < currentTimeMez)
                 {
-                    adjustedTiming = adjustedTiming.AddDays(1);
+                    adjustedTiming = adjustedTiming.Add(repeatInterval);
                 }
 
                 return adjustedTiming;
             }
+
 
             private void UpdateListViewItems(List<ListViewItem> listViewItems)
             {
@@ -309,10 +313,6 @@
                 Console.WriteLine($"Exception in {methodName}: {ex}");
             }
 
-            private TimeSpan GetRemainingTime(DateTime currentTimeMez, DateTime adjustedTiming, BossEvent bossEvent)
-            {
-                return adjustedTiming - currentTimeMez;
-            }
 
             private Color GetFontColor(BossEvent bossEvent, List<BossEvent> pastBosses)
             {
