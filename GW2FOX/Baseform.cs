@@ -159,11 +159,7 @@ namespace GW2FOX
                         UpdateBossList();
 
                       
-                        if (CheckIfBossEventExpired())
-                        {
-                            // Wenn ja, die Liste neu einlesen und aktualisieren
-                            ReloadAndRefreshBossList();
-                        }
+                        
                     });
                 }
                 catch (Exception ex)
@@ -172,30 +168,9 @@ namespace GW2FOX
                 }
             }
 
-            private void ReloadAndRefreshBossList()
-            {
             
-                UpdateBossList(); 
-            }
 
-            private bool CheckIfBossEventExpired()
-            {
-                DateTime currentTimeUtc = DateTime.UtcNow;
-                DateTime currentTimeMez = TimeZoneInfo.ConvertTimeFromUtc(currentTimeUtc, mezTimeZone);
-
-                // Rufe die Liste der zukünftigen Boss-Events ab
-                var futureBossEvents = BossTimings.GetFutureBossEvents();
-
-                // Überprüfe, ob es abgelaufene Boss-Events gibt
-                var expiredBosses = futureBossEvents
-                    .Where(bossEvent =>
-                        TimeSpan.Compare(bossEvent.Timing - currentTimeMez, TimeSpan.Zero) < 0)
-                    .ToList();
-
-                return expiredBosses.Any();
-            }
-
-
+           
 
             public void UpdateBossList()
             {
