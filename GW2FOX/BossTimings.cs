@@ -739,14 +739,11 @@
                             }
                             else
                             {
-                                // Handle den Fall, wenn die Anzahl der Timings nicht mit der Anzahl der Bosse übereinstimmt
-                                // Implement the desired handling logic
+                           
                             }
-                            break; // Da wir die Timings gefunden haben, können wir die Schleife beenden
+                            break;
                         }
                     }
-
-                    // Jetzt kannst du die alte BossList23 durch die neue Liste ersetzen
                     BossList23 = newBossList;
                 }
             }
@@ -758,21 +755,18 @@
 
         private static void AddBossEvent(string bossName, string timing, string category, TimeSpan repeatInterval)
         {
-            // Parse timing and create a BossEvent instance
+           
             BossEvent bossEvent = new BossEvent
             {
                 BossName = bossName,
-                Timing = ParseTiming(timing),  // Implement ParseTiming as needed
+                Timing = ParseTiming(timing),
                 Category = category,
                 RepeatInterval = repeatInterval
             };
-
-            // Add the boss event to your collection
             Events.Add(bossEvent);
         }
 
 
-        // Make ParseTiming static
         private static TimeSpan ParseTiming(string timing)
         {
             // Implement parsing logic based on your requirements
@@ -792,7 +786,7 @@
         // Parameterloser Konstruktor für den Objektinitialisierer
         public BossEvent() { }
 
-        // Konstruktor für die Pflichtfelder
+     
         public BossEvent(string bossName, TimeSpan timing, string category)
         {
             BossName = bossName;
@@ -800,8 +794,7 @@
             Category = category;
         }
 
-        // Weitere Methode zum Festlegen von Duration und RepeatInterval
-        public void SetEventDetails(TimeSpan duration, TimeSpan repeatInterval)
+           public void SetEventDetails(TimeSpan duration, TimeSpan repeatInterval)
         {
             Duration = duration;
             RepeatInterval = repeatInterval;

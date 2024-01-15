@@ -2,11 +2,10 @@
 {
     public class BaseForm : Form
     {
-        
         protected Overlay overlay;
         protected ListView customBossList;
         protected BossTimer bossTimer;
-        private GlobalKeyboardHook _globalKeyboardHook; // Füge dies hinzu
+        private GlobalKeyboardHook _globalKeyboardHook;
 
         public static ListView CustomBossList { get; private set; } = new ListView();
 
@@ -64,16 +63,13 @@
 
             bossTimer.Start();
             overlay.Show();
-
         }
 
         protected void ShowAndHideForm(Form newForm)
         {
-
             newForm.Show();
             this.Hide();
         }
-
 
         protected void AdjustWindowSize()
         {
@@ -106,6 +102,7 @@
                 );
             }
         }
+
         protected void HandleException(Exception ex, string methodName)
         {
             Console.WriteLine($"Exception in {methodName}: {ex}");
@@ -118,23 +115,17 @@
             Application.Exit();
         }
 
-
-
         public class BossTimer : IDisposable
         {
-            private static readonly string TimeZoneId = "W. Europe Standard Time";
             private static readonly Color DefaultFontColor = Color.Blue;
             private static readonly Color PastBossFontColor = Color.OrangeRed;
-
             private readonly ListView bossList;
-            private readonly TimeZoneInfo mezTimeZone;
-            private readonly System.Windows.Forms.Timer timer; // Qualifiziere den Timer mit dem Namespace
+            private readonly System.Windows.Forms.Timer timer;
 
             public BossTimer(ListView bossList)
             {
                 this.bossList = bossList;
-                this.mezTimeZone = TimeZoneInfo.FindSystemTimeZoneById(TimeZoneId);
-                this.timer = new System.Windows.Forms.Timer(); // Qualifiziere den Timer mit dem Namespace
+                this.timer = new System.Windows.Forms.Timer();
                 timer.Tick += TimerCallback;
                 timer.Interval = 1000;
             }
@@ -165,44 +156,50 @@
                 }
             }
 
-
             public void UpdateBossList()
             {
+                // Überprüfen, ob das Handle der bossList erstellt wurde
                 if (!bossList.IsHandleCreated) return;
 
+                // Asynchroner Aufruf, um auf das UI-Handle zuzugreifen
                 bossList.BeginInvoke((MethodInvoker)delegate
                 {
                     try
                     {
+                        // Boss-Namen aus der Konfiguration abrufen
                         List<string> bossNamesFromConfig = BossTimings.BossList23;
 
+                        // Aktuelle Zeit (UTC) abrufen
                         DateTime currentTimeUtc = DateTime.UtcNow;
-                        DateTime currentTimeMez = TimeZoneInfo.ConvertTimeFromUtc(currentTimeUtc, mezTimeZone);
-                        TimeSpan currentTime = currentTimeMez.TimeOfDay;
+                        TimeSpan currentTime = currentTimeUtc.TimeOfDay;
 
+                        // Zukünftige Boss-Events filtern
                         var upcomingBosses = BossTimings.Events
-                        .Where(bossEvent =>
-                            bossNamesFromConfig.Contains(bossEvent.BossName) &&
-                            (bossEvent.Timing > currentTime && bossEvent.Timing < currentTime.Add(new TimeSpan(8, 0, 0)) ||
-                            bossEvent.Timing.Add(bossEvent.RepeatInterval) > currentTime && bossEvent.Timing.Add(bossEvent.RepeatInterval) < currentTime.Add(new TimeSpan(8, 0, 0))))
-                        .ToList();
+                            .Where(bossEvent =>
+                                bossNamesFromConfig.Contains(bossEvent.BossName) &&
+                                (bossEvent.Timing > currentTime && bossEvent.Timing < currentTime.Add(new TimeSpan(8, 0, 0)) ||
+                                 bossEvent.Timing.Add(bossEvent.RepeatInterval) > currentTime && bossEvent.Timing.Add(bossEvent.RepeatInterval) < currentTime.Add(new TimeSpan(8, 0, 0))))
+                            .ToList();
 
-
+                        // Vergangene Boss-Events filtern
                         var pastBosses = BossTimings.Events
                             .Where(bossEvent =>
                                 bossNamesFromConfig.Contains(bossEvent.BossName) &&
                                 bossEvent.Timing > currentTime.Subtract(new TimeSpan(0, 14, 59)) && bossEvent.Timing < currentTime)
                             .ToList();
 
+                        // Alle Boss-Events (Vergangene + Zukünftige) zusammenführen
                         var allBosses = upcomingBosses.Concat(pastBosses).ToList();
 
+                        // Liste für ListView-Elemente erstellen
                         var listViewItems = new List<ListViewItem>();
                         HashSet<string> addedBossNames = new HashSet<string>();
 
+                        // Boss-Events nach Zeitpunkt, Dauer und Kategorie sortieren
                         allBosses.Sort((bossEvent1, bossEvent2) =>
                         {
-                            DateTime adjustedTiming1 = currentTimeMez.Date + bossEvent1.Timing;
-                            DateTime adjustedTiming2 = currentTimeMez.Date + bossEvent2.Timing;
+                            DateTime adjustedTiming1 = DateTime.Today + bossEvent1.Timing;
+                            DateTime adjustedTiming2 = DateTime.Today + bossEvent2.Timing;
 
                             int adjustedTimingComparison = adjustedTiming1.CompareTo(adjustedTiming2);
                             if (adjustedTimingComparison != 0) return adjustedTimingComparison;
@@ -216,15 +213,19 @@
                             return 0;
                         });
 
+                        // Durch alle Boss-Events iterieren
                         foreach (var bossEvent in allBosses)
                         {
-                            // Rufe GetAdjustedTiming auf, um adjustedTiming zu erhalten
-                            DateTime adjustedTiming = GetAdjustedTiming(currentTimeMez, bossEvent.Timing, bossEvent.RepeatInterval);
+                            // Adjustierte Zeit für das Boss-Event erhalten
+                            DateTime adjustedTiming = GetAdjustedTiming(bossEvent.Timing, bossEvent.RepeatInterval);
 
+                            // Überprüfen, ob der Boss bereits hinzugefügt wurde
                             if (addedBossNames.Add($"{bossEvent.BossName}_{adjustedTiming}"))
                             {
-                                if (pastBosses.Contains(bossEvent) && currentTimeMez - adjustedTiming < new TimeSpan(0, 14, 59))
+                                // Überprüfen, ob es sich um ein vergangenes Event handelt und es weniger als 15 Minuten her ist
+                                if (pastBosses.Contains(bossEvent) && DateTime.Now - adjustedTiming < new TimeSpan(0, 14, 59))
                                 {
+                                    // ListViewItem für vergangene Events erstellen
                                     var listViewItem = new ListViewItem(new[] { bossEvent.BossName });
                                     listViewItem.ForeColor = GetFontColor(bossEvent, pastBosses);
                                     listViewItem.Font = new Font("Segoe UI", 10, FontStyle.Bold);
@@ -232,16 +233,21 @@
                                 }
                                 else
                                 {
-                                    TimeSpan elapsedTime = adjustedTiming - currentTimeMez;
+                                    // Verbleibende Zeit bis zum Event berechnen
+                                    TimeSpan elapsedTime = adjustedTiming - DateTime.Now;
                                     TimeSpan countdownTime = elapsedTime;
 
+                                    // Formatieren der verbleibenden Zeit
                                     string elapsedTimeFormat = $"{(int)elapsedTime.TotalHours:D2}:{elapsedTime.Minutes:D2}:{elapsedTime.Seconds:D2}";
 
+                                    // Farbe des Textes basierend auf der Kategorie des Boss-Events erhalten
                                     Color fontColor = GetFontColor(bossEvent, pastBosses);
 
+                                    // ListViewItem für zukünftige Events erstellen
                                     var listViewItem = new ListViewItem(new[] { bossEvent.BossName, elapsedTimeFormat });
                                     listViewItem.ForeColor = fontColor;
 
+                                    // Wenn mehrere Events zur gleichen Zeit und Kategorie, dann Schrift kursiv setzen
                                     if (HasSameTimeAndCategory(allBosses, bossEvent))
                                     {
                                         listViewItem.Font = new Font("Segoe UI", 10, FontStyle.Italic | FontStyle.Bold);
@@ -256,14 +262,17 @@
                             }
                         }
 
+                        // ListView mit den aktualisierten Items aktualisieren
                         UpdateListViewItems(listViewItems);
                     }
                     catch (Exception ex)
                     {
+                        // Fehlerbehandlung, falls eine Ausnahme auftritt
                         HandleException(ex, "UpdateBossList");
                     }
                 });
             }
+
 
             private bool HasSameTimeAndCategory(List<BossEvent> allBosses, BossEvent currentBossEvent)
             {
@@ -274,18 +283,17 @@
                     bossEvent.BossName != currentBossEvent.BossName);
             }
 
-            private DateTime GetAdjustedTiming(DateTime currentTimeMez, TimeSpan bossTiming, TimeSpan repeatInterval)
+            private DateTime GetAdjustedTiming(TimeSpan bossTiming, TimeSpan repeatInterval)
             {
-                DateTime adjustedTiming = currentTimeMez.Date + bossTiming;
+                DateTime adjustedTiming = DateTime.Today + bossTiming;
 
-                while (adjustedTiming < currentTimeMez)
+                while (adjustedTiming < DateTime.Now)
                 {
                     adjustedTiming = adjustedTiming.Add(repeatInterval);
                 }
 
                 return adjustedTiming;
             }
-
 
             private void UpdateListViewItems(List<ListViewItem> listViewItems)
             {
@@ -312,7 +320,6 @@
             {
                 Console.WriteLine($"Exception in {methodName}: {ex}");
             }
-
 
             private Color GetFontColor(BossEvent bossEvent, List<BossEvent> pastBosses)
             {
