@@ -18,7 +18,7 @@
 
                 AddBossEvent("The frozen Maw", "01:15:00", "WBs");
                 AddBossEvent("The frozen Maw", "03:15:00", "WBs");
-                AddBossEvent("The frozen Maw", "05:15:00", "WBs");
+                AddBossEvent("The frozen Maw", "04:15:00", "WBs");
                 AddBossEvent("The frozen Maw", "07:15:00", "WBs");
                 AddBossEvent("The frozen Maw", "09:15:00", "WBs");
                 AddBossEvent("The frozen Maw", "11:15:00", "WBs");
@@ -123,12 +123,12 @@
                 AddBossEvent("Shadow Behemoth", "22:45:00", "WBs");
                 AddBossEvent("Shadow Behemoth", "00:45:00", "WBs");
 
-                AddBossEvent("Tequatl the Sunless", "01:00:00", "WBs");
-                AddBossEvent("Tequatl the Sunless", "04:00:00", "WBs");
-                AddBossEvent("Tequatl the Sunless", "08:00:00", "WBs");
-                AddBossEvent("Tequatl the Sunless", "12:30:00", "WBs");
-                AddBossEvent("Tequatl the Sunless", "17:00:00", "WBs");
-                AddBossEvent("Tequatl the Sunless", "20:00:00", "WBs");
+                AddBossEvent("Tequatl the Sunless", "01:01:00", "WBs");
+                AddBossEvent("Tequatl the Sunless", "04:01:00", "WBs");
+                AddBossEvent("Tequatl the Sunless", "08:01:00", "WBs");
+                AddBossEvent("Tequatl the Sunless", "12:31:00", "WBs");
+                AddBossEvent("Tequatl the Sunless", "16:01:00", "WBs");
+                AddBossEvent("Tequatl the Sunless", "20:01:00", "WBs");
 
                 AddBossEvent("Megadestroyer", "01:30:00", "WBs");
                 AddBossEvent("Megadestroyer", "04:30:00", "WBs");
@@ -480,19 +480,8 @@
                 AddBossEvent("Junundu Rising", "08:30:00", "Desert");
                 AddBossEvent("Junundu Rising", "09:30:00", "Desert");
                 AddBossEvent("Junundu Rising", "10:30:00", "Desert");
-                AddBossEvent("Junundu Rising", "12:30:00", "Desert");
-                AddBossEvent("Junundu Rising", "13:30:00", "Desert");
-                AddBossEvent("Junundu Rising", "14:30:00", "Desert");
-                AddBossEvent("Junundu Rising", "15:30:00", "Desert");
-                AddBossEvent("Junundu Rising", "16:30:00", "Desert");
-                AddBossEvent("Junundu Rising", "17:30:00", "Desert");
-                AddBossEvent("Junundu Rising", "18:30:00", "Desert");
-                AddBossEvent("Junundu Rising", "19:30:00", "Desert");
-                AddBossEvent("Junundu Rising", "20:30:00", "Desert");
-                AddBossEvent("Junundu Rising", "21:30:00", "Desert");
-                AddBossEvent("Junundu Rising", "22:30:00", "Desert");
-                AddBossEvent("Junundu Rising", "23:30:00", "Desert");
-              
+                AddBossEvent("Junundu Rising", "11:30:00", "Desert");
+
                 AddBossEvent("Path to Ascension", "00:30:00", "Desert");
                 AddBossEvent("Path to Ascension", "02:30:00", "Desert");
                 AddBossEvent("Path to Ascension", "04:30:00", "Desert");
@@ -741,6 +730,8 @@
                         }
                     }
 
+                    // Jetzt kannst du die alte BossList23 durch die neue Liste ersetzen
+                    BossList23 = newBossList;
                 }
             }
             catch (Exception ex)
@@ -756,12 +747,72 @@
         }
 
 
+        public static List<BossEvent> GetFutureBossEvents()
+        {
+            // Wenn die Liste leer ist, null zurückgeben
+            if (Events.Count == 0)
+                return null;
+
+            // Filtern der Events basierend auf BossList23 und zukünftigem Timing
+            var validEvents = Events
+                .Where(eventItem => BossList23.Contains(eventItem.BossName) && eventItem.Timing > DateTime.Now.TimeOfDay)
+                .OrderBy(eventItem => eventItem.Timing)
+                .ToList();
+
+            // Wenn die gefilterte Liste leer ist, null zurückgeben
+            if (validEvents.Count == 0)
+                return null;
+
+            // Gruppieren nach BossName, um alle Timings für jeden Boss zu erhalten
+            var groupedEvents = validEvents.GroupBy(eventItem => eventItem.BossName);
+
+            // Erstellen einer Liste, die alle Timings für jeden Boss enthält
+            var resultEvents = new List<BossEvent>();
+            foreach (var group in groupedEvents)
+            {
+                // Hier kannst du entscheiden, wie du mit mehreren Timings für einen Boss umgehen möchtest.
+                // In diesem Beispiel fügen wir einfach alle Timings hinzu.
+                resultEvents.AddRange(group);
+            }
+
+            return resultEvents;
+        }
+
+
+
+        public static List<BossEvent> GetNextBossEvents()
+        {
+            // Wenn die Liste leer ist, null zurückgeben
+            if (Events.Count == 0)
+                return null;
+
+            // Filtern der Events basierend auf BossList23 und zukünftigem Timing
+            var validEvents = Events
+                .Where(eventItem => BossList23.Contains(eventItem.BossName) && eventItem.Timing > DateTime.Now.TimeOfDay)
+                .OrderBy(eventItem => eventItem.Timing)
+                .ToList();
+
+            // Wenn die gefilterte Liste leer ist, null zurückgeben
+            if (validEvents.Count == 0)
+                return null;
+
+            // Das nächste Boss-Event ist das erste in der sortierten Liste
+            var nextBossEvent = validEvents.First();
+
+            // Filtern der Events, um nur die Timings aller Bosse zu erhalten
+            var allBossTimings = validEvents
+                .Where(eventItem => BossList23.Contains(eventItem.BossName))
+                .ToList();
+
+            return allBossTimings;
+        }
+
         public class BossEvent
         {
             public string BossName { get; }
             public TimeSpan Timing { get; }
             public string Category { get; }
-            public TimeSpan Duration { get; set; }
+            public TimeSpan Duration { get; set; } // Hinzugefügte Eigenschaft
 
             public BossEvent(string bossName, string timing, string category)
             {

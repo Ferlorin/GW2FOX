@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Windows.Forms;
+﻿using static GW2FOX.BossTimings;
 
 namespace GW2FOX
 {
     public class BaseForm : Form
     {
-        private Form previousPage;
+
         protected Overlay overlay;
         protected ListView customBossList;
         protected BossTimer bossTimer;
@@ -128,49 +124,37 @@ namespace GW2FOX
 
             private readonly ListView bossList;
             private readonly TimeZoneInfo mezTimeZone;
-            private readonly System.Windows.Forms.Timer timer;
+            private readonly System.Threading.Timer timer;
 
             public BossTimer(ListView bossList)
             {
                 this.bossList = bossList;
                 this.mezTimeZone = TimeZoneInfo.FindSystemTimeZoneById(TimeZoneId);
-                this.timer = new System.Windows.Forms.Timer();
-                timer.Tick += TimerCallback;
-                timer.Interval = 1000;
+                this.timer = new System.Threading.Timer(TimerCallback, null, 0, 1000);
             }
 
             public void Start()
             {
-                timer.Enabled = true;
+                timer.Change(0, 1000);
             }
 
             public void Stop()
             {
-                timer.Enabled = false;
+                timer.Change(Timeout.Infinite, Timeout.Infinite);
             }
 
-            private void TimerCallback(object? sender, EventArgs e)
+            private void TimerCallback(object? state)
             {
                 try
                 {
-                    if (!bossList.IsHandleCreated) return;
-                    bossList.BeginInvoke((MethodInvoker)delegate
-                    {
-                        UpdateBossList();
-
-                      
-                        
-                    });
+                    UpdateBossList();
                 }
                 catch (Exception ex)
                 {
-                    HandleException(ex, "TimerCallback");
+                    Console.WriteLine($"Exception in TimerCallback: {ex}");
+                    // Consider logging the exception
                 }
             }
-
-            
-
-           
 
             public void UpdateBossList()
             {
@@ -180,6 +164,7 @@ namespace GW2FOX
                 {
                     try
                     {
+                        // Read the boss names from the configuration file
                         List<string> bossNamesFromConfig = BossTimings.BossList23;
 
                         DateTime currentTimeUtc = DateTime.UtcNow;
@@ -198,36 +183,44 @@ namespace GW2FOX
                                 bossEvent.Timing > currentTime.Subtract(new TimeSpan(0, 14, 59)) && bossEvent.Timing < currentTime)
                             .ToList();
 
+                        // Combine all bosses
                         var allBosses = upcomingBosses.Concat(pastBosses).ToList();
 
                         var listViewItems = new List<ListViewItem>();
+
+                        // Use a HashSet to keep track of added boss names
                         HashSet<string> addedBossNames = new HashSet<string>();
 
                         allBosses.Sort((bossEvent1, bossEvent2) =>
                         {
-                            DateTime adjustedTiming1 = currentTimeMez.Date + currentTimeMez.TimeOfDay + bossEvent1.Timing;
-                            DateTime adjustedTiming2 = currentTimeMez.Date + currentTimeMez.TimeOfDay + bossEvent2.Timing;
+                            DateTime adjustedTiming1 = currentTimeMez.Date + bossEvent1.Timing;
+                            DateTime adjustedTiming2 = currentTimeMez.Date + bossEvent2.Timing;
 
+                            // Compare the adjusted timings for the next day
                             int adjustedTimingComparison = adjustedTiming1.CompareTo(adjustedTiming2);
                             if (adjustedTimingComparison != 0) return adjustedTimingComparison;
 
+                            // If timings are equal, sort by ascending durations
                             int durationComparison = bossEvent1.Duration.CompareTo(bossEvent2.Duration);
                             if (durationComparison != 0) return durationComparison;
 
+                            // If durations and timings are equal, sort by categories (if necessary)
                             int categoryComparison = bossEvent1.Category.CompareTo(bossEvent2.Category);
                             if (categoryComparison != 0) return categoryComparison;
 
-                            return 0;
+                            return 0; // Tie, maintain the order unchanged
                         });
 
                         foreach (var bossEvent in allBosses)
                         {
                             DateTime adjustedTiming = GetAdjustedTiming(currentTimeMez, bossEvent.Timing);
 
+                            // Check if the boss with the adjusted timing is already added to avoid duplicates
                             if (addedBossNames.Add($"{bossEvent.BossName}_{adjustedTiming}"))
                             {
                                 if (pastBosses.Contains(bossEvent) && currentTimeMez - adjustedTiming < new TimeSpan(0, 14, 59))
                                 {
+                                    // Display only the boss name for past events within the time span of 00:14:59
                                     var listViewItem = new ListViewItem(new[] { bossEvent.BossName });
                                     listViewItem.ForeColor = GetFontColor(bossEvent, pastBosses);
                                     listViewItem.Font = new Font("Segoe UI", 10, FontStyle.Bold);
@@ -236,6 +229,8 @@ namespace GW2FOX
                                 else
                                 {
                                     TimeSpan elapsedTime = adjustedTiming - currentTimeMez;
+
+                                    // Änderung der Formatierung für den Countdown basierend auf der vergangenen Zeitspanne
                                     TimeSpan countdownTime = elapsedTime;
 
                                     string elapsedTimeFormat = $"{(int)elapsedTime.TotalHours:D2}:{elapsedTime.Minutes:D2}:{elapsedTime.Seconds:D2}";
@@ -245,6 +240,7 @@ namespace GW2FOX
                                     var listViewItem = new ListViewItem(new[] { bossEvent.BossName, elapsedTimeFormat });
                                     listViewItem.ForeColor = fontColor;
 
+                                    // Neue Bedingung hinzufügen, um zu prüfen, ob ein Bossevent zur selben Zeit stattfindet wie ein anderes Bossevent derselben Kategorie
                                     if (HasSameTimeAndCategory(allBosses, bossEvent))
                                     {
                                         listViewItem.Font = new Font("Segoe UI", 10, FontStyle.Italic | FontStyle.Bold);
@@ -269,7 +265,7 @@ namespace GW2FOX
             }
 
 
-            private bool HasSameTimeAndCategory(List<BossTimings.BossEvent> allBosses, BossTimings.BossEvent currentBossEvent)
+            private bool HasSameTimeAndCategory(List<BossEvent> allBosses, BossEvent currentBossEvent)
             {
                 return allBosses.Any(bossEvent =>
                     bossEvent != currentBossEvent &&
@@ -278,9 +274,12 @@ namespace GW2FOX
                     bossEvent.BossName != currentBossEvent.BossName);
             }
 
+
+
             private DateTime GetAdjustedTiming(DateTime currentTimeMez, TimeSpan bossTiming)
             {
-                DateTime adjustedTiming = currentTimeMez.Add(bossTiming);
+                DateTime adjustedTiming = currentTimeMez.Date + bossTiming;
+
 
                 while (adjustedTiming < currentTimeMez)
                 {
@@ -289,9 +288,6 @@ namespace GW2FOX
 
                 return adjustedTiming;
             }
-
-
-
 
             private void UpdateListViewItems(List<ListViewItem> listViewItems)
             {
@@ -309,7 +305,7 @@ namespace GW2FOX
                     }
                     catch (Exception ex)
                     {
-                        HandleException(ex, "UpdateBossList");
+                        HandleException(ex, "UpdateListViewItems");
                     }
                 });
             }
@@ -317,14 +313,15 @@ namespace GW2FOX
             private void HandleException(Exception ex, string methodName)
             {
                 Console.WriteLine($"Exception in {methodName}: {ex}");
+                // Consider logging the exception with more details
             }
 
-            private TimeSpan GetRemainingTime(DateTime currentTimeMez, DateTime adjustedTiming, BossTimings.BossEvent bossEvent)
+            private TimeSpan GetRemainingTime(DateTime currentTimeMez, DateTime adjustedTiming, BossEvent bossEvent)
             {
                 return adjustedTiming - currentTimeMez;
             }
 
-            private Color GetFontColor(BossTimings.BossEvent bossEvent, List<BossTimings.BossEvent> pastBosses)
+            private static Color GetFontColor(BossEvent bossEvent, List<BossEvent> pastBosses)
             {
                 Color fontColor;
 
