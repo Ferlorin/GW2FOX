@@ -723,7 +723,7 @@ namespace GW2FOX
                     {
                         if (lines[i].StartsWith("Timings:"))
                         {
-                            string timingLine = lines[i].Replace("Bosses:", "").Trim();
+                            string timingLine = lines[i].Replace("Timings:", "").Trim();
                             string[] timings = timingLine.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
                                 .Select(timing => timing.Trim())
                                 .ToArray();
@@ -773,11 +773,7 @@ namespace GW2FOX
                 BossName = bossName;
                 Timing = TimeSpan.Parse(timing);
                 Category = category;
-
             }
-           
-
         }
-       
     }
 }
