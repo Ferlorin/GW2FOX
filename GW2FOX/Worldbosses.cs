@@ -1844,8 +1844,8 @@ namespace GW2FOX
             if (bossList != null)
             {
                 string configFilePath = "config.txt"; // Setzen Sie hier den richtigen Dateipfad ein
-                BossTimer bossTimerInstance = new BossTimer(bossList, configFilePath);
-                bossTimerInstance.UpdateBossList(configFilePath);
+                BossTimer bossTimerInstance = new BossTimer(bossList);
+                bossTimerInstance.UpdateBossList();
             }
         }
 
