@@ -1451,8 +1451,6 @@ namespace GW2FOX
             }
         }
 
-
-
         public static string[] ReadConfigFile()
         {
             try
@@ -1479,7 +1477,6 @@ namespace GW2FOX
                 throw; // Re-throw the exception to prevent infinite recursion
             }
         }
-
 
         private void RemoveBossNameFromConfig(string bossName)
         {
@@ -1551,12 +1548,6 @@ namespace GW2FOX
                 MessageBox.Show($"Error removing boss {bossName}: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-
-
-
-
-
 
 
         private void Meta_Click(object sender, EventArgs e)
@@ -1852,10 +1843,12 @@ namespace GW2FOX
             ListView bossList = CustomBossList;
             if (bossList != null)
             {
-                BossTimer bossTimerInstance = new BossTimer(bossList);
-                bossTimerInstance.UpdateBossList();
+                string configFilePath = "config.txt"; // Setzen Sie hier den richtigen Dateipfad ein
+                BossTimer bossTimerInstance = new BossTimer(bossList, configFilePath);
+                bossTimerInstance.UpdateBossList(configFilePath);
             }
         }
+
 
 
 

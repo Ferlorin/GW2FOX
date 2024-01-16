@@ -1,4 +1,7 @@
-﻿namespace GW2FOX
+﻿using System;
+using System.IO;
+
+namespace GW2FOX
 {
     public static class BossTimings
     {
@@ -758,80 +761,23 @@
             Events.Add(new BossEvent(bossName, timing, category));
         }
 
-
-        public static List<BossEvent> GetFutureBossEvents()
-        {
-            // Wenn die Liste leer ist, null zurückgeben
-            if (Events.Count == 0)
-                return null;
-
-            // Filtern der Events basierend auf BossList23 und zukünftigem Timing
-            var validEvents = Events
-                .Where(eventItem => BossList23.Contains(eventItem.BossName) && eventItem.Timing > DateTime.Now.TimeOfDay)
-                .OrderBy(eventItem => eventItem.Timing)
-                .ToList();
-
-            // Wenn die gefilterte Liste leer ist, null zurückgeben
-            if (validEvents.Count == 0)
-                return null;
-
-            // Gruppieren nach BossName, um alle Timings für jeden Boss zu erhalten
-            var groupedEvents = validEvents.GroupBy(eventItem => eventItem.BossName);
-
-            // Erstellen einer Liste, die alle Timings für jeden Boss enthält
-            var resultEvents = new List<BossEvent>();
-            foreach (var group in groupedEvents)
-            {
-                // Hier kannst du entscheiden, wie du mit mehreren Timings für einen Boss umgehen möchtest.
-                // In diesem Beispiel fügen wir einfach alle Timings hinzu.
-                resultEvents.AddRange(group);
-            }
-
-            return resultEvents;
-        }
-
-
-
-        public static List<BossEvent> GetNextBossEvents()
-        {
-            // Wenn die Liste leer ist, null zurückgeben
-            if (Events.Count == 0)
-                return null;
-
-            // Filtern der Events basierend auf BossList23 und zukünftigem Timing
-            var validEvents = Events
-                .Where(eventItem => BossList23.Contains(eventItem.BossName) && eventItem.Timing > DateTime.Now.TimeOfDay)
-                .OrderBy(eventItem => eventItem.Timing)
-                .ToList();
-
-            // Wenn die gefilterte Liste leer ist, null zurückgeben
-            if (validEvents.Count == 0)
-                return null;
-
-            // Das nächste Boss-Event ist das erste in der sortierten Liste
-            var nextBossEvent = validEvents.First();
-
-            // Filtern der Events, um nur die Timings aller Bosse zu erhalten
-            var allBossTimings = validEvents
-                .Where(eventItem => BossList23.Contains(eventItem.BossName))
-                .ToList();
-
-            return allBossTimings;
-        }
-
         public class BossEvent
         {
             public string BossName { get; }
             public TimeSpan Timing { get; }
             public string Category { get; }
-            public TimeSpan Duration { get; set; } // Hinzugefügte Eigenschaft
+            public TimeSpan Duration { get; set; } 
 
             public BossEvent(string bossName, string timing, string category)
             {
                 BossName = bossName;
                 Timing = TimeSpan.Parse(timing);
                 Category = category;
+
             }
+           
+
         }
+       
     }
 }

@@ -4,7 +4,6 @@ namespace GW2FOX
 {
     public class BaseForm : Form
     {
-
         protected Overlay overlay;
         protected ListView customBossList;
         protected BossTimer bossTimer;
@@ -16,13 +15,16 @@ namespace GW2FOX
         {
             InitializeCustomBossList();
             overlay = new Overlay(customBossList);
-            bossTimer = new BossTimer(customBossList);
+            bossTimer = new BossTimer(customBossList, "config.txt");
+
             InitializeGlobalKeyboardHook();
+            
+
         }
 
         protected void InitializeBossTimerAndOverlay()
         {
-            bossTimer = new BossTimer(customBossList);
+            bossTimer = new BossTimer(customBossList, "config.txt");
             overlay = new Overlay(customBossList);
             overlay.WindowState = FormWindowState.Normal;
         }
@@ -125,10 +127,12 @@ namespace GW2FOX
             private readonly ListView bossList;
             private readonly TimeZoneInfo mezTimeZone;
             private readonly System.Threading.Timer timer;
+            private string configFilePath;
 
-            public BossTimer(ListView bossList)
+            public BossTimer(ListView bossList, string configFilePath)
             {
                 this.bossList = bossList;
+                this.configFilePath = configFilePath; 
                 this.mezTimeZone = TimeZoneInfo.FindSystemTimeZoneById(TimeZoneId);
                 this.timer = new System.Threading.Timer(TimerCallback, null, 0, 1000);
             }
@@ -147,7 +151,7 @@ namespace GW2FOX
             {
                 try
                 {
-                    UpdateBossList();
+                    UpdateBossList(configFilePath);
                 }
                 catch (Exception ex)
                 {
@@ -156,7 +160,8 @@ namespace GW2FOX
                 }
             }
 
-            public void UpdateBossList()
+
+            public void UpdateBossList(string configFilePath)
             {
                 if (!bossList.IsHandleCreated) return;
 
@@ -165,7 +170,7 @@ namespace GW2FOX
                     try
                     {
                         // Read the boss names from the configuration file
-                        List<string> bossNamesFromConfig = BossTimings.BossList23;
+                        List<string> bossNamesFromConfig = ReadBossNamesFromConfig(configFilePath);
 
                         DateTime currentTimeUtc = DateTime.UtcNow;
                         DateTime currentTimeMez = TimeZoneInfo.ConvertTimeFromUtc(currentTimeUtc, mezTimeZone);
@@ -264,6 +269,40 @@ namespace GW2FOX
                 });
             }
 
+            private List<string> ReadBossNamesFromConfig(string filePath)
+            {
+                List<string> bossNames = new List<string>();
+
+                try
+                {
+                    // Vorhandenen Inhalt aus der Datei lesen
+                    string[] lines = File.ReadAllLines(filePath);
+
+                    // Index der Zeile mit dem Bossnamen finden
+                    int bossIndex = -1;
+                    for (int i = 0; i < lines.Length; i++)
+                    {
+                        if (lines[i].StartsWith("Bosses:"))
+                        {
+                            bossIndex = i; // Die aktuelle Zeile enthält den Namen
+                            break;
+                        }
+                    }
+
+                    // Bossnamen extrahieren
+                    if (bossIndex != -1 && bossIndex + 1 < lines.Length)
+                    {
+                        string bossNamesLine = lines[bossIndex + 1];
+                        bossNames = bossNamesLine.Split(',').Select(name => name.Trim()).ToList();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    HandleException(ex, "ReadBossNamesFromConfig");
+                }
+
+                return bossNames;
+            }
 
             private bool HasSameTimeAndCategory(List<BossEvent> allBosses, BossEvent currentBossEvent)
             {
@@ -274,12 +313,9 @@ namespace GW2FOX
                     bossEvent.BossName != currentBossEvent.BossName);
             }
 
-
-
             private DateTime GetAdjustedTiming(DateTime currentTimeMez, TimeSpan bossTiming)
             {
                 DateTime adjustedTiming = currentTimeMez.Date + bossTiming;
-
 
                 while (adjustedTiming < currentTimeMez)
                 {
