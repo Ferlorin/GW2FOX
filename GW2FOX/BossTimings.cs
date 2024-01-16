@@ -130,7 +130,7 @@ namespace GW2FOX
                 AddBossEvent("Tequatl the Sunless", "04:00:00", "WBs");
                 AddBossEvent("Tequatl the Sunless", "08:00:00", "WBs");
                 AddBossEvent("Tequatl the Sunless", "12:30:00", "WBs");
-                AddBossEvent("Tequatl the Sunless", "16:00:00", "WBs");
+                AddBossEvent("Tequatl the Sunless", "17:00:00", "WBs");
                 AddBossEvent("Tequatl the Sunless", "20:00:00", "WBs");
 
                 AddBossEvent("Megadestroyer", "01:30:00", "WBs");
