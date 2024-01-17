@@ -12,9 +12,10 @@ namespace GW2FOX
             Load += Main_Load;
             InitializeCustomBossList();
             InitializeBossTimerAndOverlay();
+            Worldbosses.ReadConfigFile();
         }
 
-        private void Main_Load(object? sender, EventArgs e)
+        private void Main_Load(object? sender, EventArgs e) 
         {
             try
             {

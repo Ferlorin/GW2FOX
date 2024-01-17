@@ -83,7 +83,7 @@ namespace GW2FOX
             }
         }
 
-        protected static void SaveTextToFile(string textToSave, string sectionHeader)
+        protected static void SaveTextToFile(string textToSave, string sectionHeader, bool hideMessages = false)
         {
             var headerToUse = sectionHeader;
             if (headerToUse.EndsWith(':'))
@@ -121,7 +121,11 @@ namespace GW2FOX
                 // Aktualisierten Inhalt zurück in die Datei schreiben
                 File.WriteAllLines(FILE_PATH, lines);
 
-                MessageBox.Show($"{headerToUse} saved.", "Saved!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                if (!hideMessages)
+                {
+                    MessageBox.Show($"{headerToUse} saved.", "Saved!", MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+                }
             }
             catch (Exception ex)
             {
@@ -182,7 +186,7 @@ namespace GW2FOX
             }
             else
             {
-                SaveTextToFile(defaultToInsert, sectionHeader);
+                SaveTextToFile(defaultToInsert, sectionHeader, true);
                 configText = File.ReadAllText(FILE_PATH);
                 LoadTextFromConfig(sectionHeader, textBox, configText, defaultToInsert);
                 // Muster wurde nicht gefunden
