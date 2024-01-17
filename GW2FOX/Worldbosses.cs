@@ -1304,7 +1304,7 @@ namespace GW2FOX
                 else
                 {
                     //This will create a new section
-                    SaveTextToFile("", "Bosses");
+                    SaveTextToFile(GlobalVariables.DEFAULT_BOSSES, "Bosses");
                     SaveBossNameToConfig(bossName);
                     // // Wenn der Abschnitt "Bosses:" nicht gefunden wird, gibt es nichts zu hinzufügen
                     // MessageBox.Show($"Bosses section not found in config.", "Not Found", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -1478,7 +1478,7 @@ namespace GW2FOX
                 }
                 else
                 {
-                    SaveTextToFile("", "Bosses");
+                    SaveTextToFile(GlobalVariables.DEFAULT_BOSSES, "Bosses");
                     SaveBossNameToConfig(bossName);
                     // Wenn der Abschnitt "Bosses:" nicht gefunden wird, gibt es nichts zu entfernen
                     // MessageBox.Show($"Bosses section not found in config.", "Not Found", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -1534,7 +1534,7 @@ namespace GW2FOX
                 }
                 else
                 {
-                    SaveTextToFile("", "Meta");
+                    SaveTextToFile(GlobalVariables.DEFAULT_META, "Meta");
                     Meta_Click(sender, e);
                     // MessageBox.Show($"Meta section not found in config.", "Not Found", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
@@ -1690,7 +1690,7 @@ namespace GW2FOX
                 else
                 {
                     //This will create a new section
-                    SaveTextToFile("", "World");
+                    SaveTextToFile(GlobalVariables.DEFAULT_WORLD, "World");
                     World_Click(sender, e);   
                     // MessageBox.Show($"World section not found in config.", "Not Found", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
@@ -1749,7 +1749,7 @@ namespace GW2FOX
                 }
                 else
                 {
-                    SaveTextToFile("", "Mixed");
+                    SaveTextToFile(GlobalVariables.DEFAULT_MIXED, "Mixed");
                     Mixed_Click(sender, e);
                     // MessageBox.Show($"Mixed section not found in config.", "Not Found", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }

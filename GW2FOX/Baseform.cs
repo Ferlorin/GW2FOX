@@ -83,12 +83,12 @@ namespace GW2FOX
             }
         }
 
-        protected void SaveTextToFile(string textToSave, string sectionHeader)
+        protected static void SaveTextToFile(string textToSave, string sectionHeader)
         {
             var headerToUse = sectionHeader;
-            if (headerToUse.EndsWith(":"))
+            if (headerToUse.EndsWith(':'))
             {
-                headerToUse = headerToUse.Substring(0, headerToUse.Length - 1);
+                headerToUse = headerToUse[..^1];
             }
 
             try
@@ -165,7 +165,8 @@ namespace GW2FOX
             Console.WriteLine($"Exception in {methodName}: {ex}");
         }
 
-        private void LoadTextFromConfig(string sectionHeader, TextBox textBox, string configText)
+        private void LoadTextFromConfig(string sectionHeader, TextBox textBox, string configText,
+            string defaultToInsert)
         {
             // Suchmuster für den Abschnitt und den eingeschlossenen Text in Anführungszeichen
             string pattern = $@"{sectionHeader}\s*""([^""]*)""";
@@ -181,9 +182,9 @@ namespace GW2FOX
             }
             else
             {
-                SaveTextToFile("", sectionHeader);
+                SaveTextToFile(defaultToInsert, sectionHeader);
                 configText = File.ReadAllText(FILE_PATH);
-                LoadTextFromConfig(sectionHeader, textBox, configText);
+                LoadTextFromConfig(sectionHeader, textBox, configText, defaultToInsert);
                 // Muster wurde nicht gefunden
                 // MessageBox.Show($"Das Muster '{sectionHeader}' wurde in der Konfigurationsdatei nicht gefunden.", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -230,24 +231,38 @@ namespace GW2FOX
                     string configText = File.ReadAllText(FILE_PATH);
 
                     // Laden von Runinfo
-                    LoadTextFromConfig("Runinfo:", Runinfo, configText);
+                    LoadTextFromConfig("Runinfo:", Runinfo, configText, DEFAULT_RUN_INFO);
 
                     // Laden von Squadinfo
-                    LoadTextFromConfig("Squadinfo:", Squadinfo, configText);
+                    LoadTextFromConfig("Squadinfo:", Squadinfo, configText, DEFAULT_SQUAD_INFO);
 
                     // Laden von Guild
-                    LoadTextFromConfig("Guild:", Guild, configText);
+                    LoadTextFromConfig("Guild:", Guild, configText, DEFAULT_GUILD);
 
                     // Laden von Welcome
-                    LoadTextFromConfig("Welcome:", Welcome, configText);
+                    LoadTextFromConfig("Welcome:", Welcome, configText, DEFAULT_WELCOME);
 
                     // Laden von Symbols
-                    LoadTextFromConfig("Symbols:", Symbols, configText);
+                    LoadTextFromConfig("Symbols:", Symbols, configText, DEFAULT_SYMBOLS);
                 }
                 else
                 {
-                    // Die Konfigurationsdatei existiert nicht
-                    MessageBox.Show("Die Konfigurationsdatei 'config.txt' wurde nicht gefunden.", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    
+                    Console.WriteLine($"Config file does not exist. Will try to create it");
+                    try
+                    {
+                        var fileStream = File.Create(FILE_PATH);
+                        fileStream.Close();
+                        LoadConfigText(Runinfo, Squadinfo, Guild, Welcome, Symbols);
+                    }
+                    catch (Exception ex)
+                    {
+                        // Log or handle the exception, but don't call ReadConfigFile recursively
+                        Console.WriteLine($"Error creating config file: {ex.Message}");
+                        throw; // Re-throw the exception to prevent infinite recursion
+                    }
+                    // // Die Konfigurationsdatei existiert nicht
+                    // MessageBox.Show("Die Konfigurationsdatei 'config.txt' wurde nicht gefunden.", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)
