@@ -21,7 +21,7 @@ namespace GW2FOX
 
                 AddBossEvent("The frozen Maw", "01:15:00", "WBs");
                 AddBossEvent("The frozen Maw", "03:15:00", "WBs");
-                AddBossEvent("The frozen Maw", "04:15:00", "WBs");
+                AddBossEvent("The frozen Maw", "05:15:00", "WBs");
                 AddBossEvent("The frozen Maw", "07:15:00", "WBs");
                 AddBossEvent("The frozen Maw", "09:15:00", "WBs");
                 AddBossEvent("The frozen Maw", "11:15:00", "WBs");
