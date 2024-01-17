@@ -1396,6 +1396,16 @@ namespace GW2FOX
                     {
                         var fileStream = File.Create(GlobalVariables.FILE_PATH);
                         fileStream.Close();
+                        SaveTextToFile(GlobalVariables.DEFAULT_BOSSES, "Bosses");
+                        SaveTextToFile(GlobalVariables.DEFAULT_META, "Meta");
+                        SaveTextToFile(GlobalVariables.DEFAULT_WORLD, "World");
+                        SaveTextToFile(GlobalVariables.DEFAULT_MIXED, "Mixed");
+                        SaveTextToFile(GlobalVariables.DEFAULT_GUILD, "Guild");
+                        SaveTextToFile(GlobalVariables.DEFAULT_RUN_INFO, "Runinfo");
+                        SaveTextToFile(GlobalVariables.DEFAULT_SQUAD_INFO, "Squadinfo");
+                        SaveTextToFile(GlobalVariables.DEFAULT_WELCOME, "Welcome");
+                        SaveTextToFile(GlobalVariables.DEFAULT_SYMBOLS, "Symbols");
+                        
                         return ReadConfigFile();
                     }
                     catch (Exception ex)

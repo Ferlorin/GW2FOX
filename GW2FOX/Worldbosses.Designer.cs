@@ -178,7 +178,7 @@
             Runinfo.ScrollBars = ScrollBars.Vertical;
             Runinfo.Size = new Size(350, 100);
             Runinfo.TabIndex = 1;
-            Runinfo.Text = "≪Meta -Train» with the old [FOX]";
+            Runinfo.Text = GlobalVariables.DEFAULT_RUN_INFO; //"≪Meta -Train» with the old [FOX]";
             // 
             // Squadinfo
             // 
@@ -190,7 +190,7 @@
             Squadinfo.ScrollBars = ScrollBars.Vertical;
             Squadinfo.Size = new Size(350, 100);
             Squadinfo.TabIndex = 2;
-            Squadinfo.Text = resources.GetString("Squadinfo.Text");
+            Squadinfo.Text = GlobalVariables.DEFAULT_RUN_INFO; //resources.GetString("Squadinfo.Text");
             // 
             // Guild
             // 
@@ -202,7 +202,7 @@
             Guild.ScrollBars = ScrollBars.Vertical;
             Guild.Size = new Size(350, 100);
             Guild.TabIndex = 3;
-            Guild.Text = "☠ Young or old [FOX], we take every stray. Humor, respect and fun at the game are what distinguish us. No Obligations! Infos: wsp me or https://gw2-hub.000webhostapp.com ☻";
+            Guild.Text = GlobalVariables.DEFAULT_GUILD;
             // 
             // Welcome
             // 
@@ -214,7 +214,9 @@
             Welcome.ScrollBars = ScrollBars.Vertical;
             Welcome.Size = new Size(350, 100);
             Welcome.TabIndex = 4;
-            Welcome.Text = "Welcome to the FOXhole. Read the Message of the Day for Infos - Questions, ask us! Guides & Tools on our Homepage: https://gw2-hub.000webhostapp.com";
+            
+            Welcome.Text = GlobalVariables.DEFAULT_WELCOME;
+            // Welcome.Text = "Welcome to the FOXhole. Read the Message of the Day for Infos - Questions, ask us! Guides & Tools on our Homepage: https://gw2-hub.000webhostapp.com";
             // 
             // Symbols
             // 
@@ -225,7 +227,8 @@
             Symbols.ScrollBars = ScrollBars.Vertical;
             Symbols.Size = new Size(434, 175);
             Symbols.TabIndex = 5;
-            Symbols.Text = "☠ ★ ☣ ☮ ☢ ♪ ☜ ☞ ┌ ∩ ┐ ( ●̮̃ • ) ۶ ( • ◡ • ) ♋ ☿ ♀ ♂ ☀ ☁ ☂ ☃ ☄ ☾ ☽ ☇ ☉ ☐ ☒ ☑ ☝ ☚ • ☟ ☆ ♔ ♕ ♖ ♗ ♘ ♙ ♚ ♛ ♜ ♝ ♞ ♟ † ☨ ☥ ☦ ☓ ☩ ☯ ☧ ☬ ☸ ♁ ♆ ☭ ✯ ☪ ☫ ✡ © ™ ® ☕ ☎ ☻ ♥ ⏰ 凸";
+
+            Symbols.Text = GlobalVariables.DEFAULT_SYMBOLS; //"☠ ★ ☣ ☮ ☢ ♪ ☜ ☞ ┌ ∩ ┐ ( ●̮̃ • ) ۶ ( • ◡ • ) ♋ ☿ ♀ ♂ ☀ ☁ ☂ ☃ ☄ ☾ ☽ ☇ ☉ ☐ ☒ ☑ ☝ ☚ • ☟ ☆ ♔ ♕ ♖ ♗ ♘ ♙ ♚ ♛ ♜ ♝ ♞ ♟ † ☨ ☥ ☦ ☓ ☩ ☯ ☧ ☬ ☸ ♁ ♆ ☭ ✯ ☪ ☫ ✡ © ™ ® ☕ ☎ ☻ ♥ ⏰ 凸";
             // 
             // button1
             // 
