@@ -8,6 +8,9 @@
         internal static List<BossEvent> Events = new List<BossEvent>();
         internal static List<BossEventGroup> BossEventGroups = new List<BossEventGroup>();
 
+        internal static int NEXT_RUNS_TO_SHOW = 2;
+        internal static int PREVIOUS_RUNS_TO_SHOW = 1;
+
         static BossTimings()
         {
             SetBossListFromConfig_Bosses();
@@ -800,13 +803,13 @@
                 {
                     return Timings
                         .Select(bossEvent => new BossEventRun(bossEvent.BossName, bossEvent.Timing, bossEvent.Category, GlobalVariables.CURRENT_DATE_TIME.Date.Add(new TimeSpan(24, 0, 0)) + bossEvent.Timing))
-                        .Take(2)
+                        .Take(NEXT_RUNS_TO_SHOW)
                         .ToList();
                 }
 
                 return nextTimings
                     .Select(bossEvent => new BossEventRun(bossEvent.BossName, bossEvent.Timing, bossEvent.Category, GlobalVariables.CURRENT_DATE_TIME.Date + bossEvent.Timing))
-                    .Take(2)
+                    .Take(NEXT_RUNS_TO_SHOW)
                     .ToList();
             }
 
@@ -815,7 +818,7 @@
                 return Timings
                     .Where(bossEvent => bossEvent.Timing > GlobalVariables.CURRENT_TIME.Subtract(new TimeSpan(0, 14, 59)) && bossEvent.Timing < GlobalVariables.CURRENT_TIME)
                     .Select(bossEvent => new BossEventRun(bossEvent.BossName, bossEvent.Timing, bossEvent.Category, GlobalVariables.CURRENT_DATE_TIME.Date + bossEvent.Timing))
-                    .Take(1)
+                    .Take(PREVIOUS_RUNS_TO_SHOW)
                     .ToList();
             }
             
