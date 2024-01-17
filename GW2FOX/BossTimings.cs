@@ -1,14 +1,12 @@
-﻿using System;
-using System.IO;
-
-namespace GW2FOX
+﻿namespace GW2FOX
 {
+    
     public static class BossTimings
     {
         public static Dictionary<string, List<BossEvent>> BossEvents { get; } = new Dictionary<string, List<BossEvent>>();
-        private static string filePath = "config.txt";
         public static List<string> BossList23 { get; set; } = new List<string>();
         internal static List<BossEvent> Events = new List<BossEvent>();
+        internal static List<BossEventGroup> BossEventGroups = new List<BossEventGroup>();
 
         static BossTimings()
         {
@@ -676,6 +674,13 @@ namespace GW2FOX
                 AddBossEvent("Convergences", "20:30:00", "SotO");
                 AddBossEvent("Convergences", "23:30:00", "SotO");
 
+
+                BossEventGroups = Events.GroupBy(bossEvent =>
+                            new { bossEvent.BossName, bossEvent.Category },
+                        (key, g) =>
+                            new BossEventGroup(key.BossName, key.Category, g.ToList())
+                    )
+                    .ToList();
             }
         }
 
@@ -686,7 +691,7 @@ namespace GW2FOX
             try
             {
                 // Vorhandenen Inhalt aus der Datei lesen
-                string[] lines = File.ReadAllLines(filePath);
+                string[] lines = File.ReadAllLines(GlobalVariables.FILE_PATH);
 
                 // Index der Zeile mit dem Bossnamen finden
                 int bossIndex = -1;
@@ -761,19 +766,87 @@ namespace GW2FOX
             Events.Add(new BossEvent(bossName, timing, category));
         }
 
+        public class BossEventGroup
+        {
+
+            public string BossName { get; }
+            public string Category { get; }
+            public TimeSpan Duration { get; set; } 
+            public List<BossEvent> Timings = new List<BossEvent>();
+            
+            
+
+            public BossEventGroup(string bossName, string bossCategory, List<BossEvent> events)
+            {
+                BossName = bossName;
+                Category = bossCategory;
+                Timings = events
+                    .Where(bossEvent => bossEvent.BossName.Equals(BossName))
+                    .OrderBy(span => span.Timing)
+                    .ToList();
+                // BossEvent? firstEvent = events.FirstOrDefault();
+                // if (firstEvent != null)
+                // {
+                //     Category = firstEvent.Category;
+                // }
+            }
+
+            public List<BossEventRun> GetNextRuns()
+            {
+                List<BossEvent> nextTimings = Timings
+                    .Where(bossEvent => bossEvent.Timing > GlobalVariables.CURRENT_TIME)
+                    .ToList();
+                if (nextTimings.Count == 0)
+                {
+                    return Timings
+                        .Select(bossEvent => new BossEventRun(bossEvent.BossName, bossEvent.Timing, bossEvent.Category, GlobalVariables.CURRENT_DATE_TIME.Date.Add(new TimeSpan(24, 0, 0)) + bossEvent.Timing))
+                        .Take(2)
+                        .ToList();
+                }
+
+                return nextTimings
+                    .Select(bossEvent => new BossEventRun(bossEvent.BossName, bossEvent.Timing, bossEvent.Category, GlobalVariables.CURRENT_DATE_TIME.Date + bossEvent.Timing))
+                    .Take(2)
+                    .ToList();
+            }
+
+            public List<BossEventRun> GetPreviousRuns()
+            {
+                return Timings
+                    .Where(bossEvent => bossEvent.Timing > GlobalVariables.CURRENT_TIME.Subtract(new TimeSpan(0, 14, 59)) && bossEvent.Timing < GlobalVariables.CURRENT_TIME)
+                    .Select(bossEvent => new BossEventRun(bossEvent.BossName, bossEvent.Timing, bossEvent.Category, GlobalVariables.CURRENT_DATE_TIME.Date + bossEvent.Timing))
+                    .Take(1)
+                    .ToList();
+            }
+            
+        }
+
         public class BossEvent
         {
             public string BossName { get; }
             public TimeSpan Timing { get; }
             public string Category { get; }
-            public TimeSpan Duration { get; set; } 
+            public TimeSpan Duration { get; set; }
 
-            public BossEvent(string bossName, string timing, string category)
+            public BossEvent(string bossName, string timing, string category) : this(bossName, TimeSpan.Parse(timing),
+                category)
+            {
+            }
+
+            public BossEvent(string bossName, TimeSpan timing, string category)
             {
                 BossName = bossName;
-                Timing = TimeSpan.Parse(timing);
+                Timing = timing;
                 Category = category;
             }
+        }
+
+
+        public class BossEventRun(string bossName, TimeSpan timing, string category, DateTime nextRunTime)
+            : BossEvent(bossName, timing, category)
+        {
+            public DateTime NextRunTime { get; set; } = nextRunTime;
+            
         }
     }
 }

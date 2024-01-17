@@ -1,14 +1,20 @@
+using System.Diagnostics;
+using static GW2FOX.BossTimings;
+using static GW2FOX.GlobalVariables;
+
 namespace GW2FOX
 {
     public class BaseForm : Form
     {
-        private Form previousPage;
+
         protected Overlay overlay;
         protected ListView customBossList;
         protected BossTimer bossTimer;
-        private GlobalKeyboardHook _globalKeyboardHook; // Füge dies hinzu
+        private GlobalKeyboardHook? _globalKeyboardHook; // Füge dies hinzu
 
         public static ListView CustomBossList { get; private set; } = new ListView();
+        
+        
 
         public BaseForm()
         {
@@ -33,11 +39,12 @@ namespace GW2FOX
 
         private void GlobalKeyboardHook_KeyPressed(object sender, KeyPressedEventArgs e)
         {
-            // Überprüfe, ob "ALT + T" gedrückt wurde
-            if (Control.ModifierKeys == Keys.Alt && e.Key == Keys.T)
+            if (ModifierKeys == Keys.Alt && e.Key == Keys.T)
             {
-                // Rufe die Timer_Click-Methode auf
-                Timer_Click(sender, e);
+                if (this is Main)
+                {
+                    Timer_Click(sender, e);
+                }
             }
         }
 
@@ -64,45 +71,92 @@ namespace GW2FOX
 
             bossTimer.Start();
             overlay.Show();
-
         }
 
         protected void ShowAndHideForm(Form newForm)
         {
-
+            newForm.Owner = this;
             newForm.Show();
-            this.Hide();
+            if (this is not Worldbosses)
+            {
+                Dispose();
+            }
         }
 
+        protected void SaveTextToFile(string textToSave, string sectionHeader)
+        {
+            var headerToUse = sectionHeader;
+            if (headerToUse.EndsWith(":"))
+            {
+                headerToUse = headerToUse.Substring(0, headerToUse.Length - 1);
+            }
+
+            try
+            {
+                // Vorhandenen Inhalt aus der Datei lesen
+                string[] lines = File.ReadAllLines(FILE_PATH);
+
+                // Index der Zeile mit dem angegebenen Header finden
+                int headerIndex = -1;
+                for (int i = 0; i < lines.Length; i++)
+                {
+                    if (lines[i].StartsWith(headerToUse + ":"))
+                    {
+                        headerIndex = i;
+                        break;
+                    }
+                }
+
+                // Wenn der Header gefunden wird, den Text aktualisieren
+                if (headerIndex != -1)
+                {
+                    lines[headerIndex] = $"{headerToUse}: \"{textToSave}\"";
+                }
+                else
+                {
+                    // Wenn der Header nicht gefunden wird, eine neue Zeile hinzufügen
+                    lines = lines.Concat(new[] { $"{headerToUse}: \"{textToSave}\"" }).ToArray();
+                }
+
+                // Aktualisierten Inhalt zurück in die Datei schreiben
+                File.WriteAllLines(FILE_PATH, lines);
+
+                MessageBox.Show($"{headerToUse} saved.", "Saved!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error {headerToUse}: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
 
         protected void AdjustWindowSize()
         {
             Screen currentScreen = Screen.FromControl(this);
             Rectangle workingArea = currentScreen.WorkingArea;
 
-            if (this.Width > workingArea.Width || this.Height > workingArea.Height)
+            if (Width > workingArea.Width || Height > workingArea.Height)
             {
-                this.Size = new Size(
-                    Math.Min(this.Width, workingArea.Width),
-                    Math.Min(this.Height, workingArea.Height)
+                Size = new Size(
+                    Math.Min(Width, workingArea.Width),
+                    Math.Min(Height, workingArea.Height)
                 );
 
-                this.Location = new Point(
-                    workingArea.Left + (workingArea.Width - this.Width) / 2,
-                    workingArea.Top + (workingArea.Height - this.Height) / 2
+                Location = new Point(
+                    workingArea.Left + (workingArea.Width - Width) / 2,
+                    workingArea.Top + (workingArea.Height - Height) / 2
                 );
             }
 
-            if (this.Height > workingArea.Height)
+            if (Height > workingArea.Height)
             {
-                this.Height = workingArea.Height;
+                Height = workingArea.Height;
             }
 
-            if (this.Bottom > workingArea.Bottom)
+            if (Bottom > workingArea.Bottom)
             {
-                this.Location = new Point(
-                    this.Left,
-                    Math.Max(workingArea.Top, workingArea.Bottom - this.Height)
+                Location = new Point(
+                    Left,
+                    Math.Max(workingArea.Top, workingArea.Bottom - Height)
                 );
             }
         }
@@ -111,13 +165,110 @@ namespace GW2FOX
             Console.WriteLine($"Exception in {methodName}: {ex}");
         }
 
+        private void LoadTextFromConfig(string sectionHeader, TextBox textBox, string configText)
+        {
+            // Suchmuster für den Abschnitt und den eingeschlossenen Text in Anführungszeichen
+            string pattern = $@"{sectionHeader}\s*""([^""]*)""";
+
+            // Mit einem regulären Ausdruck nach dem Muster suchen
+            var match = System.Text.RegularExpressions.Regex.Match(configText, pattern);
+
+            // Überprüfen, ob ein Treffer gefunden wurde
+            if (match.Success)
+            {
+                // Den extrahierten Text in das Textfeld einfügen
+                textBox.Text = match.Groups[1].Value;
+            }
+            else
+            {
+                SaveTextToFile("", sectionHeader);
+                configText = File.ReadAllText(FILE_PATH);
+                LoadTextFromConfig(sectionHeader, textBox, configText);
+                // Muster wurde nicht gefunden
+                // MessageBox.Show($"Das Muster '{sectionHeader}' wurde in der Konfigurationsdatei nicht gefunden.", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        
+        
+        protected void BringGw2ToFront()
+        {
+            try
+            { 
+                // Specify the process name without the file extension
+                string processName = "Gw2-64";
+
+                // Get the processes by name
+                Process[] processes = Process.GetProcessesByName(processName);
+
+                if (processes.Length > 0)
+                {
+                    // Bring the first instance to the foreground
+                    IntPtr mainWindowHandle = processes[0].MainWindowHandle;
+                    ShowWindow(mainWindowHandle, SW_RESTORE);
+                    SetForegroundWindow(mainWindowHandle);
+                }
+                else
+                {
+                    MessageBox.Show("Gw2-64.exe is not running.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error bringing Gw2-64.exe to the foreground: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        
+        protected void LoadConfigText(TextBox Runinfo, TextBox Squadinfo, TextBox Guild, TextBox Welcome, TextBox Symbols)
+        {
+            try
+            {
+
+                // Überprüfen, ob die Datei existiert
+                if (File.Exists(FILE_PATH))
+                {
+                    // Den gesamten Text aus der Datei lesen
+                    string configText = File.ReadAllText(FILE_PATH);
+
+                    // Laden von Runinfo
+                    LoadTextFromConfig("Runinfo:", Runinfo, configText);
+
+                    // Laden von Squadinfo
+                    LoadTextFromConfig("Squadinfo:", Squadinfo, configText);
+
+                    // Laden von Guild
+                    LoadTextFromConfig("Guild:", Guild, configText);
+
+                    // Laden von Welcome
+                    LoadTextFromConfig("Welcome:", Welcome, configText);
+
+                    // Laden von Symbols
+                    LoadTextFromConfig("Symbols:", Symbols, configText);
+                }
+                else
+                {
+                    // Die Konfigurationsdatei existiert nicht
+                    MessageBox.Show("Die Konfigurationsdatei 'config.txt' wurde nicht gefunden.", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                // Fehler beim Laden der Konfigurationsdatei
+                MessageBox.Show($"Fehler beim Laden der Konfigurationsdatei: {ex.Message}", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
             bossTimer.Dispose(); // Dispose of the BossTimer first
             base.OnFormClosing(e);
             Application.Exit();
         }
-
+        
+        protected void Back_Click(object sender, EventArgs e)
+        {
+            Owner.Show();
+            Dispose();
+        }
 
 
         public class BossTimer : IDisposable
@@ -128,36 +279,30 @@ namespace GW2FOX
 
             private readonly ListView bossList;
             private readonly TimeZoneInfo mezTimeZone;
-            private readonly System.Windows.Forms.Timer timer; // Qualifiziere den Timer mit dem Namespace
+            private readonly System.Threading.Timer timer;
 
             public BossTimer(ListView bossList)
             {
                 this.bossList = bossList;
-                this.mezTimeZone = TimeZoneInfo.FindSystemTimeZoneById(TimeZoneId);
-                this.timer = new System.Windows.Forms.Timer(); // Qualifiziere den Timer mit dem Namespace
-                timer.Tick += TimerCallback;
-                timer.Interval = 1000;
+                mezTimeZone = TimeZoneInfo.FindSystemTimeZoneById(TimeZoneId);
+                timer = new System.Threading.Timer(TimerCallback, null, 0, 1000);
             }
 
             public void Start()
             {
-                timer.Enabled = true; // Starte den Timer
+                timer.Change(0, 1000);
             }
 
             public void Stop()
             {
-                timer.Enabled = false; // Stoppe den Timer
+                timer.Change(Timeout.Infinite, Timeout.Infinite);
             }
 
-            private void TimerCallback(object? sender, EventArgs e)
+            private void TimerCallback(object? state)
             {
                 try
                 {
-                    if (!bossList.IsHandleCreated) return; // Check before accessing
-                    bossList.BeginInvoke((MethodInvoker)delegate
-                    {
-                        UpdateBossList();
-                    });
+                    UpdateBossList();
                 }
                 catch (Exception ex)
                 {
@@ -174,36 +319,50 @@ namespace GW2FOX
                 {
                     try
                     {
-                        List<string> bossNamesFromConfig = BossTimings.BossList23;
+                        // Read the boss names from the configuration file
+                        List<string> bossNamesFromConfig = BossList23;
 
                         DateTime currentTimeUtc = DateTime.UtcNow;
                         DateTime currentTimeMez = TimeZoneInfo.ConvertTimeFromUtc(currentTimeUtc, mezTimeZone);
                         TimeSpan currentTime = currentTimeMez.TimeOfDay;
 
-                        var upcomingBosses = BossTimings.Events
-                            .Where(bossEvent =>
-                                bossNamesFromConfig.Contains(bossEvent.BossName) &&
-                                bossEvent.Timing > currentTime && bossEvent.Timing < currentTime.Add(new TimeSpan(8, 0, 0)))
-                            .ToList();
 
-                        var pastBosses = BossTimings.Events
-                            .Where(bossEvent =>
-                                bossNamesFromConfig.Contains(bossEvent.BossName) &&
-                                bossEvent.Timing > currentTime.Subtract(new TimeSpan(0, 14, 59)) && bossEvent.Timing < currentTime)
+                        var upcomingBosses = BossEventGroups
+                            .Where(bossEventGroup => bossNamesFromConfig.Contains(bossEventGroup.BossName))
+                            .SelectMany(bossEventGroup => bossEventGroup.GetNextRuns())
                             .ToList();
+                            
+                            // Events
+                            // .Where(bossEvent =>
+                            //     bossNamesFromConfig.Contains(bossEvent.BossName) &&
+                            //     bossEvent.Timing > currentTime && bossEvent.Timing < currentTime.Add(new TimeSpan(24, 0, 0)))
+                            // .ToList();
 
+                        var pastBosses =  BossEventGroups
+                                .Where(bossEventGroup => bossNamesFromConfig.Contains(bossEventGroup.BossName))
+                                .SelectMany(bossEventGroup => bossEventGroup.GetPreviousRuns())
+                                .ToList();
+                        // BossTimings.Events
+                        //     .Where(bossEvent =>
+                        //         bossNamesFromConfig.Contains(bossEvent.BossName) &&
+                        //         bossEvent.Timing > currentTime.Subtract(new TimeSpan(0, 14, 59)) && bossEvent.Timing < currentTime)
+                        //     .ToList();
+
+                        // Combine all bosses
                         var allBosses = upcomingBosses.Concat(pastBosses).ToList();
 
                         var listViewItems = new List<ListViewItem>();
+
+                        // Use a HashSet to keep track of added boss names
                         HashSet<string> addedBossNames = new HashSet<string>();
 
                         allBosses.Sort((bossEvent1, bossEvent2) =>
                         {
-                            DateTime adjustedTiming1 = currentTimeMez.Date + bossEvent1.Timing;
-                            DateTime adjustedTiming2 = currentTimeMez.Date + bossEvent2.Timing;
+                            // DateTime adjustedTiming1 = currentTimeMez.Date + bossEvent1.Timing;
+                            // DateTime adjustedTiming2 = currentTimeMez.Date + bossEvent2.Timing;
 
                             // Compare the adjusted timings for the next day
-                            int adjustedTimingComparison = adjustedTiming1.CompareTo(adjustedTiming2);
+                            int adjustedTimingComparison = bossEvent1.NextRunTime.CompareTo(bossEvent2.NextRunTime);
                             if (adjustedTimingComparison != 0) return adjustedTimingComparison;
 
                             // If timings are equal, sort by ascending durations
@@ -219,12 +378,12 @@ namespace GW2FOX
 
                         foreach (var bossEvent in allBosses)
                         {
-                            DateTime adjustedTiming = GetAdjustedTiming(currentTimeMez, bossEvent.Timing);
+                            // DateTime adjustedTiming = GetAdjustedTiming(currentTimeMez, bossEvent.Timing);
 
                             // Check if the boss with the adjusted timing is already added to avoid duplicates
-                            if (addedBossNames.Add($"{bossEvent.BossName}_{adjustedTiming}"))
+                            if (addedBossNames.Add($"{bossEvent.BossName}_{bossEvent.NextRunTime}"))
                             {
-                                if (pastBosses.Contains(bossEvent) && currentTimeMez - adjustedTiming < new TimeSpan(0, 14, 59))
+                                if (pastBosses.Contains(bossEvent) && currentTimeMez - bossEvent.NextRunTime < new TimeSpan(0, 14, 59))
                                 {
                                     // Display only the boss name for past events within the time span of 00:14:59
                                     var listViewItem = new ListViewItem(new[] { bossEvent.BossName });
@@ -234,7 +393,7 @@ namespace GW2FOX
                                 }
                                 else
                                 {
-                                    TimeSpan elapsedTime = adjustedTiming - currentTimeMez;
+                                    TimeSpan elapsedTime = bossEvent.NextRunTime - currentTimeMez;
 
                                     // Änderung der Formatierung für den Countdown basierend auf der vergangenen Zeitspanne
                                     TimeSpan countdownTime = elapsedTime;
@@ -257,6 +416,8 @@ namespace GW2FOX
                                     }
 
                                     listViewItems.Add(listViewItem);
+
+
                                 }
                             }
                         }
@@ -270,26 +431,24 @@ namespace GW2FOX
                 });
             }
 
-            private bool HasSameTimeAndCategory(List<BossEvent> allBosses, BossEvent currentBossEvent)
+            private bool HasSameTimeAndCategory(List<BossEventRun> allBosses, BossEventRun currentBossEvent)
             {
                 return allBosses.Any(bossEvent =>
                     bossEvent != currentBossEvent &&
-                    bossEvent.Timing == currentBossEvent.Timing &&
+                    bossEvent.NextRunTime == currentBossEvent.NextRunTime &&
                     bossEvent.Category == currentBossEvent.Category &&
                     bossEvent.BossName != currentBossEvent.BossName);
             }
 
+
+
             private DateTime GetAdjustedTiming(DateTime currentTimeMez, TimeSpan bossTiming)
             {
                 DateTime adjustedTiming = currentTimeMez.Date + bossTiming;
-
-                while (adjustedTiming < currentTimeMez)
-                {
-                    adjustedTiming = adjustedTiming.AddDays(1);
-                }
-
                 return adjustedTiming;
             }
+
+
 
             private void UpdateListViewItems(List<ListViewItem> listViewItems)
             {
@@ -318,12 +477,12 @@ namespace GW2FOX
                 // Consider logging the exception with more details
             }
 
-            private TimeSpan GetRemainingTime(DateTime currentTimeMez, DateTime adjustedTiming, BossEvent bossEvent)
+            private TimeSpan GetRemainingTime(DateTime currentTimeMez, DateTime adjustedTiming, BossEventRun bossEvent)
             {
                 return adjustedTiming - currentTimeMez;
             }
 
-            private static Color GetFontColor(BossEvent bossEvent, List<BossEvent> pastBosses)
+            private static Color GetFontColor(BossEventRun bossEvent, List<BossEventRun> pastBosses)
             {
                 Color fontColor;
 
@@ -358,13 +517,14 @@ namespace GW2FOX
                         break;
                 }
 
-                if (pastBosses.Any(pastBoss => pastBoss.BossName == bossEvent.BossName && pastBoss.Timing == bossEvent.Timing))
+                if (pastBosses.Any(pastBoss => pastBoss.BossName == bossEvent.BossName && pastBoss.NextRunTime == bossEvent.NextRunTime))
                 {
                     fontColor = PastBossFontColor;
                 }
 
                 return fontColor;
             }
+
 
             public void Dispose()
             {

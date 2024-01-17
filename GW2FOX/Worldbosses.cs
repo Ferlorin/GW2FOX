@@ -5,7 +5,6 @@ namespace GW2FOX
 {
     public partial class Worldbosses : BaseForm
     {
-        private string filePath = "config.txt";
         public static ListView? CustomBossList { get; private set; }
         public static Dictionary<string, CheckBox> bossCheckBoxMap;
 
@@ -33,83 +32,12 @@ namespace GW2FOX
 
 
 
-        private void SaveTextToFile(string textToSave, string sectionHeader)
-        {
-            try
-            {
-                // Vorhandenen Inhalt aus der Datei lesen
-                string[] lines = File.ReadAllLines(filePath);
-
-                // Index der Zeile mit dem angegebenen Header finden
-                int headerIndex = -1;
-                for (int i = 0; i < lines.Length; i++)
-                {
-                    if (lines[i].StartsWith(sectionHeader + ":"))
-                    {
-                        headerIndex = i;
-                        break;
-                    }
-                }
-
-                // Wenn der Header gefunden wird, den Text aktualisieren
-                if (headerIndex != -1)
-                {
-                    lines[headerIndex] = $"{sectionHeader}: \"{textToSave}\"";
-                }
-                else
-                {
-                    // Wenn der Header nicht gefunden wird, eine neue Zeile hinzufügen
-                    lines = lines.Concat(new[] { $"{sectionHeader}: \"{textToSave}\"" }).ToArray();
-                }
-
-                // Aktualisierten Inhalt zurück in die Datei schreiben
-                File.WriteAllLines(filePath, lines);
-
-                MessageBox.Show($"{sectionHeader} saved.", "Saved!", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error {sectionHeader}: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-        private void BringGw2ToFront()
-        {
-            try
-            {
-                // Specify the process name without the file extension
-                string processName = "Gw2-64";
-
-                // Get the processes by name
-                Process[] processes = Process.GetProcessesByName(processName);
-
-                if (processes.Length > 0)
-                {
-                    // Bring the first instance to the foreground
-                    IntPtr mainWindowHandle = processes[0].MainWindowHandle;
-                    ShowWindow(mainWindowHandle, SW_RESTORE);
-                    SetForegroundWindow(mainWindowHandle);
-                }
-                else
-                {
-                    MessageBox.Show("Gw2-64.exe is not running.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error bringing Gw2-64.exe to the foreground: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
+        
 
         // Constants for window handling
         const int SW_RESTORE = 9;
 
-        [DllImport("user32.dll")]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        private static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
-
-        [DllImport("user32.dll")]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        private static extern bool SetForegroundWindow(IntPtr hWnd);
+        
 
         private void Saverun_Click(object sender, EventArgs e)
         {
@@ -1393,7 +1321,6 @@ namespace GW2FOX
         {
             try
             {
-                string configFilePath = "config.txt";
 
                 // Holen Sie die ausgewählten Bosses
                 List<string> selectedBosses = GetSelectedBosses();
@@ -1437,7 +1364,7 @@ namespace GW2FOX
                 }
 
                 // Schreiben Sie die aktualisierten Zeilen zurück in die Datei
-                System.IO.File.WriteAllLines(configFilePath, existingLines);
+                File.WriteAllLines(GlobalVariables.FILE_PATH, existingLines);
 
                 UpdateBossUIBosses();
 
@@ -1455,20 +1382,19 @@ namespace GW2FOX
         {
             try
             {
-                string configFilePath = "config.txt";
 
                 // Check if the file exists
-                if (File.Exists(configFilePath))
+                if (File.Exists(GlobalVariables.FILE_PATH))
                 {
                     // Read all lines from the file
-                    return System.IO.File.ReadAllLines(configFilePath);
+                    return File.ReadAllLines(GlobalVariables.FILE_PATH);
                 }
                 else
                 {
                     Console.WriteLine($"Config file does not exist. Will try to create it");
                     try
                     {
-                        var fileStream = File.Create(configFilePath);
+                        var fileStream = File.Create(GlobalVariables.FILE_PATH);
                         fileStream.Close();
                         return ReadConfigFile();
                     }
@@ -1865,7 +1791,6 @@ namespace GW2FOX
             ListView bossList = CustomBossList;
             if (bossList != null)
             {
-                string configFilePath = "config.txt"; // Setzen Sie hier den richtigen Dateipfad ein
                 BossTimer bossTimerInstance = new BossTimer(bossList);
                 bossTimerInstance.UpdateBossList();
             }

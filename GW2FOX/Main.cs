@@ -9,7 +9,7 @@ namespace GW2FOX
         public Main()
         {
             InitializeComponent();
-            this.Load += Main_Load;
+            Load += Main_Load;
             InitializeCustomBossList();
             InitializeBossTimerAndOverlay();
         }
@@ -39,13 +39,13 @@ namespace GW2FOX
         }
 
 
-        // Füge diese Methode hinzu, um Ausnahmen zu behandeln und Details anzuzeigen
+        // FÏŒge diese Methode hinzu, um Ausnahmen zu behandeln und Details anzuzeigen
         private void HandleException(Exception ex)
         {
             MessageBox.Show($"An error occurred: {ex.Message}\n\nStack Trace: {ex.StackTrace}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
-        private new void InitializeCustomBossList() // new hinzugefügt
+        private new void InitializeCustomBossList() // new hinzugefÏŒgt
         {
             customBossList = new ListView();
             customBossList.View = View.Details;

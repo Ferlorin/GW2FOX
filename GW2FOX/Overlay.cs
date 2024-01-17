@@ -10,7 +10,7 @@
         public Overlay(ListView listViewItems)
         {
             InitializeComponent();
-            if (this.Owner is BaseForm baseForm)
+            if (Owner is BaseForm baseForm)
             {
                 baseForm.UpdateCustomBossList(listViewItems);
             };
@@ -20,26 +20,26 @@
             overlayListView.ForeColor = Color.Black;
 
             // Konfiguriere das Overlay-Formular
-            this.BackColor = Color.Black;
-            this.TransparencyKey = Color.Black;
-            this.TopMost = true;
-            this.ShowInTaskbar = false;
-            this.StartPosition = FormStartPosition.Manual;
-            this.Opacity = 0.7;
-            this.MouseDown += OnMouseDown;
-            this.MouseMove += OnMouseMove;
-            this.Width = 235;
-            this.Height = 310;
-            this.AutoScroll = true;
+            BackColor = Color.Black;
+            TransparencyKey = Color.Black;
+            TopMost = true;
+            ShowInTaskbar = false;
+            StartPosition = FormStartPosition.Manual;
+            Opacity = 0.7;
+            MouseDown += OnMouseDown;
+            MouseMove += OnMouseMove;
+            Width = 235;
+            Height = 310;
+            AutoScroll = true;
 
 
             Panel listViewPanel = new Panel();
             listViewPanel.BackColor = Color.Transparent;
-            this.FormBorderStyle = FormBorderStyle.Fixed3D;
+            FormBorderStyle = FormBorderStyle.Fixed3D;
 
             // Berechne die Größe des listViewPanel
-            int panelWidth = (int)(this.Width);
-            int panelHeight = (int)(this.Height * 10);
+            int panelWidth = (int)(Width);
+            int panelHeight = (int)(Height * 10);
             listViewPanel.Size = new Size(panelWidth, panelHeight);
 
             listViewPanel.Location = new Point(0, 0);
@@ -48,7 +48,7 @@
 
             overlayListView.ForeColor = Color.Black;
             overlayListView.Font = new Font("Segoe UI", 10, FontStyle.Bold);
-            overlayListView.BackColor = this.BackColor;
+            overlayListView.BackColor = BackColor;
             overlayListView.View = View.Details;
             overlayListView.Location = new Point(0, 0);
             overlayListView.Width = listViewPanel.Width;
@@ -67,7 +67,7 @@
 
             // Füge die ListView zum ListView Panel hinzu
             listViewPanel.Controls.Add(overlayListView);
-            this.Controls.Add(listViewPanel);
+            Controls.Add(listViewPanel);
 
         }
 
@@ -99,7 +99,7 @@
         {
             if (e.Button == MouseButtons.Left)
             {
-                Point mousePos = Control.MousePosition;
+                Point mousePos = MousePosition;
                 mousePos.Offset(mouse_offset.X, mouse_offset.Y);
                 Location = mousePos;
             }
@@ -107,7 +107,7 @@
 
         public void CloseOverlay()
         {
-            this.Dispose();
+            Dispose();
         }
 
     }

@@ -11,7 +11,7 @@ namespace GW2FOX
         public Eye()
         {
             InitializeComponent();
-            LoadConfigText();
+            LoadConfigText(Runinfo, Squadinfo, Guild, Welcome, Symbols);
             // No need to re-create the TextBox here
             _ = LoadItemPriceInformation();
         }
@@ -20,12 +20,9 @@ namespace GW2FOX
         private string originPage;
 
         // Konstruktor, der den Ursprung der Seite als Parameter akzeptiert
-        public Eye(string origin)
+        public Eye(string origin) : this()
         {
-            InitializeComponent();
-            LoadConfigText();
             InitializeItemPriceTextBox();
-            _ = LoadItemPriceInformation();
 
             // Setze den Ursprung der Seite
             originPage = origin;
@@ -39,7 +36,7 @@ namespace GW2FOX
             Itempriceexeofzhaitan.AutoSize = true;
             Itempriceexeofzhaitan.ReadOnly = true;
             Itempriceexeofzhaitan.Location = new Point(/* Specify the X and Y coordinates */);
-            this.Controls.Add(Itempriceexeofzhaitan);
+            Controls.Add(Itempriceexeofzhaitan);
         }
 
 
@@ -92,82 +89,6 @@ namespace GW2FOX
                 throw new Exception($"Fehler beim Abrufen des Item-Preises: {ex.Message}");
             }
         }
-
-        private void LoadConfigText()
-        {
-            try
-            {
-                string configFilePath = "config.txt";
-
-                if (File.Exists(configFilePath))
-                {
-                    string configText = File.ReadAllText(configFilePath);
-
-                    LoadTextFromConfig("Runinfo:", Runinfo, configText);
-                    LoadTextFromConfig("Squadinfo:", Squadinfo, configText);
-                    LoadTextFromConfig("Guild:", Guild, configText);
-                    LoadTextFromConfig("Welcome:", Welcome, configText);
-                    LoadTextFromConfig("Symbols:", Symbols, configText);
-                }
-                else
-                {
-                    MessageBox.Show("Die Konfigurationsdatei 'config.txt' wurde nicht gefunden.", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Fehler beim Laden der Konfigurationsdatei: {ex.Message}", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void LoadTextFromConfig(string sectionHeader, TextBox textBox, string configText)
-        {
-            string pattern = $@"{sectionHeader}\s*""([^""]*)""";
-            var match = System.Text.RegularExpressions.Regex.Match(configText, pattern);
-
-            if (match.Success)
-            {
-                textBox.Text = match.Groups[1].Value;
-            }
-            else
-            {
-                MessageBox.Show($"Das Muster '{sectionHeader}' wurde in der Konfigurationsdatei nicht gefunden.", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void BringGw2ToFront()
-        {
-            try
-            {
-                string processName = "Gw2-64";
-                Process[] processes = Process.GetProcessesByName(processName);
-
-                if (processes.Length > 0)
-                {
-                    IntPtr mainWindowHandle = processes[0].MainWindowHandle;
-                    ShowWindow(mainWindowHandle, SW_RESTORE);
-                    SetForegroundWindow(mainWindowHandle);
-                }
-                else
-                {
-                    MessageBox.Show("Gw2-64.exe is not running.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error bringing Gw2-64.exe to the foreground: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        const int SW_RESTORE = 9;
-
-        [DllImport("user32.dll")]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        private static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
-
-        [DllImport("user32.dll")]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        private static extern bool SetForegroundWindow(IntPtr hWnd);
 
         
 
