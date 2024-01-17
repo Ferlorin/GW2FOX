@@ -2,11 +2,11 @@ namespace GW2FOX
 {
     public class BaseForm : Form
     {
-
+        private Form previousPage;
         protected Overlay overlay;
         protected ListView customBossList;
         protected BossTimer bossTimer;
-        private GlobalKeyboardHook _globalKeyboardHook;
+        private GlobalKeyboardHook _globalKeyboardHook; // Füge dies hinzu
 
         public static ListView CustomBossList { get; private set; } = new ListView();
 
@@ -33,8 +33,10 @@ namespace GW2FOX
 
         private void GlobalKeyboardHook_KeyPressed(object sender, KeyPressedEventArgs e)
         {
+            // Überprüfe, ob "ALT + T" gedrückt wurde
             if (Control.ModifierKeys == Keys.Alt && e.Key == Keys.T)
             {
+                // Rufe die Timer_Click-Methode auf
                 Timer_Click(sender, e);
             }
         }
@@ -57,24 +59,19 @@ namespace GW2FOX
 
         public void Timer_Click(object sender, EventArgs e)
         {
-            if (this is Main)
-            {
-                InitializeCustomBossList();
-                InitializeBossTimerAndOverlay();
+            InitializeCustomBossList();
+            InitializeBossTimerAndOverlay();
 
-                bossTimer.Start();
-                overlay.Show();
-            }
+            bossTimer.Start();
+            overlay.Show();
+
         }
 
         protected void ShowAndHideForm(Form newForm)
         {
-            newForm.Owner = this;
+
             newForm.Show();
-            if (this is not Worldbosses)
-            {
-                this.Dispose();
-            }
+            this.Hide();
         }
 
 
@@ -120,12 +117,7 @@ namespace GW2FOX
             base.OnFormClosing(e);
             Application.Exit();
         }
-        
-        protected void Back_Click(object sender, EventArgs e)
-        {
-            this.Owner.Show();
-            this.Dispose();
-        }
+
 
 
         public class BossTimer : IDisposable
@@ -136,35 +128,40 @@ namespace GW2FOX
 
             private readonly ListView bossList;
             private readonly TimeZoneInfo mezTimeZone;
-            private readonly System.Threading.Timer timer;
+            private readonly System.Windows.Forms.Timer timer; // Qualifiziere den Timer mit dem Namespace
 
             public BossTimer(ListView bossList)
             {
                 this.bossList = bossList;
                 this.mezTimeZone = TimeZoneInfo.FindSystemTimeZoneById(TimeZoneId);
-                this.timer = new System.Threading.Timer(TimerCallback, null, 0, 1000);
+                this.timer = new System.Windows.Forms.Timer(); // Qualifiziere den Timer mit dem Namespace
+                timer.Tick += TimerCallback;
+                timer.Interval = 1000;
             }
 
             public void Start()
             {
-                timer.Change(0, 1000);
+                timer.Enabled = true; // Starte den Timer
             }
 
             public void Stop()
             {
-                timer.Change(Timeout.Infinite, Timeout.Infinite);
+                timer.Enabled = false; // Stoppe den Timer
             }
 
-            private void TimerCallback(object? state)
+            private void TimerCallback(object? sender, EventArgs e)
             {
                 try
                 {
-                    UpdateBossList();
+                    if (!bossList.IsHandleCreated) return; // Check before accessing
+                    bossList.BeginInvoke((MethodInvoker)delegate
+                    {
+                        UpdateBossList();
+                    });
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"Exception in TimerCallback: {ex}");
-                    // Consider logging the exception
+                    HandleException(ex, "TimerCallback");
                 }
             }
 
@@ -177,7 +174,6 @@ namespace GW2FOX
                 {
                     try
                     {
-                        // Read the boss names from the configuration file
                         List<string> bossNamesFromConfig = BossTimings.BossList23;
 
                         DateTime currentTimeUtc = DateTime.UtcNow;
@@ -187,7 +183,7 @@ namespace GW2FOX
                         var upcomingBosses = BossTimings.Events
                             .Where(bossEvent =>
                                 bossNamesFromConfig.Contains(bossEvent.BossName) &&
-                                bossEvent.Timing > currentTime && bossEvent.Timing < currentTime.Add(new TimeSpan(24, 0, 0)))
+                                bossEvent.Timing > currentTime && bossEvent.Timing < currentTime.Add(new TimeSpan(8, 0, 0)))
                             .ToList();
 
                         var pastBosses = BossTimings.Events
@@ -196,12 +192,9 @@ namespace GW2FOX
                                 bossEvent.Timing > currentTime.Subtract(new TimeSpan(0, 14, 59)) && bossEvent.Timing < currentTime)
                             .ToList();
 
-                        // Combine all bosses
                         var allBosses = upcomingBosses.Concat(pastBosses).ToList();
 
                         var listViewItems = new List<ListViewItem>();
-
-                        // Use a HashSet to keep track of added boss names
                         HashSet<string> addedBossNames = new HashSet<string>();
 
                         allBosses.Sort((bossEvent1, bossEvent2) =>
@@ -264,8 +257,6 @@ namespace GW2FOX
                                     }
 
                                     listViewItems.Add(listViewItem);
-
-
                                 }
                             }
                         }
@@ -288,15 +279,17 @@ namespace GW2FOX
                     bossEvent.BossName != currentBossEvent.BossName);
             }
 
-
-
             private DateTime GetAdjustedTiming(DateTime currentTimeMez, TimeSpan bossTiming)
             {
                 DateTime adjustedTiming = currentTimeMez.Date + bossTiming;
+
+                while (adjustedTiming < currentTimeMez)
+                {
+                    adjustedTiming = adjustedTiming.AddDays(1);
+                }
+
                 return adjustedTiming;
             }
-
-
 
             private void UpdateListViewItems(List<ListViewItem> listViewItems)
             {
