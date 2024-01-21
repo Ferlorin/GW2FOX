@@ -351,21 +351,13 @@ namespace GW2FOX
                             .SelectMany(bossEventGroup => bossEventGroup.GetNextRuns())
                             .ToList();
                             
-                            // Events
-                            // .Where(bossEvent =>
-                            //     bossNamesFromConfig.Contains(bossEvent.BossName) &&
-                            //     bossEvent.Timing > currentTime && bossEvent.Timing < currentTime.Add(new TimeSpan(24, 0, 0)))
-                            // .ToList();
+                           
 
                         var pastBosses =  BossEventGroups
                                 .Where(bossEventGroup => bossNamesFromConfig.Contains(bossEventGroup.BossName))
                                 .SelectMany(bossEventGroup => bossEventGroup.GetPreviousRuns())
                                 .ToList();
-                        // BossTimings.Events
-                        //     .Where(bossEvent =>
-                        //         bossNamesFromConfig.Contains(bossEvent.BossName) &&
-                        //         bossEvent.Timing > currentTime.Subtract(new TimeSpan(0, 14, 59)) && bossEvent.Timing < currentTime)
-                        //     .ToList();
+                    
 
                         // Combine all bosses
                         var allBosses = upcomingBosses.Concat(pastBosses).ToList();
@@ -377,8 +369,6 @@ namespace GW2FOX
 
                         allBosses.Sort((bossEvent1, bossEvent2) =>
                         {
-                            // DateTime adjustedTiming1 = currentTimeMez.Date + bossEvent1.Timing;
-                            // DateTime adjustedTiming2 = currentTimeMez.Date + bossEvent2.Timing;
 
                             // Compare the adjusted timings for the next day
                             int adjustedTimingComparison = bossEvent1.NextRunTime.CompareTo(bossEvent2.NextRunTime);
@@ -397,7 +387,7 @@ namespace GW2FOX
 
                         foreach (var bossEvent in allBosses)
                         {
-                            // DateTime adjustedTiming = GetAdjustedTiming(currentTimeMez, bossEvent.Timing);
+                           
 
                             // Check if the boss with the adjusted timing is already added to avoid duplicates
                             if (addedBossNames.Add($"{bossEvent.BossName}_{bossEvent.NextRunTime}"))
@@ -459,15 +449,11 @@ namespace GW2FOX
                     bossEvent.BossName != currentBossEvent.BossName);
             }
 
-
-
             private DateTime GetAdjustedTiming(DateTime currentTimeMez, TimeSpan bossTiming)
             {
                 DateTime adjustedTiming = currentTimeMez.Date + bossTiming;
                 return adjustedTiming;
             }
-
-
 
             private void UpdateListViewItems(List<ListViewItem> listViewItems)
             {
