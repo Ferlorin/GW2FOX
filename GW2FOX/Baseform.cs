@@ -19,9 +19,17 @@ namespace GW2FOX
         public BaseForm()
         {
             InitializeCustomBossList();
-            overlay = new Overlay(customBossList);
-            bossTimer = new BossTimer(customBossList);
             InitializeGlobalKeyboardHook();
+            SetFormTransparency();
+        }
+
+        protected void SetFormTransparency()
+        {
+            this.FormBorderStyle = FormBorderStyle.None;
+            this.AllowTransparency = true;
+            this.BackColor = Color.Magenta;
+            this.TransparencyKey = Color.Magenta;
+            this.TopMost = true;
         }
 
         protected void InitializeBossTimerAndOverlay()

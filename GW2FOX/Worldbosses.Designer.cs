@@ -1525,7 +1525,6 @@
             AutoScaleMode = AutoScaleMode.Font;
             AutoSize = true;
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            BackgroundImage = Properties.Resources.Background;
             ClientSize = new Size(1904, 1041);
             Controls.Add(button66);
             Controls.Add(button65);
