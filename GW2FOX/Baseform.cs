@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using System.Drawing.Drawing2D;
 using static GW2FOX.BossTimings;
 using static GW2FOX.GlobalVariables;
 
@@ -27,8 +28,8 @@ namespace GW2FOX
         {
             this.FormBorderStyle = FormBorderStyle.None;
             this.AllowTransparency = true;
-            this.BackColor = Color.FromArgb(5, 5, 5);
-            this.TransparencyKey = Color.FromArgb(5, 5, 5);
+            this.BackColor = Color.Magenta;
+            this.TransparencyKey = Color.Magenta;
             this.Opacity = 0.90;
             this.TopMost = true;
         }
@@ -315,6 +316,12 @@ namespace GW2FOX
                 this.bossList = bossList;
                 mezTimeZone = TimeZoneInfo.FindSystemTimeZoneById(TimeZoneId);
                 timer = new System.Threading.Timer(TimerCallback, null, 0, 1000);
+
+                // OwnerDraw aktivieren + Handler zuweisen
+                bossList.OwnerDraw = true;
+                bossList.DrawItem += BossList_DrawItem;
+                bossList.DrawSubItem += BossList_DrawSubItem;
+                bossList.DrawColumnHeader += BossList_DrawColumnHeader;
             }
 
             public void Start()
@@ -338,6 +345,60 @@ namespace GW2FOX
                     HandleException(ex, "TimerCallback");
                 }
             }
+
+            private void BossList_DrawColumnHeader(object sender, DrawListViewColumnHeaderEventArgs e)
+            {
+                e.DrawDefault = true;
+            }
+
+            private void BossList_DrawItem(object sender, DrawListViewItemEventArgs e)
+            {
+                // Muss existieren, aber wird leer gelassen, weil SubItems separat gezeichnet werden
+               
+            }
+
+            private void BossList_DrawSubItem(object sender, DrawListViewSubItemEventArgs e)
+            {
+                e.DrawBackground();
+                e.DrawDefault = false;
+
+                Font font = new Font("Segoe UI", 10, FontStyle.Bold);
+                string text = e.SubItem.Text;
+                Rectangle bounds = e.SubItem.Bounds;
+
+                // 👉 Hier: Die Farbe des ersten SubItems (Bossname) verwenden
+                Color textColor = e.Item.SubItems[0].ForeColor;
+
+                using (Graphics g = e.Graphics)
+                {
+                    g.SmoothingMode = SmoothingMode.AntiAlias;
+                    g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAliasGridFit;
+
+                    StringFormat format = new StringFormat
+                    {
+                        Alignment = StringAlignment.Near,
+                        LineAlignment = StringAlignment.Center
+                    };
+
+                    Rectangle textBounds = new Rectangle(bounds.X + 2, bounds.Y, bounds.Width - 4, bounds.Height);
+
+                    using (GraphicsPath path = new GraphicsPath())
+                    {
+                        path.AddString(text, font.FontFamily, (int)font.Style, g.DpiY * font.Size / 72, textBounds, format);
+
+                        using (Pen outlinePen = new Pen(Color.Black, 2) { LineJoin = LineJoin.Round })
+                        {
+                            g.DrawPath(outlinePen, path);
+                        }
+
+                        using (Brush textBrush = new SolidBrush(textColor))
+                        {
+                            g.FillPath(textBrush, path);
+                        }
+                    }
+                }
+            }
+
 
 
             public void UpdateBossList()
