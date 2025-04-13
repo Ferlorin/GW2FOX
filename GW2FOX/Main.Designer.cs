@@ -32,7 +32,6 @@
             pictureBox1 = new PictureBox();
             button4 = new Button();
             button3 = new Button();
-            button5 = new Button();
             button1 = new Button();
             button2 = new Button();
             textBox1 = new TextBox();
@@ -68,16 +67,6 @@
             button3.UseVisualStyleBackColor = true;
             button3.Click += Repair_Click;
             // 
-            // button5
-            // 
-            button5.Location = new Point(284, 309);
-            button5.Name = "button5";
-            button5.Size = new Size(217, 23);
-            button5.TabIndex = 10;
-            button5.Text = "Overlay Timer";
-            button5.UseVisualStyleBackColor = true;
-            button5.Click += Timer_Click;
-            // 
             // button1
             // 
             button1.Location = new Point(284, 280);
@@ -100,7 +89,7 @@
             // 
             // textBox1
             // 
-            textBox1.Location = new Point(507, 310);
+            textBox1.Location = new Point(507, 280);
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(47, 23);
             textBox1.TabIndex = 13;
@@ -115,7 +104,6 @@
             Controls.Add(textBox1);
             Controls.Add(button2);
             Controls.Add(button1);
-            Controls.Add(button5);
             Controls.Add(button3);
             Controls.Add(button4);
             Controls.Add(pictureBox1);
@@ -133,7 +121,6 @@
         private PictureBox pictureBox1;
         private Button button4;
         private Button button3;
-        private Button button5;
         private Button button1;
         private Button button2;
         private TextBox textBox1;

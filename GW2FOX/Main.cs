@@ -33,12 +33,7 @@ namespace GW2FOX
             // Additional initialization specific to Main class, if any
         }
 
-        private new void Timer_Click(object sender, EventArgs e)
-        {
-            base.Timer_Click(sender, e);
-            // Additional logic specific to Timer_Click in Main class, if any
-        }
-
+       
 
         // Fόge diese Methode hinzu, um Ausnahmen zu behandeln und Details anzuzeigen
         private void HandleException(Exception ex)
@@ -61,14 +56,13 @@ namespace GW2FOX
         {
             newForm.Owner = this;
             newForm.Show();
-            // this.Dispose();
         }
 
         private void Fox_Click(object sender, EventArgs e)
         {
             try
             {
-                string homepageUrl = "https://gw2-hub.000webhostapp.com/";
+                string homepageUrl = "https://gw2fox.wixsite.com/about";
                 ProcessStartInfo psi = new ProcessStartInfo
                 {
                     FileName = homepageUrl,
@@ -154,6 +148,7 @@ namespace GW2FOX
 
         private void Leading_Click(object sender, EventArgs e)
         {
+            base.Timer_Click(sender, e);
             OpenForm(new Worldbosses());
             this.Hide();
         }
