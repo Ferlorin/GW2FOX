@@ -27,8 +27,8 @@ namespace GW2FOX
         {
             this.FormBorderStyle = FormBorderStyle.None;
             this.AllowTransparency = true;
-            this.BackColor = Color.Magenta;
-            this.TransparencyKey = Color.Magenta;
+            this.BackColor = Color.FromArgb(5, 5, 5);
+            this.TransparencyKey = Color.FromArgb(5, 5, 5);
             this.Opacity = 0.90;
             this.TopMost = true;
         }

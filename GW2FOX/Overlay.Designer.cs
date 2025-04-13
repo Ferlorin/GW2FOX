@@ -37,12 +37,14 @@
             AutoScaleMode = AutoScaleMode.Font;
             AutoValidate = AutoValidate.EnablePreventFocusChange;
             Cursor = Cursors.SizeAll;
+            DoubleBuffered = true;
             FormBorderStyle = FormBorderStyle.Fixed3D;
             MaximizeBox = false;
             MdiChildrenMinimizedAnchorBottom = false;
             MinimizeBox = false;
             Name = "Overlay";
             ShowInTaskbar = false;
+            SizeGripStyle = SizeGripStyle.Hide;
             TopMost = true;
             ResumeLayout(false);
         }

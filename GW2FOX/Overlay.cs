@@ -1,4 +1,9 @@
-﻿namespace GW2FOX
+﻿using System;
+using System.Drawing;
+using System.Reflection;
+using System.Windows.Forms;
+
+namespace GW2FOX
 {
     public partial class Overlay : Form
     {
@@ -6,69 +11,71 @@
 
         private Point mouse_offset;
 
-
         public Overlay(ListView listViewItems)
         {
             InitializeComponent();
+
+            // Aktiviert Double Buffering für das Overlay-Form
+            SetStyle(ControlStyles.OptimizedDoubleBuffer |
+                     ControlStyles.AllPaintingInWmPaint |
+                     ControlStyles.UserPaint, true);
+            UpdateStyles();
+
             if (Owner is BaseForm baseForm)
             {
                 baseForm.UpdateCustomBossList(listViewItems);
-            };
+            }
+
             CustomBossList = listViewItems;
 
-            ListView overlayListView = CustomBossList;
-            overlayListView.ForeColor = Color.Black;
+            // Aktiviert Double Buffering auf der ListView über Reflection
+            typeof(ListView).InvokeMember("DoubleBuffered",
+                BindingFlags.SetProperty | BindingFlags.Instance | BindingFlags.NonPublic,
+                null, CustomBossList, new object[] { true });
 
-            // Konfiguriere das Overlay-Formular
-            BackColor = Color.Black;
-            TransparencyKey = Color.Black;
+            // Konfiguriere das Overlay-Fenster
+            BackColor = Color.FromArgb(5, 5, 5);
+            TransparencyKey = Color.FromArgb(5, 5, 5);
             TopMost = true;
             ShowInTaskbar = false;
             StartPosition = FormStartPosition.Manual;
-            Opacity = 100;
-            MouseDown += OnMouseDown;
-            MouseMove += OnMouseMove;
+            Opacity = 1; // 1 = 100%
             Width = 235;
             Height = 310;
             AutoScroll = true;
 
+            MouseDown += OnMouseDown;
+            MouseMove += OnMouseMove;
 
-            Panel listViewPanel = new Panel();
-            listViewPanel.BackColor = Color.Transparent;
+            // Panel für ListView
+            Panel listViewPanel = new Panel
+            {
+                BackColor = Color.Transparent,
+                Size = new Size(Width, Height * 10),
+                Location = new Point(0, 0)
+            };
             FormBorderStyle = FormBorderStyle.Fixed3D;
 
-            // Berechne die Größe des listViewPanel
-            int panelWidth = (int)(Width);
-            int panelHeight = (int)(Height * 10);
-            listViewPanel.Size = new Size(panelWidth, panelHeight);
-
-            listViewPanel.Location = new Point(0, 0);
-
-            // Erstelle die ListView
-
+            // Konfiguriere die übergebene ListView
+            ListView overlayListView = CustomBossList;
+            overlayListView.OwnerDraw = true;
+            overlayListView.DrawItem += OverlayListView_DrawItem;
             overlayListView.ForeColor = Color.Black;
             overlayListView.Font = new Font("Segoe UI", 12, FontStyle.Bold);
             overlayListView.BackColor = BackColor;
             overlayListView.View = View.Details;
+            overlayListView.Scrollable = true;
             overlayListView.Location = new Point(0, 0);
             overlayListView.Width = listViewPanel.Width;
-
-            // Enable vertical scrollbar
-            overlayListView.Scrollable = true;
-
-            // Set the height considering the horizontal scrollbar
             overlayListView.Height = listViewPanel.Height - SystemInformation.HorizontalScrollBarHeight;
-
             overlayListView.Enabled = true;
             overlayListView.ItemSelectionChanged += (sender, e) =>
             {
                 overlayListView.SelectedIndices.Clear();
             };
 
-            // Füge die ListView zum ListView Panel hinzu
             listViewPanel.Controls.Add(overlayListView);
             Controls.Add(listViewPanel);
-
         }
 
         private void OverlayListView_DrawItem(object sender, DrawListViewItemEventArgs e)
@@ -77,12 +84,12 @@
 
             string text = e.Item.Text;
             Font font = e.Item.Font;
-            Point textLocation = new Point(e.Bounds.Left + 4, e.Bounds.Top + 4);
+            Point textLocation = new Point(e.Bounds.Left + 1, e.Bounds.Top + 1);
 
             // Erzeuge dickeren schwarzen Rand durch mehrfach versetztes Zeichnen
-            for (int dx = -4; dx <= 4; dx++)
+            for (int dx = -1; dx <= 1; dx++)
             {
-                for (int dy = -4; dy <= 4; dy++)
+                for (int dy = -1; dy <= 1; dy++)
                 {
                     // Nur äußere Punkte zeichnen, um den Rand dicker zu machen
                     if (Math.Abs(dx) + Math.Abs(dy) > 1)
@@ -117,6 +124,5 @@
         {
             Dispose();
         }
-
     }
 }
