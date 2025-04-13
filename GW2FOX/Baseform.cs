@@ -10,7 +10,7 @@ namespace GW2FOX
         protected Overlay overlay;
         protected ListView customBossList;
         protected BossTimer bossTimer;
-        private GlobalKeyboardHook? _globalKeyboardHook; // Füge dies hinzu
+        private GlobalKeyboardHook? _globalKeyboardHook;
 
         public static ListView CustomBossList { get; private set; } = new ListView();
         
@@ -93,10 +93,8 @@ namespace GW2FOX
 
             try
             {
-                // Vorhandenen Inhalt aus der Datei lesen
                 string[] lines = File.ReadAllLines(FILE_PATH);
 
-                // Index der Zeile mit dem angegebenen Header finden
                 int headerIndex = -1;
                 for (int i = 0; i < lines.Length; i++)
                 {
@@ -107,18 +105,15 @@ namespace GW2FOX
                     }
                 }
 
-                // Wenn der Header gefunden wird, den Text aktualisieren
                 if (headerIndex != -1)
                 {
                     lines[headerIndex] = $"{headerToUse}: \"{textToSave}\"";
                 }
                 else
                 {
-                    // Wenn der Header nicht gefunden wird, eine neue Zeile hinzufügen
                     lines = lines.Concat(new[] { $"{headerToUse}: \"{textToSave}\"" }).ToArray();
                 }
 
-                // Aktualisierten Inhalt zurück in die Datei schreiben
                 File.WriteAllLines(FILE_PATH, lines);
 
                 if (!hideMessages)
@@ -172,16 +167,12 @@ namespace GW2FOX
         private void LoadTextFromConfig(string sectionHeader, TextBox textBox, string configText,
             string defaultToInsert)
         {
-            // Suchmuster für den Abschnitt und den eingeschlossenen Text in Anführungszeichen
             string pattern = $@"{sectionHeader}\s*""([^""]*)""";
 
-            // Mit einem regulären Ausdruck nach dem Muster suchen
             var match = System.Text.RegularExpressions.Regex.Match(configText, pattern);
 
-            // Überprüfen, ob ein Treffer gefunden wurde
             if (match.Success)
             {
-                // Den extrahierten Text in das Textfeld einfügen
                 textBox.Text = match.Groups[1].Value;
             }
             else
@@ -189,8 +180,6 @@ namespace GW2FOX
                 SaveTextToFile(defaultToInsert, sectionHeader, true);
                 configText = File.ReadAllText(FILE_PATH);
                 LoadTextFromConfig(sectionHeader, textBox, configText, defaultToInsert);
-                // Muster wurde nicht gefunden
-                // MessageBox.Show($"Das Muster '{sectionHeader}' wurde in der Konfigurationsdatei nicht gefunden.", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         
@@ -261,24 +250,20 @@ namespace GW2FOX
                     }
                     catch (Exception ex)
                     {
-                        // Log or handle the exception, but don't call ReadConfigFile recursively
                         Console.WriteLine($"Error creating config file: {ex.Message}");
-                        throw; // Re-throw the exception to prevent infinite recursion
+                        throw;
                     }
-                    // // Die Konfigurationsdatei existiert nicht
-                    // MessageBox.Show("Die Konfigurationsdatei 'config.txt' wurde nicht gefunden.", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)
             {
-                // Fehler beim Laden der Konfigurationsdatei
                 MessageBox.Show($"Fehler beim Laden der Konfigurationsdatei: {ex.Message}", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
-            bossTimer.Dispose(); // Dispose of the BossTimer first
+            bossTimer.Dispose();
             base.OnFormClosing(e);
             Application.Exit();
         }
@@ -338,7 +323,6 @@ namespace GW2FOX
                 {
                     try
                     {
-                        // Read the boss names from the configuration file
                         List<string> bossNamesFromConfig = BossList23;
 
                         DateTime currentTimeUtc = DateTime.UtcNow;
