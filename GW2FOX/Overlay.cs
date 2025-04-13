@@ -16,7 +16,7 @@
             };
             CustomBossList = listViewItems;
 
-            ListView overlayListView = CustomBossList; // Behalte nur diese Zeile
+            ListView overlayListView = CustomBossList;
             overlayListView.ForeColor = Color.Black;
 
             // Konfiguriere das Overlay-Formular
