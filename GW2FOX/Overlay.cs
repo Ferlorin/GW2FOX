@@ -60,7 +60,6 @@ namespace GW2FOX
             overlayListView.Font = new Font("Segoe UI", 10, FontStyle.Bold);
             overlayListView.BackColor = BackColor;
             overlayListView.View = View.Details;
-            overlayListView.DrawItem += OverlayListView_DrawItem;
             overlayListView.Location = new Point(0, 0);
             overlayListView.Width = listViewPanel.Width;
 
@@ -80,32 +79,6 @@ namespace GW2FOX
             listViewPanel.Controls.Add(overlayListView);
             Controls.Add(listViewPanel);
 
-        }
-
-        private void OverlayListView_DrawItem(object sender, DrawListViewItemEventArgs e)
-        {
-            e.DrawBackground();
-
-            string text = e.Item.Text;
-            Font font = e.Item.Font;
-            Point textLocation = new Point(e.Bounds.Left + 2, e.Bounds.Top + 2);
-
-            // Erzeuge dickeren schwarzen Rand durch mehrfach versetztes Zeichnen
-            for (int dx = -2; dx <= 2; dx++)
-            {
-                for (int dy = -2; dy <= 2; dy++)
-                {
-                    // Nur äußere Punkte zeichnen, um den Rand dicker zu machen
-                    if (Math.Abs(dx) + Math.Abs(dy) > 1)
-                    {
-                        Point offsetLocation = new Point(textLocation.X + dx, textLocation.Y + dy);
-                        TextRenderer.DrawText(e.Graphics, text, font, offsetLocation, Color.Black, TextFormatFlags.Default);
-                    }
-                }
-            }
-
-            // Haupttext (Vordergrund)
-            TextRenderer.DrawText(e.Graphics, text, font, textLocation, Color.White, TextFormatFlags.Default);
         }
 
         private void OnMouseDown(object sender, MouseEventArgs e)
