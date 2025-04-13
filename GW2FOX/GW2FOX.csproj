@@ -32,23 +32,23 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="ThunderheadPeaks.cs" />
-    <Compile Update="Palawadan.cs" />
-    <Compile Update="DragonsStand.cs" />
-    <Compile Update="SerpentsIre.cs" />
+    <Compile Update="Metas\ThunderheadPeaks.cs" />
+    <Compile Update="Metas\Palawadan.cs" />
+    <Compile Update="Metas\DragonsStand.cs" />
+    <Compile Update="Metas\SerpentsIre.cs" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="ThunderheadPeaks.resx">
+    <EmbeddedResource Update="Metas\ThunderheadPeaks.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Update="Palawadan.resx">
+    <EmbeddedResource Update="Metas\Palawadan.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Update="DragonsStand.resx">
+    <EmbeddedResource Update="Metas\DragonsStand.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Update="SerpentsIre.resx">
+    <EmbeddedResource Update="Metas\SerpentsIre.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
