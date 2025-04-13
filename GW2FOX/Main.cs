@@ -152,24 +152,6 @@ namespace GW2FOX
             }
         }
 
-        private void Uam_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                string homepageUrl = "https://github.com/gw2-addon-loader/GW2-Addon-Manager/releases";
-                ProcessStartInfo psi = new ProcessStartInfo
-                {
-                    FileName = homepageUrl,
-                    UseShellExecute = true
-                };
-                Process.Start(psi);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Fehler beim ?ffnen der Homepage: {ex.Message}", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
         private void Leading_Click(object sender, EventArgs e)
         {
             OpenForm(new Worldbosses());

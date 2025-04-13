@@ -32,7 +32,6 @@
             pictureBox1 = new PictureBox();
             button4 = new Button();
             button3 = new Button();
-            button7 = new Button();
             button5 = new Button();
             button1 = new Button();
             button2 = new Button();
@@ -68,16 +67,6 @@
             button3.Text = "Repair Client";
             button3.UseVisualStyleBackColor = true;
             button3.Click += Repair_Click;
-            // 
-            // button7
-            // 
-            button7.Location = new Point(284, 193);
-            button7.Name = "button7";
-            button7.Size = new Size(217, 23);
-            button7.TabIndex = 9;
-            button7.Text = "Unofficial Add-On Manager";
-            button7.UseVisualStyleBackColor = true;
-            button7.Click += Uam_Click;
             // 
             // button5
             // 
@@ -127,7 +116,6 @@
             Controls.Add(button2);
             Controls.Add(button1);
             Controls.Add(button5);
-            Controls.Add(button7);
             Controls.Add(button3);
             Controls.Add(button4);
             Controls.Add(pictureBox1);
@@ -145,7 +133,6 @@
         private PictureBox pictureBox1;
         private Button button4;
         private Button button3;
-        private Button button7;
         private Button button5;
         private Button button1;
         private Button button2;

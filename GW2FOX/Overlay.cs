@@ -84,7 +84,7 @@
             Point textLocation = new Point(e.Bounds.Left + 2, e.Bounds.Top + 2);
 
             // Zeichne den Text mit dickerem schwarzen Rand
-            TextRenderer.DrawText(e.Graphics, text, font, textLocation, Color.Black, Color.Transparent, TextFormatFlags.Default);
+            TextRenderer.DrawText(e.Graphics, text, font, textLocation, Color.OrangeRed, Color.Transparent, TextFormatFlags.Default);
 
             // Zeichne den Text ohne Umrandung (darüber, um die Umrandung zu überlagern)
             TextRenderer.DrawText(e.Graphics, text, font, textLocation, Color.White, Color.Transparent, TextFormatFlags.Default);
