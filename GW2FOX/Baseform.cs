@@ -13,8 +13,8 @@ namespace GW2FOX
         private GlobalKeyboardHook? _globalKeyboardHook;
 
         public static ListView CustomBossList { get; private set; } = new ListView();
-        
-        
+
+
 
         public BaseForm()
         {
@@ -29,6 +29,7 @@ namespace GW2FOX
             this.AllowTransparency = true;
             this.BackColor = Color.Magenta;
             this.TransparencyKey = Color.Magenta;
+            this.Opacity = 0.90;
             this.TopMost = true;
         }
 
@@ -85,11 +86,9 @@ namespace GW2FOX
         {
             newForm.Owner = this;
             newForm.Show();
-            if (this is not Worldbosses)
-            {
-                Dispose();
-            }
+            this.Hide(); // Aktuelles Fenster ausblenden
         }
+
 
         protected static void SaveTextToFile(string textToSave, string sectionHeader, bool hideMessages = false)
         {
@@ -190,12 +189,12 @@ namespace GW2FOX
                 LoadTextFromConfig(sectionHeader, textBox, configText, defaultToInsert);
             }
         }
-        
-        
+
+
         protected void BringGw2ToFront()
         {
             try
-            { 
+            {
                 // Specify the process name without the file extension
                 string processName = "Gw2-64";
 
@@ -219,7 +218,7 @@ namespace GW2FOX
                 MessageBox.Show($"Error bringing Gw2-64.exe to the foreground: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        
+
         protected void LoadConfigText(TextBox Runinfo, TextBox Squadinfo, TextBox Guild, TextBox Welcome, TextBox Symbols)
         {
             try
@@ -248,7 +247,7 @@ namespace GW2FOX
                 }
                 else
                 {
-                    
+
                     Console.WriteLine($"Config file does not exist. Will try to create it");
                     try
                     {
@@ -275,13 +274,31 @@ namespace GW2FOX
             base.OnFormClosing(e);
             Application.Exit();
         }
-        
+
+       
+
         protected void Back_Click(object sender, EventArgs e)
         {
             Owner.Show();
             Dispose();
         }
 
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
 
         public class BossTimer : IDisposable
         {
@@ -342,14 +359,14 @@ namespace GW2FOX
                             .Where(bossEventGroup => bossNamesFromConfig.Contains(bossEventGroup.BossName))
                             .SelectMany(bossEventGroup => bossEventGroup.GetNextRuns())
                             .ToList();
-                            
-                           
 
-                        var pastBosses =  BossEventGroups
+
+
+                        var pastBosses = BossEventGroups
                                 .Where(bossEventGroup => bossNamesFromConfig.Contains(bossEventGroup.BossName))
                                 .SelectMany(bossEventGroup => bossEventGroup.GetPreviousRuns())
                                 .ToList();
-                    
+
 
                         // Combine all bosses
                         var allBosses = upcomingBosses.Concat(pastBosses).ToList();

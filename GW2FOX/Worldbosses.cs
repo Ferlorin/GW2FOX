@@ -30,14 +30,7 @@ namespace GW2FOX
             SetBossListFromConfig_Bosses();
         }
 
-
-
-        
-
-        // Constants for window handling
         const int SW_RESTORE = 9;
-
-        
 
         private void Saverun_Click(object sender, EventArgs e)
         {

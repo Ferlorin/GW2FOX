@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Worldbosses));
-            pictureBox1 = new PictureBox();
             Runinfo = new TextBox();
             Squadinfo = new TextBox();
             Guild = new TextBox();
@@ -75,7 +74,6 @@
             button39 = new Button();
             button40 = new Button();
             pictureBox2 = new PictureBox();
-            pictureBox4 = new PictureBox();
             button3 = new Button();
             button41 = new Button();
             DragonsStand = new Button();
@@ -154,19 +152,10 @@
             button63 = new Button();
             button65 = new Button();
             button66 = new Button();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            pictureBox4 = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
             SuspendLayout();
-            // 
-            // pictureBox1
-            // 
-            pictureBox1.Image = Properties.Resources.Header;
-            pictureBox1.Location = new Point(602, 12);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(700, 175);
-            pictureBox1.TabIndex = 0;
-            pictureBox1.TabStop = false;
             // 
             // Runinfo
             // 
@@ -271,7 +260,7 @@
             // 
             // button6
             // 
-            button6.Location = new Point(1377, 12);
+            button6.Location = new Point(1377, 164);
             button6.Name = "button6";
             button6.Size = new Size(75, 23);
             button6.TabIndex = 12;
@@ -657,15 +646,6 @@
             pictureBox2.Size = new Size(1880, 30);
             pictureBox2.TabIndex = 99;
             pictureBox2.TabStop = false;
-            // 
-            // pictureBox4
-            // 
-            pictureBox4.Image = Properties.Resources.WBsheaderonetime;
-            pictureBox4.Location = new Point(12, 193);
-            pictureBox4.Name = "pictureBox4";
-            pictureBox4.Size = new Size(1880, 30);
-            pictureBox4.TabIndex = 100;
-            pictureBox4.TabStop = false;
             // 
             // button3
             // 
@@ -1519,6 +1499,15 @@
             button66.UseVisualStyleBackColor = true;
             button66.Click += Timer_Click;
             // 
+            // pictureBox4
+            // 
+            pictureBox4.Image = Properties.Resources.WBsheaderonetime;
+            pictureBox4.Location = new Point(12, 193);
+            pictureBox4.Name = "pictureBox4";
+            pictureBox4.Size = new Size(1880, 30);
+            pictureBox4.TabIndex = 189;
+            pictureBox4.TabStop = false;
+            // 
             // Worldbosses
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -1526,6 +1515,7 @@
             AutoSize = true;
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
             ClientSize = new Size(1904, 1041);
+            Controls.Add(pictureBox4);
             Controls.Add(button66);
             Controls.Add(button65);
             Controls.Add(button63);
@@ -1604,7 +1594,6 @@
             Controls.Add(DragonsStand);
             Controls.Add(button41);
             Controls.Add(button3);
-            Controls.Add(pictureBox4);
             Controls.Add(pictureBox2);
             Controls.Add(button32);
             Controls.Add(button33);
@@ -1650,13 +1639,11 @@
             Controls.Add(Guild);
             Controls.Add(Squadinfo);
             Controls.Add(Runinfo);
-            Controls.Add(pictureBox1);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Worldbosses";
             Text = "GW2FOX";
             WindowState = FormWindowState.Maximized;
             Load += Worldbosses_Load_1;
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
             ResumeLayout(false);
@@ -1664,8 +1651,6 @@
         }
 
         #endregion
-
-        private PictureBox pictureBox1;
         private TextBox Runinfo;
         private TextBox Squadinfo;
         private TextBox Guild;
@@ -1711,7 +1696,6 @@
         private Button button39;
         private Button button40;
         private PictureBox pictureBox2;
-        private PictureBox pictureBox4;
         private Button button3;
         private Button button41;
         private Button DragonsStand;
@@ -1790,5 +1774,6 @@
         private Button button63;
         private Button button65;
         private Button button66;
+        private PictureBox pictureBox4;
     }
 }

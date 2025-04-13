@@ -155,6 +155,7 @@ namespace GW2FOX
         private void Leading_Click(object sender, EventArgs e)
         {
             OpenForm(new Worldbosses());
+            this.Hide();
         }
 
 
