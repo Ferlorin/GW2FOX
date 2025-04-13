@@ -1407,9 +1407,6 @@ namespace GW2FOX
                         Console.WriteLine($"Error creating config file: {ex.Message}");
                         throw; // Re-throw the exception to prevent infinite recursion
                     }
-                    // Log or handle the case where the file is not found
-                    Console.WriteLine($"Config file does not exist.");
-                    throw new FileNotFoundException("Config file not found.");
                 }
             }
             catch (Exception ex)
