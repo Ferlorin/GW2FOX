@@ -59,17 +59,6 @@ namespace GW2FOX.Properties {
                 resourceCulture = value;
             }
         }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Ascension {
-            get {
-                object obj = ResourceManager.GetObject("Ascension", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
@@ -99,57 +88,6 @@ namespace GW2FOX.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap buttonBEHE {
-            get {
-                object obj = ResourceManager.GetObject("buttonBEHE", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap buttonBEHE1 {
-            get {
-                object obj = ResourceManager.GetObject("buttonBEHE1", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Chak {
-            get {
-                object obj = ResourceManager.GetObject("Chak", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Choya {
-            get {
-                object obj = ResourceManager.GetObject("Choya", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Claw {
-            get {
-                object obj = ResourceManager.GetObject("Claw", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
@@ -173,43 +111,12 @@ namespace GW2FOX.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Dbs {
-            get {
-                object obj = ResourceManager.GetObject("Dbs", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap Deputy_Peacemaker_Badge {
             get {
                 object obj = ResourceManager.GetObject("Deputy_Peacemaker_Badge", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Doppelganger {
-            get {
-                object obj = ResourceManager.GetObject("Doppelganger", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Dragonstorm {
-            get {
-                object obj = ResourceManager.GetObject("Dragonstorm", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
@@ -219,17 +126,6 @@ namespace GW2FOX.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Dwayna {
-            get {
-                object obj = ResourceManager.GetObject("Dwayna", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
@@ -239,47 +135,6 @@ namespace GW2FOX.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Eye {
-            get {
-                object obj = ResourceManager.GetObject("Eye", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Fire {
-            get {
-                object obj = ResourceManager.GetObject("Fire", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Fireshaman {
-            get {
-                object obj = ResourceManager.GetObject("Fireshaman", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Forged {
-            get {
-                object obj = ResourceManager.GetObject("Forged", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
@@ -299,37 +154,6 @@ namespace GW2FOX.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Inquestgolem {
-            get {
-                object obj = ResourceManager.GetObject("Inquestgolem", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Junundu {
-            get {
-                object obj = ResourceManager.GetObject("Junundu", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Karka {
-            get {
-                object obj = ResourceManager.GetObject("Karka", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
@@ -339,27 +163,6 @@ namespace GW2FOX.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Lyssa {
-            get {
-                object obj = ResourceManager.GetObject("Lyssa", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Macsen {
-            get {
-                object obj = ResourceManager.GetObject("Macsen", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
@@ -369,37 +172,6 @@ namespace GW2FOX.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Maw {
-            get {
-                object obj = ResourceManager.GetObject("Maw", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Mega {
-            get {
-                object obj = ResourceManager.GetObject("Mega", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Ogrewars {
-            get {
-                object obj = ResourceManager.GetObject("Ogrewars", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
@@ -429,17 +201,6 @@ namespace GW2FOX.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Rhendi {
-            get {
-                object obj = ResourceManager.GetObject("Rhendi", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
@@ -449,17 +210,6 @@ namespace GW2FOX.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Shatti {
-            get {
-                object obj = ResourceManager.GetObject("Shatti", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
@@ -479,37 +229,6 @@ namespace GW2FOX.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Tarir {
-            get {
-                object obj = ResourceManager.GetObject("Tarir", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Tequatl {
-            get {
-                object obj = ResourceManager.GetObject("Tequatl", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Thaida {
-            get {
-                object obj = ResourceManager.GetObject("Thaida", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
@@ -519,17 +238,6 @@ namespace GW2FOX.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Ulgoth {
-            get {
-                object obj = ResourceManager.GetObject("Ulgoth", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
@@ -569,195 +277,6 @@ namespace GW2FOX.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Wurm {
-            get {
-                object obj = ResourceManager.GetObject("Wurm", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Sandstorm
-        {
-            get
-            {
-                object obj = ResourceManager.GetObject("Sandstorm", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        } 
-        
-        /// <summary>
-          ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
-          /// </summary>
-        internal static System.Drawing.Bitmap Saidra_s_Haven
-        {
-            get
-            {
-                object obj = ResourceManager.GetObject("Saidra_s_Haven", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap New_Loamhurst
-        {
-            get
-            {
-                object obj = ResourceManager.GetObject("New_Loamhurst", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-
-        }
-        /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Noran_s_Homestead
-        {
-            get
-            {
-                object obj = ResourceManager.GetObject("Noran_s_Homestead", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-
-        }
-        /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Maws_of_Torment
-        {
-            get
-            {
-                object obj = ResourceManager.GetObject("Maws_of_Torment", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-
-        }
-        /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap The_Oil_Floes
-        {
-            get
-            {
-                object obj = ResourceManager.GetObject("The_Oil_Floes", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-
-        }
-        /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap OozePits
-        {
-            get
-            {
-                object obj = ResourceManager.GetObject("OozePits", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-
-        }
-        /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Effigy
-        {
-            get
-            {
-                object obj = ResourceManager.GetObject("Effigy", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-
-        }
-        /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap DoomloreShrine
-        {
-            get
-            {
-                object obj = ResourceManager.GetObject("DoomloreShrine", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-
-        }
-        /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap StormsofWinter
-        {
-            get
-            {
-                object obj = ResourceManager.GetObject("StormsofWinter", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-
-        }
-        /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap DefendJorasKeep
-        {
-            get
-            {
-                object obj = ResourceManager.GetObject("DefendJorasKeep", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-
-        }
-        /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Aetherblade_Assault
-        {
-            get
-            {
-                object obj = ResourceManager.GetObject("Aetherblade_Assault", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-
-        }
-        /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Kaineng_Blackout
-        {
-            get
-            {
-                object obj = ResourceManager.GetObject("Kaineng_Blackout", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-
-        }
-        /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap GangWar
-        {
-            get
-            {
-                object obj = ResourceManager.GetObject("GangWar", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-
-        }
-        /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Aspenwood
-        {
-            get
-            {
-                object obj = ResourceManager.GetObject("Aspenwood", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-
-        }
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
@@ -773,35 +292,11 @@ namespace GW2FOX.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Fly_by_Night
-        {
-            get
-            {
-                object obj = ResourceManager.GetObject("Fly_by_Night", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-
-        }
-        /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap TheDefenseofAmnytas
         {
             get
             {
                 object obj = ResourceManager.GetObject("TheDefenseofAmnytas", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-
-        }
-        /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Battle_for_the_Jade_Sea
-        {
-            get
-            {
-                object obj = ResourceManager.GetObject("Battle_for_the_Jade_Sea", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
 

@@ -1844,12 +1844,6 @@ namespace GW2FOX
                 MessageBox.Show($"Error setting boss checkboxes: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-        private new void Timer_Click(object sender, EventArgs e)
-        {
-            base.Timer_Click(sender, e);
-            // Additional logic specific to Timer_Click in Main class, if any
-        }
     }
 
 
