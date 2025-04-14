@@ -23,7 +23,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="bin\Debug\net8.0-windows\config2.txt" />
     <Content Include="Resources\icon.ico" />
   </ItemGroup>
 
