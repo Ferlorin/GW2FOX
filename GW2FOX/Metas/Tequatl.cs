@@ -94,42 +94,7 @@ namespace GW2FOX
             BringGw2ToFront();
         }
 
-        private void Achipowerplay2_Click(object sender, EventArgs e)
-        {
-            // Copy the text from Leyline60 TextBox to the clipboard
-            Clipboard.SetText(Achipowerplay2.Text);
-
-            // Bring the Gw2-64.exe window to the foreground
-            BringGw2ToFront();
-        }
-
-        private void Achipowerplay3_Click(object sender, EventArgs e)
-        {
-            // Copy the text from Leyline60 TextBox to the clipboard
-            Clipboard.SetText(Achipowerplay3.Text);
-
-            // Bring the Gw2-64.exe window to the foreground
-            BringGw2ToFront();
-        }
-
-        private void Achipowerplay4_Click(object sender, EventArgs e)
-        {
-            // Copy the text from Leyline60 TextBox to the clipboard
-            Clipboard.SetText(Achipowerplay4.Text);
-
-            // Bring the Gw2-64.exe window to the foreground
-            BringGw2ToFront();
-        }
-
-        private void Achifoundit1_Click(object sender, EventArgs e)
-        {
-            // Copy the text from Leyline60 TextBox to the clipboard
-            Clipboard.SetText(Achifoundit1.Text);
-
-            // Bring the Gw2-64.exe window to the foreground
-            BringGw2ToFront();
-        }
-
+        
         private void Achifoundit2_Click(object sender, EventArgs e)
         {
             // Copy the text from Leyline60 TextBox to the clipboard

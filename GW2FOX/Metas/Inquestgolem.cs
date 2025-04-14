@@ -117,42 +117,6 @@ namespace GW2FOX
             BringGw2ToFront();
         }
 
-        private void Farmspots_Click(object sender, EventArgs e)
-        {
-            // Copy the text from Leyline60 TextBox to the clipboard
-            Clipboard.SetText(Farminspots.Text);
-
-            // Bring the Gw2-64.exe window to the foreground
-            BringGw2ToFront();
-        }
-
-        private void Fluffy1_Click(object sender, EventArgs e)
-        {
-            // Copy the text from Leyline60 TextBox to the clipboard
-            Clipboard.SetText(Fluffy1.Text);
-
-            // Bring the Gw2-64.exe window to the foreground
-            BringGw2ToFront();
-        }
-
-        private void Fluffy2_Click(object sender, EventArgs e)
-        {
-            // Copy the text from Leyline60 TextBox to the clipboard
-            Clipboard.SetText(Fluffy2.Text);
-
-            // Bring the Gw2-64.exe window to the foreground
-            BringGw2ToFront();
-        }
-
-        private void Fluffy3_Click(object sender, EventArgs e)
-        {
-            // Copy the text from Leyline60 TextBox to the clipboard
-            Clipboard.SetText(Fluffy3.Text);
-
-            // Bring the Gw2-64.exe window to the foreground
-            BringGw2ToFront();
-        }
-
         private void Preis_Click(object sender, EventArgs e)
         {
             // Copy the text from Leyline60 TextBox to the clipboard

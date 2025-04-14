@@ -167,24 +167,6 @@ namespace GW2FOX
             BringGw2ToFront();
         }
 
-        private void Attentionulgoth_Click(object sender, EventArgs e)
-        {
-            // Copy the text from Leyline60 TextBox to the clipboard
-            Clipboard.SetText(AttentionUlgoth.Text);
-
-            // Bring the Gw2-64.exe window to the foreground
-            BringGw2ToFront();
-        }
-
-        private void Lootulgoth_Click(object sender, EventArgs e)
-        {
-            // Copy the text from Leyline60 TextBox to the clipboard
-            Clipboard.SetText(Lootulgoth.Text);
-
-            // Bring the Gw2-64.exe window to the foreground
-            BringGw2ToFront();
-        }
-
         private void Preis_Click(object sender, EventArgs e)
         {
             // Copy the text from Leyline60 TextBox to the clipboard

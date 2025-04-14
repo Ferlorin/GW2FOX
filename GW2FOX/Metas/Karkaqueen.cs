@@ -76,15 +76,6 @@ namespace GW2FOX
             BringGw2ToFront();
         }
 
-        private void Karkaextra_Click(object sender, EventArgs e)
-        {
-            // Copy the text from Leyline60 TextBox to the clipboard
-            Clipboard.SetText(Karkaextra.Text);
-
-            // Bring the Gw2-64.exe window to the foreground
-            BringGw2ToFront();
-        }
-
         private void Karkaachiv_Click(object sender, EventArgs e)
         {
             // Copy the text from Leyline60 TextBox to the clipboard

@@ -163,7 +163,7 @@
             // Runinfo
             // 
             Runinfo.Cursor = Cursors.Cross;
-            Runinfo.Font = new Font("Segoe UI", 11F);
+            Runinfo.Font = new Font("Segoe UI", 9F);
             Runinfo.Location = new Point(27, 231);
             Runinfo.MaxLength = 199;
             Runinfo.Multiline = true;
@@ -176,7 +176,7 @@
             // Squadinfo
             // 
             Squadinfo.Cursor = Cursors.Cross;
-            Squadinfo.Font = new Font("Segoe UI", 11F);
+            Squadinfo.Font = new Font("Segoe UI", 9F);
             Squadinfo.Location = new Point(507, 231);
             Squadinfo.MaxLength = 226;
             Squadinfo.Multiline = true;
@@ -189,7 +189,7 @@
             // Guild
             // 
             Guild.Cursor = Cursors.Cross;
-            Guild.Font = new Font("Segoe UI", 11F);
+            Guild.Font = new Font("Segoe UI", 9F);
             Guild.Location = new Point(982, 231);
             Guild.MaxLength = 199;
             Guild.Multiline = true;
@@ -202,7 +202,7 @@
             // Welcome
             // 
             Welcome.Cursor = Cursors.Cross;
-            Welcome.Font = new Font("Segoe UI", 11F);
+            Welcome.Font = new Font("Segoe UI", 9F);
             Welcome.Location = new Point(1451, 231);
             Welcome.MaxLength = 199;
             Welcome.Multiline = true;
@@ -215,12 +215,12 @@
             // Symbols
             // 
             Symbols.Cursor = Cursors.Cross;
-            Symbols.Font = new Font("Segoe UI", 12F);
-            Symbols.Location = new Point(27, 958);
+            Symbols.Font = new Font("Segoe UI", 11F);
+            Symbols.Location = new Point(1463, 12);
             Symbols.Multiline = true;
             Symbols.Name = "Symbols";
             Symbols.ScrollBars = ScrollBars.Vertical;
-            Symbols.Size = new Size(429, 71);
+            Symbols.Size = new Size(429, 85);
             Symbols.TabIndex = 5;
             Symbols.Text = "☠ ★ ☣ ☮ ☢ ♪ ☜ ☞ ┌ ∩ ┐ ( ●̮̃ • ) ۶ ( • ◡ • ) ☿ ♀ ♂ ☀ ☁ ☂ ☃ ☄ ☾ ☽ ☇ ☉ ☐ ☒ ☑ ☝ ☚ • ☟ ☆ ♕ ♖ ♘ ♙ ♛ ♜ ♞ ♟ † ☨ ☥ ☦ ☓ ☩ ☯ ☧ ☬ ☸ ♁ ♆ ☭ ☪ ☫ © ™ ® ☎ ♥ 凸";
             // 
@@ -281,7 +281,7 @@
             button6.BackgroundImageLayout = ImageLayout.Center;
             button6.Cursor = Cursors.Cross;
             button6.FlatStyle = FlatStyle.Flat;
-            button6.Location = new Point(462, 1006);
+            button6.Location = new Point(1817, 118);
             button6.Name = "button6";
             button6.Size = new Size(75, 23);
             button6.TabIndex = 12;
@@ -307,7 +307,7 @@
             button8.BackgroundImageLayout = ImageLayout.Center;
             button8.Cursor = Cursors.Cross;
             button8.FlatStyle = FlatStyle.Flat;
-            button8.Location = new Point(48, 375);
+            button8.Location = new Point(50, 375);
             button8.Name = "button8";
             button8.Size = new Size(182, 46);
             button8.TabIndex = 15;
@@ -1650,12 +1650,12 @@
             // SearchResults
             // 
             SearchResults.Cursor = Cursors.Cross;
-            SearchResults.Font = new Font("Segoe UI", 11F);
+            SearchResults.Font = new Font("Segoe UI", 9F);
             SearchResults.Location = new Point(12, 12);
             SearchResults.Multiline = true;
             SearchResults.Name = "SearchResults";
             SearchResults.ScrollBars = ScrollBars.Vertical;
-            SearchResults.Size = new Size(218, 177);
+            SearchResults.Size = new Size(220, 148);
             SearchResults.TabIndex = 190;
             // 
             // button66
@@ -1664,7 +1664,7 @@
             button66.BackgroundImageLayout = ImageLayout.Center;
             button66.Cursor = Cursors.Cross;
             button66.FlatStyle = FlatStyle.Flat;
-            button66.Location = new Point(236, 166);
+            button66.Location = new Point(157, 166);
             button66.Name = "button66";
             button66.Size = new Size(75, 23);
             button66.TabIndex = 191;
@@ -1677,7 +1677,7 @@
             button67.BackgroundImageLayout = ImageLayout.Center;
             button67.Cursor = Cursors.Cross;
             button67.FlatStyle = FlatStyle.Flat;
-            button67.Location = new Point(236, 137);
+            button67.Location = new Point(76, 166);
             button67.Name = "button67";
             button67.Size = new Size(75, 23);
             button67.TabIndex = 192;
@@ -1688,9 +1688,9 @@
             // 
             Quantity.BorderStyle = BorderStyle.None;
             Quantity.Font = new Font("Segoe UI", 11F);
-            Quantity.Location = new Point(236, 111);
+            Quantity.Location = new Point(16, 166);
             Quantity.Name = "Quantity";
-            Quantity.Size = new Size(28, 20);
+            Quantity.Size = new Size(54, 20);
             Quantity.TabIndex = 193;
             Quantity.TextAlign = HorizontalAlignment.Center;
             // 

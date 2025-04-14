@@ -1866,7 +1866,8 @@ namespace GW2FOX
                         .ToList();
 
                     // Zeige die Bosse mit Komma getrennt im Textfeld "SearchResults.Text" an
-                    SearchResults.Text = string.Join(", ", upcomingBosses);
+                    SearchResults.Text = string.Join("," + Environment.NewLine, upcomingBosses.Select(b => b.ToString())) + ",";
+
                 }
                 else
                 {
@@ -1880,7 +1881,6 @@ namespace GW2FOX
                 MessageBox.Show($"Ein Fehler ist aufgetreten: {ex.Message}", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
     }
 
 

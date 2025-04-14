@@ -29,8 +29,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Karkaqueen));
-            button13 = new Button();
-            Karkaextra = new TextBox();
             button9 = new Button();
             button8 = new Button();
             button7 = new Button();
@@ -38,7 +36,6 @@
             button4 = new Button();
             button3 = new Button();
             button2 = new Button();
-            pictureBox2 = new PictureBox();
             Attentionkarka = new TextBox();
             Karkainstance = new TextBox();
             Karkainfo = new TextBox();
@@ -48,175 +45,161 @@
             Guild = new TextBox();
             Squadinfo = new TextBox();
             Runinfo = new TextBox();
-            textBox1 = new TextBox();
-            textBox2 = new TextBox();
             Karkaachi = new TextBox();
             button6 = new Button();
-            pictureBox3 = new PictureBox();
             pictureBox5 = new PictureBox();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
             SuspendLayout();
             // 
-            // button13
-            // 
-            button13.Location = new Point(654, 676);
-            button13.Name = "button13";
-            button13.Size = new Size(75, 23);
-            button13.TabIndex = 117;
-            button13.Text = "Copy";
-            button13.UseVisualStyleBackColor = true;
-            button13.Click += Karkaextra_Click;
-            // 
-            // Karkaextra
-            // 
-            Karkaextra.Font = new Font("Segoe UI", 15F);
-            Karkaextra.Location = new Point(654, 610);
-            Karkaextra.Multiline = true;
-            Karkaextra.Name = "Karkaextra";
-            Karkaextra.ReadOnly = true;
-            Karkaextra.ScrollBars = ScrollBars.Vertical;
-            Karkaextra.Size = new Size(600, 60);
-            Karkaextra.TabIndex = 116;
-            Karkaextra.Text = "☠ Bonus chest on the ship above.";
-            // 
             // button9
             // 
-            button9.Location = new Point(1294, 505);
+            button9.BackgroundImage = (Image)resources.GetObject("button9.BackgroundImage");
+            button9.BackgroundImageLayout = ImageLayout.Center;
+            button9.Cursor = Cursors.Cross;
+            button9.FlatStyle = FlatStyle.Flat;
+            button9.Location = new Point(371, 430);
             button9.Name = "button9";
             button9.Size = new Size(75, 23);
             button9.TabIndex = 115;
-            button9.Text = "Copy";
             button9.UseVisualStyleBackColor = true;
             button9.Click += Attentionkarka_Click;
             // 
             // button8
             // 
-            button8.Location = new Point(654, 505);
+            button8.BackgroundImage = (Image)resources.GetObject("button8.BackgroundImage");
+            button8.BackgroundImageLayout = ImageLayout.Center;
+            button8.Cursor = Cursors.Cross;
+            button8.FlatStyle = FlatStyle.Flat;
+            button8.Location = new Point(371, 385);
             button8.Name = "button8";
             button8.Size = new Size(75, 23);
             button8.TabIndex = 114;
-            button8.Text = "Copy";
             button8.UseVisualStyleBackColor = true;
             button8.Click += Karkainstance_Click;
             // 
             // button7
             // 
-            button7.Location = new Point(13, 505);
+            button7.BackgroundImage = (Image)resources.GetObject("button7.BackgroundImage");
+            button7.BackgroundImageLayout = ImageLayout.Center;
+            button7.Cursor = Cursors.Cross;
+            button7.FlatStyle = FlatStyle.Flat;
+            button7.Location = new Point(371, 340);
             button7.Name = "button7";
             button7.Size = new Size(75, 23);
             button7.TabIndex = 113;
-            button7.Text = "Copy";
             button7.UseVisualStyleBackColor = true;
             button7.Click += Karkainfo_Click;
             // 
             // button5
             // 
-            button5.Location = new Point(1440, 374);
+            button5.BackgroundImage = (Image)resources.GetObject("button5.BackgroundImage");
+            button5.BackgroundImageLayout = ImageLayout.Center;
+            button5.Cursor = Cursors.Cross;
+            button5.FlatStyle = FlatStyle.Flat;
+            button5.Location = new Point(1796, 295);
             button5.Name = "button5";
             button5.Size = new Size(75, 23);
             button5.TabIndex = 112;
-            button5.Text = "Copy";
             button5.UseVisualStyleBackColor = true;
             // 
             // button4
             // 
-            button4.Location = new Point(965, 374);
+            button4.BackgroundImage = (Image)resources.GetObject("button4.BackgroundImage");
+            button4.BackgroundImageLayout = ImageLayout.Center;
+            button4.Cursor = Cursors.Cross;
+            button4.FlatStyle = FlatStyle.Flat;
+            button4.Location = new Point(1321, 295);
             button4.Name = "button4";
             button4.Size = new Size(75, 23);
             button4.TabIndex = 111;
-            button4.Text = "Copy";
             button4.UseVisualStyleBackColor = true;
             button4.Click += Guild_Click;
             // 
             // button3
             // 
-            button3.Location = new Point(490, 374);
+            button3.BackgroundImage = (Image)resources.GetObject("button3.BackgroundImage");
+            button3.BackgroundImageLayout = ImageLayout.Center;
+            button3.Cursor = Cursors.Cross;
+            button3.FlatStyle = FlatStyle.Flat;
+            button3.Location = new Point(846, 295);
             button3.Name = "button3";
             button3.Size = new Size(75, 23);
             button3.TabIndex = 110;
-            button3.Text = "Copy";
             button3.UseVisualStyleBackColor = true;
             button3.Click += Squadinfo_Click;
             // 
             // button2
             // 
-            button2.Location = new Point(15, 374);
+            button2.BackgroundImage = (Image)resources.GetObject("button2.BackgroundImage");
+            button2.BackgroundImageLayout = ImageLayout.Center;
+            button2.Cursor = Cursors.Cross;
+            button2.FlatStyle = FlatStyle.Flat;
+            button2.Location = new Point(371, 295);
             button2.Name = "button2";
             button2.Size = new Size(75, 23);
             button2.TabIndex = 109;
-            button2.Text = "Copy";
             button2.UseVisualStyleBackColor = true;
             button2.Click += Runinfo_Click;
             // 
-            // pictureBox2
-            // 
-            pictureBox2.Image = Properties.Resources.WBsheader2;
-            pictureBox2.Location = new Point(14, 403);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(1877, 30);
-            pictureBox2.TabIndex = 108;
-            pictureBox2.TabStop = false;
-            // 
             // Attentionkarka
             // 
-            Attentionkarka.Font = new Font("Segoe UI", 15F);
-            Attentionkarka.Location = new Point(1294, 439);
+            Attentionkarka.Font = new Font("Microsoft Sans Serif", 8.25F);
+            Attentionkarka.Location = new Point(15, 414);
             Attentionkarka.Multiline = true;
             Attentionkarka.Name = "Attentionkarka";
             Attentionkarka.ReadOnly = true;
             Attentionkarka.ScrollBars = ScrollBars.Vertical;
-            Attentionkarka.Size = new Size(600, 60);
+            Attentionkarka.Size = new Size(350, 39);
             Attentionkarka.TabIndex = 107;
             Attentionkarka.Text = "No Waypoint on the Island? Go to ☣[&BCAEAAA=]☣ & take the north Portal to ☣Southsun Cove☣\r\n\r\n";
             // 
             // Karkainstance
             // 
-            Karkainstance.Font = new Font("Segoe UI", 15F);
-            Karkainstance.Location = new Point(654, 439);
+            Karkainstance.Font = new Font("Microsoft Sans Serif", 8.25F);
+            Karkainstance.Location = new Point(15, 369);
             Karkainstance.Multiline = true;
             Karkainstance.Name = "Karkainstance";
             Karkainstance.ReadOnly = true;
             Karkainstance.ScrollBars = ScrollBars.Vertical;
-            Karkainstance.Size = new Size(600, 60);
+            Karkainstance.Size = new Size(350, 39);
             Karkainstance.TabIndex = 106;
             Karkainstance.Text = "Go out of fight, then right click group 2 & join ☣Southsun Cove☣\r\n";
             // 
             // Karkainfo
             // 
             Karkainfo.BackColor = SystemColors.Highlight;
-            Karkainfo.Font = new Font("Segoe UI", 15F);
-            Karkainfo.Location = new Point(14, 439);
+            Karkainfo.Font = new Font("Microsoft Sans Serif", 8.25F);
+            Karkainfo.Location = new Point(15, 324);
             Karkainfo.Multiline = true;
             Karkainfo.Name = "Karkainfo";
             Karkainfo.ReadOnly = true;
             Karkainfo.ScrollBars = ScrollBars.Vertical;
-            Karkainfo.Size = new Size(600, 60);
+            Karkainfo.Size = new Size(350, 39);
             Karkainfo.TabIndex = 105;
             Karkainfo.Text = "☠Lvl 80 ≪Karka Queeni≫ with Achievement \"K.Q. Killer\" │ ☣[&BNgGAAA=]☣\r\n\r\n";
             // 
             // button1
             // 
-            button1.BackgroundImage = Properties.Resources.back;
+            button1.BackgroundImage = (Image)resources.GetObject("button1.BackgroundImage");
+            button1.BackgroundImageLayout = ImageLayout.Center;
+            button1.Cursor = Cursors.Cross;
             button1.FlatStyle = FlatStyle.Flat;
-            button1.Location = new Point(1793, 900);
+            button1.Location = new Point(1864, 1002);
             button1.Name = "button1";
-            button1.Size = new Size(100, 102);
+            button1.Size = new Size(40, 40);
             button1.TabIndex = 104;
-            button1.Text = "button1";
             button1.UseVisualStyleBackColor = true;
             button1.Click += Back_Click;
             // 
             // Symbols
             // 
-            Symbols.Font = new Font("Segoe UI", 15F);
+            Symbols.Font = new Font("Segoe UI", 11F);
             Symbols.Location = new Point(1458, 12);
             Symbols.Multiline = true;
             Symbols.Name = "Symbols";
             Symbols.ReadOnly = true;
             Symbols.ScrollBars = ScrollBars.Vertical;
-            Symbols.Size = new Size(434, 221);
+            Symbols.Size = new Size(429, 85);
             Symbols.TabIndex = 103;
             // 
             // Welcome
@@ -227,7 +210,7 @@
             Welcome.Name = "Welcome";
             Welcome.ReadOnly = true;
             Welcome.ScrollBars = ScrollBars.Vertical;
-            Welcome.Size = new Size(450, 100);
+            Welcome.Size = new Size(350, 50);
             Welcome.TabIndex = 102;
             // 
             // Guild
@@ -238,7 +221,7 @@
             Guild.Name = "Guild";
             Guild.ReadOnly = true;
             Guild.ScrollBars = ScrollBars.Vertical;
-            Guild.Size = new Size(450, 100);
+            Guild.Size = new Size(350, 50);
             Guild.TabIndex = 101;
             // 
             // Squadinfo
@@ -249,7 +232,7 @@
             Squadinfo.Name = "Squadinfo";
             Squadinfo.ReadOnly = true;
             Squadinfo.ScrollBars = ScrollBars.Vertical;
-            Squadinfo.Size = new Size(450, 100);
+            Squadinfo.Size = new Size(350, 50);
             Squadinfo.TabIndex = 100;
             Squadinfo.Text = "\r\n";
             // 
@@ -261,64 +244,35 @@
             Runinfo.Name = "Runinfo";
             Runinfo.ReadOnly = true;
             Runinfo.ScrollBars = ScrollBars.Vertical;
-            Runinfo.Size = new Size(450, 100);
+            Runinfo.Size = new Size(350, 50);
             Runinfo.TabIndex = 99;
-            // 
-            // textBox1
-            // 
-            textBox1.BackColor = SystemColors.ScrollBar;
-            textBox1.Font = new Font("Segoe UI", 15F);
-            textBox1.Location = new Point(654, 570);
-            textBox1.Multiline = true;
-            textBox1.Name = "textBox1";
-            textBox1.ReadOnly = true;
-            textBox1.Size = new Size(276, 34);
-            textBox1.TabIndex = 118;
-            textBox1.Text = "Bonus:";
-            // 
-            // textBox2
-            // 
-            textBox2.BackColor = SystemColors.ScrollBar;
-            textBox2.Font = new Font("Segoe UI", 15F);
-            textBox2.Location = new Point(11, 570);
-            textBox2.Multiline = true;
-            textBox2.Name = "textBox2";
-            textBox2.ReadOnly = true;
-            textBox2.Size = new Size(276, 34);
-            textBox2.TabIndex = 119;
-            textBox2.Text = "Achievement:";
             // 
             // Karkaachi
             // 
-            Karkaachi.Font = new Font("Segoe UI", 15F);
-            Karkaachi.Location = new Point(11, 610);
+            Karkaachi.BackColor = Color.Red;
+            Karkaachi.Font = new Font("Microsoft Sans Serif", 8.25F);
+            Karkaachi.Location = new Point(490, 324);
             Karkaachi.Multiline = true;
             Karkaachi.Name = "Karkaachi";
             Karkaachi.ReadOnly = true;
             Karkaachi.ScrollBars = ScrollBars.Vertical;
-            Karkaachi.Size = new Size(600, 60);
+            Karkaachi.Size = new Size(350, 39);
             Karkaachi.TabIndex = 120;
             Karkaachi.Text = "☠ Achievement Karka Queen Killer: Throw a karka egg at the Karka Queen.";
             // 
             // button6
             // 
+            button6.BackgroundImage = (Image)resources.GetObject("button6.BackgroundImage");
+            button6.BackgroundImageLayout = ImageLayout.Center;
+            button6.Cursor = Cursors.Cross;
+            button6.FlatStyle = FlatStyle.Flat;
             button6.Font = new Font("Segoe UI", 9F);
-            button6.Location = new Point(11, 676);
+            button6.Location = new Point(846, 340);
             button6.Name = "button6";
             button6.Size = new Size(75, 23);
             button6.TabIndex = 121;
-            button6.Text = "Copy";
             button6.UseVisualStyleBackColor = true;
             button6.Click += Karkaachiv_Click;
-            // 
-            // pictureBox3
-            // 
-            pictureBox3.Image = Properties.Resources.Line;
-            pictureBox3.Location = new Point(12, 534);
-            pictureBox3.Name = "pictureBox3";
-            pictureBox3.Size = new Size(1880, 30);
-            pictureBox3.TabIndex = 122;
-            pictureBox3.TabStop = false;
             // 
             // pictureBox5
             // 
@@ -335,13 +289,8 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1904, 1041);
             Controls.Add(pictureBox5);
-            Controls.Add(pictureBox3);
             Controls.Add(button6);
             Controls.Add(Karkaachi);
-            Controls.Add(textBox2);
-            Controls.Add(textBox1);
-            Controls.Add(button13);
-            Controls.Add(Karkaextra);
             Controls.Add(button9);
             Controls.Add(button8);
             Controls.Add(button7);
@@ -349,7 +298,6 @@
             Controls.Add(button4);
             Controls.Add(button3);
             Controls.Add(button2);
-            Controls.Add(pictureBox2);
             Controls.Add(Attentionkarka);
             Controls.Add(Karkainstance);
             Controls.Add(Karkainfo);
@@ -363,17 +311,12 @@
             Name = "Karkaqueen";
             Text = "GW2FOX";
             WindowState = FormWindowState.Maximized;
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
-
-        private Button button13;
-        private TextBox Karkaextra;
         private Button button9;
         private Button button8;
         private Button button7;
@@ -381,7 +324,6 @@
         private Button button4;
         private Button button3;
         private Button button2;
-        private PictureBox pictureBox2;
         private TextBox Attentionkarka;
         private TextBox Karkainstance;
         private TextBox Karkainfo;
@@ -391,11 +333,8 @@
         private TextBox Guild;
         private TextBox Squadinfo;
         private TextBox Runinfo;
-        private TextBox textBox1;
-        private TextBox textBox2;
         private TextBox Karkaachi;
         private Button button6;
-        private PictureBox pictureBox3;
         private PictureBox pictureBox5;
     }
 }
