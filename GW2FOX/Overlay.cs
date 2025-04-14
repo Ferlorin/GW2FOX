@@ -39,7 +39,7 @@ namespace GW2FOX
             MouseDown += OnMouseDown;
             MouseMove += OnMouseMove;
             Width = 235;
-            Height = 310;
+            Height = 370;
             AutoScroll = true;
 
 

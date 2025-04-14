@@ -41,7 +41,6 @@
             FormBorderStyle = FormBorderStyle.Fixed3D;
             MaximizeBox = false;
             MdiChildrenMinimizedAnchorBottom = false;
-            MinimizeBox = false;
             Name = "Overlay";
             ShowInTaskbar = false;
             SizeGripStyle = SizeGripStyle.Hide;

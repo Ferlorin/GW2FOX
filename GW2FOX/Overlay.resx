@@ -2267,7 +2267,7 @@
 </value>
   </data>
   <data name="$this.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1315, 700</value>
+    <value>1320, 685</value>
   </data>
   <data name="$this.MaximumSize" type="System.Drawing.Size, System.Drawing">
     <value>300, 1500</value>
