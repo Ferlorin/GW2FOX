@@ -1286,7 +1286,7 @@ namespace GW2FOX
 
                         // Setze das Häkchen im CheckBox-Control auf true
                         CheckBox bossCheckBox = FindCheckBoxByBossName(bossName);
-                        if (bossCheckBox != null) 
+                        if (bossCheckBox != null)
                         {
                             bossCheckBox.Checked = true;
                         }
@@ -1398,7 +1398,7 @@ namespace GW2FOX
                         SaveTextToFile(GlobalVariables.DEFAULT_SQUAD_INFO, "Squadinfo", true);
                         SaveTextToFile(GlobalVariables.DEFAULT_WELCOME, "Welcome", true);
                         SaveTextToFile(GlobalVariables.DEFAULT_SYMBOLS, "Symbols", true);
-                        
+
                         return ReadConfigFile();
                     }
                     catch (Exception ex)
@@ -1691,7 +1691,7 @@ namespace GW2FOX
                 {
                     //This will create a new section
                     SaveTextToFile(GlobalVariables.DEFAULT_WORLD, "World");
-                    World_Click(sender, e);   
+                    World_Click(sender, e);
                     // MessageBox.Show($"World section not found in config.", "Not Found", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
@@ -1844,6 +1844,43 @@ namespace GW2FOX
                 MessageBox.Show($"Error setting boss checkboxes: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void button66_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetText(SearchResults.Text);
+
+            // Bring the Gw2-64.exe window to the foreground
+            BringGw2ToFront();
+        }
+
+        private void button67_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Parse die Anzahl aus dem Textfeld "Quantity.Text"
+                if (int.TryParse(Quantity.Text, out int quantity) && quantity > 0)
+                {
+                    // Extrahiere die zukünftigen Bosse aus der BossList23
+                    var upcomingBosses = BossTimings.BossList23
+                        .Take(quantity) // Nimm die angegebene Anzahl an Bossen
+                        .ToList();
+
+                    // Zeige die Bosse mit Komma getrennt im Textfeld "SearchResults.Text" an
+                    SearchResults.Text = string.Join(", ", upcomingBosses);
+                }
+                else
+                {
+                    // Zeige eine Fehlermeldung, wenn die Eingabe ungültig ist
+                    MessageBox.Show("Bitte geben Sie eine gültige Zahl größer als 0 ein.", "Ungültige Eingabe", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            catch (Exception ex)
+            {
+                // Fehlerbehandlung
+                MessageBox.Show($"Ein Fehler ist aufgetreten: {ex.Message}", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
     }
 
 

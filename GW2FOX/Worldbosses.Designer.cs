@@ -152,6 +152,10 @@
             button63 = new Button();
             button65 = new Button();
             pictureBox4 = new PictureBox();
+            SearchResults = new TextBox();
+            button66 = new Button();
+            button67 = new Button();
+            Quantity = new TextBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
             SuspendLayout();
@@ -212,11 +216,11 @@
             // 
             Symbols.Cursor = Cursors.Cross;
             Symbols.Font = new Font("Segoe UI", 12F);
-            Symbols.Location = new Point(12, 999);
+            Symbols.Location = new Point(27, 958);
             Symbols.Multiline = true;
             Symbols.Name = "Symbols";
             Symbols.ScrollBars = ScrollBars.Vertical;
-            Symbols.Size = new Size(1294, 30);
+            Symbols.Size = new Size(429, 71);
             Symbols.TabIndex = 5;
             Symbols.Text = "☠ ★ ☣ ☮ ☢ ♪ ☜ ☞ ┌ ∩ ┐ ( ●̮̃ • ) ۶ ( • ◡ • ) ☿ ♀ ♂ ☀ ☁ ☂ ☃ ☄ ☾ ☽ ☇ ☉ ☐ ☒ ☑ ☝ ☚ • ☟ ☆ ♕ ♖ ♘ ♙ ♛ ♜ ♞ ♟ † ☨ ☥ ☦ ☓ ☩ ☯ ☧ ☬ ☸ ♁ ♆ ☭ ☪ ☫ © ™ ® ☎ ♥ 凸";
             // 
@@ -277,7 +281,7 @@
             button6.BackgroundImageLayout = ImageLayout.Center;
             button6.Cursor = Cursors.Cross;
             button6.FlatStyle = FlatStyle.Flat;
-            button6.Location = new Point(1312, 1002);
+            button6.Location = new Point(462, 1006);
             button6.Name = "button6";
             button6.Size = new Size(75, 23);
             button6.TabIndex = 12;
@@ -1643,6 +1647,53 @@
             pictureBox4.TabIndex = 189;
             pictureBox4.TabStop = false;
             // 
+            // SearchResults
+            // 
+            SearchResults.Cursor = Cursors.Cross;
+            SearchResults.Font = new Font("Segoe UI", 11F);
+            SearchResults.Location = new Point(12, 12);
+            SearchResults.Multiline = true;
+            SearchResults.Name = "SearchResults";
+            SearchResults.ScrollBars = ScrollBars.Vertical;
+            SearchResults.Size = new Size(218, 177);
+            SearchResults.TabIndex = 190;
+            // 
+            // button66
+            // 
+            button66.BackgroundImage = (Image)resources.GetObject("button66.BackgroundImage");
+            button66.BackgroundImageLayout = ImageLayout.Center;
+            button66.Cursor = Cursors.Cross;
+            button66.FlatStyle = FlatStyle.Flat;
+            button66.Location = new Point(236, 166);
+            button66.Name = "button66";
+            button66.Size = new Size(75, 23);
+            button66.TabIndex = 191;
+            button66.UseVisualStyleBackColor = true;
+            button66.Click += button66_Click;
+            // 
+            // button67
+            // 
+            button67.BackgroundImage = (Image)resources.GetObject("button67.BackgroundImage");
+            button67.BackgroundImageLayout = ImageLayout.Center;
+            button67.Cursor = Cursors.Cross;
+            button67.FlatStyle = FlatStyle.Flat;
+            button67.Location = new Point(236, 137);
+            button67.Name = "button67";
+            button67.Size = new Size(75, 23);
+            button67.TabIndex = 192;
+            button67.UseVisualStyleBackColor = true;
+            button67.Click += button67_Click;
+            // 
+            // Quantity
+            // 
+            Quantity.BorderStyle = BorderStyle.None;
+            Quantity.Font = new Font("Segoe UI", 11F);
+            Quantity.Location = new Point(236, 111);
+            Quantity.Name = "Quantity";
+            Quantity.Size = new Size(28, 20);
+            Quantity.TabIndex = 193;
+            Quantity.TextAlign = HorizontalAlignment.Center;
+            // 
             // Worldbosses
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -1650,6 +1701,10 @@
             AutoSize = true;
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
             ClientSize = new Size(1904, 1041);
+            Controls.Add(Quantity);
+            Controls.Add(button67);
+            Controls.Add(button66);
+            Controls.Add(SearchResults);
             Controls.Add(button60);
             Controls.Add(pictureBox4);
             Controls.Add(button65);
@@ -1908,5 +1963,9 @@
         private Button button63;
         private Button button65;
         private PictureBox pictureBox4;
+        private TextBox SearchResults;
+        private Button button66;
+        private Button button67;
+        private TextBox Quantity;
     }
 }
