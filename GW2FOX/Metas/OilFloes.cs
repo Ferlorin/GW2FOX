@@ -15,6 +15,7 @@ namespace GW2FOX
         public OilFloes()
         {
             InitializeComponent();
+            LoadConfigText(Runinfo, Squadinfo, Guild, Welcome, Symbols);
         }
 
         private void Runinfos_Click(object sender, EventArgs e)
@@ -57,6 +58,12 @@ namespace GW2FOX
         {
             Clipboard.SetText(Attentionbehe.Text);
             BringGw2ToFront();
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            Owner.Show();
+            Dispose();
         }
     }
 }

@@ -58,5 +58,13 @@ namespace GW2FOX
             Clipboard.SetText(Welcome.Text);
             BringGw2ToFront();
         }
+
+        private void Back_Click_1(object sender, EventArgs e)
+        {
+           
+            Owner.Show();
+            Dispose();
+        }
+    
     }
 }

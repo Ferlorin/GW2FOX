@@ -51,10 +51,8 @@
             button6 = new Button();
             Clawachi2 = new TextBox();
             textBox1 = new TextBox();
-            pictureBox3 = new PictureBox();
             pictureBox5 = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
             SuspendLayout();
             // 
@@ -198,7 +196,6 @@
             // 
             // button1
             // 
-            button1.BackgroundImage = Properties.Resources.back;
             button1.FlatStyle = FlatStyle.Flat;
             button1.Location = new Point(1793, 900);
             button1.Name = "button1";
@@ -297,15 +294,6 @@
             textBox1.TabIndex = 120;
             textBox1.Text = "Achievements:";
             // 
-            // pictureBox3
-            // 
-            pictureBox3.Image = Properties.Resources.Line;
-            pictureBox3.Location = new Point(12, 534);
-            pictureBox3.Name = "pictureBox3";
-            pictureBox3.Size = new Size(1880, 30);
-            pictureBox3.TabIndex = 121;
-            pictureBox3.TabStop = false;
-            // 
             // pictureBox5
             // 
             pictureBox5.Image = Properties.Resources.WBsheader;
@@ -321,7 +309,6 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1904, 1041);
             Controls.Add(pictureBox5);
-            Controls.Add(pictureBox3);
             Controls.Add(textBox1);
             Controls.Add(Clawachi2);
             Controls.Add(button6);
@@ -349,7 +336,6 @@
             Text = "GW2FOX";
             WindowState = FormWindowState.Maximized;
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -379,7 +365,6 @@
         private Button button6;
         private TextBox Clawachi2;
         private TextBox textBox1;
-        private PictureBox pictureBox3;
         private PictureBox pictureBox5;
     }
 }

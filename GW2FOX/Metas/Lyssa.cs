@@ -153,5 +153,11 @@ namespace GW2FOX
             Clipboard.SetText(Lyssainstance.Text);
             BringGw2ToFront();
         }
+
+        private void Back_Click(object sender, EventArgs e)
+        {
+            Owner.Show();
+            Dispose();
+        }
     }
 }

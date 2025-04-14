@@ -78,8 +78,9 @@ namespace GW2FOX
             BringGw2ToFront();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Back_Click_1(object sender, EventArgs e)
         {
+            Owner.Show();
             Dispose();
         }
     }

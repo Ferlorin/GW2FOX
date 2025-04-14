@@ -42,7 +42,7 @@ namespace GW2FOX
             Attentionfire = new TextBox();
             Fireinstance = new TextBox();
             Fireinfo = new TextBox();
-            button1 = new Button();
+            Back = new Button();
             Symbols = new TextBox();
             Welcome = new TextBox();
             Guild = new TextBox();
@@ -204,17 +204,17 @@ namespace GW2FOX
             Fireinfo.TabIndex = 85;
             Fireinfo.Text = "☠Lvl 15 ≪Fire Elemental≫ & “Steam Ogre” with Achievement \"CleanUp Crew\" │ ☣[&BEcAAAA=]☣\r\n";
             // 
-            // button1
+            // Back
             // 
-            button1.BackgroundImage = (Image)resources.GetObject("button1.BackgroundImage");
-            button1.BackgroundImageLayout = ImageLayout.Center;
-            button1.FlatStyle = FlatStyle.Flat;
-            button1.Location = new Point(1864, 1002);
-            button1.Name = "button1";
-            button1.Size = new Size(40, 40);
-            button1.TabIndex = 84;
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += Back_Click;
+            Back.BackgroundImage = (Image)resources.GetObject("Back.BackgroundImage");
+            Back.BackgroundImageLayout = ImageLayout.Center;
+            Back.FlatStyle = FlatStyle.Flat;
+            Back.Location = new Point(1864, 1002);
+            Back.Name = "Back";
+            Back.Size = new Size(40, 40);
+            Back.TabIndex = 84;
+            Back.UseVisualStyleBackColor = true;
+            Back.Click += Back_Click;
             // 
             // Symbols
             // 
@@ -328,7 +328,7 @@ namespace GW2FOX
             Controls.Add(Attentionfire);
             Controls.Add(Fireinstance);
             Controls.Add(Fireinfo);
-            Controls.Add(button1);
+            Controls.Add(Back);
             Controls.Add(Symbols);
             Controls.Add(Welcome);
             Controls.Add(Guild);
@@ -363,7 +363,7 @@ namespace GW2FOX
         private TextBox Attentionfire;
         private TextBox Fireinstance;
         private TextBox Fireinfo;
-        private Button button1;
+        private Button Back;
         private TextBox Symbols;
         private TextBox Welcome;
         private TextBox Guild;

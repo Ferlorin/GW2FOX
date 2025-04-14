@@ -95,16 +95,6 @@ namespace GW2FOX
         }
 
         
-
-        
-
-        
-
-
-        
-
-        
-
         private void Runinfo_Click(object sender, EventArgs e)
         {
             // Copy the text from Leyline60 TextBox to the clipboard
@@ -176,6 +166,12 @@ namespace GW2FOX
         {
             Clipboard.SetText(Itemprice.Text);
             BringGw2ToFront();
+        }
+
+        private void Back_Click(object sender, EventArgs e)
+        {
+            Owner.Show();
+            Dispose();
         }
     }
 }

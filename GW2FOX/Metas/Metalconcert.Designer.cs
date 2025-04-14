@@ -39,7 +39,7 @@
             Attentionbehe = new TextBox();
             Beheinstance = new TextBox();
             Beheinfo = new TextBox();
-            button1 = new Button();
+            Back = new Button();
             Symbols = new TextBox();
             Welcome = new TextBox();
             Guild = new TextBox();
@@ -177,18 +177,18 @@
             Beheinfo.TabIndex = 56;
             Beheinfo.Text = "☠ ≪A Concert for the Ages≫ ☣[&BPgLAAA=]☣ then run to ☣[&BBkMAAA=]☣";
             // 
-            // button1
+            // Back
             // 
-            button1.BackgroundImage = (Image)resources.GetObject("button1.BackgroundImage");
-            button1.BackgroundImageLayout = ImageLayout.Center;
-            button1.Cursor = Cursors.Cross;
-            button1.FlatStyle = FlatStyle.Flat;
-            button1.Location = new Point(1864, 1002);
-            button1.Name = "button1";
-            button1.Size = new Size(40, 40);
-            button1.TabIndex = 55;
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += Back_Click;
+            Back.BackgroundImage = (Image)resources.GetObject("Back.BackgroundImage");
+            Back.BackgroundImageLayout = ImageLayout.Center;
+            Back.Cursor = Cursors.Cross;
+            Back.FlatStyle = FlatStyle.Flat;
+            Back.Location = new Point(1864, 1002);
+            Back.Name = "Back";
+            Back.Size = new Size(40, 40);
+            Back.TabIndex = 55;
+            Back.UseVisualStyleBackColor = true;
+            Back.Click += Back_Click;
             // 
             // Symbols
             // 
@@ -271,7 +271,7 @@
             Controls.Add(Attentionbehe);
             Controls.Add(Beheinstance);
             Controls.Add(Beheinfo);
-            Controls.Add(button1);
+            Controls.Add(Back);
             Controls.Add(Symbols);
             Controls.Add(Welcome);
             Controls.Add(Guild);
@@ -297,7 +297,7 @@
         private TextBox Attentionbehe;
         private TextBox Beheinstance;
         private TextBox Beheinfo;
-        private Button button1;
+        private Button Back;
         private TextBox Symbols;
         private TextBox Welcome;
         private TextBox Guild;

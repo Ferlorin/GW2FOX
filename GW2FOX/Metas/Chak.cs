@@ -29,7 +29,7 @@ namespace GW2FOX
             BringGw2ToFront();
         }
 
-        private void Backtomain_Click(object sender, EventArgs e)
+        private void Back_Click(object sender, EventArgs e)
         {
             Owner.Show();
             Dispose();

@@ -46,7 +46,7 @@
             Squadinfo = new TextBox();
             Runinfo = new TextBox();
             button1 = new Button();
-            button6 = new Button();
+            Back = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
             SuspendLayout();
             // 
@@ -250,23 +250,25 @@
             button1.TabIndex = 120;
             button1.UseVisualStyleBackColor = true;
             // 
-            // button6
+            // Back
             // 
-            button6.BackgroundImage = (Image)resources.GetObject("button6.BackgroundImage");
-            button6.BackgroundImageLayout = ImageLayout.Center;
-            button6.FlatStyle = FlatStyle.Flat;
-            button6.Location = new Point(1864, 1002);
-            button6.Name = "button6";
-            button6.Size = new Size(40, 40);
-            button6.TabIndex = 121;
-            button6.UseVisualStyleBackColor = true;
+            Back.BackgroundImage = (Image)resources.GetObject("Back.BackgroundImage");
+            Back.BackgroundImageLayout = ImageLayout.Center;
+            Back.Cursor = Cursors.Cross;
+            Back.FlatStyle = FlatStyle.Flat;
+            Back.Location = new Point(1864, 1002);
+            Back.Name = "Back";
+            Back.Size = new Size(40, 40);
+            Back.TabIndex = 121;
+            Back.UseVisualStyleBackColor = true;
+            Back.Click += button6_Click;
             // 
             // OilFloes
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1904, 1041);
-            Controls.Add(button6);
+            Controls.Add(Back);
             Controls.Add(button1);
             Controls.Add(pictureBox4);
             Controls.Add(button9);
@@ -286,6 +288,7 @@
             Controls.Add(Runinfo);
             Name = "OilFloes";
             Text = "Form1";
+            WindowState = FormWindowState.Maximized;
             ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -310,6 +313,6 @@
         private TextBox Squadinfo;
         private TextBox Runinfo;
         private Button button1;
-        private Button button6;
+        private Button Back;
     }
 }

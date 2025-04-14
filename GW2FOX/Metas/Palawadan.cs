@@ -11,15 +11,11 @@ namespace GW2FOX
             LoadConfigText(Runinfo, Squadinfo, Guild, Welcome, Symbols);
         }
 
-        
-
-        
-
-        
-
-
-        
-
+        private void Back_Click(object sender, EventArgs e)
+        {
+            Owner.Show();
+            Dispose();
+        }
 
         private void Beheinfo_Click(object sender, EventArgs e)
         {
@@ -89,8 +85,6 @@ namespace GW2FOX
             // Bring the Gw2-64.exe window to the foreground
             BringGw2ToFront();
         }
-
-        
 
     }
 }

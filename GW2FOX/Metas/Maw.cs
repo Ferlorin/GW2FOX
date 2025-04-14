@@ -214,5 +214,11 @@ namespace GW2FOX
             // Bring the Gw2-64.exe window to the foreground
             BringGw2ToFront();
         }
+
+        private void Back_Click(object sender, EventArgs e)
+        {
+            Owner.Show();
+            Dispose();
+        }
     }
 }

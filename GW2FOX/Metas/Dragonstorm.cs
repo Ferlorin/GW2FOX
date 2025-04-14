@@ -22,14 +22,6 @@ namespace GW2FOX
             originPage = origin;
         }
 
-        
-
-        
-
-
-        
-
-        
 
         private void Runinfo_Click(object sender, EventArgs e)
         {
@@ -110,6 +102,12 @@ namespace GW2FOX
 
             // Bring the Gw2-64.exe window to the foreground
             BringGw2ToFront();
+        }
+
+        private void Back_Click(object sender, EventArgs e)
+        {
+            Owner.Show();
+            Dispose();
         }
     }
 }

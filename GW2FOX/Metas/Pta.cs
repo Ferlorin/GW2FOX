@@ -11,14 +11,11 @@ namespace GW2FOX
             LoadConfigText(Runinfo, Squadinfo, Guild, Welcome, Symbols);
         }
 
-        
-
-        
-
-        
-
-
-        
+        private void Back_Click(object sender, EventArgs e)
+        {
+            Owner.Show();
+            Dispose();
+        }
 
         private void Beheinstance_Click(object sender, EventArgs e)
         {

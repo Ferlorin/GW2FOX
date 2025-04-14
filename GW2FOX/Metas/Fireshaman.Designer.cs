@@ -41,7 +41,7 @@
             AttentionFireshaman = new TextBox();
             Fireshamaninstance = new TextBox();
             Fireshamaninfo = new TextBox();
-            button1 = new Button();
+            Back = new Button();
             Symbols = new TextBox();
             Welcome = new TextBox();
             Guild = new TextBox();
@@ -205,18 +205,18 @@
             Fireshamaninfo.TabIndex = 85;
             Fireshamaninfo.Text = "☠Lvl 60 ≪Fire Shaman & his Minions≫ │ ☣[&BO4BAAA=]☣, then up to ☣[&BNwBAAA=]☣\r\n";
             // 
-            // button1
+            // Back
             // 
-            button1.BackgroundImage = (Image)resources.GetObject("button1.BackgroundImage");
-            button1.BackgroundImageLayout = ImageLayout.Center;
-            button1.Cursor = Cursors.Cross;
-            button1.FlatStyle = FlatStyle.Flat;
-            button1.Location = new Point(1864, 1002);
-            button1.Name = "button1";
-            button1.Size = new Size(40, 40);
-            button1.TabIndex = 84;
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += Back_Click;
+            Back.BackgroundImage = (Image)resources.GetObject("Back.BackgroundImage");
+            Back.BackgroundImageLayout = ImageLayout.Center;
+            Back.Cursor = Cursors.Cross;
+            Back.FlatStyle = FlatStyle.Flat;
+            Back.Location = new Point(1864, 1002);
+            Back.Name = "Back";
+            Back.Size = new Size(40, 40);
+            Back.TabIndex = 84;
+            Back.UseVisualStyleBackColor = true;
+            Back.Click += Back_Click;
             // 
             // Symbols
             // 
@@ -301,7 +301,7 @@
             Controls.Add(AttentionFireshaman);
             Controls.Add(Fireshamaninstance);
             Controls.Add(Fireshamaninfo);
-            Controls.Add(button1);
+            Controls.Add(Back);
             Controls.Add(Symbols);
             Controls.Add(Welcome);
             Controls.Add(Guild);
@@ -331,7 +331,7 @@
         private TextBox AttentionFireshaman;
         private TextBox Fireshamaninstance;
         private TextBox Fireshamaninfo;
-        private Button button1;
+        private Button Back;
         private TextBox Symbols;
         private TextBox Welcome;
         private TextBox Guild;

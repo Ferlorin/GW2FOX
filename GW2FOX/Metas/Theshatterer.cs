@@ -77,16 +77,12 @@ namespace GW2FOX
             }
         }
 
-        
+        private void Back_Click(object sender, EventArgs e)
+        {
+            Owner.Show();
+            Dispose();
+        }
 
-        
-
-        
-
-
-        
-
-        
 
         private void Runinfo_Click(object sender, EventArgs e)
         {

@@ -41,7 +41,7 @@
             Attentionmega = new TextBox();
             Megainstance = new TextBox();
             Megainfo = new TextBox();
-            button1 = new Button();
+            Back = new Button();
             Symbols = new TextBox();
             Welcome = new TextBox();
             Guild = new TextBox();
@@ -209,18 +209,18 @@
             Megainfo.TabIndex = 85;
             Megainfo.Text = "☠Lvl 66 ≪Megadestroyer≫ │ ☣[&BM0CAAA=]☣\r\n";
             // 
-            // button1
+            // Back
             // 
-            button1.BackgroundImage = (Image)resources.GetObject("button1.BackgroundImage");
-            button1.BackgroundImageLayout = ImageLayout.Center;
-            button1.Cursor = Cursors.Cross;
-            button1.FlatStyle = FlatStyle.Flat;
-            button1.Location = new Point(1864, 1002);
-            button1.Name = "button1";
-            button1.Size = new Size(40, 40);
-            button1.TabIndex = 84;
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += Back_Click;
+            Back.BackgroundImage = (Image)resources.GetObject("Back.BackgroundImage");
+            Back.BackgroundImageLayout = ImageLayout.Center;
+            Back.Cursor = Cursors.Cross;
+            Back.FlatStyle = FlatStyle.Flat;
+            Back.Location = new Point(1864, 1002);
+            Back.Name = "Back";
+            Back.Size = new Size(40, 40);
+            Back.TabIndex = 84;
+            Back.UseVisualStyleBackColor = true;
+            Back.Click += Back_Click;
             // 
             // Symbols
             // 
@@ -361,7 +361,7 @@
             Controls.Add(Attentionmega);
             Controls.Add(Megainstance);
             Controls.Add(Megainfo);
-            Controls.Add(button1);
+            Controls.Add(Back);
             Controls.Add(Symbols);
             Controls.Add(Welcome);
             Controls.Add(Guild);
@@ -390,7 +390,7 @@
         private TextBox Attentionmega;
         private TextBox Megainstance;
         private TextBox Megainfo;
-        private Button button1;
+        private Button Back;
         private TextBox Symbols;
         private TextBox Welcome;
         private TextBox Guild;

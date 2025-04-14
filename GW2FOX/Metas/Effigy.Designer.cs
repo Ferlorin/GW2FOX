@@ -45,7 +45,7 @@
             Guild = new TextBox();
             Squadinfo = new TextBox();
             Runinfo = new TextBox();
-            button1 = new Button();
+            Back = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
             SuspendLayout();
             // 
@@ -238,24 +238,25 @@
             Runinfo.Size = new Size(350, 50);
             Runinfo.TabIndex = 102;
             // 
-            // button1
+            // Back
             // 
-            button1.BackgroundImage = (Image)resources.GetObject("button1.BackgroundImage");
-            button1.BackgroundImageLayout = ImageLayout.Center;
-            button1.Cursor = Cursors.Cross;
-            button1.FlatStyle = FlatStyle.Flat;
-            button1.Location = new Point(1864, 1002);
-            button1.Name = "button1";
-            button1.Size = new Size(40, 40);
-            button1.TabIndex = 120;
-            button1.UseVisualStyleBackColor = true;
+            Back.BackgroundImage = (Image)resources.GetObject("Back.BackgroundImage");
+            Back.BackgroundImageLayout = ImageLayout.Center;
+            Back.Cursor = Cursors.Cross;
+            Back.FlatStyle = FlatStyle.Flat;
+            Back.Location = new Point(1864, 1002);
+            Back.Name = "Back";
+            Back.Size = new Size(40, 40);
+            Back.TabIndex = 120;
+            Back.UseVisualStyleBackColor = true;
+            Back.Click += Back_Click_1;
             // 
             // Effigy
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1904, 1041);
-            Controls.Add(button1);
+            Controls.Add(Back);
             Controls.Add(pictureBox4);
             Controls.Add(button9);
             Controls.Add(button8);
@@ -297,6 +298,6 @@
         private TextBox Guild;
         private TextBox Squadinfo;
         private TextBox Runinfo;
-        private Button button1;
+        private Button Back;
     }
 }
