@@ -46,6 +46,9 @@
     <Compile Update="Metas\Forgedwithfire.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Metas\MawsOfTorments.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Metas\Inquestgolem.cs">
       <SubType>Form</SubType>
     </Compile>

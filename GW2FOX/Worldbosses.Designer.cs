@@ -73,7 +73,6 @@
             button38 = new Button();
             button39 = new Button();
             button40 = new Button();
-            pictureBox2 = new PictureBox();
             button3 = new Button();
             button41 = new Button();
             DragonsStand = new Button();
@@ -83,8 +82,8 @@
             button46 = new Button();
             button47 = new Button();
             button48 = new Button();
-            button49 = new Button();
-            button50 = new Button();
+            MawsOfTorments = new Button();
+            OilFloes = new Button();
             button51 = new Button();
             button52 = new Button();
             button53 = new Button();
@@ -156,7 +155,6 @@
             button66 = new Button();
             button67 = new Button();
             Quantity = new TextBox();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
             SuspendLayout();
             // 
@@ -216,7 +214,7 @@
             // 
             Symbols.Cursor = Cursors.Cross;
             Symbols.Font = new Font("Segoe UI", 11F);
-            Symbols.Location = new Point(1463, 12);
+            Symbols.Location = new Point(1458, 12);
             Symbols.Multiline = true;
             Symbols.Name = "Symbols";
             Symbols.ScrollBars = ScrollBars.Vertical;
@@ -738,15 +736,6 @@
             button40.UseVisualStyleBackColor = true;
             button40.Click += Chak_Click;
             // 
-            // pictureBox2
-            // 
-            pictureBox2.Image = Properties.Resources.Overline;
-            pictureBox2.Location = new Point(12, 287);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(1880, 30);
-            pictureBox2.TabIndex = 99;
-            pictureBox2.TabStop = false;
-            // 
             // button3
             // 
             button3.BackgroundImage = (Image)resources.GetObject("button3.BackgroundImage");
@@ -863,31 +852,32 @@
             button48.TabIndex = 109;
             button48.UseVisualStyleBackColor = false;
             // 
-            // button49
+            // MawsOfTorments
             // 
-            button49.BackColor = Color.Magenta;
-            button49.BackgroundImage = (Image)resources.GetObject("button49.BackgroundImage");
-            button49.BackgroundImageLayout = ImageLayout.Center;
-            button49.Cursor = Cursors.Cross;
-            button49.FlatStyle = FlatStyle.Flat;
-            button49.Location = new Point(677, 791);
-            button49.Name = "button49";
-            button49.Size = new Size(182, 46);
-            button49.TabIndex = 110;
-            button49.UseVisualStyleBackColor = false;
+            MawsOfTorments.BackColor = Color.Magenta;
+            MawsOfTorments.BackgroundImage = (Image)resources.GetObject("MawsOfTorments.BackgroundImage");
+            MawsOfTorments.BackgroundImageLayout = ImageLayout.Center;
+            MawsOfTorments.Cursor = Cursors.Cross;
+            MawsOfTorments.FlatStyle = FlatStyle.Flat;
+            MawsOfTorments.Location = new Point(677, 791);
+            MawsOfTorments.Name = "MawsOfTorments";
+            MawsOfTorments.Size = new Size(182, 46);
+            MawsOfTorments.TabIndex = 110;
+            MawsOfTorments.UseVisualStyleBackColor = false;
+            MawsOfTorments.Click += MawsOfTorments_Click;
             // 
-            // button50
+            // OilFloes
             // 
-            button50.BackColor = Color.Magenta;
-            button50.BackgroundImage = (Image)resources.GetObject("button50.BackgroundImage");
-            button50.BackgroundImageLayout = ImageLayout.Center;
-            button50.Cursor = Cursors.Cross;
-            button50.FlatStyle = FlatStyle.Flat;
-            button50.Location = new Point(677, 843);
-            button50.Name = "button50";
-            button50.Size = new Size(182, 46);
-            button50.TabIndex = 111;
-            button50.UseVisualStyleBackColor = false;
+            OilFloes.BackColor = Color.Magenta;
+            OilFloes.BackgroundImage = (Image)resources.GetObject("OilFloes.BackgroundImage");
+            OilFloes.BackgroundImageLayout = ImageLayout.Center;
+            OilFloes.Cursor = Cursors.Cross;
+            OilFloes.FlatStyle = FlatStyle.Flat;
+            OilFloes.Location = new Point(677, 843);
+            OilFloes.Name = "OilFloes";
+            OilFloes.Size = new Size(182, 46);
+            OilFloes.TabIndex = 111;
+            OilFloes.UseVisualStyleBackColor = false;
             // 
             // button51
             // 
@@ -1771,8 +1761,8 @@
             Controls.Add(button53);
             Controls.Add(button52);
             Controls.Add(button51);
-            Controls.Add(button50);
-            Controls.Add(button49);
+            Controls.Add(OilFloes);
+            Controls.Add(MawsOfTorments);
             Controls.Add(button48);
             Controls.Add(button47);
             Controls.Add(button46);
@@ -1782,7 +1772,6 @@
             Controls.Add(DragonsStand);
             Controls.Add(button41);
             Controls.Add(button3);
-            Controls.Add(pictureBox2);
             Controls.Add(button32);
             Controls.Add(button33);
             Controls.Add(button34);
@@ -1832,7 +1821,6 @@
             Text = "GW2FOX";
             WindowState = FormWindowState.Maximized;
             Load += Worldbosses_Load_1;
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -1893,8 +1881,8 @@
         private Button button46;
         private Button button47;
         private Button button48;
-        private Button button49;
-        private Button button50;
+        private Button MawsOfTorments;
+        private Button OilFloes;
         private Button button51;
         private Button button52;
         private Button button53;

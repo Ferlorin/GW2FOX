@@ -82,7 +82,7 @@
             button9.BackgroundImage = (Image)resources.GetObject("button9.BackgroundImage");
             button9.BackgroundImageLayout = ImageLayout.Center;
             button9.FlatStyle = FlatStyle.Flat;
-            button9.Location = new Point(368, 430);
+            button9.Location = new Point(371, 430);
             button9.Name = "button9";
             button9.Size = new Size(75, 23);
             button9.TabIndex = 67;
@@ -167,7 +167,7 @@
             // Attentionbehe
             // 
             Attentionbehe.Font = new Font("Segoe UI", 9F);
-            Attentionbehe.Location = new Point(12, 414);
+            Attentionbehe.Location = new Point(15, 414);
             Attentionbehe.Multiline = true;
             Attentionbehe.Name = "Attentionbehe";
             Attentionbehe.ReadOnly = true;
@@ -179,7 +179,7 @@
             // Beheinstance
             // 
             Beheinstance.Font = new Font("Segoe UI", 9F);
-            Beheinstance.Location = new Point(12, 369);
+            Beheinstance.Location = new Point(15, 369);
             Beheinstance.Multiline = true;
             Beheinstance.Name = "Beheinstance";
             Beheinstance.ReadOnly = true;

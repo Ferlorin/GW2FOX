@@ -194,7 +194,22 @@ namespace GW2FOX
             // Bring the Gw2-64.exe window to the foreground
             BringGw2ToFront();
         }
-
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        private void MawsOfTorments_Click(object sender, EventArgs e)
+        {
+            ShowAndHideForm(new MawsOfTorments());
+        }
 
         private void Chak_Click(object sender, EventArgs e)
         {
@@ -1881,6 +1896,8 @@ namespace GW2FOX
                 MessageBox.Show($"Ein Fehler ist aufgetreten: {ex.Message}", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        
     }
 
 
