@@ -59,16 +59,6 @@ namespace GW2FOX.Properties {
                 resourceCulture = value;
             }
         }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Background {
-            get {
-                object obj = ResourceManager.GetObject("Background", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
@@ -83,28 +73,10 @@ namespace GW2FOX.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap button {
-            get {
-                object obj = ResourceManager.GetObject("button", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
-        /// </summary>
+       
         internal static System.Drawing.Bitmap Concert {
             get {
                 object obj = ResourceManager.GetObject("Concert", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Concert1 {
-            get {
-                object obj = ResourceManager.GetObject("Concert1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -133,25 +105,6 @@ namespace GW2FOX.Properties {
         internal static System.Drawing.Bitmap Eternal_Ice__exotic_ {
             get {
                 object obj = ResourceManager.GetObject("Eternal_Ice__exotic_", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Header {
-            get {
-                object obj = ResourceManager.GetObject("Header", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Homepage {
-            get {
-                object obj = ResourceManager.GetObject("Homepage", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -233,15 +186,6 @@ namespace GW2FOX.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Timer {
-            get {
-                object obj = ResourceManager.GetObject("Timer", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap Ulgoth_s_Tail {
             get {
                 object obj = ResourceManager.GetObject("Ulgoth_s_Tail", resourceCulture);
@@ -277,18 +221,6 @@ namespace GW2FOX.Properties {
                 object obj = ResourceManager.GetObject("WBsheaderonetime", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
-        }
-        /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Unlocking_the_Wizard_s_Tower
-        {
-            get
-            {
-                object obj = ResourceManager.GetObject("Unlocking_the_Wizard_s_Tower", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-
         }
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.

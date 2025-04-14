@@ -1686,11 +1686,10 @@
             // 
             // Quantity
             // 
-            Quantity.BorderStyle = BorderStyle.None;
             Quantity.Font = new Font("Segoe UI", 11F);
-            Quantity.Location = new Point(16, 166);
+            Quantity.Location = new Point(16, 162);
             Quantity.Name = "Quantity";
-            Quantity.Size = new Size(54, 20);
+            Quantity.Size = new Size(54, 27);
             Quantity.TabIndex = 193;
             Quantity.TextAlign = HorizontalAlignment.Center;
             // 

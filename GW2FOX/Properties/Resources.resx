@@ -121,17 +121,8 @@
   <data name="Master_Tuning_Crystal" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Master_Tuning_Crystal.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Concert1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Concert1.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="backgroundwallpaper1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\backgroundwallpaper.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="Drakkar" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Drakkar.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Header" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Header.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Rhendaksiegel" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Rhendaksiegel.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -141,15 +132,6 @@
   </data>
   <data name="Star_of_Dwayna" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Star_of_Dwayna.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="button" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\button.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Overline" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Overline.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Background" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Background.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Symbol_of_the_Inquest" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Symbol_of_the_Inquest.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -169,29 +151,17 @@
   <data name="WBsheader2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\WBsheader2.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Line" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Line.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Screenshot 2025-03-04 025602" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Screenshot 2025-03-04 025602.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="WBsheader" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\WBsheader.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Eternal_Ice__exotic_" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Eternal_Ice_(exotic).bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="backgroundwallpaper" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\backgroundwallpaper.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="WBsheaderonetime" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\WBsheaderonetime.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Deputy_Peacemaker_Badge" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Deputy_Peacemaker_Badge.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Homepage" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Homepage.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="TheDefenseofAmnytas" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\TheDefenseofAmnytas.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

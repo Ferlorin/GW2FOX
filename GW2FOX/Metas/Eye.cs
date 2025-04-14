@@ -140,11 +140,6 @@ namespace GW2FOX
             BringGw2ToFront();
         }
 
-        private void Eyeinfos2_Click(object sender, EventArgs e)
-        {
-            Clipboard.SetText(Eyeinfos2.Text);
-            BringGw2ToFront();
-        }
 
         private void Preis_Click(object sender, EventArgs e)
         {

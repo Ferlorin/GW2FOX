@@ -7,7 +7,7 @@
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
     <StartupObject>GW2FOX.Program</StartupObject>
-    <ApplicationIcon>bin\Debug\net8.0-windows\icon.ico</ApplicationIcon>
+    <ApplicationIcon>Resources\icon.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -24,7 +24,7 @@
 
   <ItemGroup>
     <Content Include="bin\Debug\net8.0-windows\config2.txt" />
-    <Content Include="bin\Debug\net8.0-windows\icon.ico" />
+    <Content Include="Resources\icon.ico" />
   </ItemGroup>
 
   <ItemGroup>
