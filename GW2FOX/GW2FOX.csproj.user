@@ -34,6 +34,9 @@
     <Compile Update="Metas\Dwayna.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Metas\Effigy.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Metas\Eye.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -44,6 +47,9 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Metas\Forgedwithfire.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Metas\OilFloes.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Metas\MawsOfTorments.cs">
@@ -80,6 +86,9 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Metas\Ogrewars.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Metas\OozePits.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Overlay.cs">

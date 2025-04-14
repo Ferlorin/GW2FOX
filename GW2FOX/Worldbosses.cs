@@ -281,6 +281,10 @@ namespace GW2FOX
             ShowAndHideForm(new ThunderheadPeaks());
         }
 
+        private void OilFloes_Click(object sender, EventArgs e)
+        {
+            ShowAndHideForm(new OilFloes());
+        }
 
         private void Maw_CheckedChanged(object sender, EventArgs e)
         {
@@ -1897,7 +1901,15 @@ namespace GW2FOX
             }
         }
 
-        
+        private void button51_Click(object sender, EventArgs e)
+        {
+            ShowAndHideForm(new OozePits());
+        }
+
+        private void button52_Click(object sender, EventArgs e)
+        {
+            ShowAndHideForm(new Effigy());
+        }
     }
 
 

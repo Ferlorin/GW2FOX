@@ -1,6 +1,6 @@
 ﻿namespace GW2FOX
 {
-    partial class Metalconcert
+    partial class OozePits
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Metalconcert));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OozePits));
+            pictureBox4 = new PictureBox();
             button9 = new Button();
             button8 = new Button();
             button7 = new Button();
@@ -39,15 +40,23 @@
             Attentionbehe = new TextBox();
             Beheinstance = new TextBox();
             Beheinfo = new TextBox();
-            button1 = new Button();
             Symbols = new TextBox();
             Welcome = new TextBox();
             Guild = new TextBox();
             Squadinfo = new TextBox();
             Runinfo = new TextBox();
-            pictureBox5 = new PictureBox();
-            ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
+            button1 = new Button();
+            ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
             SuspendLayout();
+            // 
+            // pictureBox4
+            // 
+            pictureBox4.Image = Properties.Resources.WBsheader;
+            pictureBox4.Location = new Point(12, 232);
+            pictureBox4.Name = "pictureBox4";
+            pictureBox4.Size = new Size(1880, 30);
+            pictureBox4.TabIndex = 119;
+            pictureBox4.TabStop = false;
             // 
             // button9
             // 
@@ -58,9 +67,9 @@
             button9.Location = new Point(371, 430);
             button9.Name = "button9";
             button9.Size = new Size(75, 23);
-            button9.TabIndex = 67;
+            button9.TabIndex = 116;
             button9.UseVisualStyleBackColor = true;
-            button9.Click += Behemapinfo_Click;
+            button9.Click += button9_Click;
             // 
             // button8
             // 
@@ -71,9 +80,9 @@
             button8.Location = new Point(371, 385);
             button8.Name = "button8";
             button8.Size = new Size(75, 23);
-            button8.TabIndex = 66;
+            button8.TabIndex = 115;
             button8.UseVisualStyleBackColor = true;
-            button8.Click += Beheinstance_Click;
+            button8.Click += button8_Click;
             // 
             // button7
             // 
@@ -84,9 +93,9 @@
             button7.Location = new Point(371, 340);
             button7.Name = "button7";
             button7.Size = new Size(75, 23);
-            button7.TabIndex = 65;
+            button7.TabIndex = 114;
             button7.UseVisualStyleBackColor = true;
-            button7.Click += Beheinfo_Click;
+            button7.Click += button7_Click;
             // 
             // button5
             // 
@@ -94,12 +103,11 @@
             button5.BackgroundImageLayout = ImageLayout.Center;
             button5.Cursor = Cursors.Cross;
             button5.FlatStyle = FlatStyle.Flat;
-            button5.Location = new Point(1796, 295);
+            button5.Location = new Point(1803, 295);
             button5.Name = "button5";
             button5.Size = new Size(75, 23);
-            button5.TabIndex = 63;
+            button5.TabIndex = 113;
             button5.UseVisualStyleBackColor = true;
-            button5.Click += Welcome_Click;
             // 
             // button4
             // 
@@ -110,9 +118,8 @@
             button4.Location = new Point(1321, 295);
             button4.Name = "button4";
             button4.Size = new Size(75, 23);
-            button4.TabIndex = 62;
+            button4.TabIndex = 112;
             button4.UseVisualStyleBackColor = true;
-            button4.Click += Guild_Click;
             // 
             // button3
             // 
@@ -123,9 +130,8 @@
             button3.Location = new Point(846, 295);
             button3.Name = "button3";
             button3.Size = new Size(75, 23);
-            button3.TabIndex = 61;
+            button3.TabIndex = 111;
             button3.UseVisualStyleBackColor = true;
-            button3.Click += Squadinfo_Click;
             // 
             // button2
             // 
@@ -136,9 +142,9 @@
             button2.Location = new Point(371, 295);
             button2.Name = "button2";
             button2.Size = new Size(75, 23);
-            button2.TabIndex = 60;
+            button2.TabIndex = 110;
             button2.UseVisualStyleBackColor = true;
-            button2.Click += Runinfo_Click;
+            button2.Click += button2_Click;
             // 
             // Attentionbehe
             // 
@@ -149,8 +155,8 @@
             Attentionbehe.ReadOnly = true;
             Attentionbehe.ScrollBars = ScrollBars.Vertical;
             Attentionbehe.Size = new Size(350, 39);
-            Attentionbehe.TabIndex = 58;
-            Attentionbehe.Text = "≪ATTENTION≫ Meta -Train │ ☠Lvl 80 │ “A Concert for the Ages” │ ☣[&BPgLAAA=]☣ then run to ☣[&BBkMAAA=]☣ - Join us!";
+            Attentionbehe.TabIndex = 109;
+            Attentionbehe.Text = "≪ATTENTION≫ Meta -Train │ ☠Lvl 15 │ “The Ooze Pit Trials” │ ☣[&BPgLAAA=]☣ - Join us!";
             // 
             // Beheinstance
             // 
@@ -161,7 +167,7 @@
             Beheinstance.ReadOnly = true;
             Beheinstance.ScrollBars = ScrollBars.Vertical;
             Beheinstance.Size = new Size(350, 39);
-            Beheinstance.TabIndex = 57;
+            Beheinstance.TabIndex = 108;
             Beheinstance.Text = "Go out of fight, then right click group 2 & join ☣Grothmar Valley☣";
             // 
             // Beheinfo
@@ -174,21 +180,8 @@
             Beheinfo.ReadOnly = true;
             Beheinfo.ScrollBars = ScrollBars.Vertical;
             Beheinfo.Size = new Size(350, 39);
-            Beheinfo.TabIndex = 56;
-            Beheinfo.Text = "☠ ≪A Concert for the Ages≫ ☣[&BPgLAAA=]☣ then run to ☣[&BBkMAAA=]☣";
-            // 
-            // button1
-            // 
-            button1.BackgroundImage = (Image)resources.GetObject("button1.BackgroundImage");
-            button1.BackgroundImageLayout = ImageLayout.Center;
-            button1.Cursor = Cursors.Cross;
-            button1.FlatStyle = FlatStyle.Flat;
-            button1.Location = new Point(1864, 1002);
-            button1.Name = "button1";
-            button1.Size = new Size(40, 40);
-            button1.TabIndex = 55;
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += Back_Click;
+            Beheinfo.TabIndex = 107;
+            Beheinfo.Text = "☠Lvl 80 ≪The Ooze Pit Trials≫ │ ☣[&BPgLAAA=]☣";
             // 
             // Symbols
             // 
@@ -199,7 +192,7 @@
             Symbols.ReadOnly = true;
             Symbols.ScrollBars = ScrollBars.Vertical;
             Symbols.Size = new Size(429, 85);
-            Symbols.TabIndex = 54;
+            Symbols.TabIndex = 106;
             // 
             // Welcome
             // 
@@ -210,7 +203,7 @@
             Welcome.ReadOnly = true;
             Welcome.ScrollBars = ScrollBars.Vertical;
             Welcome.Size = new Size(350, 50);
-            Welcome.TabIndex = 53;
+            Welcome.TabIndex = 105;
             // 
             // Guild
             // 
@@ -221,7 +214,7 @@
             Guild.ReadOnly = true;
             Guild.ScrollBars = ScrollBars.Vertical;
             Guild.Size = new Size(350, 50);
-            Guild.TabIndex = 52;
+            Guild.TabIndex = 104;
             // 
             // Squadinfo
             // 
@@ -232,7 +225,7 @@
             Squadinfo.ReadOnly = true;
             Squadinfo.ScrollBars = ScrollBars.Vertical;
             Squadinfo.Size = new Size(350, 50);
-            Squadinfo.TabIndex = 51;
+            Squadinfo.TabIndex = 103;
             Squadinfo.Text = "\r\n";
             // 
             // Runinfo
@@ -244,23 +237,28 @@
             Runinfo.ReadOnly = true;
             Runinfo.ScrollBars = ScrollBars.Vertical;
             Runinfo.Size = new Size(350, 50);
-            Runinfo.TabIndex = 50;
+            Runinfo.TabIndex = 102;
             // 
-            // pictureBox5
+            // button1
             // 
-            pictureBox5.Image = Properties.Resources.WBsheader;
-            pictureBox5.Location = new Point(12, 232);
-            pictureBox5.Name = "pictureBox5";
-            pictureBox5.Size = new Size(1880, 30);
-            pictureBox5.TabIndex = 126;
-            pictureBox5.TabStop = false;
+            button1.BackgroundImage = (Image)resources.GetObject("button1.BackgroundImage");
+            button1.BackgroundImageLayout = ImageLayout.Center;
+            button1.Cursor = Cursors.Cross;
+            button1.FlatStyle = FlatStyle.Flat;
+            button1.Location = new Point(1864, 1002);
+            button1.Name = "button1";
+            button1.Size = new Size(40, 40);
+            button1.TabIndex = 120;
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
-            // Metalconcert
+            // OozePits
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1904, 1041);
-            Controls.Add(pictureBox5);
+            Controls.Add(button1);
+            Controls.Add(pictureBox4);
             Controls.Add(button9);
             Controls.Add(button8);
             Controls.Add(button7);
@@ -271,22 +269,21 @@
             Controls.Add(Attentionbehe);
             Controls.Add(Beheinstance);
             Controls.Add(Beheinfo);
-            Controls.Add(button1);
             Controls.Add(Symbols);
             Controls.Add(Welcome);
             Controls.Add(Guild);
             Controls.Add(Squadinfo);
             Controls.Add(Runinfo);
-            Icon = (Icon)resources.GetObject("$this.Icon");
-            Name = "Metalconcert";
-            Text = "GW2FOX";
-            WindowState = FormWindowState.Maximized;
-            ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
+            Name = "OozePits";
+            Text = "OozePits";
+            ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
+
+        private PictureBox pictureBox4;
         private Button button9;
         private Button button8;
         private Button button7;
@@ -297,12 +294,11 @@
         private TextBox Attentionbehe;
         private TextBox Beheinstance;
         private TextBox Beheinfo;
-        private Button button1;
         private TextBox Symbols;
         private TextBox Welcome;
         private TextBox Guild;
         private TextBox Squadinfo;
         private TextBox Runinfo;
-        private PictureBox pictureBox5;
+        private Button button1;
     }
 }
