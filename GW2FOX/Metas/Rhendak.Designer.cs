@@ -232,7 +232,7 @@
             Symbols.Multiline = true;
             Symbols.Name = "Symbols";
             Symbols.ScrollBars = ScrollBars.Vertical;
-            Symbols.Size = new Size(434, 221);
+            Symbols.Size = new Size(429, 85);
             Symbols.TabIndex = 83;
             // 
             // Welcome
