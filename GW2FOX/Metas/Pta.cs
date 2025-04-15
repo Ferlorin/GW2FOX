@@ -68,7 +68,7 @@ namespace GW2FOX
             BringGw2ToFront();
         }
 
-        
+
 
         private void Beheinfo_Click(object sender, EventArgs e)
         {

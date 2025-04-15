@@ -148,17 +148,8 @@
   <data name="Ulgoth_s_Tail" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Ulgoth's_Tail.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="WBsheader2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\WBsheader2.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="WBsheader" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\WBsheader.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="Eternal_Ice__exotic_" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Eternal_Ice_(exotic).bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="WBsheaderonetime" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\WBsheaderonetime.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Deputy_Peacemaker_Badge" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Deputy_Peacemaker_Badge.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

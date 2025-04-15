@@ -30,7 +30,6 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LLA));
             button1 = new Button();
-            pictureBox4 = new PictureBox();
             button5 = new Button();
             button4 = new Button();
             button3 = new Button();
@@ -52,7 +51,14 @@
             Leyline60 = new TextBox();
             Leyline50 = new TextBox();
             Leyline20 = new TextBox();
+            pictureBox4 = new PictureBox();
+            pictureBox3 = new PictureBox();
+            pictureBox2 = new PictureBox();
+            pictureBox1 = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // button1
@@ -60,21 +66,12 @@
             button1.BackgroundImage = (Image)resources.GetObject("button1.BackgroundImage");
             button1.BackgroundImageLayout = ImageLayout.Center;
             button1.FlatStyle = FlatStyle.Flat;
-            button1.Location = new Point(1864, 1002);
+            button1.Location = new Point(1852, 989);
             button1.Name = "button1";
             button1.Size = new Size(40, 40);
             button1.TabIndex = 56;
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
-            // 
-            // pictureBox4
-            // 
-            pictureBox4.Image = Properties.Resources.WBsheader;
-            pictureBox4.Location = new Point(12, 232);
-            pictureBox4.Name = "pictureBox4";
-            pictureBox4.Size = new Size(1880, 30);
-            pictureBox4.TabIndex = 119;
-            pictureBox4.TabStop = false;
             // 
             // button5
             // 
@@ -130,7 +127,7 @@
             // Symbols
             // 
             Symbols.Font = new Font("Segoe UI", 11F);
-            Symbols.Location = new Point(1458, 12);
+            Symbols.Location = new Point(1463, 12);
             Symbols.Multiline = true;
             Symbols.Name = "Symbols";
             Symbols.ReadOnly = true;
@@ -336,11 +333,55 @@
             Leyline20.TabIndex = 120;
             Leyline20.Text = "☠LvL 20 ≪Legend Ley Line Anomaly≫ │ ☣[&BOQAAAA=]☣";
             // 
+            // pictureBox4
+            // 
+            pictureBox4.BackgroundImage = (Image)resources.GetObject("pictureBox4.BackgroundImage");
+            pictureBox4.BackgroundImageLayout = ImageLayout.Center;
+            pictureBox4.Location = new Point(490, 232);
+            pictureBox4.Name = "pictureBox4";
+            pictureBox4.Size = new Size(350, 30);
+            pictureBox4.TabIndex = 135;
+            pictureBox4.TabStop = false;
+            // 
+            // pictureBox3
+            // 
+            pictureBox3.BackgroundImage = (Image)resources.GetObject("pictureBox3.BackgroundImage");
+            pictureBox3.BackgroundImageLayout = ImageLayout.Center;
+            pictureBox3.Location = new Point(965, 232);
+            pictureBox3.Name = "pictureBox3";
+            pictureBox3.Size = new Size(350, 30);
+            pictureBox3.TabIndex = 134;
+            pictureBox3.TabStop = false;
+            // 
+            // pictureBox2
+            // 
+            pictureBox2.BackgroundImage = (Image)resources.GetObject("pictureBox2.BackgroundImage");
+            pictureBox2.BackgroundImageLayout = ImageLayout.Center;
+            pictureBox2.Location = new Point(1440, 232);
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.Size = new Size(350, 30);
+            pictureBox2.TabIndex = 133;
+            pictureBox2.TabStop = false;
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.BackgroundImage = (Image)resources.GetObject("pictureBox1.BackgroundImage");
+            pictureBox1.BackgroundImageLayout = ImageLayout.Center;
+            pictureBox1.Location = new Point(15, 232);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(350, 30);
+            pictureBox1.TabIndex = 132;
+            pictureBox1.TabStop = false;
+            // 
             // LLA
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1904, 1041);
+            Controls.Add(pictureBox4);
+            Controls.Add(pictureBox3);
+            Controls.Add(pictureBox2);
+            Controls.Add(pictureBox1);
             Controls.Add(button15);
             Controls.Add(button14);
             Controls.Add(button13);
@@ -353,7 +394,6 @@
             Controls.Add(Leyline60);
             Controls.Add(Leyline50);
             Controls.Add(Leyline20);
-            Controls.Add(pictureBox4);
             Controls.Add(button5);
             Controls.Add(button4);
             Controls.Add(button3);
@@ -368,6 +408,9 @@
             Text = "LLA";
             WindowState = FormWindowState.Maximized;
             ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -375,7 +418,6 @@
         #endregion
 
         private Button button1;
-        private PictureBox pictureBox4;
         private Button button5;
         private Button button4;
         private Button button3;
@@ -397,5 +439,9 @@
         private TextBox Leyline60;
         private TextBox Leyline50;
         private TextBox Leyline20;
+        private PictureBox pictureBox4;
+        private PictureBox pictureBox3;
+        private PictureBox pictureBox2;
+        private PictureBox pictureBox1;
     }
 }

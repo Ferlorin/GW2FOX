@@ -50,8 +50,14 @@ namespace GW2FOX
             Runinfo = new TextBox();
             Matrixkey = new TextBox();
             button6 = new Button();
-            pictureBox5 = new PictureBox();
-            ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
+            pictureBox4 = new PictureBox();
+            pictureBox3 = new PictureBox();
+            pictureBox2 = new PictureBox();
+            pictureBox1 = new PictureBox();
+            ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // button13
@@ -209,7 +215,7 @@ namespace GW2FOX
             Back.BackgroundImage = (Image)resources.GetObject("Back.BackgroundImage");
             Back.BackgroundImageLayout = ImageLayout.Center;
             Back.FlatStyle = FlatStyle.Flat;
-            Back.Location = new Point(1864, 1002);
+            Back.Location = new Point(1852, 989);
             Back.Name = "Back";
             Back.Size = new Size(40, 40);
             Back.TabIndex = 84;
@@ -219,12 +225,12 @@ namespace GW2FOX
             // Symbols
             // 
             Symbols.Font = new Font("Segoe UI", 11F);
-            Symbols.Location = new Point(1458, 12);
+            Symbols.Location = new Point(1440, 12);
             Symbols.Multiline = true;
             Symbols.Name = "Symbols";
             Symbols.ReadOnly = true;
             Symbols.ScrollBars = ScrollBars.Vertical;
-            Symbols.Size = new Size(429, 85);
+            Symbols.Size = new Size(452, 85);
             Symbols.TabIndex = 83;
             // 
             // Welcome
@@ -298,14 +304,45 @@ namespace GW2FOX
             button6.UseVisualStyleBackColor = true;
             button6.Click += Matrixkey_Click;
             // 
-            // pictureBox5
+            // pictureBox4
             // 
-            pictureBox5.Image = Properties.Resources.WBsheader;
-            pictureBox5.Location = new Point(12, 232);
-            pictureBox5.Name = "pictureBox5";
-            pictureBox5.Size = new Size(1880, 30);
-            pictureBox5.TabIndex = 126;
-            pictureBox5.TabStop = false;
+            pictureBox4.BackgroundImage = (Image)resources.GetObject("pictureBox4.BackgroundImage");
+            pictureBox4.BackgroundImageLayout = ImageLayout.Center;
+            pictureBox4.Location = new Point(490, 232);
+            pictureBox4.Name = "pictureBox4";
+            pictureBox4.Size = new Size(350, 30);
+            pictureBox4.TabIndex = 104;
+            pictureBox4.TabStop = false;
+            // 
+            // pictureBox3
+            // 
+            pictureBox3.BackgroundImage = (Image)resources.GetObject("pictureBox3.BackgroundImage");
+            pictureBox3.BackgroundImageLayout = ImageLayout.Center;
+            pictureBox3.Location = new Point(965, 232);
+            pictureBox3.Name = "pictureBox3";
+            pictureBox3.Size = new Size(350, 30);
+            pictureBox3.TabIndex = 103;
+            pictureBox3.TabStop = false;
+            // 
+            // pictureBox2
+            // 
+            pictureBox2.BackgroundImage = (Image)resources.GetObject("pictureBox2.BackgroundImage");
+            pictureBox2.BackgroundImageLayout = ImageLayout.Center;
+            pictureBox2.Location = new Point(1440, 232);
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.Size = new Size(350, 30);
+            pictureBox2.TabIndex = 102;
+            pictureBox2.TabStop = false;
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.BackgroundImage = (Image)resources.GetObject("pictureBox1.BackgroundImage");
+            pictureBox1.BackgroundImageLayout = ImageLayout.Center;
+            pictureBox1.Location = new Point(15, 232);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(350, 30);
+            pictureBox1.TabIndex = 101;
+            pictureBox1.TabStop = false;
             // 
             // Fireelemental
             // 
@@ -313,7 +350,10 @@ namespace GW2FOX
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImageLayout = ImageLayout.Center;
             ClientSize = new Size(1904, 1041);
-            Controls.Add(pictureBox5);
+            Controls.Add(pictureBox4);
+            Controls.Add(pictureBox3);
+            Controls.Add(pictureBox2);
+            Controls.Add(pictureBox1);
             Controls.Add(button6);
             Controls.Add(Matrixkey);
             Controls.Add(button13);
@@ -339,7 +379,10 @@ namespace GW2FOX
             Name = "Fireelemental";
             Text = "GW2FOX";
             WindowState = FormWindowState.Maximized;
-            ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -371,6 +414,9 @@ namespace GW2FOX
         private TextBox Runinfo;
         private TextBox Matrixkey;
         private Button button6;
-        private PictureBox pictureBox5;
+        private PictureBox pictureBox4;
+        private PictureBox pictureBox3;
+        private PictureBox pictureBox2;
+        private PictureBox pictureBox1;
     }
 }

@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OilFloes));
-            pictureBox4 = new PictureBox();
             button9 = new Button();
             button8 = new Button();
             button7 = new Button();
@@ -45,19 +44,16 @@
             Guild = new TextBox();
             Squadinfo = new TextBox();
             Runinfo = new TextBox();
-            button1 = new Button();
             Back = new Button();
+            pictureBox4 = new PictureBox();
+            pictureBox3 = new PictureBox();
+            pictureBox2 = new PictureBox();
+            pictureBox1 = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
-            // 
-            // pictureBox4
-            // 
-            pictureBox4.Image = Properties.Resources.WBsheader;
-            pictureBox4.Location = new Point(12, 232);
-            pictureBox4.Name = "pictureBox4";
-            pictureBox4.Size = new Size(1880, 30);
-            pictureBox4.TabIndex = 119;
-            pictureBox4.TabStop = false;
             // 
             // button9
             // 
@@ -186,12 +182,12 @@
             // Symbols
             // 
             Symbols.Font = new Font("Segoe UI", 11F);
-            Symbols.Location = new Point(1458, 12);
+            Symbols.Location = new Point(1440, 12);
             Symbols.Multiline = true;
             Symbols.Name = "Symbols";
             Symbols.ReadOnly = true;
             Symbols.ScrollBars = ScrollBars.Vertical;
-            Symbols.Size = new Size(429, 85);
+            Symbols.Size = new Size(452, 85);
             Symbols.TabIndex = 106;
             // 
             // Welcome
@@ -239,38 +235,69 @@
             Runinfo.Size = new Size(350, 50);
             Runinfo.TabIndex = 102;
             // 
-            // button1
-            // 
-            button1.BackgroundImage = (Image)resources.GetObject("button1.BackgroundImage");
-            button1.BackgroundImageLayout = ImageLayout.Center;
-            button1.FlatStyle = FlatStyle.Flat;
-            button1.Location = new Point(1864, 1002);
-            button1.Name = "button1";
-            button1.Size = new Size(40, 40);
-            button1.TabIndex = 120;
-            button1.UseVisualStyleBackColor = true;
-            // 
             // Back
             // 
             Back.BackgroundImage = (Image)resources.GetObject("Back.BackgroundImage");
             Back.BackgroundImageLayout = ImageLayout.Center;
             Back.Cursor = Cursors.Cross;
             Back.FlatStyle = FlatStyle.Flat;
-            Back.Location = new Point(1864, 1002);
+            Back.Location = new Point(1852, 989);
             Back.Name = "Back";
             Back.Size = new Size(40, 40);
             Back.TabIndex = 121;
             Back.UseVisualStyleBackColor = true;
             Back.Click += button6_Click;
             // 
+            // pictureBox4
+            // 
+            pictureBox4.BackgroundImage = (Image)resources.GetObject("pictureBox4.BackgroundImage");
+            pictureBox4.BackgroundImageLayout = ImageLayout.Center;
+            pictureBox4.Location = new Point(490, 232);
+            pictureBox4.Name = "pictureBox4";
+            pictureBox4.Size = new Size(350, 30);
+            pictureBox4.TabIndex = 125;
+            pictureBox4.TabStop = false;
+            // 
+            // pictureBox3
+            // 
+            pictureBox3.BackgroundImage = (Image)resources.GetObject("pictureBox3.BackgroundImage");
+            pictureBox3.BackgroundImageLayout = ImageLayout.Center;
+            pictureBox3.Location = new Point(965, 232);
+            pictureBox3.Name = "pictureBox3";
+            pictureBox3.Size = new Size(350, 30);
+            pictureBox3.TabIndex = 124;
+            pictureBox3.TabStop = false;
+            // 
+            // pictureBox2
+            // 
+            pictureBox2.BackgroundImage = (Image)resources.GetObject("pictureBox2.BackgroundImage");
+            pictureBox2.BackgroundImageLayout = ImageLayout.Center;
+            pictureBox2.Location = new Point(1440, 232);
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.Size = new Size(350, 30);
+            pictureBox2.TabIndex = 123;
+            pictureBox2.TabStop = false;
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.BackgroundImage = (Image)resources.GetObject("pictureBox1.BackgroundImage");
+            pictureBox1.BackgroundImageLayout = ImageLayout.Center;
+            pictureBox1.Location = new Point(15, 232);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(350, 30);
+            pictureBox1.TabIndex = 122;
+            pictureBox1.TabStop = false;
+            // 
             // OilFloes
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1904, 1041);
-            Controls.Add(Back);
-            Controls.Add(button1);
             Controls.Add(pictureBox4);
+            Controls.Add(pictureBox3);
+            Controls.Add(pictureBox2);
+            Controls.Add(pictureBox1);
+            Controls.Add(Back);
             Controls.Add(button9);
             Controls.Add(button8);
             Controls.Add(button7);
@@ -290,13 +317,14 @@
             Text = "Form1";
             WindowState = FormWindowState.Maximized;
             ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
-
-        private PictureBox pictureBox4;
         private Button button9;
         private Button button8;
         private Button button7;
@@ -312,7 +340,10 @@
         private TextBox Guild;
         private TextBox Squadinfo;
         private TextBox Runinfo;
-        private Button button1;
         private Button Back;
+        private PictureBox pictureBox4;
+        private PictureBox pictureBox3;
+        private PictureBox pictureBox2;
+        private PictureBox pictureBox1;
     }
 }

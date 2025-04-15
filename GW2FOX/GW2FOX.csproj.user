@@ -103,9 +103,6 @@
     <Compile Update="Metas\Inquestgolem.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Metas\Jormag.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Update="Metas\Junglewurm.cs">
       <SubType>Form</SubType>
     </Compile>
