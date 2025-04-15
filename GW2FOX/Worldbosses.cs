@@ -552,7 +552,7 @@ namespace GW2FOX
 
         private void Mascen_CheckedChanged(object sender, EventArgs e)
         {
-            string bossName = "Spellmaster Macsen";
+            string bossName = "Nightbosses";
 
 
 
@@ -1173,7 +1173,7 @@ namespace GW2FOX
         { "Claw of Jormag", Claw },
         { "Chak Gerent", Chak },
         { "Battle in Tarir", Tarir },
-        { "Spellmaster Macsen", Mascen },
+        { "Nightbosses", Mascen },
         { "Dragon's Stand", DS },
         { "Death-Branded Shatterer", DBS },
         { "Junundu Rising", Junundu },

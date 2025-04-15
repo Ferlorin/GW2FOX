@@ -352,18 +352,18 @@
                 AddBossEvent("Battle in Tarir", "22:45:00", "Maguuma");
                 AddBossEvent("Battle in Tarir", "00:45:00", "Maguuma");
 
-                AddBossEvent("Spellmaster Macsen", "02:10:00", "Maguuma");
-                AddBossEvent("Spellmaster Macsen", "04:10:00", "Maguuma");
-                AddBossEvent("Spellmaster Macsen", "06:10:00", "Maguuma");
-                AddBossEvent("Spellmaster Macsen", "08:10:00", "Maguuma");
-                AddBossEvent("Spellmaster Macsen", "10:10:00", "Maguuma");
-                AddBossEvent("Spellmaster Macsen", "12:10:00", "Maguuma");
-                AddBossEvent("Spellmaster Macsen", "14:10:00", "Maguuma");
-                AddBossEvent("Spellmaster Macsen", "16:10:00", "Maguuma");
-                AddBossEvent("Spellmaster Macsen", "18:10:00", "Maguuma");
-                AddBossEvent("Spellmaster Macsen", "20:10:00", "Maguuma");
-                AddBossEvent("Spellmaster Macsen", "22:10:00", "Maguuma");
-                AddBossEvent("Spellmaster Macsen", "00:10:00", "Maguuma");
+                AddBossEvent("Nightbosses", "02:10:00", "Maguuma");
+                AddBossEvent("Nightbosses", "04:10:00", "Maguuma");
+                AddBossEvent("Nightbosses", "06:10:00", "Maguuma");
+                AddBossEvent("Nightbosses", "08:10:00", "Maguuma");
+                AddBossEvent("Nightbosses", "10:10:00", "Maguuma");
+                AddBossEvent("Nightbosses", "12:10:00", "Maguuma");
+                AddBossEvent("Nightbosses", "14:10:00", "Maguuma");
+                AddBossEvent("Nightbosses", "16:10:00", "Maguuma");
+                AddBossEvent("Nightbosses", "18:10:00", "Maguuma");
+                AddBossEvent("Nightbosses", "20:10:00", "Maguuma");
+                AddBossEvent("Nightbosses", "22:10:00", "Maguuma");
+                AddBossEvent("Nightbosses", "00:10:00", "Maguuma");
 
                 AddBossEvent("Dragon's Stand", "01:30:00", "Maguuma");
                 AddBossEvent("Dragon's Stand", "03:30:00", "Maguuma");
@@ -432,31 +432,31 @@
                 AddBossEvent("Thunderhead Keep", "21:45:00", "Desert");
                 AddBossEvent("Thunderhead Keep", "23:45:00", "Desert");
 
-                AddBossEvent("Serpents' Ire", "02:30:00", "Desert");
-                AddBossEvent("Serpents' Ire", "04:30:00", "Desert");
-                AddBossEvent("Serpents' Ire", "06:30:00", "Desert");
-                AddBossEvent("Serpents' Ire", "08:30:00", "Desert");
-                AddBossEvent("Serpents' Ire", "10:30:00", "Desert");
-                AddBossEvent("Serpents' Ire", "12:30:00", "Desert");
-                AddBossEvent("Serpents' Ire", "14:30:00", "Desert");
-                AddBossEvent("Serpents' Ire", "16:30:00", "Desert");
-                AddBossEvent("Serpents' Ire", "18:30:00", "Desert");
-                AddBossEvent("Serpents' Ire", "20:30:00", "Desert");
-                AddBossEvent("Serpents' Ire", "22:30:00", "Desert");
-                AddBossEvent("Serpents' Ire", "00:30:00", "Desert");
+                AddBossEvent("Serpents'Ire", "02:30:00", "Desert");
+                AddBossEvent("Serpents'Ire", "04:30:00", "Desert");
+                AddBossEvent("Serpents'Ire", "06:30:00", "Desert");
+                AddBossEvent("Serpents'Ire", "08:30:00", "Desert");
+                AddBossEvent("Serpents'Ire", "10:30:00", "Desert");
+                AddBossEvent("Serpents'Ire", "12:30:00", "Desert");
+                AddBossEvent("Serpents'Ire", "14:30:00", "Desert");
+                AddBossEvent("Serpents'Ire", "16:30:00", "Desert");
+                AddBossEvent("Serpents'Ire", "18:30:00", "Desert");
+                AddBossEvent("Serpents'Ire", "20:30:00", "Desert");
+                AddBossEvent("Serpents'Ire", "22:30:00", "Desert");
+                AddBossEvent("Serpents'Ire", "00:30:00", "Desert");
 
-                AddBossEvent("Death-Branded Shatterer", "03:00:00", "Desert");
-                AddBossEvent("Death-Branded Shatterer", "05:00:00", "Desert");
-                AddBossEvent("Death-Branded Shatterer", "07:00:00", "Desert");
-                AddBossEvent("Death-Branded Shatterer", "09:00:00", "Desert");
-                AddBossEvent("Death-Branded Shatterer", "11:00:00", "Desert");
-                AddBossEvent("Death-Branded Shatterer", "13:00:00", "Desert");
-                AddBossEvent("Death-Branded Shatterer", "15:00:00", "Desert");
-                AddBossEvent("Death-Branded Shatterer", "17:00:00", "Desert");
-                AddBossEvent("Death-Branded Shatterer", "19:00:00", "Desert");
-                AddBossEvent("Death-Branded Shatterer", "21:00:00", "Desert");
-                AddBossEvent("Death-Branded Shatterer", "23:00:00", "Desert");
-                AddBossEvent("Death-Branded Shatterer", "01:00:00", "Desert");
+                AddBossEvent("DB Shatterer", "03:00:00", "Desert");
+                AddBossEvent("DB Shatterer", "05:00:00", "Desert");
+                AddBossEvent("DB Shatterer", "07:00:00", "Desert");
+                AddBossEvent("DB Shatterer", "09:00:00", "Desert");
+                AddBossEvent("DB Shatterer", "11:00:00", "Desert");
+                AddBossEvent("DB Shatterer", "13:00:00", "Desert");
+                AddBossEvent("DB Shatterer", "15:00:00", "Desert");
+                AddBossEvent("DB Shatterer", "17:00:00", "Desert");
+                AddBossEvent("DB Shatterer", "19:00:00", "Desert");
+                AddBossEvent("DB Shatterer", "21:00:00", "Desert");
+                AddBossEvent("DB Shatterer", "23:00:00", "Desert");
+                AddBossEvent("DB Shatterer", "01:00:00", "Desert");
 
                 AddBossEvent("Junundu Rising", "01:30:00", "Desert");
                 AddBossEvent("Junundu Rising", "02:30:00", "Desert");
@@ -617,18 +617,17 @@
 
 
                 //SotO
-                //SotO
-                AddBossEvent("Unlock'Wizard's Tower", "01:00:00", "SotO");
-                AddBossEvent("Unlock'Wizard's Tower", "03:00:00", "SotO");
-                AddBossEvent("Unlock'Wizard's Tower", "05:00:00", "SotO");
-                AddBossEvent("Unlock'Wizard's Tower", "07:00:00", "SotO");
-                AddBossEvent("Unlock'Wizard's Tower", "09:00:00", "SotO");
-                AddBossEvent("Unlock'Wizard's Tower", "11:00:00", "SotO");
-                AddBossEvent("Unlock'Wizard's Tower", "13:00:00", "SotO");
-                AddBossEvent("Unlock'Wizard's Tower", "15:00:00", "SotO");
-                AddBossEvent("Unlock'Wizard's Tower", "17:00:00", "SotO");
-                AddBossEvent("Unlock'Wizard's Tower", "19:00:00", "SotO");
-                AddBossEvent("Unlock'Wizard's Tower", "23:00:00", "SotO");
+                AddBossEvent("Wizard's Tower", "01:00:00", "SotO");
+                AddBossEvent("Wizard's Tower", "03:00:00", "SotO");
+                AddBossEvent("Wizard's Tower", "05:00:00", "SotO");
+                AddBossEvent("Wizard's Tower", "07:00:00", "SotO");
+                AddBossEvent("Wizard's Tower", "09:00:00", "SotO");
+                AddBossEvent("Wizard's Tower", "11:00:00", "SotO");
+                AddBossEvent("Wizard's Tower", "13:00:00", "SotO");
+                AddBossEvent("Wizard's Tower", "15:00:00", "SotO");
+                AddBossEvent("Wizard's Tower", "17:00:00", "SotO");
+                AddBossEvent("Wizard's Tower", "19:00:00", "SotO");
+                AddBossEvent("Wizard's Tower", "23:00:00", "SotO");
 
                 AddBossEvent("Fly by Night", "01:55:00", "SotO");
                 AddBossEvent("Fly by Night", "03:55:00", "SotO");
