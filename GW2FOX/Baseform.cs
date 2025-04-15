@@ -412,28 +412,17 @@ namespace GW2FOX
                 {
                     try
                     {
+                        // Read the boss names from the configuration file
                         List<string> bossNamesFromConfig = BossList23;
 
-                        DateTime currentTimeUtc = DateTime.UtcNow;
-                        DateTime currentTimeMez = TimeZoneInfo.ConvertTimeFromUtc(currentTimeUtc, mezTimeZone);
-                        TimeSpan currentTime = currentTimeMez.TimeOfDay;
-
-
-                        var upcomingBosses = BossEventGroups
+                        var bossEventGroups = BossEventGroups
                             .Where(bossEventGroup => bossNamesFromConfig.Contains(bossEventGroup.BossName))
+                            .ToList();
+
+                        var allBosses = bossEventGroups
                             .SelectMany(bossEventGroup => bossEventGroup.GetNextRuns())
                             .ToList();
 
-
-
-                        var pastBosses = BossEventGroups
-                                .Where(bossEventGroup => bossNamesFromConfig.Contains(bossEventGroup.BossName))
-                                .SelectMany(bossEventGroup => bossEventGroup.GetPreviousRuns())
-                                .ToList();
-
-
-                        // Combine all bosses
-                        var allBosses = upcomingBosses.Concat(pastBosses).ToList();
 
                         var listViewItems = new List<ListViewItem>();
 
@@ -442,56 +431,47 @@ namespace GW2FOX
 
                         allBosses.Sort((bossEvent1, bossEvent2) =>
                         {
-
                             // Compare the adjusted timings for the next day
                             int adjustedTimingComparison = bossEvent1.NextRunTime.CompareTo(bossEvent2.NextRunTime);
                             if (adjustedTimingComparison != 0) return adjustedTimingComparison;
 
-                            // If timings are equal, sort by ascending durations
-                            int durationComparison = bossEvent1.Duration.CompareTo(bossEvent2.Duration);
-                            if (durationComparison != 0) return durationComparison;
 
                             // If durations and timings are equal, sort by categories (if necessary)
-                            int categoryComparison = bossEvent1.Category.CompareTo(bossEvent2.Category);
+                            int categoryComparison = String.Compare(bossEvent1.Category, bossEvent2.Category, StringComparison.Ordinal);
                             if (categoryComparison != 0) return categoryComparison;
 
-                            return 0; // Tie, maintain the order unchanged
+                            return 0;
                         });
 
                         foreach (var bossEvent in allBosses)
                         {
-                            if (addedBossNames.Add($"{bossEvent.BossName}_{bossEvent.NextRunTime}"))
+                            // Calculate the end time of the boss event based on the current time
+
+                            var listViewItem = new ListViewItem("btn", 0);
+                            listViewItem.SubItems.Add(bossEvent.BossName); // Hier wird ein Unterelement hinzugefügt
+                            listViewItem.SubItems.Add(bossEvent.getTimeRemainingFormatted()); // Hier wird ein Unterelement hinzugefügt
+                            listViewItem.ForeColor = bossEvent.getForeColor();
+                            // listViewItem.ToolTipText =
+                            //     "Left Click to copy the Waypoint to clipboard\nRight Click to remove from the list";
+                            listViewItem.Tag = bossEvent;
+                            foreach (ListViewItem.ListViewSubItem subItem in listViewItem.SubItems)
                             {
-                                bool isPastBoss = pastBosses.Contains(bossEvent);
-                                TimeSpan timeDifference = currentTimeMez - bossEvent.NextRunTime;
-
-                                if (isPastBoss && timeDifference < new TimeSpan(0, 14, 59))
-                                {
-                                    string elapsedSinceStart = $"{(int)timeDifference.TotalHours:D2}:{timeDifference.Minutes:D2}:{timeDifference.Seconds:D2}";
-
-                                    var listViewItem = new ListViewItem(new[] { bossEvent.BossName, elapsedSinceStart });
-                                    listViewItem.ForeColor = GetFontColor(bossEvent, pastBosses);
-                                    listViewItem.Font = new Font("Segoe UI", 10, FontStyle.Bold);
-                                    listViewItems.Add(listViewItem);
-                                }
-                                else
-                                {
-                                    TimeSpan elapsedTime = bossEvent.NextRunTime - currentTimeMez;
-                                    string elapsedTimeFormat = $"{(int)elapsedTime.TotalHours:D2}:{elapsedTime.Minutes:D2}:{elapsedTime.Seconds:D2}";
-
-                                    Color fontColor = GetFontColor(bossEvent, pastBosses);
-                                    var listViewItem = new ListViewItem(new[] { bossEvent.BossName, elapsedTimeFormat });
-                                    listViewItem.ForeColor = fontColor;
-
-                                    listViewItem.Font = HasSameTimeAndCategory(allBosses, bossEvent)
-                                        ? new Font("Segoe UI", 10, FontStyle.Italic | FontStyle.Bold)
-                                        : new Font("Segoe UI", 10, FontStyle.Bold);
-
-                                    listViewItems.Add(listViewItem);
-                                }
+                                subItem.ForeColor = listViewItem.ForeColor;
                             }
-                        }
 
+
+                            // Neue Bedingung hinzufügen, um zu prüfen, ob ein Bossevent zur selben Zeit stattfindet wie ein anderes Bossevent derselben Kategorie
+                            if (HasSameTimeAndCategory(allBosses, bossEvent))
+                            {
+                                listViewItem.Font = new Font("Segoe UI", 10, FontStyle.Italic | FontStyle.Bold);
+                            }
+                            else
+                            {
+                                listViewItem.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+                            }
+
+                            listViewItems.Add(listViewItem);
+                        }
                         UpdateListViewItems(listViewItems);
                     }
                     catch (Exception ex)

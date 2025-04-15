@@ -1,680 +1,125 @@
-﻿namespace GW2FOX
+﻿using TimeSpan = System.TimeSpan;
+
+namespace GW2FOX
 {
-    
     public static class BossTimings
     {
-        public static Dictionary<string, List<BossEvent>> BossEvents { get; } = new Dictionary<string, List<BossEvent>>();
-        public static List<string> BossList23 { get; set; } = new List<string>();
-        internal static List<BossEvent> Events = new List<BossEvent>();
-        internal static List<BossEventGroup> BossEventGroups = new List<BossEventGroup>();
+        public static Dictionary<string, List<BossEvent>> BossEvents { get; } =
+            new Dictionary<string, List<BossEvent>>();
 
-        internal static int NEXT_RUNS_TO_SHOW = 2;
-        internal static int PREVIOUS_RUNS_TO_SHOW = 1;
+        public static List<string> BossList23 { get; private set; } = [];
+        public static Dictionary<DateTime, List<string>> DoneBosses { get; private set; } = [];
+        private static readonly List<BossEvent> Events = [];
+        internal static readonly List<BossEventGroup> BossEventGroups = [];
+
+        private const int NextRunsToShow = 2;
+        private const int DaysExtraToCalculate = 1;
+
+        // internal static int PREVIOUS_RUNS_TO_SHOW = 1;
+        private static readonly char[] Separator = new char[] { ',' };
+
+        private static void Init()
+        {
+            Events.Clear();
+            BossEventGroups.Clear();
+        }
 
         static BossTimings()
         {
             SetBossListFromConfig_Bosses();
+            Init();
+
+            AddBossEvent("The frozen Maw", "01:15:00", 2, "WBs", "[&BMIDAAA=]");
+            AddBossEvent("Fireshaman", "01:15:00", 2, "WBs", "[&BO4BAAA=]");
+            AddBossEvent("LLLA Timberline", "01:20:00", 6, "WBs");
+            AddBossEvent("LLLA Iron Marches", "03:20:00", 6, "WBs", "[&BOcBAAA=]");
+            AddBossEvent("LLLA Gendarran", "05:20:00", 6, "WBs");
+            AddBossEvent("Fire Elemental", "01:45:00", 2, "WBs", "[&BEcAAAA=]");
+            AddBossEvent("Great Jungle Wurm", "00:15:00", 2, "WBs", "[&BEEFAAA=]");
+            AddBossEvent("Ulgoth the Modniir", "02:30:00", 3, "WBs", "[&BLAAAAA=]");
+            AddBossEvent("Taidha Covington", "01:00:00", 3, "WBs", "[&BKgBAAA=]");
+            AddBossEvent("The Shatterer", "02:00:00", 3, "WBs", "[&BE4DAAA=]");
+            AddBossEvent("Shadow Behemoth", "00:45:00", 2, "WBs", "[&BPcAAAA=]");
+            AddBossEvent("Tequatl the Sunless", [
+                "01:00:00",
+                "04:00:00",
+                "08:00:00",
+                "12:30:00",
+                "17:00:00",
+                "20:00:00"
+            ], "WBs", "[&BNABAAA=]");
+            AddBossEvent("Megadestroyer", "01:30:00", 3, "WBs", "[&BM0CAAA=]");
+            AddBossEvent("Inquest Golem M2", "00:03:00", 3, "WBs", "[&BNQCAAA=]");
+            AddBossEvent("Karka Queen", [
+                "00:00:00",
+                "03:00:00",
+                "07:00:00",
+                "11:30:00",
+                "16:00:00",
+                "19:00:00"
+            ], "WBs", "[&BNUGAAA=]");
+            AddBossEvent("Claw of Jormag", "00:30:00", 3, "WBs", "[&BHoCAAA=]");
+
+            //LWS2
+            AddBossEvent("Sandstorm", "00:40:00", 1, "LWS2", "[&BIAHAAA=]");
+
+            //LWS3
+            AddBossEvent("Saidra's Haven", "00:00:00", 2, "LWS3", "[&BK0JAAA=]");
+            AddBossEvent("New Loamhurst", "00:45:00", 2, "LWS3", "[&BLQJAAA=]");
+            AddBossEvent("Noran's Homestead", "01:40:00", 2, "LWS3", "[&BK8JAAA=]");
 
 
-            foreach (var bossName in BossList23)
-            {
+            //Ice
+            AddBossEvent("Defend Jora's Keep", "00:45:00", 2, "Ice", "[&BCcMAAA=]");
+            AddBossEvent("Doomlore Shrine", "01:38:00", 2, "Ice", "[&BA4MAAA=]");
+            AddBossEvent("Storms of Winter", "01:00:00", 2, "Ice", "[&BCcMAAA=]");
+            AddBossEvent("Effigy", "01:10:00", 2, "Ice", "[&BA4MAAA=]");
+            AddBossEvent("Ooze Pits", "00:05:00", 2, "Ice", "[&BPgLAAA=]");
+            AddBossEvent("Dragonstorm", "00:00:00", 2, "Ice", "[&BAkMAAA=]");
+            AddBossEvent("Drakkar", "00:05:00", 2, "Ice", "[&BDkMAAA=]");
+            AddBossEvent("Metal Concert", "00:40:00", 2, "Ice", "[&BPgLAAA=]");
+
+            // Maguuma
+            AddBossEvent("Chak Gerent", "01:30:00", 2, "Maguuma", "[&BPUHAAA=]");
+            AddBossEvent("Battle in Tarir", "01:45:00", 2, "Maguuma", "[&BN0HAAA=][&BGwIAAA=][&BAIIAAA=][&BAYIAAA=]");
+            AddBossEvent("Octovine", "02:00:00", 2, "Maguuma", "[&BN0HAAA=][&BGwIAAA=][&BAIIAAA=][&BAYIAAA=]");
+            AddBossEvent("Spellmaster Macsen", "01:10:00", 2, "Maguuma", "[&BO8HAAA=]");
+            AddBossEvent("Dragon's Stand", "00:30:00", 2, "Maguuma", "[&BBAIAAA=]");
+
+            //Desert
+            AddBossEvent("The Oil Floes", "01:45:00", 2, "Desert", "[&BKYLAAA=]");
+            AddBossEvent("Maws of Torment", "00:00:00", 2, "Desert", "[&BKMKAAA=]");
+            AddBossEvent("Palawadan", "00:45:00", 2, "Desert", "[&BAkLAAA=]");
+            AddBossEvent("Thunderhead Keep", "00:45:00", 2, "Desert", "[&BLsLAAA=]");
+            AddBossEvent("Serpents' Ire", "01:30:00", 2, "Desert", "[&BHQKAAA=]");
+            AddBossEvent("DB Shatterer", "00:00:00", 2, "Desert", "[&BJMLAAA=]");
+            AddBossEvent("Junundu Rising", "00:30:00", 1, "Desert", "[&BMEKAAA=]");
+            AddBossEvent("Path to Ascension", "00:30:00", 2, "Desert", "[&BFMKAAA=]");
+            AddBossEvent("Doppelganger", "00:55:00", 2, "Desert", "[&BFMKAAA=]");
+            AddBossEvent("Forged with Fire", "01:00:00", 1, "Desert", "[&BO0KAAA=]");
+            AddBossEvent("Choya Piñata", "01:20:00", 2, "Desert", "[&BLsKAAA=]");
+
+            // Cantha
+            AddBossEvent("Aetherblade Assault", "00:30:00", 2, "Cantha", "[&BGUNAAA=]");
+            AddBossEvent("Kaineng Blackout", "01:00:00", 2, "Cantha", "[&BBkNAAA=]");
+            AddBossEvent("Gang War", "01:30:00", 2, "Cantha", "[&BMwMAAA=]");
+            AddBossEvent("Aspenwood", "00:40:00", 2, "Cantha", "[&BPkMAAA=]");
+            AddBossEvent("Battle for Jade Sea", "00:00:00", 2, "Cantha", "[&BKIMAAA=]");
+
+            //SotO
+            AddBossEvent("Wizard's Tower", "00:00:00", 2, "SotO", "[&BL4NAAA=]");
+            AddBossEvent("Fly by Night", "00:55:00", 2, "SotO", "[&BB8OAAA=]");
+            AddBossEvent("Defense of Amnytas", "01:00:00", 2, "SotO", "[&BDQOAAA=]");
+            AddBossEvent("Convergences", "02:30:00", 3, "SotO", "[&BB8OAAA=]");
 
 
-                AddBossEvent("The frozen Maw", "02:15:00", "WBs");
-                AddBossEvent("The frozen Maw", "04:15:00", "WBs");
-                AddBossEvent("The frozen Maw", "06:15:00", "WBs");
-                AddBossEvent("The frozen Maw", "08:15:00", "WBs");
-                AddBossEvent("The frozen Maw", "10:15:00", "WBs");
-                AddBossEvent("The frozen Maw", "12:15:00", "WBs");
-                AddBossEvent("The frozen Maw", "14:15:00", "WBs");
-                AddBossEvent("The frozen Maw", "16:15:00", "WBs");
-                AddBossEvent("The frozen Maw", "18:15:00", "WBs");
-                AddBossEvent("The frozen Maw", "20:15:00", "WBs");
-                AddBossEvent("The frozen Maw", "22:15:00", "WBs");
-                AddBossEvent("The frozen Maw", "00:15:00", "WBs");
-
-                AddBossEvent("LLLA - Timberline Falls", "02:20:00", "WBs");
-                AddBossEvent("LLLA - Iron Marches", "04:20:00", "WBs");
-                AddBossEvent("LLLA - Gendarran Fields", "06:20:00", "WBs");
-                AddBossEvent("LLLA - Timberline Falls", "08:20:00", "WBs");
-                AddBossEvent("LLLA - Iron Marches", "10:20:00", "WBs");
-                AddBossEvent("LLLA - Gendarran Fields", "12:20:00", "WBs");
-                AddBossEvent("LLLA - Timberline Falls", "14:20:00", "WBs");
-                AddBossEvent("LLLA - Iron Marches", "16:20:00", "WBs");
-                AddBossEvent("LLLA - Gendarran Fields", "18:20:00", "WBs");
-                AddBossEvent("LLLA - Timberline Falls", "20:20:00", "WBs");
-                AddBossEvent("LLLA - Iron Marches", "22:20:00", "WBs");
-                AddBossEvent("LLLA - Gendarran Fields", "00:20:00", "WBs");
-
-                AddBossEvent("Fire Elemental", "02:45:00", "WBs");
-                AddBossEvent("Fire Elemental", "04:45:00", "WBs");
-                AddBossEvent("Fire Elemental", "06:45:00", "WBs");
-                AddBossEvent("Fire Elemental", "08:45:00", "WBs");
-                AddBossEvent("Fire Elemental", "10:45:00", "WBs");
-                AddBossEvent("Fire Elemental", "12:45:00", "WBs");
-                AddBossEvent("Fire Elemental", "14:45:00", "WBs");
-                AddBossEvent("Fire Elemental", "16:45:00", "WBs");
-                AddBossEvent("Fire Elemental", "18:45:00", "WBs");
-                AddBossEvent("Fire Elemental", "20:45:00", "WBs");
-                AddBossEvent("Fire Elemental", "22:45:00", "WBs");
-                AddBossEvent("Fire Elemental", "00:45:00", "WBs");
-
-                AddBossEvent("Great Jungle Wurm", "01:15:00", "WBs");
-                AddBossEvent("Great Jungle Wurm", "03:15:00", "WBs");
-                AddBossEvent("Great Jungle Wurm", "05:15:00", "WBs");
-                AddBossEvent("Great Jungle Wurm", "07:15:00", "WBs");
-                AddBossEvent("Great Jungle Wurm", "09:15:00", "WBs");
-                AddBossEvent("Great Jungle Wurm", "11:15:00", "WBs");
-                AddBossEvent("Great Jungle Wurm", "13:15:00", "WBs");
-                AddBossEvent("Great Jungle Wurm", "15:15:00", "WBs");
-                AddBossEvent("Great Jungle Wurm", "17:15:00", "WBs");
-                AddBossEvent("Great Jungle Wurm", "19:15:00", "WBs");
-                AddBossEvent("Great Jungle Wurm", "21:15:00", "WBs");
-                AddBossEvent("Great Jungle Wurm", "23:15:00", "WBs");
-
-                AddBossEvent("Ulgoth the Modniir", "03:30:00", "WBs");
-                AddBossEvent("Ulgoth the Modniir", "06:30:00", "WBs");
-                AddBossEvent("Ulgoth the Modniir", "09:30:00", "WBs");
-                AddBossEvent("Ulgoth the Modniir", "12:30:00", "WBs");
-                AddBossEvent("Ulgoth the Modniir", "15:30:00", "WBs");
-                AddBossEvent("Ulgoth the Modniir", "18:30:00", "WBs");
-                AddBossEvent("Ulgoth the Modniir", "21:30:00", "WBs");
-                AddBossEvent("Ulgoth the Modniir", "00:30:00", "WBs");
-
-                AddBossEvent("Taidha Covington", "02:00:00", "WBs");
-                AddBossEvent("Taidha Covington", "05:00:00", "WBs");
-                AddBossEvent("Taidha Covington", "08:00:00", "WBs");
-                AddBossEvent("Taidha Covington", "11:00:00", "WBs");
-                AddBossEvent("Taidha Covington", "14:00:00", "WBs");
-                AddBossEvent("Taidha Covington", "17:00:00", "WBs");
-                AddBossEvent("Taidha Covington", "20:00:00", "WBs");
-                AddBossEvent("Taidha Covington", "23:00:00", "WBs");
-
-                AddBossEvent("The Shatterer", "03:00:00", "WBs");
-                AddBossEvent("The Shatterer", "06:00:00", "WBs");
-                AddBossEvent("The Shatterer", "09:00:00", "WBs");
-                AddBossEvent("The Shatterer", "12:00:00", "WBs");
-                AddBossEvent("The Shatterer", "15:00:00", "WBs");
-                AddBossEvent("The Shatterer", "18:00:00", "WBs");
-                AddBossEvent("The Shatterer", "21:00:00", "WBs");
-                AddBossEvent("The Shatterer", "00:00:00", "WBs");
-
-                AddBossEvent("Shadow Behemoth", "03:45:00", "WBs");
-                AddBossEvent("Shadow Behemoth", "05:45:00", "WBs");
-                AddBossEvent("Shadow Behemoth", "07:45:00", "WBs");
-                AddBossEvent("Shadow Behemoth", "09:45:00", "WBs");
-                AddBossEvent("Shadow Behemoth", "11:45:00", "WBs");
-                AddBossEvent("Shadow Behemoth", "13:45:00", "WBs");
-                AddBossEvent("Shadow Behemoth", "15:45:00", "WBs");
-                AddBossEvent("Shadow Behemoth", "17:45:00", "WBs");
-                AddBossEvent("Shadow Behemoth", "19:45:00", "WBs");
-                AddBossEvent("Shadow Behemoth", "21:45:00", "WBs");
-                AddBossEvent("Shadow Behemoth", "23:45:00", "WBs");
-                AddBossEvent("Shadow Behemoth", "01:45:00", "WBs");
-
-                AddBossEvent("Tequatl the Sunless", "02:00:00", "WBs");
-                AddBossEvent("Tequatl the Sunless", "05:00:00", "WBs");
-                AddBossEvent("Tequatl the Sunless", "09:00:00", "WBs");
-                AddBossEvent("Tequatl the Sunless", "13:30:00", "WBs");
-                AddBossEvent("Tequatl the Sunless", "18:00:00", "WBs");
-                AddBossEvent("Tequatl the Sunless", "21:00:00", "WBs");
-
-                AddBossEvent("Megadestroyer", "02:30:00", "WBs");
-                AddBossEvent("Megadestroyer", "05:30:00", "WBs");
-                AddBossEvent("Megadestroyer", "08:30:00", "WBs");
-                AddBossEvent("Megadestroyer", "11:30:00", "WBs");
-                AddBossEvent("Megadestroyer", "14:30:00", "WBs");
-                AddBossEvent("Megadestroyer", "17:30:00", "WBs");
-                AddBossEvent("Megadestroyer", "20:30:00", "WBs");
-                AddBossEvent("Megadestroyer", "23:30:00", "WBs");
-
-                AddBossEvent("Inquest Golem Mark II", "01:03:00", "WBs");
-                AddBossEvent("Inquest Golem Mark II", "04:03:00", "WBs");
-                AddBossEvent("Inquest Golem Mark II", "07:03:00", "WBs");
-                AddBossEvent("Inquest Golem Mark II", "10:03:00", "WBs");
-                AddBossEvent("Inquest Golem Mark II", "13:03:00", "WBs");
-                AddBossEvent("Inquest Golem Mark II", "16:03:00", "WBs");
-                AddBossEvent("Inquest Golem Mark II", "19:03:00", "WBs");
-                AddBossEvent("Inquest Golem Mark II", "22:03:00", "WBs");
-
-                AddBossEvent("Karka Queen", "01:00:00", "WBs");
-                AddBossEvent("Karka Queen", "04:00:00", "WBs");
-                AddBossEvent("Karka Queen", "08:00:00", "WBs");
-                AddBossEvent("Karka Queen", "12:30:00", "WBs");
-                AddBossEvent("Karka Queen", "17:00:00", "WBs");
-                AddBossEvent("Karka Queen", "20:00:00", "WBs");
-
-                AddBossEvent("Claw of Jormag", "04:30:00", "WBs");
-                AddBossEvent("Claw of Jormag", "07:30:00", "WBs");
-                AddBossEvent("Claw of Jormag", "10:30:00", "WBs");
-                AddBossEvent("Claw of Jormag", "13:30:00", "WBs");
-                AddBossEvent("Claw of Jormag", "16:30:00", "WBs");
-                AddBossEvent("Claw of Jormag", "19:30:00", "WBs");
-                AddBossEvent("Claw of Jormag", "22:30:00", "WBs");
-                AddBossEvent("Claw of Jormag", "01:30:00", "WBs");
-
-
-                //LWS2
-                AddBossEvent("Sandstorm", "01:40:00", "LWS2");
-                AddBossEvent("Sandstorm", "02:40:00", "LWS2");
-                AddBossEvent("Sandstorm", "03:40:00", "LWS2");
-                AddBossEvent("Sandstorm", "04:40:00", "LWS2");
-                AddBossEvent("Sandstorm", "05:40:00", "LWS2");
-                AddBossEvent("Sandstorm", "06:40:00", "LWS2");
-                AddBossEvent("Sandstorm", "07:40:00", "LWS2");
-                AddBossEvent("Sandstorm", "08:40:00", "LWS2");
-                AddBossEvent("Sandstorm", "09:40:00", "LWS2");
-                AddBossEvent("Sandstorm", "10:40:00", "LWS2");
-                AddBossEvent("Sandstorm", "11:40:00", "LWS2");
-                AddBossEvent("Sandstorm", "12:40:00", "LWS2");
-                AddBossEvent("Sandstorm", "13:40:00", "LWS2");
-                AddBossEvent("Sandstorm", "14:40:00", "LWS2");
-                AddBossEvent("Sandstorm", "15:40:00", "LWS2");
-                AddBossEvent("Sandstorm", "16:40:00", "LWS2");
-                AddBossEvent("Sandstorm", "17:40:00", "LWS2");
-                AddBossEvent("Sandstorm", "18:40:00", "LWS2");
-                AddBossEvent("Sandstorm", "19:40:00", "LWS2");
-                AddBossEvent("Sandstorm", "20:40:00", "LWS2");
-                AddBossEvent("Sandstorm", "21:40:00", "LWS2");
-                AddBossEvent("Sandstorm", "22:40:00", "LWS2");
-                AddBossEvent("Sandstorm", "23:40:00", "LWS2");
-                AddBossEvent("Sandstorm", "00:40:00", "LWS2");
-
-                //LWS3
-                AddBossEvent("Saidra's Haven", "01:00:00", "LWS3");
-                AddBossEvent("Saidra's Haven", "03:00:00", "LWS3");
-                AddBossEvent("Saidra's Haven", "05:00:00", "LWS3");
-                AddBossEvent("Saidra's Haven", "07:00:00", "LWS3");
-                AddBossEvent("Saidra's Haven", "09:00:00", "LWS3");
-                AddBossEvent("Saidra's Haven", "11:00:00", "LWS3");
-                AddBossEvent("Saidra's Haven", "13:00:00", "LWS3");
-                AddBossEvent("Saidra's Haven", "15:00:00", "LWS3");
-                AddBossEvent("Saidra's Haven", "17:00:00", "LWS3");
-                AddBossEvent("Saidra's Haven", "19:00:00", "LWS3");
-                AddBossEvent("Saidra's Haven", "21:00:00", "LWS3");
-                AddBossEvent("Saidra's Haven", "23:00:00", "LWS3");
-
-                AddBossEvent("New Loamhurst", "01:45:00", "LWS3");
-                AddBossEvent("New Loamhurst", "03:45:00", "LWS3");
-                AddBossEvent("New Loamhurst", "05:45:00", "LWS3");
-                AddBossEvent("New Loamhurst", "07:45:00", "LWS3");
-                AddBossEvent("New Loamhurst", "09:45:00", "LWS3");
-                AddBossEvent("New Loamhurst", "11:45:00", "LWS3");
-                AddBossEvent("New Loamhurst", "13:45:00", "LWS3");
-                AddBossEvent("New Loamhurst", "15:45:00", "LWS3");
-                AddBossEvent("New Loamhurst", "17:45:00", "LWS3");
-                AddBossEvent("New Loamhurst", "19:45:00", "LWS3");
-                AddBossEvent("New Loamhurst", "21:45:00", "LWS3");
-                AddBossEvent("New Loamhurst", "23:45:00", "LWS3");
-
-                AddBossEvent("Noran's Homestead", "02:40:00", "LWS3");
-                AddBossEvent("Noran's Homestead", "04:40:00", "LWS3");
-                AddBossEvent("Noran's Homestead", "06:40:00", "LWS3");
-                AddBossEvent("Noran's Homestead", "08:40:00", "LWS3");
-                AddBossEvent("Noran's Homestead", "10:40:00", "LWS3");
-                AddBossEvent("Noran's Homestead", "12:40:00", "LWS3");
-                AddBossEvent("Noran's Homestead", "14:40:00", "LWS3");
-                AddBossEvent("Noran's Homestead", "16:40:00", "LWS3");
-                AddBossEvent("Noran's Homestead", "18:40:00", "LWS3");
-                AddBossEvent("Noran's Homestead", "20:40:00", "LWS3");
-                AddBossEvent("Noran's Homestead", "22:40:00", "LWS3");
-                AddBossEvent("Noran's Homestead", "00:40:00", "LWS3");
-                // Ice
-                AddBossEvent("Defend Jora's Keep", "03:45:00", "Ice");
-                AddBossEvent("Defend Jora's Keep", "05:45:00", "Ice");
-                AddBossEvent("Defend Jora's Keep", "07:45:00", "Ice");
-                AddBossEvent("Defend Jora's Keep", "09:45:00", "Ice");
-                AddBossEvent("Defend Jora's Keep", "11:45:00", "Ice");
-                AddBossEvent("Defend Jora's Keep", "13:45:00", "Ice");
-                AddBossEvent("Defend Jora's Keep", "15:45:00", "Ice");
-                AddBossEvent("Defend Jora's Keep", "17:45:00", "Ice");
-                AddBossEvent("Defend Jora's Keep", "19:45:00", "Ice");
-                AddBossEvent("Defend Jora's Keep", "21:45:00", "Ice");
-                AddBossEvent("Defend Jora's Keep", "23:45:00", "Ice");
-                AddBossEvent("Defend Jora's Keep", "01:45:00", "Ice");
-
-                AddBossEvent("Doomlore Shrine", "02:38:00", "Ice");
-                AddBossEvent("Doomlore Shrine", "04:38:00", "Ice");
-                AddBossEvent("Doomlore Shrine", "06:38:00", "Ice");
-                AddBossEvent("Doomlore Shrine", "08:38:00", "Ice");
-                AddBossEvent("Doomlore Shrine", "10:38:00", "Ice");
-                AddBossEvent("Doomlore Shrine", "12:38:00", "Ice");
-                AddBossEvent("Doomlore Shrine", "14:38:00", "Ice");
-                AddBossEvent("Doomlore Shrine", "16:38:00", "Ice");
-                AddBossEvent("Doomlore Shrine", "18:38:00", "Ice");
-                AddBossEvent("Doomlore Shrine", "20:38:00", "Ice");
-                AddBossEvent("Doomlore Shrine", "22:38:00", "Ice");
-                AddBossEvent("Doomlore Shrine", "00:38:00", "Ice");
-
-                AddBossEvent("Storms of Winter", "02:00:00", "Ice");
-                AddBossEvent("Storms of Winter", "04:00:00", "Ice");
-                AddBossEvent("Storms of Winter", "06:00:00", "Ice");
-                AddBossEvent("Storms of Winter", "08:00:00", "Ice");
-                AddBossEvent("Storms of Winter", "10:00:00", "Ice");
-                AddBossEvent("Storms of Winter", "12:00:00", "Ice");
-                AddBossEvent("Storms of Winter", "14:00:00", "Ice");
-                AddBossEvent("Storms of Winter", "16:00:00", "Ice");
-                AddBossEvent("Storms of Winter", "18:00:00", "Ice");
-                AddBossEvent("Storms of Winter", "20:00:00", "Ice");
-                AddBossEvent("Storms of Winter", "22:00:00", "Ice");
-                AddBossEvent("Storms of Winter", "00:00:00", "Ice");
-
-                AddBossEvent("Effigy", "02:10:00", "Ice");
-                AddBossEvent("Effigy", "04:10:00", "Ice");
-                AddBossEvent("Effigy", "06:10:00", "Ice");
-                AddBossEvent("Effigy", "08:10:00", "Ice");
-                AddBossEvent("Effigy", "10:10:00", "Ice");
-                AddBossEvent("Effigy", "12:10:00", "Ice");
-                AddBossEvent("Effigy", "14:10:00", "Ice");
-                AddBossEvent("Effigy", "16:10:00", "Ice");
-                AddBossEvent("Effigy", "18:10:00", "Ice");
-                AddBossEvent("Effigy", "20:10:00", "Ice");
-                AddBossEvent("Effigy", "22:10:00", "Ice");
-                AddBossEvent("Effigy", "00:10:00", "Ice");
-
-                AddBossEvent("Ooze Pits", "01:05:00", "Ice");
-                AddBossEvent("Ooze Pits", "03:05:00", "Ice");
-                AddBossEvent("Ooze Pits", "05:05:00", "Ice");
-                AddBossEvent("Ooze Pits", "07:05:00", "Ice");
-                AddBossEvent("Ooze Pits", "09:05:00", "Ice");
-                AddBossEvent("Ooze Pits", "11:05:00", "Ice");
-                AddBossEvent("Ooze Pits", "13:05:00", "Ice");
-                AddBossEvent("Ooze Pits", "15:05:00", "Ice");
-                AddBossEvent("Ooze Pits", "17:05:00", "Ice");
-                AddBossEvent("Ooze Pits", "19:05:00", "Ice");
-                AddBossEvent("Ooze Pits", "21:05:00", "Ice");
-                AddBossEvent("Ooze Pits", "23:05:00", "Ice");
-
-                AddBossEvent("Dragonstorm", "01:00:00", "Ice");
-                AddBossEvent("Dragonstorm", "03:00:00", "Ice");
-                AddBossEvent("Dragonstorm", "05:00:00", "Ice");
-                AddBossEvent("Dragonstorm", "07:00:00", "Ice");
-                AddBossEvent("Dragonstorm", "09:00:00", "Ice");
-                AddBossEvent("Dragonstorm", "11:00:00", "Ice");
-                AddBossEvent("Dragonstorm", "13:00:00", "Ice");
-                AddBossEvent("Dragonstorm", "15:00:00", "Ice");
-                AddBossEvent("Dragonstorm", "17:00:00", "Ice");
-                AddBossEvent("Dragonstorm", "19:00:00", "Ice");
-                AddBossEvent("Dragonstorm", "21:00:00", "Ice");
-                AddBossEvent("Dragonstorm", "23:00:00", "Ice");
-
-                AddBossEvent("Drakkar", "01:05:00", "Ice");
-                AddBossEvent("Drakkar", "03:05:00", "Ice");
-                AddBossEvent("Drakkar", "05:05:00", "Ice");
-                AddBossEvent("Drakkar", "07:05:00", "Ice");
-                AddBossEvent("Drakkar", "09:05:00", "Ice");
-                AddBossEvent("Drakkar", "11:05:00", "Ice");
-                AddBossEvent("Drakkar", "13:05:00", "Ice");
-                AddBossEvent("Drakkar", "15:05:00", "Ice");
-                AddBossEvent("Drakkar", "17:05:00", "Ice");
-                AddBossEvent("Drakkar", "19:05:00", "Ice");
-                AddBossEvent("Drakkar", "21:05:00", "Ice");
-                AddBossEvent("Drakkar", "23:05:00", "Ice");
-
-                AddBossEvent("Metal Concert", "01:40:00", "Ice");
-                AddBossEvent("Metal Concert", "03:40:00", "Ice");
-                AddBossEvent("Metal Concert", "05:40:00", "Ice");
-                AddBossEvent("Metal Concert", "07:40:00", "Ice");
-                AddBossEvent("Metal Concert", "09:40:00", "Ice");
-                AddBossEvent("Metal Concert", "11:40:00", "Ice");
-                AddBossEvent("Metal Concert", "13:40:00", "Ice");
-                AddBossEvent("Metal Concert", "15:40:00", "Ice");
-                AddBossEvent("Metal Concert", "17:40:00", "Ice");
-                AddBossEvent("Metal Concert", "19:40:00", "Ice");
-                AddBossEvent("Metal Concert", "21:40:00", "Ice");
-                AddBossEvent("Metal Concert", "23:40:00", "Ice");
-
-
-                // Maguuma
-                AddBossEvent("Chak Gerent", "02:30:00", "Maguuma");
-                AddBossEvent("Chak Gerent", "04:30:00", "Maguuma");
-                AddBossEvent("Chak Gerent", "06:30:00", "Maguuma");
-                AddBossEvent("Chak Gerent", "08:30:00", "Maguuma");
-                AddBossEvent("Chak Gerent", "10:30:00", "Maguuma");
-                AddBossEvent("Chak Gerent", "12:30:00", "Maguuma");
-                AddBossEvent("Chak Gerent", "14:30:00", "Maguuma");
-                AddBossEvent("Chak Gerent", "16:30:00", "Maguuma");
-                AddBossEvent("Chak Gerent", "18:30:00", "Maguuma");
-                AddBossEvent("Chak Gerent", "20:30:00", "Maguuma");
-                AddBossEvent("Chak Gerent", "22:30:00", "Maguuma");
-                AddBossEvent("Chak Gerent", "00:30:00", "Maguuma");
-
-                AddBossEvent("Battle in Tarir", "02:45:00", "Maguuma");
-                AddBossEvent("Battle in Tarir", "04:45:00", "Maguuma");
-                AddBossEvent("Battle in Tarir", "06:45:00", "Maguuma");
-                AddBossEvent("Battle in Tarir", "08:45:00", "Maguuma");
-                AddBossEvent("Battle in Tarir", "10:45:00", "Maguuma");
-                AddBossEvent("Battle in Tarir", "12:45:00", "Maguuma");
-                AddBossEvent("Battle in Tarir", "14:45:00", "Maguuma");
-                AddBossEvent("Battle in Tarir", "16:45:00", "Maguuma");
-                AddBossEvent("Battle in Tarir", "18:45:00", "Maguuma");
-                AddBossEvent("Battle in Tarir", "20:45:00", "Maguuma");
-                AddBossEvent("Battle in Tarir", "22:45:00", "Maguuma");
-                AddBossEvent("Battle in Tarir", "00:45:00", "Maguuma");
-
-                AddBossEvent("Nightbosses", "02:10:00", "Maguuma");
-                AddBossEvent("Nightbosses", "04:10:00", "Maguuma");
-                AddBossEvent("Nightbosses", "06:10:00", "Maguuma");
-                AddBossEvent("Nightbosses", "08:10:00", "Maguuma");
-                AddBossEvent("Nightbosses", "10:10:00", "Maguuma");
-                AddBossEvent("Nightbosses", "12:10:00", "Maguuma");
-                AddBossEvent("Nightbosses", "14:10:00", "Maguuma");
-                AddBossEvent("Nightbosses", "16:10:00", "Maguuma");
-                AddBossEvent("Nightbosses", "18:10:00", "Maguuma");
-                AddBossEvent("Nightbosses", "20:10:00", "Maguuma");
-                AddBossEvent("Nightbosses", "22:10:00", "Maguuma");
-                AddBossEvent("Nightbosses", "00:10:00", "Maguuma");
-
-                AddBossEvent("Dragon's Stand", "01:30:00", "Maguuma");
-                AddBossEvent("Dragon's Stand", "03:30:00", "Maguuma");
-                AddBossEvent("Dragon's Stand", "05:30:00", "Maguuma");
-                AddBossEvent("Dragon's Stand", "07:30:00", "Maguuma");
-                AddBossEvent("Dragon's Stand", "09:30:00", "Maguuma");
-                AddBossEvent("Dragon's Stand", "11:30:00", "Maguuma");
-                AddBossEvent("Dragon's Stand", "13:30:00", "Maguuma");
-                AddBossEvent("Dragon's Stand", "15:30:00", "Maguuma");
-                AddBossEvent("Dragon's Stand", "17:30:00", "Maguuma");
-                AddBossEvent("Dragon's Stand", "19:30:00", "Maguuma");
-                AddBossEvent("Dragon's Stand", "21:30:00", "Maguuma");
-                AddBossEvent("Dragon's Stand", "23:30:00", "Maguuma");
-
-
-                //Desert
-                AddBossEvent("The Oil Floes", "02:45:00", "Desert");
-                AddBossEvent("The Oil Floes", "04:45:00", "Desert");
-                AddBossEvent("The Oil Floes", "06:45:00", "Desert");
-                AddBossEvent("The Oil Floes", "08:45:00", "Desert");
-                AddBossEvent("The Oil Floes", "10:45:00", "Desert");
-                AddBossEvent("The Oil Floes", "12:45:00", "Desert");
-                AddBossEvent("The Oil Floes", "14:45:00", "Desert");
-                AddBossEvent("The Oil Floes", "16:45:00", "Desert");
-                AddBossEvent("The Oil Floes", "18:45:00", "Desert");
-                AddBossEvent("The Oil Floes", "20:45:00", "Desert");
-                AddBossEvent("The Oil Floes", "22:45:00", "Desert");
-                AddBossEvent("The Oil Floes", "00:45:00", "Desert");
-
-                AddBossEvent("Maws of Torment", "01:00:00", "Desert");
-                AddBossEvent("Maws of Torment", "03:00:00", "Desert");
-                AddBossEvent("Maws of Torment", "05:00:00", "Desert");
-                AddBossEvent("Maws of Torment", "07:00:00", "Desert");
-                AddBossEvent("Maws of Torment", "09:00:00", "Desert");
-                AddBossEvent("Maws of Torment", "11:00:00", "Desert");
-                AddBossEvent("Maws of Torment", "13:00:00", "Desert");
-                AddBossEvent("Maws of Torment", "15:00:00", "Desert");
-                AddBossEvent("Maws of Torment", "17:00:00", "Desert");
-                AddBossEvent("Maws of Torment", "19:00:00", "Desert");
-                AddBossEvent("Maws of Torment", "21:00:00", "Desert");
-                AddBossEvent("Maws of Torment", "23:00:00", "Desert");
-
-                AddBossEvent("Palawadan", "01:45:00", "Desert");
-                AddBossEvent("Palawadan", "03:45:00", "Desert");
-                AddBossEvent("Palawadan", "05:45:00", "Desert");
-                AddBossEvent("Palawadan", "07:45:00", "Desert");
-                AddBossEvent("Palawadan", "09:45:00", "Desert");
-                AddBossEvent("Palawadan", "11:45:00", "Desert");
-                AddBossEvent("Palawadan", "13:45:00", "Desert");
-                AddBossEvent("Palawadan", "15:45:00", "Desert");
-                AddBossEvent("Palawadan", "17:45:00", "Desert");
-                AddBossEvent("Palawadan", "19:45:00", "Desert");
-                AddBossEvent("Palawadan", "21:45:00", "Desert");
-                AddBossEvent("Palawadan", "23:45:00", "Desert");
-
-                AddBossEvent("Thunderhead Keep", "01:45:00", "Desert");
-                AddBossEvent("Thunderhead Keep", "03:45:00", "Desert");
-                AddBossEvent("Thunderhead Keep", "05:45:00", "Desert");
-                AddBossEvent("Thunderhead Keep", "07:45:00", "Desert");
-                AddBossEvent("Thunderhead Keep", "09:45:00", "Desert");
-                AddBossEvent("Thunderhead Keep", "11:45:00", "Desert");
-                AddBossEvent("Thunderhead Keep", "13:45:00", "Desert");
-                AddBossEvent("Thunderhead Keep", "15:45:00", "Desert");
-                AddBossEvent("Thunderhead Keep", "17:45:00", "Desert");
-                AddBossEvent("Thunderhead Keep", "19:45:00", "Desert");
-                AddBossEvent("Thunderhead Keep", "21:45:00", "Desert");
-                AddBossEvent("Thunderhead Keep", "23:45:00", "Desert");
-
-                AddBossEvent("Serpents'Ire", "02:30:00", "Desert");
-                AddBossEvent("Serpents'Ire", "04:30:00", "Desert");
-                AddBossEvent("Serpents'Ire", "06:30:00", "Desert");
-                AddBossEvent("Serpents'Ire", "08:30:00", "Desert");
-                AddBossEvent("Serpents'Ire", "10:30:00", "Desert");
-                AddBossEvent("Serpents'Ire", "12:30:00", "Desert");
-                AddBossEvent("Serpents'Ire", "14:30:00", "Desert");
-                AddBossEvent("Serpents'Ire", "16:30:00", "Desert");
-                AddBossEvent("Serpents'Ire", "18:30:00", "Desert");
-                AddBossEvent("Serpents'Ire", "20:30:00", "Desert");
-                AddBossEvent("Serpents'Ire", "22:30:00", "Desert");
-                AddBossEvent("Serpents'Ire", "00:30:00", "Desert");
-
-                AddBossEvent("DB Shatterer", "03:00:00", "Desert");
-                AddBossEvent("DB Shatterer", "05:00:00", "Desert");
-                AddBossEvent("DB Shatterer", "07:00:00", "Desert");
-                AddBossEvent("DB Shatterer", "09:00:00", "Desert");
-                AddBossEvent("DB Shatterer", "11:00:00", "Desert");
-                AddBossEvent("DB Shatterer", "13:00:00", "Desert");
-                AddBossEvent("DB Shatterer", "15:00:00", "Desert");
-                AddBossEvent("DB Shatterer", "17:00:00", "Desert");
-                AddBossEvent("DB Shatterer", "19:00:00", "Desert");
-                AddBossEvent("DB Shatterer", "21:00:00", "Desert");
-                AddBossEvent("DB Shatterer", "23:00:00", "Desert");
-                AddBossEvent("DB Shatterer", "01:00:00", "Desert");
-
-                AddBossEvent("Junundu Rising", "01:30:00", "Desert");
-                AddBossEvent("Junundu Rising", "02:30:00", "Desert");
-                AddBossEvent("Junundu Rising", "03:30:00", "Desert");
-                AddBossEvent("Junundu Rising", "04:30:00", "Desert");
-                AddBossEvent("Junundu Rising", "05:30:00", "Desert");
-                AddBossEvent("Junundu Rising", "06:30:00", "Desert");
-                AddBossEvent("Junundu Rising", "07:30:00", "Desert");
-                AddBossEvent("Junundu Rising", "08:30:00", "Desert");
-                AddBossEvent("Junundu Rising", "09:30:00", "Desert");
-                AddBossEvent("Junundu Rising", "10:30:00", "Desert");
-                AddBossEvent("Junundu Rising", "11:30:00", "Desert");
-                AddBossEvent("Junundu Rising", "12:30:00", "Desert");
-                AddBossEvent("Junundu Rising", "13:30:00", "Desert");
-                AddBossEvent("Junundu Rising", "14:30:00", "Desert");
-                AddBossEvent("Junundu Rising", "15:30:00", "Desert");
-                AddBossEvent("Junundu Rising", "16:30:00", "Desert");
-                AddBossEvent("Junundu Rising", "17:30:00", "Desert");
-                AddBossEvent("Junundu Rising", "18:30:00", "Desert");
-                AddBossEvent("Junundu Rising", "19:30:00", "Desert");
-                AddBossEvent("Junundu Rising", "20:30:00", "Desert");
-                AddBossEvent("Junundu Rising", "21:30:00", "Desert");
-                AddBossEvent("Junundu Rising", "22:30:00", "Desert");
-                AddBossEvent("Junundu Rising", "23:30:00", "Desert");
-                AddBossEvent("Junundu Rising", "00:30:00", "Desert");
-
-                AddBossEvent("Path to Ascension", "01:30:00", "Desert");
-                AddBossEvent("Path to Ascension", "03:30:00", "Desert");
-                AddBossEvent("Path to Ascension", "05:30:00", "Desert");
-                AddBossEvent("Path to Ascension", "07:30:00", "Desert");
-                AddBossEvent("Path to Ascension", "09:30:00", "Desert");
-                AddBossEvent("Path to Ascension", "11:30:00", "Desert");
-                AddBossEvent("Path to Ascension", "13:30:00", "Desert");
-                AddBossEvent("Path to Ascension", "15:30:00", "Desert");
-                AddBossEvent("Path to Ascension", "17:30:00", "Desert");
-                AddBossEvent("Path to Ascension", "19:30:00", "Desert");
-                AddBossEvent("Path to Ascension", "21:30:00", "Desert");
-                AddBossEvent("Path to Ascension", "23:30:00", "Desert");
-
-                AddBossEvent("Doppelganger", "01:55:00", "Desert");
-                AddBossEvent("Doppelganger", "03:55:00", "Desert");
-                AddBossEvent("Doppelganger", "05:55:00", "Desert");
-                AddBossEvent("Doppelganger", "07:55:00", "Desert");
-                AddBossEvent("Doppelganger", "09:55:00", "Desert");
-                AddBossEvent("Doppelganger", "11:55:00", "Desert");
-                AddBossEvent("Doppelganger", "13:55:00", "Desert");
-                AddBossEvent("Doppelganger", "15:55:00", "Desert");
-                AddBossEvent("Doppelganger", "17:55:00", "Desert");
-                AddBossEvent("Doppelganger", "19:55:00", "Desert");
-                AddBossEvent("Doppelganger", "21:55:00", "Desert");
-                AddBossEvent("Doppelganger", "23:55:00", "Desert");
-
-                AddBossEvent("Forged with Fire", "01:00:00", "Desert");
-                AddBossEvent("Forged with Fire", "02:00:00", "Desert");
-                AddBossEvent("Forged with Fire", "03:00:00", "Desert");
-                AddBossEvent("Forged with Fire", "04:00:00", "Desert");
-                AddBossEvent("Forged with Fire", "05:00:00", "Desert");
-                AddBossEvent("Forged with Fire", "06:00:00", "Desert");
-                AddBossEvent("Forged with Fire", "07:00:00", "Desert");
-                AddBossEvent("Forged with Fire", "08:00:00", "Desert");
-                AddBossEvent("Forged with Fire", "09:00:00", "Desert");
-                AddBossEvent("Forged with Fire", "10:00:00", "Desert");
-                AddBossEvent("Forged with Fire", "11:00:00", "Desert");
-                AddBossEvent("Forged with Fire", "12:00:00", "Desert");
-                AddBossEvent("Forged with Fire", "13:00:00", "Desert");
-                AddBossEvent("Forged with Fire", "14:00:00", "Desert");
-                AddBossEvent("Forged with Fire", "15:00:00", "Desert");
-                AddBossEvent("Forged with Fire", "16:00:00", "Desert");
-                AddBossEvent("Forged with Fire", "17:00:00", "Desert");
-                AddBossEvent("Forged with Fire", "18:00:00", "Desert");
-                AddBossEvent("Forged with Fire", "19:00:00", "Desert");
-                AddBossEvent("Forged with Fire", "20:00:00", "Desert");
-                AddBossEvent("Forged with Fire", "21:00:00", "Desert");
-                AddBossEvent("Forged with Fire", "22:00:00", "Desert");
-                AddBossEvent("Forged with Fire", "23:00:00", "Desert");
-                AddBossEvent("Forged with Fire", "00:00:01", "Desert");
-                
-
-                AddBossEvent("Choya Piñata", "02:20:00", "Desert");
-                AddBossEvent("Choya Piñata", "04:20:00", "Desert");
-                AddBossEvent("Choya Piñata", "06:20:00", "Desert");
-                AddBossEvent("Choya Piñata", "08:20:00", "Desert");
-                AddBossEvent("Choya Piñata", "10:20:00", "Desert");
-                AddBossEvent("Choya Piñata", "12:20:00", "Desert");
-                AddBossEvent("Choya Piñata", "14:20:00", "Desert");
-                AddBossEvent("Choya Piñata", "16:20:00", "Desert");
-                AddBossEvent("Choya Piñata", "18:20:00", "Desert");
-                AddBossEvent("Choya Piñata", "20:20:00", "Desert");
-                AddBossEvent("Choya Piñata", "22:20:00", "Desert");
-                AddBossEvent("Choya Piñata", "00:20:00", "Desert");
-
-
-                // Cantha
-                AddBossEvent("Aetherblade Assault", "01:30:00", "Cantha");
-                AddBossEvent("Aetherblade Assault", "03:30:00", "Cantha");
-                AddBossEvent("Aetherblade Assault", "05:30:00", "Cantha");
-                AddBossEvent("Aetherblade Assault", "07:30:00", "Cantha");
-                AddBossEvent("Aetherblade Assault", "09:30:00", "Cantha");
-                AddBossEvent("Aetherblade Assault", "11:30:00", "Cantha");
-                AddBossEvent("Aetherblade Assault", "13:30:00", "Cantha");
-                AddBossEvent("Aetherblade Assault", "15:30:00", "Cantha");
-                AddBossEvent("Aetherblade Assault", "17:30:00", "Cantha");
-                AddBossEvent("Aetherblade Assault", "19:30:00", "Cantha");
-                AddBossEvent("Aetherblade Assault", "21:30:00", "Cantha");
-                AddBossEvent("Aetherblade Assault", "23:30:00", "Cantha");
-
-                AddBossEvent("Kaineng Blackout", "02:00:00", "Cantha");
-                AddBossEvent("Kaineng Blackout", "04:00:00", "Cantha");
-                AddBossEvent("Kaineng Blackout", "06:00:00", "Cantha");
-                AddBossEvent("Kaineng Blackout", "08:00:00", "Cantha");
-                AddBossEvent("Kaineng Blackout", "10:00:00", "Cantha");
-                AddBossEvent("Kaineng Blackout", "12:00:00", "Cantha");
-                AddBossEvent("Kaineng Blackout", "14:00:00", "Cantha");
-                AddBossEvent("Kaineng Blackout", "16:00:00", "Cantha");
-                AddBossEvent("Kaineng Blackout", "18:00:00", "Cantha");
-                AddBossEvent("Kaineng Blackout", "20:00:00", "Cantha");
-                AddBossEvent("Kaineng Blackout", "22:00:00", "Cantha");
-                AddBossEvent("Kaineng Blackout", "00:00:00", "Cantha");
-
-                AddBossEvent("Gang War", "02:30:00", "Cantha");
-                AddBossEvent("Gang War", "04:30:00", "Cantha");
-                AddBossEvent("Gang War", "06:30:00", "Cantha");
-                AddBossEvent("Gang War", "08:30:00", "Cantha");
-                AddBossEvent("Gang War", "10:30:00", "Cantha");
-                AddBossEvent("Gang War", "12:30:00", "Cantha");
-                AddBossEvent("Gang War", "14:30:00", "Cantha");
-                AddBossEvent("Gang War", "16:30:00", "Cantha");
-                AddBossEvent("Gang War", "18:30:00", "Cantha");
-                AddBossEvent("Gang War", "20:30:00", "Cantha");
-                AddBossEvent("Gang War", "22:30:00", "Cantha");
-                AddBossEvent("Gang War", "00:30:00", "Cantha");
-
-                AddBossEvent("Aspenwood", "01:40:00", "Cantha");
-                AddBossEvent("Aspenwood", "03:40:00", "Cantha");
-                AddBossEvent("Aspenwood", "05:40:00", "Cantha");
-                AddBossEvent("Aspenwood", "07:40:00", "Cantha");
-                AddBossEvent("Aspenwood", "09:40:00", "Cantha");
-                AddBossEvent("Aspenwood", "11:40:00", "Cantha");
-                AddBossEvent("Aspenwood", "13:40:00", "Cantha");
-                AddBossEvent("Aspenwood", "15:40:00", "Cantha");
-                AddBossEvent("Aspenwood", "17:40:00", "Cantha");
-                AddBossEvent("Aspenwood", "19:40:00", "Cantha");
-                AddBossEvent("Aspenwood", "21:40:00", "Cantha");
-                AddBossEvent("Aspenwood", "23:40:00", "Cantha");
-
-                AddBossEvent("Battle for Jade Sea", "01:00:00", "Cantha");
-                AddBossEvent("Battle for Jade Sea", "03:00:00", "Cantha");
-                AddBossEvent("Battle for Jade Sea", "05:00:00", "Cantha");
-                AddBossEvent("Battle for Jade Sea", "07:00:00", "Cantha");
-                AddBossEvent("Battle for Jade Sea", "09:00:00", "Cantha");
-                AddBossEvent("Battle for Jade Sea", "11:00:00", "Cantha");
-                AddBossEvent("Battle for Jade Sea", "13:00:00", "Cantha");
-                AddBossEvent("Battle for Jade Sea", "15:00:00", "Cantha");
-                AddBossEvent("Battle for Jade Sea", "17:00:00", "Cantha");
-                AddBossEvent("Battle for Jade Sea", "19:00:00", "Cantha");
-                AddBossEvent("Battle for Jade Sea", "21:00:00", "Cantha");
-                AddBossEvent("Battle for Jade Sea", "23:00:00", "Cantha");
-
-
-                //SotO
-                AddBossEvent("Wizard's Tower", "01:00:00", "SotO");
-                AddBossEvent("Wizard's Tower", "03:00:00", "SotO");
-                AddBossEvent("Wizard's Tower", "05:00:00", "SotO");
-                AddBossEvent("Wizard's Tower", "07:00:00", "SotO");
-                AddBossEvent("Wizard's Tower", "09:00:00", "SotO");
-                AddBossEvent("Wizard's Tower", "11:00:00", "SotO");
-                AddBossEvent("Wizard's Tower", "13:00:00", "SotO");
-                AddBossEvent("Wizard's Tower", "15:00:00", "SotO");
-                AddBossEvent("Wizard's Tower", "17:00:00", "SotO");
-                AddBossEvent("Wizard's Tower", "19:00:00", "SotO");
-                AddBossEvent("Wizard's Tower", "23:00:00", "SotO");
-
-                AddBossEvent("Fly by Night", "01:55:00", "SotO");
-                AddBossEvent("Fly by Night", "03:55:00", "SotO");
-                AddBossEvent("Fly by Night", "05:55:00", "SotO");
-                AddBossEvent("Fly by Night", "07:55:00", "SotO");
-                AddBossEvent("Fly by Night", "09:55:00", "SotO");
-                AddBossEvent("Fly by Night", "11:55:00", "SotO");
-                AddBossEvent("Fly by Night", "13:55:00", "SotO");
-                AddBossEvent("Fly by Night", "15:55:00", "SotO");
-                AddBossEvent("Fly by Night", "17:55:00", "SotO");
-                AddBossEvent("Fly by Night", "19:55:00", "SotO");
-                AddBossEvent("Fly by Night", "21:55:00", "SotO");
-                AddBossEvent("Fly by Night", "23:55:00", "SotO");
-
-                AddBossEvent("Defense of Amnytas", "02:00:00", "SotO");
-                AddBossEvent("Defense of Amnytas", "04:00:00", "SotO");
-                AddBossEvent("Defense of Amnytas", "06:00:00", "SotO");
-                AddBossEvent("Defense of Amnytas", "08:00:00", "SotO");
-                AddBossEvent("Defense of Amnytas", "10:00:00", "SotO");
-                AddBossEvent("Defense of Amnytas", "12:00:00", "SotO");
-                AddBossEvent("Defense of Amnytas", "14:00:00", "SotO");
-                AddBossEvent("Defense of Amnytas", "16:00:00", "SotO");
-                AddBossEvent("Defense of Amnytas", "18:00:00", "SotO");
-                AddBossEvent("Defense of Amnytas", "20:00:00", "SotO");
-                AddBossEvent("Defense of Amnytas", "22:00:00", "SotO");
-                AddBossEvent("Defense of Amnytas", "00:00:00", "SotO");
-
-                AddBossEvent("Convergences", "03:30:00", "SotO");
-                AddBossEvent("Convergences", "06:30:00", "SotO");
-                AddBossEvent("Convergences", "09:30:00", "SotO");
-                AddBossEvent("Convergences", "12:30:00", "SotO");
-                AddBossEvent("Convergences", "15:30:00", "SotO");
-                AddBossEvent("Convergences", "18:30:00", "SotO");
-                AddBossEvent("Convergences", "21:30:00", "SotO");
-                AddBossEvent("Convergences", "00:30:00", "SotO");
-
-
-
-                BossEventGroups = Events.GroupBy(bossEvent =>
-                            new { bossEvent.BossName, bossEvent.Category },
-                        (key, g) =>
-                            new BossEventGroup(key.BossName, key.Category, g.ToList())
-                    )
-                    .ToList();
-            }
+            BossEventGroups = Events.GroupBy(bossEvent =>
+                        new { bossEvent.BossName, bossEvent.Category },
+                    (key, g) =>
+                        new BossEventGroup(key.BossName, g.ToList())
+                )
+                .ToList();
         }
-
 
 
         public static void SetBossListFromConfig_Bosses()
@@ -682,96 +127,110 @@
             try
             {
                 // Vorhandenen Inhalt aus der Datei lesen
-                string[] lines = File.ReadAllLines(GlobalVariables.FILE_PATH);
+                var lines = File.ReadAllLines(GlobalVariables.FILE_PATH);
 
                 // Index der Zeile mit dem Bossnamen finden
-                int bossIndex = -1;
-                for (int i = 0; i < lines.Length; i++)
+                var bossIndex = -1;
+                for (var i = 0; i < lines.Length; i++)
                 {
-                    if (lines[i].StartsWith("Bosses:"))
-                    {
-                        bossIndex = i; // Die aktuelle Zeile enthält den Namen
-                        break;
-                    }
+                    if (!lines[i].StartsWith("Bosses:")) continue;
+                    bossIndex = i; // Die aktuelle Zeile enthält den Namen
+                    break;
                 }
 
                 // Wenn der Bossname gefunden wird, setze die BossList23
-                if (bossIndex != -1 && bossIndex < lines.Length)
+                if (bossIndex == -1 || bossIndex >= lines.Length) return;
                 {
                     // Extrahiere die Bosse aus der Zeile zwischen den Anführungszeichen
-                    string bossLine = lines[bossIndex].Replace("Bosses:", "").Trim();
+                    var bossLine = lines[bossIndex].Replace("Bosses:", "").Trim();
 
                     // Entferne die äußeren Anführungszeichen und teile die Bosse
-                    string[] bossNames = bossLine
-                        .Trim('"')  // Entferne äußere Anführungszeichen
-                        .Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
-                        .Select(name => name.Trim())  // Entferne führende und abschließende Leerzeichen
+                    var bossNames = bossLine
+                        .Trim('"') // Entferne äußere Anführungszeichen
+                        .Split(Separator, StringSplitOptions.RemoveEmptyEntries)
+                        .Select(name => name.Trim()) // Entferne führende und abschließende Leerzeichen
                         .ToArray();
 
                     // Erstelle eine neue List, um BossList23 zu ersetzen
-                    List<string> newBossList = new List<string>();
+                    var newBossList = new List<string>();
 
                     // Füge jeden Bossnamen zur neuen Liste hinzu
                     newBossList.AddRange(bossNames);
 
                     // Iteriere durch die Zeilen, um Timings zu extrahieren
-                    for (int i = bossIndex + 1; i < lines.Length; i++)
+                    for (var i = bossIndex + 1; i < lines.Length; i++)
                     {
-                        if (lines[i].StartsWith("Timings:"))
-                        {
-                            string timingLine = lines[i].Replace("Timings:", "").Trim();
-                            string[] timings = timingLine.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
-                                .Select(timing => timing.Trim())
-                                .ToArray();
+                        if (!lines[i].StartsWith("Timings:")) continue;
+                        var timingLine = lines[i].Replace("Timings:", "").Trim();
+                        var timings = timingLine.Split(Separator, StringSplitOptions.RemoveEmptyEntries)
+                            .Select(timing => timing.Trim())
+                            .ToArray();
 
-                            // Überprüfe, ob die Anzahl der Timings mit der Anzahl der Bosse übereinstimmt
-                            if (timings.Length == bossNames.Length)
+                        // Überprüfe, ob die Anzahl der Timings mit der Anzahl der Bosse übereinstimmt
+                        if (timings.Length == bossNames.Length)
+                        {
+                            for (var j = 0; j < bossNames.Length; j++)
                             {
-                                for (int j = 0; j < bossNames.Length; j++)
-                                {
-                                    // Füge das BossEvent zur neuen Liste hinzu
-                                    AddBossEvent(bossNames[j], timings[j], "WBs");
-                                }
+                                // Füge das BossEvent zur neuen Liste hinzu
+                                AddBossEvent(bossNames[j], timings[j], "WBs");
                             }
-                            else
-                            {
-                                // Handle den Fall, wenn die Anzahl der Timings nicht mit der Anzahl der Bosse übereinstimmt
-                            }
-                            break; // Da wir die Timings gefunden haben, können wir die Schleife beenden
                         }
+                        else
+                        {
+                            // Handle den Fall, wenn die Anzahl der Timings nicht mit der Anzahl der Bosse übereinstimmt
+                        }
+
+                        break; // Da wir die Timings gefunden haben, können wir die Schleife beenden
                     }
 
                     // Jetzt kannst du die alte BossList23 durch die neue Liste ersetzen
                     BossList23 = newBossList;
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 // Hier kann eine Fehlermeldung protokolliert oder geloggt werden, wenn gewünscht
             }
         }
 
 
-        public static void AddBossEvent(string bossName, string timing, string category)
+        private static void AddBossEvent(string bossName, string firstTiming, int happensEveryInHours, string category,
+            string waypoint = "")
         {
-            Events.Add(new BossEvent(bossName, timing, category));
+            var timeSpan = TimeSpan.Parse(firstTiming);
+            while (timeSpan <= TimeSpan.Parse("23:59:59"))
+            {
+                Events.Add(new BossEvent(bossName, timeSpan, category, waypoint));
+                timeSpan = timeSpan.Add(TimeSpan.FromHours(happensEveryInHours));
+            }
+        }
+
+
+        private static void AddBossEvent(string bossName, string[] timings, string category, string waypoint = "")
+        {
+            foreach (var timing in timings)
+            {
+                Events.Add(new BossEvent(bossName, timing, category, waypoint));
+            }
+        }
+
+
+        private static void AddBossEvent(string bossName, string timing, string category, string waypoint = "")
+        {
+            Events.Add(new BossEvent(bossName, timing, category, waypoint));
         }
 
         public class BossEventGroup
         {
-
             public string BossName { get; }
-            public string Category { get; }
-            public TimeSpan Duration { get; set; } 
-            public List<BossEvent> Timings = new List<BossEvent>();
-            
-            
+            public TimeSpan Duration { get; set; }
+            private readonly List<BossEvent> _timings;
 
-            public BossEventGroup(string bossName, string bossCategory, List<BossEvent> events)
+
+            public BossEventGroup(string bossName, IEnumerable<BossEvent> events)
             {
                 BossName = bossName;
-                Category = bossCategory;
-                Timings = events
+                _timings = events
                     .Where(bossEvent => bossEvent.BossName.Equals(BossName))
                     .OrderBy(span => span.Timing)
                     .ToList();
@@ -782,62 +241,178 @@
                 // }
             }
 
-            public List<BossEventRun> GetNextRuns()
+            
+            /// <summary>
+            /// Calculates Next Runs based on DaysExtraToCalculate and NextRunsToShow.
+            /// </summary>
+            /// <remarks>
+            /// <b><code>DaysExtraToCalculate</code></b> is how many more days it should calculate after the current date (to calculate also tomorrow insert 1
+            /// <b><code>NextRunsToShow</code></b> is how many more runs of the same Category/Boss it will show. I have inserted the default 2 but it could be more
+            /// </remarks>
+            public IEnumerable<BossEventRun> GetNextRuns()
             {
-                List<BossEvent> nextTimings = Timings
-                    .Where(bossEvent => bossEvent.Timing > GlobalVariables.CURRENT_TIME)
-                    .ToList();
-                if (nextTimings.Count == 0)
+                //changed the logic to always calculate more than one day
+                List<BossEventRun> toReturn = new List<BossEventRun>();
+                
+                for (var i = -1; i <= DaysExtraToCalculate; i++)
                 {
-                    return Timings
-                        .Select(bossEvent => new BossEventRun(bossEvent.BossName, bossEvent.Timing, bossEvent.Category, GlobalVariables.CURRENT_DATE_TIME.Date.Add(new TimeSpan(24, 0, 0)) + bossEvent.Timing))
-                        .Take(NEXT_RUNS_TO_SHOW)
-                        .ToList();
+                    toReturn.AddRange(
+                        _timings
+                            .Select(bossEvent => new BossEventRun(bossEvent.BossName, bossEvent.Timing, bossEvent.Category,
+                                GlobalVariables
+                                    .CURRENT_DATE_TIME
+                                    .Date
+                                    .Add(new TimeSpan(0, i * 24, 0, 0, 0))
+                                + bossEvent.Timing,
+                                bossEvent.Waypoint))
+                            .ToList()
+                    );
                 }
 
-                return nextTimings
-                    .Select(bossEvent => new BossEventRun(bossEvent.BossName, bossEvent.Timing, bossEvent.Category, GlobalVariables.CURRENT_DATE_TIME.Date + bossEvent.Timing))
-                    .Take(NEXT_RUNS_TO_SHOW)
+               return toReturn
+                    .Where(bossEvent => bossEvent.getTimeToShow() >= GlobalVariables.CURRENT_DATE_TIME)
+                    .OrderBy(bossEvent => bossEvent.getTimeToShow())
+                    .Take(NextRunsToShow)
+                    .ToList()
+                    ;
+                
+                
+            }
+
+            public IEnumerable<BossEventRun> GetPreviousRuns()
+            {
+                return _timings
+                    .Where(bossEvent =>
+                        bossEvent.Timing > GlobalVariables.CURRENT_TIME.Subtract(new TimeSpan(0, 14, 59)) &&
+                        bossEvent.Timing < GlobalVariables.CURRENT_TIME)
+                    .Select(bossEvent => new BossEventRun(bossEvent.BossName, bossEvent.Timing, bossEvent.Category,
+                        GlobalVariables.CURRENT_DATE_TIME.Date + bossEvent.Timing
+                        , bossEvent.Waypoint))
+                    // .Where(bossEventRun => !DoneBosses.ContainsKey(bossEventRun.NextRunTime.Date) || !DoneBosses[bossEventRun.NextRunTime.Date].Contains(bossEventRun.BossName))
                     .ToList();
-            }
-
-            public List<BossEventRun> GetPreviousRuns()
-            {
-                return Timings
-                    .Where(bossEvent => bossEvent.Timing > GlobalVariables.CURRENT_TIME.Subtract(new TimeSpan(0, 14, 59)) && bossEvent.Timing < GlobalVariables.CURRENT_TIME)
-                    .Select(bossEvent => new BossEventRun(bossEvent.BossName, bossEvent.Timing, bossEvent.Category, GlobalVariables.CURRENT_DATE_TIME.Date + bossEvent.Timing))
-                    .Take(PREVIOUS_RUNS_TO_SHOW)
-                    .ToList();
-            }
-            
-        }
-
-        public class BossEvent
-        {
-            public string BossName { get; }
-            public TimeSpan Timing { get; }
-            public string Category { get; }
-            public TimeSpan Duration { get; set; }
-
-            public BossEvent(string bossName, string timing, string category) : this(bossName, TimeSpan.Parse(timing),
-                category)
-            {
-            }
-
-            public BossEvent(string bossName, TimeSpan timing, string category)
-            {
-                BossName = bossName;
-                Timing = timing;
-                Category = category;
             }
         }
 
-
-        public class BossEventRun(string bossName, TimeSpan timing, string category, DateTime nextRunTime)
-            : BossEvent(bossName, timing, category)
+        public class BossEvent(string bossName, TimeSpan timing, string category, string waypoint = "")
         {
+            public string BossName { get; } = bossName;
+            public string Waypoint { get; } = waypoint;
+            public TimeSpan Timing { get; } = GlobalVariables.IsDaylightSavingTimeActive() ? timing.Add(new TimeSpan(1, 0, 0)) : timing;
+            public string Category { get; } = category;
+
+
+            public BossEvent(string bossName, string timing, string category, string waypoint = "") : this(bossName,
+                TimeSpan.Parse(timing),
+                category, waypoint)
+            {
+            }
+        }
+
+        private class BossEventComparer : IEqualityComparer<BossEvent>
+        {
+            public bool Equals(BossEvent? x, BossEvent? y)
+            {
+                if (x == null && y == null)
+                    return true;
+                else if (x == null || y == null)
+                    return false;
+                else
+                    return x.BossName == y.BossName && x.Timing == y.Timing;
+            }
+
+            public int GetHashCode(BossEvent? obj)
+            {
+                if (obj == null)
+                    return 0;
+
+                var hashBossName = obj.BossName.GetHashCode();
+                var hashTiming = obj.Timing.GetHashCode();
+
+                return hashBossName ^ hashTiming;
+            }
+        }
+
+
+        public class BossEventRun(
+            string bossName,
+            TimeSpan timing,
+            string category,
+            DateTime nextRunTime,
+            string waypoint = "")
+            : BossEvent(bossName, timing, category, waypoint)
+        {
+
+            private static readonly Color DefaultFontColor = Color.White;
+            private static readonly Color PastBossFontColor = Color.OrangeRed;
+
             public DateTime NextRunTime { get; set; } = nextRunTime;
-            
+
+            public bool isPreviousBoss => NextRunTime < GlobalVariables.CURRENT_DATE_TIME;
+            public DateTime NextRunTimeEnding => NextRunTime.AddMinutes(14).AddSeconds(59);
+
+            public DateTime getTimeToShow()
+            {
+                if (isPreviousBoss)
+                {
+                    return NextRunTimeEnding;
+                }
+
+                return NextRunTime;
+            }
+            public TimeSpan getTimeRemaining()
+            {
+                if (!isPreviousBoss)
+                {
+                    return getTimeToShow() - GlobalVariables.CURRENT_DATE_TIME;
+                }
+                else
+                {
+                    return GlobalVariables.CURRENT_DATE_TIME
+                        .Add(new TimeSpan(0, 0, 15, 0, 0))
+                        // .Subtract(new TimeSpan(0, 0,0, 2, 0))
+                        .Subtract(getTimeToShow());
+                }
+            }
+            public string getTimeRemainingFormatted()
+            {
+                var remainingTime = getTimeRemaining();
+                return $"{(int)remainingTime.TotalHours:D2}:{remainingTime.Minutes:D2}:{remainingTime.Seconds:D2}";
+            }
+
+            public Color getForeColor()
+            {
+                if (isPreviousBoss)
+                {
+                    return PastBossFontColor; // Setzen Sie die Farbe auf OrangeRed für PreviewBosses
+                }
+                else
+                {
+                    // Setzen Sie die Farbe basierend auf der Kategorie des BossEvents
+                    switch (Category)
+                    {
+                        case "Maguuma":
+                            return Color.LimeGreen;
+                        case "Desert":
+                            return Color.DeepPink;
+                        case "WBs":
+                            return Color.WhiteSmoke;
+                        case "Ice":
+                            return Color.DeepSkyBlue;
+                        case "Cantha":
+                            return Color.Blue;
+                        case "SotO":
+                            return Color.Yellow;
+                        case "LWS2":
+                            return Color.LightYellow;
+                        case "LWS3":
+                            return Color.ForestGreen;
+                        default:
+                            return DefaultFontColor;
+                    }
+                }
+            }
         }
     }
+
+
 }
