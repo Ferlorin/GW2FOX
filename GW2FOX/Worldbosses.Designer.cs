@@ -856,6 +856,7 @@
             button48.Size = new Size(140, 35);
             button48.TabIndex = 109;
             button48.UseVisualStyleBackColor = false;
+            button48.Click += button48_Click;
             // 
             // MawsOfTorments
             // 
@@ -966,6 +967,7 @@
             button56.Size = new Size(140, 35);
             button56.TabIndex = 117;
             button56.UseVisualStyleBackColor = false;
+            button56.Click += button56_Click;
             // 
             // button57
             // 
@@ -978,6 +980,7 @@
             button57.Size = new Size(140, 35);
             button57.TabIndex = 118;
             button57.UseVisualStyleBackColor = false;
+            button57.Click += button57_Click;
             // 
             // button58
             // 

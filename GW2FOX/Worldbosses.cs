@@ -1940,6 +1940,21 @@ namespace GW2FOX
         {
             ShowAndHideForm(new NewLoamhurst());
         }
+
+        private void button48_Click(object sender, EventArgs e)
+        {
+            ShowAndHideForm(new NoransHomestead());
+        }
+
+        private void button56_Click(object sender, EventArgs e)
+        {
+            ShowAndHideForm(new AetherbladeAssault());
+        }
+
+        private void button57_Click(object sender, EventArgs e)
+        {
+            ShowAndHideForm(new KainengBlackout());
+        }
     }
 
 

@@ -7,6 +7,9 @@
     <Compile Update="DoubleBufferedListView.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Update="Metas\AetherbladeAssault.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Metas\Behemoth.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -55,7 +58,13 @@
     <Compile Update="Metas\DefendJorasKeep.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Metas\KainengBlackout.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Metas\NewLoamhurst.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Metas\NoransHomestead.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Metas\OilFloes.cs">
