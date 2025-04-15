@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "GW2FOX": {
+      "commandName": "Project",
+      "nativeDebugging": true
+    }
+  }
+}
