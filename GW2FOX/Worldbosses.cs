@@ -1990,6 +1990,31 @@ namespace GW2FOX
         {
             ShowAndHideForm(new Covergences());
         }
+
+        private void button49_Click(object sender, EventArgs e)
+        {
+            ShowAndHideForm(new LLA());
+        }
+
+        private void button50_Click(object sender, EventArgs e)
+        {
+            ShowAndHideForm(new CaptainRotbeard());
+        }
+
+        private void button68_Click(object sender, EventArgs e)
+        {
+            ShowAndHideForm(new DredgeComissar());
+        }
+
+        private void button69_Click(object sender, EventArgs e)
+        {
+            ShowAndHideForm(new BrandedGenerals());
+        }
+
+        private void button70_Click(object sender, EventArgs e)
+        {
+            ShowAndHideForm(new GatesOfArah());
+        }
     }
 
 

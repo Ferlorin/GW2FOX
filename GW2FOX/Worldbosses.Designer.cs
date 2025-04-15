@@ -156,6 +156,11 @@
             button67 = new Button();
             Quantity = new TextBox();
             pictureBox1 = new PictureBox();
+            button49 = new Button();
+            button50 = new Button();
+            button68 = new Button();
+            button69 = new Button();
+            button70 = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
@@ -1714,6 +1719,71 @@
             pictureBox1.TabIndex = 194;
             pictureBox1.TabStop = false;
             // 
+            // button49
+            // 
+            button49.BackgroundImage = (Image)resources.GetObject("button49.BackgroundImage");
+            button49.BackgroundImageLayout = ImageLayout.Stretch;
+            button49.Cursor = Cursors.Cross;
+            button49.FlatStyle = FlatStyle.Flat;
+            button49.Location = new Point(277, 569);
+            button49.Name = "button49";
+            button49.Size = new Size(140, 35);
+            button49.TabIndex = 195;
+            button49.UseVisualStyleBackColor = true;
+            button49.Click += button49_Click;
+            // 
+            // button50
+            // 
+            button50.BackgroundImage = (Image)resources.GetObject("button50.BackgroundImage");
+            button50.BackgroundImageLayout = ImageLayout.Stretch;
+            button50.Cursor = Cursors.Cross;
+            button50.FlatStyle = FlatStyle.Flat;
+            button50.Location = new Point(277, 610);
+            button50.Name = "button50";
+            button50.Size = new Size(140, 35);
+            button50.TabIndex = 196;
+            button50.UseVisualStyleBackColor = true;
+            button50.Click += button50_Click;
+            // 
+            // button68
+            // 
+            button68.BackgroundImage = (Image)resources.GetObject("button68.BackgroundImage");
+            button68.BackgroundImageLayout = ImageLayout.Stretch;
+            button68.Cursor = Cursors.Cross;
+            button68.FlatStyle = FlatStyle.Flat;
+            button68.Location = new Point(277, 651);
+            button68.Name = "button68";
+            button68.Size = new Size(140, 35);
+            button68.TabIndex = 197;
+            button68.UseVisualStyleBackColor = true;
+            button68.Click += button68_Click;
+            // 
+            // button69
+            // 
+            button69.BackgroundImage = (Image)resources.GetObject("button69.BackgroundImage");
+            button69.BackgroundImageLayout = ImageLayout.Stretch;
+            button69.Cursor = Cursors.Cross;
+            button69.FlatStyle = FlatStyle.Flat;
+            button69.Location = new Point(277, 692);
+            button69.Name = "button69";
+            button69.Size = new Size(140, 35);
+            button69.TabIndex = 198;
+            button69.UseVisualStyleBackColor = true;
+            button69.Click += button69_Click;
+            // 
+            // button70
+            // 
+            button70.BackgroundImage = (Image)resources.GetObject("button70.BackgroundImage");
+            button70.BackgroundImageLayout = ImageLayout.Stretch;
+            button70.Cursor = Cursors.Cross;
+            button70.FlatStyle = FlatStyle.Flat;
+            button70.Location = new Point(277, 733);
+            button70.Name = "button70";
+            button70.Size = new Size(140, 35);
+            button70.TabIndex = 199;
+            button70.UseVisualStyleBackColor = true;
+            button70.Click += button70_Click;
+            // 
             // Worldbosses
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -1721,6 +1791,11 @@
             AutoSize = true;
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
             ClientSize = new Size(1904, 1041);
+            Controls.Add(button70);
+            Controls.Add(button69);
+            Controls.Add(button68);
+            Controls.Add(button50);
+            Controls.Add(button49);
             Controls.Add(pictureBox1);
             Controls.Add(Quantity);
             Controls.Add(button67);
@@ -1988,5 +2063,10 @@
         private Button button67;
         private TextBox Quantity;
         private PictureBox pictureBox1;
+        private Button button49;
+        private Button button50;
+        private Button button68;
+        private Button button69;
+        private Button button70;
     }
 }

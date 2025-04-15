@@ -19,6 +19,12 @@
     <Compile Update="Metas\Behemoth.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Metas\BrandedGenerals.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Metas\CaptainRotbeard.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Metas\Chak.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -41,6 +47,9 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Metas\Drakkar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Metas\DredgeComissar.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Metas\Dwayna.cs">
@@ -70,7 +79,13 @@
     <Compile Update="Metas\DefendJorasKeep.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Metas\GatesOfArah.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Metas\KainengBlackout.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Metas\LLA.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Metas\NewLoamhurst.cs">

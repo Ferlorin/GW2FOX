@@ -45,18 +45,6 @@
             button7 = new Button();
             button8 = new Button();
             button9 = new Button();
-            Leyline20 = new TextBox();
-            Leyline50 = new TextBox();
-            Leyline60 = new TextBox();
-            button10 = new Button();
-            button11 = new Button();
-            button12 = new Button();
-            Oofll20 = new TextBox();
-            Oofll50 = new TextBox();
-            Oofll60 = new TextBox();
-            button13 = new Button();
-            button14 = new Button();
-            button15 = new Button();
             Mawitem = new TextBox();
             pictureBox4 = new PictureBox();
             button6 = new Button();
@@ -151,7 +139,7 @@
             // Oofmaw
             // 
             Oofmaw.Font = new Font("Segoe UI", 9F);
-            Oofmaw.Location = new Point(15, 477);
+            Oofmaw.Location = new Point(15, 414);
             Oofmaw.Multiline = true;
             Oofmaw.Name = "Oofmaw";
             Oofmaw.ReadOnly = true;
@@ -243,7 +231,7 @@
             button8.BackgroundImageLayout = ImageLayout.Center;
             button8.Cursor = Cursors.Cross;
             button8.FlatStyle = FlatStyle.Flat;
-            button8.Location = new Point(371, 493);
+            button8.Location = new Point(371, 430);
             button8.Name = "button8";
             button8.Size = new Size(75, 23);
             button8.TabIndex = 35;
@@ -262,159 +250,6 @@
             button9.TabIndex = 36;
             button9.UseVisualStyleBackColor = true;
             button9.Click += Attentionmaw_Click;
-            // 
-            // Leyline20
-            // 
-            Leyline20.BackColor = SystemColors.Highlight;
-            Leyline20.Font = new Font("Segoe UI", 9F);
-            Leyline20.Location = new Point(490, 522);
-            Leyline20.Multiline = true;
-            Leyline20.Name = "Leyline20";
-            Leyline20.ReadOnly = true;
-            Leyline20.ScrollBars = ScrollBars.Vertical;
-            Leyline20.Size = new Size(350, 39);
-            Leyline20.TabIndex = 37;
-            Leyline20.Text = "☠LvL 20 ≪Legend Ley Line Anomaly≫ │ ☣[&BOQAAAA=]☣";
-            // 
-            // Leyline50
-            // 
-            Leyline50.BackColor = SystemColors.Highlight;
-            Leyline50.Font = new Font("Segoe UI", 9F);
-            Leyline50.Location = new Point(490, 567);
-            Leyline50.Multiline = true;
-            Leyline50.Name = "Leyline50";
-            Leyline50.ReadOnly = true;
-            Leyline50.ScrollBars = ScrollBars.Vertical;
-            Leyline50.Size = new Size(350, 39);
-            Leyline50.TabIndex = 38;
-            Leyline50.Text = "☠LvL 50 ≪Legend Ley Line Anomaly≫ │ ☣[&BEwCAAA=]☣\r\n";
-            // 
-            // Leyline60
-            // 
-            Leyline60.BackColor = SystemColors.Highlight;
-            Leyline60.Font = new Font("Segoe UI", 9F);
-            Leyline60.Location = new Point(490, 612);
-            Leyline60.Multiline = true;
-            Leyline60.Name = "Leyline60";
-            Leyline60.ReadOnly = true;
-            Leyline60.ScrollBars = ScrollBars.Vertical;
-            Leyline60.Size = new Size(350, 39);
-            Leyline60.TabIndex = 39;
-            Leyline60.Text = "☠Lvl 60 ≪Legend Ley-Line-Anomaly≫ │ ☣[&BOcBAAA=]☣";
-            // 
-            // button10
-            // 
-            button10.BackgroundImage = (Image)resources.GetObject("button10.BackgroundImage");
-            button10.BackgroundImageLayout = ImageLayout.Center;
-            button10.Cursor = Cursors.Cross;
-            button10.FlatStyle = FlatStyle.Flat;
-            button10.Location = new Point(846, 538);
-            button10.Name = "button10";
-            button10.Size = new Size(75, 23);
-            button10.TabIndex = 40;
-            button10.UseVisualStyleBackColor = true;
-            button10.Click += Ll20_Click;
-            // 
-            // button11
-            // 
-            button11.BackgroundImage = (Image)resources.GetObject("button11.BackgroundImage");
-            button11.BackgroundImageLayout = ImageLayout.Center;
-            button11.Cursor = Cursors.Cross;
-            button11.FlatStyle = FlatStyle.Flat;
-            button11.Location = new Point(846, 583);
-            button11.Name = "button11";
-            button11.Size = new Size(75, 23);
-            button11.TabIndex = 41;
-            button11.UseVisualStyleBackColor = true;
-            button11.Click += Ll50_Click;
-            // 
-            // button12
-            // 
-            button12.BackgroundImage = (Image)resources.GetObject("button12.BackgroundImage");
-            button12.BackgroundImageLayout = ImageLayout.Center;
-            button12.Cursor = Cursors.Cross;
-            button12.FlatStyle = FlatStyle.Flat;
-            button12.Location = new Point(846, 628);
-            button12.Name = "button12";
-            button12.Size = new Size(75, 23);
-            button12.TabIndex = 42;
-            button12.UseVisualStyleBackColor = true;
-            button12.Click += Ll60_Click;
-            // 
-            // Oofll20
-            // 
-            Oofll20.Font = new Font("Segoe UI", 9F);
-            Oofll20.Location = new Point(15, 522);
-            Oofll20.Multiline = true;
-            Oofll20.Name = "Oofll20";
-            Oofll20.ReadOnly = true;
-            Oofll20.ScrollBars = ScrollBars.Vertical;
-            Oofll20.Size = new Size(350, 39);
-            Oofll20.TabIndex = 43;
-            Oofll20.Text = "Go out of fight, then right click group 2 & join ☣Gendarran Fields☣";
-            // 
-            // Oofll50
-            // 
-            Oofll50.Font = new Font("Segoe UI", 9F);
-            Oofll50.Location = new Point(15, 567);
-            Oofll50.Multiline = true;
-            Oofll50.Name = "Oofll50";
-            Oofll50.ReadOnly = true;
-            Oofll50.ScrollBars = ScrollBars.Vertical;
-            Oofll50.Size = new Size(350, 39);
-            Oofll50.TabIndex = 44;
-            Oofll50.Text = "Go out of fight, then right click group 2 & join ☣Timberline Falls☣";
-            // 
-            // Oofll60
-            // 
-            Oofll60.Font = new Font("Segoe UI", 9F);
-            Oofll60.Location = new Point(15, 612);
-            Oofll60.Multiline = true;
-            Oofll60.Name = "Oofll60";
-            Oofll60.ReadOnly = true;
-            Oofll60.ScrollBars = ScrollBars.Vertical;
-            Oofll60.Size = new Size(350, 39);
-            Oofll60.TabIndex = 45;
-            Oofll60.Text = "Go out of fight, then right click group 2 & join ☣Iron Marches☣";
-            // 
-            // button13
-            // 
-            button13.BackgroundImage = (Image)resources.GetObject("button13.BackgroundImage");
-            button13.BackgroundImageLayout = ImageLayout.Center;
-            button13.Cursor = Cursors.Cross;
-            button13.FlatStyle = FlatStyle.Flat;
-            button13.Location = new Point(371, 538);
-            button13.Name = "button13";
-            button13.Size = new Size(75, 23);
-            button13.TabIndex = 46;
-            button13.UseVisualStyleBackColor = true;
-            button13.Click += Instancell20_Click;
-            // 
-            // button14
-            // 
-            button14.BackgroundImage = (Image)resources.GetObject("button14.BackgroundImage");
-            button14.BackgroundImageLayout = ImageLayout.Center;
-            button14.Cursor = Cursors.Cross;
-            button14.FlatStyle = FlatStyle.Flat;
-            button14.Location = new Point(371, 583);
-            button14.Name = "button14";
-            button14.Size = new Size(75, 23);
-            button14.TabIndex = 47;
-            button14.UseVisualStyleBackColor = true;
-            button14.Click += Instancell50_Click;
-            // 
-            // button15
-            // 
-            button15.BackgroundImage = (Image)resources.GetObject("button15.BackgroundImage");
-            button15.BackgroundImageLayout = ImageLayout.Center;
-            button15.Cursor = Cursors.Cross;
-            button15.FlatStyle = FlatStyle.Flat;
-            button15.Location = new Point(371, 628);
-            button15.Name = "button15";
-            button15.Size = new Size(75, 23);
-            button15.TabIndex = 48;
-            button15.UseVisualStyleBackColor = true;
-            button15.Click += Instancell60_Click;
             // 
             // Mawitem
             // 
@@ -477,18 +312,6 @@
             Controls.Add(button6);
             Controls.Add(pictureBox4);
             Controls.Add(Mawitem);
-            Controls.Add(button15);
-            Controls.Add(button14);
-            Controls.Add(button13);
-            Controls.Add(Oofll60);
-            Controls.Add(Oofll50);
-            Controls.Add(Oofll20);
-            Controls.Add(button12);
-            Controls.Add(button11);
-            Controls.Add(button10);
-            Controls.Add(Leyline60);
-            Controls.Add(Leyline50);
-            Controls.Add(Leyline20);
             Controls.Add(button9);
             Controls.Add(button8);
             Controls.Add(button7);
@@ -533,18 +356,6 @@
         private Button button7;
         private Button button8;
         private Button button9;
-        private TextBox Leyline20;
-        private TextBox Leyline50;
-        private TextBox Leyline60;
-        private Button button10;
-        private Button button11;
-        private Button button12;
-        private TextBox Oofll20;
-        private TextBox Oofll50;
-        private TextBox Oofll60;
-        private Button button13;
-        private Button button14;
-        private Button button15;
         private PictureBox pictureBox4;
         private Button button6;
         private TextBox Mawitemname;

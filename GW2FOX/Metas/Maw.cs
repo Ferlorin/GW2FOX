@@ -93,38 +93,6 @@ namespace GW2FOX
             BringGw2ToFront();
         }
 
-        
-
-
-        
-
-        private void Ll20_Click(object sender, EventArgs e)
-        {
-            // Copy the text from Leyline20 TextBox to the clipboard
-            Clipboard.SetText(Leyline20.Text);
-
-            // Bring the Gw2-64.exe window to the foreground
-            BringGw2ToFront();
-        }
-
-        private void Ll50_Click(object sender, EventArgs e)
-        {
-            // Copy the text from Leyline50 TextBox to the clipboard
-            Clipboard.SetText(Leyline50.Text);
-
-            // Bring the Gw2-64.exe window to the foreground
-            BringGw2ToFront();
-        }
-
-        private void Ll60_Click(object sender, EventArgs e)
-        {
-            // Copy the text from Leyline60 TextBox to the clipboard
-            Clipboard.SetText(Leyline60.Text);
-
-            // Bring the Gw2-64.exe window to the foreground
-            BringGw2ToFront();
-        }
-
         private void Runinfoload_Click(object sender, EventArgs e)
         {
             // Copy the text from Leyline60 TextBox to the clipboard
@@ -156,33 +124,6 @@ namespace GW2FOX
         {
             // Copy the text from Leyline60 TextBox to the clipboard
             Clipboard.SetText(Oofmaw.Text);
-
-            // Bring the Gw2-64.exe window to the foreground
-            BringGw2ToFront();
-        }
-
-        private void Instancell20_Click(object sender, EventArgs e)
-        {
-            // Copy the text from Leyline60 TextBox to the clipboard
-            Clipboard.SetText(Oofll20.Text);
-
-            // Bring the Gw2-64.exe window to the foreground
-            BringGw2ToFront();
-        }
-
-        private void Instancell50_Click(object sender, EventArgs e)
-        {
-            // Copy the text from Leyline60 TextBox to the clipboard
-            Clipboard.SetText(Oofll50.Text);
-
-            // Bring the Gw2-64.exe window to the foreground
-            BringGw2ToFront();
-        }
-
-        private void Instancell60_Click(object sender, EventArgs e)
-        {
-            // Copy the text from Leyline60 TextBox to the clipboard
-            Clipboard.SetText(Oofll60.Text);
 
             // Bring the Gw2-64.exe window to the foreground
             BringGw2ToFront();
