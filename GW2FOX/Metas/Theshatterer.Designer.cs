@@ -226,7 +226,7 @@
             // 
             // Welcome
             // 
-            Welcome.Font = new Font("Segoe UI", 15F);
+            Welcome.Font = new Font("Segoe UI", 9F);
             Welcome.Location = new Point(1440, 268);
             Welcome.Multiline = true;
             Welcome.Name = "Welcome";
@@ -237,7 +237,7 @@
             // 
             // Guild
             // 
-            Guild.Font = new Font("Segoe UI", 15F);
+            Guild.Font = new Font("Segoe UI", 9F);
             Guild.Location = new Point(965, 268);
             Guild.Multiline = true;
             Guild.Name = "Guild";
@@ -248,7 +248,7 @@
             // 
             // Squadinfo
             // 
-            Squadinfo.Font = new Font("Segoe UI", 15F);
+            Squadinfo.Font = new Font("Segoe UI", 9F);
             Squadinfo.Location = new Point(490, 268);
             Squadinfo.Multiline = true;
             Squadinfo.Name = "Squadinfo";
@@ -260,7 +260,7 @@
             // 
             // Runinfo
             // 
-            Runinfo.Font = new Font("Segoe UI", 15F);
+            Runinfo.Font = new Font("Segoe UI", 9F);
             Runinfo.Location = new Point(15, 268);
             Runinfo.Multiline = true;
             Runinfo.Name = "Runinfo";
@@ -508,7 +508,7 @@
             // 
             // Shattiitem
             // 
-            Shattiitem.Font = new Font("Segoe UI", 15F);
+            Shattiitem.Font = new Font("Segoe UI", 9F);
             Shattiitem.Location = new Point(15, 82);
             Shattiitem.Multiline = true;
             Shattiitem.Name = "Shattiitem";
@@ -540,7 +540,7 @@
             // 
             // Shattiitemname
             // 
-            Shattiitemname.Font = new Font("Segoe UI", 15F);
+            Shattiitemname.Font = new Font("Segoe UI", 9F);
             Shattiitemname.Location = new Point(85, 53);
             Shattiitemname.Multiline = true;
             Shattiitemname.Name = "Shattiitemname";

@@ -1019,6 +1019,7 @@
             button60.Size = new Size(140, 35);
             button60.TabIndex = 121;
             button60.UseVisualStyleBackColor = false;
+            button60.Click += button60_Click;
             // 
             // button61
             // 
@@ -1031,6 +1032,7 @@
             button61.Size = new Size(140, 35);
             button61.TabIndex = 122;
             button61.UseVisualStyleBackColor = false;
+            button61.Click += button61_Click;
             // 
             // button62
             // 
@@ -1043,6 +1045,7 @@
             button62.Size = new Size(140, 35);
             button62.TabIndex = 123;
             button62.UseVisualStyleBackColor = false;
+            button62.Click += button62_Click;
             // 
             // Convergens
             // 
@@ -1055,6 +1058,7 @@
             Convergens.Size = new Size(140, 35);
             Convergens.TabIndex = 124;
             Convergens.UseVisualStyleBackColor = false;
+            Convergens.Click += Convergens_Click;
             // 
             // button64
             // 

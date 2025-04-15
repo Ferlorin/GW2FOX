@@ -1970,6 +1970,26 @@ namespace GW2FOX
         {
             ShowAndHideForm(new BattleOfTheJadeSea());
         }
+
+        private void button60_Click(object sender, EventArgs e)
+        {
+            ShowAndHideForm(new UnlockingTheWizzardsTower());
+        }
+
+        private void button61_Click(object sender, EventArgs e)
+        {
+            ShowAndHideForm(new FlyByNight());
+        }
+
+        private void button62_Click(object sender, EventArgs e)
+        {
+            ShowAndHideForm(new TheDefenseOfAmnytas());
+        }
+
+        private void Convergens_Click(object sender, EventArgs e)
+        {
+            ShowAndHideForm(new Covergences());
+        }
     }
 
 

@@ -25,6 +25,9 @@
     <Compile Update="Metas\Clawofjormag.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Metas\Covergences.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Metas\Dbs.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -53,6 +56,9 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Metas\Fireshaman.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Metas\FlyByNight.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Metas\Forgedwithfire.cs">
@@ -124,7 +130,13 @@
     <Compile Update="Metas\StormsOfWinter.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Metas\TheDefenseOfAmnytas.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Metas\TheGangWar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Metas\UnlockingTheWizzardsTower.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Overlay.cs">
