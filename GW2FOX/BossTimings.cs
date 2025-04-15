@@ -480,6 +480,7 @@
                 AddBossEvent("Junundu Rising", "20:30:00", "Desert");
                 AddBossEvent("Junundu Rising", "21:30:00", "Desert");
                 AddBossEvent("Junundu Rising", "22:30:00", "Desert");
+                AddBossEvent("Junundu Rising", "23:30:00", "Desert");
                 AddBossEvent("Junundu Rising", "00:30:00", "Desert");
 
                 AddBossEvent("Path to Ascension", "01:30:00", "Desert");
@@ -508,6 +509,7 @@
                 AddBossEvent("Doppelganger", "21:55:00", "Desert");
                 AddBossEvent("Doppelganger", "23:55:00", "Desert");
 
+                AddBossEvent("Forged with Fire", "01:00:00", "Desert");
                 AddBossEvent("Forged with Fire", "02:00:00", "Desert");
                 AddBossEvent("Forged with Fire", "03:00:00", "Desert");
                 AddBossEvent("Forged with Fire", "04:00:00", "Desert");
@@ -530,7 +532,8 @@
                 AddBossEvent("Forged with Fire", "21:00:00", "Desert");
                 AddBossEvent("Forged with Fire", "22:00:00", "Desert");
                 AddBossEvent("Forged with Fire", "23:00:00", "Desert");
-                AddBossEvent("Forged with Fire", "01:00:00", "Desert");
+                AddBossEvent("Forged with Fire", "00:00:01", "Desert");
+                
 
                 AddBossEvent("Choya Piñata", "02:20:00", "Desert");
                 AddBossEvent("Choya Piñata", "04:20:00", "Desert");
