@@ -1955,6 +1955,21 @@ namespace GW2FOX
         {
             ShowAndHideForm(new KainengBlackout());
         }
+
+        private void button58_Click(object sender, EventArgs e)
+        {
+            ShowAndHideForm(new TheGangWar());
+        }
+
+        private void button59_Click(object sender, EventArgs e)
+        {
+            ShowAndHideForm(new Aspenwood());
+        }
+
+        private void button64_Click(object sender, EventArgs e)
+        {
+            ShowAndHideForm(new BattleOfTheJadeSea());
+        }
     }
 
 

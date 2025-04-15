@@ -993,6 +993,7 @@
             button58.Size = new Size(140, 35);
             button58.TabIndex = 119;
             button58.UseVisualStyleBackColor = false;
+            button58.Click += button58_Click;
             // 
             // button59
             // 
@@ -1005,6 +1006,7 @@
             button59.Size = new Size(140, 35);
             button59.TabIndex = 120;
             button59.UseVisualStyleBackColor = false;
+            button59.Click += button59_Click;
             // 
             // button60
             // 
@@ -1065,6 +1067,7 @@
             button64.Size = new Size(140, 35);
             button64.TabIndex = 125;
             button64.UseVisualStyleBackColor = false;
+            button64.Click += button64_Click;
             // 
             // Maw
             // 

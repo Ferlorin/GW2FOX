@@ -33,6 +33,7 @@ namespace GW2FOX
         private void Behemapinfo_Click(object sender, EventArgs e)
         {
             Clipboard.SetText(Attentionbehe.Text);
+
             BringGw2ToFront();
         }
 
