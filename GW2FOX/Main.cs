@@ -15,7 +15,6 @@ namespace GW2FOX
         public Main()
         {
             InitializeComponent();
-            Load += Main_Load;
 
             InitializeGlobalKeyboardHook();
 
@@ -34,18 +33,6 @@ namespace GW2FOX
             if (ModifierKeys == Keys.Alt && e.Key == Keys.T)
             {
                 Timer_Click(sender, e);
-            }
-        }
-
-        private void Main_Load(object? sender, EventArgs e)
-        {
-            try
-            {
-                AdjustWindowSize();
-            }
-            catch (Exception ex)
-            {
-                HandleException(ex);
             }
         }
 

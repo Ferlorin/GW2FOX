@@ -1921,8 +1921,6 @@ namespace GW2FOX
         }
 
 
-
-
         public static void UpdateBossUiBosses()
         {
             BossTimings.SetBossListFromConfig_Bosses();
@@ -1931,9 +1929,6 @@ namespace GW2FOX
                 BossTimerService.UpdateCustomBossList(CustomBossList);
             }
         }
-
-
-
 
         public static void SetBossListFromConfig_Bosses()
         {

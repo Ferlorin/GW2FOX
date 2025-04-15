@@ -7,46 +7,71 @@ namespace GW2FOX
     public partial class BaseForm : Form
     {
 
+        protected Overlay overlay;
+        protected ListView customBossList;
+        protected BossTimer bossTimer;
+        private GlobalKeyboardHook? _globalKeyboardHook;
 
+        public static ListView CustomBossList { get; private set; } = new ListView();
 
         public BaseForm()
         {
-            InitializeComponent();
-
-            // Setzen Sie hier Ihre gemeinsamen Eigenschaften
-            this.BackColor = System.Drawing.Color.White;
-            this.BackgroundImage = Properties.Resources.Background;
-            this.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.FormBorderStyle = FormBorderStyle.Sizable;
-            this.Text = "GW2FOX";
-            this.SizeGripStyle = SizeGripStyle.Show;
-            this.AutoScaleMode = AutoScaleMode.None;
-            this.AutoScroll = true;
-            this.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            
-            this.StartPosition = FormStartPosition.CenterParent;
-            this.WindowState = FormWindowState.Normal;
-            this.DoubleBuffered = true;
-            // Weitere gemeinsame Eigenschaften setzen...
+            InitializeCustomBossList();
+            InitializeGlobalKeyboardHook();
+            SetFormTransparency();
         }
 
+        protected void SetFormTransparency()
+        {
+            this.FormBorderStyle = FormBorderStyle.None;
+            this.AllowTransparency = true;
+            this.BackColor = Color.Magenta;
+            this.TransparencyKey = Color.Magenta;
+            this.Opacity = 0.90;
+            this.TopMost = true;
+        }
+        protected void InitializeBossTimerAndOverlay()
+        {
+            bossTimer = new BossTimer(customBossList);
+            overlay = new Overlay(customBossList);
+            overlay.WindowState = FormWindowState.Normal;
+        }
+
+        private void InitializeGlobalKeyboardHook()
+        {
+            _globalKeyboardHook = new GlobalKeyboardHook();
+            _globalKeyboardHook.KeyPressed += GlobalKeyboardHook_KeyPressed;
+        }
+
+        private void GlobalKeyboardHook_KeyPressed(object sender, KeyPressedEventArgs e)
+        {
+            if (ModifierKeys == Keys.Alt && e.Key == Keys.T)
+            {
+                if (this is Main)
+                {
+                    Timer_Click(sender, e);
+                }
+            }
+        }
+        protected void InitializeCustomBossList()
+        {
+            customBossList = new DoubleBufferedListView(); // statt new ListView()
+            customBossList.View = View.Details;
+            customBossList.Columns.Add("Meta", 145);
+            customBossList.Columns.Add("Time", 78);
+            customBossList.Location = new Point(0, 0);
+            customBossList.ForeColor = Color.White;
+            customBossList.FullRowSelect = true;
+            customBossList.OwnerDraw = true;
+
+            customBossList.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+        }
 
         protected void ShowAndHideForm(Form newForm)
         {
-            // Speichern Sie die Größe und Position des aktuellen Formulars
-            Size currentSize = this.Size;
-            Point currentPosition = this.Location;
-
-            // Setzen Sie die Größe und Position des neuen Formulars
-            newForm.Size = currentSize;
-            newForm.Location = currentPosition;
-
-            // Setzen Sie das aktuelle Formular als Besitzer des neuen Formulars
             newForm.Owner = this;
-
-            // Zeigen Sie das neue Formular an und verbergen Sie das aktuelle Formular
             newForm.Show();
-            this.Hide();
+            this.Hide(); // Aktuelles Fenster ausblenden
         }
 
         protected static void SaveTextToFile(string textToSave, string sectionHeader, bool hideMessages = false)
@@ -99,41 +124,7 @@ namespace GW2FOX
             }
         }
 
-        protected void AdjustWindowSize()
-        {
-            Screen currentScreen = Screen.FromControl(this);
-            Rectangle workingArea = currentScreen.WorkingArea;
-
-            if (Width > workingArea.Width || Height > workingArea.Height)
-            {
-                Size = new Size(
-                    Math.Min(Width, workingArea.Width),
-                    Math.Min(Height, workingArea.Height)
-                );
-
-                Location = new Point(
-                    workingArea.Left + (workingArea.Width - Width) / 2,
-                    workingArea.Top + (workingArea.Height - Height) / 2
-                );
-            }
-
-            if (Height > workingArea.Height)
-            {
-                Height = workingArea.Height;
-            }
-
-            if (Bottom > workingArea.Bottom)
-            {
-                Location = new Point(
-                    Left,
-                    Math.Max(workingArea.Top, workingArea.Bottom - Height)
-                );
-            }
-        }
-        protected void HandleException(Exception ex, string methodName)
-        {
-            Console.WriteLine($"Exception in {methodName}: {ex}");
-        }
+        
 
         private void LoadTextFromConfig(string sectionHeader, TextBox textBox, string configText,
             string defaultToInsert)

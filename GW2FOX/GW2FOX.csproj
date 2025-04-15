@@ -32,61 +32,61 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Convergences.cs">
+    <Compile Update="Metas\Convergences.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="DefenseOfAmnytas.cs">
+    <Compile Update="Metas\DefenseOfAmnytas.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="FlyByNight.cs">
+    <Compile Update="Metas\FlyByNight.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="WizardsTower.cs">
+    <Compile Update="Metas\WizardsTower.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="JadeSea.cs">
+    <Compile Update="Metas\JadeSea.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Aspenwood.cs">
+    <Compile Update="Metas\Aspenwood.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="GangWar.cs">
+    <Compile Update="Metas\GangWar.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="KainengBlackout.cs">
+    <Compile Update="Metas\KainengBlackout.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="AetherbladeAssault.cs">
+    <Compile Update="Metas\AetherbladeAssault.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="NoransHomestead.cs">
+    <Compile Update="Metas\NoransHomestead.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="NewLoamhurst.cs">
+    <Compile Update="Metas\NewLoamhurst.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="SaidrasHaven.cs">
+    <Compile Update="Metas\SaidrasHaven.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Sandstorm.cs">
+    <Compile Update="Metas\Sandstorm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="DefendJorasKeep.cs">
+    <Compile Update="Metas\DefendJorasKeep.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="StormsOfWinter.cs">
+    <Compile Update="Metas\StormsOfWinter.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="DoomloreShrine.cs">
+    <Compile Update="Metas\DoomloreShrine.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Effigy.cs">
+    <Compile Update="Metas\Effigy.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="TheOozePits.cs">
+    <Compile Update="Metas\TheOozePits.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="TheOilFloes.cs">
+    <Compile Update="Metas\TheOilFloes.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="MawsOfTorment.cs">
@@ -97,68 +97,68 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Update="ThunderheadPeaks.cs" />
-    <Compile Update="Palawadan.cs" />
-    <Compile Update="DragonsStand.cs" />
-    <Compile Update="SerpentsIre.cs" />
+    <Compile Update="Metas\ThunderheadPeaks.cs" />
+    <Compile Update="Metas\Palawadan.cs" />
+    <Compile Update="Metas\DragonsStand.cs" />
+    <Compile Update="Metas\SerpentsIre.cs" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Convergences.resx">
+    <EmbeddedResource Update="Metas\Convergences.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Update="DefenseOfAmnytas.resx">
+    <EmbeddedResource Update="Metas\DefenseOfAmnytas.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Update="FlyByNight.resx">
+    <EmbeddedResource Update="Metas\FlyByNight.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Update="WizardsTower.resx">
+    <EmbeddedResource Update="Metas\WizardsTower.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Update="JadeSea.resx">
+    <EmbeddedResource Update="Metas\JadeSea.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Update="Aspenwood.resx">
+    <EmbeddedResource Update="Metas\Aspenwood.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Update="GangWar.resx">
+    <EmbeddedResource Update="Metas\GangWar.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Update="KainengBlackout.resx">
+    <EmbeddedResource Update="Metas\KainengBlackout.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Update="AetherbladeAssault.resx">
+    <EmbeddedResource Update="Metas\AetherbladeAssault.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Update="NoransHomestead.resx">
+    <EmbeddedResource Update="Metas\NoransHomestead.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Update="NewLoamhurst.resx">
+    <EmbeddedResource Update="Metas\NewLoamhurst.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Update="SaidrasHaven.resx">
+    <EmbeddedResource Update="Metas\SaidrasHaven.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Update="Sandstorm.resx">
+    <EmbeddedResource Update="Metas\Sandstorm.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Update="DefendJorasKeep.resx">
+    <EmbeddedResource Update="Metas\DefendJorasKeep.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Update="StormsOfWinter.resx">
+    <EmbeddedResource Update="Metas\StormsOfWinter.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Update="DoomloreShrine.resx">
+    <EmbeddedResource Update="Metas\DoomloreShrine.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Update="Effigy.resx">
+    <EmbeddedResource Update="Metas\Effigy.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Update="TheOozePits.resx">
+    <EmbeddedResource Update="Metas\TheOozePits.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Update="TheOilFloes.resx">
+    <EmbeddedResource Update="Metas\TheOilFloes.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Update="MawsOfTorment.resx">
@@ -168,16 +168,16 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="ThunderheadPeaks.resx">
+    <EmbeddedResource Update="Metas\ThunderheadPeaks.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Update="Palawadan.resx">
+    <EmbeddedResource Update="Metas\Palawadan.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Update="DragonsStand.resx">
+    <EmbeddedResource Update="Metas\DragonsStand.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Update="SerpentsIre.resx">
+    <EmbeddedResource Update="Metas\SerpentsIre.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>

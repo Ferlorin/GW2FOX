@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Worldbosses));
-            pictureBox1 = new PictureBox();
             Runinfo = new TextBox();
             Squadinfo = new TextBox();
             Guild = new TextBox();
@@ -74,8 +73,6 @@
             button38 = new Button();
             button39 = new Button();
             button40 = new Button();
-            pictureBox2 = new PictureBox();
-            pictureBox4 = new PictureBox();
             button3 = new Button();
             button41 = new Button();
             DragonsStand = new Button();
@@ -149,25 +146,7 @@
             Flybynigtht = new CheckBox();
             Amnytas = new CheckBox();
             Convergence = new CheckBox();
-            button27 = new Button();
-            button42 = new Button();
-            button63 = new Button();
-            button65 = new Button();
-            button66 = new Button();
-            buttonSelectAll = new Button();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
             SuspendLayout();
-            // 
-            // pictureBox1
-            // 
-            pictureBox1.Image = Properties.Resources.Header;
-            pictureBox1.Location = new Point(602, 12);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(700, 175);
-            pictureBox1.TabIndex = 0;
-            pictureBox1.TabStop = false;
             // 
             // Runinfo
             // 
@@ -649,24 +628,6 @@
             button40.TabIndex = 88;
             button40.UseVisualStyleBackColor = true;
             button40.Click += Chak_Click;
-            // 
-            // pictureBox2
-            // 
-            pictureBox2.Image = Properties.Resources.Overline;
-            pictureBox2.Location = new Point(12, 335);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(1880, 30);
-            pictureBox2.TabIndex = 99;
-            pictureBox2.TabStop = false;
-            // 
-            // pictureBox4
-            // 
-            pictureBox4.Image = Properties.Resources.WBsheaderonetime;
-            pictureBox4.Location = new Point(12, 193);
-            pictureBox4.Name = "pictureBox4";
-            pictureBox4.Size = new Size(1880, 30);
-            pictureBox4.TabIndex = 100;
-            pictureBox4.TabStop = false;
             // 
             // button3
             // 
@@ -1490,92 +1451,11 @@
             Convergence.UseVisualStyleBackColor = false;
             Convergence.CheckedChanged += Convergence_CheckedChanged;
             // 
-            // button27
-            // 
-            button27.BackColor = SystemColors.ActiveCaptionText;
-            button27.BackgroundImage = Properties.Resources.Metainfusion;
-            button27.FlatStyle = FlatStyle.Flat;
-            button27.Location = new Point(12, 62);
-            button27.Name = "button27";
-            button27.Size = new Size(182, 45);
-            button27.TabIndex = 184;
-            button27.UseVisualStyleBackColor = false;
-            button27.Click += Meta_Click;
-            // 
-            // button42
-            // 
-            button42.BackColor = SystemColors.ActiveCaptionText;
-            button42.BackgroundImage = Properties.Resources.Worldbosses;
-            button42.FlatStyle = FlatStyle.Flat;
-            button42.Location = new Point(12, 12);
-            button42.Name = "button42";
-            button42.Size = new Size(182, 45);
-            button42.TabIndex = 185;
-            button42.UseVisualStyleBackColor = false;
-            button42.Click += World_Click;
-            // 
-            // button63
-            // 
-            button63.BackColor = SystemColors.ActiveCaptionText;
-            button63.BackgroundImage = Properties.Resources.Clear;
-            button63.FlatStyle = FlatStyle.Flat;
-            button63.ForeColor = Color.Black;
-            button63.Location = new Point(200, 62);
-            button63.Name = "button63";
-            button63.Size = new Size(182, 45);
-            button63.TabIndex = 186;
-            button63.UseVisualStyleBackColor = false;
-            button63.Click += ClearAll_Click;
-            // 
-            // button65
-            // 
-            button65.BackColor = Color.Black;
-            button65.BackgroundImage = Properties.Resources.WorldMeta;
-            button65.FlatStyle = FlatStyle.Flat;
-            button65.Location = new Point(12, 114);
-            button65.Name = "button65";
-            button65.Size = new Size(182, 45);
-            button65.TabIndex = 187;
-            button65.UseVisualStyleBackColor = false;
-            button65.Click += Mixed_Click;
-            // 
-            // button66
-            // 
-            button66.BackColor = SystemColors.ActiveCaptionText;
-            button66.BackgroundImage = Properties.Resources.TimerOverlay;
-            button66.FlatStyle = FlatStyle.Flat;
-            button66.Location = new Point(388, 10);
-            button66.Name = "button66";
-            button66.Size = new Size(182, 45);
-            button66.TabIndex = 189;
-            button66.UseVisualStyleBackColor = false;
-            button66.Click += Timer_Click;
-            // 
-            // buttonSelectAll
-            // 
-            buttonSelectAll.BackColor = Color.Black;
-            buttonSelectAll.BackgroundImage = Properties.Resources.AllMetas;
-            buttonSelectAll.FlatStyle = FlatStyle.Flat;
-            buttonSelectAll.ForeColor = SystemColors.ControlText;
-            buttonSelectAll.Location = new Point(200, 10);
-            buttonSelectAll.Name = "buttonSelectAll";
-            buttonSelectAll.Size = new Size(182, 45);
-            buttonSelectAll.TabIndex = 188;
-            buttonSelectAll.UseVisualStyleBackColor = false;
-            buttonSelectAll.Click += All_click;
-            // 
             // Worldbosses
             // 
             AutoScaleMode = AutoScaleMode.None;
             AutoValidate = AutoValidate.EnablePreventFocusChange;
-            BackgroundImage = Properties.Resources.Background;
             ClientSize = new Size(1904, 1041);
-            Controls.Add(button66);
-            Controls.Add(buttonSelectAll);
-            Controls.Add(button65);
-            Controls.Add(button63);
-            Controls.Add(button42);
-            Controls.Add(button27);
             Controls.Add(WizzardsTower);
             Controls.Add(Flybynigtht);
             Controls.Add(Amnytas);
@@ -1649,8 +1529,6 @@
             Controls.Add(DragonsStand);
             Controls.Add(button41);
             Controls.Add(button3);
-            Controls.Add(pictureBox4);
-            Controls.Add(pictureBox2);
             Controls.Add(button32);
             Controls.Add(button33);
             Controls.Add(button34);
@@ -1695,22 +1573,16 @@
             Controls.Add(Guild);
             Controls.Add(Squadinfo);
             Controls.Add(Runinfo);
-            Controls.Add(pictureBox1);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Worldbosses";
             RightToLeft = RightToLeft.No;
             StartPosition = FormStartPosition.Manual;
             Load += Worldbosses_Load_1;
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
-
-        private PictureBox pictureBox1;
         private TextBox Runinfo;
         private TextBox Squadinfo;
         private TextBox Guild;
@@ -1755,8 +1627,6 @@
         private Button button38;
         private Button button39;
         private Button button40;
-        private PictureBox pictureBox2;
-        private PictureBox pictureBox4;
         private Button button3;
         private Button button41;
         private Button DragonsStand;
@@ -1830,11 +1700,5 @@
         private CheckBox Flybynigtht;
         private CheckBox Amnytas;
         private CheckBox Convergence;
-        private Button button27;
-        private Button button42;
-        private Button button63;
-        private Button button65;
-        private Button button66;
-        private Button buttonSelectAll;
     }
 }
