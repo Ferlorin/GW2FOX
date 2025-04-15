@@ -1925,6 +1925,21 @@ namespace GW2FOX
         {
             ShowAndHideForm(new DefendJorasKeep());
         }
+
+        private void button45_Click(object sender, EventArgs e)
+        {
+            ShowAndHideForm(new Sandstorm());
+        }
+
+        private void button46_Click(object sender, EventArgs e)
+        {
+            ShowAndHideForm(new SaidrasHeaven());
+        }
+
+        private void button47_Click(object sender, EventArgs e)
+        {
+            ShowAndHideForm(new NewLoamhurst());
+        }
     }
 
 

@@ -817,6 +817,7 @@
             button45.Size = new Size(140, 35);
             button45.TabIndex = 106;
             button45.UseVisualStyleBackColor = false;
+            button45.Click += button45_Click;
             // 
             // button46
             // 
@@ -829,6 +830,7 @@
             button46.Size = new Size(140, 35);
             button46.TabIndex = 107;
             button46.UseVisualStyleBackColor = false;
+            button46.Click += button46_Click;
             // 
             // button47
             // 
@@ -841,6 +843,7 @@
             button47.Size = new Size(140, 35);
             button47.TabIndex = 108;
             button47.UseVisualStyleBackColor = false;
+            button47.Click += button47_Click;
             // 
             // button48
             // 
