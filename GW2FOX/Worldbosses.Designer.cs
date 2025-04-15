@@ -1902,8 +1902,6 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            AutoSize = true;
-            AutoSizeMode = AutoSizeMode.GrowAndShrink;
             ClientSize = new Size(1904, 1041);
             Controls.Add(pictureBox12);
             Controls.Add(pictureBox11);
