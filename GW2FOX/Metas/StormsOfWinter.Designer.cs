@@ -1,6 +1,6 @@
 ﻿namespace GW2FOX
 {
-    partial class Effigy
+    partial class StormsOfWinter
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Effigy));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StormsOfWinter));
+            Back = new Button();
             pictureBox4 = new PictureBox();
             button9 = new Button();
             button8 = new Button();
@@ -45,9 +46,20 @@
             Guild = new TextBox();
             Squadinfo = new TextBox();
             Runinfo = new TextBox();
-            Back = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
             SuspendLayout();
+            // 
+            // Back
+            // 
+            Back.BackgroundImage = (Image)resources.GetObject("Back.BackgroundImage");
+            Back.BackgroundImageLayout = ImageLayout.Center;
+            Back.FlatStyle = FlatStyle.Flat;
+            Back.Location = new Point(1864, 1002);
+            Back.Name = "Back";
+            Back.Size = new Size(40, 40);
+            Back.TabIndex = 56;
+            Back.UseVisualStyleBackColor = true;
+            Back.Click += Back_Click_1;
             // 
             // pictureBox4
             // 
@@ -155,7 +167,7 @@
             Attentionbehe.ScrollBars = ScrollBars.Vertical;
             Attentionbehe.Size = new Size(350, 39);
             Attentionbehe.TabIndex = 109;
-            Attentionbehe.Text = "≪ATTENTION≫ Meta -Train │ ☠Lvl 80 │ “Ceremony of the Sacred Flame” │ ☣[&BA4MAAA=]☣ - Join us!";
+            Attentionbehe.Text = "≪ATTENTION≫ Meta -Train │ ☠Lvl 80 │ “StormsOfWinter” │ ☣[&BCEMAAA=]☣ - Join us!";
             // 
             // Beheinstance
             // 
@@ -167,7 +179,7 @@
             Beheinstance.ScrollBars = ScrollBars.Vertical;
             Beheinstance.Size = new Size(350, 39);
             Beheinstance.TabIndex = 108;
-            Beheinstance.Text = "Go out of fight, then right click group 2 & join ☣Grothmar Valley☣";
+            Beheinstance.Text = "Go out of fight, then right click group 2 & join ☣Bjora Marches☣";
             // 
             // Beheinfo
             // 
@@ -180,7 +192,7 @@
             Beheinfo.ScrollBars = ScrollBars.Vertical;
             Beheinfo.Size = new Size(350, 39);
             Beheinfo.TabIndex = 107;
-            Beheinfo.Text = "☠Lvl 80 ≪Ceremony of the Sacred Flame≫ │ ☣[&BA4MAAA=]☣";
+            Beheinfo.Text = "☠Lvl 80 ≪StormsOfWinter≫ │ ☣[&BCEMAAA=]☣";
             // 
             // Symbols
             // 
@@ -238,25 +250,11 @@
             Runinfo.Size = new Size(350, 50);
             Runinfo.TabIndex = 102;
             // 
-            // Back
-            // 
-            Back.BackgroundImage = (Image)resources.GetObject("Back.BackgroundImage");
-            Back.BackgroundImageLayout = ImageLayout.Center;
-            Back.Cursor = Cursors.Cross;
-            Back.FlatStyle = FlatStyle.Flat;
-            Back.Location = new Point(1864, 1002);
-            Back.Name = "Back";
-            Back.Size = new Size(40, 40);
-            Back.TabIndex = 120;
-            Back.UseVisualStyleBackColor = true;
-            Back.Click += Back_Click_1;
-            // 
-            // Effigy
+            // StormsOfWinter
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1904, 1041);
-            Controls.Add(Back);
             Controls.Add(pictureBox4);
             Controls.Add(button9);
             Controls.Add(button8);
@@ -273,8 +271,10 @@
             Controls.Add(Guild);
             Controls.Add(Squadinfo);
             Controls.Add(Runinfo);
-            Name = "Effigy";
-            Text = "Effigy";
+            Controls.Add(Back);
+            Name = "StormsOfWinter";
+            Text = "StormsOfWinter";
+            WindowState = FormWindowState.Maximized;
             ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -282,6 +282,7 @@
 
         #endregion
 
+        private Button Back;
         private PictureBox pictureBox4;
         private Button button9;
         private Button button8;
@@ -298,6 +299,5 @@
         private TextBox Guild;
         private TextBox Squadinfo;
         private TextBox Runinfo;
-        private Button Back;
     }
 }

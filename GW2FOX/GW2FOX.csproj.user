@@ -49,6 +49,12 @@
     <Compile Update="Metas\Forgedwithfire.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Metas\DoomloreShrine.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Metas\DefendJorasKeep.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Metas\OilFloes.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -89,6 +95,9 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Metas\OozePits.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Metas\StormsOfWinter.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Overlay.cs">

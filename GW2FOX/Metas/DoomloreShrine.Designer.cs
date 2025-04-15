@@ -1,6 +1,6 @@
 ﻿namespace GW2FOX
 {
-    partial class Effigy
+    partial class DoomloreShrine
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Effigy));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DoomloreShrine));
             pictureBox4 = new PictureBox();
             button9 = new Button();
             button8 = new Button();
@@ -55,7 +55,7 @@
             pictureBox4.Location = new Point(12, 232);
             pictureBox4.Name = "pictureBox4";
             pictureBox4.Size = new Size(1880, 30);
-            pictureBox4.TabIndex = 119;
+            pictureBox4.TabIndex = 135;
             pictureBox4.TabStop = false;
             // 
             // button9
@@ -66,7 +66,7 @@
             button9.Location = new Point(371, 430);
             button9.Name = "button9";
             button9.Size = new Size(75, 23);
-            button9.TabIndex = 116;
+            button9.TabIndex = 134;
             button9.UseVisualStyleBackColor = true;
             button9.Click += button9_Click;
             // 
@@ -78,7 +78,7 @@
             button8.Location = new Point(371, 385);
             button8.Name = "button8";
             button8.Size = new Size(75, 23);
-            button8.TabIndex = 115;
+            button8.TabIndex = 133;
             button8.UseVisualStyleBackColor = true;
             button8.Click += button8_Click;
             // 
@@ -90,7 +90,7 @@
             button7.Location = new Point(371, 340);
             button7.Name = "button7";
             button7.Size = new Size(75, 23);
-            button7.TabIndex = 114;
+            button7.TabIndex = 132;
             button7.UseVisualStyleBackColor = true;
             button7.Click += button7_Click;
             // 
@@ -103,7 +103,7 @@
             button5.Location = new Point(1796, 295);
             button5.Name = "button5";
             button5.Size = new Size(75, 23);
-            button5.TabIndex = 113;
+            button5.TabIndex = 131;
             button5.UseVisualStyleBackColor = true;
             button5.Click += button5_Click;
             // 
@@ -116,7 +116,7 @@
             button4.Location = new Point(1321, 295);
             button4.Name = "button4";
             button4.Size = new Size(75, 23);
-            button4.TabIndex = 112;
+            button4.TabIndex = 130;
             button4.UseVisualStyleBackColor = true;
             button4.Click += button4_Click;
             // 
@@ -129,7 +129,7 @@
             button3.Location = new Point(846, 295);
             button3.Name = "button3";
             button3.Size = new Size(75, 23);
-            button3.TabIndex = 111;
+            button3.TabIndex = 129;
             button3.UseVisualStyleBackColor = true;
             button3.Click += button3_Click;
             // 
@@ -141,7 +141,7 @@
             button2.Location = new Point(371, 295);
             button2.Name = "button2";
             button2.Size = new Size(75, 23);
-            button2.TabIndex = 110;
+            button2.TabIndex = 128;
             button2.UseVisualStyleBackColor = true;
             button2.Click += button2_Click;
             // 
@@ -154,7 +154,7 @@
             Attentionbehe.ReadOnly = true;
             Attentionbehe.ScrollBars = ScrollBars.Vertical;
             Attentionbehe.Size = new Size(350, 39);
-            Attentionbehe.TabIndex = 109;
+            Attentionbehe.TabIndex = 127;
             Attentionbehe.Text = "≪ATTENTION≫ Meta -Train │ ☠Lvl 80 │ “Ceremony of the Sacred Flame” │ ☣[&BA4MAAA=]☣ - Join us!";
             // 
             // Beheinstance
@@ -166,7 +166,7 @@
             Beheinstance.ReadOnly = true;
             Beheinstance.ScrollBars = ScrollBars.Vertical;
             Beheinstance.Size = new Size(350, 39);
-            Beheinstance.TabIndex = 108;
+            Beheinstance.TabIndex = 126;
             Beheinstance.Text = "Go out of fight, then right click group 2 & join ☣Grothmar Valley☣";
             // 
             // Beheinfo
@@ -179,7 +179,7 @@
             Beheinfo.ReadOnly = true;
             Beheinfo.ScrollBars = ScrollBars.Vertical;
             Beheinfo.Size = new Size(350, 39);
-            Beheinfo.TabIndex = 107;
+            Beheinfo.TabIndex = 125;
             Beheinfo.Text = "☠Lvl 80 ≪Ceremony of the Sacred Flame≫ │ ☣[&BA4MAAA=]☣";
             // 
             // Symbols
@@ -191,7 +191,7 @@
             Symbols.ReadOnly = true;
             Symbols.ScrollBars = ScrollBars.Vertical;
             Symbols.Size = new Size(429, 85);
-            Symbols.TabIndex = 106;
+            Symbols.TabIndex = 124;
             // 
             // Welcome
             // 
@@ -202,7 +202,7 @@
             Welcome.ReadOnly = true;
             Welcome.ScrollBars = ScrollBars.Vertical;
             Welcome.Size = new Size(350, 50);
-            Welcome.TabIndex = 105;
+            Welcome.TabIndex = 123;
             // 
             // Guild
             // 
@@ -213,7 +213,7 @@
             Guild.ReadOnly = true;
             Guild.ScrollBars = ScrollBars.Vertical;
             Guild.Size = new Size(350, 50);
-            Guild.TabIndex = 104;
+            Guild.TabIndex = 122;
             // 
             // Squadinfo
             // 
@@ -224,7 +224,7 @@
             Squadinfo.ReadOnly = true;
             Squadinfo.ScrollBars = ScrollBars.Vertical;
             Squadinfo.Size = new Size(350, 50);
-            Squadinfo.TabIndex = 103;
+            Squadinfo.TabIndex = 121;
             Squadinfo.Text = "\r\n";
             // 
             // Runinfo
@@ -236,22 +236,21 @@
             Runinfo.ReadOnly = true;
             Runinfo.ScrollBars = ScrollBars.Vertical;
             Runinfo.Size = new Size(350, 50);
-            Runinfo.TabIndex = 102;
+            Runinfo.TabIndex = 120;
             // 
             // Back
             // 
             Back.BackgroundImage = (Image)resources.GetObject("Back.BackgroundImage");
             Back.BackgroundImageLayout = ImageLayout.Center;
-            Back.Cursor = Cursors.Cross;
             Back.FlatStyle = FlatStyle.Flat;
             Back.Location = new Point(1864, 1002);
             Back.Name = "Back";
             Back.Size = new Size(40, 40);
-            Back.TabIndex = 120;
+            Back.TabIndex = 136;
             Back.UseVisualStyleBackColor = true;
             Back.Click += Back_Click_1;
             // 
-            // Effigy
+            // DoomloreShrine
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -273,8 +272,8 @@
             Controls.Add(Guild);
             Controls.Add(Squadinfo);
             Controls.Add(Runinfo);
-            Name = "Effigy";
-            Text = "Effigy";
+            Name = "DoomloreShrine";
+            Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
             ResumeLayout(false);
             PerformLayout();

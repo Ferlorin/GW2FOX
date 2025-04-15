@@ -1910,6 +1910,21 @@ namespace GW2FOX
         {
             ShowAndHideForm(new Effigy());
         }
+
+        private void button53_Click(object sender, EventArgs e)
+        {
+            ShowAndHideForm(new DoomloreShrine());
+        }
+
+        private void button54_Click(object sender, EventArgs e)
+        {
+            ShowAndHideForm(new StormsOfWinter());
+        }
+
+        private void button55_Click(object sender, EventArgs e)
+        {
+            ShowAndHideForm(new DefendJorasKeep());
+        }
     }
 
 

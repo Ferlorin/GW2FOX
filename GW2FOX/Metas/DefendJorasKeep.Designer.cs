@@ -1,6 +1,6 @@
 ﻿namespace GW2FOX
 {
-    partial class Effigy
+    partial class DefendJorasKeep
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Effigy));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DefendJorasKeep));
             pictureBox4 = new PictureBox();
             button9 = new Button();
             button8 = new Button();
@@ -155,7 +155,7 @@
             Attentionbehe.ScrollBars = ScrollBars.Vertical;
             Attentionbehe.Size = new Size(350, 39);
             Attentionbehe.TabIndex = 109;
-            Attentionbehe.Text = "≪ATTENTION≫ Meta -Train │ ☠Lvl 80 │ “Ceremony of the Sacred Flame” │ ☣[&BA4MAAA=]☣ - Join us!";
+            Attentionbehe.Text = "≪ATTENTION≫ Meta -Train │ ☠Lvl 80 │ “Defend Jora's Keep” │ ☣[&BCcMAAA=]☣ - Join us!";
             // 
             // Beheinstance
             // 
@@ -167,7 +167,7 @@
             Beheinstance.ScrollBars = ScrollBars.Vertical;
             Beheinstance.Size = new Size(350, 39);
             Beheinstance.TabIndex = 108;
-            Beheinstance.Text = "Go out of fight, then right click group 2 & join ☣Grothmar Valley☣";
+            Beheinstance.Text = "Go out of fight, then right click group 2 & join ☣Bjora Marches☣";
             // 
             // Beheinfo
             // 
@@ -180,7 +180,7 @@
             Beheinfo.ScrollBars = ScrollBars.Vertical;
             Beheinfo.Size = new Size(350, 39);
             Beheinfo.TabIndex = 107;
-            Beheinfo.Text = "☠Lvl 80 ≪Ceremony of the Sacred Flame≫ │ ☣[&BA4MAAA=]☣";
+            Beheinfo.Text = "☠Lvl 80 ≪Defend Jora's Keep≫ │ ☣[&BCcMAAA=]☣";
             // 
             // Symbols
             // 
@@ -242,7 +242,6 @@
             // 
             Back.BackgroundImage = (Image)resources.GetObject("Back.BackgroundImage");
             Back.BackgroundImageLayout = ImageLayout.Center;
-            Back.Cursor = Cursors.Cross;
             Back.FlatStyle = FlatStyle.Flat;
             Back.Location = new Point(1864, 1002);
             Back.Name = "Back";
@@ -251,7 +250,7 @@
             Back.UseVisualStyleBackColor = true;
             Back.Click += Back_Click_1;
             // 
-            // Effigy
+            // DefendJorasKeep
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -273,8 +272,9 @@
             Controls.Add(Guild);
             Controls.Add(Squadinfo);
             Controls.Add(Runinfo);
-            Name = "Effigy";
-            Text = "Effigy";
+            Name = "DefendJorasKeep";
+            Text = "Form1";
+            WindowState = FormWindowState.Maximized;
             ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
             ResumeLayout(false);
             PerformLayout();
