@@ -11,14 +11,14 @@ namespace GW2FOX
             LoadConfigText(Runinfo, Squadinfo, Guild, Welcome, Symbols);
         }
 
-        
-
-        
-
-        
 
 
-        
+
+
+
+
+
+
 
         private void Beheinfo_Click(object sender, EventArgs e)
         {
@@ -38,11 +38,6 @@ namespace GW2FOX
             BringGw2ToFront();
         }
 
-        private void Backtomain_Click(object sender, EventArgs e)
-        {
-            Owner.Show();
-            Dispose();
-        }
 
         private void Runinfo_Click(object sender, EventArgs e)
         {
@@ -78,7 +73,7 @@ namespace GW2FOX
             BringGw2ToFront();
         }
 
-        
+
 
         private void North_Click(object sender, EventArgs e)
         {
@@ -134,6 +129,24 @@ namespace GW2FOX
             Clipboard.SetText(Southside.Text);
 
             BringGw2ToFront();
+        }
+
+        private void button16_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string homepageUrl = "https://wiki.guildwars2.com/wiki/Battle_in_Tarir";
+                ProcessStartInfo psi = new ProcessStartInfo
+                {
+                    FileName = homepageUrl,
+                    UseShellExecute = true
+                };
+                Process.Start(psi);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Fehler beim ?ffnen der Homepage: {ex.Message}", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

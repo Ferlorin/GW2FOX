@@ -59,6 +59,7 @@
             button11 = new Button();
             Escord = new TextBox();
             pictureBox5 = new PictureBox();
+            button12 = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
@@ -382,12 +383,24 @@
             pictureBox5.TabIndex = 127;
             pictureBox5.TabStop = false;
             // 
+            // button12
+            // 
+            button12.BackgroundImage = Properties.Resources.wikigw2;
+            button12.FlatStyle = FlatStyle.Flat;
+            button12.Location = new Point(11, 11);
+            button12.Name = "button12";
+            button12.Size = new Size(100, 45);
+            button12.TabIndex = 128;
+            button12.UseVisualStyleBackColor = true;
+            button12.Click += button12_Click;
+            // 
             // Ulgoth
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources.Background;
             ClientSize = new Size(1904, 1041);
+            Controls.Add(button12);
             Controls.Add(pictureBox5);
             Controls.Add(button11);
             Controls.Add(Escord);
@@ -420,8 +433,7 @@
             Controls.Add(pictureBox1);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Ulgoth";
-            Text = "GW2FOX";
-            WindowState = FormWindowState.Maximized;
+            StartPosition = FormStartPosition.Manual;
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
@@ -463,5 +475,6 @@
         private Button button11;
         private TextBox Escord;
         private PictureBox pictureBox5;
+        private Button button12;
     }
 }

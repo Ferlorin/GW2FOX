@@ -1,58 +1,63 @@
-﻿namespace GW2FOX
+﻿using static GW2FOX.BossTimings;
+
+namespace GW2FOX
 {
     public partial class Overlay : Form
     {
-        public static ListView CustomBossList { get; private set; }
+ 
+        private static readonly Color DefaultFontColor = Color.White;
+        private static readonly Color PastBossFontColor = Color.OrangeRed;
+        private static readonly Color MyAlmostBlackColor = Color.FromArgb(255, 1, 1, 1);
+        private ListView overlayListView;
 
-        private Point mouse_offset;
 
 
+        private Panel listViewPanel;
         public Overlay(ListView listViewItems)
         {
             InitializeComponent();
-            if (Owner is BaseForm baseForm)
-            {
-                baseForm.UpdateCustomBossList(listViewItems);
-            };
-            CustomBossList = listViewItems;
 
-            ListView overlayListView = CustomBossList; // Behalte nur diese Zeile
-            overlayListView.ForeColor = Color.Black;
+            overlayListView = listViewItems;
+            overlayListView.DrawItem += OverlayListView_SetColor;
+
+            listViewPanel = new Panel();
+            listViewPanel.Size = new Size(listViewPanel.Width, 21 * overlayListView.Items.Count);
 
             // Konfiguriere das Overlay-Formular
-            BackColor = Color.Black;
-            TransparencyKey = Color.Black;
+            BackColor = MyAlmostBlackColor;
+            TransparencyKey = MyAlmostBlackColor;
             TopMost = true;
             ShowInTaskbar = false;
             StartPosition = FormStartPosition.Manual;
-            Opacity = 0.7;
-            MouseDown += OnMouseDown;
-            MouseMove += OnMouseMove;
-            Width = 235;
+            Opacity = 1;
+
+            Width = 240;
             Height = 310;
             AutoScroll = true;
 
-
-            Panel listViewPanel = new Panel();
             listViewPanel.BackColor = Color.Transparent;
-            FormBorderStyle = FormBorderStyle.Fixed3D;
 
             // Berechne die Größe des listViewPanel
-            int panelWidth = (int)(Width);
+            int panelWidth = Width - 10;
             int panelHeight = (int)(Height * 10);
             listViewPanel.Size = new Size(panelWidth, panelHeight);
 
             listViewPanel.Location = new Point(0, 0);
 
             // Erstelle die ListView
-
-            overlayListView.ForeColor = Color.Black;
-            overlayListView.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+           
             overlayListView.BackColor = BackColor;
+
+            // Setze die View auf Details, um die horizontale Scrollleiste zu deaktivieren
             overlayListView.View = View.Details;
+            
+            // Entferne die Spaltenüberschriften, um die horizontale Scrollleiste zu verbergen
+            overlayListView.HeaderStyle = ColumnHeaderStyle.None;
+
+            overlayListView.OwnerDraw = true;
             overlayListView.Location = new Point(0, 0);
             overlayListView.Width = listViewPanel.Width;
-
+            overlayListView.Visible = true;
             // Enable vertical scrollbar
             overlayListView.Scrollable = true;
 
@@ -68,41 +73,15 @@
             // Füge die ListView zum ListView Panel hinzu
             listViewPanel.Controls.Add(overlayListView);
             Controls.Add(listViewPanel);
-
+       
         }
 
-        private void OverlayListView_DrawItem(object sender, DrawListViewItemEventArgs e)
+
+        private void OverlayListView_SetColor(object sender, DrawListViewItemEventArgs e)
         {
-            // Zeichne den Hintergrund
-            e.DrawBackground();
+            listViewPanel.Size = new Size(listViewPanel.Width, 21 * overlayListView.Items.Count);
+            //this was not needed we have already assigned color in BossTimerService.cs line 312 and 318
 
-            // Definiere den Text und die Schriftart
-            string text = e.Item.Text;
-            Font font = e.Item.Font;
-
-            // Definiere die Position des Textes mit schwarzer Umrandung
-            Point textLocation = new Point(e.Bounds.Left + 2, e.Bounds.Top + 2);
-
-            // Zeichne den Text mit dickerem schwarzen Rand
-            TextRenderer.DrawText(e.Graphics, text, font, textLocation, Color.Black, Color.Transparent, TextFormatFlags.Default);
-
-            // Zeichne den Text ohne Umrandung (darüber, um die Umrandung zu überlagern)
-            TextRenderer.DrawText(e.Graphics, text, font, textLocation, Color.White, Color.Transparent, TextFormatFlags.Default);
-        }
-
-        private void OnMouseDown(object sender, MouseEventArgs e)
-        {
-            mouse_offset = new Point(-e.X, -e.Y);
-        }
-
-        private void OnMouseMove(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left)
-            {
-                Point mousePos = MousePosition;
-                mousePos.Offset(mouse_offset.X, mouse_offset.Y);
-                Location = mousePos;
-            }
         }
 
         public void CloseOverlay()
@@ -110,5 +89,9 @@
             Dispose();
         }
 
+        private void Overlay_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

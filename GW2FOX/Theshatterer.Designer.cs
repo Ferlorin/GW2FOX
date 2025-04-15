@@ -89,6 +89,7 @@
             pictureBox4 = new PictureBox();
             Shattiitemname = new TextBox();
             pictureBox5 = new PictureBox();
+            button23 = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
@@ -739,12 +740,24 @@
             pictureBox5.TabIndex = 156;
             pictureBox5.TabStop = false;
             // 
+            // button23
+            // 
+            button23.BackgroundImage = Properties.Resources.wikigw2;
+            button23.FlatStyle = FlatStyle.Flat;
+            button23.Location = new Point(11, 11);
+            button23.Name = "button23";
+            button23.Size = new Size(100, 45);
+            button23.TabIndex = 157;
+            button23.UseVisualStyleBackColor = true;
+            button23.Click += button23_Click;
+            // 
             // Theshatterer
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources.Background;
             ClientSize = new Size(1904, 1041);
+            Controls.Add(button23);
             Controls.Add(pictureBox5);
             Controls.Add(Shattiitemname);
             Controls.Add(pictureBox4);
@@ -807,8 +820,7 @@
             Controls.Add(pictureBox1);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Theshatterer";
-            Text = "GW2FOX";
-            WindowState = FormWindowState.Maximized;
+            StartPosition = FormStartPosition.Manual;
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
@@ -879,5 +891,6 @@
         private PictureBox pictureBox4;
         private TextBox Shattiitemname;
         private PictureBox pictureBox5;
+        private Button button23;
     }
 }

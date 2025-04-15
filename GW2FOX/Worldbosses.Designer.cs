@@ -154,6 +154,7 @@
             button63 = new Button();
             button65 = new Button();
             button66 = new Button();
+            buttonSelectAll = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
@@ -178,7 +179,7 @@
             Runinfo.ScrollBars = ScrollBars.Vertical;
             Runinfo.Size = new Size(350, 100);
             Runinfo.TabIndex = 1;
-            Runinfo.Text = GlobalVariables.DEFAULT_RUN_INFO; //"≪Meta -Train» with the old [FOX]";
+            Runinfo.Text = "«Meta-Train» with the old [FOX]";
             // 
             // Squadinfo
             // 
@@ -190,7 +191,7 @@
             Squadinfo.ScrollBars = ScrollBars.Vertical;
             Squadinfo.Size = new Size(350, 100);
             Squadinfo.TabIndex = 2;
-            Squadinfo.Text = GlobalVariables.DEFAULT_RUN_INFO; //resources.GetString("Squadinfo.Text");
+            Squadinfo.Text = resources.GetString("Squadinfo.Text");
             // 
             // Guild
             // 
@@ -202,7 +203,7 @@
             Guild.ScrollBars = ScrollBars.Vertical;
             Guild.Size = new Size(350, 100);
             Guild.TabIndex = 3;
-            Guild.Text = GlobalVariables.DEFAULT_GUILD;
+            Guild.Text = "☠ Young or old [FOX], we take every stray. Humor, respect and fun at the game are what distinguish us. No Obligations! Infos: wsp me or www.gw2fox.com ☻";
             // 
             // Welcome
             // 
@@ -214,9 +215,7 @@
             Welcome.ScrollBars = ScrollBars.Vertical;
             Welcome.Size = new Size(350, 100);
             Welcome.TabIndex = 4;
-            
-            Welcome.Text = GlobalVariables.DEFAULT_WELCOME;
-            // Welcome.Text = "Welcome to the FOXhole. Read the Message of the Day for Infos - Questions, ask us! Guides & Tools on our Homepage: https://gw2-hub.000webhostapp.com";
+            Welcome.Text = "Welcome to the FOXhole. Read the Message of the Day for Infos - Questions, ask us! Guides & Tools on our Homepage: www.gw2fox.com";
             // 
             // Symbols
             // 
@@ -227,8 +226,7 @@
             Symbols.ScrollBars = ScrollBars.Vertical;
             Symbols.Size = new Size(434, 175);
             Symbols.TabIndex = 5;
-
-            Symbols.Text = GlobalVariables.DEFAULT_SYMBOLS; //"☠ ★ ☣ ☮ ☢ ♪ ☜ ☞ ┌ ∩ ┐ ( ●̮̃ • ) ۶ ( • ◡ • ) ♋ ☿ ♀ ♂ ☀ ☁ ☂ ☃ ☄ ☾ ☽ ☇ ☉ ☐ ☒ ☑ ☝ ☚ • ☟ ☆ ♔ ♕ ♖ ♗ ♘ ♙ ♚ ♛ ♜ ♝ ♞ ♟ † ☨ ☥ ☦ ☓ ☩ ☯ ☧ ☬ ☸ ♁ ♆ ☭ ✯ ☪ ☫ ✡ © ™ ® ☕ ☎ ☻ ♥ ⏰ 凸";
+            Symbols.Text = "☠ ★ ☣ ☮ ☢ ♪ ☜ ☞ ┌ ∩ ┐ ( ●̮̃ • ) ۶ ( • ◡ • ) ♋ ☿ ♀ ♂ ☀ ☁ ☂ ☃ ☄ ☾ ☽ ☇ ☉ ☐ ☒ ☑ ☝ ☚ • ☟ ☆ ♔ ♕ ♖ ♗ ♘ ♙ ♚ ♛ ♜ ♝ ♞ ♟ † ☨ ☥ ☦ ☓ ☩ ☯ ☧ ☬ ☸ ♁ ♆ ☭ ✯ ☪ ☫ ✡ © ™ ® ☕ ☎ ☻ ♥ ⏰ 凸 ◇";
             // 
             // button1
             // 
@@ -274,7 +272,7 @@
             // 
             // button6
             // 
-            button6.Location = new Point(1377, 12);
+            button6.Location = new Point(1377, 164);
             button6.Name = "button6";
             button6.Size = new Size(75, 23);
             button6.TabIndex = 12;
@@ -645,7 +643,7 @@
             // 
             button40.BackgroundImage = Properties.Resources.Chak;
             button40.FlatStyle = FlatStyle.Flat;
-            button40.Location = new Point(468, 371);
+            button40.Location = new Point(470, 371);
             button40.Name = "button40";
             button40.Size = new Size(182, 46);
             button40.TabIndex = 88;
@@ -734,6 +732,7 @@
             button45.Size = new Size(182, 46);
             button45.TabIndex = 106;
             button45.UseVisualStyleBackColor = false;
+            button45.Click += Sandstorm_Click;
             // 
             // button46
             // 
@@ -745,6 +744,7 @@
             button46.Size = new Size(182, 46);
             button46.TabIndex = 107;
             button46.UseVisualStyleBackColor = false;
+            button46.Click += SaidrasHaven_Click;
             // 
             // button47
             // 
@@ -756,6 +756,7 @@
             button47.Size = new Size(182, 46);
             button47.TabIndex = 108;
             button47.UseVisualStyleBackColor = false;
+            button47.Click += NewLoamhurst_Click;
             // 
             // button48
             // 
@@ -767,6 +768,7 @@
             button48.Size = new Size(182, 46);
             button48.TabIndex = 109;
             button48.UseVisualStyleBackColor = false;
+            button48.Click += NoransHomestead_Click;
             // 
             // button49
             // 
@@ -778,6 +780,7 @@
             button49.Size = new Size(182, 46);
             button49.TabIndex = 110;
             button49.UseVisualStyleBackColor = false;
+            button49.Click += MawsOfTorment_Click;
             // 
             // button50
             // 
@@ -789,6 +792,7 @@
             button50.Size = new Size(182, 46);
             button50.TabIndex = 111;
             button50.UseVisualStyleBackColor = false;
+            button50.Click += TheOilFloes_Click;
             // 
             // button51
             // 
@@ -800,6 +804,7 @@
             button51.Size = new Size(182, 46);
             button51.TabIndex = 112;
             button51.UseVisualStyleBackColor = false;
+            button51.Click += OozePits_Click;
             // 
             // button52
             // 
@@ -811,6 +816,7 @@
             button52.Size = new Size(182, 46);
             button52.TabIndex = 113;
             button52.UseVisualStyleBackColor = false;
+            button52.Click += Effigy_Click;
             // 
             // button53
             // 
@@ -822,6 +828,7 @@
             button53.Size = new Size(182, 46);
             button53.TabIndex = 114;
             button53.UseVisualStyleBackColor = false;
+            button53.Click += DoomloreShrine_Click;
             // 
             // button54
             // 
@@ -833,6 +840,7 @@
             button54.Size = new Size(182, 46);
             button54.TabIndex = 115;
             button54.UseVisualStyleBackColor = false;
+            button54.Click += StormsOfWinter_Click;
             // 
             // button55
             // 
@@ -844,6 +852,7 @@
             button55.Size = new Size(182, 46);
             button55.TabIndex = 116;
             button55.UseVisualStyleBackColor = false;
+            button55.Click += DefendJorasKeep_Click;
             // 
             // button56
             // 
@@ -855,6 +864,7 @@
             button56.Size = new Size(185, 46);
             button56.TabIndex = 117;
             button56.UseVisualStyleBackColor = false;
+            button56.Click += AetherbladeAssault_Click;
             // 
             // button57
             // 
@@ -866,6 +876,7 @@
             button57.Size = new Size(185, 46);
             button57.TabIndex = 118;
             button57.UseVisualStyleBackColor = false;
+            button57.Click += KainengBlackout_Click;
             // 
             // button58
             // 
@@ -877,6 +888,7 @@
             button58.Size = new Size(185, 46);
             button58.TabIndex = 119;
             button58.UseVisualStyleBackColor = false;
+            button58.Click += GangWar_Click;
             // 
             // button59
             // 
@@ -888,6 +900,7 @@
             button59.Size = new Size(185, 46);
             button59.TabIndex = 120;
             button59.UseVisualStyleBackColor = false;
+            button59.Click += Aspenwood_Click;
             // 
             // button60
             // 
@@ -899,6 +912,7 @@
             button60.Size = new Size(185, 46);
             button60.TabIndex = 121;
             button60.UseVisualStyleBackColor = false;
+            button60.Click += WizardsTower_Click;
             // 
             // button61
             // 
@@ -910,6 +924,7 @@
             button61.Size = new Size(185, 46);
             button61.TabIndex = 122;
             button61.UseVisualStyleBackColor = false;
+            button61.Click += FlyByNight_Click;
             // 
             // button62
             // 
@@ -921,6 +936,7 @@
             button62.Size = new Size(185, 46);
             button62.TabIndex = 123;
             button62.UseVisualStyleBackColor = false;
+            button62.Click += DefenseOfAmnytas_Click;
             // 
             // Convergens
             // 
@@ -932,6 +948,7 @@
             Convergens.Size = new Size(185, 46);
             Convergens.TabIndex = 124;
             Convergens.UseVisualStyleBackColor = false;
+            Convergens.Click += Convergences_Click;
             // 
             // button64
             // 
@@ -943,6 +960,7 @@
             button64.Size = new Size(185, 46);
             button64.TabIndex = 125;
             button64.UseVisualStyleBackColor = false;
+            button64.Click += JadeSea_Click;
             // 
             // Maw
             // 
@@ -1474,63 +1492,86 @@
             // 
             // button27
             // 
-            button27.Location = new Point(12, 12);
+            button27.BackColor = SystemColors.ActiveCaptionText;
+            button27.BackgroundImage = Properties.Resources.Metainfusion;
+            button27.FlatStyle = FlatStyle.Flat;
+            button27.Location = new Point(12, 62);
             button27.Name = "button27";
-            button27.Size = new Size(131, 23);
+            button27.Size = new Size(182, 45);
             button27.TabIndex = 184;
-            button27.Text = "MetaInfusin";
-            button27.UseVisualStyleBackColor = true;
+            button27.UseVisualStyleBackColor = false;
             button27.Click += Meta_Click;
             // 
             // button42
             // 
-            button42.Location = new Point(12, 41);
+            button42.BackColor = SystemColors.ActiveCaptionText;
+            button42.BackgroundImage = Properties.Resources.Worldbosses;
+            button42.FlatStyle = FlatStyle.Flat;
+            button42.Location = new Point(12, 12);
             button42.Name = "button42";
-            button42.Size = new Size(130, 23);
+            button42.Size = new Size(182, 45);
             button42.TabIndex = 185;
-            button42.Text = "Worldbosses";
-            button42.UseVisualStyleBackColor = true;
+            button42.UseVisualStyleBackColor = false;
             button42.Click += World_Click;
             // 
             // button63
             // 
-            button63.Location = new Point(10, 99);
+            button63.BackColor = SystemColors.ActiveCaptionText;
+            button63.BackgroundImage = Properties.Resources.Clear;
+            button63.FlatStyle = FlatStyle.Flat;
+            button63.ForeColor = Color.Black;
+            button63.Location = new Point(200, 62);
             button63.Name = "button63";
-            button63.Size = new Size(131, 23);
+            button63.Size = new Size(182, 45);
             button63.TabIndex = 186;
-            button63.Text = "ClearAll";
-            button63.UseVisualStyleBackColor = true;
+            button63.UseVisualStyleBackColor = false;
             button63.Click += ClearAll_Click;
             // 
             // button65
             // 
-            button65.Location = new Point(11, 70);
+            button65.BackColor = Color.Black;
+            button65.BackgroundImage = Properties.Resources.WorldMeta;
+            button65.FlatStyle = FlatStyle.Flat;
+            button65.Location = new Point(12, 114);
             button65.Name = "button65";
-            button65.Size = new Size(130, 23);
+            button65.Size = new Size(182, 45);
             button65.TabIndex = 187;
-            button65.Text = "World + Meta";
-            button65.UseVisualStyleBackColor = true;
+            button65.UseVisualStyleBackColor = false;
             button65.Click += Mixed_Click;
             // 
             // button66
             // 
-            button66.Location = new Point(10, 141);
+            button66.BackColor = SystemColors.ActiveCaptionText;
+            button66.BackgroundImage = Properties.Resources.TimerOverlay;
+            button66.FlatStyle = FlatStyle.Flat;
+            button66.Location = new Point(388, 10);
             button66.Name = "button66";
-            button66.Size = new Size(130, 23);
-            button66.TabIndex = 188;
-            button66.Text = "Timer Overlay";
-            button66.UseVisualStyleBackColor = true;
+            button66.Size = new Size(182, 45);
+            button66.TabIndex = 189;
+            button66.UseVisualStyleBackColor = false;
             button66.Click += Timer_Click;
+            // 
+            // buttonSelectAll
+            // 
+            buttonSelectAll.BackColor = Color.Black;
+            buttonSelectAll.BackgroundImage = Properties.Resources.AllMetas;
+            buttonSelectAll.FlatStyle = FlatStyle.Flat;
+            buttonSelectAll.ForeColor = SystemColors.ControlText;
+            buttonSelectAll.Location = new Point(200, 10);
+            buttonSelectAll.Name = "buttonSelectAll";
+            buttonSelectAll.Size = new Size(182, 45);
+            buttonSelectAll.TabIndex = 188;
+            buttonSelectAll.UseVisualStyleBackColor = false;
+            buttonSelectAll.Click += All_click;
             // 
             // Worldbosses
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
-            AutoScaleMode = AutoScaleMode.Font;
-            AutoSize = true;
-            AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            AutoScaleMode = AutoScaleMode.None;
+            AutoValidate = AutoValidate.EnablePreventFocusChange;
             BackgroundImage = Properties.Resources.Background;
             ClientSize = new Size(1904, 1041);
             Controls.Add(button66);
+            Controls.Add(buttonSelectAll);
             Controls.Add(button65);
             Controls.Add(button63);
             Controls.Add(button42);
@@ -1657,8 +1698,8 @@
             Controls.Add(pictureBox1);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Worldbosses";
-            Text = "GW2FOX";
-            WindowState = FormWindowState.Maximized;
+            RightToLeft = RightToLeft.No;
+            StartPosition = FormStartPosition.Manual;
             Load += Worldbosses_Load_1;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
@@ -1794,5 +1835,6 @@
         private Button button63;
         private Button button65;
         private Button button66;
+        private Button buttonSelectAll;
     }
 }

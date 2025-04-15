@@ -57,6 +57,7 @@
             button12 = new Button();
             Mapinfo = new TextBox();
             pictureBox4 = new PictureBox();
+            button13 = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
@@ -362,12 +363,24 @@
             pictureBox4.TabIndex = 101;
             pictureBox4.TabStop = false;
             // 
+            // button13
+            // 
+            button13.BackgroundImage = Properties.Resources.wikigw2;
+            button13.FlatStyle = FlatStyle.Flat;
+            button13.Location = new Point(12, 12);
+            button13.Name = "button13";
+            button13.Size = new Size(100, 45);
+            button13.TabIndex = 104;
+            button13.UseVisualStyleBackColor = true;
+            button13.Click += button13_Click;
+            // 
             // Chak
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources.Background;
             ClientSize = new Size(1904, 1041);
+            Controls.Add(button13);
             Controls.Add(pictureBox4);
             Controls.Add(button12);
             Controls.Add(Mapinfo);
@@ -398,8 +411,7 @@
             Controls.Add(pictureBox1);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Chak";
-            Text = "GW2FOX";
-            WindowState = FormWindowState.Maximized;
+            StartPosition = FormStartPosition.Manual;
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
@@ -437,5 +449,6 @@
         private Button button12;
         private TextBox Mapinfo;
         private PictureBox pictureBox4;
+        private Button button13;
     }
 }

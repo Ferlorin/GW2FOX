@@ -132,7 +132,7 @@
     <value>GrowAndShrink</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>264, 241</value>
+    <value>784, 561</value>
   </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt, style=Bold</value>
@@ -2270,13 +2270,13 @@
     <value>1315, 700</value>
   </data>
   <data name="$this.MaximumSize" type="System.Drawing.Size, System.Drawing">
-    <value>300, 1500</value>
+    <value>1920, 1080</value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>1, 1</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>[FOX] - Timer</value>
+    <value>Overlay Timer</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>Overlay</value>

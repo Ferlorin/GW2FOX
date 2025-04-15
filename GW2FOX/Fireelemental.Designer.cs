@@ -55,6 +55,7 @@ namespace GW2FOX
             button6 = new Button();
             pictureBox3 = new PictureBox();
             pictureBox5 = new PictureBox();
+            button10 = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
@@ -327,12 +328,24 @@ namespace GW2FOX
             pictureBox5.TabIndex = 126;
             pictureBox5.TabStop = false;
             // 
+            // button10
+            // 
+            button10.BackgroundImage = Properties.Resources.wikigw2;
+            button10.FlatStyle = FlatStyle.Flat;
+            button10.Location = new Point(10, 12);
+            button10.Name = "button10";
+            button10.Size = new Size(100, 45);
+            button10.TabIndex = 127;
+            button10.UseVisualStyleBackColor = true;
+            button10.Click += button10_Click;
+            // 
             // Fireelemental
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources.Background;
             ClientSize = new Size(1904, 1041);
+            Controls.Add(button10);
             Controls.Add(pictureBox5);
             Controls.Add(pictureBox3);
             Controls.Add(button6);
@@ -360,8 +373,7 @@ namespace GW2FOX
             Controls.Add(pictureBox1);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Fireelemental";
-            Text = "GW2FOX";
-            WindowState = FormWindowState.Maximized;
+            StartPosition = FormStartPosition.Manual;
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
@@ -402,5 +414,6 @@ namespace GW2FOX
         private Button button6;
         private PictureBox pictureBox3;
         private PictureBox pictureBox5;
+        private Button button10;
     }
 }

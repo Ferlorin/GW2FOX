@@ -32,6 +32,71 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Convergences.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="DefenseOfAmnytas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="FlyByNight.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="WizardsTower.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="JadeSea.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Aspenwood.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="GangWar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="KainengBlackout.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="AetherbladeAssault.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="NoransHomestead.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="NewLoamhurst.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="SaidrasHaven.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Sandstorm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="DefendJorasKeep.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="StormsOfWinter.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="DoomloreShrine.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Effigy.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="TheOozePits.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="TheOilFloes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="MawsOfTorment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Update="ThunderheadPeaks.cs" />
     <Compile Update="Palawadan.cs" />
     <Compile Update="DragonsStand.cs" />
@@ -39,6 +104,70 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="Convergences.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Update="DefenseOfAmnytas.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Update="FlyByNight.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Update="WizardsTower.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Update="JadeSea.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Aspenwood.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Update="GangWar.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Update="KainengBlackout.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Update="AetherbladeAssault.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Update="NoransHomestead.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Update="NewLoamhurst.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Update="SaidrasHaven.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Sandstorm.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Update="DefendJorasKeep.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Update="StormsOfWinter.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Update="DoomloreShrine.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Effigy.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Update="TheOozePits.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Update="TheOilFloes.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Update="MawsOfTorment.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Update="ThunderheadPeaks.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>

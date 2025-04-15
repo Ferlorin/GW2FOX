@@ -78,11 +78,11 @@ namespace GW2FOX
             }
         }
 
-        
 
-        
 
-        
+
+
+
 
         private void Mawinfo_Click(object sender, EventArgs e)
         {
@@ -93,10 +93,10 @@ namespace GW2FOX
             BringGw2ToFront();
         }
 
-        
 
 
-        
+
+
 
         private void Ll20_Click(object sender, EventArgs e)
         {
@@ -213,6 +213,24 @@ namespace GW2FOX
 
             // Bring the Gw2-64.exe window to the foreground
             BringGw2ToFront();
+        }
+
+        private void button16_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string homepageUrl = "https://wiki.guildwars2.com/wiki/Kill_the_Svanir_shaman_chief_to_break_his_control_over_the_ice_elemental";
+                ProcessStartInfo psi = new ProcessStartInfo
+                {
+                    FileName = homepageUrl,
+                    UseShellExecute = true
+                };
+                Process.Start(psi);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Fehler beim ?ffnen der Homepage: {ex.Message}", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

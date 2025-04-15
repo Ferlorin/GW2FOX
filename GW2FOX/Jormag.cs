@@ -20,14 +20,14 @@ namespace GW2FOX
             // Setze den Ursprung der Seite
             originPage = origin;
         }
-        
-
-        
-
-        
 
 
-        
+
+
+
+
+
+
 
         private void Runinfo_Click(object sender, EventArgs e)
         {
@@ -108,6 +108,24 @@ namespace GW2FOX
 
             // Bring the Gw2-64.exe window to the foreground
             BringGw2ToFront();
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string homepageUrl = "https://wiki.guildwars2.com/wiki/Defeat_the_Claw_of_Jormag";
+                ProcessStartInfo psi = new ProcessStartInfo
+                {
+                    FileName = homepageUrl,
+                    UseShellExecute = true
+                };
+                Process.Start(psi);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Fehler beim ?ffnen der Homepage: {ex.Message}", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

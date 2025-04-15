@@ -77,16 +77,16 @@ namespace GW2FOX
             }
         }
 
-        
-
-        
-
-        
 
 
-        
 
-        
+
+
+
+
+
+
+
 
         private void Runinfo_Click(object sender, EventArgs e)
         {
@@ -275,6 +275,24 @@ namespace GW2FOX
 
             // Bring the Gw2-64.exe window to the foreground
             BringGw2ToFront();
+        }
+
+        private void button23_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string homepageUrl = "https://wiki.guildwars2.com/wiki/Slay_the_Shatterer";
+                ProcessStartInfo psi = new ProcessStartInfo
+                {
+                    FileName = homepageUrl,
+                    UseShellExecute = true
+                };
+                Process.Start(psi);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Fehler beim ?ffnen der Homepage: {ex.Message}", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

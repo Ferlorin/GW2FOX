@@ -1,21 +1,43 @@
 // Main.cs
 
 using System.Diagnostics;
+using IWshRuntimeLibrary;
+using File = System.IO.File;
 
 namespace GW2FOX
 {
     public partial class Main : BaseForm
     {
+
+
+        private GlobalKeyboardHook? _globalKeyboardHook; // Füge dies hinzu
+
         public Main()
         {
             InitializeComponent();
             Load += Main_Load;
-            InitializeCustomBossList();
-            InitializeBossTimerAndOverlay();
-            Worldbosses.ReadConfigFile();
+
+            InitializeGlobalKeyboardHook();
+
+            // Updater.CheckForUpdates(Worldbosses.getConfigLineForItem("Version"));
         }
 
-        private void Main_Load(object? sender, EventArgs e) 
+
+        private void InitializeGlobalKeyboardHook()
+        {
+            _globalKeyboardHook = new GlobalKeyboardHook();
+            _globalKeyboardHook.KeyPressed += GlobalKeyboardHook_KeyPressed;
+        }
+
+        private void GlobalKeyboardHook_KeyPressed(object sender, KeyPressedEventArgs e)
+        {
+            if (ModifierKeys == Keys.Alt && e.Key == Keys.T)
+            {
+                Timer_Click(sender, e);
+            }
+        }
+
+        private void Main_Load(object? sender, EventArgs e)
         {
             try
             {
@@ -27,34 +49,17 @@ namespace GW2FOX
             }
         }
 
-        private new void InitializeBossTimerAndOverlay()
-        {
-            base.InitializeBossTimerAndOverlay();
-            // Additional initialization specific to Main class, if any
-        }
 
-        private new void Timer_Click(object sender, EventArgs e)
+        private void Timer_Click(object sender, EventArgs e)
         {
-            base.Timer_Click(sender, e);
+            BossTimerService.Timer_Click(sender, e);
             // Additional logic specific to Timer_Click in Main class, if any
         }
 
 
-        // Fόge diese Methode hinzu, um Ausnahmen zu behandeln und Details anzuzeigen
         private void HandleException(Exception ex)
         {
             MessageBox.Show($"An error occurred: {ex.Message}\n\nStack Trace: {ex.StackTrace}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        }
-
-        private new void InitializeCustomBossList() // new hinzugefόgt
-        {
-            customBossList = new ListView();
-            customBossList.View = View.Details;
-            customBossList.Columns.Add("Boss Name", 145);
-            customBossList.Columns.Add("Time", 78);
-            customBossList.Location = new Point(0, 0);
-            customBossList.ForeColor = Color.White;
-            new Font("Segoe UI", 10, FontStyle.Bold);
         }
 
         private void OpenForm(Form newForm)
@@ -68,7 +73,7 @@ namespace GW2FOX
         {
             try
             {
-                string homepageUrl = "https://gw2-hub.000webhostapp.com/";
+                string homepageUrl = "www.gw2fox.com";
                 ProcessStartInfo psi = new ProcessStartInfo
                 {
                     FileName = homepageUrl,
@@ -120,8 +125,8 @@ namespace GW2FOX
                     return;
                 }
 
-                IWshRuntimeLibrary.WshShell shell = new IWshRuntimeLibrary.WshShell();
-                IWshRuntimeLibrary.IWshShortcut shortcut = (IWshRuntimeLibrary.IWshShortcut)shell.CreateShortcut(shortcutPath);
+                WshShell shell = new WshShell();
+                IWshShortcut shortcut = (IWshShortcut)shell.CreateShortcut(shortcutPath);
                 shortcut.TargetPath = targetPath;
                 shortcut.WorkingDirectory = Path.GetDirectoryName(targetPath); // Setzen Sie das Arbeitsverzeichnis auf den Ordner der ausf?hrbaren Datei
                 shortcut.Arguments = commandLineParameters;
@@ -152,27 +157,11 @@ namespace GW2FOX
             }
         }
 
-        private void Uam_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                string homepageUrl = "https://github.com/gw2-addon-loader/GW2-Addon-Manager/releases";
-                ProcessStartInfo psi = new ProcessStartInfo
-                {
-                    FileName = homepageUrl,
-                    UseShellExecute = true
-                };
-                Process.Start(psi);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Fehler beim ?ffnen der Homepage: {ex.Message}", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
+
 
         private void Leading_Click(object sender, EventArgs e)
         {
-            OpenForm(new Worldbosses());
+            ShowAndHideForm(new Worldbosses());
         }
 
 
@@ -181,18 +170,12 @@ namespace GW2FOX
             try
             {
                 // Stop the Timer and dispose of the BossTimer
-                if (bossTimer != null)
-                {
-                    bossTimer.Stop();
-                    bossTimer.Dispose(); // Dispose of the BossTimer
-                }
+                BossTimerService._bossTimer?.Stop();
+                BossTimerService._bossTimer?.Dispose(); // Dispose of the BossTimer
 
                 // Close the Overlay and dispose of it
-                if (overlay != null)
-                {
-                    overlay.Close();
-                    overlay.Dispose(); // Dispose of the Overlay
-                }
+                BossTimerService._overlay?.Close();
+                BossTimerService._overlay?.Dispose(); // Dispose of the Overlay
 
                 // Close the program
                 Application.Exit();
@@ -202,6 +185,172 @@ namespace GW2FOX
                 HandleException(ex);
             }
         }
+
+        private void BlishHUD_Click(object sender, EventArgs e)
+        {
+            // Verzeichnis der ausführbaren Datei erhalten
+            string exeDirectory = Path.GetDirectoryName(Application.ExecutablePath);
+
+            // Pfad zur Datei "Blish HUD.exe" im Verzeichnis "data"
+            string filePath = Path.Combine(exeDirectory, "data2", "Blish HUD.exe");
+
+            // Überprüfen, ob die Datei existiert, bevor sie geöffnet wird
+            if (File.Exists(filePath))
+            {
+                try
+                {
+                    // Öffne die Datei
+                    Process.Start(filePath);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Fehler beim Öffnen der Datei: " + ex.Message, "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Die Datei wurde nicht gefunden.", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void ReShade_Click(object sender, EventArgs e)
+        {
+            // Verzeichnis der ausführbaren Datei erhalten
+            string exeDirectory = Path.GetDirectoryName(Application.ExecutablePath);
+
+            // Pfad zur Datei "Blish HUD.exe" im Verzeichnis "data"
+            string filePath = Path.Combine(exeDirectory, "data", "ReShade_Setup_6.0.1.exe");
+
+            // Überprüfen, ob die Datei existiert, bevor sie geöffnet wird
+            if (File.Exists(filePath))
+            {
+                try
+                {
+                    // Öffne die Datei
+                    Process.Start(filePath);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Fehler beim Öffnen der Datei: " + ex.Message, "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Die Datei wurde nicht gefunden.", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            // Verzeichnis der ausführbaren Datei erhalten
+            string exeDirectory = Path.GetDirectoryName(Application.ExecutablePath);
+
+            // Pfad zur Datei "Blish HUD.exe" im Verzeichnis "data"
+            string filePath = Path.Combine(exeDirectory, "data", "GW2TacO.exe");
+
+            // Überprüfen, ob die Datei existiert, bevor sie geöffnet wird
+            if (File.Exists(filePath))
+            {
+                try
+                {
+                    // Öffne die Datei
+                    Process.Start(filePath);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Fehler beim Öffnen der Datei: " + ex.Message, "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Die Datei wurde nicht gefunden.", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void ArcDPSInstall_Click(object sender, EventArgs e)
+        {
+            string gw2Verzeichnis = GetGw2Verzeichnis();
+
+            if (string.IsNullOrEmpty(gw2Verzeichnis))
+            {
+                MessageBox.Show("Das Guild Wars 2-Verzeichnis wurde nicht ausgewählt.", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            InstallArcDPS(gw2Verzeichnis);
+        }
+
+        private string GetGw2Verzeichnis()
+        {
+            using (var dialog = new FolderBrowserDialog())
+            {
+                dialog.Description = "Please select the directory of Guild Wars 2 where the .exe file is located.";
+                dialog.ShowNewFolderButton = false;
+
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    return dialog.SelectedPath;
+                }
+            }
+
+            return null;
+        }
+
+        private void InstallArcDPS(string gw2Verzeichnis)
+        {
+            // Pfade zu den zu kopierenden Dateien
+            string d3d11DllQuelle = Path.Combine("data", "d3d11.dll");
+            string d3d11Md5SumQuelle = Path.Combine("data", "d3d11.dll.md5sum");
+
+            // Ziel Pfade im Guild Wars 2-Verzeichnis
+            string d3d11DllZiel = Path.Combine(gw2Verzeichnis, "d3d11.dll");
+            string d3d11Md5SumZiel = Path.Combine(gw2Verzeichnis, "d3d11.dll.md5sum");
+
+            try
+            {
+                // Dateien kopieren
+                File.Copy(d3d11DllQuelle, d3d11DllZiel, true);
+                File.Copy(d3d11Md5SumQuelle, d3d11Md5SumZiel, true);
+
+                MessageBox.Show("Done.", "Done", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void ArcDPSDeinstall_Click(object sender, EventArgs e)
+        {
+            string gw2Verzeichnis = GetGw2Verzeichnis();
+
+            if (string.IsNullOrEmpty(gw2Verzeichnis))
+            {
+                MessageBox.Show("The Guild Wars 2 directory was not selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            try
+            {
+                // Pfade zu den zu löschenden Dateien
+                string d3d11DllZiel = Path.Combine(gw2Verzeichnis, "d3d11.dll");
+                string d3d11Md5SumZiel = Path.Combine(gw2Verzeichnis, "d3d11.dll.md5sum");
+
+                // Dateien löschen, wenn sie existieren
+                if (File.Exists(d3d11DllZiel))
+                    File.Delete(d3d11DllZiel);
+
+                if (File.Exists(d3d11Md5SumZiel))
+                    File.Delete(d3d11Md5SumZiel);
+
+                MessageBox.Show("Done.", "Done", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
 
     }
 }

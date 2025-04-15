@@ -51,6 +51,7 @@
             pictureBox3 = new PictureBox();
             pictureBox4 = new PictureBox();
             pictureBox2 = new PictureBox();
+            button10 = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
@@ -159,7 +160,7 @@
             Attentiondrakkar.ScrollBars = ScrollBars.Vertical;
             Attentiondrakkar.Size = new Size(600, 60);
             Attentiondrakkar.TabIndex = 107;
-            Attentiondrakkar.Text = "≪ATTENTION≫ Meta -Train │ ☠Lvl 80 │ “Drakkar” │ ☣[&BOkBAAA=]☣ - Join us!";
+            Attentiondrakkar.Text = "≪ATTENTION≫ Meta -Train │ ☠Lvl 80 │ “Drakkar” │ ☣[&BDkMAAA=]☣ - Join us!";
             // 
             // Drakkarinstance
             // 
@@ -290,12 +291,24 @@
             pictureBox2.TabIndex = 121;
             pictureBox2.TabStop = false;
             // 
+            // button10
+            // 
+            button10.BackgroundImage = Properties.Resources.wikigw2;
+            button10.FlatStyle = FlatStyle.Flat;
+            button10.Location = new Point(15, 12);
+            button10.Name = "button10";
+            button10.Size = new Size(100, 45);
+            button10.TabIndex = 126;
+            button10.UseVisualStyleBackColor = true;
+            button10.Click += button10_Click;
+            // 
             // Drakkar
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources.Background;
             ClientSize = new Size(1904, 1041);
+            Controls.Add(button10);
             Controls.Add(pictureBox2);
             Controls.Add(pictureBox4);
             Controls.Add(pictureBox3);
@@ -320,7 +333,7 @@
             Controls.Add(pictureBox1);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Drakkar";
-            Text = "GW2FOX";
+            StartPosition = FormStartPosition.Manual;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
@@ -353,5 +366,6 @@
         private PictureBox pictureBox3;
         private PictureBox pictureBox4;
         private PictureBox pictureBox2;
+        private Button button10;
     }
 }

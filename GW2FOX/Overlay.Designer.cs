@@ -36,14 +36,14 @@
             resources.ApplyResources(this, "$this");
             AutoScaleMode = AutoScaleMode.Font;
             AutoValidate = AutoValidate.EnablePreventFocusChange;
-            Cursor = Cursors.SizeAll;
-            FormBorderStyle = FormBorderStyle.Fixed3D;
+            ForeColor = SystemColors.Window;
             MaximizeBox = false;
             MdiChildrenMinimizedAnchorBottom = false;
-            MinimizeBox = false;
             Name = "Overlay";
             ShowInTaskbar = false;
+            SizeGripStyle = SizeGripStyle.Show;
             TopMost = true;
+            Load += Overlay_Load;
             ResumeLayout(false);
         }
 

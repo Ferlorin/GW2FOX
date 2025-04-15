@@ -63,6 +63,7 @@
             button14 = new Button();
             pictureBox3 = new PictureBox();
             pictureBox5 = new PictureBox();
+            button15 = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
@@ -446,12 +447,24 @@
             pictureBox5.TabIndex = 131;
             pictureBox5.TabStop = false;
             // 
+            // button15
+            // 
+            button15.BackgroundImage = Properties.Resources.wikigw2;
+            button15.FlatStyle = FlatStyle.Flat;
+            button15.Location = new Point(12, 11);
+            button15.Name = "button15";
+            button15.Size = new Size(100, 45);
+            button15.TabIndex = 132;
+            button15.UseVisualStyleBackColor = true;
+            button15.Click += button15_Click;
+            // 
             // Tequatl
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources.Background;
             ClientSize = new Size(1904, 1041);
+            Controls.Add(button15);
             Controls.Add(pictureBox5);
             Controls.Add(pictureBox3);
             Controls.Add(button14);
@@ -488,8 +501,7 @@
             Controls.Add(pictureBox1);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Tequatl";
-            Text = "GW2FOX";
-            WindowState = FormWindowState.Maximized;
+            StartPosition = FormStartPosition.Manual;
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
@@ -533,5 +545,6 @@
         private Button button14;
         private PictureBox pictureBox3;
         private PictureBox pictureBox5;
+        private Button button15;
     }
 }

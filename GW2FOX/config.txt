@@ -7,7 +7,7 @@ Squadinfo: "
     - right click on me & join MapName 
 • Don’t cancel invites! 
 • No Triple Trouble
-• https://gw2-hub.000webhostapp.com
+http://www.gw2fox.com
  
 • GW2FOX: 
   - Overlay Timer
@@ -17,10 +17,10 @@ Squadinfo: "
 "
 
 
-Guild: "☠ Young or old [FOX], we take every stray. Humor, respect and fun at the game are what distinguish us. No Obligations! Infos: wsp me or https://gw2-hub.000webhostapp.com ☻"
+Guild: "☠ Young or old [FOX], we take every stray. Humor, respect and fun at the game are what distinguish us. No Obligations! Infos: wsp me or http://www.gw2fox.com ☻"
 
 
-Welcome: "Welcome to the FOXhole. Read the Message of the Day for Infos - Questions, ask us! Guides & Tools on our Homepage: https://gw2-hub.000webhostapp.com"
+Welcome: "Welcome to the FOXhole. Read the Message of the Day for Infos - Questions, ask us! Guides & Tools on our Homepage: http://www.gw2fox.com"
 
 
 Symbols: "☠ ★ ☣ ☮ ☢ ♪ ☜ ☞ ┌ ∩ ┐ ( ●̮̃ • ) ۶ ( • ◡ • ) ♋ ☿ ♀ ♂ ☀ ☁ ☂ ☃ ☄ ☾ ☽ ☇ ☉ ☐ ☒ ☑ ☝ ☚ • ☟ ☆ ♔ ♕ ♖ ♗ ♘ ♙ ♚ ♛ ♜ ♝ ♞ ♟ † ☨ ☥ ☦ ☓ ☩ ☯ ☧ ☬ ☸ ♁ ♆ ☭ ✯ ☪ ☫ ✡ © ™ ® ☕ ☎ ☻ ♥ ⏰ 凸"

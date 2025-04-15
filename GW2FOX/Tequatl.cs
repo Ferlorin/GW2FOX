@@ -11,16 +11,16 @@ namespace GW2FOX
             LoadConfigText(Runinfo, Squadinfo, Guild, Welcome, Symbols);
         }
 
-        
-
-        
-
-        
 
 
-        
 
-        
+
+
+
+
+
+
+
 
         private void Runinfo_Click(object sender, EventArgs e)
         {
@@ -137,6 +137,24 @@ namespace GW2FOX
 
             // Bring the Gw2-64.exe window to the foreground
             BringGw2ToFront();
+        }
+
+        private void button15_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string homepageUrl = "https://wiki.guildwars2.com/wiki/Defeat_Tequatl_the_Sunless";
+                ProcessStartInfo psi = new ProcessStartInfo
+                {
+                    FileName = homepageUrl,
+                    UseShellExecute = true
+                };
+                Process.Start(psi);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Fehler beim ?ffnen der Homepage: {ex.Message}", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

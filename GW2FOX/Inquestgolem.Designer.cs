@@ -63,6 +63,7 @@
             button13 = new Button();
             Golemitemname = new TextBox();
             pictureBox5 = new PictureBox();
+            button14 = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
@@ -434,12 +435,24 @@
             pictureBox5.TabIndex = 132;
             pictureBox5.TabStop = false;
             // 
+            // button14
+            // 
+            button14.BackgroundImage = Properties.Resources.wikigw2;
+            button14.FlatStyle = FlatStyle.Flat;
+            button14.Location = new Point(12, 12);
+            button14.Name = "button14";
+            button14.Size = new Size(100, 45);
+            button14.TabIndex = 133;
+            button14.UseVisualStyleBackColor = true;
+            button14.Click += button14_Click;
+            // 
             // Inquestgolem
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources.Background;
             ClientSize = new Size(1904, 1041);
+            Controls.Add(button14);
             Controls.Add(pictureBox5);
             Controls.Add(Golemitemname);
             Controls.Add(button13);
@@ -476,8 +489,7 @@
             Controls.Add(pictureBox1);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Inquestgolem";
-            Text = "GW2FOX";
-            WindowState = FormWindowState.Maximized;
+            StartPosition = FormStartPosition.Manual;
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
@@ -521,5 +533,6 @@
         private Button button13;
         private TextBox Golemitemname;
         private PictureBox pictureBox5;
+        private Button button14;
     }
 }

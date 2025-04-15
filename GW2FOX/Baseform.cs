@@ -1,86 +1,52 @@
-using System.Diagnostics;
-using static GW2FOX.BossTimings;
+﻿using System.Diagnostics;
+using static GW2FOX.BossTimerService;
 using static GW2FOX.GlobalVariables;
 
 namespace GW2FOX
 {
-    public class BaseForm : Form
+    public partial class BaseForm : Form
     {
 
-        protected Overlay overlay;
-        protected ListView customBossList;
-        protected BossTimer bossTimer;
-        private GlobalKeyboardHook? _globalKeyboardHook; // Füge dies hinzu
 
-        public static ListView CustomBossList { get; private set; } = new ListView();
-        
-        
 
         public BaseForm()
         {
-            InitializeCustomBossList();
-            overlay = new Overlay(customBossList);
-            bossTimer = new BossTimer(customBossList);
-            InitializeGlobalKeyboardHook();
+            InitializeComponent();
+
+            // Setzen Sie hier Ihre gemeinsamen Eigenschaften
+            this.BackColor = System.Drawing.Color.White;
+            this.BackgroundImage = Properties.Resources.Background;
+            this.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.FormBorderStyle = FormBorderStyle.Sizable;
+            this.Text = "GW2FOX";
+            this.SizeGripStyle = SizeGripStyle.Show;
+            this.AutoScaleMode = AutoScaleMode.None;
+            this.AutoScroll = true;
+            this.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            
+            this.StartPosition = FormStartPosition.CenterParent;
+            this.WindowState = FormWindowState.Normal;
+            this.DoubleBuffered = true;
+            // Weitere gemeinsame Eigenschaften setzen...
         }
 
-        protected void InitializeBossTimerAndOverlay()
-        {
-            bossTimer = new BossTimer(customBossList);
-            overlay = new Overlay(customBossList);
-            overlay.WindowState = FormWindowState.Normal;
-        }
-
-        private void InitializeGlobalKeyboardHook()
-        {
-            _globalKeyboardHook = new GlobalKeyboardHook();
-            _globalKeyboardHook.KeyPressed += GlobalKeyboardHook_KeyPressed;
-        }
-
-        private void GlobalKeyboardHook_KeyPressed(object sender, KeyPressedEventArgs e)
-        {
-            if (ModifierKeys == Keys.Alt && e.Key == Keys.T)
-            {
-                if (this is Main)
-                {
-                    Timer_Click(sender, e);
-                }
-            }
-        }
-
-        protected void InitializeCustomBossList()
-        {
-            customBossList = new ListView();
-            customBossList.View = View.Details;
-            customBossList.Columns.Add("Boss Name", 145);
-            customBossList.Columns.Add("Time", 78);
-            customBossList.Location = new Point(0, 0);
-            customBossList.ForeColor = Color.White;
-            new Font("Segoe UI", 10, FontStyle.Bold);
-        }
-
-        public void UpdateCustomBossList(ListView updatedList)
-        {
-            CustomBossList = updatedList;
-        }
-
-        public void Timer_Click(object sender, EventArgs e)
-        {
-            InitializeCustomBossList();
-            InitializeBossTimerAndOverlay();
-
-            bossTimer.Start();
-            overlay.Show();
-        }
 
         protected void ShowAndHideForm(Form newForm)
         {
+            // Speichern Sie die Größe und Position des aktuellen Formulars
+            Size currentSize = this.Size;
+            Point currentPosition = this.Location;
+
+            // Setzen Sie die Größe und Position des neuen Formulars
+            newForm.Size = currentSize;
+            newForm.Location = currentPosition;
+
+            // Setzen Sie das aktuelle Formular als Besitzer des neuen Formulars
             newForm.Owner = this;
+
+            // Zeigen Sie das neue Formular an und verbergen Sie das aktuelle Formular
             newForm.Show();
-            if (this is not Worldbosses)
-            {
-                Dispose();
-            }
+            this.Hide();
         }
 
         protected static void SaveTextToFile(string textToSave, string sectionHeader, bool hideMessages = false)
@@ -193,12 +159,12 @@ namespace GW2FOX
                 // MessageBox.Show($"Das Muster '{sectionHeader}' wurde in der Konfigurationsdatei nicht gefunden.", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        
-        
+
+
         protected void BringGw2ToFront()
         {
             try
-            { 
+            {
                 // Specify the process name without the file extension
                 string processName = "Gw2-64";
 
@@ -222,7 +188,7 @@ namespace GW2FOX
                 MessageBox.Show($"Error bringing Gw2-64.exe to the foreground: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        
+
         protected void LoadConfigText(TextBox Runinfo, TextBox Squadinfo, TextBox Guild, TextBox Welcome, TextBox Symbols)
         {
             try
@@ -251,7 +217,7 @@ namespace GW2FOX
                 }
                 else
                 {
-                    
+
                     Console.WriteLine($"Config file does not exist. Will try to create it");
                     try
                     {
@@ -278,280 +244,18 @@ namespace GW2FOX
 
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
-            bossTimer.Dispose(); // Dispose of the BossTimer first
+            _bossTimer?.Dispose(); // Dispose of the BossTimer first
             base.OnFormClosing(e);
             Application.Exit();
         }
-        
+
         protected void Back_Click(object sender, EventArgs e)
         {
-            Owner.Show();
+            Owner?.Show();
             Dispose();
         }
 
 
-        public class BossTimer : IDisposable
-        {
-            private static readonly string TimeZoneId = "W. Europe Standard Time";
-            private static readonly Color DefaultFontColor = Color.Blue;
-            private static readonly Color PastBossFontColor = Color.OrangeRed;
 
-            private readonly ListView bossList;
-            private readonly TimeZoneInfo mezTimeZone;
-            private readonly System.Threading.Timer timer;
-
-            public BossTimer(ListView bossList)
-            {
-                this.bossList = bossList;
-                mezTimeZone = TimeZoneInfo.FindSystemTimeZoneById(TimeZoneId);
-                timer = new System.Threading.Timer(TimerCallback, null, 0, 1000);
-            }
-
-            public void Start()
-            {
-                timer.Change(0, 1000);
-            }
-
-            public void Stop()
-            {
-                timer.Change(Timeout.Infinite, Timeout.Infinite);
-            }
-
-            private void TimerCallback(object? state)
-            {
-                try
-                {
-                    UpdateBossList();
-                }
-                catch (Exception ex)
-                {
-                    HandleException(ex, "TimerCallback");
-                }
-            }
-
-
-            public void UpdateBossList()
-            {
-                if (!bossList.IsHandleCreated) return;
-
-                bossList.BeginInvoke((MethodInvoker)delegate
-                {
-                    try
-                    {
-                        // Read the boss names from the configuration file
-                        List<string> bossNamesFromConfig = BossList23;
-
-                        DateTime currentTimeUtc = DateTime.UtcNow;
-                        DateTime currentTimeMez = TimeZoneInfo.ConvertTimeFromUtc(currentTimeUtc, mezTimeZone);
-                        TimeSpan currentTime = currentTimeMez.TimeOfDay;
-
-
-                        var upcomingBosses = BossEventGroups
-                            .Where(bossEventGroup => bossNamesFromConfig.Contains(bossEventGroup.BossName))
-                            .SelectMany(bossEventGroup => bossEventGroup.GetNextRuns())
-                            .ToList();
-                            
-                           
-
-                        var pastBosses =  BossEventGroups
-                                .Where(bossEventGroup => bossNamesFromConfig.Contains(bossEventGroup.BossName))
-                                .SelectMany(bossEventGroup => bossEventGroup.GetPreviousRuns())
-                                .ToList();
-                    
-
-                        // Combine all bosses
-                        var allBosses = upcomingBosses.Concat(pastBosses).ToList();
-
-                        var listViewItems = new List<ListViewItem>();
-
-                        // Use a HashSet to keep track of added boss names
-                        HashSet<string> addedBossNames = new HashSet<string>();
-
-                        allBosses.Sort((bossEvent1, bossEvent2) =>
-                        {
-
-                            // Compare the adjusted timings for the next day
-                            int adjustedTimingComparison = bossEvent1.NextRunTime.CompareTo(bossEvent2.NextRunTime);
-                            if (adjustedTimingComparison != 0) return adjustedTimingComparison;
-
-                            // If timings are equal, sort by ascending durations
-                            int durationComparison = bossEvent1.Duration.CompareTo(bossEvent2.Duration);
-                            if (durationComparison != 0) return durationComparison;
-
-                            // If durations and timings are equal, sort by categories (if necessary)
-                            int categoryComparison = bossEvent1.Category.CompareTo(bossEvent2.Category);
-                            if (categoryComparison != 0) return categoryComparison;
-
-                            return 0; // Tie, maintain the order unchanged
-                        });
-
-                        foreach (var bossEvent in allBosses)
-                        {
-                           
-
-                            // Check if the boss with the adjusted timing is already added to avoid duplicates
-                            if (addedBossNames.Add($"{bossEvent.BossName}_{bossEvent.NextRunTime}"))
-                            {
-                                if (pastBosses.Contains(bossEvent) && currentTimeMez - bossEvent.NextRunTime < new TimeSpan(0, 14, 59))
-                                {
-                                    // Display only the boss name for past events within the time span of 00:14:59
-                                    var listViewItem = new ListViewItem(new[] { bossEvent.BossName });
-                                    listViewItem.ForeColor = GetFontColor(bossEvent, pastBosses);
-                                    listViewItem.Font = new Font("Segoe UI", 10, FontStyle.Bold);
-                                    listViewItems.Add(listViewItem);
-                                }
-                                else
-                                {
-                                    TimeSpan elapsedTime = bossEvent.NextRunTime - currentTimeMez;
-
-                                    // Änderung der Formatierung für den Countdown basierend auf der vergangenen Zeitspanne
-                                    TimeSpan countdownTime = elapsedTime;
-
-                                    string elapsedTimeFormat = $"{(int)elapsedTime.TotalHours:D2}:{elapsedTime.Minutes:D2}:{elapsedTime.Seconds:D2}";
-
-                                    Color fontColor = GetFontColor(bossEvent, pastBosses);
-
-                                    var listViewItem = new ListViewItem(new[] { bossEvent.BossName, elapsedTimeFormat });
-                                    listViewItem.ForeColor = fontColor;
-
-                                    // Neue Bedingung hinzufügen, um zu prüfen, ob ein Bossevent zur selben Zeit stattfindet wie ein anderes Bossevent derselben Kategorie
-                                    if (HasSameTimeAndCategory(allBosses, bossEvent))
-                                    {
-                                        listViewItem.Font = new Font("Segoe UI", 10, FontStyle.Italic | FontStyle.Bold);
-                                    }
-                                    else
-                                    {
-                                        listViewItem.Font = new Font("Segoe UI", 10, FontStyle.Bold);
-                                    }
-
-                                    listViewItems.Add(listViewItem);
-
-
-                                }
-                            }
-                        }
-
-                        UpdateListViewItems(listViewItems);
-                    }
-                    catch (Exception ex)
-                    {
-                        HandleException(ex, "UpdateBossList");
-                    }
-                });
-            }
-
-            private bool HasSameTimeAndCategory(List<BossEventRun> allBosses, BossEventRun currentBossEvent)
-            {
-                return allBosses.Any(bossEvent =>
-                    bossEvent != currentBossEvent &&
-                    bossEvent.NextRunTime == currentBossEvent.NextRunTime &&
-                    bossEvent.Category == currentBossEvent.Category &&
-                    bossEvent.BossName != currentBossEvent.BossName);
-            }
-
-            private DateTime GetAdjustedTiming(DateTime currentTimeMez, TimeSpan bossTiming)
-            {
-                DateTime adjustedTiming = currentTimeMez.Date + bossTiming;
-                return adjustedTiming;
-            }
-
-            private void UpdateListViewItems(List<ListViewItem> listViewItems)
-            {
-                bossList.BeginInvoke((MethodInvoker)delegate
-                {
-                    try
-                    {
-                        if (bossList.IsHandleCreated)
-                        {
-                            bossList.BeginUpdate();
-                            bossList.Items.Clear();
-                            bossList.Items.AddRange(listViewItems.ToArray());
-                            bossList.EndUpdate();
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        HandleException(ex, "UpdateListViewItems");
-                    }
-                });
-            }
-
-            private void HandleException(Exception ex, string methodName)
-            {
-                Console.WriteLine($"Exception in {methodName}: {ex}");
-                // Consider logging the exception with more details
-            }
-
-            private TimeSpan GetRemainingTime(DateTime currentTimeMez, DateTime adjustedTiming, BossEventRun bossEvent)
-            {
-                return adjustedTiming - currentTimeMez;
-            }
-
-            private static Color GetFontColor(BossEventRun bossEvent, List<BossEventRun> pastBosses)
-            {
-                Color fontColor;
-
-                switch (bossEvent.Category)
-                {
-                    case "Maguuma":
-                        fontColor = Color.LimeGreen;
-                        break;
-                    case "Desert":
-                        fontColor = Color.DeepPink;
-                        break;
-                    case "WBs":
-                        fontColor = Color.WhiteSmoke;
-                        break;
-                    case "Ice":
-                        fontColor = Color.DeepSkyBlue;
-                        break;
-                    case "Cantha":
-                        fontColor = Color.Blue;
-                        break;
-                    case "SotO":
-                        fontColor = Color.Yellow;
-                        break;
-                    case "LWS2":
-                        fontColor = Color.LightYellow;
-                        break;
-                    case "LWS3":
-                        fontColor = Color.ForestGreen;
-                        break;
-                    default:
-                        fontColor = DefaultFontColor;
-                        break;
-                }
-
-                if (pastBosses.Any(pastBoss => pastBoss.BossName == bossEvent.BossName && pastBoss.NextRunTime == bossEvent.NextRunTime))
-                {
-                    fontColor = PastBossFontColor;
-                }
-
-                return fontColor;
-            }
-
-
-            public void Dispose()
-            {
-                Dispose(true);
-                GC.SuppressFinalize(this);
-            }
-
-            protected virtual void Dispose(bool disposing)
-            {
-                if (disposing)
-                {
-                    if (timer != null)
-                    {
-                        timer.Dispose();
-                    }
-                }
-            }
-
-            ~BossTimer()
-            {
-                Dispose(false);
-            }
-        }
     }
 }

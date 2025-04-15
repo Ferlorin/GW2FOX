@@ -11,14 +11,14 @@ namespace GW2FOX
             LoadConfigText(Runinfo, Squadinfo, Guild, Welcome, Symbols);
         }
 
-        
-
-        
-
-        
 
 
-        
+
+
+
+
+
+
 
         private void Beheinstance_Click(object sender, EventArgs e)
         {
@@ -29,11 +29,6 @@ namespace GW2FOX
             BringGw2ToFront();
         }
 
-        private void Backtomain_Click(object sender, EventArgs e)
-        {
-            Owner.Show();
-            Dispose();
-        }
 
         private void Runinfo_Click(object sender, EventArgs e)
         {
@@ -71,7 +66,7 @@ namespace GW2FOX
             BringGw2ToFront();
         }
 
-        
+
 
         private void Beheinfo_Click(object sender, EventArgs e)
         {
@@ -87,6 +82,24 @@ namespace GW2FOX
 
             // Bring the Gw2-64.exe window to the foreground
             BringGw2ToFront();
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string homepageUrl = "https://wiki.guildwars2.com/wiki/The_Path_to_Ascension";
+                ProcessStartInfo psi = new ProcessStartInfo
+                {
+                    FileName = homepageUrl,
+                    UseShellExecute = true
+                };
+                Process.Start(psi);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Fehler beim ?ffnen der Homepage: {ex.Message}", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

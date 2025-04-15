@@ -65,6 +65,7 @@
             button17 = new Button();
             Mapinfo = new TextBox();
             pictureBox5 = new PictureBox();
+            button16 = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
@@ -163,7 +164,7 @@
             Beheinfo.ScrollBars = ScrollBars.Vertical;
             Beheinfo.Size = new Size(600, 60);
             Beheinfo.TabIndex = 56;
-            Beheinfo.Text = "☠ ≪Battle in Tarir≫ South: ☣[&BAIIAAA=]☣, North: ☣[&BN0HAAA=]☣, East: ☣[&BGwIAAA=]☣, West: ☣ [&BAIIAAA=]☣";
+            Beheinfo.Text = "☠ ≪Battle in Tarir≫ South: ☣[&BAIIAAA=]☣, North: ☣[&BN0HAAA=]☣, East: ☣[&BGwIAAA=]☣, West: ☣ [&BAYIAAA=]☣";
             // 
             // button1
             // 
@@ -461,12 +462,24 @@
             pictureBox5.TabIndex = 126;
             pictureBox5.TabStop = false;
             // 
+            // button16
+            // 
+            button16.BackgroundImage = Properties.Resources.wikigw2;
+            button16.FlatStyle = FlatStyle.Flat;
+            button16.Location = new Point(12, 11);
+            button16.Name = "button16";
+            button16.Size = new Size(100, 45);
+            button16.TabIndex = 127;
+            button16.UseVisualStyleBackColor = true;
+            button16.Click += button16_Click;
+            // 
             // Tarir
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources.Background;
             ClientSize = new Size(1904, 1041);
+            Controls.Add(button16);
             Controls.Add(pictureBox5);
             Controls.Add(button17);
             Controls.Add(Mapinfo);
@@ -505,8 +518,7 @@
             Controls.Add(pictureBox1);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Tarir";
-            Text = "GW2FOX";
-            WindowState = FormWindowState.Maximized;
+            StartPosition = FormStartPosition.Manual;
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
@@ -552,5 +564,6 @@
         private Button button17;
         private TextBox Mapinfo;
         private PictureBox pictureBox5;
+        private Button button16;
     }
 }

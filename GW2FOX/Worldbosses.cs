@@ -1,5 +1,5 @@
-﻿using System.Diagnostics;
-using System.Runtime.InteropServices;
+﻿
+using static GW2FOX.BossTimings;
 
 namespace GW2FOX
 {
@@ -13,31 +13,27 @@ namespace GW2FOX
             InitializeComponent();
             bossCheckBoxMap = new Dictionary<string, CheckBox>();
             InitializeBossCheckBoxMap();
-            InitializeBossTimerAndOverlay();
-            UpdateBossUIBosses();
+            UpdateBossUiBosses();
+            LoadConfigText(Runinfo, Squadinfo, Guild, Welcome, Symbols);
 
             Load += Worldbosses_Load_1;
-        }
-        private new void InitializeBossTimerAndOverlay()
-        {
-            base.InitializeBossTimerAndOverlay();
         }
 
         private void Worldbosses_Load_1(object? sender, EventArgs e)
         {
 
-            WindowState = FormWindowState.Maximized;
+
             SetBossListFromConfig_Bosses();
         }
 
 
 
-        
+
 
         // Constants for window handling
         const int SW_RESTORE = 9;
 
-        
+
 
         private void Saverun_Click(object sender, EventArgs e)
         {
@@ -62,6 +58,11 @@ namespace GW2FOX
         private void Symbols_Click(object sender, EventArgs e)
         {
             SaveTextToFile(Symbols.Text, "Symbols");
+        }
+
+        private void TheOilFloes_Click(object sender, EventArgs e)
+        {
+            ShowAndHideForm(new TheOilFloes());
         }
 
         private void Behe_Click(object sender, EventArgs e)
@@ -202,6 +203,12 @@ namespace GW2FOX
             BringGw2ToFront();
         }
 
+        private void MawsOfTorment_Click(object sender, EventArgs e)
+        {
+            ShowAndHideForm(new MawsOfTorement());
+        }
+
+
 
         private void Chak_Click(object sender, EventArgs e)
         {
@@ -253,6 +260,12 @@ namespace GW2FOX
             SaveTextToFile(Squadinfo.Text, "Squadinfo");
         }
 
+
+        private void OozePits_Click(object sender, EventArgs e)
+        {
+            ShowAndHideForm(new TheOozePits());
+        }
+
         private void SerpentsIre_Click(object sender, EventArgs e)
         {
             ShowAndHideForm(new SerpentsIre());
@@ -277,7 +290,7 @@ namespace GW2FOX
         private void Maw_CheckedChanged(object sender, EventArgs e)
         {
             // Der Name des Bosses
-            string[] bossNames = { "LLLA - Timberline Falls", "LLLA - Iron Marches", "LLLA - Gendarran Fields", "The frozen Maw" };
+            string[] bossNames = { "LLLA Timberline", "LLLA Iron Marches", "LLLA Gendarran ", "The frozen Maw" };
 
 
             // Setze den Trigger, um anzuzeigen, dass die Aktion vom Benutzer ausgelöst wurde
@@ -417,7 +430,7 @@ namespace GW2FOX
 
         private void MarkTwo_CheckedChanged(object sender, EventArgs e)
         {
-            string bossName = "Inquest Golem Mark II";
+            string bossName = "Inquest Golem M2";
 
 
 
@@ -523,17 +536,17 @@ namespace GW2FOX
 
         private void Tarir_CheckedChanged(object sender, EventArgs e)
         {
-            string bossName = "Battle in Tarir";
+            string[] bossNames = ["Battle in Tarir", "Octovine"];
 
 
 
             if (Tarir.Checked)
             {
-                SaveBossNameToConfig(bossName);
+                SaveBossNameToConfig(bossNames);
             }
             else
             {
-                RemoveBossNameFromConfig(bossName);
+                RemoveBossNameFromConfig(bossNames);
             }
 
         }
@@ -574,7 +587,7 @@ namespace GW2FOX
 
         private void DBS_CheckedChanged(object sender, EventArgs e)
         {
-            string bossName = "Death-Branded Shatterer";
+            string bossName = "DB Shatterer";
 
 
 
@@ -1072,7 +1085,7 @@ namespace GW2FOX
 
         private void WizzardsTower_CheckedChanged(object sender, EventArgs e)
         {
-            string bossName = "Unlock'Wizard's Tower";
+            string bossName = "Wizard's Tower";
 
 
 
@@ -1154,7 +1167,7 @@ namespace GW2FOX
         { "Ulgoth the Modniir", Ulgoth },
         { "Taidha Covington", Thaida },
         { "Megadestroyer", Megadestroyer },
-        { "Inquest Golem Mark II", MarkTwo },
+        { "Inquest Golem M2", MarkTwo },
         { "Tequatl the Sunless", Tequatl },
         { "The Shatterer", Shatterer },
         { "Karka Queen", Karka },
@@ -1163,7 +1176,7 @@ namespace GW2FOX
         { "Battle in Tarir", Tarir },
         { "Spellmaster Macsen", Mascen },
         { "Dragon's Stand", DS },
-        { "Death-Branded Shatterer", DBS },
+        { "DB Shatterer", DBS },
         { "Junundu Rising", Junundu },
         { "Path to Ascension", PTA },
         { "Doppelganger", Doppelganger },
@@ -1191,7 +1204,7 @@ namespace GW2FOX
         { "Gang War", GangWar },
         { "Aspenwood", Aspenwood },
         { "Battle for Jade Sea", JadeSea },
-        { "Unlock'Wizard's Tower", WizzardsTower },
+        { "Wizard's Tower", WizzardsTower },
         { "Fly by Night", Flybynigtht },
         { "Defense of Amnytas", Amnytas },
         { "Convergences", Convergence }
@@ -1242,7 +1255,15 @@ namespace GW2FOX
 
         }
 
-        private void SaveBossNameToConfig(string bossName)
+        private static void SaveBossNameToConfig(string[] bossNames)
+        {
+            foreach (var bossName in bossNames)
+            {
+                SaveBossNameToConfig(bossName);
+            }
+        }
+
+        private static void SaveBossNameToConfig(string bossName)
         {
             try
             {
@@ -1293,7 +1314,7 @@ namespace GW2FOX
 
                         // Setze das Häkchen im CheckBox-Control auf true
                         CheckBox bossCheckBox = FindCheckBoxByBossName(bossName);
-                        if (bossCheckBox != null) 
+                        if (bossCheckBox != null)
                         {
                             bossCheckBox.Checked = true;
                         }
@@ -1323,50 +1344,58 @@ namespace GW2FOX
             {
 
                 // Holen Sie die ausgewählten Bosses
-                List<string> selectedBosses = GetSelectedBosses();
+                // List<string> selectedBosses;
+                // try
+                // {
+                //     selectedBosses = GetSelectedBosses();
+                // }
+                // catch (Exception)
+                // {
+                //     selectedBosses = BossEventGroups.Select(group => group.BossName).ToList();
+                // }
 
                 // Erstellen Sie die Zeile für die "Bosses:"-Sektion
-                string bossesLine = $"Bosses: \"{string.Join(", ", selectedBosses)}\"";
+                // string bossesLine = $"Bosses: \"{string.Join(", ", selectedBosses)}\"";
 
                 // Lesen Sie die bestehenden Zeilen aus der Datei
                 string[] existingLines = ReadConfigFile();
 
                 // Suchen Sie nach der Zeile mit der "Bosses:"-Sektion
-                int bossesIndex = -1;
-                for (int i = 0; i < existingLines.Length; i++)
-                {
-                    if (existingLines[i].StartsWith("Bosses:"))
-                    {
-                        bossesIndex = i;
-                        break;
-                    }
-                }
-
-                // Wenn die "Bosses:"-Sektion gefunden wurde, löschen Sie sie
-                if (bossesIndex != -1)
-                {
-                    List<string> newLines = existingLines.ToList();
-
-                    // Entfernen Sie die "Bosses:"-Sektion
-                    newLines.RemoveAt(bossesIndex);
-
-                    // Fügen Sie die aktualisierte "Bosses:"-Zeile hinzu
-                    newLines.Insert(bossesIndex, bossesLine);
-
-                    existingLines = newLines.ToArray();
-                }
-                else
-                {
-                    // Wenn die "Bosses:"-Sektion nicht gefunden wurde, fügen Sie sie einfach hinzu
-                    List<string> newLines = existingLines.ToList();
-                    newLines.Add(bossesLine);
-                    existingLines = newLines.ToArray();
-                }
+                // int bossesIndex = -1;
+                // for (int i = 0; i < existingLines.Length; i++)
+                // {
+                //     if (existingLines[i].StartsWith("Bosses:"))
+                //     {
+                //         bossesIndex = i;
+                //         break;
+                //     }
+                // }
+                //
+                // // Wenn die "Bosses:"-Sektion gefunden wurde, löschen Sie sie
+                // if (bossesIndex != -1)
+                // {
+                //     List<string> newLines = existingLines.ToList();
+                //
+                //     // Entfernen Sie die "Bosses:"-Sektion
+                //     newLines.RemoveAt(bossesIndex);
+                //
+                //     // Fügen Sie die aktualisierte "Bosses:"-Zeile hinzu
+                //     newLines.Insert(bossesIndex, bossesLine);
+                //
+                //     existingLines = newLines.ToArray();
+                // }
+                // else
+                // {
+                //     // Wenn die "Bosses:"-Sektion nicht gefunden wurde, fügen Sie sie einfach hinzu
+                //     List<string> newLines = existingLines.ToList();
+                //     newLines.Add(bossesLine);
+                //     existingLines = newLines.ToArray();
+                // }
 
                 // Schreiben Sie die aktualisierten Zeilen zurück in die Datei
-                File.WriteAllLines(GlobalVariables.FILE_PATH, existingLines);
+                File.WriteAllLines(GlobalVariables.FILE_PATH, lines);
 
-                UpdateBossUIBosses();
+                UpdateBossUiBosses();
 
 
 
@@ -1405,7 +1434,7 @@ namespace GW2FOX
                         SaveTextToFile(GlobalVariables.DEFAULT_SQUAD_INFO, "Squadinfo", true);
                         SaveTextToFile(GlobalVariables.DEFAULT_WELCOME, "Welcome", true);
                         SaveTextToFile(GlobalVariables.DEFAULT_SYMBOLS, "Symbols", true);
-                        
+
                         return ReadConfigFile();
                     }
                     catch (Exception ex)
@@ -1427,7 +1456,15 @@ namespace GW2FOX
             }
         }
 
-        private void RemoveBossNameFromConfig(string bossName)
+        private static void RemoveBossNameFromConfig(string[] bossNames)
+        {
+            foreach (var bossName in bossNames)
+            {
+                RemoveBossNameFromConfig(bossName);
+            }
+        }
+
+        public static void RemoveBossNameFromConfig(string bossName)
         {
             try
             {
@@ -1468,11 +1505,11 @@ namespace GW2FOX
                     bossNames.Remove(bossName);
 
                     // Erstelle eine neue Zeile für die Bosse
-                    string newBossLine = $"Bosses: \"{string.Join(", ", bossNames)}\"";
+                    lines[bossIndex] = $"Bosses: \"{string.Join(", ", bossNames)}\"";
 
                     // Aktualisierten Inhalt zurück in die Datei schreiben
+                    // BossEventGroups.RemoveAll(x => x.BossName == bossName);
                     WriteConfigFile(lines);
-
 
 
                     // Setze das Häkchen im CheckBox-Control
@@ -1606,8 +1643,8 @@ namespace GW2FOX
                 if (bossIndex != -1 && bossIndex < lines.Length)
                 {
                     // Remove the "Bosses:" section from the array
-                    lines = lines.Take(bossIndex).Concat(lines.SkipWhile(line => line.StartsWith("Bosses:")).Skip(1)).ToArray();
-
+                    // lines = lines.Take(bossIndex).Concat(lines.SkipWhile(line => line.StartsWith("Bosses:")).Skip(1)).ToArray();
+                    lines[bossIndex] = "Bosses: ";
                     // Save the modified configuration back to the file
                     WriteConfigFile(lines);
                 }
@@ -1620,6 +1657,44 @@ namespace GW2FOX
 
 
 
+        public static void CheckAllBossCheckboxes()
+        {
+            try
+            {
+                // Uncheck all checkboxes in the UI
+                foreach (CheckBox checkBox in bossCheckBoxMap.Values)
+                {
+                    checkBox.Checked = true;
+                    checkBox.Invalidate();
+                }
+
+                // Remove all bosses from the "Bosses:" section in the config file
+                string[] lines = ReadConfigFile();
+
+                int bossIndex = -1;
+                for (int i = 0; i < lines.Length; i++)
+                {
+                    if (lines[i].StartsWith("Bosses:"))
+                    {
+                        bossIndex = i;
+                        break;
+                    }
+                }
+
+                if (bossIndex != -1 && bossIndex < lines.Length)
+                {
+                    // Remove the "Bosses:" section from the array
+                    // lines = lines.Take(bossIndex).Concat(lines.SkipWhile(line => line.StartsWith("Bosses:")).Skip(1)).ToArray();
+                    lines[bossIndex] = $"Bosses: \"{string.Join(", ", BossEventGroups.Select(group => group.BossName).ToList())}\"";
+                    // Save the modified configuration back to the file
+                    WriteConfigFile(lines);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error checking all bosses: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
 
 
         private void CheckBossCheckboxes(string[] bossNames)
@@ -1657,6 +1732,59 @@ namespace GW2FOX
             }
         }
 
+        private void All_click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Uncheck all existing checkboxes
+                CheckAllBossCheckboxes();
+
+                // Read the config file
+                string[] lines = ReadConfigFile();
+
+                // Index of the line with the World bosses
+                int bossIndex = -1;
+                for (int i = 0; i < lines.Length; i++)
+                {
+                    if (lines[i].StartsWith("Bosses:"))
+                    {
+                        bossIndex = i;
+                        break;
+                    }
+                }
+
+                // If World section is found, extract and check the checkboxes for World bosses
+                if (bossIndex != -1 && bossIndex < lines.Length)
+                {
+                    // Extract the bosses from the World line
+                    string bossesLine = lines[bossIndex].Replace("Bosses:", "").Trim();
+
+                    // Remove the outer quotes and split the bosses
+                    string[] worldBosses = bossesLine
+                        .Trim('"')
+                        .Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+                        .Select(boss => boss.Trim())
+                        .ToArray();
+
+                    // Check the corresponding checkboxes for World bosses
+                    CheckBossCheckboxes(worldBosses);
+
+                    // Update the "Bosses:" section in the configuration file
+                    UpdateBossesSection1(worldBosses, lines);
+                }
+                else
+                {
+                    //This will create a new section
+                    SaveTextToFile(GlobalVariables.DEFAULT_BOSSES, "Bosses");
+                    World_Click(sender, e);
+                    // MessageBox.Show($"World section not found in config.", "Not Found", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error loading World bosses: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
         private void World_Click(object sender, EventArgs e)
         {
             try
@@ -1701,7 +1829,7 @@ namespace GW2FOX
                 {
                     //This will create a new section
                     SaveTextToFile(GlobalVariables.DEFAULT_WORLD, "World");
-                    World_Click(sender, e);   
+                    World_Click(sender, e);
                     // MessageBox.Show($"World section not found in config.", "Not Found", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
@@ -1795,14 +1923,12 @@ namespace GW2FOX
 
 
 
-        public static void UpdateBossUIBosses()
+        public static void UpdateBossUiBosses()
         {
             BossTimings.SetBossListFromConfig_Bosses();
-            ListView bossList = CustomBossList;
-            if (bossList != null)
+            if (CustomBossList != null)
             {
-                BossTimer bossTimerInstance = new BossTimer(bossList);
-                bossTimerInstance.UpdateBossList();
+                BossTimerService.UpdateCustomBossList(CustomBossList);
             }
         }
 
@@ -1857,10 +1983,127 @@ namespace GW2FOX
 
         private new void Timer_Click(object sender, EventArgs e)
         {
-            base.Timer_Click(sender, e);
+            BossTimerService.Timer_Click(sender, e);
             // Additional logic specific to Timer_Click in Main class, if any
         }
+
+
+        public static string getConfigLineForItem(string configItem)
+        {
+            string[] lines = ReadConfigFile();
+
+            // Index of the line with the Meta bosses
+            int versionIndex = -1;
+            for (int i = 0; i < lines.Length; i++)
+            {
+                if (lines[i].StartsWith(configItem + ":"))
+                {
+                    versionIndex = i;
+                    break;
+                }
+            }
+            if (versionIndex != -1 && versionIndex < lines.Length)
+            {
+                // Extract the bosses from the Meta line
+                return lines[versionIndex].Replace(configItem + ":", "").Trim();
+
+
+            }
+            else
+            {
+                SaveTextToFile("1", configItem);
+                return getConfigLineForItem(configItem);
+            }
+        }
+
+        private void Effigy_Click(object sender, EventArgs e)
+        {
+            ShowAndHideForm(new Effigy());
+        }
+
+        private void DoomloreShrine_Click(object sender, EventArgs e)
+        {
+            ShowAndHideForm(new DoomloreShrine());
+        }
+
+        private void StormsOfWinter_Click(object sender, EventArgs e)
+        {
+            ShowAndHideForm(new StormsOfWinter());
+        }
+
+        private void DefendJorasKeep_Click(object sender, EventArgs e)
+        {
+            ShowAndHideForm(new DefendJorasKeep());
+        }
+
+        private void Sandstorm_Click(object sender, EventArgs e)
+        {
+            ShowAndHideForm(new Sandstorm());
+        }
+
+        private void SaidrasHaven_Click(object sender, EventArgs e)
+        {
+            ShowAndHideForm(new SaidrasHaven());
+        }
+
+        private void NewLoamhurst_Click(object sender, EventArgs e)
+        {
+            ShowAndHideForm(new NewLoamhurst());
+        }
+
+        private void NoransHomestead_Click(object sender, EventArgs e)
+        {
+            ShowAndHideForm(new NoransHomestead());
+        }
+
+        private void AetherbladeAssault_Click(object sender, EventArgs e)
+        {
+            ShowAndHideForm(new AetherbladeAssault());
+        }
+
+        private void KainengBlackout_Click(object sender, EventArgs e)
+        {
+            ShowAndHideForm(new KainengBlackout());
+        }
+
+        private void GangWar_Click(object sender, EventArgs e)
+        {
+            ShowAndHideForm(new GangWar());
+        }
+
+        private void Aspenwood_Click(object sender, EventArgs e)
+        {
+            ShowAndHideForm(new Aspenwood());
+        }
+
+        private void JadeSea_Click(object sender, EventArgs e)
+        {
+            ShowAndHideForm(new JadeSea());
+        }
+
+        private void WizardsTower_Click(object sender, EventArgs e)
+        {
+            ShowAndHideForm(new WizardsTower());
+        }
+
+        private void FlyByNight_Click(object sender, EventArgs e)
+        {
+            ShowAndHideForm(new FlyByNight());
+        }
+
+        private void DefenseOfAmnytas_Click(object sender, EventArgs e)
+        {
+            ShowAndHideForm(new DefenseOfAmnytas());
+        }
+
+        private void Convergences_Click(object sender, EventArgs e)
+        {
+            ShowAndHideForm(new Convergences());
+        }
     }
+
+
+
 
 
 }
