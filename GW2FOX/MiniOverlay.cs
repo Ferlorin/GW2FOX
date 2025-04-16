@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Windows.Forms;
 
 namespace GW2FOX
@@ -44,6 +45,49 @@ namespace GW2FOX
             }
         }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            string exeDirectory = Path.GetDirectoryName(Application.ExecutablePath);
+            string filePath = Path.Combine(exeDirectory, "data2", "Blish HUD.exe");
+
+            if (File.Exists(filePath))
+            {
+                try
+                {
+                    Process.Start(filePath);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error opening the file: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("The file was not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            string exeDirectory = Path.GetDirectoryName(Application.ExecutablePath);
+            string filePath = Path.Combine(exeDirectory, "data", "GW2TacO.exe");
+
+            if (File.Exists(filePath))
+            {
+                try
+                {
+                    Process.Start(filePath);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error opening the file: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("The file was not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }
 
