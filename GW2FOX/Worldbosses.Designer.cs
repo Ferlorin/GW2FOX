@@ -172,6 +172,7 @@
             button65 = new Button();
             button68 = new Button();
             button1 = new Button();
+            button69 = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
@@ -1894,11 +1895,25 @@
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 
+            // button69
+            // 
+            button69.BackgroundImage = (Image)resources.GetObject("button69.BackgroundImage");
+            button69.BackgroundImageLayout = ImageLayout.Stretch;
+            button69.Cursor = Cursors.Cross;
+            button69.FlatStyle = FlatStyle.Flat;
+            button69.Location = new Point(894, 103);
+            button69.Name = "button69";
+            button69.Size = new Size(127, 32);
+            button69.TabIndex = 237;
+            button69.UseVisualStyleBackColor = true;
+            button69.Click += button69_Click;
+            // 
             // Worldbosses
             // 
             AutoScaleMode = AutoScaleMode.None;
             AutoValidate = AutoValidate.EnablePreventFocusChange;
             ClientSize = new Size(1904, 1041);
+            Controls.Add(button69);
             Controls.Add(button1);
             Controls.Add(button68);
             Controls.Add(button65);
@@ -2208,5 +2223,6 @@
         private Button button65;
         private Button button68;
         private Button button1;
+        private Button button69;
     }
 }

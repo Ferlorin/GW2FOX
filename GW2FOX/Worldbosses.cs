@@ -1,4 +1,5 @@
 ﻿
+using static GW2FOX.BossTimerService;
 using static GW2FOX.BossTimings;
 
 namespace GW2FOX
@@ -1992,6 +1993,13 @@ namespace GW2FOX
         {
             ShowAndHideForm(new Main());
         }
+
+        private void button69_Click(object sender, EventArgs e)
+        {
+            BossTimerService.Timer_Click(sender, e);
+        }
+
+
     }
 
 

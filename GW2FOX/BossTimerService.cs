@@ -40,6 +40,9 @@ namespace GW2FOX
 
 
 
+
+
+
         static BossTimerService()
         {
             Initialize();
@@ -193,20 +196,35 @@ namespace GW2FOX
             }
         }
 
-        private static void Update()
+        public static void Update()
         {
-            Initialize();
+            // Only initialize if not already done
+            if (_bossTimer == null || _overlay == null || _overlay.IsDisposed)
+            {
+                Initialize();
+            }
 
+            // Start the timer if it's not already running
             _bossTimer?.Start();
-            if (_overlay is { Visible: false })
+
+            // Show the overlay if it's not visible
+            if (_overlay != null && !_overlay.Visible)
             {
                 _overlay.Show();
             }
         }
 
 
+
+
         public class BossTimer : IDisposable
         {
+            public System.Threading.Timer Timer => _timer;
+
+            private bool _isRunning = false;
+
+            // Public property to access whether the timer is running
+            public bool IsRunning => _isRunning;
 
             private readonly ListView _bossList;
             private readonly TimeZoneInfo _mezTimeZone;
@@ -216,28 +234,26 @@ namespace GW2FOX
             {
                 this._bossList = bossList;
                 _mezTimeZone = TimeZoneInfo.FindSystemTimeZoneById(TimeZoneId);
-                _timer = new System.Threading.Timer(TimerCallback, null, 0, 1000);
+                _timer = new System.Threading.Timer(TimerCallback, null, Timeout.Infinite, Timeout.Infinite);
             }
-
 
             public void Start()
             {
-                _timer.Change(0, 1000);
+                if (!_isRunning)
+                {
+                    _timer.Change(0, 1000);  // Start the timer
+                    _isRunning = true;
+                }
             }
 
             public void Stop()
             {
-                _timer.Change(Timeout.Infinite, Timeout.Infinite);
+                if (_isRunning)
+                {
+                    _timer.Change(Timeout.Infinite, Timeout.Infinite);  // Stop the timer
+                    _isRunning = false;
+                }
             }
-
-            public static void UpdateCustomBossList(ListView updatedList)
-            {
-                CustomBossList = updatedList;
-
-                BossTimer.UpdateCustomBossList(updatedList);
-            }
-
-
 
             private void TimerCallback(object? state)
             {
@@ -375,6 +391,7 @@ namespace GW2FOX
             {
                 Dispose(true);
                 GC.SuppressFinalize(this);
+                _timer.Dispose();
             }
 
             protected virtual void Dispose(bool disposing)
@@ -382,11 +399,6 @@ namespace GW2FOX
                 if (!disposing) return;
                 // _bossTimer = null;
                 _timer.Dispose();
-            }
-
-            ~BossTimer()
-            {
-                Dispose(false);
             }
         }
     }
