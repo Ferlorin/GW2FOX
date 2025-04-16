@@ -1963,6 +1963,31 @@ namespace GW2FOX
             Clipboard.SetText(SearchResults.Text);
             BringGw2ToFront();
         }
+
+        private void button68_Click(object sender, EventArgs e)
+        {
+            ShowAndHideForm(new LLA());
+        }
+
+        private void button65_Click(object sender, EventArgs e)
+        {
+            ShowAndHideForm(new CaptainRotbeard());
+        }
+
+        private void button63_Click(object sender, EventArgs e)
+        {
+            ShowAndHideForm(new DredgeComissar());
+        }
+
+        private void button42_Click(object sender, EventArgs e)
+        {
+            ShowAndHideForm(new BrandedGenerals());
+        }
+
+        private void button31_Click(object sender, EventArgs e)
+        {
+            ShowAndHideForm(new GatesOfArah());
+        }
     }
 
 

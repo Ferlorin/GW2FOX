@@ -167,6 +167,11 @@
             button67 = new Button();
             button66 = new Button();
             SearchResults = new TextBox();
+            button31 = new Button();
+            button42 = new Button();
+            button63 = new Button();
+            button65 = new Button();
+            button68 = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
@@ -283,7 +288,7 @@
             button10.BackgroundImage = Properties.Resources.Wurm;
             button10.BackgroundImageLayout = ImageLayout.Stretch;
             button10.FlatStyle = FlatStyle.Flat;
-            button10.Location = new Point(153, 496);
+            button10.Location = new Point(153, 494);
             button10.Name = "button10";
             button10.Size = new Size(140, 35);
             button10.TabIndex = 17;
@@ -296,7 +301,7 @@
             button11.BackgroundImageLayout = ImageLayout.Stretch;
             button11.Cursor = Cursors.Cross;
             button11.FlatStyle = FlatStyle.Flat;
-            button11.Location = new Point(361, 576);
+            button11.Location = new Point(360, 576);
             button11.Name = "button11";
             button11.Size = new Size(140, 35);
             button11.TabIndex = 18;
@@ -308,7 +313,7 @@
             button12.BackgroundImage = Properties.Resources.Ulgoth;
             button12.BackgroundImageLayout = ImageLayout.Stretch;
             button12.FlatStyle = FlatStyle.Flat;
-            button12.Location = new Point(153, 537);
+            button12.Location = new Point(153, 535);
             button12.Name = "button12";
             button12.Size = new Size(140, 35);
             button12.TabIndex = 19;
@@ -320,7 +325,7 @@
             button13.BackgroundImage = Properties.Resources.Thaida;
             button13.BackgroundImageLayout = ImageLayout.Stretch;
             button13.FlatStyle = FlatStyle.Flat;
-            button13.Location = new Point(153, 578);
+            button13.Location = new Point(153, 576);
             button13.Name = "button13";
             button13.Size = new Size(140, 35);
             button13.TabIndex = 20;
@@ -332,7 +337,7 @@
             button14.BackgroundImage = Properties.Resources.Shatti;
             button14.BackgroundImageLayout = ImageLayout.Stretch;
             button14.FlatStyle = FlatStyle.Flat;
-            button14.Location = new Point(153, 742);
+            button14.Location = new Point(153, 740);
             button14.Name = "button14";
             button14.Size = new Size(140, 35);
             button14.TabIndex = 21;
@@ -345,7 +350,7 @@
             button15.BackgroundImageLayout = ImageLayout.Stretch;
             button15.Cursor = Cursors.Cross;
             button15.FlatStyle = FlatStyle.Flat;
-            button15.Location = new Point(361, 535);
+            button15.Location = new Point(360, 535);
             button15.Name = "button15";
             button15.Size = new Size(140, 35);
             button15.TabIndex = 22;
@@ -357,7 +362,7 @@
             button16.BackgroundImage = Properties.Resources.Tequatl;
             button16.BackgroundImageLayout = ImageLayout.Stretch;
             button16.FlatStyle = FlatStyle.Flat;
-            button16.Location = new Point(153, 701);
+            button16.Location = new Point(153, 699);
             button16.Name = "button16";
             button16.Size = new Size(140, 35);
             button16.TabIndex = 23;
@@ -369,7 +374,7 @@
             button17.BackgroundImage = Properties.Resources.Mega;
             button17.BackgroundImageLayout = ImageLayout.Stretch;
             button17.FlatStyle = FlatStyle.Flat;
-            button17.Location = new Point(153, 619);
+            button17.Location = new Point(153, 617);
             button17.Name = "button17";
             button17.Size = new Size(140, 35);
             button17.TabIndex = 24;
@@ -381,7 +386,7 @@
             button18.BackgroundImage = Properties.Resources.Inquestgolem;
             button18.BackgroundImageLayout = ImageLayout.Stretch;
             button18.FlatStyle = FlatStyle.Flat;
-            button18.Location = new Point(153, 660);
+            button18.Location = new Point(153, 658);
             button18.Name = "button18";
             button18.Size = new Size(140, 35);
             button18.TabIndex = 25;
@@ -393,7 +398,7 @@
             button19.BackgroundImage = Properties.Resources.Karka;
             button19.BackgroundImageLayout = ImageLayout.Stretch;
             button19.FlatStyle = FlatStyle.Flat;
-            button19.Location = new Point(153, 783);
+            button19.Location = new Point(153, 781);
             button19.Name = "button19";
             button19.Size = new Size(140, 35);
             button19.TabIndex = 26;
@@ -405,7 +410,7 @@
             button20.BackgroundImage = Properties.Resources.Claw;
             button20.BackgroundImageLayout = ImageLayout.Stretch;
             button20.FlatStyle = FlatStyle.Flat;
-            button20.Location = new Point(153, 824);
+            button20.Location = new Point(153, 822);
             button20.Name = "button20";
             button20.Size = new Size(140, 35);
             button20.TabIndex = 27;
@@ -444,7 +449,7 @@
             button23.BackgroundImageLayout = ImageLayout.Stretch;
             button23.Cursor = Cursors.Cross;
             button23.FlatStyle = FlatStyle.Flat;
-            button23.Location = new Point(361, 371);
+            button23.Location = new Point(360, 371);
             button23.Name = "button23";
             button23.Size = new Size(140, 35);
             button23.TabIndex = 30;
@@ -457,7 +462,7 @@
             button24.BackgroundImageLayout = ImageLayout.Stretch;
             button24.Cursor = Cursors.Cross;
             button24.FlatStyle = FlatStyle.Flat;
-            button24.Location = new Point(361, 412);
+            button24.Location = new Point(360, 412);
             button24.Name = "button24";
             button24.Size = new Size(140, 35);
             button24.TabIndex = 31;
@@ -470,7 +475,7 @@
             button25.BackgroundImageLayout = ImageLayout.Stretch;
             button25.Cursor = Cursors.Cross;
             button25.FlatStyle = FlatStyle.Flat;
-            button25.Location = new Point(361, 453);
+            button25.Location = new Point(360, 453);
             button25.Name = "button25";
             button25.Size = new Size(140, 35);
             button25.TabIndex = 32;
@@ -483,7 +488,7 @@
             button26.BackgroundImageLayout = ImageLayout.Stretch;
             button26.Cursor = Cursors.Cross;
             button26.FlatStyle = FlatStyle.Flat;
-            button26.Location = new Point(361, 494);
+            button26.Location = new Point(360, 494);
             button26.Name = "button26";
             button26.Size = new Size(140, 35);
             button26.TabIndex = 33;
@@ -1704,7 +1709,7 @@
             // pictureBox5
             // 
             pictureBox5.BackgroundImage = (Image)resources.GetObject("pictureBox5.BackgroundImage");
-            pictureBox5.Location = new Point(343, 335);
+            pictureBox5.Location = new Point(342, 335);
             pictureBox5.Name = "pictureBox5";
             pictureBox5.Size = new Size(175, 30);
             pictureBox5.TabIndex = 214;
@@ -1830,11 +1835,81 @@
             SearchResults.Size = new Size(220, 148);
             SearchResults.TabIndex = 227;
             // 
+            // button31
+            // 
+            button31.BackgroundImage = (Image)resources.GetObject("button31.BackgroundImage");
+            button31.BackgroundImageLayout = ImageLayout.Stretch;
+            button31.Cursor = Cursors.Cross;
+            button31.FlatStyle = FlatStyle.Flat;
+            button31.Location = new Point(360, 781);
+            button31.Name = "button31";
+            button31.Size = new Size(140, 35);
+            button31.TabIndex = 231;
+            button31.UseVisualStyleBackColor = true;
+            button31.Click += button31_Click;
+            // 
+            // button42
+            // 
+            button42.BackgroundImage = (Image)resources.GetObject("button42.BackgroundImage");
+            button42.BackgroundImageLayout = ImageLayout.Stretch;
+            button42.Cursor = Cursors.Cross;
+            button42.FlatStyle = FlatStyle.Flat;
+            button42.Location = new Point(360, 740);
+            button42.Name = "button42";
+            button42.Size = new Size(140, 35);
+            button42.TabIndex = 232;
+            button42.UseVisualStyleBackColor = true;
+            button42.Click += button42_Click;
+            // 
+            // button63
+            // 
+            button63.BackgroundImage = (Image)resources.GetObject("button63.BackgroundImage");
+            button63.BackgroundImageLayout = ImageLayout.Stretch;
+            button63.Cursor = Cursors.Cross;
+            button63.FlatStyle = FlatStyle.Flat;
+            button63.Location = new Point(360, 699);
+            button63.Name = "button63";
+            button63.Size = new Size(140, 35);
+            button63.TabIndex = 233;
+            button63.UseVisualStyleBackColor = true;
+            button63.Click += button63_Click;
+            // 
+            // button65
+            // 
+            button65.BackgroundImage = (Image)resources.GetObject("button65.BackgroundImage");
+            button65.BackgroundImageLayout = ImageLayout.Stretch;
+            button65.Cursor = Cursors.Cross;
+            button65.FlatStyle = FlatStyle.Flat;
+            button65.Location = new Point(360, 658);
+            button65.Name = "button65";
+            button65.Size = new Size(140, 35);
+            button65.TabIndex = 234;
+            button65.UseVisualStyleBackColor = true;
+            button65.Click += button65_Click;
+            // 
+            // button68
+            // 
+            button68.BackgroundImage = (Image)resources.GetObject("button68.BackgroundImage");
+            button68.BackgroundImageLayout = ImageLayout.Stretch;
+            button68.Cursor = Cursors.Cross;
+            button68.FlatStyle = FlatStyle.Flat;
+            button68.Location = new Point(360, 617);
+            button68.Name = "button68";
+            button68.Size = new Size(140, 35);
+            button68.TabIndex = 235;
+            button68.UseVisualStyleBackColor = true;
+            button68.Click += button68_Click;
+            // 
             // Worldbosses
             // 
             AutoScaleMode = AutoScaleMode.None;
             AutoValidate = AutoValidate.EnablePreventFocusChange;
             ClientSize = new Size(1904, 1041);
+            Controls.Add(button68);
+            Controls.Add(button65);
+            Controls.Add(button63);
+            Controls.Add(button42);
+            Controls.Add(button31);
             Controls.Add(Quantity);
             Controls.Add(button67);
             Controls.Add(button66);
@@ -2134,5 +2209,10 @@
         private Button button67;
         private Button button66;
         private TextBox SearchResults;
+        private Button button31;
+        private Button button42;
+        private Button button63;
+        private Button button65;
+        private Button button68;
     }
 }
