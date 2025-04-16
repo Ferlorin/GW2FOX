@@ -173,6 +173,7 @@
             button68 = new Button();
             button1 = new Button();
             button69 = new Button();
+            LLA = new CheckBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
@@ -894,7 +895,7 @@
             button60.BackgroundImageLayout = ImageLayout.Stretch;
             button60.Cursor = Cursors.Cross;
             button60.FlatStyle = FlatStyle.Flat;
-            button60.Location = new Point(1618, 375);
+            button60.Location = new Point(1618, 371);
             button60.Name = "button60";
             button60.Size = new Size(140, 35);
             button60.TabIndex = 121;
@@ -908,7 +909,7 @@
             button61.BackgroundImageLayout = ImageLayout.Stretch;
             button61.Cursor = Cursors.Cross;
             button61.FlatStyle = FlatStyle.Flat;
-            button61.Location = new Point(1618, 427);
+            button61.Location = new Point(1618, 412);
             button61.Name = "button61";
             button61.Size = new Size(140, 35);
             button61.TabIndex = 122;
@@ -922,7 +923,7 @@
             button62.BackgroundImageLayout = ImageLayout.Stretch;
             button62.Cursor = Cursors.Cross;
             button62.FlatStyle = FlatStyle.Flat;
-            button62.Location = new Point(1618, 479);
+            button62.Location = new Point(1618, 453);
             button62.Name = "button62";
             button62.Size = new Size(140, 35);
             button62.TabIndex = 123;
@@ -936,7 +937,7 @@
             Convergens.BackgroundImageLayout = ImageLayout.Stretch;
             Convergens.Cursor = Cursors.Cross;
             Convergens.FlatStyle = FlatStyle.Flat;
-            Convergens.Location = new Point(1618, 531);
+            Convergens.Location = new Point(1618, 494);
             Convergens.Name = "Convergens";
             Convergens.Size = new Size(140, 35);
             Convergens.TabIndex = 124;
@@ -1457,7 +1458,7 @@
             // 
             WizzardsTower.AutoSize = true;
             WizzardsTower.BackColor = Color.Magenta;
-            WizzardsTower.Location = new Point(1597, 392);
+            WizzardsTower.Location = new Point(1597, 382);
             WizzardsTower.Name = "WizzardsTower";
             WizzardsTower.Size = new Size(15, 14);
             WizzardsTower.TabIndex = 183;
@@ -1468,7 +1469,7 @@
             // 
             Flybynigtht.AutoSize = true;
             Flybynigtht.BackColor = Color.Magenta;
-            Flybynigtht.Location = new Point(1597, 444);
+            Flybynigtht.Location = new Point(1597, 423);
             Flybynigtht.Name = "Flybynigtht";
             Flybynigtht.Size = new Size(15, 14);
             Flybynigtht.TabIndex = 182;
@@ -1479,7 +1480,7 @@
             // 
             Amnytas.AutoSize = true;
             Amnytas.BackColor = Color.Magenta;
-            Amnytas.Location = new Point(1597, 496);
+            Amnytas.Location = new Point(1597, 464);
             Amnytas.Name = "Amnytas";
             Amnytas.Size = new Size(15, 14);
             Amnytas.TabIndex = 181;
@@ -1490,7 +1491,7 @@
             // 
             Convergence.AutoSize = true;
             Convergence.BackColor = Color.Magenta;
-            Convergence.Location = new Point(1597, 548);
+            Convergence.Location = new Point(1597, 505);
             Convergence.Name = "Convergence";
             Convergence.Size = new Size(15, 14);
             Convergence.TabIndex = 180;
@@ -1777,7 +1778,7 @@
             Quantity.Font = new Font("Segoe UI", 11F);
             Quantity.Location = new Point(16, 162);
             Quantity.Name = "Quantity";
-            Quantity.Size = new Size(54, 27);
+            Quantity.Size = new Size(34, 27);
             Quantity.TabIndex = 230;
             Quantity.TextAlign = HorizontalAlignment.Center;
             // 
@@ -1787,7 +1788,7 @@
             button67.BackgroundImageLayout = ImageLayout.Center;
             button67.Cursor = Cursors.Cross;
             button67.FlatStyle = FlatStyle.Flat;
-            button67.Location = new Point(76, 166);
+            button67.Location = new Point(56, 162);
             button67.Name = "button67";
             button67.Size = new Size(75, 23);
             button67.TabIndex = 229;
@@ -1800,7 +1801,7 @@
             button66.BackgroundImageLayout = ImageLayout.Center;
             button66.Cursor = Cursors.Cross;
             button66.FlatStyle = FlatStyle.Flat;
-            button66.Location = new Point(157, 166);
+            button66.Location = new Point(137, 162);
             button66.Name = "button66";
             button66.Size = new Size(75, 23);
             button66.TabIndex = 228;
@@ -1815,7 +1816,7 @@
             SearchResults.Multiline = true;
             SearchResults.Name = "SearchResults";
             SearchResults.ScrollBars = ScrollBars.Vertical;
-            SearchResults.Size = new Size(220, 148);
+            SearchResults.Size = new Size(164, 148);
             SearchResults.TabIndex = 227;
             // 
             // button31
@@ -1824,7 +1825,7 @@
             button31.BackgroundImageLayout = ImageLayout.Stretch;
             button31.Cursor = Cursors.Cross;
             button31.FlatStyle = FlatStyle.Flat;
-            button31.Location = new Point(360, 781);
+            button31.Location = new Point(360, 740);
             button31.Name = "button31";
             button31.Size = new Size(140, 35);
             button31.TabIndex = 231;
@@ -1837,7 +1838,7 @@
             button42.BackgroundImageLayout = ImageLayout.Stretch;
             button42.Cursor = Cursors.Cross;
             button42.FlatStyle = FlatStyle.Flat;
-            button42.Location = new Point(360, 740);
+            button42.Location = new Point(360, 699);
             button42.Name = "button42";
             button42.Size = new Size(140, 35);
             button42.TabIndex = 232;
@@ -1850,7 +1851,7 @@
             button63.BackgroundImageLayout = ImageLayout.Stretch;
             button63.Cursor = Cursors.Cross;
             button63.FlatStyle = FlatStyle.Flat;
-            button63.Location = new Point(360, 699);
+            button63.Location = new Point(360, 658);
             button63.Name = "button63";
             button63.Size = new Size(140, 35);
             button63.TabIndex = 233;
@@ -1863,7 +1864,7 @@
             button65.BackgroundImageLayout = ImageLayout.Stretch;
             button65.Cursor = Cursors.Cross;
             button65.FlatStyle = FlatStyle.Flat;
-            button65.Location = new Point(360, 658);
+            button65.Location = new Point(360, 617);
             button65.Name = "button65";
             button65.Size = new Size(140, 35);
             button65.TabIndex = 234;
@@ -1876,7 +1877,7 @@
             button68.BackgroundImageLayout = ImageLayout.Stretch;
             button68.Cursor = Cursors.Cross;
             button68.FlatStyle = FlatStyle.Flat;
-            button68.Location = new Point(360, 617);
+            button68.Location = new Point(153, 863);
             button68.Name = "button68";
             button68.Size = new Size(140, 35);
             button68.TabIndex = 235;
@@ -1908,11 +1909,24 @@
             button69.UseVisualStyleBackColor = true;
             button69.Click += button69_Click;
             // 
+            // LLA
+            // 
+            LLA.AutoSize = true;
+            LLA.BackColor = Color.Magenta;
+            LLA.ForeColor = Color.Magenta;
+            LLA.Location = new Point(132, 874);
+            LLA.Name = "LLA";
+            LLA.Size = new Size(15, 14);
+            LLA.TabIndex = 238;
+            LLA.UseVisualStyleBackColor = false;
+            LLA.CheckedChanged += LLA_CheckedChanged;
+            // 
             // Worldbosses
             // 
             AutoScaleMode = AutoScaleMode.None;
             AutoValidate = AutoValidate.EnablePreventFocusChange;
             ClientSize = new Size(1904, 1041);
+            Controls.Add(LLA);
             Controls.Add(button69);
             Controls.Add(button1);
             Controls.Add(button68);
@@ -2224,5 +2238,6 @@
         private Button button68;
         private Button button1;
         private Button button69;
+        private CheckBox LLA;
     }
 }

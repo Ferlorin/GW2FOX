@@ -1138,13 +1138,35 @@ namespace GW2FOX
 
         }
 
+        private void LLA_CheckedChanged(object sender, EventArgs e)
+        {
+            string[] bossNames = { "LLA Timberline", "LLA Iron Marches", "LLA Gendarran" };
+
+            if (LLA.Checked)
+            {
+                foreach (string bossName in bossNames)
+                {
+                    SaveBossNameToConfig(bossName);
+                }
+            }
+            else
+            {
+                foreach (string bossName in bossNames)
+                {
+                    RemoveBossNameFromConfig(bossName);
+                }
+            }
+        }
+
+
+
         private void InitializeBossCheckBoxMap()
         {
             bossCheckBoxMap = new Dictionary<string, CheckBox>
         {
-        { "LLLA - Timberline Falls", Maw },
-        { "LLLA - Iron Marches", Maw },
-        { "LLLA - Gendarran Fields", Maw },
+        { "LLA Timberline", LLA },
+        { "LLA Iron Marches", LLA },
+        { "LLA Gendarran", LLA },
         { "The frozen Maw", Maw },
         { "Shadow Behemoth", Behemoth },
         { "Fire Elemental", Fire_Elemental },
@@ -1939,13 +1961,37 @@ namespace GW2FOX
         {
             try
             {
-                if (int.TryParse(Quantity.Text, out int quantity) && quantity > 0)
+                // Anzahl der Bosse aus dem Textfeld entnehmen (ScheduleTextBox)
+                if (int.TryParse(Quantity.Text, out int numberOfBosses) && numberOfBosses > 0)
                 {
-                    var upcomingBosses = BossTimings.BossList23
-                        .Take(quantity)
-                        .ToList();
-                    SearchResults.Text = string.Join("," + Environment.NewLine, upcomingBosses.Select(b => b.ToString())) + ",";
+                    // Hier die Liste der kommenden Bosse laden (bereits vorhandene Methode)
+                    List<string> bossNamesFromConfig = BossList23;
 
+                    var bossEventGroups = BossEventGroups
+                        .Where(bossEventGroup => bossNamesFromConfig.Contains(bossEventGroup.BossName))
+                        .ToList();
+
+                    var allBosses = bossEventGroups
+                        .SelectMany(bossEventGroup => bossEventGroup.GetNextRuns())
+                        .ToList();
+
+                    // Sortierung nach der Zeit des nächsten Bosskampfs
+                    allBosses.Sort((bossEvent1, bossEvent2) =>
+                    {
+                        return bossEvent1.NextRunTime.CompareTo(bossEvent2.NextRunTime);
+                    });
+
+                    // Bossnamen extrahieren (bis zur gewünschten Anzahl)
+                    var bossNames = allBosses.Take(numberOfBosses).Select(bossEvent => bossEvent.BossName).ToList();
+
+                    // Bossnamen durch Kommas getrennt
+                    string bossNamesString = string.Join("," + Environment.NewLine, bossNames);
+
+                    // Die Bossnamen in die Zwischenablage kopieren
+                    Clipboard.SetText(bossNamesString);
+
+                    // Bossnamen in ResultTextBox anzeigen
+                    SearchResults.Text = bossNamesString;
                 }
                 else
                 {
@@ -1957,6 +2003,7 @@ namespace GW2FOX
                 MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
 
         private void button66_Click(object sender, EventArgs e)
         {
@@ -1998,8 +2045,6 @@ namespace GW2FOX
         {
             BossTimerService.Timer_Click(sender, e);
         }
-
-
     }
 
 
