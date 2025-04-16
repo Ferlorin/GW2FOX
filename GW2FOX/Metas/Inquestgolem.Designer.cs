@@ -53,6 +53,7 @@
             pictureBox3 = new PictureBox();
             pictureBox2 = new PictureBox();
             pictureBox5 = new PictureBox();
+            button6 = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
@@ -260,7 +261,7 @@
             // ItempriceInquest
             // 
             ItempriceInquest.Font = new Font("Segoe UI", 9F);
-            ItempriceInquest.Location = new Point(14, 82);
+            ItempriceInquest.Location = new Point(12, 174);
             ItempriceInquest.Multiline = true;
             ItempriceInquest.Name = "ItempriceInquest";
             ItempriceInquest.ReadOnly = true;
@@ -270,7 +271,7 @@
             // pictureBox4
             // 
             pictureBox4.Image = Properties.Resources.Symbol_of_the_Inquest;
-            pictureBox4.Location = new Point(14, 12);
+            pictureBox4.Location = new Point(12, 104);
             pictureBox4.Name = "pictureBox4";
             pictureBox4.Size = new Size(64, 64);
             pictureBox4.TabIndex = 129;
@@ -282,7 +283,7 @@
             button13.BackgroundImageLayout = ImageLayout.Center;
             button13.Cursor = Cursors.Cross;
             button13.FlatStyle = FlatStyle.Flat;
-            button13.Location = new Point(17, 111);
+            button13.Location = new Point(15, 203);
             button13.Name = "button13";
             button13.Size = new Size(75, 23);
             button13.TabIndex = 130;
@@ -292,7 +293,7 @@
             // Golemitemname
             // 
             Golemitemname.Font = new Font("Segoe UI", 9F);
-            Golemitemname.Location = new Point(84, 53);
+            Golemitemname.Location = new Point(82, 145);
             Golemitemname.Multiline = true;
             Golemitemname.Name = "Golemitemname";
             Golemitemname.ReadOnly = true;
@@ -339,11 +340,23 @@
             pictureBox5.TabIndex = 132;
             pictureBox5.TabStop = false;
             // 
+            // button6
+            // 
+            button6.BackgroundImage = (Image)resources.GetObject("button6.BackgroundImage");
+            button6.FlatStyle = FlatStyle.Flat;
+            button6.Location = new Point(12, 12);
+            button6.Name = "button6";
+            button6.Size = new Size(80, 36);
+            button6.TabIndex = 136;
+            button6.UseVisualStyleBackColor = true;
+            button6.Click += button6_Click;
+            // 
             // Inquestgolem
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1904, 1041);
+            Controls.Add(button6);
             Controls.Add(pictureBox1);
             Controls.Add(pictureBox3);
             Controls.Add(pictureBox2);
@@ -405,5 +418,6 @@
         private PictureBox pictureBox3;
         private PictureBox pictureBox2;
         private PictureBox pictureBox5;
+        private Button button6;
     }
 }

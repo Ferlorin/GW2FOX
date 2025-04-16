@@ -292,7 +292,7 @@
             // 
             button6.BackgroundImage = (Image)resources.GetObject("button6.BackgroundImage");
             button6.FlatStyle = FlatStyle.Flat;
-            button6.Location = new Point(12, 12);
+            button6.Location = new Point(15, 12);
             button6.Name = "button6";
             button6.Size = new Size(80, 36);
             button6.TabIndex = 124;
