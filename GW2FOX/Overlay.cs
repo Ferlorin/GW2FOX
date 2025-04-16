@@ -80,18 +80,12 @@ namespace GW2FOX
         private void OverlayListView_SetColor(object sender, DrawListViewItemEventArgs e)
         {
             listViewPanel.Size = new Size(listViewPanel.Width, 21 * overlayListView.Items.Count);
-            //this was not needed we have already assigned color in BossTimerService.cs line 312 and 318
 
         }
 
         public void CloseOverlay()
         {
             Dispose();
-        }
-
-        private void Overlay_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }

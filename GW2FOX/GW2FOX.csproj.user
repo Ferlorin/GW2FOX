@@ -142,6 +142,9 @@
     <Compile Update="Metas\TheOilFloes.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="MiniOverlay.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Overlay.cs">
       <SubType>Form</SubType>
     </Compile>

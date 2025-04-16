@@ -168,7 +168,6 @@ namespace GW2FOX
         {
             Clipboard.SetText(Runinfo.Text);
 
-            // Bring the Gw2-64.exe window to the foreground
             BringGw2ToFront();
         }
 

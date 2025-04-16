@@ -148,6 +148,7 @@ namespace GW2FOX
         private void Leading_Click(object sender, EventArgs e)
         {
             ShowAndHideForm(new Worldbosses());
+            ShowAndHideForm(new MiniOverlay());
             BossTimerService.Timer_Click(sender, e);
         }
 
