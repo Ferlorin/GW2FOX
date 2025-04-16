@@ -1987,6 +1987,11 @@ namespace GW2FOX
         {
             ShowAndHideForm(new GatesOfArah());
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            ShowAndHideForm(new Main());
+        }
     }
 
 

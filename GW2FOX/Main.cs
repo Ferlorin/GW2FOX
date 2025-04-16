@@ -1,5 +1,3 @@
-// Main.cs
-
 using System.Diagnostics;
 using IWshRuntimeLibrary;
 using File = System.IO.File;
@@ -8,19 +6,16 @@ namespace GW2FOX
 {
     public partial class Main : BaseForm
     {
+        private GlobalKeyboardHook? _globalKeyboardHook;
+        private Worldbosses _worldbossesForm;
 
-
-        private GlobalKeyboardHook? _globalKeyboardHook; // Füge dies hinzu
 
         public Main()
         {
             InitializeComponent();
-
             InitializeGlobalKeyboardHook();
-
             // Updater.CheckForUpdates(Worldbosses.getConfigLineForItem("Version"));
         }
-
 
         private void InitializeGlobalKeyboardHook()
         {
@@ -36,12 +31,10 @@ namespace GW2FOX
             }
         }
 
-
         private void Timer_Click(object sender, EventArgs e)
         {
             BossTimerService.Timer_Click(sender, e);
         }
-
 
         private void HandleException(Exception ex)
         {
@@ -52,7 +45,6 @@ namespace GW2FOX
         {
             newForm.Owner = this;
             newForm.Show();
-            // this.Dispose();
         }
 
         private void Fox_Click(object sender, EventArgs e)
@@ -69,7 +61,7 @@ namespace GW2FOX
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"GREAT - you deletet the INTERNET!: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"GREAT - you deleted the INTERNET!: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -114,9 +106,9 @@ namespace GW2FOX
                 WshShell shell = new WshShell();
                 IWshShortcut shortcut = (IWshShortcut)shell.CreateShortcut(shortcutPath);
                 shortcut.TargetPath = targetPath;
-                shortcut.WorkingDirectory = Path.GetDirectoryName(targetPath); // Setzen Sie das Arbeitsverzeichnis auf den Ordner der ausf?hrbaren Datei
+                shortcut.WorkingDirectory = Path.GetDirectoryName(targetPath);
                 shortcut.Arguments = commandLineParameters;
-                shortcut.Save(); // Speichern Sie die Verkn?pfung, um sie zu erstellen
+                shortcut.Save();
             }
             catch (Exception ex)
             {
@@ -144,28 +136,16 @@ namespace GW2FOX
         }
 
 
-
-        private void Leading_Click(object sender, EventArgs e)
-        {
-            ShowAndHideForm(new Worldbosses());
-            ShowAndHideForm(new MiniOverlay());
-            BossTimerService.Timer_Click(sender, e);
-        }
-
-
         private void CloseAll_Click(object sender, EventArgs e)
         {
             try
             {
-                // Stop the Timer and dispose of the BossTimer
                 BossTimerService._bossTimer?.Stop();
-                BossTimerService._bossTimer?.Dispose(); // Dispose of the BossTimer
+                BossTimerService._bossTimer?.Dispose();
 
-                // Close the Overlay and dispose of it
                 BossTimerService._overlay?.Close();
-                BossTimerService._overlay?.Dispose(); // Dispose of the Overlay
+                BossTimerService._overlay?.Dispose();
 
-                // Close the program
                 Application.Exit();
             }
             catch (Exception ex)
@@ -176,55 +156,45 @@ namespace GW2FOX
 
         private void BlishHUD_Click(object sender, EventArgs e)
         {
-            // Verzeichnis der ausführbaren Datei erhalten
             string exeDirectory = Path.GetDirectoryName(Application.ExecutablePath);
-
-            // Pfad zur Datei "Blish HUD.exe" im Verzeichnis "data"
             string filePath = Path.Combine(exeDirectory, "data2", "Blish HUD.exe");
 
-            // Überprüfen, ob die Datei existiert, bevor sie geöffnet wird
             if (File.Exists(filePath))
             {
                 try
                 {
-                    // Öffne die Datei
                     Process.Start(filePath);
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Fehler beim Öffnen der Datei: " + ex.Message, "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Error opening the file: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             else
             {
-                MessageBox.Show("Die Datei wurde nicht gefunden.", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("The file was not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void button8_Click(object sender, EventArgs e)
         {
-            // Verzeichnis der ausführbaren Datei erhalten
             string exeDirectory = Path.GetDirectoryName(Application.ExecutablePath);
-
-            // Pfad zur Datei "Blish HUD.exe" im Verzeichnis "data"
             string filePath = Path.Combine(exeDirectory, "data", "GW2TacO.exe");
 
-            // Überprüfen, ob die Datei existiert, bevor sie geöffnet wird
             if (File.Exists(filePath))
             {
                 try
                 {
-                    // Öffne die Datei
                     Process.Start(filePath);
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Fehler beim Öffnen der Datei: " + ex.Message, "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Error opening the file: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             else
             {
-                MessageBox.Show("Die Datei wurde nicht gefunden.", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("The file was not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -234,7 +204,7 @@ namespace GW2FOX
 
             if (string.IsNullOrEmpty(gw2Verzeichnis))
             {
-                MessageBox.Show("Das Guild Wars 2-Verzeichnis wurde nicht ausgewählt.", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Please select the directory of Guild Wars 2 where the .exe file is located.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -259,17 +229,14 @@ namespace GW2FOX
 
         private void InstallArcDPS(string gw2Verzeichnis)
         {
-            // Pfade zu den zu kopierenden Dateien
             string d3d11DllQuelle = Path.Combine("data", "d3d11.dll");
             string d3d11Md5SumQuelle = Path.Combine("data", "d3d11.dll.md5sum");
 
-            // Ziel Pfade im Guild Wars 2-Verzeichnis
             string d3d11DllZiel = Path.Combine(gw2Verzeichnis, "d3d11.dll");
             string d3d11Md5SumZiel = Path.Combine(gw2Verzeichnis, "d3d11.dll.md5sum");
 
             try
             {
-                // Dateien kopieren
                 File.Copy(d3d11DllQuelle, d3d11DllZiel, true);
                 File.Copy(d3d11Md5SumQuelle, d3d11Md5SumZiel, true);
 
@@ -293,11 +260,9 @@ namespace GW2FOX
 
             try
             {
-                // Pfade zu den zu löschenden Dateien
                 string d3d11DllZiel = Path.Combine(gw2Verzeichnis, "d3d11.dll");
                 string d3d11Md5SumZiel = Path.Combine(gw2Verzeichnis, "d3d11.dll.md5sum");
 
-                // Dateien löschen, wenn sie existieren
                 if (File.Exists(d3d11DllZiel))
                     File.Delete(d3d11DllZiel);
 
@@ -313,5 +278,22 @@ namespace GW2FOX
         }
 
 
+        private void Leading_Click(object sender, EventArgs e)
+        {
+            // Wenn Worldbosses noch nicht existiert, erstelle es
+            if (_worldbossesForm == null || _worldbossesForm.IsDisposed)
+            {
+                _worldbossesForm = new Worldbosses();
+                _worldbossesForm.FormClosed += (s, args) => _worldbossesForm = null;
+                _worldbossesForm.Hide(); // Worldbosses verstecken
+            }
+
+            // MiniOverlay mit der Worldbosses-Instanz übergeben
+            ShowAndHideForm(new MiniOverlay(_worldbossesForm));
+            BossTimerService.Timer_Click(sender, e);
+        }
     }
 }
+
+
+

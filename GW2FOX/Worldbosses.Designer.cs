@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Worldbosses));
-            button1 = new Button();
             button2 = new Button();
             button4 = new Button();
             button5 = new Button();
@@ -172,6 +171,7 @@
             button63 = new Button();
             button65 = new Button();
             button68 = new Button();
+            button1 = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
@@ -185,19 +185,6 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox7).BeginInit();
             SuspendLayout();
-            // 
-            // button1
-            // 
-            button1.BackgroundImage = Properties.Resources.back;
-            button1.BackgroundImageLayout = ImageLayout.Center;
-            button1.Cursor = Cursors.Cross;
-            button1.FlatStyle = FlatStyle.Flat;
-            button1.Location = new Point(1852, 989);
-            button1.Name = "button1";
-            button1.Size = new Size(40, 40);
-            button1.TabIndex = 7;
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += Back_Click;
             // 
             // button2
             // 
@@ -1725,7 +1712,7 @@
             World.BackgroundImageLayout = ImageLayout.Center;
             World.Cursor = Cursors.Cross;
             World.FlatStyle = FlatStyle.Flat;
-            World.Location = new Point(756, 12);
+            World.Location = new Point(761, 27);
             World.Name = "World";
             World.Size = new Size(127, 32);
             World.TabIndex = 222;
@@ -1738,7 +1725,7 @@
             Mixed.BackgroundImageLayout = ImageLayout.Center;
             Mixed.Cursor = Cursors.Cross;
             Mixed.FlatStyle = FlatStyle.Flat;
-            Mixed.Location = new Point(1022, 12);
+            Mixed.Location = new Point(1027, 27);
             Mixed.Name = "Mixed";
             Mixed.Size = new Size(127, 32);
             Mixed.TabIndex = 225;
@@ -1751,7 +1738,7 @@
             ClearAll.BackgroundImageLayout = ImageLayout.Center;
             ClearAll.Cursor = Cursors.Cross;
             ClearAll.FlatStyle = FlatStyle.Flat;
-            ClearAll.Location = new Point(827, 50);
+            ClearAll.Location = new Point(832, 65);
             ClearAll.Name = "ClearAll";
             ClearAll.Size = new Size(127, 32);
             ClearAll.TabIndex = 224;
@@ -1764,7 +1751,7 @@
             Meta.BackgroundImageLayout = ImageLayout.Center;
             Meta.Cursor = Cursors.Cross;
             Meta.FlatStyle = FlatStyle.Flat;
-            Meta.Location = new Point(889, 12);
+            Meta.Location = new Point(894, 27);
             Meta.Name = "Meta";
             Meta.Size = new Size(127, 32);
             Meta.TabIndex = 223;
@@ -1777,7 +1764,7 @@
             ShowAll.BackgroundImageLayout = ImageLayout.Center;
             ShowAll.Cursor = Cursors.Cross;
             ShowAll.FlatStyle = FlatStyle.Flat;
-            ShowAll.Location = new Point(960, 50);
+            ShowAll.Location = new Point(965, 65);
             ShowAll.Name = "ShowAll";
             ShowAll.Size = new Size(127, 32);
             ShowAll.TabIndex = 226;
@@ -1895,11 +1882,24 @@
             button68.UseVisualStyleBackColor = true;
             button68.Click += button68_Click;
             // 
+            // button1
+            // 
+            button1.BackgroundImage = (Image)resources.GetObject("button1.BackgroundImage");
+            button1.BackgroundImageLayout = ImageLayout.Center;
+            button1.FlatStyle = FlatStyle.Flat;
+            button1.Location = new Point(1852, 989);
+            button1.Name = "button1";
+            button1.Size = new Size(40, 40);
+            button1.TabIndex = 236;
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
+            // 
             // Worldbosses
             // 
             AutoScaleMode = AutoScaleMode.None;
             AutoValidate = AutoValidate.EnablePreventFocusChange;
             ClientSize = new Size(1904, 1041);
+            Controls.Add(button1);
             Controls.Add(button68);
             Controls.Add(button65);
             Controls.Add(button63);
@@ -2042,7 +2042,6 @@
             Controls.Add(button5);
             Controls.Add(button4);
             Controls.Add(button2);
-            Controls.Add(button1);
             Cursor = Cursors.Cross;
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Worldbosses";
@@ -2066,7 +2065,6 @@
         }
 
         #endregion
-        private Button button1;
         private Button button2;
         private Button button4;
         private Button button5;
@@ -2209,5 +2207,6 @@
         private Button button63;
         private Button button65;
         private Button button68;
+        private Button button1;
     }
 }

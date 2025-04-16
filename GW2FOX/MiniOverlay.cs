@@ -5,13 +5,14 @@ namespace GW2FOX
 {
     public partial class MiniOverlay : BaseForm
     {
-        private Worldbosses worldbossesForm;
+        private Worldbosses _worldbossesForm;
 
-        public MiniOverlay()
+        public MiniOverlay(Worldbosses worldbosses)
         {
             InitializeComponent();
             this.TopMost = true;
             this.Load += MiniOverlay_Load;
+            _worldbossesForm = worldbosses;
         }
 
         private void MiniOverlay_Load(object sender, EventArgs e)
@@ -27,17 +28,22 @@ namespace GW2FOX
 
         private void button1_Click(object sender, EventArgs e)
         {
-            // Verhindert mehrfaches Öffnen von Worldbosses
-            if (worldbossesForm == null || worldbossesForm.IsDisposed)
+            // Nur einblenden, wenn es ausgeblendet ist
+            if (_worldbossesForm != null && !_worldbossesForm.IsDisposed)
             {
-                worldbossesForm = new Worldbosses();
-                worldbossesForm.Show();
-            }
-            else
-            {
-                worldbossesForm.BringToFront();
-                worldbossesForm.Focus();
+                if (_worldbossesForm.Visible)
+                {
+                    _worldbossesForm.Hide(); // Ausblenden
+                }
+                else
+                {
+                    _worldbossesForm.Show(); // Einblenden
+                    _worldbossesForm.BringToFront(); // In den Vordergrund holen
+                    _worldbossesForm.Focus(); // Fokus setzen
+                }
             }
         }
+
     }
 }
+

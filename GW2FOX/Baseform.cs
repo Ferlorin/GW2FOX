@@ -67,11 +67,14 @@ namespace GW2FOX
             customBossList.Font = new Font("Segoe UI", 10, FontStyle.Bold);
         }
 
-        protected void ShowAndHideForm(Form newForm)
+        protected void ShowAndHideForm(Form newForm, bool hideCurrentForm = true)
         {
             newForm.Owner = this;
             newForm.Show();
-            this.Hide(); // Aktuelles Fenster ausblenden
+            if (hideCurrentForm)
+            {
+                this.Hide(); // Verstecke nur das aktuelle Formular, nicht immer das übergeordnete Formular
+            }
         }
 
         protected static void SaveTextToFile(string textToSave, string sectionHeader, bool hideMessages = false)
