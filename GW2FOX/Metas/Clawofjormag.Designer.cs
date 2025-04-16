@@ -386,6 +386,7 @@
             button10.Size = new Size(75, 23);
             button10.TabIndex = 133;
             button10.UseVisualStyleBackColor = true;
+            button10.Click += button10_Click;
             // 
             // pictureBox5
             // 

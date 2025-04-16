@@ -56,11 +56,16 @@
             pictureBox2 = new PictureBox();
             pictureBox5 = new PictureBox();
             button1 = new Button();
+            textBox1 = new TextBox();
+            pictureBox6 = new PictureBox();
+            button10 = new Button();
+            textBox2 = new TextBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox6).BeginInit();
             SuspendLayout();
             // 
             // button13
@@ -311,7 +316,8 @@
             // 
             // pictureBox4
             // 
-            pictureBox4.Image = Properties.Resources.Star_of_Dwayna;
+            pictureBox4.BackColor = Color.Magenta;
+            pictureBox4.Image = (Image)resources.GetObject("pictureBox4.Image");
             pictureBox4.Location = new Point(15, 104);
             pictureBox4.Name = "pictureBox4";
             pictureBox4.Size = new Size(64, 64);
@@ -379,11 +385,57 @@
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 
+            // textBox1
+            // 
+            textBox1.Font = new Font("Segoe UI", 9F);
+            textBox1.Location = new Point(560, 145);
+            textBox1.Multiline = true;
+            textBox1.Name = "textBox1";
+            textBox1.ReadOnly = true;
+            textBox1.Size = new Size(230, 23);
+            textBox1.TabIndex = 131;
+            // 
+            // pictureBox6
+            // 
+            pictureBox6.Image = (Image)resources.GetObject("pictureBox6.Image");
+            pictureBox6.Location = new Point(490, 104);
+            pictureBox6.Name = "pictureBox6";
+            pictureBox6.Size = new Size(64, 64);
+            pictureBox6.TabIndex = 130;
+            pictureBox6.TabStop = false;
+            // 
+            // button10
+            // 
+            button10.BackgroundImage = (Image)resources.GetObject("button10.BackgroundImage");
+            button10.BackgroundImageLayout = ImageLayout.Center;
+            button10.Cursor = Cursors.Cross;
+            button10.FlatStyle = FlatStyle.Flat;
+            button10.Location = new Point(490, 203);
+            button10.Name = "button10";
+            button10.Size = new Size(75, 23);
+            button10.TabIndex = 129;
+            button10.UseVisualStyleBackColor = true;
+            button10.Click += button10_Click;
+            // 
+            // textBox2
+            // 
+            textBox2.Font = new Font("Segoe UI", 9F);
+            textBox2.Location = new Point(490, 174);
+            textBox2.Multiline = true;
+            textBox2.Name = "textBox2";
+            textBox2.ReadOnly = true;
+            textBox2.Size = new Size(300, 23);
+            textBox2.TabIndex = 128;
+            // 
             // Dwayna
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1904, 1041);
+            Controls.Add(textBox1);
+            Controls.Add(pictureBox6);
+            Controls.Add(button10);
+            Controls.Add(textBox2);
             Controls.Add(button1);
             Controls.Add(pictureBox1);
             Controls.Add(pictureBox3);
@@ -420,6 +472,7 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox6).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -452,5 +505,9 @@
         private PictureBox pictureBox2;
         private PictureBox pictureBox5;
         private Button button1;
+        private TextBox textBox1;
+        private PictureBox pictureBox6;
+        private Button button10;
+        private TextBox textBox2;
     }
 }

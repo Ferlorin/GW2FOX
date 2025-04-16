@@ -50,10 +50,15 @@
             pictureBox2 = new PictureBox();
             pictureBox1 = new PictureBox();
             button6 = new Button();
+            Mawitemname = new TextBox();
+            button10 = new Button();
+            pictureBox5 = new PictureBox();
+            Mawitem = new TextBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
             SuspendLayout();
             // 
             // button1
@@ -292,18 +297,64 @@
             // 
             button6.BackgroundImage = (Image)resources.GetObject("button6.BackgroundImage");
             button6.FlatStyle = FlatStyle.Flat;
-            button6.Location = new Point(12, 12);
+            button6.Location = new Point(15, 12);
             button6.Name = "button6";
             button6.Size = new Size(80, 36);
             button6.TabIndex = 123;
             button6.UseVisualStyleBackColor = true;
             button6.Click += button6_Click;
             // 
+            // Mawitemname
+            // 
+            Mawitemname.Font = new Font("Segoe UI", 9F);
+            Mawitemname.Location = new Point(85, 145);
+            Mawitemname.Multiline = true;
+            Mawitemname.Name = "Mawitemname";
+            Mawitemname.ReadOnly = true;
+            Mawitemname.Size = new Size(280, 23);
+            Mawitemname.TabIndex = 134;
+            // 
+            // button10
+            // 
+            button10.BackgroundImage = (Image)resources.GetObject("button10.BackgroundImage");
+            button10.BackgroundImageLayout = ImageLayout.Center;
+            button10.Cursor = Cursors.Cross;
+            button10.FlatStyle = FlatStyle.Flat;
+            button10.Location = new Point(15, 203);
+            button10.Name = "button10";
+            button10.Size = new Size(75, 23);
+            button10.TabIndex = 133;
+            button10.UseVisualStyleBackColor = true;
+            button10.Click += button10_Click;
+            // 
+            // pictureBox5
+            // 
+            pictureBox5.Image = (Image)resources.GetObject("pictureBox5.Image");
+            pictureBox5.Location = new Point(15, 104);
+            pictureBox5.Name = "pictureBox5";
+            pictureBox5.Size = new Size(64, 64);
+            pictureBox5.TabIndex = 132;
+            pictureBox5.TabStop = false;
+            // 
+            // Mawitem
+            // 
+            Mawitem.Font = new Font("Segoe UI", 9F);
+            Mawitem.Location = new Point(15, 174);
+            Mawitem.Multiline = true;
+            Mawitem.Name = "Mawitem";
+            Mawitem.ReadOnly = true;
+            Mawitem.Size = new Size(350, 23);
+            Mawitem.TabIndex = 131;
+            // 
             // DredgeComissar
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1904, 1041);
+            Controls.Add(Mawitemname);
+            Controls.Add(button10);
+            Controls.Add(pictureBox5);
+            Controls.Add(Mawitem);
             Controls.Add(button6);
             Controls.Add(pictureBox4);
             Controls.Add(pictureBox3);
@@ -332,6 +383,7 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -359,5 +411,9 @@
         private PictureBox pictureBox2;
         private PictureBox pictureBox1;
         private Button button6;
+        private TextBox Mawitemname;
+        private Button button10;
+        private PictureBox pictureBox5;
+        private TextBox Mawitem;
     }
 }

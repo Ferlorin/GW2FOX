@@ -6,7 +6,7 @@ namespace GW2FOX
 {
     public partial class Dwayna : BaseForm
     {
-        private TextBox Dwaynaitem; // Keep this declaration
+        private TextBox Dwaynaitem;
 
         public Dwayna()
         {
@@ -14,30 +14,7 @@ namespace GW2FOX
             LoadConfigText(Runinfo, Squadinfo, Guild, Welcome, Symbols);
             // No need to re-create the TextBox here
             _ = LoadItemPriceInformation();
-        }
-
-        // Variable zur Speicherung des Ursprungs der Seite
-        private string originPage;
-
-        // Konstruktor, der den Ursprung der Seite als Parameter akzeptiert
-        public Dwayna(string origin) : this()
-        {
-            InitializeItemPriceTextBox();
-            _ = LoadItemPriceInformation();
-
-            // Setze den Ursprung der Seite
-            originPage = origin;
-        }
-
-        private void InitializeItemPriceTextBox()
-        {
-            // Remove this line since Itempriceexeofzhaitan is already declared in the designer.
-            // Itempriceexeofzhaitan = new TextBox(); 
-            Dwaynaitem.Text = "Item-Preis: Wird geladen...";
-            Dwaynaitem.AutoSize = true;
-            Dwaynaitem.ReadOnly = true;
-            Dwaynaitem.Location = new Point(/* Specify the X and Y coordinates */);
-            Controls.Add(Dwaynaitem);
+            _ = LoadItemPriceInformation2();
         }
 
 
@@ -90,6 +67,57 @@ namespace GW2FOX
             catch (Exception ex)
             {
                 throw new Exception($"Fehler beim Abrufen des Item-Preises: {ex.Message}");
+            }
+        }
+
+        private async Task LoadItemPriceInformation2()
+        {
+            try
+            {
+                using (HttpClient client = new HttpClient())
+                {
+                    string apiUrl = "https://api.guildwars2.com/v2/items/39479";
+                    string jsonResult = await client.GetStringAsync(apiUrl);
+
+                    JObject resultObject = JObject.Parse(jsonResult);
+
+                    // Extract the item name, chat link, and price
+                    string itemName = (string)resultObject["name"];
+                    string chatLink = (string)resultObject["chat_link"];
+                    int itemPriceCopper = await GetItemPriceCopper2();
+
+                    int gold = itemPriceCopper / 10000;
+                    int silver = (itemPriceCopper % 10000) / 100;
+                    int copper = itemPriceCopper % 100;
+
+                    // Update the existing "Dwaynaitem" TextBox text
+                    textBox2.Text = $"{chatLink}: Price: {gold} Gold, {silver} Silver, {copper} Copper";
+
+                    // Update the "Dwaynaitemname" TextBox text
+                    textBox1.Text = itemName;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Oh NO something went wrong: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+
+        private async Task<int> GetItemPriceCopper2()
+        {
+            try
+            {
+                using (HttpClient client = new HttpClient())
+                {
+                    string jsonResult = await client.GetStringAsync("https://api.guildwars2.com/v2/commerce/prices/39479");
+                    JObject resultObject = JObject.Parse(jsonResult);
+                    return (int)resultObject["sells"]["unit_price"];
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error: {ex.Message}");
             }
         }
 
@@ -196,6 +224,15 @@ namespace GW2FOX
             {
                 MessageBox.Show($"GREAT - you deleted the INTERNET!: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            // Copy the text from Leyline60 TextBox to the clipboard
+            Clipboard.SetText(textBox2.Text);
+
+            // Bring the Gw2-64.exe window to the foreground
+            BringGw2ToFront();
         }
     }
 }
