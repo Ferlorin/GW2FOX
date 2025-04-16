@@ -112,7 +112,7 @@ namespace GW2FOX
         {
             try
             {
-                string homepageUrl = https://wiki.guildwars2.com/wiki/Maws_of_Torment";
+                string homepageUrl = "https://wiki.guildwars2.com/wiki/Maws_of_Torment";
                 ProcessStartInfo psi = new ProcessStartInfo
                 {
                     FileName = homepageUrl,

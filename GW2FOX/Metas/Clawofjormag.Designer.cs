@@ -54,10 +54,15 @@
             pictureBox2 = new PictureBox();
             pictureBox1 = new PictureBox();
             button1 = new Button();
+            Mawitemname = new TextBox();
+            button10 = new Button();
+            pictureBox5 = new PictureBox();
+            Mawitem = new TextBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
             SuspendLayout();
             // 
             // button13
@@ -353,18 +358,63 @@
             // 
             button1.BackgroundImage = (Image)resources.GetObject("button1.BackgroundImage");
             button1.FlatStyle = FlatStyle.Flat;
-            button1.Location = new Point(12, 12);
+            button1.Location = new Point(15, 12);
             button1.Name = "button1";
             button1.Size = new Size(80, 36);
             button1.TabIndex = 124;
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 
+            // Mawitemname
+            // 
+            Mawitemname.Font = new Font("Segoe UI", 9F);
+            Mawitemname.Location = new Point(85, 145);
+            Mawitemname.Multiline = true;
+            Mawitemname.Name = "Mawitemname";
+            Mawitemname.ReadOnly = true;
+            Mawitemname.Size = new Size(280, 23);
+            Mawitemname.TabIndex = 134;
+            // 
+            // button10
+            // 
+            button10.BackgroundImage = (Image)resources.GetObject("button10.BackgroundImage");
+            button10.BackgroundImageLayout = ImageLayout.Center;
+            button10.Cursor = Cursors.Cross;
+            button10.FlatStyle = FlatStyle.Flat;
+            button10.Location = new Point(15, 203);
+            button10.Name = "button10";
+            button10.Size = new Size(75, 23);
+            button10.TabIndex = 133;
+            button10.UseVisualStyleBackColor = true;
+            // 
+            // pictureBox5
+            // 
+            pictureBox5.Image = (Image)resources.GetObject("pictureBox5.Image");
+            pictureBox5.Location = new Point(15, 104);
+            pictureBox5.Name = "pictureBox5";
+            pictureBox5.Size = new Size(64, 64);
+            pictureBox5.TabIndex = 132;
+            pictureBox5.TabStop = false;
+            // 
+            // Mawitem
+            // 
+            Mawitem.Font = new Font("Segoe UI", 9F);
+            Mawitem.Location = new Point(15, 174);
+            Mawitem.Multiline = true;
+            Mawitem.Name = "Mawitem";
+            Mawitem.ReadOnly = true;
+            Mawitem.Size = new Size(350, 23);
+            Mawitem.TabIndex = 131;
+            // 
             // Clawofjormag
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1904, 1041);
+            Controls.Add(Mawitemname);
+            Controls.Add(button10);
+            Controls.Add(pictureBox5);
+            Controls.Add(Mawitem);
             Controls.Add(button1);
             Controls.Add(pictureBox4);
             Controls.Add(pictureBox3);
@@ -398,6 +448,7 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -429,5 +480,9 @@
         private PictureBox pictureBox2;
         private PictureBox pictureBox1;
         private Button button1;
+        private TextBox Mawitemname;
+        private Button button10;
+        private PictureBox pictureBox5;
+        private TextBox Mawitem;
     }
 }

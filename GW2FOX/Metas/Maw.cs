@@ -16,18 +16,6 @@ namespace GW2FOX
             _ = LoadItemPriceInformation();
         }
 
-        private void InitializeItemPriceTextBox()
-        {
-            // Remove this line since Itempriceexeofzhaitan is already declared in the designer.
-            // Itempriceexeofzhaitan = new TextBox(); 
-            Mawitem.Text = "Item-Preis: Wird geladen...";
-            Mawitem.AutoSize = true;
-            Mawitem.ReadOnly = true;
-            Mawitem.Location = new Point(/* Specify the X and Y coordinates */);
-            Controls.Add(Mawitem);
-        }
-
-
 
         private async Task LoadItemPriceInformation()
         {

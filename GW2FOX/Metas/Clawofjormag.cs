@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using System.Runtime.InteropServices;
+using Newtonsoft.Json.Linq;
 
 namespace GW2FOX
 {
@@ -9,16 +10,58 @@ namespace GW2FOX
         {
             InitializeComponent();
             LoadConfigText(Runinfo, Squadinfo, Guild, Welcome, Symbols);
+            _ = LoadItemPriceInformation();
         }
-        // Variable zur Speicherung des Ursprungs der Seite
-        private string originPage;
 
-        // Konstruktor, der den Ursprung der Seite als Parameter akzeptiert
-        public Clawofjormag(string origin) : this()
+        private async Task LoadItemPriceInformation()
         {
-            // Setze den Ursprung der Seite
-            originPage = origin;
+            try
+            {
+                using (HttpClient client = new HttpClient())
+                {
+                    string apiUrl = "https://api.guildwars2.com/v2/items/67276";
+                    string jsonResult = await client.GetStringAsync(apiUrl);
+
+                    JObject resultObject = JObject.Parse(jsonResult);
+
+                    string itemName = (string)resultObject["name"];
+                    string chatLink = (string)resultObject["chat_link"];
+                    int itemPriceCopper = await GetItemPriceCopper();
+
+                    int gold = itemPriceCopper / 10000;
+                    int silver = (itemPriceCopper % 10000) / 100;
+                    int copper = itemPriceCopper % 100;
+
+                    // Update the existing "Itempriceexeofzhaitan" TextBox text
+                    Mawitemname.Text = $"{itemName}";
+
+                    Mawitem.Text = $"{chatLink}, Price: {gold} Gold, {silver} Silver, {copper} Copper";
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Oh NO something went wrong: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
+
+        private async Task<int> GetItemPriceCopper()
+        {
+            try
+            {
+                using (HttpClient client = new HttpClient())
+                {
+                    string jsonResult = await client.GetStringAsync("https://api.guildwars2.com/v2/commerce/prices/67276");
+                    JObject resultObject = JObject.Parse(jsonResult);
+                    return (int)resultObject["sells"]["unit_price"];
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error: {ex.Message}");
+            }
+        }
+
 
 
         private void Back_Click(object sender, EventArgs e)
