@@ -32,7 +32,7 @@ namespace GW2FOX
             Opacity = 1;
 
             Width = 240;
-            Height = 310;
+            Height = 370;
             AutoScroll = true;
 
             listViewPanel.BackColor = Color.Transparent;
