@@ -78,11 +78,11 @@ namespace GW2FOX
             }
         }
 
-        
 
-        
 
-        
+
+
+
 
         private void Mawinfo_Click(object sender, EventArgs e)
         {
@@ -160,6 +160,24 @@ namespace GW2FOX
         {
             Owner.Show();
             Dispose();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string homepageUrl = "https://wiki.guildwars2.com/wiki/Kill_the_Svanir_shaman_chief_to_break_his_control_over_the_ice_elemental";
+                ProcessStartInfo psi = new ProcessStartInfo
+                {
+                    FileName = homepageUrl,
+                    UseShellExecute = true
+                };
+                Process.Start(psi);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"GREAT - you deleted the INTERNET!: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

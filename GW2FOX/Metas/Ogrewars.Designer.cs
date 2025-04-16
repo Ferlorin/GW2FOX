@@ -53,6 +53,7 @@
             pictureBox3 = new PictureBox();
             pictureBox2 = new PictureBox();
             pictureBox5 = new PictureBox();
+            button1 = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
@@ -260,7 +261,7 @@
             // Itemprice
             // 
             Itemprice.Font = new Font("Segoe UI", 9F);
-            Itemprice.Location = new Point(12, 78);
+            Itemprice.Location = new Point(14, 174);
             Itemprice.Multiline = true;
             Itemprice.Name = "Itemprice";
             Itemprice.ReadOnly = true;
@@ -273,7 +274,7 @@
             button6.BackgroundImageLayout = ImageLayout.Center;
             button6.Cursor = Cursors.Cross;
             button6.FlatStyle = FlatStyle.Flat;
-            button6.Location = new Point(13, 107);
+            button6.Location = new Point(15, 203);
             button6.Name = "button6";
             button6.Size = new Size(75, 23);
             button6.TabIndex = 119;
@@ -283,7 +284,7 @@
             // Samname
             // 
             Samname.Font = new Font("Segoe UI", 9F);
-            Samname.Location = new Point(78, 49);
+            Samname.Location = new Point(80, 145);
             Samname.Multiline = true;
             Samname.Name = "Samname";
             Samname.ReadOnly = true;
@@ -293,7 +294,7 @@
             // pictureBox4
             // 
             pictureBox4.Image = Properties.Resources.Sam;
-            pictureBox4.Location = new Point(12, 12);
+            pictureBox4.Location = new Point(14, 108);
             pictureBox4.Name = "pictureBox4";
             pictureBox4.Size = new Size(60, 60);
             pictureBox4.TabIndex = 121;
@@ -339,11 +340,23 @@
             pictureBox5.TabIndex = 122;
             pictureBox5.TabStop = false;
             // 
+            // button1
+            // 
+            button1.BackgroundImage = (Image)resources.GetObject("button1.BackgroundImage");
+            button1.FlatStyle = FlatStyle.Flat;
+            button1.Location = new Point(15, 12);
+            button1.Name = "button1";
+            button1.Size = new Size(80, 36);
+            button1.TabIndex = 126;
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
+            // 
             // Ogrewars
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1904, 1041);
+            Controls.Add(button1);
             Controls.Add(pictureBox1);
             Controls.Add(pictureBox3);
             Controls.Add(pictureBox2);
@@ -406,5 +419,6 @@
         private PictureBox pictureBox3;
         private PictureBox pictureBox2;
         private PictureBox pictureBox5;
+        private Button button1;
     }
 }

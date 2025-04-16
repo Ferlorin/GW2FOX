@@ -53,6 +53,7 @@
             pictureBox3 = new PictureBox();
             pictureBox2 = new PictureBox();
             pictureBox5 = new PictureBox();
+            button1 = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
@@ -260,7 +261,7 @@
             // Mawitem
             // 
             Mawitem.Font = new Font("Segoe UI", 9F);
-            Mawitem.Location = new Point(15, 82);
+            Mawitem.Location = new Point(15, 174);
             Mawitem.Multiline = true;
             Mawitem.Name = "Mawitem";
             Mawitem.ReadOnly = true;
@@ -270,7 +271,7 @@
             // pictureBox4
             // 
             pictureBox4.Image = Properties.Resources.Eternal_Ice__exotic_;
-            pictureBox4.Location = new Point(15, 12);
+            pictureBox4.Location = new Point(15, 104);
             pictureBox4.Name = "pictureBox4";
             pictureBox4.Size = new Size(64, 64);
             pictureBox4.TabIndex = 82;
@@ -282,7 +283,7 @@
             button6.BackgroundImageLayout = ImageLayout.Center;
             button6.Cursor = Cursors.Cross;
             button6.FlatStyle = FlatStyle.Flat;
-            button6.Location = new Point(15, 111);
+            button6.Location = new Point(15, 203);
             button6.Name = "button6";
             button6.Size = new Size(75, 23);
             button6.TabIndex = 83;
@@ -292,7 +293,7 @@
             // Mawitemname
             // 
             Mawitemname.Font = new Font("Segoe UI", 9F);
-            Mawitemname.Location = new Point(85, 53);
+            Mawitemname.Location = new Point(85, 145);
             Mawitemname.Multiline = true;
             Mawitemname.Name = "Mawitemname";
             Mawitemname.ReadOnly = true;
@@ -339,11 +340,23 @@
             pictureBox5.TabIndex = 85;
             pictureBox5.TabStop = false;
             // 
+            // button1
+            // 
+            button1.BackgroundImage = (Image)resources.GetObject("button1.BackgroundImage");
+            button1.FlatStyle = FlatStyle.Flat;
+            button1.Location = new Point(15, 12);
+            button1.Name = "button1";
+            button1.Size = new Size(80, 36);
+            button1.TabIndex = 130;
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
+            // 
             // Maw
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1904, 1041);
+            Controls.Add(button1);
             Controls.Add(pictureBox1);
             Controls.Add(pictureBox3);
             Controls.Add(pictureBox2);
@@ -406,5 +419,6 @@
         private PictureBox pictureBox3;
         private PictureBox pictureBox2;
         private PictureBox pictureBox5;
+        private Button button1;
     }
 }
