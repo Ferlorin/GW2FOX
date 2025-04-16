@@ -26,13 +26,7 @@ namespace GW2FOX
             SetBossListFromConfig_Bosses();
         }
 
-
-
-
-
-        // Constants for window handling
         const int SW_RESTORE = 9;
-
 
 
         private void Saverun_Click(object sender, EventArgs e)
@@ -288,31 +282,22 @@ namespace GW2FOX
 
 
         private void Maw_CheckedChanged(object sender, EventArgs e)
-        {
+       {
             // Der Name des Bosses
-            string[] bossNames = { "LLLA Timberline", "LLLA Iron Marches", "LLLA Gendarran ", "The frozen Maw" };
+            string bossName = "The frozen Maw";
 
-
-            // Setze den Trigger, um anzuzeigen, dass die Aktion vom Benutzer ausgelöst wurde
 
 
             if (Maw.Checked)
             {
                 // Wenn das Kontrollkästchen ausgewählt ist
-                foreach (string bossName in bossNames)
-                {
-                    SaveBossNameToConfig(bossName);
-                }
+                SaveBossNameToConfig(bossName);
             }
             else
             {
                 // Wenn das Kontrollkästchen nicht ausgewählt ist
-                foreach (string bossName in bossNames)
-                {
-                    RemoveBossNameFromConfig(bossName);
-                }
+                RemoveBossNameFromConfig(bossName);
             }
-
 
         }
 
@@ -1342,57 +1327,8 @@ namespace GW2FOX
         {
             try
             {
-
-                // Holen Sie die ausgewählten Bosses
-                // List<string> selectedBosses;
-                // try
-                // {
-                //     selectedBosses = GetSelectedBosses();
-                // }
-                // catch (Exception)
-                // {
-                //     selectedBosses = BossEventGroups.Select(group => group.BossName).ToList();
-                // }
-
-                // Erstellen Sie die Zeile für die "Bosses:"-Sektion
-                // string bossesLine = $"Bosses: \"{string.Join(", ", selectedBosses)}\"";
-
-                // Lesen Sie die bestehenden Zeilen aus der Datei
                 string[] existingLines = ReadConfigFile();
 
-                // Suchen Sie nach der Zeile mit der "Bosses:"-Sektion
-                // int bossesIndex = -1;
-                // for (int i = 0; i < existingLines.Length; i++)
-                // {
-                //     if (existingLines[i].StartsWith("Bosses:"))
-                //     {
-                //         bossesIndex = i;
-                //         break;
-                //     }
-                // }
-                //
-                // // Wenn die "Bosses:"-Sektion gefunden wurde, löschen Sie sie
-                // if (bossesIndex != -1)
-                // {
-                //     List<string> newLines = existingLines.ToList();
-                //
-                //     // Entfernen Sie die "Bosses:"-Sektion
-                //     newLines.RemoveAt(bossesIndex);
-                //
-                //     // Fügen Sie die aktualisierte "Bosses:"-Zeile hinzu
-                //     newLines.Insert(bossesIndex, bossesLine);
-                //
-                //     existingLines = newLines.ToArray();
-                // }
-                // else
-                // {
-                //     // Wenn die "Bosses:"-Sektion nicht gefunden wurde, fügen Sie sie einfach hinzu
-                //     List<string> newLines = existingLines.ToList();
-                //     newLines.Add(bossesLine);
-                //     existingLines = newLines.ToArray();
-                // }
-
-                // Schreiben Sie die aktualisierten Zeilen zurück in die Datei
                 File.WriteAllLines(GlobalVariables.FILE_PATH, lines);
 
                 UpdateBossUiBosses();
@@ -1468,16 +1404,13 @@ namespace GW2FOX
         {
             try
             {
-                // Vorhandenen Inhalt aus der Datei lesen
                 string[] lines = ReadConfigFile();
 
                 if (lines == null)
                 {
-                    // Fehler beim Lesen der Datei, abbrechen
                     return;
                 }
 
-                // Index der Zeile mit dem Bossnamen finden
                 int bossIndex = -1;
                 for (int i = 0; i < lines.Length; i++)
                 {
@@ -1488,20 +1421,16 @@ namespace GW2FOX
                     }
                 }
 
-                // Wenn der Bossname gefunden wird, die Bosses-Liste aktualisieren und in die Datei schreiben
                 if (bossIndex != -1 && bossIndex < lines.Length)
                 {
-                    // Extrahiere die Bosse aus der Zeile zwischen den Anführungszeichen
                     string bossLine = lines[bossIndex].Replace("Bosses:", "").Trim();
 
-                    // Entferne die äußeren Anführungszeichen und teile die Bosse
                     List<string> bossNames = bossLine
                         .Trim('"')  // Entferne äußere Anführungszeichen
                         .Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
                         .Select(name => name.Trim())
                         .ToList();  // Konvertiere in eine Liste
 
-                    // Entferne den zu löschenden Boss
                     bossNames.Remove(bossName);
 
                     // Erstelle eine neue Zeile für die Bosse
@@ -1527,8 +1456,6 @@ namespace GW2FOX
                 {
                     SaveTextToFile(GlobalVariables.DEFAULT_BOSSES, "Bosses");
                     SaveBossNameToConfig(bossName);
-                    // Wenn der Abschnitt "Bosses:" nicht gefunden wird, gibt es nichts zu entfernen
-                    // MessageBox.Show($"Bosses section not found in config.", "Not Found", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             catch (Exception ex)
@@ -1542,7 +1469,6 @@ namespace GW2FOX
         {
             try
             {
-                // Uncheck all existing checkboxes
                 UncheckAllBossCheckboxes();
 
                 // Read the config file
