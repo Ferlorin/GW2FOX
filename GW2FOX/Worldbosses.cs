@@ -282,7 +282,7 @@ namespace GW2FOX
 
 
         private void Maw_CheckedChanged(object sender, EventArgs e)
-       {
+        {
             // Der Name des Bosses
             string bossName = "The frozen Maw";
 
@@ -1347,11 +1347,8 @@ namespace GW2FOX
         {
             try
             {
-
-                // Check if the file exists
                 if (File.Exists(GlobalVariables.FILE_PATH))
                 {
-                    // Read all lines from the file
                     return File.ReadAllLines(GlobalVariables.FILE_PATH);
                 }
                 else
@@ -1375,20 +1372,15 @@ namespace GW2FOX
                     }
                     catch (Exception ex)
                     {
-                        // Log or handle the exception, but don't call ReadConfigFile recursively
                         Console.WriteLine($"Error creating config file: {ex.Message}");
-                        throw; // Re-throw the exception to prevent infinite recursion
+                        throw;
                     }
-                    // Log or handle the case where the file is not found
-                    Console.WriteLine($"Config file does not exist.");
-                    throw new FileNotFoundException("Config file not found.");
                 }
             }
             catch (Exception ex)
             {
-                // Log or handle the exception, but don't call ReadConfigFile recursively
                 Console.WriteLine($"Error reading from config file: {ex.Message}");
-                throw; // Re-throw the exception to prevent infinite recursion
+                throw;
             }
         }
 
@@ -1416,7 +1408,7 @@ namespace GW2FOX
                 {
                     if (lines[i].StartsWith("Bosses:"))
                     {
-                        bossIndex = i; // Die aktuelle Zeile enthält den Namen
+                        bossIndex = i;
                         break;
                     }
                 }
@@ -1426,22 +1418,16 @@ namespace GW2FOX
                     string bossLine = lines[bossIndex].Replace("Bosses:", "").Trim();
 
                     List<string> bossNames = bossLine
-                        .Trim('"')  // Entferne äußere Anführungszeichen
+                        .Trim('"')
                         .Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
                         .Select(name => name.Trim())
-                        .ToList();  // Konvertiere in eine Liste
+                        .ToList();
 
                     bossNames.Remove(bossName);
 
-                    // Erstelle eine neue Zeile für die Bosse
                     lines[bossIndex] = $"Bosses: \"{string.Join(", ", bossNames)}\"";
-
-                    // Aktualisierten Inhalt zurück in die Datei schreiben
-                    // BossEventGroups.RemoveAll(x => x.BossName == bossName);
                     WriteConfigFile(lines);
 
-
-                    // Setze das Häkchen im CheckBox-Control
                     CheckBox bossCheckBox = FindCheckBoxByBossName(bossName);
                     if (bossCheckBox != null)
                     {
@@ -1465,16 +1451,13 @@ namespace GW2FOX
         }
 
 
-        private void Meta_Click(object sender, EventArgs e)
+        private void Meta_Click_1(object sender, EventArgs e)
         {
             try
             {
-                UncheckAllBossCheckboxes();
-
-                // Read the config file
+                ClearAll_Click(null, EventArgs.Empty);
                 string[] lines = ReadConfigFile();
 
-                // Index of the line with the Meta bosses
                 int metaIndex = -1;
                 for (int i = 0; i < lines.Length; i++)
                 {
@@ -1485,31 +1468,23 @@ namespace GW2FOX
                     }
                 }
 
-                // If Meta section is found, extract and check the checkboxes for Meta bosses
                 if (metaIndex != -1 && metaIndex < lines.Length)
                 {
-                    // Extract the bosses from the Meta line
                     string metaBossLine = lines[metaIndex].Replace("Meta:", "").Trim();
 
-                    // Remove the outer quotes and split the bosses
                     string[] metaBosses = metaBossLine
                         .Trim('"')
                         .Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
                         .Select(boss => boss.Trim())
                         .ToArray();
-
-                    // Check the corresponding checkboxes for Meta bosses
                     CheckBossCheckboxes(metaBosses);
-
-                    // Update the "Bosses:" section in the configuration file
                     UpdateBossesSection(metaBosses, lines);
 
                 }
                 else
                 {
                     SaveTextToFile(GlobalVariables.DEFAULT_META, "Meta");
-                    Meta_Click(sender, e);
-                    // MessageBox.Show($"Meta section not found in config.", "Not Found", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Meta_Click_1(sender, e);
                 }
             }
             catch (Exception ex)
@@ -1520,7 +1495,6 @@ namespace GW2FOX
 
         private void UpdateBossesSection(string[] metaBosses, string[] lines)
         {
-            // Find the index of the "Bosses:" section
             int bossesIndex = -1;
             for (int i = 0; i < lines.Length; i++)
             {
@@ -1530,55 +1504,12 @@ namespace GW2FOX
                     break;
                 }
             }
-
-            // If "Bosses:" section is found, update it with the Meta bosses
+            
             if (bossesIndex != -1 && bossesIndex < lines.Length)
             {
-                // Join the Meta bosses and update the "Bosses:" section
                 lines[bossesIndex] = $"Bosses: \"{string.Join(", ", metaBosses)}\"";
             }
 
-        }
-
-
-
-        public static void UncheckAllBossCheckboxes()
-        {
-            try
-            {
-                // Uncheck all checkboxes in the UI
-                foreach (CheckBox checkBox in bossCheckBoxMap.Values)
-                {
-                    checkBox.Checked = false;
-                    checkBox.Invalidate();
-                }
-
-                // Remove all bosses from the "Bosses:" section in the config file
-                string[] lines = ReadConfigFile();
-
-                int bossIndex = -1;
-                for (int i = 0; i < lines.Length; i++)
-                {
-                    if (lines[i].StartsWith("Bosses:"))
-                    {
-                        bossIndex = i;
-                        break;
-                    }
-                }
-
-                if (bossIndex != -1 && bossIndex < lines.Length)
-                {
-                    // Remove the "Bosses:" section from the array
-                    // lines = lines.Take(bossIndex).Concat(lines.SkipWhile(line => line.StartsWith("Bosses:")).Skip(1)).ToArray();
-                    lines[bossIndex] = "Bosses: ";
-                    // Save the modified configuration back to the file
-                    WriteConfigFile(lines);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error unchecking all bosses: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
         }
 
 
@@ -1587,14 +1518,12 @@ namespace GW2FOX
         {
             try
             {
-                // Uncheck all checkboxes in the UI
                 foreach (CheckBox checkBox in bossCheckBoxMap.Values)
                 {
                     checkBox.Checked = true;
                     checkBox.Invalidate();
                 }
 
-                // Remove all bosses from the "Bosses:" section in the config file
                 string[] lines = ReadConfigFile();
 
                 int bossIndex = -1;
@@ -1609,10 +1538,7 @@ namespace GW2FOX
 
                 if (bossIndex != -1 && bossIndex < lines.Length)
                 {
-                    // Remove the "Bosses:" section from the array
-                    // lines = lines.Take(bossIndex).Concat(lines.SkipWhile(line => line.StartsWith("Bosses:")).Skip(1)).ToArray();
                     lines[bossIndex] = $"Bosses: \"{string.Join(", ", BossEventGroups.Select(group => group.BossName).ToList())}\"";
-                    // Save the modified configuration back to the file
                     WriteConfigFile(lines);
                 }
             }
@@ -1636,10 +1562,8 @@ namespace GW2FOX
         }
 
 
-
         private void UpdateBossesSection1(string[] metaBosses, string[] lines)
         {
-            // Find the index of the "Bosses:" section
             int bossesIndex = -1;
             for (int i = 0; i < lines.Length; i++)
             {
@@ -1650,10 +1574,8 @@ namespace GW2FOX
                 }
             }
 
-            // If "Bosses:" section is found, update it with the Meta bosses
             if (bossesIndex != -1 && bossesIndex < lines.Length)
             {
-                // Join the Meta bosses and update the "Bosses:" section
                 lines[bossesIndex] = $"Bosses: \"{string.Join(", ", metaBosses)}\"";
             }
         }
@@ -1662,13 +1584,9 @@ namespace GW2FOX
         {
             try
             {
-                // Uncheck all existing checkboxes
                 CheckAllBossCheckboxes();
-
-                // Read the config file
                 string[] lines = ReadConfigFile();
 
-                // Index of the line with the World bosses
                 int bossIndex = -1;
                 for (int i = 0; i < lines.Length; i++)
                 {
@@ -1679,84 +1597,24 @@ namespace GW2FOX
                     }
                 }
 
-                // If World section is found, extract and check the checkboxes for World bosses
                 if (bossIndex != -1 && bossIndex < lines.Length)
                 {
-                    // Extract the bosses from the World line
                     string bossesLine = lines[bossIndex].Replace("Bosses:", "").Trim();
 
-                    // Remove the outer quotes and split the bosses
                     string[] worldBosses = bossesLine
                         .Trim('"')
                         .Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
                         .Select(boss => boss.Trim())
                         .ToArray();
 
-                    // Check the corresponding checkboxes for World bosses
                     CheckBossCheckboxes(worldBosses);
-
-                    // Update the "Bosses:" section in the configuration file
                     UpdateBossesSection1(worldBosses, lines);
                 }
                 else
                 {
-                    //This will create a new section
                     SaveTextToFile(GlobalVariables.DEFAULT_BOSSES, "Bosses");
                     World_Click(sender, e);
-                    // MessageBox.Show($"World section not found in config.", "Not Found", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error loading World bosses: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-        private void World_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                // Uncheck all existing checkboxes
-                UncheckAllBossCheckboxes();
-
-                // Read the config file
-                string[] lines = ReadConfigFile();
-
-                // Index of the line with the World bosses
-                int worldIndex = -1;
-                for (int i = 0; i < lines.Length; i++)
-                {
-                    if (lines[i].StartsWith("World:"))
-                    {
-                        worldIndex = i;
-                        break;
-                    }
-                }
-
-                // If World section is found, extract and check the checkboxes for World bosses
-                if (worldIndex != -1 && worldIndex < lines.Length)
-                {
-                    // Extract the bosses from the World line
-                    string worldBossLine = lines[worldIndex].Replace("World:", "").Trim();
-
-                    // Remove the outer quotes and split the bosses
-                    string[] worldBosses = worldBossLine
-                        .Trim('"')
-                        .Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
-                        .Select(boss => boss.Trim())
-                        .ToArray();
-
-                    // Check the corresponding checkboxes for World bosses
-                    CheckBossCheckboxes(worldBosses);
-
-                    // Update the "Bosses:" section in the configuration file
-                    UpdateBossesSection1(worldBosses, lines);
-                }
-                else
-                {
-                    //This will create a new section
-                    SaveTextToFile(GlobalVariables.DEFAULT_WORLD, "World");
-                    World_Click(sender, e);
-                    // MessageBox.Show($"World section not found in config.", "Not Found", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show($"World section not found in config.", "Not Found", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             catch (Exception ex)
@@ -1766,22 +1624,16 @@ namespace GW2FOX
         }
 
 
-        private void ClearAll_Click(object sender, EventArgs e)
-        {
-            UncheckAllBossCheckboxes();
-        }
 
-        private void Mixed_Click(object sender, EventArgs e)
+        private void Mixed_Click_1(object sender, EventArgs e)
         {
             try
             {
-                // Uncheck all existing checkboxes
-                UncheckAllBossCheckboxes();
+                ClearAll_Click(null, EventArgs.Empty);
 
-                // Read the config file
+
                 string[] lines = ReadConfigFile();
 
-                // Index of the line with the Mixed bosses
                 int mixedIndex = -1;
                 for (int i = 0; i < lines.Length; i++)
                 {
@@ -1792,30 +1644,23 @@ namespace GW2FOX
                     }
                 }
 
-                // If Mixed section is found, extract and check the checkboxes for Mixed bosses
                 if (mixedIndex != -1 && mixedIndex < lines.Length)
                 {
-                    // Extract the bosses from the Mixed line
                     string mixedBossLine = lines[mixedIndex].Replace("Mixed:", "").Trim();
 
-                    // Remove the outer quotes and split the bosses
                     string[] mixedBosses = mixedBossLine
                         .Trim('"')
                         .Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
                         .Select(boss => boss.Trim())
                         .ToArray();
 
-                    // Check the corresponding checkboxes for Mixed bosses
                     CheckBossCheckboxes(mixedBosses);
-
-                    // Update the "Bosses:" section in the configuration file
                     UpdateBossesSection2(mixedBosses, lines);
                 }
                 else
                 {
                     SaveTextToFile(GlobalVariables.DEFAULT_MIXED, "Mixed");
-                    Mixed_Click(sender, e);
-                    // MessageBox.Show($"Mixed section not found in config.", "Not Found", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Mixed_Click_1(sender, e);
                 }
             }
             catch (Exception ex)
@@ -1827,7 +1672,6 @@ namespace GW2FOX
 
         private void UpdateBossesSection2(string[] mixedBosses, string[] lines)
         {
-            // Find the index of the "Mixed:" section
             int mixedIndex = -1;
             for (int i = 0; i < lines.Length; i++)
             {
@@ -1838,10 +1682,8 @@ namespace GW2FOX
                 }
             }
 
-            // If "Mixed:" section is found, update it with the Mixed bosses
             if (mixedIndex != -1 && mixedIndex < lines.Length)
             {
-                // Join the Mixed bosses and update the "Mixed:" section
                 lines[mixedIndex] = $"Bosses: \"{string.Join(", ", mixedBosses)}\"";
             }
         }
@@ -1860,31 +1702,25 @@ namespace GW2FOX
         {
             try
             {
-                // Lese die Bosse aus der Konfigurationsdatei
                 string[] lines = ReadConfigFile();
 
                 if (lines == null)
                 {
-                    // Fehler beim Lesen der Datei, abbrechen
                     return;
                 }
 
-                // Suche nach dem Abschnitt "Bosses:"
                 int bossIndex = Array.FindIndex(lines, line => line.StartsWith("Bosses:"));
 
                 if (bossIndex != -1 && bossIndex < lines.Length)
                 {
-                    // Extrahiere die Bosse aus der Zeile zwischen den Anführungszeichen
                     string bossLine = lines[bossIndex].Replace("Bosses:", "").Trim();
 
-                    // Entferne die äußeren Anführungszeichen und teile die Bosse
                     List<string> bossNames = bossLine
                         .Trim('"')  // Entferne äußere Anführungszeichen
                         .Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
                         .Select(name => name.Trim())
                         .ToList();  // Konvertiere in eine Liste
 
-                    // Setze die Häkchen entsprechend der Bosse in der Liste
                     foreach (string bossName in bossNames)
                     {
                         CheckBox bossCheckBox = FindCheckBoxByBossName(bossName);
@@ -1905,7 +1741,6 @@ namespace GW2FOX
         private new void Timer_Click(object sender, EventArgs e)
         {
             BossTimerService.Timer_Click(sender, e);
-            // Additional logic specific to Timer_Click in Main class, if any
         }
 
 
@@ -2021,6 +1856,86 @@ namespace GW2FOX
         {
             ShowAndHideForm(new Convergences());
         }
+
+        private void World_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ClearAll_Click(null, EventArgs.Empty);
+
+
+                string[] lines = ReadConfigFile();
+
+                int worldIndex = -1;
+                for (int i = 0; i < lines.Length; i++)
+                {
+                    if (lines[i].StartsWith("World:"))
+                    {
+                        worldIndex = i;
+                        break;
+                    }
+                }
+
+                if (worldIndex != -1 && worldIndex < lines.Length)
+                {
+                    string worldBossLine = lines[worldIndex].Replace("World:", "").Trim();
+
+                    string[] worldBosses = worldBossLine
+                        .Trim('"')
+                        .Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+                        .Select(boss => boss.Trim())
+                        .ToArray();
+
+                    CheckBossCheckboxes(worldBosses);
+                    UpdateBossesSection1(worldBosses, lines);
+                }
+                else
+                {
+                    SaveTextToFile(GlobalVariables.DEFAULT_WORLD, "World");
+                    World_Click(sender, e);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error loading World bosses: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void ClearAll_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                foreach (CheckBox checkBox in bossCheckBoxMap.Values)
+                {
+                    checkBox.Checked = false;
+                    checkBox.Invalidate();
+                }
+
+                string[] lines = ReadConfigFile();
+
+                int bossIndex = -1;
+                for (int i = 0; i < lines.Length; i++)
+                {
+                    if (lines[i].StartsWith("Bosses:"))
+                    {
+                        bossIndex = i;
+                        break;
+                    }
+                }
+
+                if (bossIndex != -1 && bossIndex < lines.Length)
+                {
+                    lines[bossIndex] = "Bosses: ";
+                    WriteConfigFile(lines);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error unchecking all bosses: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        
     }
 
 

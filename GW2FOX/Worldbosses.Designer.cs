@@ -158,6 +158,10 @@
             pictureBox6 = new PictureBox();
             pictureBox5 = new PictureBox();
             pictureBox7 = new PictureBox();
+            World = new Button();
+            Mixed = new Button();
+            ClearAll = new Button();
+            Meta = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
@@ -409,7 +413,7 @@
             button21.BackgroundImageLayout = ImageLayout.Stretch;
             button21.Cursor = Cursors.Cross;
             button21.FlatStyle = FlatStyle.Flat;
-            button21.Location = new Point(986, 479);
+            button21.Location = new Point(986, 453);
             button21.Name = "button21";
             button21.Size = new Size(140, 35);
             button21.TabIndex = 28;
@@ -422,7 +426,7 @@
             button22.BackgroundImageLayout = ImageLayout.Stretch;
             button22.Cursor = Cursors.Cross;
             button22.FlatStyle = FlatStyle.Flat;
-            button22.Location = new Point(986, 375);
+            button22.Location = new Point(986, 371);
             button22.Name = "button22";
             button22.Size = new Size(140, 35);
             button22.TabIndex = 29;
@@ -487,7 +491,7 @@
             Concert.BackgroundImageLayout = ImageLayout.Stretch;
             Concert.Cursor = Cursors.Cross;
             Concert.FlatStyle = FlatStyle.Flat;
-            Concert.Location = new Point(986, 427);
+            Concert.Location = new Point(986, 412);
             Concert.Name = "Concert";
             Concert.Size = new Size(140, 35);
             Concert.TabIndex = 81;
@@ -500,7 +504,7 @@
             button32.BackgroundImageLayout = ImageLayout.Stretch;
             button32.Cursor = Cursors.Cross;
             button32.FlatStyle = FlatStyle.Flat;
-            button32.Location = new Point(780, 635);
+            button32.Location = new Point(781, 576);
             button32.Name = "button32";
             button32.Size = new Size(140, 35);
             button32.TabIndex = 96;
@@ -513,7 +517,7 @@
             button33.BackgroundImageLayout = ImageLayout.Stretch;
             button33.Cursor = Cursors.Cross;
             button33.FlatStyle = FlatStyle.Flat;
-            button33.Location = new Point(780, 583);
+            button33.Location = new Point(781, 535);
             button33.Name = "button33";
             button33.Size = new Size(140, 35);
             button33.TabIndex = 95;
@@ -526,7 +530,7 @@
             button34.BackgroundImageLayout = ImageLayout.Stretch;
             button34.Cursor = Cursors.Cross;
             button34.FlatStyle = FlatStyle.Flat;
-            button34.Location = new Point(780, 531);
+            button34.Location = new Point(781, 494);
             button34.Name = "button34";
             button34.Size = new Size(140, 35);
             button34.TabIndex = 94;
@@ -539,7 +543,7 @@
             button35.BackgroundImageLayout = ImageLayout.Stretch;
             button35.Cursor = Cursors.Cross;
             button35.FlatStyle = FlatStyle.Flat;
-            button35.Location = new Point(780, 479);
+            button35.Location = new Point(780, 453);
             button35.Name = "button35";
             button35.Size = new Size(140, 35);
             button35.TabIndex = 93;
@@ -552,7 +556,7 @@
             button36.BackgroundImageLayout = ImageLayout.Stretch;
             button36.Cursor = Cursors.Cross;
             button36.FlatStyle = FlatStyle.Flat;
-            button36.Location = new Point(780, 427);
+            button36.Location = new Point(780, 412);
             button36.Name = "button36";
             button36.Size = new Size(140, 35);
             button36.TabIndex = 92;
@@ -565,7 +569,7 @@
             button37.BackgroundImageLayout = ImageLayout.Stretch;
             button37.Cursor = Cursors.Cross;
             button37.FlatStyle = FlatStyle.Flat;
-            button37.Location = new Point(780, 375);
+            button37.Location = new Point(780, 371);
             button37.Name = "button37";
             button37.Size = new Size(140, 35);
             button37.TabIndex = 91;
@@ -629,7 +633,7 @@
             button41.BackgroundImageLayout = ImageLayout.Stretch;
             button41.Cursor = Cursors.Cross;
             button41.FlatStyle = FlatStyle.Flat;
-            button41.Location = new Point(780, 687);
+            button41.Location = new Point(781, 617);
             button41.Name = "button41";
             button41.Size = new Size(140, 35);
             button41.TabIndex = 102;
@@ -655,7 +659,7 @@
             button43.BackgroundImageLayout = ImageLayout.Stretch;
             button43.Cursor = Cursors.Cross;
             button43.FlatStyle = FlatStyle.Flat;
-            button43.Location = new Point(780, 739);
+            button43.Location = new Point(781, 658);
             button43.Name = "button43";
             button43.Size = new Size(140, 35);
             button43.TabIndex = 104;
@@ -668,7 +672,7 @@
             button44.BackgroundImageLayout = ImageLayout.Stretch;
             button44.Cursor = Cursors.Cross;
             button44.FlatStyle = FlatStyle.Flat;
-            button44.Location = new Point(780, 791);
+            button44.Location = new Point(780, 699);
             button44.Name = "button44";
             button44.Size = new Size(140, 35);
             button44.TabIndex = 105;
@@ -682,7 +686,7 @@
             button45.BackgroundImageLayout = ImageLayout.Stretch;
             button45.Cursor = Cursors.Cross;
             button45.FlatStyle = FlatStyle.Flat;
-            button45.Location = new Point(1197, 375);
+            button45.Location = new Point(1197, 371);
             button45.Name = "button45";
             button45.Size = new Size(140, 35);
             button45.TabIndex = 106;
@@ -696,7 +700,7 @@
             button46.BackgroundImageLayout = ImageLayout.Stretch;
             button46.Cursor = Cursors.Cross;
             button46.FlatStyle = FlatStyle.Flat;
-            button46.Location = new Point(1197, 427);
+            button46.Location = new Point(1197, 412);
             button46.Name = "button46";
             button46.Size = new Size(140, 35);
             button46.TabIndex = 107;
@@ -710,7 +714,7 @@
             button47.BackgroundImageLayout = ImageLayout.Stretch;
             button47.Cursor = Cursors.Cross;
             button47.FlatStyle = FlatStyle.Flat;
-            button47.Location = new Point(1197, 479);
+            button47.Location = new Point(1197, 453);
             button47.Name = "button47";
             button47.Size = new Size(140, 35);
             button47.TabIndex = 108;
@@ -724,7 +728,7 @@
             button48.BackgroundImageLayout = ImageLayout.Stretch;
             button48.Cursor = Cursors.Cross;
             button48.FlatStyle = FlatStyle.Flat;
-            button48.Location = new Point(1197, 531);
+            button48.Location = new Point(1197, 494);
             button48.Name = "button48";
             button48.Size = new Size(140, 35);
             button48.TabIndex = 109;
@@ -738,7 +742,7 @@
             button49.BackgroundImageLayout = ImageLayout.Stretch;
             button49.Cursor = Cursors.Cross;
             button49.FlatStyle = FlatStyle.Flat;
-            button49.Location = new Point(780, 843);
+            button49.Location = new Point(780, 740);
             button49.Name = "button49";
             button49.Size = new Size(140, 35);
             button49.TabIndex = 110;
@@ -752,7 +756,7 @@
             button50.BackgroundImageLayout = ImageLayout.Stretch;
             button50.Cursor = Cursors.Cross;
             button50.FlatStyle = FlatStyle.Flat;
-            button50.Location = new Point(780, 895);
+            button50.Location = new Point(780, 781);
             button50.Name = "button50";
             button50.Size = new Size(140, 35);
             button50.TabIndex = 111;
@@ -766,7 +770,7 @@
             button51.BackgroundImageLayout = ImageLayout.Stretch;
             button51.Cursor = Cursors.Cross;
             button51.FlatStyle = FlatStyle.Flat;
-            button51.Location = new Point(986, 531);
+            button51.Location = new Point(986, 494);
             button51.Name = "button51";
             button51.Size = new Size(140, 35);
             button51.TabIndex = 112;
@@ -780,7 +784,7 @@
             button52.BackgroundImageLayout = ImageLayout.Stretch;
             button52.Cursor = Cursors.Cross;
             button52.FlatStyle = FlatStyle.Flat;
-            button52.Location = new Point(986, 583);
+            button52.Location = new Point(986, 535);
             button52.Name = "button52";
             button52.Size = new Size(140, 35);
             button52.TabIndex = 113;
@@ -794,7 +798,7 @@
             button53.BackgroundImageLayout = ImageLayout.Stretch;
             button53.Cursor = Cursors.Cross;
             button53.FlatStyle = FlatStyle.Flat;
-            button53.Location = new Point(986, 635);
+            button53.Location = new Point(986, 576);
             button53.Name = "button53";
             button53.Size = new Size(140, 35);
             button53.TabIndex = 114;
@@ -808,7 +812,7 @@
             button54.BackgroundImageLayout = ImageLayout.Stretch;
             button54.Cursor = Cursors.Cross;
             button54.FlatStyle = FlatStyle.Flat;
-            button54.Location = new Point(986, 687);
+            button54.Location = new Point(986, 617);
             button54.Name = "button54";
             button54.Size = new Size(140, 35);
             button54.TabIndex = 115;
@@ -822,7 +826,7 @@
             button55.BackgroundImageLayout = ImageLayout.Stretch;
             button55.Cursor = Cursors.Cross;
             button55.FlatStyle = FlatStyle.Flat;
-            button55.Location = new Point(986, 739);
+            button55.Location = new Point(986, 658);
             button55.Name = "button55";
             button55.Size = new Size(140, 35);
             button55.TabIndex = 116;
@@ -836,7 +840,7 @@
             button56.BackgroundImageLayout = ImageLayout.Stretch;
             button56.Cursor = Cursors.Cross;
             button56.FlatStyle = FlatStyle.Flat;
-            button56.Location = new Point(1406, 375);
+            button56.Location = new Point(1406, 371);
             button56.Name = "button56";
             button56.Size = new Size(140, 35);
             button56.TabIndex = 117;
@@ -850,7 +854,7 @@
             button57.BackgroundImageLayout = ImageLayout.Stretch;
             button57.Cursor = Cursors.Cross;
             button57.FlatStyle = FlatStyle.Flat;
-            button57.Location = new Point(1406, 427);
+            button57.Location = new Point(1406, 412);
             button57.Name = "button57";
             button57.Size = new Size(140, 35);
             button57.TabIndex = 118;
@@ -864,7 +868,7 @@
             button58.BackgroundImageLayout = ImageLayout.Stretch;
             button58.Cursor = Cursors.Cross;
             button58.FlatStyle = FlatStyle.Flat;
-            button58.Location = new Point(1406, 479);
+            button58.Location = new Point(1406, 453);
             button58.Name = "button58";
             button58.Size = new Size(140, 35);
             button58.TabIndex = 119;
@@ -878,7 +882,7 @@
             button59.BackgroundImageLayout = ImageLayout.Stretch;
             button59.Cursor = Cursors.Cross;
             button59.FlatStyle = FlatStyle.Flat;
-            button59.Location = new Point(1406, 531);
+            button59.Location = new Point(1406, 494);
             button59.Name = "button59";
             button59.Size = new Size(140, 35);
             button59.TabIndex = 120;
@@ -948,7 +952,7 @@
             button64.BackgroundImageLayout = ImageLayout.Stretch;
             button64.Cursor = Cursors.Cross;
             button64.FlatStyle = FlatStyle.Flat;
-            button64.Location = new Point(1406, 583);
+            button64.Location = new Point(1406, 535);
             button64.Name = "button64";
             button64.Size = new Size(140, 35);
             button64.TabIndex = 125;
@@ -1020,7 +1024,7 @@
             JungleWurm.AutoSize = true;
             JungleWurm.BackColor = Color.Magenta;
             JungleWurm.ForeColor = Color.Magenta;
-            JungleWurm.Location = new Point(132, 507);
+            JungleWurm.Location = new Point(132, 505);
             JungleWurm.Name = "JungleWurm";
             JungleWurm.Size = new Size(15, 14);
             JungleWurm.TabIndex = 131;
@@ -1147,7 +1151,7 @@
             // 
             MawsOfTorment.AutoSize = true;
             MawsOfTorment.BackColor = Color.Magenta;
-            MawsOfTorment.Location = new Point(757, 860);
+            MawsOfTorment.Location = new Point(760, 750);
             MawsOfTorment.Name = "MawsOfTorment";
             MawsOfTorment.Size = new Size(15, 14);
             MawsOfTorment.TabIndex = 158;
@@ -1158,7 +1162,7 @@
             // 
             Oil.AutoSize = true;
             Oil.BackColor = Color.Magenta;
-            Oil.Location = new Point(757, 912);
+            Oil.Location = new Point(760, 791);
             Oil.Name = "Oil";
             Oil.Size = new Size(15, 14);
             Oil.TabIndex = 157;
@@ -1169,7 +1173,7 @@
             // 
             ThunderheadKeep.AutoSize = true;
             ThunderheadKeep.BackColor = Color.Magenta;
-            ThunderheadKeep.Location = new Point(757, 808);
+            ThunderheadKeep.Location = new Point(760, 712);
             ThunderheadKeep.Name = "ThunderheadKeep";
             ThunderheadKeep.Size = new Size(15, 14);
             ThunderheadKeep.TabIndex = 156;
@@ -1180,7 +1184,7 @@
             // 
             Junundu.AutoSize = true;
             Junundu.BackColor = Color.Magenta;
-            Junundu.Location = new Point(759, 444);
+            Junundu.Location = new Point(760, 423);
             Junundu.Name = "Junundu";
             Junundu.Size = new Size(15, 14);
             Junundu.TabIndex = 155;
@@ -1191,7 +1195,7 @@
             // 
             PTA.AutoSize = true;
             PTA.BackColor = Color.Magenta;
-            PTA.Location = new Point(759, 496);
+            PTA.Location = new Point(760, 464);
             PTA.Name = "PTA";
             PTA.Size = new Size(15, 14);
             PTA.TabIndex = 154;
@@ -1202,7 +1206,7 @@
             // 
             Doppelganger.AutoSize = true;
             Doppelganger.BackColor = Color.Magenta;
-            Doppelganger.Location = new Point(759, 548);
+            Doppelganger.Location = new Point(760, 505);
             Doppelganger.Name = "Doppelganger";
             Doppelganger.Size = new Size(15, 14);
             Doppelganger.TabIndex = 153;
@@ -1213,7 +1217,7 @@
             // 
             Doggies.AutoSize = true;
             Doggies.BackColor = Color.Magenta;
-            Doggies.Location = new Point(759, 600);
+            Doggies.Location = new Point(760, 548);
             Doggies.Name = "Doggies";
             Doggies.Size = new Size(15, 14);
             Doggies.TabIndex = 152;
@@ -1224,7 +1228,7 @@
             // 
             Pinata.AutoSize = true;
             Pinata.BackColor = Color.Magenta;
-            Pinata.Location = new Point(759, 652);
+            Pinata.Location = new Point(760, 587);
             Pinata.Name = "Pinata";
             Pinata.Size = new Size(15, 14);
             Pinata.TabIndex = 151;
@@ -1235,7 +1239,7 @@
             // 
             SerpentsIre.AutoSize = true;
             SerpentsIre.BackColor = Color.Magenta;
-            SerpentsIre.Location = new Point(759, 704);
+            SerpentsIre.Location = new Point(760, 628);
             SerpentsIre.Name = "SerpentsIre";
             SerpentsIre.Size = new Size(15, 14);
             SerpentsIre.TabIndex = 150;
@@ -1246,7 +1250,7 @@
             // 
             Palawadan.AutoSize = true;
             Palawadan.BackColor = Color.Magenta;
-            Palawadan.Location = new Point(759, 756);
+            Palawadan.Location = new Point(760, 671);
             Palawadan.Name = "Palawadan";
             Palawadan.Size = new Size(15, 14);
             Palawadan.TabIndex = 149;
@@ -1257,7 +1261,7 @@
             // 
             DBS.AutoSize = true;
             DBS.BackColor = Color.Magenta;
-            DBS.Location = new Point(759, 392);
+            DBS.Location = new Point(760, 382);
             DBS.Name = "DBS";
             DBS.Size = new Size(15, 14);
             DBS.TabIndex = 148;
@@ -1268,7 +1272,7 @@
             // 
             Metalconcert.AutoSize = true;
             Metalconcert.BackColor = Color.Magenta;
-            Metalconcert.Location = new Point(965, 444);
+            Metalconcert.Location = new Point(965, 423);
             Metalconcert.Name = "Metalconcert";
             Metalconcert.Size = new Size(15, 14);
             Metalconcert.TabIndex = 166;
@@ -1279,7 +1283,7 @@
             // 
             Dragonstorm.AutoSize = true;
             Dragonstorm.BackColor = Color.Magenta;
-            Dragonstorm.Location = new Point(965, 496);
+            Dragonstorm.Location = new Point(965, 464);
             Dragonstorm.Name = "Dragonstorm";
             Dragonstorm.Size = new Size(15, 14);
             Dragonstorm.TabIndex = 165;
@@ -1290,7 +1294,7 @@
             // 
             OozePits.AutoSize = true;
             OozePits.BackColor = Color.Magenta;
-            OozePits.Location = new Point(965, 548);
+            OozePits.Location = new Point(965, 505);
             OozePits.Name = "OozePits";
             OozePits.Size = new Size(15, 14);
             OozePits.TabIndex = 164;
@@ -1301,7 +1305,7 @@
             // 
             Effigy.AutoSize = true;
             Effigy.BackColor = Color.Magenta;
-            Effigy.Location = new Point(965, 600);
+            Effigy.Location = new Point(965, 548);
             Effigy.Name = "Effigy";
             Effigy.Size = new Size(15, 14);
             Effigy.TabIndex = 163;
@@ -1312,7 +1316,7 @@
             // 
             Doomlore.AutoSize = true;
             Doomlore.BackColor = Color.Magenta;
-            Doomlore.Location = new Point(965, 652);
+            Doomlore.Location = new Point(965, 587);
             Doomlore.Name = "Doomlore";
             Doomlore.Size = new Size(15, 14);
             Doomlore.TabIndex = 162;
@@ -1323,7 +1327,7 @@
             // 
             SormsOfWinter.AutoSize = true;
             SormsOfWinter.BackColor = Color.Magenta;
-            SormsOfWinter.Location = new Point(965, 704);
+            SormsOfWinter.Location = new Point(965, 628);
             SormsOfWinter.Name = "SormsOfWinter";
             SormsOfWinter.Size = new Size(15, 14);
             SormsOfWinter.TabIndex = 161;
@@ -1334,7 +1338,7 @@
             // 
             JorasKeep.AutoSize = true;
             JorasKeep.BackColor = Color.Magenta;
-            JorasKeep.Location = new Point(965, 756);
+            JorasKeep.Location = new Point(965, 671);
             JorasKeep.Name = "JorasKeep";
             JorasKeep.Size = new Size(15, 14);
             JorasKeep.TabIndex = 160;
@@ -1345,7 +1349,7 @@
             // 
             Drakkar.AutoSize = true;
             Drakkar.BackColor = Color.Magenta;
-            Drakkar.Location = new Point(965, 392);
+            Drakkar.Location = new Point(965, 382);
             Drakkar.Name = "Drakkar";
             Drakkar.Size = new Size(15, 14);
             Drakkar.TabIndex = 159;
@@ -1356,7 +1360,7 @@
             // 
             SaidrasHeaven.AutoSize = true;
             SaidrasHeaven.BackColor = Color.Magenta;
-            SaidrasHeaven.Location = new Point(1176, 444);
+            SaidrasHeaven.Location = new Point(1176, 423);
             SaidrasHeaven.Name = "SaidrasHeaven";
             SaidrasHeaven.Size = new Size(15, 14);
             SaidrasHeaven.TabIndex = 174;
@@ -1367,7 +1371,7 @@
             // 
             Loamhurst.AutoSize = true;
             Loamhurst.BackColor = Color.Magenta;
-            Loamhurst.Location = new Point(1176, 496);
+            Loamhurst.Location = new Point(1176, 464);
             Loamhurst.Name = "Loamhurst";
             Loamhurst.Size = new Size(15, 14);
             Loamhurst.TabIndex = 173;
@@ -1378,7 +1382,7 @@
             // 
             Homestead.AutoSize = true;
             Homestead.BackColor = Color.Magenta;
-            Homestead.Location = new Point(1176, 548);
+            Homestead.Location = new Point(1176, 505);
             Homestead.Name = "Homestead";
             Homestead.Size = new Size(15, 14);
             Homestead.TabIndex = 172;
@@ -1389,7 +1393,7 @@
             // 
             Sandstorm.AutoSize = true;
             Sandstorm.BackColor = Color.Magenta;
-            Sandstorm.Location = new Point(1176, 392);
+            Sandstorm.Location = new Point(1176, 382);
             Sandstorm.Name = "Sandstorm";
             Sandstorm.Size = new Size(15, 14);
             Sandstorm.TabIndex = 167;
@@ -1400,7 +1404,7 @@
             // 
             Blackout.AutoSize = true;
             Blackout.BackColor = Color.Magenta;
-            Blackout.Location = new Point(1385, 444);
+            Blackout.Location = new Point(1385, 423);
             Blackout.Name = "Blackout";
             Blackout.Size = new Size(15, 14);
             Blackout.TabIndex = 179;
@@ -1411,7 +1415,7 @@
             // 
             GangWar.AutoSize = true;
             GangWar.BackColor = Color.Magenta;
-            GangWar.Location = new Point(1385, 496);
+            GangWar.Location = new Point(1385, 464);
             GangWar.Name = "GangWar";
             GangWar.Size = new Size(15, 14);
             GangWar.TabIndex = 178;
@@ -1422,7 +1426,7 @@
             // 
             Aspenwood.AutoSize = true;
             Aspenwood.BackColor = Color.Magenta;
-            Aspenwood.Location = new Point(1385, 548);
+            Aspenwood.Location = new Point(1385, 505);
             Aspenwood.Name = "Aspenwood";
             Aspenwood.Size = new Size(15, 14);
             Aspenwood.TabIndex = 177;
@@ -1433,7 +1437,7 @@
             // 
             JadeSea.AutoSize = true;
             JadeSea.BackColor = Color.Magenta;
-            JadeSea.Location = new Point(1385, 600);
+            JadeSea.Location = new Point(1385, 548);
             JadeSea.Name = "JadeSea";
             JadeSea.Size = new Size(15, 14);
             JadeSea.TabIndex = 176;
@@ -1444,7 +1448,7 @@
             // 
             Atherblade.AutoSize = true;
             Atherblade.BackColor = Color.Magenta;
-            Atherblade.Location = new Point(1385, 392);
+            Atherblade.Location = new Point(1385, 382);
             Atherblade.Name = "Atherblade";
             Atherblade.Size = new Size(15, 14);
             Atherblade.TabIndex = 175;
@@ -1710,11 +1714,64 @@
             pictureBox7.TabIndex = 213;
             pictureBox7.TabStop = false;
             // 
+            // World
+            // 
+            World.BackgroundImage = (Image)resources.GetObject("World.BackgroundImage");
+            World.BackgroundImageLayout = ImageLayout.Center;
+            World.Cursor = Cursors.Cross;
+            World.FlatStyle = FlatStyle.Flat;
+            World.Location = new Point(756, 12);
+            World.Name = "World";
+            World.Size = new Size(127, 32);
+            World.TabIndex = 222;
+            World.UseVisualStyleBackColor = true;
+            World.Click += World_Click;
+            // 
+            // Mixed
+            // 
+            Mixed.BackgroundImage = (Image)resources.GetObject("Mixed.BackgroundImage");
+            Mixed.Cursor = Cursors.Cross;
+            Mixed.FlatStyle = FlatStyle.Flat;
+            Mixed.Location = new Point(1022, 12);
+            Mixed.Name = "Mixed";
+            Mixed.Size = new Size(127, 32);
+            Mixed.TabIndex = 225;
+            Mixed.UseVisualStyleBackColor = true;
+            Mixed.Click += Mixed_Click_1;
+            // 
+            // ClearAll
+            // 
+            ClearAll.BackgroundImage = (Image)resources.GetObject("ClearAll.BackgroundImage");
+            ClearAll.Cursor = Cursors.Cross;
+            ClearAll.FlatStyle = FlatStyle.Flat;
+            ClearAll.Location = new Point(889, 50);
+            ClearAll.Name = "ClearAll";
+            ClearAll.Size = new Size(127, 32);
+            ClearAll.TabIndex = 224;
+            ClearAll.UseVisualStyleBackColor = true;
+            ClearAll.Click += ClearAll_Click;
+            // 
+            // Meta
+            // 
+            Meta.BackgroundImage = (Image)resources.GetObject("Meta.BackgroundImage");
+            Meta.Cursor = Cursors.Cross;
+            Meta.FlatStyle = FlatStyle.Flat;
+            Meta.Location = new Point(889, 12);
+            Meta.Name = "Meta";
+            Meta.Size = new Size(127, 32);
+            Meta.TabIndex = 223;
+            Meta.UseVisualStyleBackColor = true;
+            Meta.Click += Meta_Click_1;
+            // 
             // Worldbosses
             // 
             AutoScaleMode = AutoScaleMode.None;
             AutoValidate = AutoValidate.EnablePreventFocusChange;
             ClientSize = new Size(1904, 1041);
+            Controls.Add(Mixed);
+            Controls.Add(ClearAll);
+            Controls.Add(Meta);
+            Controls.Add(World);
             Controls.Add(pictureBox12);
             Controls.Add(pictureBox11);
             Controls.Add(pictureBox10);
@@ -1996,5 +2053,9 @@
         private PictureBox pictureBox6;
         private PictureBox pictureBox5;
         private PictureBox pictureBox7;
+        private Button World;
+        private Button Mixed;
+        private Button ClearAll;
+        private Button Meta;
     }
 }
