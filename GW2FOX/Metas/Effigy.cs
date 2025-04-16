@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -61,10 +62,27 @@ namespace GW2FOX
 
         private void Back_Click_1(object sender, EventArgs e)
         {
-           
+
             Owner.Show();
             Dispose();
         }
-    
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string homepageUrl = "https://wiki.guildwars2.com/wiki/Ceremony_of_the_Sacred_Flame";
+                ProcessStartInfo psi = new ProcessStartInfo
+                {
+                    FileName = homepageUrl,
+                    UseShellExecute = true
+                };
+                Process.Start(psi);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"GREAT - you deleted the INTERNET!: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }

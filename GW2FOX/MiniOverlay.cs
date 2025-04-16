@@ -104,14 +104,14 @@ namespace GW2FOX
                 // Prüfen ob Update.exe existiert
                 if (!File.Exists(updaterPath))
                 {
-                    MessageBox.Show("Discord-Updater wurde nicht gefunden. Ist Discord installiert?", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Install Discord first!", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
                 // Falls keine Verknüpfung vorhanden ist, erstellen
                 if (!File.Exists(shortcutPath))
                 {
-                    CreateShortcut(shortcutPath, updaterPath, "--processStart \"Discord.exe\"", "Startet Discord über Updater");
+                    CreateShortcut(shortcutPath, updaterPath, "--processStart \"Discord.exe\"", "Start Discord");
                 }
 
                 // Verknüpfung starten
@@ -119,7 +119,7 @@ namespace GW2FOX
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Fehler beim Starten von Discord: {ex.Message}", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error starting Dissi: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

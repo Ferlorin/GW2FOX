@@ -55,6 +55,7 @@
             pictureBox3 = new PictureBox();
             pictureBox2 = new PictureBox();
             pictureBox5 = new PictureBox();
+            button6 = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
@@ -288,7 +289,7 @@
             // Itempriceexeofzhaitan
             // 
             Itempriceexeofzhaitan.Font = new Font("Segoe UI", 9F);
-            Itempriceexeofzhaitan.Location = new Point(11, 82);
+            Itempriceexeofzhaitan.Location = new Point(15, 174);
             Itempriceexeofzhaitan.Multiline = true;
             Itempriceexeofzhaitan.Name = "Itempriceexeofzhaitan";
             Itempriceexeofzhaitan.ReadOnly = true;
@@ -298,7 +299,7 @@
             // pictureBox4
             // 
             pictureBox4.Image = Properties.Resources.Pendant_of_Arah;
-            pictureBox4.Location = new Point(11, 12);
+            pictureBox4.Location = new Point(15, 104);
             pictureBox4.Name = "pictureBox4";
             pictureBox4.Size = new Size(64, 64);
             pictureBox4.TabIndex = 122;
@@ -310,7 +311,7 @@
             button10.BackgroundImageLayout = ImageLayout.Center;
             button10.Cursor = Cursors.Cross;
             button10.FlatStyle = FlatStyle.Flat;
-            button10.Location = new Point(11, 111);
+            button10.Location = new Point(15, 203);
             button10.Name = "button10";
             button10.Size = new Size(75, 23);
             button10.TabIndex = 123;
@@ -320,7 +321,7 @@
             // Eyeitemname
             // 
             Eyeitemname.Font = new Font("Segoe UI", 9F);
-            Eyeitemname.Location = new Point(81, 53);
+            Eyeitemname.Location = new Point(85, 145);
             Eyeitemname.Multiline = true;
             Eyeitemname.Name = "Eyeitemname";
             Eyeitemname.ReadOnly = true;
@@ -367,11 +368,23 @@
             pictureBox5.TabIndex = 125;
             pictureBox5.TabStop = false;
             // 
+            // button6
+            // 
+            button6.BackgroundImage = (Image)resources.GetObject("button6.BackgroundImage");
+            button6.FlatStyle = FlatStyle.Flat;
+            button6.Location = new Point(12, 12);
+            button6.Name = "button6";
+            button6.Size = new Size(80, 36);
+            button6.TabIndex = 129;
+            button6.UseVisualStyleBackColor = true;
+            button6.Click += button6_Click;
+            // 
             // Eye
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1904, 1041);
+            Controls.Add(button6);
             Controls.Add(pictureBox1);
             Controls.Add(pictureBox3);
             Controls.Add(pictureBox2);
@@ -438,5 +451,6 @@
         private PictureBox pictureBox3;
         private PictureBox pictureBox2;
         private PictureBox pictureBox5;
+        private Button button6;
     }
 }

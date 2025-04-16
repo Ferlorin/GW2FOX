@@ -97,5 +97,23 @@ namespace GW2FOX
             // Bring the Gw2-64.exe window to the foreground
             BringGw2ToFront();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string homepageUrl = "https://wiki.guildwars2.com/wiki/Destroy_the_fire_elemental_created_from_chaotic_energy_fusing_with_the_C.L.E.A.N._5000's_energy_core";
+                ProcessStartInfo psi = new ProcessStartInfo
+                {
+                    FileName = homepageUrl,
+                    UseShellExecute = true
+                };
+                Process.Start(psi);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"GREAT - you deleted the INTERNET!: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -64,6 +65,26 @@ namespace GW2FOX
         {
             Clipboard.SetText(Welcome.Text);
             BringGw2ToFront();
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        
+                {
+                    try
+                    {
+                        string homepageUrl = "https://wiki.guildwars2.com/wiki/Use_the_siege_turtles_to_destroy_the_shield_generators_as_you_fight_through_the_fort";
+                        ProcessStartInfo psi = new ProcessStartInfo
+                        {
+                            FileName = homepageUrl,
+                            UseShellExecute = true
+                        };
+                        Process.Start(psi);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"GREAT - you deleted the INTERNET!: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+             
+            }
         }
     }
 }

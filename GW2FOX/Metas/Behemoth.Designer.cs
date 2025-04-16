@@ -51,6 +51,7 @@
             pictureBox2 = new PictureBox();
             pictureBox3 = new PictureBox();
             pictureBox4 = new PictureBox();
+            button6 = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
@@ -315,12 +316,24 @@
             pictureBox4.TabIndex = 81;
             pictureBox4.TabStop = false;
             // 
+            // button6
+            // 
+            button6.BackgroundImage = (Image)resources.GetObject("button6.BackgroundImage");
+            button6.FlatStyle = FlatStyle.Flat;
+            button6.Location = new Point(15, 12);
+            button6.Name = "button6";
+            button6.Size = new Size(80, 36);
+            button6.TabIndex = 122;
+            button6.UseVisualStyleBackColor = true;
+            button6.Click += button6_Click;
+            // 
             // Behemoth
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImageLayout = ImageLayout.Center;
             ClientSize = new Size(1904, 1041);
+            Controls.Add(button6);
             Controls.Add(pictureBox4);
             Controls.Add(pictureBox3);
             Controls.Add(pictureBox2);
@@ -379,5 +392,6 @@
         private PictureBox pictureBox2;
         private PictureBox pictureBox3;
         private PictureBox pictureBox4;
+        private Button button6;
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -64,6 +65,24 @@ namespace GW2FOX
         {
             Owner.Show();
             Dispose();
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string homepageUrl = "https://wiki.guildwars2.com/wiki/The_Haunting_of_Doomlore_Shrine";
+                ProcessStartInfo psi = new ProcessStartInfo
+                {
+                    FileName = homepageUrl,
+                    UseShellExecute = true
+                };
+                Process.Start(psi);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"GREAT - you deleted the INTERNET!: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

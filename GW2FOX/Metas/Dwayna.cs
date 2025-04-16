@@ -180,5 +180,22 @@ namespace GW2FOX
             Dispose();
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string homepageUrl = "https://wiki.guildwars2.com/wiki/Defeat_the_Risen_Priestess_of_Dwayna";
+                ProcessStartInfo psi = new ProcessStartInfo
+                {
+                    FileName = homepageUrl,
+                    UseShellExecute = true
+                };
+                Process.Start(psi);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"GREAT - you deleted the INTERNET!: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }

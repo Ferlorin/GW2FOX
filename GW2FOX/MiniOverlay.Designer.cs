@@ -105,7 +105,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Magenta;
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(119, 24);
+            ClientSize = new Size(120, 25);
             ControlBox = false;
             Controls.Add(button4);
             Controls.Add(button3);

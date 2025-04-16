@@ -11,14 +11,6 @@ namespace GW2FOX
             LoadConfigText(Runinfo, Squadinfo, Guild, Welcome, Symbols);
         }
 
-        
-
-        
-
-        
-
-
-        
 
         private void Beheinfo_Click(object sender, EventArgs e)
         {
@@ -90,5 +82,22 @@ namespace GW2FOX
             Dispose();
         }
 
+        private void button6_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string homepageUrl = "https://wiki.guildwars2.com/wiki/Advancing_on_the_Blighting_Towers";
+                ProcessStartInfo psi = new ProcessStartInfo
+                {
+                    FileName = homepageUrl,
+                    UseShellExecute = true
+                };
+                Process.Start(psi);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"GREAT - you deleted the INTERNET!: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }
