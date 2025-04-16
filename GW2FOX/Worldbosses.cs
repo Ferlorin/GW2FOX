@@ -1504,7 +1504,7 @@ namespace GW2FOX
                     break;
                 }
             }
-            
+
             if (bossesIndex != -1 && bossesIndex < lines.Length)
             {
                 lines[bossesIndex] = $"Bosses: \"{string.Join(", ", metaBosses)}\"";
@@ -1577,49 +1577,6 @@ namespace GW2FOX
             if (bossesIndex != -1 && bossesIndex < lines.Length)
             {
                 lines[bossesIndex] = $"Bosses: \"{string.Join(", ", metaBosses)}\"";
-            }
-        }
-
-        private void All_click(object sender, EventArgs e)
-        {
-            try
-            {
-                CheckAllBossCheckboxes();
-                string[] lines = ReadConfigFile();
-
-                int bossIndex = -1;
-                for (int i = 0; i < lines.Length; i++)
-                {
-                    if (lines[i].StartsWith("Bosses:"))
-                    {
-                        bossIndex = i;
-                        break;
-                    }
-                }
-
-                if (bossIndex != -1 && bossIndex < lines.Length)
-                {
-                    string bossesLine = lines[bossIndex].Replace("Bosses:", "").Trim();
-
-                    string[] worldBosses = bossesLine
-                        .Trim('"')
-                        .Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
-                        .Select(boss => boss.Trim())
-                        .ToArray();
-
-                    CheckBossCheckboxes(worldBosses);
-                    UpdateBossesSection1(worldBosses, lines);
-                }
-                else
-                {
-                    SaveTextToFile(GlobalVariables.DEFAULT_BOSSES, "Bosses");
-                    World_Click(sender, e);
-                    MessageBox.Show($"World section not found in config.", "Not Found", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error loading World bosses: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -1935,7 +1892,77 @@ namespace GW2FOX
             }
         }
 
-        
+        private void ShowAll_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                CheckAllBossCheckboxes();
+                string[] lines = ReadConfigFile();
+
+                int bossIndex = -1;
+                for (int i = 0; i < lines.Length; i++)
+                {
+                    if (lines[i].StartsWith("Bosses:"))
+                    {
+                        bossIndex = i;
+                        break;
+                    }
+                }
+
+                if (bossIndex != -1 && bossIndex < lines.Length)
+                {
+                    string bossesLine = lines[bossIndex].Replace("Bosses:", "").Trim();
+
+                    string[] worldBosses = bossesLine
+                        .Trim('"')
+                        .Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+                        .Select(boss => boss.Trim())
+                        .ToArray();
+
+                    CheckBossCheckboxes(worldBosses);
+                    UpdateBossesSection1(worldBosses, lines);
+                }
+                else
+                {
+                    SaveTextToFile(GlobalVariables.DEFAULT_BOSSES, "Bosses");
+                    World_Click(sender, e);
+                    MessageBox.Show($"World section not found in config.", "Not Found", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error loading World bosses: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void button67_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (int.TryParse(Quantity.Text, out int quantity) && quantity > 0)
+                {
+                    var upcomingBosses = BossTimings.BossList23
+                        .Take(quantity)
+                        .ToList();
+                    SearchResults.Text = string.Join("," + Environment.NewLine, upcomingBosses.Select(b => b.ToString())) + ",";
+
+                }
+                else
+                {
+                    MessageBox.Show("A Number please!.", "Do you know the meaning of a NUMBER, try 10!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void button66_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetText(SearchResults.Text);
+            BringGw2ToFront();
+        }
     }
 
 

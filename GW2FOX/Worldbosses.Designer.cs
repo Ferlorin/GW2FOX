@@ -162,6 +162,11 @@
             Mixed = new Button();
             ClearAll = new Button();
             Meta = new Button();
+            ShowAll = new Button();
+            Quantity = new TextBox();
+            button67 = new Button();
+            button66 = new Button();
+            SearchResults = new TextBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
@@ -1730,6 +1735,7 @@
             // Mixed
             // 
             Mixed.BackgroundImage = (Image)resources.GetObject("Mixed.BackgroundImage");
+            Mixed.BackgroundImageLayout = ImageLayout.Center;
             Mixed.Cursor = Cursors.Cross;
             Mixed.FlatStyle = FlatStyle.Flat;
             Mixed.Location = new Point(1022, 12);
@@ -1742,9 +1748,10 @@
             // ClearAll
             // 
             ClearAll.BackgroundImage = (Image)resources.GetObject("ClearAll.BackgroundImage");
+            ClearAll.BackgroundImageLayout = ImageLayout.Center;
             ClearAll.Cursor = Cursors.Cross;
             ClearAll.FlatStyle = FlatStyle.Flat;
-            ClearAll.Location = new Point(889, 50);
+            ClearAll.Location = new Point(827, 50);
             ClearAll.Name = "ClearAll";
             ClearAll.Size = new Size(127, 32);
             ClearAll.TabIndex = 224;
@@ -1754,6 +1761,7 @@
             // Meta
             // 
             Meta.BackgroundImage = (Image)resources.GetObject("Meta.BackgroundImage");
+            Meta.BackgroundImageLayout = ImageLayout.Center;
             Meta.Cursor = Cursors.Cross;
             Meta.FlatStyle = FlatStyle.Flat;
             Meta.Location = new Point(889, 12);
@@ -1763,11 +1771,75 @@
             Meta.UseVisualStyleBackColor = true;
             Meta.Click += Meta_Click_1;
             // 
+            // ShowAll
+            // 
+            ShowAll.BackgroundImage = (Image)resources.GetObject("ShowAll.BackgroundImage");
+            ShowAll.BackgroundImageLayout = ImageLayout.Center;
+            ShowAll.Cursor = Cursors.Cross;
+            ShowAll.FlatStyle = FlatStyle.Flat;
+            ShowAll.Location = new Point(960, 50);
+            ShowAll.Name = "ShowAll";
+            ShowAll.Size = new Size(127, 32);
+            ShowAll.TabIndex = 226;
+            ShowAll.UseVisualStyleBackColor = true;
+            ShowAll.Click += ShowAll_Click;
+            // 
+            // Quantity
+            // 
+            Quantity.Font = new Font("Segoe UI", 11F);
+            Quantity.Location = new Point(16, 162);
+            Quantity.Name = "Quantity";
+            Quantity.Size = new Size(54, 27);
+            Quantity.TabIndex = 230;
+            Quantity.TextAlign = HorizontalAlignment.Center;
+            // 
+            // button67
+            // 
+            button67.BackgroundImage = (Image)resources.GetObject("button67.BackgroundImage");
+            button67.BackgroundImageLayout = ImageLayout.Center;
+            button67.Cursor = Cursors.Cross;
+            button67.FlatStyle = FlatStyle.Flat;
+            button67.Location = new Point(76, 166);
+            button67.Name = "button67";
+            button67.Size = new Size(75, 23);
+            button67.TabIndex = 229;
+            button67.UseVisualStyleBackColor = true;
+            button67.Click += button67_Click;
+            // 
+            // button66
+            // 
+            button66.BackgroundImage = (Image)resources.GetObject("button66.BackgroundImage");
+            button66.BackgroundImageLayout = ImageLayout.Center;
+            button66.Cursor = Cursors.Cross;
+            button66.FlatStyle = FlatStyle.Flat;
+            button66.Location = new Point(157, 166);
+            button66.Name = "button66";
+            button66.Size = new Size(75, 23);
+            button66.TabIndex = 228;
+            button66.UseVisualStyleBackColor = true;
+            button66.Click += button66_Click;
+            // 
+            // SearchResults
+            // 
+            SearchResults.Cursor = Cursors.Cross;
+            SearchResults.Font = new Font("Segoe UI", 9F);
+            SearchResults.Location = new Point(12, 12);
+            SearchResults.Multiline = true;
+            SearchResults.Name = "SearchResults";
+            SearchResults.ScrollBars = ScrollBars.Vertical;
+            SearchResults.Size = new Size(220, 148);
+            SearchResults.TabIndex = 227;
+            // 
             // Worldbosses
             // 
             AutoScaleMode = AutoScaleMode.None;
             AutoValidate = AutoValidate.EnablePreventFocusChange;
             ClientSize = new Size(1904, 1041);
+            Controls.Add(Quantity);
+            Controls.Add(button67);
+            Controls.Add(button66);
+            Controls.Add(SearchResults);
+            Controls.Add(ShowAll);
             Controls.Add(Mixed);
             Controls.Add(ClearAll);
             Controls.Add(Meta);
@@ -2057,5 +2129,10 @@
         private Button Mixed;
         private Button ClearAll;
         private Button Meta;
+        private Button ShowAll;
+        private TextBox Quantity;
+        private Button button67;
+        private Button button66;
+        private TextBox SearchResults;
     }
 }
