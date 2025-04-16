@@ -71,6 +71,7 @@
             pictureBox3 = new PictureBox();
             pictureBox2 = new PictureBox();
             pictureBox5 = new PictureBox();
+            button1 = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
@@ -515,7 +516,7 @@
             // Shattiitem
             // 
             Shattiitem.Font = new Font("Segoe UI", 9F);
-            Shattiitem.Location = new Point(15, 82);
+            Shattiitem.Location = new Point(15, 174);
             Shattiitem.Multiline = true;
             Shattiitem.Name = "Shattiitem";
             Shattiitem.ReadOnly = true;
@@ -528,7 +529,7 @@
             button22.BackgroundImageLayout = ImageLayout.Center;
             button22.Cursor = Cursors.Cross;
             button22.FlatStyle = FlatStyle.Flat;
-            button22.Location = new Point(15, 111);
+            button22.Location = new Point(15, 203);
             button22.Name = "button22";
             button22.Size = new Size(75, 23);
             button22.TabIndex = 153;
@@ -538,7 +539,7 @@
             // pictureBox4
             // 
             pictureBox4.Image = Properties.Resources.Master_Tuning_Crystal;
-            pictureBox4.Location = new Point(15, 12);
+            pictureBox4.Location = new Point(15, 104);
             pictureBox4.Name = "pictureBox4";
             pictureBox4.Size = new Size(64, 64);
             pictureBox4.TabIndex = 154;
@@ -547,7 +548,7 @@
             // Shattiitemname
             // 
             Shattiitemname.Font = new Font("Segoe UI", 9F);
-            Shattiitemname.Location = new Point(85, 53);
+            Shattiitemname.Location = new Point(85, 145);
             Shattiitemname.Multiline = true;
             Shattiitemname.Name = "Shattiitemname";
             Shattiitemname.ReadOnly = true;
@@ -594,11 +595,23 @@
             pictureBox5.TabIndex = 156;
             pictureBox5.TabStop = false;
             // 
+            // button1
+            // 
+            button1.BackgroundImage = (Image)resources.GetObject("button1.BackgroundImage");
+            button1.FlatStyle = FlatStyle.Flat;
+            button1.Location = new Point(15, 12);
+            button1.Name = "button1";
+            button1.Size = new Size(80, 36);
+            button1.TabIndex = 160;
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
+            // 
             // Theshatterer
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1904, 1041);
+            Controls.Add(button1);
             Controls.Add(pictureBox1);
             Controls.Add(pictureBox3);
             Controls.Add(pictureBox2);
@@ -697,5 +710,6 @@
         private PictureBox pictureBox3;
         private PictureBox pictureBox2;
         private PictureBox pictureBox5;
+        private Button button1;
     }
 }

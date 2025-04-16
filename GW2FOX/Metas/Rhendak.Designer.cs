@@ -57,6 +57,7 @@
             pictureBox3 = new PictureBox();
             pictureBox2 = new PictureBox();
             pictureBox5 = new PictureBox();
+            button1 = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
@@ -311,7 +312,7 @@
             // Itemprice
             // 
             Itemprice.Font = new Font("Segoe UI", 9F);
-            Itemprice.Location = new Point(11, 82);
+            Itemprice.Location = new Point(15, 174);
             Itemprice.Name = "Itemprice";
             Itemprice.ReadOnly = true;
             Itemprice.Size = new Size(300, 23);
@@ -320,7 +321,7 @@
             // pictureBox4
             // 
             pictureBox4.Image = Properties.Resources.Rhendaksiegel;
-            pictureBox4.Location = new Point(11, 12);
+            pictureBox4.Location = new Point(15, 104);
             pictureBox4.Name = "pictureBox4";
             pictureBox4.Size = new Size(64, 64);
             pictureBox4.TabIndex = 103;
@@ -332,7 +333,7 @@
             button10.BackgroundImageLayout = ImageLayout.Center;
             button10.Cursor = Cursors.Cross;
             button10.FlatStyle = FlatStyle.Flat;
-            button10.Location = new Point(11, 111);
+            button10.Location = new Point(15, 203);
             button10.Name = "button10";
             button10.Size = new Size(75, 23);
             button10.TabIndex = 105;
@@ -342,7 +343,7 @@
             // Rhendiitemname
             // 
             Rhendiitemname.Font = new Font("Segoe UI", 9F);
-            Rhendiitemname.Location = new Point(81, 53);
+            Rhendiitemname.Location = new Point(85, 145);
             Rhendiitemname.Multiline = true;
             Rhendiitemname.Name = "Rhendiitemname";
             Rhendiitemname.ReadOnly = true;
@@ -389,11 +390,23 @@
             pictureBox5.TabIndex = 107;
             pictureBox5.TabStop = false;
             // 
+            // button1
+            // 
+            button1.BackgroundImage = (Image)resources.GetObject("button1.BackgroundImage");
+            button1.FlatStyle = FlatStyle.Flat;
+            button1.Location = new Point(15, 12);
+            button1.Name = "button1";
+            button1.Size = new Size(80, 36);
+            button1.TabIndex = 125;
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
+            // 
             // Rhendak
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1904, 1041);
+            Controls.Add(button1);
             Controls.Add(pictureBox1);
             Controls.Add(pictureBox3);
             Controls.Add(pictureBox2);
@@ -465,5 +478,6 @@
         private PictureBox pictureBox3;
         private PictureBox pictureBox2;
         private PictureBox pictureBox5;
+        private Button button1;
     }
 }
