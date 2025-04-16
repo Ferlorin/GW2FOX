@@ -88,6 +88,54 @@ namespace GW2FOX
                 MessageBox.Show("The file was not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Discord-Ordner und Pfad zur Update.exe
+                string discordFolder = Path.Combine(
+                    Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                    "Discord");
+
+                string updaterPath = Path.Combine(discordFolder, "Update.exe");
+                string shortcutPath = Path.Combine(discordFolder, "StartDiscord.lnk");
+
+                // Prüfen ob Update.exe existiert
+                if (!File.Exists(updaterPath))
+                {
+                    MessageBox.Show("Discord-Updater wurde nicht gefunden. Ist Discord installiert?", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                // Falls keine Verknüpfung vorhanden ist, erstellen
+                if (!File.Exists(shortcutPath))
+                {
+                    CreateShortcut(shortcutPath, updaterPath, "--processStart \"Discord.exe\"", "Startet Discord über Updater");
+                }
+
+                // Verknüpfung starten
+                Process.Start("explorer.exe", $"\"{shortcutPath}\"");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Fehler beim Starten von Discord: {ex.Message}", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void CreateShortcut(string shortcutPath, string targetPath, string arguments, string description)
+        {
+            // COM-Verweis nötig: "Windows Script Host Object Model"
+            var wsh = new IWshRuntimeLibrary.WshShell();
+            var shortcut = (IWshRuntimeLibrary.IWshShortcut)wsh.CreateShortcut(shortcutPath);
+            shortcut.Description = description;
+            shortcut.TargetPath = targetPath;
+            shortcut.Arguments = arguments;
+            shortcut.Save();
+        }
+
+
+
     }
 }
 
