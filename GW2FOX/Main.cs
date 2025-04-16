@@ -40,7 +40,6 @@ namespace GW2FOX
         private void Timer_Click(object sender, EventArgs e)
         {
             BossTimerService.Timer_Click(sender, e);
-            // Additional logic specific to Timer_Click in Main class, if any
         }
 
 
@@ -60,7 +59,7 @@ namespace GW2FOX
         {
             try
             {
-                string homepageUrl = "www.gw2fox.com";
+                string homepageUrl = "https://gw2fox.wixsite.com/about";
                 ProcessStartInfo psi = new ProcessStartInfo
                 {
                     FileName = homepageUrl,
@@ -70,7 +69,7 @@ namespace GW2FOX
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Fehler beim ?ffnen der Homepage: {ex.Message}", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"GREAT - you deletet the INTERNET!: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -149,6 +148,7 @@ namespace GW2FOX
         private void Leading_Click(object sender, EventArgs e)
         {
             ShowAndHideForm(new Worldbosses());
+            BossTimerService.Timer_Click(sender, e);
         }
 
 
@@ -180,33 +180,6 @@ namespace GW2FOX
 
             // Pfad zur Datei "Blish HUD.exe" im Verzeichnis "data"
             string filePath = Path.Combine(exeDirectory, "data2", "Blish HUD.exe");
-
-            // Überprüfen, ob die Datei existiert, bevor sie geöffnet wird
-            if (File.Exists(filePath))
-            {
-                try
-                {
-                    // Öffne die Datei
-                    Process.Start(filePath);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Fehler beim Öffnen der Datei: " + ex.Message, "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            else
-            {
-                MessageBox.Show("Die Datei wurde nicht gefunden.", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void ReShade_Click(object sender, EventArgs e)
-        {
-            // Verzeichnis der ausführbaren Datei erhalten
-            string exeDirectory = Path.GetDirectoryName(Application.ExecutablePath);
-
-            // Pfad zur Datei "Blish HUD.exe" im Verzeichnis "data"
-            string filePath = Path.Combine(exeDirectory, "data", "ReShade_Setup_6.0.1.exe");
 
             // Überprüfen, ob die Datei existiert, bevor sie geöffnet wird
             if (File.Exists(filePath))

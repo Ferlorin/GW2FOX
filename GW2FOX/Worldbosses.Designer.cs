@@ -1602,7 +1602,6 @@
             Symbols.Location = new Point(1440, 12);
             Symbols.Multiline = true;
             Symbols.Name = "Symbols";
-            Symbols.ReadOnly = true;
             Symbols.ScrollBars = ScrollBars.Vertical;
             Symbols.Size = new Size(452, 85);
             Symbols.TabIndex = 188;
@@ -1613,7 +1612,6 @@
             Welcome.Location = new Point(1440, 268);
             Welcome.Multiline = true;
             Welcome.Name = "Welcome";
-            Welcome.ReadOnly = true;
             Welcome.ScrollBars = ScrollBars.Vertical;
             Welcome.Size = new Size(350, 50);
             Welcome.TabIndex = 187;
@@ -1624,7 +1622,6 @@
             Guild.Location = new Point(965, 268);
             Guild.Multiline = true;
             Guild.Name = "Guild";
-            Guild.ReadOnly = true;
             Guild.ScrollBars = ScrollBars.Vertical;
             Guild.Size = new Size(350, 50);
             Guild.TabIndex = 186;
@@ -1635,7 +1632,6 @@
             Squadinfo.Location = new Point(490, 268);
             Squadinfo.Multiline = true;
             Squadinfo.Name = "Squadinfo";
-            Squadinfo.ReadOnly = true;
             Squadinfo.ScrollBars = ScrollBars.Vertical;
             Squadinfo.Size = new Size(350, 50);
             Squadinfo.TabIndex = 185;
@@ -1647,7 +1643,6 @@
             Runinfo.Location = new Point(15, 268);
             Runinfo.Multiline = true;
             Runinfo.Name = "Runinfo";
-            Runinfo.ReadOnly = true;
             Runinfo.ScrollBars = ScrollBars.Vertical;
             Runinfo.Size = new Size(350, 50);
             Runinfo.TabIndex = 184;
