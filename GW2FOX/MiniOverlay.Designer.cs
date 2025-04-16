@@ -39,9 +39,10 @@
             button1.Cursor = Cursors.Cross;
             button1.FlatStyle = FlatStyle.Flat;
             button1.ForeColor = Color.Magenta;
-            button1.Location = new Point(12, 3);
+            button1.Location = new Point(0, -3);
+            button1.Margin = new Padding(0);
             button1.Name = "button1";
-            button1.Size = new Size(22, 21);
+            button1.Size = new Size(28, 28);
             button1.TabIndex = 0;
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
@@ -51,7 +52,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(43, 27);
+            ClientSize = new Size(29, 27);
             ControlBox = false;
             Controls.Add(button1);
             Cursor = Cursors.Cross;

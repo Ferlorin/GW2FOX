@@ -1713,7 +1713,7 @@
             World.BackgroundImageLayout = ImageLayout.Center;
             World.Cursor = Cursors.Cross;
             World.FlatStyle = FlatStyle.Flat;
-            World.Location = new Point(761, 27);
+            World.Location = new Point(756, 27);
             World.Name = "World";
             World.Size = new Size(127, 32);
             World.TabIndex = 222;
@@ -1726,7 +1726,7 @@
             Mixed.BackgroundImageLayout = ImageLayout.Center;
             Mixed.Cursor = Cursors.Cross;
             Mixed.FlatStyle = FlatStyle.Flat;
-            Mixed.Location = new Point(1027, 27);
+            Mixed.Location = new Point(1022, 27);
             Mixed.Name = "Mixed";
             Mixed.Size = new Size(127, 32);
             Mixed.TabIndex = 225;
@@ -1739,7 +1739,7 @@
             ClearAll.BackgroundImageLayout = ImageLayout.Center;
             ClearAll.Cursor = Cursors.Cross;
             ClearAll.FlatStyle = FlatStyle.Flat;
-            ClearAll.Location = new Point(832, 65);
+            ClearAll.Location = new Point(827, 66);
             ClearAll.Name = "ClearAll";
             ClearAll.Size = new Size(127, 32);
             ClearAll.TabIndex = 224;
@@ -1752,7 +1752,7 @@
             Meta.BackgroundImageLayout = ImageLayout.Center;
             Meta.Cursor = Cursors.Cross;
             Meta.FlatStyle = FlatStyle.Flat;
-            Meta.Location = new Point(894, 27);
+            Meta.Location = new Point(889, 27);
             Meta.Name = "Meta";
             Meta.Size = new Size(127, 32);
             Meta.TabIndex = 223;
@@ -1765,7 +1765,7 @@
             ShowAll.BackgroundImageLayout = ImageLayout.Center;
             ShowAll.Cursor = Cursors.Cross;
             ShowAll.FlatStyle = FlatStyle.Flat;
-            ShowAll.Location = new Point(965, 65);
+            ShowAll.Location = new Point(960, 66);
             ShowAll.Name = "ShowAll";
             ShowAll.Size = new Size(127, 32);
             ShowAll.TabIndex = 226;
@@ -1901,7 +1901,7 @@
             button69.BackgroundImageLayout = ImageLayout.Stretch;
             button69.Cursor = Cursors.Cross;
             button69.FlatStyle = FlatStyle.Flat;
-            button69.Location = new Point(894, 103);
+            button69.Location = new Point(889, 104);
             button69.Name = "button69";
             button69.Size = new Size(127, 32);
             button69.TabIndex = 237;
