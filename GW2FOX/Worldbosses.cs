@@ -2049,6 +2049,30 @@ namespace GW2FOX
         {
             BossTimerService.Timer_Click(sender, e);
         }
+
+        private void button30_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetText(Runinfo.Text);
+            BringGw2ToFront();
+        }
+
+        private void button29_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetText(Squadinfo.Text);
+            BringGw2ToFront();
+        }
+
+        private void button28_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetText(Guild.Text);
+            BringGw2ToFront();
+        }
+
+        private void button27_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetText(Welcome.Text);
+            BringGw2ToFront()
+        }
     }
 
 

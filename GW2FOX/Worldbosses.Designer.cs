@@ -1549,6 +1549,7 @@
             button27.Size = new Size(75, 23);
             button27.TabIndex = 192;
             button27.UseVisualStyleBackColor = true;
+            button27.Click += button27_Click;
             // 
             // button28
             // 
@@ -1561,6 +1562,7 @@
             button28.Size = new Size(75, 23);
             button28.TabIndex = 191;
             button28.UseVisualStyleBackColor = true;
+            button28.Click += button28_Click;
             // 
             // button29
             // 
@@ -1573,6 +1575,7 @@
             button29.Size = new Size(75, 23);
             button29.TabIndex = 190;
             button29.UseVisualStyleBackColor = true;
+            button29.Click += button29_Click;
             // 
             // button30
             // 
@@ -1584,6 +1587,7 @@
             button30.Size = new Size(75, 23);
             button30.TabIndex = 189;
             button30.UseVisualStyleBackColor = true;
+            button30.Click += button30_Click;
             // 
             // Symbols
             // 
