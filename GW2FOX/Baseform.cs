@@ -255,7 +255,6 @@ namespace GW2FOX
             _bossTimer?.Dispose();
             base.OnFormClosing(e);
 
-            // Nur App beenden, wenn es das Hauptformular ist (z. B. Main)
             if (this is Main)
             {
                 Application.Exit();
