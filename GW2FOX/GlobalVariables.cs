@@ -9,8 +9,6 @@ public class GlobalVariables
         TimeZoneInfo
             .ConvertTimeFromUtc(
                 DateTime.UtcNow, 
-                // DateTime.UtcNow + TimeSpan.FromHours(11) - TimeSpan.FromMinutes(17),
-                // DateTime.Parse("14:18:01"),
                 TIMEZONE_TO_USE
             );
     

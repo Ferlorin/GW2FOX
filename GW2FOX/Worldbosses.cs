@@ -1334,8 +1334,6 @@ namespace GW2FOX
                     //This will create a new section
                     SaveTextToFile(GlobalVariables.DEFAULT_BOSSES, "Bosses");
                     SaveBossNameToConfig(bossName);
-                    // // Wenn der Abschnitt "Bosses:" nicht gefunden wird, gibt es nichts zu hinzufügen
-                    // MessageBox.Show($"Bosses section not found in config.", "Not Found", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             catch (Exception ex)
