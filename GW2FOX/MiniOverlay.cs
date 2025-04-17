@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.IO;
 using System.Windows.Forms;
 
 namespace GW2FOX
@@ -7,6 +8,7 @@ namespace GW2FOX
     public partial class MiniOverlay : BaseForm
     {
         private Form lastOpenedForm;
+        private Form lastOpenedBoss = null;
 
         public MiniOverlay(Worldbosses worldbosses)
         {
@@ -27,20 +29,27 @@ namespace GW2FOX
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (lastOpenedForm == null || lastOpenedForm.IsDisposed)
+            if (lastOpenedBoss == null || lastOpenedBoss.IsDisposed)
             {
-                lastOpenedForm = new Worldbosses();
-                lastOpenedForm.Show();
+                // Wenn kein Bossfenster offen ist oder das Fenster geschlossen wurde, zeige Worldbosses
+                lastOpenedBoss = new Worldbosses();
+                lastOpenedBoss.Show();
             }
             else
             {
-                if (lastOpenedForm.WindowState == FormWindowState.Minimized)
-                    lastOpenedForm.WindowState = FormWindowState.Normal;
+                // Wenn das Fenster minimiert war, stelle es wieder her
+                if (lastOpenedBoss.WindowState == FormWindowState.Minimized)
+                    lastOpenedBoss.WindowState = FormWindowState.Normal;
 
-                lastOpenedForm.BringToFront();
-                lastOpenedForm.Activate();
+                // Stelle sicher, dass Worldbosses im Vordergrund kommt
+                lastOpenedBoss.BringToFront();
+                lastOpenedBoss.Activate();
+
+                // Versuche es explizit in den Vordergrund zu bringen
+                SetForegroundWindow(lastOpenedBoss.Handle);
             }
         }
+
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -130,9 +139,5 @@ namespace GW2FOX
             shortcut.Arguments = arguments;
             shortcut.Save();
         }
-
-       
-
     }
 }
-

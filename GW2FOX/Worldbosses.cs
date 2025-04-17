@@ -202,8 +202,6 @@ namespace GW2FOX
             ShowAndHideForm(new MawsOfTorement());
         }
 
-
-
         private void Chak_Click(object sender, EventArgs e)
         {
             ShowAndHideForm(new Chak());

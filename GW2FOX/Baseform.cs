@@ -2,6 +2,7 @@
 using System.Runtime.InteropServices;
 using static GW2FOX.BossTimerService;
 using static GW2FOX.GlobalVariables;
+using System.Threading;
 
 namespace GW2FOX
 {
@@ -12,7 +13,7 @@ namespace GW2FOX
         protected ListView customBossList;
         protected BossTimer bossTimer;
         private GlobalKeyboardHook? _globalKeyboardHook;
-        
+        protected Form lastOpenedBoss = null;
         public static ListView CustomBossList { get; private set; } = new ListView();
 
         public BaseForm()
@@ -22,14 +23,45 @@ namespace GW2FOX
             SetFormTransparency();
         }
 
+        [DllImport("user32.dll")]
+        public static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
 
         [DllImport("user32.dll")]
-        private static extern bool SetForegroundWindow(IntPtr hWnd);
+        public static extern bool SetForegroundWindow(IntPtr hWnd);
 
-        [DllImport("user32.dll")]
-        private static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
+        protected const int SW_RESTORE = 9;
 
-        private const int SW_RESTORE = 9;
+        protected void ShowAndHideForm(Form newForm)
+        {
+            // Wenn es bereits einen offenen Boss gibt, verstecke ihn
+            if (lastOpenedBoss != null && !lastOpenedBoss.IsDisposed)
+            {
+                lastOpenedBoss.Hide();
+            }
+
+            // Speichere den neuen Boss als den zuletzt geöffneten
+            lastOpenedBoss = newForm;
+
+            newForm.Owner = this;
+            ShowFormWithoutActivation(newForm);
+
+            // Wenn das neue Fenster minimiert ist, stelle es wieder her
+            if (newForm.WindowState == FormWindowState.Minimized)
+                newForm.WindowState = FormWindowState.Normal;
+
+            // Versuche, das Fenster explizit in den Vordergrund zu bringen
+            newForm.BringToFront();
+            newForm.Activate();
+
+            // Setze das Fenster explizit in den Vordergrund
+            SetForegroundWindow(newForm.Handle);
+
+            // Falls wir in Worldbosses oder Main sind, das aktuelle Fenster verstecken
+            if (this is Worldbosses || this is Main)
+            {
+                this.Hide();
+            }
+        }
 
         protected void SetFormTransparency()
         {
@@ -38,7 +70,6 @@ namespace GW2FOX
             this.BackColor = Color.Magenta;
             this.TransparencyKey = Color.Magenta;
             this.Opacity = 0.90;
-            this.TopMost = true;
         }
         protected void InitializeBossTimerAndOverlay()
         {
@@ -77,20 +108,27 @@ namespace GW2FOX
             customBossList.Font = new Font("Segoe UI", 10, FontStyle.Bold);
         }
 
-        protected void ShowAndHideForm(Form newForm)
-        {
-            newForm.Owner = this;
-            newForm.Show();
+       
 
-            if (this is Worldbosses || this is Main)
-            {
-                this.Hide();
-            }
-            else
-            {
-                this.Close();
-            }
+        private void ShowFormWithoutActivation(Form form)
+        {
+            var style = NativeMethods.GetWindowLong(form.Handle, NativeMethods.GWL_EXSTYLE);
+            NativeMethods.SetWindowLong(form.Handle, NativeMethods.GWL_EXSTYLE, style | NativeMethods.WS_EX_NOACTIVATE);
+            form.Show();
         }
+
+        internal static class NativeMethods
+        {
+            public const int GWL_EXSTYLE = -20;
+            public const int WS_EX_NOACTIVATE = 0x08000000;
+
+            [System.Runtime.InteropServices.DllImport("user32.dll")]
+            public static extern int GetWindowLong(IntPtr hWnd, int nIndex);
+
+            [System.Runtime.InteropServices.DllImport("user32.dll")]
+            public static extern int SetWindowLong(IntPtr hWnd, int nIndex, int dwNewLong);
+        }
+
 
 
         protected static void SaveTextToFile(string textToSave, string sectionHeader, bool hideMessages = false)
