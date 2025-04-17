@@ -40,6 +40,9 @@
     <Compile Update="Metas\FlyByNight.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Metas\Theshatterer2.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Metas\WizardsTower.cs">
       <SubType>Form</SubType>
     </Compile>

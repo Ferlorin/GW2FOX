@@ -37,6 +37,7 @@
             button8 = new Button();
             button9 = new Button();
             button10 = new Button();
+            button5 = new Button();
             SuspendLayout();
             // 
             // button4
@@ -149,12 +150,27 @@
             button10.UseVisualStyleBackColor = true;
             button10.Click += ArcDPSDeinstall_Click;
             // 
+            // button5
+            // 
+            button5.BackColor = SystemColors.ActiveCaptionText;
+            button5.BackgroundImage = (Image)resources.GetObject("button5.BackgroundImage");
+            button5.BackgroundImageLayout = ImageLayout.Stretch;
+            button5.Cursor = Cursors.Cross;
+            button5.FlatStyle = FlatStyle.Flat;
+            button5.Location = new Point(12, 395);
+            button5.Name = "button5";
+            button5.Size = new Size(140, 35);
+            button5.TabIndex = 20;
+            button5.UseVisualStyleBackColor = false;
+            button5.Click += button5_Click;
+            // 
             // Main
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Black;
-            ClientSize = new Size(164, 327);
+            ClientSize = new Size(164, 442);
+            Controls.Add(button5);
             Controls.Add(button10);
             Controls.Add(button9);
             Controls.Add(button8);
@@ -179,5 +195,6 @@
         private Button button8;
         private Button button9;
         private Button button10;
+        private Button button5;
     }
 }

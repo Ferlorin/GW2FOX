@@ -160,6 +160,9 @@
     <Compile Update="Metas\WizardsTower.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Tutorial.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Worldbosses.cs">
       <SubType>Form</SubType>
     </Compile>
