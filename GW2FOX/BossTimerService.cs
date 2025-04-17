@@ -3,30 +3,6 @@ using static GW2FOX.BossTimings;
 
 namespace GW2FOX
 {
-    public static class Extensions
-    {
-        public static void DoubleBuffered(this ListView listView, bool enable)
-        {
-            if (SystemInformation.TerminalServerSession)
-                return;
-
-            listView.GetType().InvokeMember("DoubleBuffered",
-                BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.SetProperty,
-                null, listView, new object[] { enable });
-        }
-
-        public static void SetDoubleBuffered(this Control control)
-        {
-            if (SystemInformation.TerminalServerSession)
-                return;
-
-            control.GetType().InvokeMember("DoubleBuffered",
-                BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.SetProperty,
-                null, control, new object[] { true });
-        }
-    }
-
-
     public static class BossTimerService
     {
         private static readonly string TimeZoneId = "W. Europe Standard Time";
