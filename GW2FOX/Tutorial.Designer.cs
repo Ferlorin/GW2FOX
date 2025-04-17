@@ -177,6 +177,7 @@
             pictureBox13 = new PictureBox();
             pictureBox14 = new PictureBox();
             pictureBox15 = new PictureBox();
+            pictureBox16 = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox12).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox11).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox10).BeginInit();
@@ -192,6 +193,7 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox13).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox14).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox15).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox16).BeginInit();
             SuspendLayout();
             // 
             // LLA
@@ -1840,12 +1842,22 @@
             pictureBox15.TabIndex = 386;
             pictureBox15.TabStop = false;
             // 
+            // pictureBox16
+            // 
+            pictureBox16.BackgroundImage = (Image)resources.GetObject("pictureBox16.BackgroundImage");
+            pictureBox16.Location = new Point(880, 27);
+            pictureBox16.Name = "pictureBox16";
+            pictureBox16.Size = new Size(54, 100);
+            pictureBox16.TabIndex = 387;
+            pictureBox16.TabStop = false;
+            // 
             // Tutorial
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Black;
             ClientSize = new Size(1904, 1041);
+            Controls.Add(pictureBox16);
             Controls.Add(pictureBox15);
             Controls.Add(pictureBox14);
             Controls.Add(button63);
@@ -2012,6 +2024,7 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox13).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox14).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox15).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox16).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -2166,5 +2179,6 @@
         private PictureBox pictureBox13;
         private PictureBox pictureBox14;
         private PictureBox pictureBox15;
+        private PictureBox pictureBox16;
     }
 }
