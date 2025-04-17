@@ -17,12 +17,11 @@ namespace GW2FOX
 
         private void MiniOverlay_Load(object sender, EventArgs e)
         {
-            // Position: Oben mittig auf dem Bildschirm
             var screen = Screen.PrimaryScreen.WorkingArea;
             this.StartPosition = FormStartPosition.Manual;
             this.Location = new System.Drawing.Point(
                 (screen.Width - this.Width) / 2,
-                0 // Oben am Bildschirm
+                0
             );
         }
 
@@ -132,7 +131,7 @@ namespace GW2FOX
             shortcut.Save();
         }
 
-
+       
 
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Runtime.InteropServices;
 using static GW2FOX.BossTimerService;
 using static GW2FOX.GlobalVariables;
 
@@ -11,7 +12,7 @@ namespace GW2FOX
         protected ListView customBossList;
         protected BossTimer bossTimer;
         private GlobalKeyboardHook? _globalKeyboardHook;
-
+        
         public static ListView CustomBossList { get; private set; } = new ListView();
 
         public BaseForm()
@@ -21,6 +22,15 @@ namespace GW2FOX
             SetFormTransparency();
         }
 
+
+        [DllImport("user32.dll")]
+        private static extern bool SetForegroundWindow(IntPtr hWnd);
+
+        [DllImport("user32.dll")]
+        private static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
+
+        private const int SW_RESTORE = 9;
+
         protected void SetFormTransparency()
         {
             this.FormBorderStyle = FormBorderStyle.None;
@@ -28,6 +38,7 @@ namespace GW2FOX
             this.BackColor = Color.Magenta;
             this.TransparencyKey = Color.Magenta;
             this.Opacity = 0.90;
+            this.TopMost = true;
         }
         protected void InitializeBossTimerAndOverlay()
         {
@@ -154,8 +165,6 @@ namespace GW2FOX
                 SaveTextToFile(defaultToInsert, sectionHeader, true);
                 configText = File.ReadAllText(FILE_PATH);
                 LoadTextFromConfig(sectionHeader, textBox, configText, defaultToInsert);
-                // Muster wurde nicht gefunden
-                // MessageBox.Show($"Das Muster '{sectionHeader}' wurde in der Konfigurationsdatei nicht gefunden.", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -243,9 +252,14 @@ namespace GW2FOX
 
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
-            _bossTimer?.Dispose(); // Dispose of the BossTimer first
+            _bossTimer?.Dispose();
             base.OnFormClosing(e);
-            Application.Exit();
+
+            // Nur App beenden, wenn es das Hauptformular ist (z. B. Main)
+            if (this is Main)
+            {
+                Application.Exit();
+            }
         }
 
         protected void Back_Click(object sender, EventArgs e)

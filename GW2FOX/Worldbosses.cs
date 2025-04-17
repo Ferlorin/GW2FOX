@@ -2036,6 +2036,14 @@ namespace GW2FOX
 
         private void button1_Click(object sender, EventArgs e)
         {
+            foreach (Form form in Application.OpenForms)
+            {
+                if (form is MiniOverlay)
+                {
+                    form.Close();
+                    break;
+                }
+            }
             ShowAndHideForm(new Main());
         }
 
