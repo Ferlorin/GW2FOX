@@ -2071,7 +2071,7 @@ namespace GW2FOX
         private void button27_Click(object sender, EventArgs e)
         {
             Clipboard.SetText(Welcome.Text);
-            BringGw2ToFront()
+            BringGw2ToFront();
         }
     }
 
