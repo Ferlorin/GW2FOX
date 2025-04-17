@@ -28,7 +28,6 @@ namespace GW2FOX
             this.BackColor = Color.Magenta;
             this.TransparencyKey = Color.Magenta;
             this.Opacity = 0.90;
-            this.TopMost = true;
         }
         protected void InitializeBossTimerAndOverlay()
         {
@@ -67,15 +66,13 @@ namespace GW2FOX
             customBossList.Font = new Font("Segoe UI", 10, FontStyle.Bold);
         }
 
-        protected void ShowAndHideForm(Form newForm, bool hideCurrentForm = true)
+        protected void ShowAndHideForm(Form newForm)
         {
             newForm.Owner = this;
             newForm.Show();
-            if (hideCurrentForm)
-            {
-                this.Hide(); // Verstecke nur das aktuelle Formular, nicht immer das übergeordnete Formular
-            }
+            this.Hide();
         }
+
 
         protected static void SaveTextToFile(string textToSave, string sectionHeader, bool hideMessages = false)
         {
