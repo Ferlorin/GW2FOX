@@ -29,26 +29,51 @@ namespace GW2FOX
 
         private void button1_Click(object sender, EventArgs e)
         {
+            var allowedTypes = new[] { typeof(Main), typeof(Overlay), typeof(MiniOverlay), typeof(Worldbosses) };
+
+            foreach (Form openForm in Application.OpenForms)
+            {
+                if (!allowedTypes.Contains(openForm.GetType()))
+                {
+                    // Toggle Verhalten für "andere" Fenster
+                    openForm.ShowInTaskbar = false; // Verhindert Taskleisten-Eintrag
+                    if (openForm.Visible)
+                    {
+                        openForm.Hide();
+                    }
+                    else
+                    {
+                        openForm.Show();
+                        openForm.BringToFront();
+                        openForm.Activate();
+                        SetForegroundWindow(openForm.Handle);
+                    }
+                    return;
+                }
+            }
+
             if (lastOpenedBoss == null || lastOpenedBoss.IsDisposed)
             {
-                // Wenn kein Bossfenster offen ist oder das Fenster geschlossen wurde, zeige Worldbosses
-                lastOpenedBoss = new Worldbosses();
+                lastOpenedBoss = new Worldbosses
+                {
+                    ShowInTaskbar = false // Wichtig: keine Taskleiste
+                };
                 lastOpenedBoss.Show();
+            }
+            else if (lastOpenedBoss.Visible)
+            {
+                lastOpenedBoss.Hide();
             }
             else
             {
-                // Wenn das Fenster minimiert war, stelle es wieder her
-                if (lastOpenedBoss.WindowState == FormWindowState.Minimized)
-                    lastOpenedBoss.WindowState = FormWindowState.Normal;
-
-                // Stelle sicher, dass Worldbosses im Vordergrund kommt
+                lastOpenedBoss.Show();
                 lastOpenedBoss.BringToFront();
                 lastOpenedBoss.Activate();
-
-                // Versuche es explizit in den Vordergrund zu bringen
                 SetForegroundWindow(lastOpenedBoss.Handle);
             }
         }
+
+
 
 
         private void button2_Click(object sender, EventArgs e)
