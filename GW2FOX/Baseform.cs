@@ -70,7 +70,15 @@ namespace GW2FOX
         {
             newForm.Owner = this;
             newForm.Show();
-            this.Hide();
+
+            if (this is Worldbosses || this is Main)
+            {
+                this.Hide();
+            }
+            else
+            {
+                this.Close();
+            }
         }
 
 
