@@ -178,6 +178,7 @@
             pictureBox14 = new PictureBox();
             pictureBox15 = new PictureBox();
             pictureBox16 = new PictureBox();
+            pictureBox17 = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox12).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox11).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox10).BeginInit();
@@ -194,6 +195,7 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox14).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox15).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox16).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox17).BeginInit();
             SuspendLayout();
             // 
             // LLA
@@ -1836,7 +1838,7 @@
             // pictureBox15
             // 
             pictureBox15.BackgroundImage = (Image)resources.GetObject("pictureBox15.BackgroundImage");
-            pictureBox15.Location = new Point(1299, 679);
+            pictureBox15.Location = new Point(371, 803);
             pictureBox15.Name = "pictureBox15";
             pictureBox15.Size = new Size(300, 220);
             pictureBox15.TabIndex = 386;
@@ -1851,12 +1853,22 @@
             pictureBox16.TabIndex = 387;
             pictureBox16.TabStop = false;
             // 
+            // pictureBox17
+            // 
+            pictureBox17.BackgroundImage = (Image)resources.GetObject("pictureBox17.BackgroundImage");
+            pictureBox17.Location = new Point(1093, 803);
+            pictureBox17.Name = "pictureBox17";
+            pictureBox17.Size = new Size(200, 107);
+            pictureBox17.TabIndex = 388;
+            pictureBox17.TabStop = false;
+            // 
             // Tutorial
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Black;
             ClientSize = new Size(1904, 1041);
+            Controls.Add(pictureBox17);
             Controls.Add(pictureBox16);
             Controls.Add(pictureBox15);
             Controls.Add(pictureBox14);
@@ -2007,7 +2019,9 @@
             Controls.Add(button4);
             Controls.Add(button2);
             Name = "Tutorial";
+            Opacity = 1D;
             Text = "Tutorial";
+            TopMost = false;
             WindowState = FormWindowState.Maximized;
             ((System.ComponentModel.ISupportInitialize)pictureBox12).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox11).EndInit();
@@ -2025,6 +2039,7 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox14).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox15).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox16).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox17).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -2180,5 +2195,6 @@
         private PictureBox pictureBox14;
         private PictureBox pictureBox15;
         private PictureBox pictureBox16;
+        private PictureBox pictureBox17;
     }
 }

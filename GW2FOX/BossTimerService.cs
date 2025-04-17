@@ -185,16 +185,15 @@ namespace GW2FOX
 
         public static void Update()
         {
-            // Only initialize if not already done
-            if (_bossTimer == null || _overlay == null || _overlay.IsDisposed)
+            if (_bossTimer == null)
             {
                 Initialize();
             }
 
-            // Start the timer if it's not already running
             _bossTimer?.Start();
 
-            // Show the overlay if it's not visible
+            GC.KeepAlive(_bossTimer);
+
             if (_overlay != null && !_overlay.Visible)
             {
                 _overlay.Show();
@@ -210,7 +209,6 @@ namespace GW2FOX
 
             private bool _isRunning = false;
 
-            // Public property to access whether the timer is running
             public bool IsRunning => _isRunning;
 
             private readonly ListView _bossList;
@@ -228,6 +226,7 @@ namespace GW2FOX
             {
                 if (!_isRunning)
                 {
+                    Console.WriteLine("Starting Timer");
                     _timer.Change(0, 1000);  // Start the timer
                     _isRunning = true;
                 }
@@ -237,6 +236,7 @@ namespace GW2FOX
             {
                 if (_isRunning)
                 {
+                    Console.WriteLine("Stopping Timer");
                     _timer.Change(Timeout.Infinite, Timeout.Infinite);  // Stop the timer
                     _isRunning = false;
                 }
@@ -244,6 +244,7 @@ namespace GW2FOX
 
             private void TimerCallback(object? state)
             {
+                Console.WriteLine("Timer Tick: " + DateTime.Now);
                 try
                 {
                     UpdateBossList();
@@ -253,6 +254,7 @@ namespace GW2FOX
                     HandleException(ex, "TimerCallback");
                 }
             }
+
 
             public void UpdateBossList()
             {

@@ -667,7 +667,7 @@
             // pictureBox15
             // 
             pictureBox15.BackgroundImage = (Image)resources.GetObject("pictureBox15.BackgroundImage");
-            pictureBox15.Location = new Point(1299, 679);
+            pictureBox15.Location = new Point(371, 803);
             pictureBox15.Name = "pictureBox15";
             pictureBox15.Size = new Size(300, 220);
             pictureBox15.TabIndex = 387;
@@ -731,7 +731,9 @@
             Controls.Add(Runinfo);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Theshatterer2";
+            Opacity = 1D;
             Text = "GW2FOX";
+            TopMost = false;
             WindowState = FormWindowState.Maximized;
             ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
