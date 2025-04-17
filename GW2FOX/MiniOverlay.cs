@@ -29,7 +29,7 @@ namespace GW2FOX
 
         private void button1_Click(object sender, EventArgs e)
         {
-            var allowedTypes = new[] { typeof(Main), typeof(Overlay), typeof(MiniOverlay), typeof(Worldbosses) };
+            var allowedTypes = new[] { typeof(Main), typeof(MiniOverlay), typeof(Worldbosses) };
 
             foreach (Form openForm in Application.OpenForms)
             {
@@ -72,6 +72,7 @@ namespace GW2FOX
                 SetForegroundWindow(lastOpenedBoss.Handle);
             }
         }
+
 
 
 
