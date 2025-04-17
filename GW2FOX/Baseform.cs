@@ -108,8 +108,6 @@ namespace GW2FOX
             customBossList.Font = new Font("Segoe UI", 10, FontStyle.Bold);
         }
 
-       
-
         private void ShowFormWithoutActivation(Form form)
         {
             var style = NativeMethods.GetWindowLong(form.Handle, NativeMethods.GWL_EXSTYLE);
@@ -128,6 +126,7 @@ namespace GW2FOX
             [System.Runtime.InteropServices.DllImport("user32.dll")]
             public static extern int SetWindowLong(IntPtr hWnd, int nIndex, int dwNewLong);
         }
+
 
 
 
@@ -222,7 +221,6 @@ namespace GW2FOX
                     // Bring the first instance to the foreground
                     IntPtr mainWindowHandle = processes[0].MainWindowHandle;
                     ShowWindow(mainWindowHandle, SW_RESTORE);
-                    SetForegroundWindow(mainWindowHandle);
                 }
                 else
                 {
