@@ -70,6 +70,7 @@ namespace GW2FOX
             this.BackColor = Color.Magenta;
             this.TransparencyKey = Color.Magenta;
             this.Opacity = 0.90;
+            this.TopMost = true;
         }
         protected void InitializeBossTimerAndOverlay()
         {
