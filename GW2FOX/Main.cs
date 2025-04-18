@@ -296,7 +296,7 @@ namespace GW2FOX
         private void button5_Click(object sender, EventArgs e)
         {
             ShowAndHideForm(new Tutorial());
-            ShowAndHideForm(new MiniOverlay(_worldbossesForm));
+            ShowAndHideForm(new MiniOverlay2(_worldbossesForm));
             BossTimerService.Timer_Click(sender, e);
         }
     }

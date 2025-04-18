@@ -4,15 +4,13 @@ using System.Runtime.InteropServices;
 
 namespace GW2FOX
 {
-    public partial class Theshatterer2 : BaseForm
+    public partial class Theshatterer2 : Form
     {
-        private TextBox Shattiitem; // Keep this declaration
+        private TextBox Shattiitem;
 
         public Theshatterer2()
         {
             InitializeComponent();
-            LoadConfigText(Runinfo, Squadinfo, Guild, Welcome, Symbols);
-            // No need to re-create the TextBox here
             _ = LoadItemPriceInformation();
         }
 
@@ -75,156 +73,87 @@ namespace GW2FOX
 
         private void Runinfo_Click(object sender, EventArgs e)
         {
-            // Copy the text from Leyline60 TextBox to the clipboard
-            Clipboard.SetText(Runinfo.Text);
-
-            // Bring the Gw2-64.exe window to the foreground
-            BringGw2ToFront();
+            //
         }
 
         private void Squadinfo_Click(object sender, EventArgs e)
         {
-            // Copy the text from Leyline60 TextBox to the clipboard
-            Clipboard.SetText(Squadinfo.Text);
-
-            // Bring the Gw2-64.exe window to the foreground
-            BringGw2ToFront();
+            //
         }
 
         private void Guild_Click(object sender, EventArgs e)
         {
-            // Copy the text from Leyline60 TextBox to the clipboard
-            Clipboard.SetText(Guild.Text);
-
-            // Bring the Gw2-64.exe window to the foreground
-            BringGw2ToFront();
         }
 
         private void Welcome_Click(object sender, EventArgs e)
         {
-            // Copy the text from Leyline60 TextBox to the clipboard
-            Clipboard.SetText(Welcome.Text);
-
-            // Bring the Gw2-64.exe window to the foreground
-            BringGw2ToFront();
+            //
         }
 
         private void Shattererinfo_Click(object sender, EventArgs e)
         {
-            // Copy the text from Leyline60 TextBox to the clipboard
-            Clipboard.SetText(Shattererinfo.Text);
-
-            // Bring the Gw2-64.exe window to the foreground
-            BringGw2ToFront();
+            // 
         }
 
         private void Shattererinstance_Click(object sender, EventArgs e)
         {
-            // Copy the text from Leyline60 TextBox to the clipboard
-            Clipboard.SetText(Shattererinstance.Text);
-
-            // Bring the Gw2-64.exe window to the foreground
-            BringGw2ToFront();
+            // 
         }
 
         private void Attentionshatterer_Click(object sender, EventArgs e)
         {
-            // Copy the text from Leyline60 TextBox to the clipboard
-            Clipboard.SetText(Attentionshatterer.Text);
-
-            // Bring the Gw2-64.exe window to the foreground
-            BringGw2ToFront();
+            // 
         }
 
         private void Squadmessage2_Click(object sender, EventArgs e)
         {
-            // Copy the text from Leyline60 TextBox to the clipboard
-            Clipboard.SetText(Squadmessage2.Text);
-
-            // Bring the Gw2-64.exe window to the foreground
-            BringGw2ToFront();
+            // 
         }
 
 
         private void Pres_Click(object sender, EventArgs e)
         {
-            // Copy the text from Leyline60 TextBox to the clipboard
-            Clipboard.SetText(Pres.Text);
-
-            // Bring the Gw2-64.exe window to the foreground
-            BringGw2ToFront();
+            // 
         }
 
         private void Petsback_Click(object sender, EventArgs e)
         {
-            // Copy the text from Leyline60 TextBox to the clipboard
-            Clipboard.SetText(Petsback.Text);
-
-            // Bring the Gw2-64.exe window to the foreground
-            BringGw2ToFront();
+            // 
         }
 
         private void Crystalls_Click(object sender, EventArgs e)
         {
-            // Copy the text from Leyline60 TextBox to the clipboard
-            Clipboard.SetText(Crystalls.Text);
-
-            // Bring the Gw2-64.exe window to the foreground
-            BringGw2ToFront();
+            //
         }
 
         private void Nochance_Click(object sender, EventArgs e)
         {
-            // Copy the text from Leyline60 TextBox to the clipboard
-            Clipboard.SetText(NoChance.Text);
-
-            // Bring the Gw2-64.exe window to the foreground
-            BringGw2ToFront();
+            // 
         }
 
         private void Burnsblunder_Click(object sender, EventArgs e)
         {
-            // Copy the text from Leyline60 TextBox to the clipboard
-            Clipboard.SetText(Burnsblunder.Text);
-
-            // Bring the Gw2-64.exe window to the foreground
-            BringGw2ToFront();
+            // 
         }
 
         private void Nofly_Click(object sender, EventArgs e)
         {
-            // Copy the text from Leyline60 TextBox to the clipboard
-            Clipboard.SetText(Nofly1.Text);
-
-            // Bring the Gw2-64.exe window to the foreground
-            BringGw2ToFront();
+            // 
         }
 
         private void Nofly2_Click(object sender, EventArgs e)
         {
-            // Copy the text from Leyline60 TextBox to the clipboard
-            Clipboard.SetText(Nofly2.Text);
-
-            // Bring the Gw2-64.exe window to the foreground
-            BringGw2ToFront();
+            // 
         }
 
         private void Nofly3_Click(object sender, EventArgs e)
         {
-            // Copy the text from Leyline60 TextBox to the clipboard
-            Clipboard.SetText(Nofly3.Text);
-
-            // Bring the Gw2-64.exe window to the foreground
-            BringGw2ToFront();
+            // 
         }
 
         private void Preis_Click(object sender, EventArgs e)
         {
-            // Copy the text from Leyline60 TextBox to the clipboard
-            Clipboard.SetText(Shattiitem.Text);
-
-            // Bring the Gw2-64.exe window to the foreground
-            BringGw2ToFront();
+            // 
         }
 
         private void button1_Click(object sender, EventArgs e)
