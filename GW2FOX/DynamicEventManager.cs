@@ -16,15 +16,15 @@ namespace GW2FOX
         /// </summary>
         public static List<DynamicEvent> Events { get; } = new List<DynamicEvent>
         {
-            new DynamicEvent("The Eye of Zhaitan", TimeSpan.FromMinutes(20), "Treasures", "[&BPgCAAA=]"),
-            new DynamicEvent("Gates of Arah",        TimeSpan.FromMinutes(90), "Treasures", "[&BA8DAAA=]"),
-            new DynamicEvent("Branded Generals",     TimeSpan.FromMinutes(90), "Treasures", "[&BIMLAAA=]"),
-            new DynamicEvent("Dredge Commissar",     TimeSpan.FromMinutes(20), "Treasures", "[&BFYCAAA=]"),
-            new DynamicEvent("Captain Rotbeard",     TimeSpan.FromMinutes(35), "Treasures", "[&BOQGAAA=]"),
-            new DynamicEvent("Rhendak",              TimeSpan.FromMinutes(10), "Treasures", "[&BNwAAAA=]"),
-            new DynamicEvent("Ogrewars",             TimeSpan.FromMinutes(20), "Treasures", "[&BDwEAAA=]"),
-            new DynamicEvent("Statue of Dwanya",     TimeSpan.FromMinutes(50), "Treasures", "[&BLICAAA=]"),
-            new DynamicEvent("Priestess of Lyssa",   TimeSpan.FromMinutes(90), "Treasures", "[&BKsCAAA=]"),
+            new DynamicEvent("The Eye of Zhaitan", TimeSpan.FromMinutes(20), "Treasures", "[&BPgCAAA=]"), // correct all 20min from point i click
+            new DynamicEvent("Gates of Arah",        TimeSpan.FromMinutes(90), "Treasures", "[&BA8DAAA=]"), //???
+            new DynamicEvent("Branded Generals",     TimeSpan.FromMinutes(90), "Treasures", "[&BIMLAAA=]"), //???
+            new DynamicEvent("Dredge Commissar",     TimeSpan.FromMinutes(20), "Treasures", "[&BFYCAAA=]"), // correct same style like Eye
+            new DynamicEvent("Captain Rotbeard",     TimeSpan.FromMinutes(35), "Treasures", "[&BOQGAAA=]"), // correct same style like Eye
+            new DynamicEvent("Rhendak",              TimeSpan.FromMinutes(10), "Treasures", "[&BNwAAAA=]"), // correct same style like Eye
+            new DynamicEvent("Ogrewars",             TimeSpan.FromMinutes(20), "Treasures", "[&BDwEAAA=]"), // correct same style like Eye
+            new DynamicEvent("Statue of Dwanya",     TimeSpan.FromMinutes(50), "Treasures", "[&BLICAAA=]"), // correct same style like Eye
+            new DynamicEvent("Priestess of Lyssa",   TimeSpan.FromMinutes(90), "Treasures", "[&BKsCAAA=]"), //???
         };
 
         static DynamicEventManager()
