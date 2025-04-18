@@ -20,11 +20,13 @@ namespace GW2FOX
         private void button1_Click(object sender, EventArgs e)
         {
             ShowAndHideForm(new Main());
+            this.Hide();
         }
 
         private void button14_Click(object sender, EventArgs e)
         {
             ShowAndHideForm(new Theshatterer2());
+            this.Hide();
         }
     }
 }
