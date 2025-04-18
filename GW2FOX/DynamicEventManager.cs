@@ -1,14 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Text.Json;
 using static GW2FOX.BossTimings;
 
 namespace GW2FOX
 {
     internal static class DynamicEventManager
     {
+        private const string PersistFile = "dynamicEvents.json";
+
         /// <summary>
-        /// Statically defined dynamic events with their respective delay and waypoint.
+        /// Statically defined dynamic events.
         /// </summary>
         public static List<DynamicEvent> Events { get; } = new List<DynamicEvent>
         {
@@ -24,8 +28,13 @@ namespace GW2FOX
             new DynamicEvent("FireShaman",           TimeSpan.FromMinutes(75), "Treasures", "[&BKsCAAA=]")
         };
 
+        static DynamicEventManager()
+        {
+            LoadPersistedState();
+        }
+
         /// <summary>
-        /// Starts the countdown for the specified dynamic event.
+        /// Trigger the event and persist state.
         /// </summary>
         public static void Trigger(string bossName)
         {
@@ -34,10 +43,11 @@ namespace GW2FOX
                 return;
 
             ev.Trigger();
+            SavePersistedState();
         }
 
         /// <summary>
-        /// Returns all currently running dynamic events as BossEventRun instances.
+        /// Get all currently running events as BossEventRuns.
         /// </summary>
         public static IEnumerable<BossEventRun> GetActiveBossEventRuns()
         {
@@ -46,24 +56,54 @@ namespace GW2FOX
                 .Select(e => e.ToBossEventRun());
         }
 
-        // Hilfsmethode, wenn du je anders bauen möchtest
-        private static string GetWaypoint(string bossName)
+        private static void LoadPersistedState()
         {
-            return bossName switch
+            try
             {
-                "The Eye of Zhaitan" => "[&BPgCAAA=]",
-                "Gates of Arah" => "[&BA8DAAA=]",
-                "Branded Generals" => "[&BIMLAAA=]",
-                "Dredge Commissar" => "[&BFYCAAA=]",
-                "Captain Rotbeard" => "[&BOQGAAA=]",
-                "Rhendak" => "[&BNwAAAA=]",
-                "Ogrewars" => "[&BDwEAAA=]",
-                "Statue of Dwanya" => "[&BLICAAA=]",
-                "Priestess of Lyssa" => "[&BKsCAAA=]",
-                "FireShaman" => "[&BKsCAAA=]",
-                _ => string.Empty
-            };
+                if (!File.Exists(PersistFile))
+                    return;
+
+                var json = File.ReadAllText(PersistFile);
+                var saved = JsonSerializer.Deserialize<List<PersistEntry>>(json);
+                if (saved == null) return;
+
+                foreach (var entry in saved)
+                {
+                    var ev = Events.FirstOrDefault(e => e.BossName == entry.BossName);
+                    if (ev != null)
+                        ev.SetStartTime(entry.UtcStartTime);
+                }
+            }
+            catch
+            {
+                // ignore errors or log
+            }
+        }
+
+        private static void SavePersistedState()
+        {
+            try
+            {
+                var entries = Events
+                    .Where(e => e.StartTime.HasValue)
+                    .Select(e => new PersistEntry { BossName = e.BossName, UtcStartTime = e.StartTime.Value })
+                    .ToList();
+
+                var json = JsonSerializer.Serialize(entries);
+                File.WriteAllText(PersistFile, json);
+            }
+            catch
+            {
+                // ignore errors or log
+            }
+        }
+
+        private class PersistEntry
+        {
+            public string BossName { get; set; } = string.Empty;
+            public DateTime UtcStartTime { get; set; }
         }
     }
 }
+
 
