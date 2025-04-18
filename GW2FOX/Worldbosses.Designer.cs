@@ -175,6 +175,16 @@
             button69 = new Button();
             LLA = new CheckBox();
             FidosSpecial = new Button();
+            ArahBox = new CheckBox();
+            GeneralsBox = new CheckBox();
+            CommissarBox = new CheckBox();
+            CaptainBox = new CheckBox();
+            RhendakBox = new CheckBox();
+            FireShamanBox = new CheckBox();
+            OgreBox = new CheckBox();
+            LyssaBox = new CheckBox();
+            DwanyaBox = new CheckBox();
+            EyeBox = new CheckBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
@@ -1939,11 +1949,131 @@
             FidosSpecial.UseVisualStyleBackColor = true;
             FidosSpecial.Click += FidosSpecial_Click;
             // 
+            // ArahBox
+            // 
+            ArahBox.AutoSize = true;
+            ArahBox.BackColor = Color.Magenta;
+            ArahBox.Location = new Point(339, 751);
+            ArahBox.Name = "ArahBox";
+            ArahBox.Size = new Size(15, 14);
+            ArahBox.TabIndex = 240;
+            ArahBox.UseVisualStyleBackColor = false;
+            ArahBox.CheckedChanged += ArahBox_CheckedChanged;
+            // 
+            // GeneralsBox
+            // 
+            GeneralsBox.AutoSize = true;
+            GeneralsBox.BackColor = Color.Magenta;
+            GeneralsBox.Location = new Point(339, 710);
+            GeneralsBox.Name = "GeneralsBox";
+            GeneralsBox.Size = new Size(15, 14);
+            GeneralsBox.TabIndex = 241;
+            GeneralsBox.UseVisualStyleBackColor = false;
+            GeneralsBox.CheckedChanged += GeneralsBox_CheckedChanged;
+            // 
+            // CommissarBox
+            // 
+            CommissarBox.AutoSize = true;
+            CommissarBox.BackColor = Color.Magenta;
+            CommissarBox.Location = new Point(339, 671);
+            CommissarBox.Name = "CommissarBox";
+            CommissarBox.Size = new Size(15, 14);
+            CommissarBox.TabIndex = 242;
+            CommissarBox.UseVisualStyleBackColor = false;
+            CommissarBox.CheckedChanged += CommissarBox_CheckedChanged;
+            // 
+            // CaptainBox
+            // 
+            CaptainBox.AutoSize = true;
+            CaptainBox.BackColor = Color.Magenta;
+            CaptainBox.Location = new Point(339, 628);
+            CaptainBox.Name = "CaptainBox";
+            CaptainBox.Size = new Size(15, 14);
+            CaptainBox.TabIndex = 243;
+            CaptainBox.UseVisualStyleBackColor = false;
+            CaptainBox.CheckedChanged += CaptainBox_CheckedChanged;
+            // 
+            // RhendakBox
+            // 
+            RhendakBox.AutoSize = true;
+            RhendakBox.BackColor = Color.Magenta;
+            RhendakBox.Location = new Point(339, 587);
+            RhendakBox.Name = "RhendakBox";
+            RhendakBox.Size = new Size(15, 14);
+            RhendakBox.TabIndex = 244;
+            RhendakBox.UseVisualStyleBackColor = false;
+            RhendakBox.CheckedChanged += RhendakBox_CheckedChanged;
+            // 
+            // FireShamanBox
+            // 
+            FireShamanBox.AutoSize = true;
+            FireShamanBox.BackColor = Color.Magenta;
+            FireShamanBox.Location = new Point(339, 545);
+            FireShamanBox.Name = "FireShamanBox";
+            FireShamanBox.Size = new Size(15, 14);
+            FireShamanBox.TabIndex = 245;
+            FireShamanBox.UseVisualStyleBackColor = false;
+            FireShamanBox.CheckedChanged += FireShamanBox_CheckedChanged;
+            // 
+            // OgreBox
+            // 
+            OgreBox.AutoSize = true;
+            OgreBox.BackColor = Color.Magenta;
+            OgreBox.Location = new Point(339, 505);
+            OgreBox.Name = "OgreBox";
+            OgreBox.Size = new Size(15, 14);
+            OgreBox.TabIndex = 246;
+            OgreBox.UseVisualStyleBackColor = false;
+            OgreBox.CheckedChanged += OgreBox_CheckedChanged;
+            // 
+            // LyssaBox
+            // 
+            LyssaBox.AutoSize = true;
+            LyssaBox.BackColor = Color.Magenta;
+            LyssaBox.Location = new Point(339, 464);
+            LyssaBox.Name = "LyssaBox";
+            LyssaBox.Size = new Size(15, 14);
+            LyssaBox.TabIndex = 247;
+            LyssaBox.UseVisualStyleBackColor = false;
+            LyssaBox.CheckedChanged += LyssaBox_CheckedChanged;
+            // 
+            // DwanyaBox
+            // 
+            DwanyaBox.AutoSize = true;
+            DwanyaBox.BackColor = Color.Magenta;
+            DwanyaBox.Location = new Point(339, 423);
+            DwanyaBox.Name = "DwanyaBox";
+            DwanyaBox.Size = new Size(15, 14);
+            DwanyaBox.TabIndex = 248;
+            DwanyaBox.UseVisualStyleBackColor = false;
+            DwanyaBox.CheckedChanged += DwanyaBox_CheckedChanged;
+            // 
+            // EyeBox
+            // 
+            EyeBox.AutoSize = true;
+            EyeBox.BackColor = Color.Magenta;
+            EyeBox.Location = new Point(339, 382);
+            EyeBox.Name = "EyeBox";
+            EyeBox.Size = new Size(15, 14);
+            EyeBox.TabIndex = 249;
+            EyeBox.UseVisualStyleBackColor = false;
+            EyeBox.CheckedChanged += EyeBox_CheckedChanged;
+            // 
             // Worldbosses
             // 
             AutoScaleMode = AutoScaleMode.None;
             AutoValidate = AutoValidate.EnablePreventFocusChange;
             ClientSize = new Size(1904, 1041);
+            Controls.Add(EyeBox);
+            Controls.Add(DwanyaBox);
+            Controls.Add(LyssaBox);
+            Controls.Add(OgreBox);
+            Controls.Add(FireShamanBox);
+            Controls.Add(RhendakBox);
+            Controls.Add(CaptainBox);
+            Controls.Add(CommissarBox);
+            Controls.Add(GeneralsBox);
+            Controls.Add(ArahBox);
             Controls.Add(FidosSpecial);
             Controls.Add(LLA);
             Controls.Add(button69);
@@ -2259,5 +2389,15 @@
         private Button button69;
         private CheckBox LLA;
         private Button FidosSpecial;
+        private CheckBox ArahBox;
+        private CheckBox GeneralsBox;
+        private CheckBox CommissarBox;
+        private CheckBox CaptainBox;
+        private CheckBox RhendakBox;
+        private CheckBox FireShamanBox;
+        private CheckBox OgreBox;
+        private CheckBox LyssaBox;
+        private CheckBox DwanyaBox;
+        private CheckBox EyeBox;
     }
 }

@@ -356,23 +356,23 @@ namespace GW2FOX
         }
 
         private void Ulgoth_CheckedChanged(object sender, EventArgs e)
+
         {
+            string bossName = "Ulgoth the Modniir";
+
+
+
+            if (Ulgoth.Checked)
             {
-                string bossName = "Ulgoth the Modniir";
-
-
-
-                if (Ulgoth.Checked)
-                {
-                    SaveBossNameToConfig(bossName);
-                }
-                else
-                {
-                    RemoveBossNameFromConfig(bossName);
-                }
-
+                SaveBossNameToConfig(bossName);
             }
+            else
+            {
+                RemoveBossNameFromConfig(bossName);
+            }
+
         }
+
 
         private void Thaida_CheckedChanged(object sender, EventArgs e)
         {
@@ -1212,7 +1212,17 @@ namespace GW2FOX
         { "Wizard's Tower", WizzardsTower },
         { "Fly by Night", Flybynigtht },
         { "Defense of Amnytas", Amnytas },
-        { "Convergences", Convergence }
+        { "Convergences", Convergence },
+        { "Priestess of Lyssa", LyssaBox },
+        { "Statue of Dwanya", DwanyaBox },
+        { "Ogrewars", OgreBox },
+        { "FireShaman", FireShamanBox },
+        { "Rhendak", RhendakBox },
+        { "Captain Rotbeard", CaptainBox },
+        { "Dredge Commissar", CommissarBox },
+        { "Branded Generals", GeneralsBox },
+        { "Gates of Arah", ArahBox },
+        { "The Eye of Zhaitan", EyeBox }
         };
         }
 
@@ -2119,7 +2129,175 @@ namespace GW2FOX
             BringGw2ToFront();
         }
 
-        
+        private void EyeBox_CheckedChanged(object sender, EventArgs e)
+        {
+            string bossName = "Eye of Zhaitan";
+
+
+
+            if (EyeBox.Checked)
+            {
+                SaveBossNameToConfig(bossName);
+            }
+            else
+            {
+                RemoveBossNameFromConfig(bossName);
+            }
+
+        }
+
+        private void DwanyaBox_CheckedChanged(object sender, EventArgs e)
+        {
+            string bossName = "Statue of Dwanya";
+
+
+
+            if (DwanyaBox.Checked)
+            {
+                SaveBossNameToConfig(bossName);
+            }
+            else
+            {
+                RemoveBossNameFromConfig(bossName);
+            }
+
+        }
+
+        private void LyssaBox_CheckedChanged(object sender, EventArgs e)
+        {
+            string bossName = "Priestess of Lyssa";
+
+
+
+            if (LyssaBox.Checked)
+            {
+                SaveBossNameToConfig(bossName);
+            }
+            else
+            {
+                RemoveBossNameFromConfig(bossName);
+            }
+
+        }
+
+        private void OgreBox_CheckedChanged(object sender, EventArgs e)
+        {
+            string bossName = "Ogrewars";
+
+
+
+            if (OgreBox.Checked)
+            {
+                SaveBossNameToConfig(bossName);
+            }
+            else
+            {
+                RemoveBossNameFromConfig(bossName);
+            }
+
+        }
+
+        private void FireShamanBox_CheckedChanged(object sender, EventArgs e)
+        {
+            string bossName = "FireShaman";
+
+
+
+            if (FireShamanBox.Checked)
+            {
+                SaveBossNameToConfig(bossName);
+            }
+            else
+            {
+                RemoveBossNameFromConfig(bossName);
+            }
+
+        }
+
+        private void RhendakBox_CheckedChanged(object sender, EventArgs e)
+        {
+            string bossName = "Rhendak";
+
+
+
+            if (RhendakBox.Checked)
+            {
+                SaveBossNameToConfig(bossName);
+            }
+            else
+            {
+                RemoveBossNameFromConfig(bossName);
+            }
+
+        }
+
+        private void CaptainBox_CheckedChanged(object sender, EventArgs e)
+        {
+            string bossName = "Captain Rotbeard";
+
+
+
+            if (CaptainBox.Checked)
+            {
+                SaveBossNameToConfig(bossName);
+            }
+            else
+            {
+                RemoveBossNameFromConfig(bossName);
+            }
+
+        }
+
+        private void CommissarBox_CheckedChanged(object sender, EventArgs e)
+        {
+            string bossName = "Dredge Commissar";
+
+
+
+            if (CommissarBox.Checked)
+            {
+                SaveBossNameToConfig(bossName);
+            }
+            else
+            {
+                RemoveBossNameFromConfig(bossName);
+            }
+
+        }
+
+        private void GeneralsBox_CheckedChanged(object sender, EventArgs e)
+        {
+            string bossName = "Branded Generals";
+
+
+
+            if (GeneralsBox.Checked)
+            {
+                SaveBossNameToConfig(bossName);
+            }
+            else
+            {
+                RemoveBossNameFromConfig(bossName);
+            }
+
+        }
+
+        private void ArahBox_CheckedChanged(object sender, EventArgs e)
+        {
+            string bossName = "Gates of Arah";
+
+
+
+            if (ArahBox.Checked)
+            {
+                SaveBossNameToConfig(bossName);
+            }
+            else
+            {
+                RemoveBossNameFromConfig(bossName);
+            }
+
+        }
     }
 }
 
