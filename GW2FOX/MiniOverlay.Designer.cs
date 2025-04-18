@@ -43,7 +43,7 @@
             button1.FlatAppearance.BorderSize = 0;
             button1.FlatStyle = FlatStyle.Popup;
             button1.ForeColor = Color.Magenta;
-            button1.Location = new Point(-1, -2);
+            button1.Location = new Point(11, -1);
             button1.Margin = new Padding(0);
             button1.Name = "button1";
             button1.Size = new Size(28, 28);
@@ -59,7 +59,7 @@
             button2.FlatAppearance.BorderSize = 0;
             button2.FlatStyle = FlatStyle.Popup;
             button2.ForeColor = Color.Magenta;
-            button2.Location = new Point(27, -2);
+            button2.Location = new Point(39, -1);
             button2.Margin = new Padding(0);
             button2.Name = "button2";
             button2.Size = new Size(28, 28);
@@ -75,7 +75,7 @@
             button3.FlatAppearance.BorderSize = 0;
             button3.FlatStyle = FlatStyle.Popup;
             button3.ForeColor = Color.Transparent;
-            button3.Location = new Point(55, -2);
+            button3.Location = new Point(67, -1);
             button3.Margin = new Padding(0);
             button3.Name = "button3";
             button3.Size = new Size(28, 28);
@@ -91,7 +91,7 @@
             button4.FlatAppearance.BorderSize = 0;
             button4.FlatStyle = FlatStyle.Popup;
             button4.ForeColor = Color.Transparent;
-            button4.Location = new Point(83, -2);
+            button4.Location = new Point(95, -1);
             button4.Margin = new Padding(0);
             button4.Name = "button4";
             button4.Size = new Size(28, 28);
@@ -103,9 +103,9 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.Magenta;
+            BackColor = Color.Black;
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(120, 25);
+            ClientSize = new Size(135, 25);
             ControlBox = false;
             Controls.Add(button4);
             Controls.Add(button3);
@@ -113,6 +113,7 @@
             Controls.Add(button1);
             Cursor = Cursors.Cross;
             Name = "MiniOverlay";
+            Opacity = 0.7D;
             ShowIcon = false;
             ShowInTaskbar = false;
             SizeGripStyle = SizeGripStyle.Hide;

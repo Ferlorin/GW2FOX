@@ -1213,16 +1213,6 @@ namespace GW2FOX
         { "Fly by Night", Flybynigtht },
         { "Defense of Amnytas", Amnytas },
         { "Convergences", Convergence },
-        { "Priestess of Lyssa", LyssaBox },
-        { "Statue of Dwanya", DwanyaBox },
-        { "Ogrewars", OgreBox },
-        { "FireShaman", FireShamanBox },
-        { "Rhendak", RhendakBox },
-        { "Captain Rotbeard", CaptainBox },
-        { "Dredge Commissar", CommissarBox },
-        { "Branded Generals", GeneralsBox },
-        { "Gates of Arah", ArahBox },
-        { "The Eye of Zhaitan", EyeBox }
         };
         }
 
