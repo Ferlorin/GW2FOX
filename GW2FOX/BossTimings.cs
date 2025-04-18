@@ -83,7 +83,7 @@ namespace GW2FOX
             AddBossEvent("Chak Gerent", "01:30:00", 2, "Maguuma", "[&BPUHAAA=]");
             AddBossEvent("Battle in Tarir", "01:45:00", 2, "Maguuma", "[&BN0HAAA=][&BGwIAAA=][&BAIIAAA=][&BAYIAAA=]");
             AddBossEvent("Octovine", "02:00:00", 2, "Maguuma", "[&BN0HAAA=][&BGwIAAA=][&BAIIAAA=][&BAYIAAA=]");
-            AddBossEvent("Spellmaster Macsen", "01:10:00", 2, "Maguuma", "[&BO8HAAA=]");
+            AddBossEvent("Nightbosses", "01:10:00", 2, "Maguuma", "[&BO8HAAA=]");
             AddBossEvent("Dragon's Stand", "00:30:00", 2, "Maguuma", "[&BBAIAAA=]");
 
             //Desert

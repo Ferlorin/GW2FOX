@@ -174,6 +174,7 @@
             button1 = new Button();
             button69 = new Button();
             LLA = new CheckBox();
+            FidosSpecial = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
@@ -1718,7 +1719,7 @@
             World.BackgroundImageLayout = ImageLayout.Center;
             World.Cursor = Cursors.Cross;
             World.FlatStyle = FlatStyle.Flat;
-            World.Location = new Point(756, 27);
+            World.Location = new Point(694, 28);
             World.Name = "World";
             World.Size = new Size(127, 32);
             World.TabIndex = 222;
@@ -1731,7 +1732,7 @@
             Mixed.BackgroundImageLayout = ImageLayout.Center;
             Mixed.Cursor = Cursors.Cross;
             Mixed.FlatStyle = FlatStyle.Flat;
-            Mixed.Location = new Point(1022, 27);
+            Mixed.Location = new Point(960, 28);
             Mixed.Name = "Mixed";
             Mixed.Size = new Size(127, 32);
             Mixed.TabIndex = 225;
@@ -1757,7 +1758,7 @@
             Meta.BackgroundImageLayout = ImageLayout.Center;
             Meta.Cursor = Cursors.Cross;
             Meta.FlatStyle = FlatStyle.Flat;
-            Meta.Location = new Point(889, 27);
+            Meta.Location = new Point(827, 28);
             Meta.Name = "Meta";
             Meta.Size = new Size(127, 32);
             Meta.TabIndex = 223;
@@ -1925,11 +1926,25 @@
             LLA.UseVisualStyleBackColor = false;
             LLA.CheckedChanged += LLA_CheckedChanged;
             // 
+            // FidosSpecial
+            // 
+            FidosSpecial.BackgroundImage = (Image)resources.GetObject("FidosSpecial.BackgroundImage");
+            FidosSpecial.BackgroundImageLayout = ImageLayout.Center;
+            FidosSpecial.Cursor = Cursors.Cross;
+            FidosSpecial.FlatStyle = FlatStyle.Flat;
+            FidosSpecial.Location = new Point(1093, 28);
+            FidosSpecial.Name = "FidosSpecial";
+            FidosSpecial.Size = new Size(127, 32);
+            FidosSpecial.TabIndex = 239;
+            FidosSpecial.UseVisualStyleBackColor = true;
+            FidosSpecial.Click += FidosSpecial_Click;
+            // 
             // Worldbosses
             // 
             AutoScaleMode = AutoScaleMode.None;
             AutoValidate = AutoValidate.EnablePreventFocusChange;
             ClientSize = new Size(1904, 1041);
+            Controls.Add(FidosSpecial);
             Controls.Add(LLA);
             Controls.Add(button69);
             Controls.Add(button1);
@@ -2243,5 +2258,6 @@
         private Button button1;
         private Button button69;
         private CheckBox LLA;
+        private Button FidosSpecial;
     }
 }

@@ -1179,7 +1179,7 @@ namespace GW2FOX
         { "Claw of Jormag", Claw },
         { "Chak Gerent", Chak },
         { "Battle in Tarir", Tarir },
-        { "Spellmaster Macsen", Mascen },
+        { "Nightbosses", Mascen },
         { "Dragon's Stand", DS },
         { "DB Shatterer", DBS },
         { "Junundu Rising", Junundu },
@@ -1832,6 +1832,51 @@ namespace GW2FOX
             ShowAndHideForm(new Convergences());
         }
 
+        private void FidosSpecial_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ClearAll_Click(null, EventArgs.Empty);
+
+
+                string[] lines = ReadConfigFile();
+
+                int worldIndex = -1;
+                for (int i = 0; i < lines.Length; i++)
+                {
+                    if (lines[i].StartsWith("Fido:"))
+                    {
+                        worldIndex = i;
+                        break;
+                    }
+                }
+
+                if (worldIndex != -1 && worldIndex < lines.Length)
+                {
+                    string worldBossLine = lines[worldIndex].Replace("Fido:", "").Trim();
+
+                    string[] worldBosses = worldBossLine
+                        .Trim('"')
+                        .Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+                        .Select(boss => boss.Trim())
+                        .ToArray();
+
+                    CheckBossCheckboxes(worldBosses);
+                    UpdateBossesSection1(worldBosses, lines);
+                }
+                else
+                {
+                    SaveTextToFile(GlobalVariables.DEFAULT_WORLD, "Fido");
+                    World_Click(sender, e);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error loading World bosses: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+
         private void World_Click(object sender, EventArgs e)
         {
             try
@@ -2073,12 +2118,9 @@ namespace GW2FOX
             Clipboard.SetText(Welcome.Text);
             BringGw2ToFront();
         }
+
+        
     }
-
-
-
-
-
 }
 
 
