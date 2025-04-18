@@ -14,11 +14,6 @@ namespace GW2FOX
 
         private static ToolTip toolTip = new ToolTip();
 
-
-
-
-
-
         static BossTimerService()
         {
             Initialize();
@@ -264,7 +259,7 @@ namespace GW2FOX
                 {
                     try
                     {
-                        // Read the boss names from the configuration file
+                        // 1. Statische Events aus Konfiguration
                         List<string> bossNamesFromConfig = BossList23;
 
                         var bossEventGroups = BossEventGroups
@@ -275,52 +270,37 @@ namespace GW2FOX
                             .SelectMany(bossEventGroup => bossEventGroup.GetNextRuns())
                             .ToList();
 
+                        // 2. Dynamische Events hinzufügen
+                        var dynamicRuns = DynamicEventManager.Events
+                            .Where(de => de.IsRunning)
+                            .Select(de => de.ToBossEventRun());
+                        allBosses.AddRange(dynamicRuns);
+
+                        // 3. Sortieren nach nächster Laufzeit und Kategorie
+                        allBosses.Sort((bossEvent1, bossEvent2) =>
+                        {
+                            int timeComparison = bossEvent1.NextRunTime.CompareTo(bossEvent2.NextRunTime);
+                            if (timeComparison != 0) return timeComparison;
+                            return string.Compare(bossEvent1.Category, bossEvent2.Category, StringComparison.Ordinal);
+                        });
 
                         var listViewItems = new List<ListViewItem>();
 
-                        // Use a HashSet to keep track of added boss names
-                        HashSet<string> addedBossNames = new HashSet<string>();
-
-                        allBosses.Sort((bossEvent1, bossEvent2) =>
-                        {
-                            // Compare the adjusted timings for the next day
-                            int adjustedTimingComparison = bossEvent1.NextRunTime.CompareTo(bossEvent2.NextRunTime);
-                            if (adjustedTimingComparison != 0) return adjustedTimingComparison;
-
-
-                            // If durations and timings are equal, sort by categories (if necessary)
-                            int categoryComparison = String.Compare(bossEvent1.Category, bossEvent2.Category, StringComparison.Ordinal);
-                            if (categoryComparison != 0) return categoryComparison;
-
-                            return 0;
-                        });
-
                         foreach (var bossEvent in allBosses)
                         {
-                            // Calculate the end time of the boss event based on the current time
-
                             var listViewItem = new ListViewItem("btn", 0);
-                            listViewItem.SubItems.Add(bossEvent.BossName); // Hier wird ein Unterelement hinzugefügt
-                            listViewItem.SubItems.Add(bossEvent.getTimeRemainingFormatted()); // Hier wird ein Unterelement hinzugefügt
+                            listViewItem.SubItems.Add(bossEvent.BossName);
+                            listViewItem.SubItems.Add(bossEvent.getTimeRemainingFormatted());
                             listViewItem.ForeColor = bossEvent.getForeColor();
-                            // listViewItem.ToolTipText =
-                            //     "Left Click to copy the Waypoint to clipboard\nRight Click to remove from the list";
                             listViewItem.Tag = bossEvent;
                             foreach (ListViewItem.ListViewSubItem subItem in listViewItem.SubItems)
-                            {
                                 subItem.ForeColor = listViewItem.ForeColor;
-                            }
 
-
-                            // Neue Bedingung hinzufügen, um zu prüfen, ob ein Bossevent zur selben Zeit stattfindet wie ein anderes Bossevent derselben Kategorie
+                            // Gemeinsame Zeiten und Kategorie kursiv markieren
                             if (HasSameTimeAndCategory(allBosses, bossEvent))
-                            {
                                 listViewItem.Font = new Font("Segoe UI", 10, FontStyle.Italic | FontStyle.Bold);
-                            }
                             else
-                            {
                                 listViewItem.Font = new Font("Segoe UI", 10, FontStyle.Bold);
-                            }
 
                             listViewItems.Add(listViewItem);
                         }
@@ -333,6 +313,7 @@ namespace GW2FOX
                     }
                 });
             }
+
 
 
 

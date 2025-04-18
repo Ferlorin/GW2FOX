@@ -9,7 +9,7 @@ namespace GW2FOX
 
         public static List<string> BossList23 { get; private set; } = [];
         public static Dictionary<DateTime, List<string>> DoneBosses { get; private set; } = [];
-        private static readonly List<BossEvent> Events = [];
+        public static readonly List<BossEvent> Events = [];
         internal static readonly List<BossEventGroup> BossEventGroups = [];
 
         private const int NextRunsToShow = 2;
@@ -59,18 +59,6 @@ namespace GW2FOX
                 "19:00:00"
             ], "WBs", "[&BNUGAAA=]");
             AddBossEvent("Claw of Jormag", "00:30:00", 3, "WBs", "[&BHoCAAA=]");
-
-            //Treasures
-            AddBossEvent("The Eye of Zhaitan", "01:30:00", 3, "Treasures", "[&BPgCAAA=]");
-            AddBossEvent("Gates of Arah", "01:30:00", 3, "Treasures", "[&BA8DAAA=]");
-            AddBossEvent("Branded Generals", "01:30:00", 3, "Treasures", "[&BIMLAAA=]");
-            AddBossEvent("Dredge Commissar", "01:30:00", 3, "Treasures", "[&BFYCAAA=]");
-            AddBossEvent("Captain Rotbeard", "01:30:00", 3, "Treasures", "[&BOQGAAA=]");
-            AddBossEvent("Rhendak", "01:30:00", 3, "Treasures", "[&BNwAAAA=]");
-            AddBossEvent("FireShaman", "01:30:00", 3, "Treasures", "[&BNwBAAA=]");
-            AddBossEvent("Ogrewars", "01:30:00", 3, "Treasures", "[&BDwEAAA=]");
-            AddBossEvent("Statue of Dwanya", "01:30:00", 3, "Treasures", "[&BLICAAA=]");
-            AddBossEvent("Priestess of Lyssa", "01:30:00", 3, "Treasures", "[&BKsCAAA=]");
 
 
             //LWS2

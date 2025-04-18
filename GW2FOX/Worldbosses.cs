@@ -2301,7 +2301,8 @@ namespace GW2FOX
 
         private void EyeButton_Click(object sender, EventArgs e)
         {
-
+            DynamicEventManager.Trigger("The Eye of Zhaitan");
+            BossTimerService.Update();
         }
     }
 }
