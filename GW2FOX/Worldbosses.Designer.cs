@@ -185,6 +185,16 @@
             LyssaBox = new CheckBox();
             DwanyaBox = new CheckBox();
             EyeBox = new CheckBox();
+            EyeButton = new Button();
+            ArahButton = new Button();
+            GeneralsButton = new Button();
+            CommissarButton = new Button();
+            CaptainButton = new Button();
+            RhendakButton = new Button();
+            FireShamanButton = new Button();
+            OgresButton = new Button();
+            LyssaButton = new Button();
+            DwanyButton = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
@@ -301,7 +311,7 @@
             button11.BackgroundImageLayout = ImageLayout.Stretch;
             button11.Cursor = Cursors.Cross;
             button11.FlatStyle = FlatStyle.Flat;
-            button11.Location = new Point(360, 576);
+            button11.Location = new Point(342, 576);
             button11.Name = "button11";
             button11.Size = new Size(140, 35);
             button11.TabIndex = 18;
@@ -350,7 +360,7 @@
             button15.BackgroundImageLayout = ImageLayout.Stretch;
             button15.Cursor = Cursors.Cross;
             button15.FlatStyle = FlatStyle.Flat;
-            button15.Location = new Point(360, 535);
+            button15.Location = new Point(342, 535);
             button15.Name = "button15";
             button15.Size = new Size(140, 35);
             button15.TabIndex = 22;
@@ -449,7 +459,7 @@
             button23.BackgroundImageLayout = ImageLayout.Stretch;
             button23.Cursor = Cursors.Cross;
             button23.FlatStyle = FlatStyle.Flat;
-            button23.Location = new Point(360, 371);
+            button23.Location = new Point(342, 371);
             button23.Name = "button23";
             button23.Size = new Size(140, 35);
             button23.TabIndex = 30;
@@ -462,7 +472,7 @@
             button24.BackgroundImageLayout = ImageLayout.Stretch;
             button24.Cursor = Cursors.Cross;
             button24.FlatStyle = FlatStyle.Flat;
-            button24.Location = new Point(360, 412);
+            button24.Location = new Point(342, 412);
             button24.Name = "button24";
             button24.Size = new Size(140, 35);
             button24.TabIndex = 31;
@@ -475,7 +485,7 @@
             button25.BackgroundImageLayout = ImageLayout.Stretch;
             button25.Cursor = Cursors.Cross;
             button25.FlatStyle = FlatStyle.Flat;
-            button25.Location = new Point(360, 453);
+            button25.Location = new Point(342, 453);
             button25.Name = "button25";
             button25.Size = new Size(140, 35);
             button25.TabIndex = 32;
@@ -488,7 +498,7 @@
             button26.BackgroundImageLayout = ImageLayout.Stretch;
             button26.Cursor = Cursors.Cross;
             button26.FlatStyle = FlatStyle.Flat;
-            button26.Location = new Point(360, 494);
+            button26.Location = new Point(342, 494);
             button26.Name = "button26";
             button26.Size = new Size(140, 35);
             button26.TabIndex = 33;
@@ -1840,7 +1850,7 @@
             button31.BackgroundImageLayout = ImageLayout.Stretch;
             button31.Cursor = Cursors.Cross;
             button31.FlatStyle = FlatStyle.Flat;
-            button31.Location = new Point(360, 740);
+            button31.Location = new Point(342, 740);
             button31.Name = "button31";
             button31.Size = new Size(140, 35);
             button31.TabIndex = 231;
@@ -1853,7 +1863,7 @@
             button42.BackgroundImageLayout = ImageLayout.Stretch;
             button42.Cursor = Cursors.Cross;
             button42.FlatStyle = FlatStyle.Flat;
-            button42.Location = new Point(360, 699);
+            button42.Location = new Point(342, 699);
             button42.Name = "button42";
             button42.Size = new Size(140, 35);
             button42.TabIndex = 232;
@@ -1866,7 +1876,7 @@
             button63.BackgroundImageLayout = ImageLayout.Stretch;
             button63.Cursor = Cursors.Cross;
             button63.FlatStyle = FlatStyle.Flat;
-            button63.Location = new Point(360, 658);
+            button63.Location = new Point(342, 658);
             button63.Name = "button63";
             button63.Size = new Size(140, 35);
             button63.TabIndex = 233;
@@ -1879,7 +1889,7 @@
             button65.BackgroundImageLayout = ImageLayout.Stretch;
             button65.Cursor = Cursors.Cross;
             button65.FlatStyle = FlatStyle.Flat;
-            button65.Location = new Point(360, 617);
+            button65.Location = new Point(342, 617);
             button65.Name = "button65";
             button65.Size = new Size(140, 35);
             button65.TabIndex = 234;
@@ -1953,7 +1963,7 @@
             // 
             ArahBox.AutoSize = true;
             ArahBox.BackColor = Color.Magenta;
-            ArahBox.Location = new Point(339, 751);
+            ArahBox.Location = new Point(321, 751);
             ArahBox.Name = "ArahBox";
             ArahBox.Size = new Size(15, 14);
             ArahBox.TabIndex = 240;
@@ -1964,7 +1974,7 @@
             // 
             GeneralsBox.AutoSize = true;
             GeneralsBox.BackColor = Color.Magenta;
-            GeneralsBox.Location = new Point(339, 710);
+            GeneralsBox.Location = new Point(321, 710);
             GeneralsBox.Name = "GeneralsBox";
             GeneralsBox.Size = new Size(15, 14);
             GeneralsBox.TabIndex = 241;
@@ -1975,7 +1985,7 @@
             // 
             CommissarBox.AutoSize = true;
             CommissarBox.BackColor = Color.Magenta;
-            CommissarBox.Location = new Point(339, 671);
+            CommissarBox.Location = new Point(321, 671);
             CommissarBox.Name = "CommissarBox";
             CommissarBox.Size = new Size(15, 14);
             CommissarBox.TabIndex = 242;
@@ -1986,7 +1996,7 @@
             // 
             CaptainBox.AutoSize = true;
             CaptainBox.BackColor = Color.Magenta;
-            CaptainBox.Location = new Point(339, 628);
+            CaptainBox.Location = new Point(321, 628);
             CaptainBox.Name = "CaptainBox";
             CaptainBox.Size = new Size(15, 14);
             CaptainBox.TabIndex = 243;
@@ -1997,7 +2007,7 @@
             // 
             RhendakBox.AutoSize = true;
             RhendakBox.BackColor = Color.Magenta;
-            RhendakBox.Location = new Point(339, 587);
+            RhendakBox.Location = new Point(321, 587);
             RhendakBox.Name = "RhendakBox";
             RhendakBox.Size = new Size(15, 14);
             RhendakBox.TabIndex = 244;
@@ -2008,7 +2018,7 @@
             // 
             FireShamanBox.AutoSize = true;
             FireShamanBox.BackColor = Color.Magenta;
-            FireShamanBox.Location = new Point(339, 545);
+            FireShamanBox.Location = new Point(321, 545);
             FireShamanBox.Name = "FireShamanBox";
             FireShamanBox.Size = new Size(15, 14);
             FireShamanBox.TabIndex = 245;
@@ -2019,7 +2029,7 @@
             // 
             OgreBox.AutoSize = true;
             OgreBox.BackColor = Color.Magenta;
-            OgreBox.Location = new Point(339, 505);
+            OgreBox.Location = new Point(321, 505);
             OgreBox.Name = "OgreBox";
             OgreBox.Size = new Size(15, 14);
             OgreBox.TabIndex = 246;
@@ -2030,7 +2040,7 @@
             // 
             LyssaBox.AutoSize = true;
             LyssaBox.BackColor = Color.Magenta;
-            LyssaBox.Location = new Point(339, 464);
+            LyssaBox.Location = new Point(321, 464);
             LyssaBox.Name = "LyssaBox";
             LyssaBox.Size = new Size(15, 14);
             LyssaBox.TabIndex = 247;
@@ -2041,7 +2051,7 @@
             // 
             DwanyaBox.AutoSize = true;
             DwanyaBox.BackColor = Color.Magenta;
-            DwanyaBox.Location = new Point(339, 423);
+            DwanyaBox.Location = new Point(321, 423);
             DwanyaBox.Name = "DwanyaBox";
             DwanyaBox.Size = new Size(15, 14);
             DwanyaBox.TabIndex = 248;
@@ -2052,18 +2062,149 @@
             // 
             EyeBox.AutoSize = true;
             EyeBox.BackColor = Color.Magenta;
-            EyeBox.Location = new Point(339, 382);
+            EyeBox.Location = new Point(321, 382);
             EyeBox.Name = "EyeBox";
             EyeBox.Size = new Size(15, 14);
             EyeBox.TabIndex = 249;
             EyeBox.UseVisualStyleBackColor = false;
             EyeBox.CheckedChanged += EyeBox_CheckedChanged;
             // 
+            // EyeButton
+            // 
+            EyeButton.BackgroundImage = (Image)resources.GetObject("EyeButton.BackgroundImage");
+            EyeButton.BackgroundImageLayout = ImageLayout.Stretch;
+            EyeButton.FlatStyle = FlatStyle.Flat;
+            EyeButton.Location = new Point(488, 382);
+            EyeButton.Name = "EyeButton";
+            EyeButton.Size = new Size(50, 15);
+            EyeButton.TabIndex = 250;
+            EyeButton.Text = "button70";
+            EyeButton.UseVisualStyleBackColor = true;
+            EyeButton.Click += EyeButton_Click;
+            // 
+            // ArahButton
+            // 
+            ArahButton.BackgroundImage = (Image)resources.GetObject("ArahButton.BackgroundImage");
+            ArahButton.BackgroundImageLayout = ImageLayout.Stretch;
+            ArahButton.FlatStyle = FlatStyle.Flat;
+            ArahButton.Location = new Point(488, 750);
+            ArahButton.Name = "ArahButton";
+            ArahButton.Size = new Size(50, 15);
+            ArahButton.TabIndex = 252;
+            ArahButton.Text = "button72";
+            ArahButton.UseVisualStyleBackColor = true;
+            // 
+            // GeneralsButton
+            // 
+            GeneralsButton.BackgroundImage = (Image)resources.GetObject("GeneralsButton.BackgroundImage");
+            GeneralsButton.BackgroundImageLayout = ImageLayout.Stretch;
+            GeneralsButton.FlatStyle = FlatStyle.Flat;
+            GeneralsButton.Location = new Point(488, 710);
+            GeneralsButton.Name = "GeneralsButton";
+            GeneralsButton.Size = new Size(50, 15);
+            GeneralsButton.TabIndex = 253;
+            GeneralsButton.Text = "button73";
+            GeneralsButton.UseVisualStyleBackColor = true;
+            // 
+            // CommissarButton
+            // 
+            CommissarButton.BackgroundImage = (Image)resources.GetObject("CommissarButton.BackgroundImage");
+            CommissarButton.BackgroundImageLayout = ImageLayout.Stretch;
+            CommissarButton.FlatStyle = FlatStyle.Flat;
+            CommissarButton.Location = new Point(488, 668);
+            CommissarButton.Name = "CommissarButton";
+            CommissarButton.Size = new Size(50, 15);
+            CommissarButton.TabIndex = 254;
+            CommissarButton.Text = "button74";
+            CommissarButton.UseVisualStyleBackColor = true;
+            // 
+            // CaptainButton
+            // 
+            CaptainButton.BackgroundImage = (Image)resources.GetObject("CaptainButton.BackgroundImage");
+            CaptainButton.BackgroundImageLayout = ImageLayout.Stretch;
+            CaptainButton.FlatStyle = FlatStyle.Flat;
+            CaptainButton.Location = new Point(488, 630);
+            CaptainButton.Name = "CaptainButton";
+            CaptainButton.Size = new Size(50, 15);
+            CaptainButton.TabIndex = 255;
+            CaptainButton.Text = "button75";
+            CaptainButton.UseVisualStyleBackColor = true;
+            // 
+            // RhendakButton
+            // 
+            RhendakButton.BackgroundImage = (Image)resources.GetObject("RhendakButton.BackgroundImage");
+            RhendakButton.BackgroundImageLayout = ImageLayout.Stretch;
+            RhendakButton.FlatStyle = FlatStyle.Flat;
+            RhendakButton.Location = new Point(488, 586);
+            RhendakButton.Name = "RhendakButton";
+            RhendakButton.Size = new Size(50, 15);
+            RhendakButton.TabIndex = 256;
+            RhendakButton.Text = "button76";
+            RhendakButton.UseVisualStyleBackColor = true;
+            // 
+            // FireShamanButton
+            // 
+            FireShamanButton.BackgroundImage = (Image)resources.GetObject("FireShamanButton.BackgroundImage");
+            FireShamanButton.BackgroundImageLayout = ImageLayout.Stretch;
+            FireShamanButton.FlatStyle = FlatStyle.Flat;
+            FireShamanButton.Location = new Point(488, 547);
+            FireShamanButton.Name = "FireShamanButton";
+            FireShamanButton.Size = new Size(50, 15);
+            FireShamanButton.TabIndex = 257;
+            FireShamanButton.Text = "button77";
+            FireShamanButton.UseVisualStyleBackColor = true;
+            // 
+            // OgresButton
+            // 
+            OgresButton.BackgroundImage = (Image)resources.GetObject("OgresButton.BackgroundImage");
+            OgresButton.BackgroundImageLayout = ImageLayout.Stretch;
+            OgresButton.FlatStyle = FlatStyle.Flat;
+            OgresButton.Location = new Point(488, 504);
+            OgresButton.Name = "OgresButton";
+            OgresButton.Size = new Size(50, 15);
+            OgresButton.TabIndex = 258;
+            OgresButton.Text = "button78";
+            OgresButton.UseVisualStyleBackColor = true;
+            // 
+            // LyssaButton
+            // 
+            LyssaButton.BackgroundImage = (Image)resources.GetObject("LyssaButton.BackgroundImage");
+            LyssaButton.BackgroundImageLayout = ImageLayout.Stretch;
+            LyssaButton.FlatStyle = FlatStyle.Flat;
+            LyssaButton.Location = new Point(488, 464);
+            LyssaButton.Name = "LyssaButton";
+            LyssaButton.Size = new Size(50, 15);
+            LyssaButton.TabIndex = 259;
+            LyssaButton.Text = "button79";
+            LyssaButton.UseVisualStyleBackColor = true;
+            // 
+            // DwanyButton
+            // 
+            DwanyButton.BackgroundImage = (Image)resources.GetObject("DwanyButton.BackgroundImage");
+            DwanyButton.BackgroundImageLayout = ImageLayout.Stretch;
+            DwanyButton.FlatStyle = FlatStyle.Flat;
+            DwanyButton.Location = new Point(488, 423);
+            DwanyButton.Name = "DwanyButton";
+            DwanyButton.Size = new Size(50, 15);
+            DwanyButton.TabIndex = 260;
+            DwanyButton.Text = "button80";
+            DwanyButton.UseVisualStyleBackColor = true;
+            // 
             // Worldbosses
             // 
             AutoScaleMode = AutoScaleMode.None;
             AutoValidate = AutoValidate.EnablePreventFocusChange;
             ClientSize = new Size(1904, 1041);
+            Controls.Add(DwanyButton);
+            Controls.Add(LyssaButton);
+            Controls.Add(OgresButton);
+            Controls.Add(FireShamanButton);
+            Controls.Add(RhendakButton);
+            Controls.Add(CaptainButton);
+            Controls.Add(CommissarButton);
+            Controls.Add(GeneralsButton);
+            Controls.Add(ArahButton);
+            Controls.Add(EyeButton);
             Controls.Add(EyeBox);
             Controls.Add(DwanyaBox);
             Controls.Add(LyssaBox);
@@ -2399,5 +2540,15 @@
         private CheckBox LyssaBox;
         private CheckBox DwanyaBox;
         private CheckBox EyeBox;
+        private Button EyeButton;
+        private Button ArahButton;
+        private Button GeneralsButton;
+        private Button CommissarButton;
+        private Button CaptainButton;
+        private Button RhendakButton;
+        private Button FireShamanButton;
+        private Button OgresButton;
+        private Button LyssaButton;
+        private Button DwanyButton;
     }
 }
