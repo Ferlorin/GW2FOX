@@ -60,6 +60,19 @@ namespace GW2FOX
             ], "WBs", "[&BNUGAAA=]");
             AddBossEvent("Claw of Jormag", "00:30:00", 3, "WBs", "[&BHoCAAA=]");
 
+            //Treasures
+            AddBossEvent("The Eye of Zhaitan", "01:30:00", 3, "Treasures", "[&BPgCAAA=]");
+            AddBossEvent("Gates of Arah", "01:30:00", 3, "Treasures", "[&BA8DAAA=]");
+            AddBossEvent("Branded Generals", "01:30:00", 3, "Treasures", "[&BIMLAAA=]");
+            AddBossEvent("Dredge Commissar", "01:30:00", 3, "Treasures", "[&BFYCAAA=]");
+            AddBossEvent("Captain Rotbeard", "01:30:00", 3, "Treasures", "[&BOQGAAA=]");
+            AddBossEvent("Rhendak", "01:30:00", 3, "Treasures", "[&BNwAAAA=]");
+            AddBossEvent("FireShaman", "01:30:00", 3, "Treasures", "[&BNwBAAA=]");
+            AddBossEvent("Ogrewars", "01:30:00", 3, "Treasures", "[&BDwEAAA=]");
+            AddBossEvent("Statue of Dwanya", "01:30:00", 3, "Treasures", "[&BLICAAA=]");
+            AddBossEvent("Priestess of Lyssa", "01:30:00", 3, "Treasures", "[&BKsCAAA=]");
+
+
             //LWS2
             AddBossEvent("Sandstorm", "00:40:00", 1, "LWS2", "[&BIAHAAA=]");
 
