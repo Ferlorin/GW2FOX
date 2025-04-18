@@ -175,23 +175,12 @@
             button69 = new Button();
             LLA = new CheckBox();
             FidosSpecial = new Button();
-            ArahBox = new CheckBox();
-            GeneralsBox = new CheckBox();
-            CommissarBox = new CheckBox();
-            CaptainBox = new CheckBox();
-            RhendakBox = new CheckBox();
-            FireShamanBox = new CheckBox();
-            OgreBox = new CheckBox();
-            LyssaBox = new CheckBox();
-            DwanyaBox = new CheckBox();
-            EyeBox = new CheckBox();
             EyeButton = new Button();
             ArahButton = new Button();
             GeneralsButton = new Button();
             CommissarButton = new Button();
             CaptainButton = new Button();
             RhendakButton = new Button();
-            FireShamanButton = new Button();
             OgresButton = new Button();
             LyssaButton = new Button();
             DwanyButton = new Button();
@@ -311,7 +300,7 @@
             button11.BackgroundImageLayout = ImageLayout.Stretch;
             button11.Cursor = Cursors.Cross;
             button11.FlatStyle = FlatStyle.Flat;
-            button11.Location = new Point(342, 576);
+            button11.Location = new Point(342, 537);
             button11.Name = "button11";
             button11.Size = new Size(140, 35);
             button11.TabIndex = 18;
@@ -360,7 +349,7 @@
             button15.BackgroundImageLayout = ImageLayout.Stretch;
             button15.Cursor = Cursors.Cross;
             button15.FlatStyle = FlatStyle.Flat;
-            button15.Location = new Point(342, 535);
+            button15.Location = new Point(153, 904);
             button15.Name = "button15";
             button15.Size = new Size(140, 35);
             button15.TabIndex = 22;
@@ -1850,7 +1839,7 @@
             button31.BackgroundImageLayout = ImageLayout.Stretch;
             button31.Cursor = Cursors.Cross;
             button31.FlatStyle = FlatStyle.Flat;
-            button31.Location = new Point(342, 740);
+            button31.Location = new Point(342, 701);
             button31.Name = "button31";
             button31.Size = new Size(140, 35);
             button31.TabIndex = 231;
@@ -1863,7 +1852,7 @@
             button42.BackgroundImageLayout = ImageLayout.Stretch;
             button42.Cursor = Cursors.Cross;
             button42.FlatStyle = FlatStyle.Flat;
-            button42.Location = new Point(342, 699);
+            button42.Location = new Point(342, 660);
             button42.Name = "button42";
             button42.Size = new Size(140, 35);
             button42.TabIndex = 232;
@@ -1876,7 +1865,7 @@
             button63.BackgroundImageLayout = ImageLayout.Stretch;
             button63.Cursor = Cursors.Cross;
             button63.FlatStyle = FlatStyle.Flat;
-            button63.Location = new Point(342, 658);
+            button63.Location = new Point(342, 619);
             button63.Name = "button63";
             button63.Size = new Size(140, 35);
             button63.TabIndex = 233;
@@ -1889,7 +1878,7 @@
             button65.BackgroundImageLayout = ImageLayout.Stretch;
             button65.Cursor = Cursors.Cross;
             button65.FlatStyle = FlatStyle.Flat;
-            button65.Location = new Point(342, 617);
+            button65.Location = new Point(342, 578);
             button65.Name = "button65";
             button65.Size = new Size(140, 35);
             button65.TabIndex = 234;
@@ -1959,116 +1948,6 @@
             FidosSpecial.UseVisualStyleBackColor = true;
             FidosSpecial.Click += FidosSpecial_Click;
             // 
-            // ArahBox
-            // 
-            ArahBox.AutoSize = true;
-            ArahBox.BackColor = Color.Magenta;
-            ArahBox.Location = new Point(321, 751);
-            ArahBox.Name = "ArahBox";
-            ArahBox.Size = new Size(15, 14);
-            ArahBox.TabIndex = 240;
-            ArahBox.UseVisualStyleBackColor = false;
-            ArahBox.CheckedChanged += ArahBox_CheckedChanged;
-            // 
-            // GeneralsBox
-            // 
-            GeneralsBox.AutoSize = true;
-            GeneralsBox.BackColor = Color.Magenta;
-            GeneralsBox.Location = new Point(321, 710);
-            GeneralsBox.Name = "GeneralsBox";
-            GeneralsBox.Size = new Size(15, 14);
-            GeneralsBox.TabIndex = 241;
-            GeneralsBox.UseVisualStyleBackColor = false;
-            GeneralsBox.CheckedChanged += GeneralsBox_CheckedChanged;
-            // 
-            // CommissarBox
-            // 
-            CommissarBox.AutoSize = true;
-            CommissarBox.BackColor = Color.Magenta;
-            CommissarBox.Location = new Point(321, 671);
-            CommissarBox.Name = "CommissarBox";
-            CommissarBox.Size = new Size(15, 14);
-            CommissarBox.TabIndex = 242;
-            CommissarBox.UseVisualStyleBackColor = false;
-            CommissarBox.CheckedChanged += CommissarBox_CheckedChanged;
-            // 
-            // CaptainBox
-            // 
-            CaptainBox.AutoSize = true;
-            CaptainBox.BackColor = Color.Magenta;
-            CaptainBox.Location = new Point(321, 628);
-            CaptainBox.Name = "CaptainBox";
-            CaptainBox.Size = new Size(15, 14);
-            CaptainBox.TabIndex = 243;
-            CaptainBox.UseVisualStyleBackColor = false;
-            CaptainBox.CheckedChanged += CaptainBox_CheckedChanged;
-            // 
-            // RhendakBox
-            // 
-            RhendakBox.AutoSize = true;
-            RhendakBox.BackColor = Color.Magenta;
-            RhendakBox.Location = new Point(321, 587);
-            RhendakBox.Name = "RhendakBox";
-            RhendakBox.Size = new Size(15, 14);
-            RhendakBox.TabIndex = 244;
-            RhendakBox.UseVisualStyleBackColor = false;
-            RhendakBox.CheckedChanged += RhendakBox_CheckedChanged;
-            // 
-            // FireShamanBox
-            // 
-            FireShamanBox.AutoSize = true;
-            FireShamanBox.BackColor = Color.Magenta;
-            FireShamanBox.Location = new Point(321, 545);
-            FireShamanBox.Name = "FireShamanBox";
-            FireShamanBox.Size = new Size(15, 14);
-            FireShamanBox.TabIndex = 245;
-            FireShamanBox.UseVisualStyleBackColor = false;
-            FireShamanBox.CheckedChanged += FireShamanBox_CheckedChanged;
-            // 
-            // OgreBox
-            // 
-            OgreBox.AutoSize = true;
-            OgreBox.BackColor = Color.Magenta;
-            OgreBox.Location = new Point(321, 505);
-            OgreBox.Name = "OgreBox";
-            OgreBox.Size = new Size(15, 14);
-            OgreBox.TabIndex = 246;
-            OgreBox.UseVisualStyleBackColor = false;
-            OgreBox.CheckedChanged += OgreBox_CheckedChanged;
-            // 
-            // LyssaBox
-            // 
-            LyssaBox.AutoSize = true;
-            LyssaBox.BackColor = Color.Magenta;
-            LyssaBox.Location = new Point(321, 464);
-            LyssaBox.Name = "LyssaBox";
-            LyssaBox.Size = new Size(15, 14);
-            LyssaBox.TabIndex = 247;
-            LyssaBox.UseVisualStyleBackColor = false;
-            LyssaBox.CheckedChanged += LyssaBox_CheckedChanged;
-            // 
-            // DwanyaBox
-            // 
-            DwanyaBox.AutoSize = true;
-            DwanyaBox.BackColor = Color.Magenta;
-            DwanyaBox.Location = new Point(321, 423);
-            DwanyaBox.Name = "DwanyaBox";
-            DwanyaBox.Size = new Size(15, 14);
-            DwanyaBox.TabIndex = 248;
-            DwanyaBox.UseVisualStyleBackColor = false;
-            DwanyaBox.CheckedChanged += DwanyaBox_CheckedChanged;
-            // 
-            // EyeBox
-            // 
-            EyeBox.AutoSize = true;
-            EyeBox.BackColor = Color.Magenta;
-            EyeBox.Location = new Point(321, 382);
-            EyeBox.Name = "EyeBox";
-            EyeBox.Size = new Size(15, 14);
-            EyeBox.TabIndex = 249;
-            EyeBox.UseVisualStyleBackColor = false;
-            EyeBox.CheckedChanged += EyeBox_CheckedChanged;
-            // 
             // EyeButton
             // 
             EyeButton.BackgroundImage = (Image)resources.GetObject("EyeButton.BackgroundImage");
@@ -2087,43 +1966,46 @@
             ArahButton.BackgroundImage = (Image)resources.GetObject("ArahButton.BackgroundImage");
             ArahButton.BackgroundImageLayout = ImageLayout.Stretch;
             ArahButton.FlatStyle = FlatStyle.Flat;
-            ArahButton.Location = new Point(488, 750);
+            ArahButton.Location = new Point(488, 711);
             ArahButton.Name = "ArahButton";
             ArahButton.Size = new Size(50, 15);
             ArahButton.TabIndex = 252;
             ArahButton.Text = "button72";
             ArahButton.UseVisualStyleBackColor = true;
+            ArahButton.Click += ArahButton_Click;
             // 
             // GeneralsButton
             // 
             GeneralsButton.BackgroundImage = (Image)resources.GetObject("GeneralsButton.BackgroundImage");
             GeneralsButton.BackgroundImageLayout = ImageLayout.Stretch;
             GeneralsButton.FlatStyle = FlatStyle.Flat;
-            GeneralsButton.Location = new Point(488, 710);
+            GeneralsButton.Location = new Point(488, 671);
             GeneralsButton.Name = "GeneralsButton";
             GeneralsButton.Size = new Size(50, 15);
             GeneralsButton.TabIndex = 253;
             GeneralsButton.Text = "button73";
             GeneralsButton.UseVisualStyleBackColor = true;
+            GeneralsButton.Click += GeneralsButton_Click;
             // 
             // CommissarButton
             // 
             CommissarButton.BackgroundImage = (Image)resources.GetObject("CommissarButton.BackgroundImage");
             CommissarButton.BackgroundImageLayout = ImageLayout.Stretch;
             CommissarButton.FlatStyle = FlatStyle.Flat;
-            CommissarButton.Location = new Point(488, 668);
+            CommissarButton.Location = new Point(488, 629);
             CommissarButton.Name = "CommissarButton";
             CommissarButton.Size = new Size(50, 15);
             CommissarButton.TabIndex = 254;
             CommissarButton.Text = "button74";
             CommissarButton.UseVisualStyleBackColor = true;
+            CommissarButton.Click += CommissarButton_Click;
             // 
             // CaptainButton
             // 
             CaptainButton.BackgroundImage = (Image)resources.GetObject("CaptainButton.BackgroundImage");
             CaptainButton.BackgroundImageLayout = ImageLayout.Stretch;
             CaptainButton.FlatStyle = FlatStyle.Flat;
-            CaptainButton.Location = new Point(488, 630);
+            CaptainButton.Location = new Point(488, 591);
             CaptainButton.Name = "CaptainButton";
             CaptainButton.Size = new Size(50, 15);
             CaptainButton.TabIndex = 255;
@@ -2135,24 +2017,13 @@
             RhendakButton.BackgroundImage = (Image)resources.GetObject("RhendakButton.BackgroundImage");
             RhendakButton.BackgroundImageLayout = ImageLayout.Stretch;
             RhendakButton.FlatStyle = FlatStyle.Flat;
-            RhendakButton.Location = new Point(488, 586);
+            RhendakButton.Location = new Point(488, 547);
             RhendakButton.Name = "RhendakButton";
             RhendakButton.Size = new Size(50, 15);
             RhendakButton.TabIndex = 256;
             RhendakButton.Text = "button76";
             RhendakButton.UseVisualStyleBackColor = true;
-            // 
-            // FireShamanButton
-            // 
-            FireShamanButton.BackgroundImage = (Image)resources.GetObject("FireShamanButton.BackgroundImage");
-            FireShamanButton.BackgroundImageLayout = ImageLayout.Stretch;
-            FireShamanButton.FlatStyle = FlatStyle.Flat;
-            FireShamanButton.Location = new Point(488, 547);
-            FireShamanButton.Name = "FireShamanButton";
-            FireShamanButton.Size = new Size(50, 15);
-            FireShamanButton.TabIndex = 257;
-            FireShamanButton.Text = "button77";
-            FireShamanButton.UseVisualStyleBackColor = true;
+            RhendakButton.Click += RhendakButton_Click;
             // 
             // OgresButton
             // 
@@ -2165,6 +2036,7 @@
             OgresButton.TabIndex = 258;
             OgresButton.Text = "button78";
             OgresButton.UseVisualStyleBackColor = true;
+            OgresButton.Click += OgresButton_Click;
             // 
             // LyssaButton
             // 
@@ -2177,6 +2049,7 @@
             LyssaButton.TabIndex = 259;
             LyssaButton.Text = "button79";
             LyssaButton.UseVisualStyleBackColor = true;
+            LyssaButton.Click += LyssaButton_Click;
             // 
             // DwanyButton
             // 
@@ -2189,6 +2062,7 @@
             DwanyButton.TabIndex = 260;
             DwanyButton.Text = "button80";
             DwanyButton.UseVisualStyleBackColor = true;
+            DwanyButton.Click += DwanyButton_Click;
             // 
             // Worldbosses
             // 
@@ -2198,23 +2072,12 @@
             Controls.Add(DwanyButton);
             Controls.Add(LyssaButton);
             Controls.Add(OgresButton);
-            Controls.Add(FireShamanButton);
             Controls.Add(RhendakButton);
             Controls.Add(CaptainButton);
             Controls.Add(CommissarButton);
             Controls.Add(GeneralsButton);
             Controls.Add(ArahButton);
             Controls.Add(EyeButton);
-            Controls.Add(EyeBox);
-            Controls.Add(DwanyaBox);
-            Controls.Add(LyssaBox);
-            Controls.Add(OgreBox);
-            Controls.Add(FireShamanBox);
-            Controls.Add(RhendakBox);
-            Controls.Add(CaptainBox);
-            Controls.Add(CommissarBox);
-            Controls.Add(GeneralsBox);
-            Controls.Add(ArahBox);
             Controls.Add(FidosSpecial);
             Controls.Add(LLA);
             Controls.Add(button69);
@@ -2530,23 +2393,12 @@
         private Button button69;
         private CheckBox LLA;
         private Button FidosSpecial;
-        private CheckBox ArahBox;
-        private CheckBox GeneralsBox;
-        private CheckBox CommissarBox;
-        private CheckBox CaptainBox;
-        private CheckBox RhendakBox;
-        private CheckBox FireShamanBox;
-        private CheckBox OgreBox;
-        private CheckBox LyssaBox;
-        private CheckBox DwanyaBox;
-        private CheckBox EyeBox;
         private Button EyeButton;
         private Button ArahButton;
         private Button GeneralsButton;
         private Button CommissarButton;
         private Button CaptainButton;
         private Button RhendakButton;
-        private Button FireShamanButton;
         private Button OgresButton;
         private Button LyssaButton;
         private Button DwanyButton;

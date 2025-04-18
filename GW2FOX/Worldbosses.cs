@@ -2129,183 +2129,53 @@ namespace GW2FOX
             BringGw2ToFront();
         }
 
-        private void EyeBox_CheckedChanged(object sender, EventArgs e)
-        {
-            string bossName = "Eye of Zhaitan";
-
-
-
-            if (EyeBox.Checked)
-            {
-                SaveBossNameToConfig(bossName);
-            }
-            else
-            {
-                RemoveBossNameFromConfig(bossName);
-            }
-
-        }
-
-        private void DwanyaBox_CheckedChanged(object sender, EventArgs e)
-        {
-            string bossName = "Statue of Dwanya";
-
-
-
-            if (DwanyaBox.Checked)
-            {
-                SaveBossNameToConfig(bossName);
-            }
-            else
-            {
-                RemoveBossNameFromConfig(bossName);
-            }
-
-        }
-
-        private void LyssaBox_CheckedChanged(object sender, EventArgs e)
-        {
-            string bossName = "Priestess of Lyssa";
-
-
-
-            if (LyssaBox.Checked)
-            {
-                SaveBossNameToConfig(bossName);
-            }
-            else
-            {
-                RemoveBossNameFromConfig(bossName);
-            }
-
-        }
-
-        private void OgreBox_CheckedChanged(object sender, EventArgs e)
-        {
-            string bossName = "Ogrewars";
-
-
-
-            if (OgreBox.Checked)
-            {
-                SaveBossNameToConfig(bossName);
-            }
-            else
-            {
-                RemoveBossNameFromConfig(bossName);
-            }
-
-        }
-
-        private void FireShamanBox_CheckedChanged(object sender, EventArgs e)
-        {
-            string bossName = "FireShaman";
-
-
-
-            if (FireShamanBox.Checked)
-            {
-                SaveBossNameToConfig(bossName);
-            }
-            else
-            {
-                RemoveBossNameFromConfig(bossName);
-            }
-
-        }
-
-        private void RhendakBox_CheckedChanged(object sender, EventArgs e)
-        {
-            string bossName = "Rhendak";
-
-
-
-            if (RhendakBox.Checked)
-            {
-                SaveBossNameToConfig(bossName);
-            }
-            else
-            {
-                RemoveBossNameFromConfig(bossName);
-            }
-
-        }
-
-        private void CaptainBox_CheckedChanged(object sender, EventArgs e)
-        {
-            string bossName = "Captain Rotbeard";
-
-
-
-            if (CaptainBox.Checked)
-            {
-                SaveBossNameToConfig(bossName);
-            }
-            else
-            {
-                RemoveBossNameFromConfig(bossName);
-            }
-
-        }
-
-        private void CommissarBox_CheckedChanged(object sender, EventArgs e)
-        {
-            string bossName = "Dredge Commissar";
-
-
-
-            if (CommissarBox.Checked)
-            {
-                SaveBossNameToConfig(bossName);
-            }
-            else
-            {
-                RemoveBossNameFromConfig(bossName);
-            }
-
-        }
-
-        private void GeneralsBox_CheckedChanged(object sender, EventArgs e)
-        {
-            string bossName = "Branded Generals";
-
-
-
-            if (GeneralsBox.Checked)
-            {
-                SaveBossNameToConfig(bossName);
-            }
-            else
-            {
-                RemoveBossNameFromConfig(bossName);
-            }
-
-        }
-
-        private void ArahBox_CheckedChanged(object sender, EventArgs e)
-        {
-            string bossName = "Gates of Arah";
-
-
-
-            if (ArahBox.Checked)
-            {
-                SaveBossNameToConfig(bossName);
-            }
-            else
-            {
-                RemoveBossNameFromConfig(bossName);
-            }
-
-        }
-
         private void EyeButton_Click(object sender, EventArgs e)
         {
             DynamicEventManager.Trigger("The Eye of Zhaitan");
             BossTimerService.Update();
         }
+
+        private void DwanyButton_Click(object sender, EventArgs e)
+        {
+            DynamicEventManager.Trigger("Statue of Dwanya");
+            BossTimerService.Update();
+        }
+
+        private void LyssaButton_Click(object sender, EventArgs e)
+        {
+            DynamicEventManager.Trigger("Priestess of Lyssa");
+            BossTimerService.Update();
+        }
+
+        private void OgresButton_Click(object sender, EventArgs e)
+        {
+            DynamicEventManager.Trigger("Ogrewars");
+            BossTimerService.Update();
+        }
+
+        private void RhendakButton_Click(object sender, EventArgs e)
+        {
+            DynamicEventManager.Trigger("Rhendak");
+            BossTimerService.Update();
+        }
+
+        private void CommissarButton_Click(object sender, EventArgs e)
+        {
+            DynamicEventManager.Trigger("Dredge Commissar");
+            BossTimerService.Update();
+        }
+
+        private void GeneralsButton_Click(object sender, EventArgs e)
+        {
+            DynamicEventManager.Trigger("Branded Generals");
+            BossTimerService.Update();
+        }
+
+        private void ArahButton_Click(object sender, EventArgs e)
+        {
+            DynamicEventManager.Trigger("Gates of Arah");
+            BossTimerService.Update();
+        }
     }
 }
-
-
 

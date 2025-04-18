@@ -25,7 +25,6 @@ namespace GW2FOX
             new DynamicEvent("Ogrewars",             TimeSpan.FromMinutes(20), "Treasures", "[&BDwEAAA=]"),
             new DynamicEvent("Statue of Dwanya",     TimeSpan.FromMinutes(50), "Treasures", "[&BLICAAA=]"),
             new DynamicEvent("Priestess of Lyssa",   TimeSpan.FromMinutes(90), "Treasures", "[&BKsCAAA=]"),
-            new DynamicEvent("FireShaman",           TimeSpan.FromMinutes(75), "Treasures", "[&BKsCAAA=]")
         };
 
         static DynamicEventManager()
