@@ -32,10 +32,6 @@
             LLA = new CheckBox();
             button69 = new Button();
             button68 = new Button();
-            button65 = new Button();
-            button63 = new Button();
-            button42 = new Button();
-            button31 = new Button();
             Quantity = new TextBox();
             button67 = new Button();
             button66 = new Button();
@@ -149,10 +145,6 @@
             button39 = new Button();
             button40 = new Button();
             Concert = new Button();
-            button26 = new Button();
-            button25 = new Button();
-            button24 = new Button();
-            button23 = new Button();
             button22 = new Button();
             button21 = new Button();
             button20 = new Button();
@@ -160,11 +152,9 @@
             button18 = new Button();
             button17 = new Button();
             button16 = new Button();
-            button15 = new Button();
             button14 = new Button();
             button13 = new Button();
             button12 = new Button();
-            button11 = new Button();
             button10 = new Button();
             button9 = new Button();
             button8 = new Button();
@@ -178,6 +168,25 @@
             pictureBox14 = new PictureBox();
             pictureBox15 = new PictureBox();
             pictureBox17 = new PictureBox();
+            DwanyButton = new Button();
+            LyssaButton = new Button();
+            OgresButton = new Button();
+            RhendakButton = new Button();
+            CaptainButton = new Button();
+            CommissarButton = new Button();
+            GeneralsButton = new Button();
+            ArahButton = new Button();
+            EyeButton = new Button();
+            button65 = new Button();
+            button63 = new Button();
+            button42 = new Button();
+            button31 = new Button();
+            button26 = new Button();
+            button25 = new Button();
+            button24 = new Button();
+            button23 = new Button();
+            button11 = new Button();
+            pictureBox16 = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox12).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox11).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox10).BeginInit();
@@ -194,6 +203,7 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox14).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox15).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox17).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox16).BeginInit();
             SuspendLayout();
             // 
             // LLA
@@ -230,54 +240,6 @@
             button68.Size = new Size(140, 35);
             button68.TabIndex = 380;
             button68.UseVisualStyleBackColor = true;
-            // 
-            // button65
-            // 
-            button65.BackgroundImage = (Image)resources.GetObject("button65.BackgroundImage");
-            button65.BackgroundImageLayout = ImageLayout.Stretch;
-            button65.Cursor = Cursors.Cross;
-            button65.FlatStyle = FlatStyle.Flat;
-            button65.Location = new Point(360, 617);
-            button65.Name = "button65";
-            button65.Size = new Size(140, 35);
-            button65.TabIndex = 379;
-            button65.UseVisualStyleBackColor = true;
-            // 
-            // button63
-            // 
-            button63.BackgroundImage = (Image)resources.GetObject("button63.BackgroundImage");
-            button63.BackgroundImageLayout = ImageLayout.Stretch;
-            button63.Cursor = Cursors.Cross;
-            button63.FlatStyle = FlatStyle.Flat;
-            button63.Location = new Point(360, 658);
-            button63.Name = "button63";
-            button63.Size = new Size(140, 35);
-            button63.TabIndex = 378;
-            button63.UseVisualStyleBackColor = true;
-            // 
-            // button42
-            // 
-            button42.BackgroundImage = (Image)resources.GetObject("button42.BackgroundImage");
-            button42.BackgroundImageLayout = ImageLayout.Stretch;
-            button42.Cursor = Cursors.Cross;
-            button42.FlatStyle = FlatStyle.Flat;
-            button42.Location = new Point(360, 699);
-            button42.Name = "button42";
-            button42.Size = new Size(140, 35);
-            button42.TabIndex = 377;
-            button42.UseVisualStyleBackColor = true;
-            // 
-            // button31
-            // 
-            button31.BackgroundImage = (Image)resources.GetObject("button31.BackgroundImage");
-            button31.BackgroundImageLayout = ImageLayout.Stretch;
-            button31.Cursor = Cursors.Cross;
-            button31.FlatStyle = FlatStyle.Flat;
-            button31.Location = new Point(360, 740);
-            button31.Name = "button31";
-            button31.Size = new Size(140, 35);
-            button31.TabIndex = 376;
-            button31.UseVisualStyleBackColor = true;
             // 
             // Quantity
             // 
@@ -316,7 +278,7 @@
             // SearchResults
             // 
             SearchResults.Cursor = Cursors.Cross;
-            SearchResults.Font = new Font("Segoe UI", 9F);
+            SearchResults.Font = new Font("Segoe UI", 11F);
             SearchResults.Location = new Point(12, 12);
             SearchResults.Multiline = true;
             SearchResults.Name = "SearchResults";
@@ -557,7 +519,7 @@
             // 
             // Welcome
             // 
-            Welcome.Font = new Font("Segoe UI", 9F);
+            Welcome.Font = new Font("Segoe UI", 11F);
             Welcome.Location = new Point(1440, 268);
             Welcome.Multiline = true;
             Welcome.Name = "Welcome";
@@ -568,7 +530,7 @@
             // 
             // Guild
             // 
-            Guild.Font = new Font("Segoe UI", 9F);
+            Guild.Font = new Font("Segoe UI", 11F);
             Guild.Location = new Point(965, 268);
             Guild.Multiline = true;
             Guild.Name = "Guild";
@@ -579,7 +541,7 @@
             // 
             // Squadinfo
             // 
-            Squadinfo.Font = new Font("Segoe UI", 9F);
+            Squadinfo.Font = new Font("Segoe UI", 11F);
             Squadinfo.Location = new Point(490, 268);
             Squadinfo.Multiline = true;
             Squadinfo.Name = "Squadinfo";
@@ -590,7 +552,7 @@
             // 
             // Runinfo
             // 
-            Runinfo.Font = new Font("Segoe UI", 9F);
+            Runinfo.Font = new Font("Segoe UI", 11F);
             Runinfo.Location = new Point(15, 268);
             Runinfo.Multiline = true;
             Runinfo.Name = "Runinfo";
@@ -1530,54 +1492,6 @@
             Concert.TabIndex = 263;
             Concert.UseVisualStyleBackColor = true;
             // 
-            // button26
-            // 
-            button26.BackgroundImage = Properties.Resources.Ogrewars;
-            button26.BackgroundImageLayout = ImageLayout.Stretch;
-            button26.Cursor = Cursors.Cross;
-            button26.FlatStyle = FlatStyle.Flat;
-            button26.Location = new Point(360, 494);
-            button26.Name = "button26";
-            button26.Size = new Size(140, 35);
-            button26.TabIndex = 262;
-            button26.UseVisualStyleBackColor = true;
-            // 
-            // button25
-            // 
-            button25.BackgroundImage = Properties.Resources.Lyssa;
-            button25.BackgroundImageLayout = ImageLayout.Stretch;
-            button25.Cursor = Cursors.Cross;
-            button25.FlatStyle = FlatStyle.Flat;
-            button25.Location = new Point(360, 453);
-            button25.Name = "button25";
-            button25.Size = new Size(140, 35);
-            button25.TabIndex = 261;
-            button25.UseVisualStyleBackColor = true;
-            // 
-            // button24
-            // 
-            button24.BackgroundImage = Properties.Resources.Dwayna;
-            button24.BackgroundImageLayout = ImageLayout.Stretch;
-            button24.Cursor = Cursors.Cross;
-            button24.FlatStyle = FlatStyle.Flat;
-            button24.Location = new Point(360, 412);
-            button24.Name = "button24";
-            button24.Size = new Size(140, 35);
-            button24.TabIndex = 260;
-            button24.UseVisualStyleBackColor = true;
-            // 
-            // button23
-            // 
-            button23.BackgroundImage = Properties.Resources.Eye;
-            button23.BackgroundImageLayout = ImageLayout.Stretch;
-            button23.Cursor = Cursors.Cross;
-            button23.FlatStyle = FlatStyle.Flat;
-            button23.Location = new Point(360, 371);
-            button23.Name = "button23";
-            button23.Size = new Size(140, 35);
-            button23.TabIndex = 259;
-            button23.UseVisualStyleBackColor = true;
-            // 
             // button22
             // 
             button22.BackgroundImage = Properties.Resources.Drakkar;
@@ -1657,18 +1571,6 @@
             button16.TabIndex = 252;
             button16.UseVisualStyleBackColor = true;
             // 
-            // button15
-            // 
-            button15.BackgroundImage = Properties.Resources.Fireshaman;
-            button15.BackgroundImageLayout = ImageLayout.Stretch;
-            button15.Cursor = Cursors.Cross;
-            button15.FlatStyle = FlatStyle.Flat;
-            button15.Location = new Point(360, 535);
-            button15.Name = "button15";
-            button15.Size = new Size(140, 35);
-            button15.TabIndex = 251;
-            button15.UseVisualStyleBackColor = true;
-            // 
             // button14
             // 
             button14.BackgroundImage = Properties.Resources.Shatti;
@@ -1702,18 +1604,6 @@
             button12.Size = new Size(140, 35);
             button12.TabIndex = 248;
             button12.UseVisualStyleBackColor = true;
-            // 
-            // button11
-            // 
-            button11.BackgroundImage = Properties.Resources.Rhendi;
-            button11.BackgroundImageLayout = ImageLayout.Stretch;
-            button11.Cursor = Cursors.Cross;
-            button11.FlatStyle = FlatStyle.Flat;
-            button11.Location = new Point(360, 576);
-            button11.Name = "button11";
-            button11.Size = new Size(140, 35);
-            button11.TabIndex = 247;
-            button11.UseVisualStyleBackColor = true;
             // 
             // button10
             // 
@@ -1851,24 +1741,264 @@
             pictureBox17.TabIndex = 388;
             pictureBox17.TabStop = false;
             // 
+            // DwanyButton
+            // 
+            DwanyButton.BackgroundImage = (Image)resources.GetObject("DwanyButton.BackgroundImage");
+            DwanyButton.BackgroundImageLayout = ImageLayout.Stretch;
+            DwanyButton.FlatStyle = FlatStyle.Flat;
+            DwanyButton.Location = new Point(488, 423);
+            DwanyButton.Name = "DwanyButton";
+            DwanyButton.Size = new Size(50, 15);
+            DwanyButton.TabIndex = 406;
+            DwanyButton.Text = "button80";
+            DwanyButton.UseVisualStyleBackColor = true;
+            // 
+            // LyssaButton
+            // 
+            LyssaButton.BackgroundImage = (Image)resources.GetObject("LyssaButton.BackgroundImage");
+            LyssaButton.BackgroundImageLayout = ImageLayout.Stretch;
+            LyssaButton.FlatStyle = FlatStyle.Flat;
+            LyssaButton.Location = new Point(488, 464);
+            LyssaButton.Name = "LyssaButton";
+            LyssaButton.Size = new Size(50, 15);
+            LyssaButton.TabIndex = 405;
+            LyssaButton.Text = "button79";
+            LyssaButton.UseVisualStyleBackColor = true;
+            // 
+            // OgresButton
+            // 
+            OgresButton.BackgroundImage = (Image)resources.GetObject("OgresButton.BackgroundImage");
+            OgresButton.BackgroundImageLayout = ImageLayout.Stretch;
+            OgresButton.FlatStyle = FlatStyle.Flat;
+            OgresButton.Location = new Point(488, 504);
+            OgresButton.Name = "OgresButton";
+            OgresButton.Size = new Size(50, 15);
+            OgresButton.TabIndex = 404;
+            OgresButton.Text = "button78";
+            OgresButton.UseVisualStyleBackColor = true;
+            // 
+            // RhendakButton
+            // 
+            RhendakButton.BackgroundImage = (Image)resources.GetObject("RhendakButton.BackgroundImage");
+            RhendakButton.BackgroundImageLayout = ImageLayout.Stretch;
+            RhendakButton.FlatStyle = FlatStyle.Flat;
+            RhendakButton.Location = new Point(488, 547);
+            RhendakButton.Name = "RhendakButton";
+            RhendakButton.Size = new Size(50, 15);
+            RhendakButton.TabIndex = 403;
+            RhendakButton.Text = "button76";
+            RhendakButton.UseVisualStyleBackColor = true;
+            // 
+            // CaptainButton
+            // 
+            CaptainButton.BackgroundImage = (Image)resources.GetObject("CaptainButton.BackgroundImage");
+            CaptainButton.BackgroundImageLayout = ImageLayout.Stretch;
+            CaptainButton.FlatStyle = FlatStyle.Flat;
+            CaptainButton.Location = new Point(488, 591);
+            CaptainButton.Name = "CaptainButton";
+            CaptainButton.Size = new Size(50, 15);
+            CaptainButton.TabIndex = 402;
+            CaptainButton.Text = "button75";
+            CaptainButton.UseVisualStyleBackColor = true;
+            // 
+            // CommissarButton
+            // 
+            CommissarButton.BackgroundImage = (Image)resources.GetObject("CommissarButton.BackgroundImage");
+            CommissarButton.BackgroundImageLayout = ImageLayout.Stretch;
+            CommissarButton.FlatStyle = FlatStyle.Flat;
+            CommissarButton.Location = new Point(488, 629);
+            CommissarButton.Name = "CommissarButton";
+            CommissarButton.Size = new Size(50, 15);
+            CommissarButton.TabIndex = 401;
+            CommissarButton.Text = "button74";
+            CommissarButton.UseVisualStyleBackColor = true;
+            // 
+            // GeneralsButton
+            // 
+            GeneralsButton.BackgroundImage = (Image)resources.GetObject("GeneralsButton.BackgroundImage");
+            GeneralsButton.BackgroundImageLayout = ImageLayout.Stretch;
+            GeneralsButton.FlatStyle = FlatStyle.Flat;
+            GeneralsButton.Location = new Point(488, 671);
+            GeneralsButton.Name = "GeneralsButton";
+            GeneralsButton.Size = new Size(50, 15);
+            GeneralsButton.TabIndex = 400;
+            GeneralsButton.Text = "button73";
+            GeneralsButton.UseVisualStyleBackColor = true;
+            // 
+            // ArahButton
+            // 
+            ArahButton.BackgroundImage = (Image)resources.GetObject("ArahButton.BackgroundImage");
+            ArahButton.BackgroundImageLayout = ImageLayout.Stretch;
+            ArahButton.FlatStyle = FlatStyle.Flat;
+            ArahButton.Location = new Point(488, 711);
+            ArahButton.Name = "ArahButton";
+            ArahButton.Size = new Size(50, 15);
+            ArahButton.TabIndex = 399;
+            ArahButton.Text = "button72";
+            ArahButton.UseVisualStyleBackColor = true;
+            // 
+            // EyeButton
+            // 
+            EyeButton.BackgroundImage = (Image)resources.GetObject("EyeButton.BackgroundImage");
+            EyeButton.BackgroundImageLayout = ImageLayout.Stretch;
+            EyeButton.FlatStyle = FlatStyle.Flat;
+            EyeButton.Location = new Point(488, 382);
+            EyeButton.Name = "EyeButton";
+            EyeButton.Size = new Size(50, 15);
+            EyeButton.TabIndex = 398;
+            EyeButton.Text = "button70";
+            EyeButton.UseVisualStyleBackColor = true;
+            // 
+            // button65
+            // 
+            button65.BackgroundImage = (Image)resources.GetObject("button65.BackgroundImage");
+            button65.BackgroundImageLayout = ImageLayout.Stretch;
+            button65.Cursor = Cursors.Cross;
+            button65.FlatStyle = FlatStyle.Flat;
+            button65.Location = new Point(342, 578);
+            button65.Name = "button65";
+            button65.Size = new Size(140, 35);
+            button65.TabIndex = 397;
+            button65.UseVisualStyleBackColor = true;
+            // 
+            // button63
+            // 
+            button63.BackgroundImage = (Image)resources.GetObject("button63.BackgroundImage");
+            button63.BackgroundImageLayout = ImageLayout.Stretch;
+            button63.Cursor = Cursors.Cross;
+            button63.FlatStyle = FlatStyle.Flat;
+            button63.Location = new Point(342, 619);
+            button63.Name = "button63";
+            button63.Size = new Size(140, 35);
+            button63.TabIndex = 396;
+            button63.UseVisualStyleBackColor = true;
+            // 
+            // button42
+            // 
+            button42.BackgroundImage = (Image)resources.GetObject("button42.BackgroundImage");
+            button42.BackgroundImageLayout = ImageLayout.Stretch;
+            button42.Cursor = Cursors.Cross;
+            button42.FlatStyle = FlatStyle.Flat;
+            button42.Location = new Point(342, 660);
+            button42.Name = "button42";
+            button42.Size = new Size(140, 35);
+            button42.TabIndex = 395;
+            button42.UseVisualStyleBackColor = true;
+            // 
+            // button31
+            // 
+            button31.BackgroundImage = (Image)resources.GetObject("button31.BackgroundImage");
+            button31.BackgroundImageLayout = ImageLayout.Stretch;
+            button31.Cursor = Cursors.Cross;
+            button31.FlatStyle = FlatStyle.Flat;
+            button31.Location = new Point(342, 701);
+            button31.Name = "button31";
+            button31.Size = new Size(140, 35);
+            button31.TabIndex = 394;
+            button31.UseVisualStyleBackColor = true;
+            // 
+            // button26
+            // 
+            button26.BackgroundImage = Properties.Resources.Ogrewars;
+            button26.BackgroundImageLayout = ImageLayout.Stretch;
+            button26.Cursor = Cursors.Cross;
+            button26.FlatStyle = FlatStyle.Flat;
+            button26.Location = new Point(342, 494);
+            button26.Name = "button26";
+            button26.Size = new Size(140, 35);
+            button26.TabIndex = 393;
+            button26.UseVisualStyleBackColor = true;
+            // 
+            // button25
+            // 
+            button25.BackgroundImage = Properties.Resources.Lyssa;
+            button25.BackgroundImageLayout = ImageLayout.Stretch;
+            button25.Cursor = Cursors.Cross;
+            button25.FlatStyle = FlatStyle.Flat;
+            button25.Location = new Point(342, 453);
+            button25.Name = "button25";
+            button25.Size = new Size(140, 35);
+            button25.TabIndex = 392;
+            button25.UseVisualStyleBackColor = true;
+            // 
+            // button24
+            // 
+            button24.BackgroundImage = Properties.Resources.Dwayna;
+            button24.BackgroundImageLayout = ImageLayout.Stretch;
+            button24.Cursor = Cursors.Cross;
+            button24.FlatStyle = FlatStyle.Flat;
+            button24.Location = new Point(342, 412);
+            button24.Name = "button24";
+            button24.Size = new Size(140, 35);
+            button24.TabIndex = 391;
+            button24.UseVisualStyleBackColor = true;
+            // 
+            // button23
+            // 
+            button23.BackgroundImage = Properties.Resources.Eye;
+            button23.BackgroundImageLayout = ImageLayout.Stretch;
+            button23.Cursor = Cursors.Cross;
+            button23.FlatStyle = FlatStyle.Flat;
+            button23.Location = new Point(342, 371);
+            button23.Name = "button23";
+            button23.Size = new Size(140, 35);
+            button23.TabIndex = 390;
+            button23.UseVisualStyleBackColor = true;
+            // 
+            // button11
+            // 
+            button11.BackgroundImage = Properties.Resources.Rhendi;
+            button11.BackgroundImageLayout = ImageLayout.Stretch;
+            button11.Cursor = Cursors.Cross;
+            button11.FlatStyle = FlatStyle.Flat;
+            button11.Location = new Point(342, 537);
+            button11.Name = "button11";
+            button11.Size = new Size(140, 35);
+            button11.TabIndex = 389;
+            button11.UseVisualStyleBackColor = true;
+            // 
+            // pictureBox16
+            // 
+            pictureBox16.BackgroundImage = (Image)resources.GetObject("pictureBox16.BackgroundImage");
+            pictureBox16.Location = new Point(552, 587);
+            pictureBox16.Name = "pictureBox16";
+            pictureBox16.Size = new Size(200, 107);
+            pictureBox16.TabIndex = 407;
+            pictureBox16.TabStop = false;
+            // 
             // Tutorial
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Black;
             ClientSize = new Size(1904, 1041);
-            Controls.Add(pictureBox17);
-            Controls.Add(pictureBox15);
-            Controls.Add(pictureBox14);
+            Controls.Add(pictureBox16);
+            Controls.Add(DwanyButton);
+            Controls.Add(LyssaButton);
+            Controls.Add(OgresButton);
+            Controls.Add(RhendakButton);
+            Controls.Add(CaptainButton);
+            Controls.Add(CommissarButton);
+            Controls.Add(GeneralsButton);
+            Controls.Add(ArahButton);
+            Controls.Add(EyeButton);
+            Controls.Add(button65);
             Controls.Add(button63);
             Controls.Add(button42);
             Controls.Add(button31);
+            Controls.Add(button26);
+            Controls.Add(button25);
+            Controls.Add(button24);
+            Controls.Add(button23);
+            Controls.Add(button11);
+            Controls.Add(pictureBox17);
+            Controls.Add(pictureBox15);
+            Controls.Add(pictureBox14);
             Controls.Add(pictureBox13);
             Controls.Add(button1);
             Controls.Add(LLA);
             Controls.Add(button69);
             Controls.Add(button68);
-            Controls.Add(button65);
             Controls.Add(Quantity);
             Controls.Add(button67);
             Controls.Add(button66);
@@ -1982,10 +2112,6 @@
             Controls.Add(button39);
             Controls.Add(button40);
             Controls.Add(Concert);
-            Controls.Add(button26);
-            Controls.Add(button25);
-            Controls.Add(button24);
-            Controls.Add(button23);
             Controls.Add(button22);
             Controls.Add(button21);
             Controls.Add(button20);
@@ -1993,11 +2119,9 @@
             Controls.Add(button18);
             Controls.Add(button17);
             Controls.Add(button16);
-            Controls.Add(button15);
             Controls.Add(button14);
             Controls.Add(button13);
             Controls.Add(button12);
-            Controls.Add(button11);
             Controls.Add(button10);
             Controls.Add(button9);
             Controls.Add(button8);
@@ -2027,6 +2151,7 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox14).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox15).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox17).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox16).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -2036,10 +2161,6 @@
         private CheckBox LLA;
         private Button button69;
         private Button button68;
-        private Button button65;
-        private Button button63;
-        private Button button42;
-        private Button button31;
         private TextBox Quantity;
         private Button button67;
         private Button button66;
@@ -2153,10 +2274,6 @@
         private Button button39;
         private Button button40;
         private Button Concert;
-        private Button button26;
-        private Button button25;
-        private Button button24;
-        private Button button23;
         private Button button22;
         private Button button21;
         private Button button20;
@@ -2164,11 +2281,9 @@
         private Button button18;
         private Button button17;
         private Button button16;
-        private Button button15;
         private Button button14;
         private Button button13;
         private Button button12;
-        private Button button11;
         private Button button10;
         private Button button9;
         private Button button8;
@@ -2182,5 +2297,24 @@
         private PictureBox pictureBox14;
         private PictureBox pictureBox15;
         private PictureBox pictureBox17;
+        private Button DwanyButton;
+        private Button LyssaButton;
+        private Button OgresButton;
+        private Button RhendakButton;
+        private Button CaptainButton;
+        private Button CommissarButton;
+        private Button GeneralsButton;
+        private Button ArahButton;
+        private Button EyeButton;
+        private Button button65;
+        private Button button63;
+        private Button button42;
+        private Button button31;
+        private Button button26;
+        private Button button25;
+        private Button button24;
+        private Button button23;
+        private Button button11;
+        private PictureBox pictureBox16;
     }
 }
