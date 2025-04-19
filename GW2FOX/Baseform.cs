@@ -217,28 +217,37 @@ namespace GW2FOX
         {
             try
             {
-                // Specify the process name without the file extension
                 string processName = "Gw2-64";
-
-                // Get the processes by name
                 Process[] processes = Process.GetProcessesByName(processName);
 
                 if (processes.Length > 0)
                 {
-                    // Bring the first instance to the foreground
                     IntPtr mainWindowHandle = processes[0].MainWindowHandle;
-                    ShowWindow(mainWindowHandle, SW_RESTORE);
+
+                    if (mainWindowHandle != IntPtr.Zero)
+                    {
+                        // Falls das Fenster minimiert ist, stelle es wieder her
+                        ShowWindow(mainWindowHandle, SW_RESTORE);
+
+                        // Setze das Fenster in den Vordergrund und fokussiere es
+                        SetForegroundWindow(mainWindowHandle);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Fensterhandle von Gw2-64.exe nicht gefunden.", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Gw2-64.exe is not running.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Gw2-64.exe läuft nicht.", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error bringing Gw2-64.exe to the foreground: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Fehler beim Fokussieren von Gw2-64.exe: {ex.Message}", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
 
         protected void LoadConfigText(TextBox Runinfo, TextBox Squadinfo, TextBox Guild, TextBox Welcome, TextBox Symbols)
         {
@@ -309,11 +318,6 @@ namespace GW2FOX
             Owner?.Show();
             Dispose();
         }
-        //----------------------------------------------------------------------------
-
-
-
-
 
 
         private void Button_MouseEnter(object sender, EventArgs e)

@@ -1725,7 +1725,7 @@
             // World
             // 
             World.BackgroundImage = (Image)resources.GetObject("World.BackgroundImage");
-            World.BackgroundImageLayout = ImageLayout.Center;
+            World.BackgroundImageLayout = ImageLayout.Stretch;
             World.Cursor = Cursors.Cross;
             World.FlatStyle = FlatStyle.Flat;
             World.Location = new Point(694, 28);
@@ -1738,7 +1738,7 @@
             // Mixed
             // 
             Mixed.BackgroundImage = (Image)resources.GetObject("Mixed.BackgroundImage");
-            Mixed.BackgroundImageLayout = ImageLayout.Center;
+            Mixed.BackgroundImageLayout = ImageLayout.Stretch;
             Mixed.Cursor = Cursors.Cross;
             Mixed.FlatStyle = FlatStyle.Flat;
             Mixed.Location = new Point(960, 28);
@@ -1751,7 +1751,7 @@
             // ClearAll
             // 
             ClearAll.BackgroundImage = (Image)resources.GetObject("ClearAll.BackgroundImage");
-            ClearAll.BackgroundImageLayout = ImageLayout.Center;
+            ClearAll.BackgroundImageLayout = ImageLayout.Stretch;
             ClearAll.Cursor = Cursors.Cross;
             ClearAll.FlatStyle = FlatStyle.Flat;
             ClearAll.Location = new Point(827, 66);
@@ -1764,7 +1764,7 @@
             // Meta
             // 
             Meta.BackgroundImage = (Image)resources.GetObject("Meta.BackgroundImage");
-            Meta.BackgroundImageLayout = ImageLayout.Center;
+            Meta.BackgroundImageLayout = ImageLayout.Stretch;
             Meta.Cursor = Cursors.Cross;
             Meta.FlatStyle = FlatStyle.Flat;
             Meta.Location = new Point(827, 28);
@@ -1777,7 +1777,7 @@
             // ShowAll
             // 
             ShowAll.BackgroundImage = (Image)resources.GetObject("ShowAll.BackgroundImage");
-            ShowAll.BackgroundImageLayout = ImageLayout.Center;
+            ShowAll.BackgroundImageLayout = ImageLayout.Stretch;
             ShowAll.Cursor = Cursors.Cross;
             ShowAll.FlatStyle = FlatStyle.Flat;
             ShowAll.Location = new Point(960, 66);
@@ -1938,7 +1938,7 @@
             // FidosSpecial
             // 
             FidosSpecial.BackgroundImage = (Image)resources.GetObject("FidosSpecial.BackgroundImage");
-            FidosSpecial.BackgroundImageLayout = ImageLayout.Center;
+            FidosSpecial.BackgroundImageLayout = ImageLayout.Stretch;
             FidosSpecial.Cursor = Cursors.Cross;
             FidosSpecial.FlatStyle = FlatStyle.Flat;
             FidosSpecial.Location = new Point(1093, 28);
