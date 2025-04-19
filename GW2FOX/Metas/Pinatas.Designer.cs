@@ -251,7 +251,7 @@
             Mapinfo.ScrollBars = ScrollBars.Vertical;
             Mapinfo.Size = new Size(350, 39);
             Mapinfo.TabIndex = 80;
-            Mapinfo.Text = "Go out of fight, then right click group 2 & join Right Click Group 2 &join ☣Crystal Oasis☣";
+            Mapinfo.Text = "≪ATTENTION≫ Meta-Infusion-Train │ “Choya-Piñat” │ ☣[&BLsKAAA=]☣ - Join us!";
             // 
             // pictureBox4
             // 

@@ -153,7 +153,7 @@
             Oofmaw.ScrollBars = ScrollBars.Vertical;
             Oofmaw.Size = new Size(350, 39);
             Oofmaw.TabIndex = 26;
-            Oofmaw.Text = "Go out of fight, then right click group 2 & join ☣Wayfarer Foothills☣";
+            Oofmaw.Text = "≪ATTENTION≫ ☠Lvl 10 │ The frozen Maw with Achievement Svanirs Bane → Kill 1 Icebrood Elemental & the Chief │";
             // 
             // Attentionmaw
             // 
@@ -165,7 +165,7 @@
             Attentionmaw.ScrollBars = ScrollBars.Vertical;
             Attentionmaw.Size = new Size(350, 39);
             Attentionmaw.TabIndex = 27;
-            Attentionmaw.Text = "≪ATTENTION≫ ☠Lvl 10 │ The frozen Maw with Achievement Svanirs Bane → Kill 1 Icebrood Elemental & the Chief │\r\nPre at ☣[&BMIDAAA=]☣ - Join us!";
+            Attentionmaw.Text = "Go out of fight, then right click group 2 & join ☣Wayfarer Foothills☣";
             // 
             // button2
             // 

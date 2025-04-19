@@ -66,61 +66,79 @@
             // 
             // button8
             // 
+            button8.BackgroundImage = (Image)resources.GetObject("button8.BackgroundImage");
+            button8.BackgroundImageLayout = ImageLayout.Center;
+            button8.Cursor = Cursors.Cross;
+            button8.FlatStyle = FlatStyle.Flat;
             button8.Location = new Point(371, 385);
             button8.Name = "button8";
             button8.Size = new Size(75, 23);
             button8.TabIndex = 66;
-            button8.Text = "Copy";
             button8.UseVisualStyleBackColor = true;
             button8.Click += Beheinstance_Click;
             // 
             // button7
             // 
+            button7.BackgroundImage = (Image)resources.GetObject("button7.BackgroundImage");
+            button7.BackgroundImageLayout = ImageLayout.Center;
+            button7.Cursor = Cursors.Cross;
+            button7.FlatStyle = FlatStyle.Flat;
             button7.Location = new Point(371, 340);
             button7.Name = "button7";
             button7.Size = new Size(75, 23);
             button7.TabIndex = 65;
-            button7.Text = "Copy";
             button7.UseVisualStyleBackColor = true;
             button7.Click += Beheinfo_Click;
             // 
             // button5
             // 
+            button5.BackgroundImage = (Image)resources.GetObject("button5.BackgroundImage");
+            button5.BackgroundImageLayout = ImageLayout.Center;
+            button5.Cursor = Cursors.Cross;
+            button5.FlatStyle = FlatStyle.Flat;
             button5.Location = new Point(1796, 295);
             button5.Name = "button5";
             button5.Size = new Size(75, 23);
             button5.TabIndex = 63;
-            button5.Text = "Copy";
             button5.UseVisualStyleBackColor = true;
             button5.Click += Welcome_Click;
             // 
             // button4
             // 
+            button4.BackgroundImage = (Image)resources.GetObject("button4.BackgroundImage");
+            button4.BackgroundImageLayout = ImageLayout.Center;
+            button4.Cursor = Cursors.Cross;
+            button4.FlatStyle = FlatStyle.Flat;
             button4.Location = new Point(1321, 295);
             button4.Name = "button4";
             button4.Size = new Size(75, 23);
             button4.TabIndex = 62;
-            button4.Text = "Copy";
             button4.UseVisualStyleBackColor = true;
             button4.Click += Guild_Click;
             // 
             // button3
             // 
+            button3.BackgroundImage = (Image)resources.GetObject("button3.BackgroundImage");
+            button3.BackgroundImageLayout = ImageLayout.Center;
+            button3.Cursor = Cursors.Cross;
+            button3.FlatStyle = FlatStyle.Flat;
             button3.Location = new Point(846, 295);
             button3.Name = "button3";
             button3.Size = new Size(75, 23);
             button3.TabIndex = 61;
-            button3.Text = "Copy";
             button3.UseVisualStyleBackColor = true;
             button3.Click += Squadinfo_Click;
             // 
             // button2
             // 
+            button2.BackgroundImage = (Image)resources.GetObject("button2.BackgroundImage");
+            button2.BackgroundImageLayout = ImageLayout.Center;
+            button2.Cursor = Cursors.Cross;
+            button2.FlatStyle = FlatStyle.Flat;
             button2.Location = new Point(371, 295);
             button2.Name = "button2";
             button2.Size = new Size(75, 23);
             button2.TabIndex = 60;
-            button2.Text = "Copy";
             button2.UseVisualStyleBackColor = true;
             button2.Click += Runinfo_Click;
             // 
@@ -220,11 +238,14 @@
             // 
             // button6
             // 
+            button6.BackgroundImage = (Image)resources.GetObject("button6.BackgroundImage");
+            button6.BackgroundImageLayout = ImageLayout.Center;
+            button6.Cursor = Cursors.Cross;
+            button6.FlatStyle = FlatStyle.Flat;
             button6.Location = new Point(846, 340);
             button6.Name = "button6";
             button6.Size = new Size(75, 23);
             button6.TabIndex = 81;
-            button6.Text = "Copy";
             button6.UseVisualStyleBackColor = true;
             button6.Click += Rata_Click;
             // 
@@ -243,11 +264,14 @@
             // 
             // button9
             // 
+            button9.BackgroundImage = (Image)resources.GetObject("button9.BackgroundImage");
+            button9.BackgroundImageLayout = ImageLayout.Center;
+            button9.Cursor = Cursors.Cross;
+            button9.FlatStyle = FlatStyle.Flat;
             button9.Location = new Point(846, 385);
             button9.Name = "button9";
             button9.Size = new Size(75, 23);
             button9.TabIndex = 83;
-            button9.Text = "Copy";
             button9.UseVisualStyleBackColor = true;
             button9.Click += Scar_Click;
             // 
@@ -266,11 +290,14 @@
             // 
             // button10
             // 
+            button10.BackgroundImage = (Image)resources.GetObject("button10.BackgroundImage");
+            button10.BackgroundImageLayout = ImageLayout.Center;
+            button10.Cursor = Cursors.Cross;
+            button10.FlatStyle = FlatStyle.Flat;
             button10.Location = new Point(846, 430);
             button10.Name = "button10";
             button10.Size = new Size(75, 23);
             button10.TabIndex = 85;
-            button10.Text = "Copy";
             button10.UseVisualStyleBackColor = true;
             button10.Click += Nuhoch_Click;
             // 
@@ -289,11 +316,14 @@
             // 
             // button11
             // 
+            button11.BackgroundImage = (Image)resources.GetObject("button11.BackgroundImage");
+            button11.BackgroundImageLayout = ImageLayout.Center;
+            button11.Cursor = Cursors.Cross;
+            button11.FlatStyle = FlatStyle.Flat;
             button11.Location = new Point(846, 475);
             button11.Name = "button11";
             button11.Size = new Size(75, 23);
             button11.TabIndex = 87;
-            button11.Text = "Copy";
             button11.UseVisualStyleBackColor = true;
             button11.Click += Ogre_Click;
             // 
@@ -312,11 +342,14 @@
             // 
             // button12
             // 
+            button12.BackgroundImage = (Image)resources.GetObject("button12.BackgroundImage");
+            button12.BackgroundImageLayout = ImageLayout.Center;
+            button12.Cursor = Cursors.Cross;
+            button12.FlatStyle = FlatStyle.Flat;
             button12.Location = new Point(371, 430);
             button12.Name = "button12";
             button12.Size = new Size(75, 23);
             button12.TabIndex = 89;
-            button12.Text = "Copy";
             button12.UseVisualStyleBackColor = true;
             button12.Click += Mapinfo_Click;
             // 
