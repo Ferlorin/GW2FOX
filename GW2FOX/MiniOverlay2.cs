@@ -165,5 +165,24 @@ namespace GW2FOX
             shortcut.Arguments = arguments;
             shortcut.Save();
         }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            var overlayForm = Application.OpenForms.Cast<Form>().FirstOrDefault(f => f is Overlay);
+
+            if (overlayForm != null)
+            {
+                // If the overlay is visible, hide it
+                if (overlayForm.Visible)
+                {
+                    overlayForm.Hide();
+                }
+                // If the overlay is hidden, show it
+                else
+                {
+                    overlayForm.Show();
+                }
+            }
+        }
     }
 }
