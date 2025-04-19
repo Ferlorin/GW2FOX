@@ -147,8 +147,7 @@ namespace GW2FOX
                 BossTimerService._bossTimer?.Stop();
                 BossTimerService._bossTimer?.Dispose();
 
-                BossTimerService._overlay?.Close();
-                BossTimerService._overlay?.Dispose();
+                BossTimerService._overlayWindow?.Close();
 
                 Application.Exit();
             }

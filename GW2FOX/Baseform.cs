@@ -7,24 +7,25 @@ using System.Windows.Forms;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.IO;
+using System.Windows.Controls;
+using WinFormsButton = System.Windows.Forms.Button;
+using WpfButton = System.Windows.Controls.Button;
 
 namespace GW2FOX
 {
     public partial class BaseForm : Form
     {
-        private readonly Dictionary<Button, Size> originalSizes = new();
-        protected Overlay overlay;
-        protected ListView customBossList;
+        private readonly Dictionary<WinFormsButton, Size> originalSizes = new();
+        protected OverlayWindow overlayWindow; // Ersetzt Overlay durch OverlayWindow
+        protected System.Windows.Controls.ListView customBossList;
         protected BossTimer bossTimer;
         private GlobalKeyboardHook? _globalKeyboardHook;
         protected Form lastOpenedBoss = null;
-        public static ListView CustomBossList { get; private set; } = new ListView();
+        public static System.Windows.Controls.ListView CustomBossList { get; private set; } = new System.Windows.Controls.ListView();
 
         public BaseForm()
         {
-            InitializeCustomBossList();
             InitializeGlobalKeyboardHook();
-            SetFormTransparency();
         }
 
         protected override void OnLoad(EventArgs e)
@@ -43,51 +44,38 @@ namespace GW2FOX
 
         protected void ShowAndHideForm(Form newForm)
         {
-            // Wenn es bereits einen offenen Boss gibt, verstecke ihn
             if (lastOpenedBoss != null && !lastOpenedBoss.IsDisposed)
             {
                 lastOpenedBoss.Hide();
             }
 
-            // Speichere den neuen Boss als den zuletzt geöffneten
             lastOpenedBoss = newForm;
 
             newForm.Owner = this;
             ShowFormWithoutActivation(newForm);
 
-            // Wenn das neue Fenster minimiert ist, stelle es wieder her
             if (newForm.WindowState == FormWindowState.Minimized)
                 newForm.WindowState = FormWindowState.Normal;
 
-            // Versuche, das Fenster explizit in den Vordergrund zu bringen
             newForm.BringToFront();
             newForm.Activate();
 
-            // Setze das Fenster explizit in den Vordergrund
             SetForegroundWindow(newForm.Handle);
 
-            // Falls wir in Worldbosses oder Main sind, das aktuelle Fenster verstecken
             if (this is Worldbosses || this is Main)
             {
                 this.Hide();
             }
         }
 
-        protected void SetFormTransparency()
-        {
-            this.FormBorderStyle = FormBorderStyle.None;
-            this.AllowTransparency = true;
-            this.BackColor = Color.Magenta;
-            this.TransparencyKey = Color.Magenta;
-            this.Opacity = 0.90;
-            this.TopMost = true;
-        }
+
         protected void InitializeBossTimerAndOverlay()
         {
             bossTimer = new BossTimer(customBossList);
-            overlay = new Overlay(customBossList);
-            overlay.WindowState = FormWindowState.Normal;
+            overlayWindow = new OverlayWindow(); // Ersetzt Overlay durch OverlayWindow
+            overlayWindow.Show(); // Zeigt das OverlayWindow an
         }
+
 
         private void InitializeGlobalKeyboardHook()
         {
@@ -105,19 +93,7 @@ namespace GW2FOX
                 }
             }
         }
-        protected void InitializeCustomBossList()
-        {
-            customBossList = new DoubleBufferedListView(); // statt new ListView()
-            customBossList.View = View.Details;
-            customBossList.Columns.Add("Meta", 145);
-            customBossList.Columns.Add("Time", 78);
-            customBossList.Location = new Point(0, 0);
-            customBossList.ForeColor = Color.White;
-            customBossList.FullRowSelect = true;
-            customBossList.OwnerDraw = true;
-
-            customBossList.Font = new Font("Segoe UI", 10, FontStyle.Bold);
-        }
+       
 
         private void ShowFormWithoutActivation(Form form)
         {
@@ -137,9 +113,6 @@ namespace GW2FOX
             [System.Runtime.InteropServices.DllImport("user32.dll")]
             public static extern int SetWindowLong(IntPtr hWnd, int nIndex, int dwNewLong);
         }
-
-
-
 
         protected static void SaveTextToFile(string textToSave, string sectionHeader, bool hideMessages = false)
         {
@@ -191,9 +164,7 @@ namespace GW2FOX
             }
         }
 
-        
-
-        private void LoadTextFromConfig(string sectionHeader, TextBox textBox, string configText,
+        private void LoadTextFromConfig(string sectionHeader, System.Windows.Forms.TextBox textBox, string configText,
             string defaultToInsert)
         {
             // Suchmuster für den Abschnitt und den eingeschlossenen Text in Anführungszeichen
@@ -215,7 +186,6 @@ namespace GW2FOX
                 LoadTextFromConfig(sectionHeader, textBox, configText, defaultToInsert);
             }
         }
-
 
         protected void BringGw2ToFront()
         {
@@ -252,8 +222,7 @@ namespace GW2FOX
             }
         }
 
-
-        protected void LoadConfigText(TextBox Runinfo, TextBox Squadinfo, TextBox Guild, TextBox Welcome, TextBox Symbols)
+        protected void LoadConfigText(System.Windows.Forms.TextBox Runinfo, System.Windows.Forms.TextBox Squadinfo, System.Windows.Forms.TextBox Guild, System.Windows.Forms.TextBox Welcome, System.Windows.Forms.TextBox Symbols)
         {
             try
             {
@@ -308,7 +277,8 @@ namespace GW2FOX
 
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
-            _bossTimer?.Dispose();
+            bossTimer?.Dispose();
+            overlayWindow?.Close(); // Schließt das OverlayWindow
             base.OnFormClosing(e);
 
             if (this is Main)
@@ -326,7 +296,7 @@ namespace GW2FOX
 
         private void Button_MouseEnter(object sender, EventArgs e)
         {
-            if (sender is Button button)
+            if (sender is WinFormsButton button)
             {
                 if (!originalSizes.ContainsKey(button))
                 {
@@ -342,7 +312,7 @@ namespace GW2FOX
 
         private void Button_MouseLeave(object sender, EventArgs e)
         {
-            if (sender is Button button && originalSizes.TryGetValue(button, out Size originalSize))
+            if (sender is System.Windows.Forms. Button button && originalSizes.TryGetValue(button, out Size originalSize))
             {
                 // Setze die Originalgröße wieder her
                 button.Size = originalSize;
@@ -351,7 +321,7 @@ namespace GW2FOX
 
         private void Button_MouseDown(object sender, MouseEventArgs e)
         {
-            if (sender is Button button)
+            if (sender is System.Windows.Forms.Button button)
             {
                 if (!originalSizes.ContainsKey(button))
                 {
@@ -367,17 +337,17 @@ namespace GW2FOX
 
         private void Button_MouseUp(object sender, MouseEventArgs e)
         {
-            if (sender is Button button && originalSizes.TryGetValue(button, out Size originalSize))
+            if (sender is System.Windows.Forms.Button button && originalSizes.TryGetValue(button, out Size originalSize))
             {
                 button.Size = originalSize;
             }
         }
 
-        private void AddButtonAnimations(Control control)
+        private void AddButtonAnimations(System.Windows.Forms.Control control)
         {
-            foreach (Control c in control.Controls)
+            foreach (System.Windows.Forms.Control c in control.Controls)
             {
-                if (c is Button button)
+                if (c is System.Windows.Forms.Button  button)
                 {
                     button.MouseEnter += Button_MouseEnter;
                     button.MouseLeave += Button_MouseLeave;

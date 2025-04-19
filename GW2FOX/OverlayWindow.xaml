@@ -53,8 +53,29 @@
                     <ColumnDefinition Width="185*"/>
                 </Grid.ColumnDefinitions>
 
-                <!-- WindowsFormsHost für die ListView -->
-                <wfi:WindowsFormsHost Name="listViewHost" Grid.ColumnSpan="2"/>
+                <!-- ListView für Boss-Timer -->
+                <ListView x:Name="BossListView" Background="Transparent" BorderBrush="Transparent" MouseDoubleClick="ListViewItem_MouseDoubleClick">
+                    <ListView.View>
+                        <GridView>
+                            <!-- Waypoint-Spalte mit Icon -->
+                            <GridViewColumn Header="Waypoint" Width="40">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Image Source="{Binding WaypointImage}" Width="16" Height="16" MouseLeftButtonDown="Waypoint_MouseLeftButtonDown"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <!-- Boss Name-Spalte -->
+                            <GridViewColumn Header="Boss Name" DisplayMemberBinding="{Binding BossName}" Width="138"/>
+
+                            <!-- Time-Spalte -->
+                            <GridViewColumn Header="Time" DisplayMemberBinding="{Binding Time}" Width="120"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
             </Grid>
         </Grid>
     </Border>

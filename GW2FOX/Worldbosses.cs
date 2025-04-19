@@ -30,6 +30,64 @@ namespace GW2FOX
 
         const int SW_RESTORE = 9;
 
+        private void InitializeBossCheckBoxMap()
+        {
+            bossCheckBoxMap = new Dictionary<string, CheckBox>
+        {
+        { "LLA Timberline", LLA },
+        { "FireShaman", Shaman },
+        { "LLA Iron Marches", LLA },
+        { "LLA Gendarran", LLA },
+        { "The frozen Maw", Maw },
+        { "Shadow Behemoth", Behemoth },
+        { "Fire Elemental", Fire_Elemental },
+        { "Great Jungle Wurm", JungleWurm },
+        { "Ulgoth the Modniir", Ulgoth },
+        { "Taidha Covington", Thaida },
+        { "Megadestroyer", Megadestroyer },
+        { "Inquest Golem M2", MarkTwo },
+        { "Tequatl the Sunless", Tequatl },
+        { "The Shatterer", Shatterer },
+        { "Karka Queen", Karka },
+        { "Claw of Jormag", Claw },
+        { "Chak Gerent", Chak },
+        { "Battle in Tarir", Tarir },
+        { "Nightbosses", Mascen },
+        { "Dragon's Stand", DS },
+        { "DB Shatterer", DBS },
+        { "Junundu Rising", Junundu },
+        { "Path to Ascension", PTA },
+        { "Doppelganger", Doppelganger },
+        { "Forged with Fire", Doggies },
+        { "Choya Piñata", Pinata },
+        { "Serpents' Ire", SerpentsIre },
+        { "Palawadan", Palawadan },
+        { "Thunderhead Keep", ThunderheadKeep },
+        { "Maws of Torment", MawsOfTorment },
+        { "The Oil Floes", Oil },
+        { "Drakkar", Drakkar },
+        { "Metal Concert", Metalconcert },
+        { "Dragonstorm", Dragonstorm },
+        { "Ooze Pits", OozePits },
+        { "Effigy", Effigy },
+        { "Doomlore Shrine", Doomlore },
+        { "Storms of Winter", SormsOfWinter },
+        { "Defend Jora's Keep", JorasKeep },
+        { "Sandstorm", Sandstorm },
+        { "Saidra's Haven", SaidrasHeaven },
+        { "New Loamhurst", Loamhurst },
+        { "Noran's Homestead", Homestead },
+        { "Aetherblade Assault", Atherblade },
+        { "Kaineng Blackout", Blackout },
+        { "Gang War", GangWar },
+        { "Aspenwood", Aspenwood },
+        { "Battle for Jade Sea", JadeSea },
+        { "Wizard's Tower", WizzardsTower },
+        { "Fly by Night", Flybynigtht },
+        { "Defense of Amnytas", Amnytas },
+        { "Convergences", Convergence },
+        };
+        }
 
         private void Saverun_Click(object sender, EventArgs e)
         {
@@ -1155,67 +1213,6 @@ namespace GW2FOX
                     RemoveBossNameFromConfig(bossName);
                 }
             }
-        }
-
-
-
-        private void InitializeBossCheckBoxMap()
-        {
-            bossCheckBoxMap = new Dictionary<string, CheckBox>
-        {
-        { "LLA Timberline", LLA },
-        { "FireShaman", Shaman },
-        { "LLA Iron Marches", LLA },
-        { "LLA Gendarran", LLA },
-        { "The frozen Maw", Maw },
-        { "Shadow Behemoth", Behemoth },
-        { "Fire Elemental", Fire_Elemental },
-        { "Great Jungle Wurm", JungleWurm },
-        { "Ulgoth the Modniir", Ulgoth },
-        { "Taidha Covington", Thaida },
-        { "Megadestroyer", Megadestroyer },
-        { "Inquest Golem M2", MarkTwo },
-        { "Tequatl the Sunless", Tequatl },
-        { "The Shatterer", Shatterer },
-        { "Karka Queen", Karka },
-        { "Claw of Jormag", Claw },
-        { "Chak Gerent", Chak },
-        { "Battle in Tarir", Tarir },
-        { "Nightbosses", Mascen },
-        { "Dragon's Stand", DS },
-        { "DB Shatterer", DBS },
-        { "Junundu Rising", Junundu },
-        { "Path to Ascension", PTA },
-        { "Doppelganger", Doppelganger },
-        { "Forged with Fire", Doggies },
-        { "Choya Piñata", Pinata },
-        { "Serpents' Ire", SerpentsIre },
-        { "Palawadan", Palawadan },
-        { "Thunderhead Keep", ThunderheadKeep },
-        { "Maws of Torment", MawsOfTorment },
-        { "The Oil Floes", Oil },
-        { "Drakkar", Drakkar },
-        { "Metal Concert", Metalconcert },
-        { "Dragonstorm", Dragonstorm },
-        { "Ooze Pits", OozePits },
-        { "Effigy", Effigy },
-        { "Doomlore Shrine", Doomlore },
-        { "Storms of Winter", SormsOfWinter },
-        { "Defend Jora's Keep", JorasKeep },
-        { "Sandstorm", Sandstorm },
-        { "Saidra's Haven", SaidrasHeaven },
-        { "New Loamhurst", Loamhurst },
-        { "Noran's Homestead", Homestead },
-        { "Aetherblade Assault", Atherblade },
-        { "Kaineng Blackout", Blackout },
-        { "Gang War", GangWar },
-        { "Aspenwood", Aspenwood },
-        { "Battle for Jade Sea", JadeSea },
-        { "Wizard's Tower", WizzardsTower },
-        { "Fly by Night", Flybynigtht },
-        { "Defense of Amnytas", Amnytas },
-        { "Convergences", Convergence },
-        };
         }
 
         public static List<string> GetSelectedBosses()
