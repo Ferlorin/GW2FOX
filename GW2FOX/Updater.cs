@@ -3,6 +3,9 @@ using System.Net;
 using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
+using System.Windows.Forms;
+using System.Net.Http;
+using System.Threading.Tasks;
 // Please check bottom lines because the logic needs to change.
 // You are never going to be able to update the application you are already running
 public class Updater

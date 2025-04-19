@@ -1,14 +1,15 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <OutputType>WinExe</OutputType>
-    <TargetFramework>net8.0-windows</TargetFramework>
-    <Nullable>enable</Nullable>
-    <UseWindowsForms>true</UseWindowsForms>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <StartupObject>GW2FOX.Program</StartupObject>
-    <ApplicationIcon>Resources\icon.ico</ApplicationIcon>
-  </PropertyGroup>
+<PropertyGroup>
+  <OutputType>WinExe</OutputType>
+  <TargetFramework>net8.0-windows</TargetFramework>
+  <Nullable>enable</Nullable>
+  <UseWindowsForms>true</UseWindowsForms>
+  <UseWPF>true</UseWPF> <!-- NEU -->
+  <ImplicitUsings>enable</ImplicitUsings>
+  <StartupObject>GW2FOX.Program</StartupObject>
+  <ApplicationIcon>Resources\icon.ico</ApplicationIcon>
+</PropertyGroup>
 
   <ItemGroup>
     <COMReference Include="IWshRuntimeLibrary">

@@ -1,5 +1,8 @@
 ﻿using System.Diagnostics;
 using System.Runtime.InteropServices;
+using System.Windows.Forms;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 public class GlobalKeyboardHook
 {

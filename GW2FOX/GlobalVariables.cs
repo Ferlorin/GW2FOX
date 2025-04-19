@@ -1,4 +1,7 @@
 ﻿using System.Runtime.InteropServices;
+using System.Windows.Forms;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace GW2FOX;
 

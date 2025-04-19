@@ -1,4 +1,8 @@
 ﻿using TimeSpan = System.TimeSpan;
+using System.Windows.Forms;
+using System.Net.Http;
+using System.Threading.Tasks;
+using System.IO;
 
 namespace GW2FOX
 {

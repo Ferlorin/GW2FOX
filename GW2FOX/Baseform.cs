@@ -3,6 +3,10 @@ using System.Runtime.InteropServices;
 using static GW2FOX.BossTimerService;
 using static GW2FOX.GlobalVariables;
 using System.Threading;
+using System.Windows.Forms;
+using System.Net.Http;
+using System.Threading.Tasks;
+using System.IO;
 
 namespace GW2FOX
 {
