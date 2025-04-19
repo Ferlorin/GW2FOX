@@ -340,6 +340,7 @@ namespace GW2FOX
                 button.Size = originalSize;
             }
         }
+
         private void Button_MouseDown(object sender, MouseEventArgs e)
         {
             if (sender is Button button)
