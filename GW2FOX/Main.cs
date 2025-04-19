@@ -12,7 +12,7 @@ namespace GW2FOX
     {
         private GlobalKeyboardHook? _globalKeyboardHook;
         private Worldbosses _worldbossesForm;
-
+        private OverlayWindow _overlayWindow;
 
         public Main()
         {
@@ -306,8 +306,30 @@ namespace GW2FOX
 
         private void button7_Click(object sender, EventArgs e)
         {
-            var overlay = new OverlayWindow();
-            overlay.Show();
+            if (_worldbossesForm == null || _worldbossesForm.IsDisposed)
+            {
+                _worldbossesForm = new Worldbosses();
+                _worldbossesForm.FormClosed += (s, args) => _worldbossesForm = null;
+                _worldbossesForm.Hide();
+            }
+
+            ShowAndHideForm(new MiniOverlay(_worldbossesForm));
+
+            if (_overlayWindow == null)
+            {
+                _overlayWindow = new OverlayWindow();
+                _overlayWindow.Closed += (s, args) => _overlayWindow = null;
+                _overlayWindow.Show();
+            }
+            else if (_overlayWindow.IsVisible)
+            {
+                _overlayWindow.Hide();
+            }
+            else
+            {
+                _overlayWindow.Show();
+                _overlayWindow.Activate();
+            }
         }
 
     }
