@@ -213,7 +213,7 @@
             Back.BackgroundImageLayout = ImageLayout.Center;
             Back.Cursor = Cursors.Cross;
             Back.FlatStyle = FlatStyle.Flat;
-            Back.Location = new Point(1852, 989);
+            Back.Location = new Point(1852, 904);
             Back.Name = "Back";
             Back.Size = new Size(40, 40);
             Back.TabIndex = 102;

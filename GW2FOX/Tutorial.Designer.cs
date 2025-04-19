@@ -1698,7 +1698,7 @@
             button1.BackgroundImage = (Image)resources.GetObject("button1.BackgroundImage");
             button1.BackgroundImageLayout = ImageLayout.Center;
             button1.FlatStyle = FlatStyle.Flat;
-            button1.Location = new Point(1852, 989);
+            button1.Location = new Point(1852, 904);
             button1.Name = "button1";
             button1.Size = new Size(40, 40);
             button1.TabIndex = 383;
