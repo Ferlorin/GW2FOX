@@ -184,6 +184,7 @@
             OgresButton = new Button();
             LyssaButton = new Button();
             DwanyButton = new Button();
+            Shaman = new CheckBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
@@ -2064,11 +2065,24 @@
             DwanyButton.UseVisualStyleBackColor = true;
             DwanyButton.Click += DwanyButton_Click;
             // 
+            // Shaman
+            // 
+            Shaman.AutoSize = true;
+            Shaman.BackColor = Color.Magenta;
+            Shaman.ForeColor = Color.Magenta;
+            Shaman.Location = new Point(132, 915);
+            Shaman.Name = "Shaman";
+            Shaman.Size = new Size(15, 14);
+            Shaman.TabIndex = 261;
+            Shaman.UseVisualStyleBackColor = false;
+            Shaman.CheckedChanged += checkBox1_CheckedChanged;
+            // 
             // Worldbosses
             // 
             AutoScaleMode = AutoScaleMode.None;
             AutoValidate = AutoValidate.EnablePreventFocusChange;
             ClientSize = new Size(1904, 1041);
+            Controls.Add(Shaman);
             Controls.Add(DwanyButton);
             Controls.Add(LyssaButton);
             Controls.Add(OgresButton);
@@ -2402,5 +2416,6 @@
         private Button OgresButton;
         private Button LyssaButton;
         private Button DwanyButton;
+        private CheckBox Shaman;
     }
 }

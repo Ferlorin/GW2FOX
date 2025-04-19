@@ -1163,6 +1163,7 @@ namespace GW2FOX
             bossCheckBoxMap = new Dictionary<string, CheckBox>
         {
         { "LLA Timberline", LLA },
+        { "FireShaman", Shaman },
         { "LLA Iron Marches", LLA },
         { "LLA Gendarran", LLA },
         { "The frozen Maw", Maw },
@@ -2165,6 +2166,23 @@ namespace GW2FOX
         {
             DynamicEventManager.Trigger("Gates of Arah");
             BossTimerService.Update();
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            string bossName = "FireShaman";
+
+
+
+            if (Shaman.Checked)
+            {
+                SaveBossNameToConfig(bossName);
+            }
+            else
+            {
+                RemoveBossNameFromConfig(bossName);
+            }
+
         }
     }
 }
