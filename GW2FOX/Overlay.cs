@@ -12,10 +12,9 @@ namespace GW2FOX
         private static readonly Color PastBossFontColor = Color.OrangeRed;
         private static readonly Color MyAlmostBlackColor = Color.FromArgb(255, 1, 1, 1);
         private ListView overlayListView;
-
-
-
         private Panel listViewPanel;
+
+
         public Overlay(ListView listViewItems)
         {
             InitializeComponent();

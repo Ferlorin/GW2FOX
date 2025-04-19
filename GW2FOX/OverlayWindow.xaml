@@ -13,29 +13,23 @@
 
     <Border CornerRadius="8" Background="Transparent" BorderBrush="#333" BorderThickness="0">
         <Grid>
-            <!-- Drei Zeilen: Titelleiste, Linie, Inhalt -->
+            <!-- Layout mit zwei Zeilen -->
             <Grid.RowDefinitions>
                 <RowDefinition Height="30"/>
-                <!-- Titelleiste -->
-                <RowDefinition Height="1"/>
-                <!-- Schwarze Linie -->
                 <RowDefinition Height="*"/>
-                <!-- Inhalt -->
             </Grid.RowDefinitions>
 
-            <!-- Titelleiste -->
+            <!-- Titelleiste mit transparentem Hintergrund (kein Event-Handler mehr) -->
             <Grid Background="Transparent" Grid.Row="0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <!-- Icon zum Verschieben -->
                 <Image x:Name="Com" Source="/Com.png"
                        Width="20" Height="20" Margin="6,5,4,5"
                        MouseLeftButtonDown="Icon_MouseLeftButtonDown"/>
 
-                <!-- Titel -->
                 <TextBlock Grid.Column="1"
                            VerticalAlignment="Center"
                            Foreground="Black"
@@ -52,15 +46,14 @@
                 </TextBlock>
             </Grid>
 
-            <!-- 1-Pixel-Schwarze Linie unter der Titelleiste -->
-            <Rectangle Grid.Row="1" Height="1" Fill="Black"/>
-
-            <!-- Inhalt -->
-            <Grid Grid.Row="2">
+            <!-- Inhalt (unter Titelleiste) -->
+            <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="93*"/>
                     <ColumnDefinition Width="185*"/>
                 </Grid.ColumnDefinitions>
+
+                <!-- WindowsFormsHost für die ListView -->
                 <wfi:WindowsFormsHost Name="listViewHost" Grid.ColumnSpan="2"/>
             </Grid>
         </Grid>
