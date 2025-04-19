@@ -8,7 +8,7 @@ namespace GW2FOX
 {
     public partial class BaseForm : Form
     {
-
+        private readonly Dictionary<Button, Size> originalSizes = new();
         protected Overlay overlay;
         protected ListView customBossList;
         protected BossTimer bossTimer;
@@ -21,6 +21,12 @@ namespace GW2FOX
             InitializeCustomBossList();
             InitializeGlobalKeyboardHook();
             SetFormTransparency();
+        }
+
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
+            AddButtonAnimations(this); // 💥 wird auf jeder Form aufgerufen
         }
 
         [DllImport("user32.dll")]
@@ -303,8 +309,80 @@ namespace GW2FOX
             Owner?.Show();
             Dispose();
         }
+        //----------------------------------------------------------------------------
 
 
+
+
+
+
+        private void Button_MouseEnter(object sender, EventArgs e)
+        {
+            if (sender is Button button)
+            {
+                if (!originalSizes.ContainsKey(button))
+                {
+                    originalSizes[button] = button.Size;
+                }
+
+                // Vergrößere die Größe um 10%
+                int newWidth = (int)(originalSizes[button].Width * 1.03);
+                int newHeight = (int)(originalSizes[button].Height * 1.03);
+                button.Size = new Size(newWidth, newHeight);
+            }
+        }
+
+        private void Button_MouseLeave(object sender, EventArgs e)
+        {
+            if (sender is Button button && originalSizes.TryGetValue(button, out Size originalSize))
+            {
+                // Setze die Originalgröße wieder her
+                button.Size = originalSize;
+            }
+        }
+        private void Button_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (sender is Button button)
+            {
+                if (!originalSizes.ContainsKey(button))
+                {
+                    originalSizes[button] = button.Size;
+                }
+
+                // Verkleinere die Größe um 3%
+                int newWidth = (int)(originalSizes[button].Width * 0.97);
+                int newHeight = (int)(originalSizes[button].Height * 0.97);
+                button.Size = new Size(newWidth, newHeight);
+            }
+        }
+
+        private void Button_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (sender is Button button && originalSizes.TryGetValue(button, out Size originalSize))
+            {
+                button.Size = originalSize;
+            }
+        }
+
+        private void AddButtonAnimations(Control control)
+        {
+            foreach (Control c in control.Controls)
+            {
+                if (c is Button button)
+                {
+                    button.MouseEnter += Button_MouseEnter;
+                    button.MouseLeave += Button_MouseLeave;
+                    button.MouseDown += Button_MouseDown;
+                    button.MouseUp += Button_MouseUp;
+                }
+
+                // Rekursiv alle Child-Controls durchgehen
+                if (c.HasChildren)
+                {
+                    AddButtonAnimations(c);
+                }
+            }
+        }
 
     }
 }
