@@ -33,6 +33,7 @@
             button2 = new Button();
             button3 = new Button();
             button4 = new Button();
+            button5 = new Button();
             SuspendLayout();
             // 
             // button1
@@ -99,14 +100,31 @@
             button4.UseVisualStyleBackColor = true;
             button4.Click += button4_Click;
             // 
+            // button5
+            // 
+            button5.BackgroundImage = (Image)resources.GetObject("button5.BackgroundImage");
+            button5.BackgroundImageLayout = ImageLayout.Stretch;
+            button5.Cursor = Cursors.Cross;
+            button5.FlatAppearance.BorderSize = 0;
+            button5.FlatStyle = FlatStyle.Popup;
+            button5.ForeColor = Color.Transparent;
+            button5.Location = new Point(123, -1);
+            button5.Margin = new Padding(0);
+            button5.Name = "button5";
+            button5.Size = new Size(28, 28);
+            button5.TabIndex = 4;
+            button5.UseVisualStyleBackColor = true;
+            button5.Click += button5_Click;
+            // 
             // MiniOverlay
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Black;
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(135, 25);
+            ClientSize = new Size(166, 25);
             ControlBox = false;
+            Controls.Add(button5);
             Controls.Add(button4);
             Controls.Add(button3);
             Controls.Add(button2);
@@ -126,5 +144,6 @@
         private Button button2;
         private Button button3;
         private Button button4;
+        private Button button5;
     }
 }

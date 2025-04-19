@@ -172,7 +172,6 @@
             button65 = new Button();
             button68 = new Button();
             button1 = new Button();
-            button69 = new Button();
             LLA = new CheckBox();
             FidosSpecial = new Button();
             EyeButton = new Button();
@@ -1911,19 +1910,6 @@
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 
-            // button69
-            // 
-            button69.BackgroundImage = (Image)resources.GetObject("button69.BackgroundImage");
-            button69.BackgroundImageLayout = ImageLayout.Stretch;
-            button69.Cursor = Cursors.Cross;
-            button69.FlatStyle = FlatStyle.Flat;
-            button69.Location = new Point(889, 104);
-            button69.Name = "button69";
-            button69.Size = new Size(127, 32);
-            button69.TabIndex = 237;
-            button69.UseVisualStyleBackColor = true;
-            button69.Click += button69_Click;
-            // 
             // LLA
             // 
             LLA.AutoSize = true;
@@ -2094,7 +2080,6 @@
             Controls.Add(EyeButton);
             Controls.Add(FidosSpecial);
             Controls.Add(LLA);
-            Controls.Add(button69);
             Controls.Add(button1);
             Controls.Add(button68);
             Controls.Add(button65);
@@ -2404,7 +2389,6 @@
         private Button button65;
         private Button button68;
         private Button button1;
-        private Button button69;
         private CheckBox LLA;
         private Button FidosSpecial;
         private Button EyeButton;
