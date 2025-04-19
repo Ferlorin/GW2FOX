@@ -36,7 +36,9 @@
             resources.ApplyResources(this, "$this");
             AutoScaleMode = AutoScaleMode.Font;
             AutoValidate = AutoValidate.EnablePreventFocusChange;
+            ControlBox = false;
             ForeColor = SystemColors.Window;
+            FormBorderStyle = FormBorderStyle.FixedDialog;
             MaximizeBox = false;
             MdiChildrenMinimizedAnchorBottom = false;
             Name = "Overlay";

@@ -1,5 +1,4 @@
-﻿
-using static GW2FOX.BossTimerService;
+﻿using static GW2FOX.BossTimerService;
 using static GW2FOX.BossTimings;
 
 namespace GW2FOX
@@ -22,8 +21,6 @@ namespace GW2FOX
 
         private void Worldbosses_Load_1(object? sender, EventArgs e)
         {
-
-
             SetBossListFromConfig_Bosses();
         }
 
@@ -1714,10 +1711,6 @@ namespace GW2FOX
             }
         }
 
-        private new void Timer_Click(object sender, EventArgs e)
-        {
-            BossTimerService.Timer_Click(sender, e);
-        }
 
 
         public static string getConfigLineForItem(string configItem)
@@ -2078,24 +2071,6 @@ namespace GW2FOX
             ShowAndHideForm(new GatesOfArah());
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form is MiniOverlay)
-                {
-                    form.Close();
-                    break;
-                }
-            }
-            ShowAndHideForm(new Main());
-        }
-
-        private void button69_Click(object sender, EventArgs e)
-        {
-            BossTimerService.Timer_Click(sender, e);
-        }
-
         private void button30_Click(object sender, EventArgs e)
         {
             Clipboard.SetText(Runinfo.Text);
@@ -2184,6 +2159,33 @@ namespace GW2FOX
             }
 
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Application.Restart();
+        }
+
+        private void button69_Click(object sender, EventArgs e)
+        {
+            // Find the overlay form or control
+            var overlayForm = Application.OpenForms.Cast<Form>().FirstOrDefault(f => f is Overlay);
+
+            if (overlayForm != null)
+            {
+                // If the overlay is visible, hide it
+                if (overlayForm.Visible)
+                {
+                    overlayForm.Hide();
+                }
+                // If the overlay is hidden, show it
+                else
+                {
+                    overlayForm.Show();
+                }
+            }
+        }
+
+
     }
 }
 
