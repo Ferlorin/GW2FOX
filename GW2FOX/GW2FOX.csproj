@@ -11,6 +11,10 @@
   <ApplicationIcon>Resources\icon.ico</ApplicationIcon>
 </PropertyGroup>
 
+<ItemGroup>
+  <None Remove="Com.png" />
+</ItemGroup>
+
   <ItemGroup>
     <COMReference Include="IWshRuntimeLibrary">
       <WrapperTool>tlbimp</WrapperTool>
@@ -29,6 +33,10 @@
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Com.png" />
   </ItemGroup>
 
   <ItemGroup>

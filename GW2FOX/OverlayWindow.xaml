@@ -11,29 +11,31 @@
         ShowInTaskbar="False"
         Title="OverlayWindow">
 
-    <Border CornerRadius="8" Background="Transparent" BorderBrush="#333" BorderThickness="1">
+    <Border CornerRadius="8" Background="Transparent" BorderBrush="#333" BorderThickness="0">
         <Grid>
-            <!-- Layout mit zwei Zeilen -->
+            <!-- Drei Zeilen: Titelleiste, Linie, Inhalt -->
             <Grid.RowDefinitions>
                 <RowDefinition Height="30"/>
+                <!-- Titelleiste -->
+                <RowDefinition Height="1"/>
+                <!-- Schwarze Linie -->
                 <RowDefinition Height="*"/>
+                <!-- Inhalt -->
             </Grid.RowDefinitions>
 
-            <!-- Titelleiste mit transparentem Hintergrund (kein Event-Handler mehr) -->
+            <!-- Titelleiste -->
             <Grid Background="Transparent" Grid.Row="0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
-                    <!-- Icon -->
                     <ColumnDefinition Width="*"/>
-                    <!-- Titel -->
                 </Grid.ColumnDefinitions>
 
-                <!-- Icon als Griff zum Verschieben des gesamten Fensters -->
-                <Image Source="pack://application:,,,/Resources/Com.png"
+                <!-- Icon zum Verschieben -->
+                <Image x:Name="Com" Source="/Com.png"
                        Width="20" Height="20" Margin="6,5,4,5"
                        MouseLeftButtonDown="Icon_MouseLeftButtonDown"/>
 
-                <!-- Titel mit DropShadowEffect für besseren Kontrast -->
+                <!-- Titel -->
                 <TextBlock Grid.Column="1"
                            VerticalAlignment="Center"
                            Foreground="Black"
@@ -50,8 +52,11 @@
                 </TextBlock>
             </Grid>
 
-            <!-- Inhalt (unter Titelleiste) -->
-            <Grid Grid.Row="1">
+            <!-- 1-Pixel-Schwarze Linie unter der Titelleiste -->
+            <Rectangle Grid.Row="1" Height="1" Fill="Black"/>
+
+            <!-- Inhalt -->
+            <Grid Grid.Row="2">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="93*"/>
                     <ColumnDefinition Width="185*"/>
