@@ -12,7 +12,7 @@ namespace GW2FOX
 
         public static Overlay? _overlay { get; set; }
         public static BossTimer? _bossTimer { get; set; }
-        private static ListView CustomBossList { get; set; } = new();
+        public static ListView CustomBossList { get; set; } = new();
         public static ListViewExtender extender { get; private set; }
 
         private static ToolTip toolTip = new ToolTip();

@@ -303,6 +303,19 @@ namespace GW2FOX
             ShowAndHideForm(new MiniOverlay2(_worldbossesForm));
             BossTimerService.Timer_Click(sender, e);
         }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            // Verwenden Sie die vorhandene CustomBossList aus BossTimerService
+            var bossList = BossTimerService.CustomBossList;
+
+            // Erstellen Sie ein neues OverlayWindow und übergeben Sie die BossList
+            var overlay = new OverlayWindow();
+
+            // Zeigen Sie das OverlayWindow an
+            overlay.Show();
+        }
+
     }
 }
 

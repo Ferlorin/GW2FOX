@@ -38,6 +38,7 @@
             button9 = new Button();
             button10 = new Button();
             button5 = new Button();
+            button7 = new Button();
             SuspendLayout();
             // 
             // button4
@@ -164,12 +165,23 @@
             button5.UseVisualStyleBackColor = false;
             button5.Click += button5_Click;
             // 
+            // button7
+            // 
+            button7.Location = new Point(41, 344);
+            button7.Name = "button7";
+            button7.Size = new Size(75, 23);
+            button7.TabIndex = 21;
+            button7.Text = "button7";
+            button7.UseVisualStyleBackColor = true;
+            button7.Click += button7_Click;
+            // 
             // Main
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Black;
             ClientSize = new Size(164, 442);
+            Controls.Add(button7);
             Controls.Add(button5);
             Controls.Add(button10);
             Controls.Add(button9);
@@ -182,7 +194,6 @@
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Main";
             StartPosition = FormStartPosition.CenterScreen;
-            TopMost = false;
             ResumeLayout(false);
         }
 
@@ -196,5 +207,6 @@
         private Button button9;
         private Button button10;
         private Button button5;
+        private Button button7;
     }
 }

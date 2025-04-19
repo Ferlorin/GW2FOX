@@ -1,31 +1,63 @@
 ﻿<Window x:Class="GW2FOX.OverlayWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:wfi="clr-namespace:System.Windows.Forms.Integration;assembly=WindowsFormsIntegration"
         WindowStyle="None"
         AllowsTransparency="True"
-        Background="#FF010101"
+        Background="Transparent"
         Topmost="True"
         ResizeMode="NoResize"
         Width="280" Height="400"
         ShowInTaskbar="False"
         Title="OverlayWindow">
 
-    <Border CornerRadius="8" Background="#FF010101" BorderBrush="#333" BorderThickness="1">
+    <Border CornerRadius="8" Background="Transparent" BorderBrush="#333" BorderThickness="1">
         <Grid>
-            <Grid Height="30" Background="#222" MouseLeftButtonDown="TitleBar_MouseLeftButtonDown">
+            <!-- Layout mit zwei Zeilen -->
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Titelleiste mit transparentem Hintergrund (kein Event-Handler mehr) -->
+            <Grid Background="Transparent" Grid.Row="0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
+                    <!-- Icon -->
                     <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
+                    <!-- Titel -->
                 </Grid.ColumnDefinitions>
 
-                <Image Source="pack://application:,,,/Resources/eventicon.png" Width="20" Height="20" Margin="6,5,4,5"/>
-                <TextBlock Grid.Column="1" VerticalAlignment="Center" Foreground="White" FontWeight="Bold" FontSize="14" Text="Weltevent"/>
-                <Button Grid.Column="2" Content="▁" Width="24" Height="24" Margin="4" Click="Minimize_Click"/>
-                <Button Grid.Column="3" Content="🞬" Width="24" Height="24" Margin="4" Click="Close_Click"/>
+                <!-- Icon als Griff zum Verschieben des gesamten Fensters -->
+                <Image Source="pack://application:,,,/Resources/Com.png"
+                       Width="20" Height="20" Margin="6,5,4,5"
+                       MouseLeftButtonDown="Icon_MouseLeftButtonDown"/>
+
+                <!-- Titel mit DropShadowEffect für besseren Kontrast -->
+                <TextBlock Grid.Column="1"
+                           VerticalAlignment="Center"
+                           Foreground="Black"
+                           FontWeight="Bold"
+                           FontSize="14"
+                           Text="Event Timer">
+                    <TextBlock.Effect>
+                        <DropShadowEffect Color="Black"
+                                          BlurRadius="0"
+                                          Direction="0"
+                                          ShadowDepth="0"
+                                          Opacity="1"/>
+                    </TextBlock.Effect>
+                </TextBlock>
             </Grid>
-            <Grid Margin="0,30,0,0"/>
+
+            <!-- Inhalt (unter Titelleiste) -->
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="93*"/>
+                    <ColumnDefinition Width="185*"/>
+                </Grid.ColumnDefinitions>
+                <wfi:WindowsFormsHost Name="listViewHost" Grid.ColumnSpan="2"/>
+            </Grid>
         </Grid>
     </Border>
 </Window>
