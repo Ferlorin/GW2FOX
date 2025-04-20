@@ -21,7 +21,8 @@ namespace GW2FOX
 
         public OverlayWindow()
         {
-
+            this.Left = 1315;
+            this.Top = 700;
             _instance = this;
             InitializeComponent(); // Stelle sicher, dass dies korrekt ausgeführt wird
             myListView = new System.Windows.Controls.ListView();

@@ -75,7 +75,7 @@
                                     <TextBlock Text="{Binding BossName}"
                                                FontWeight="Bold"
                                                Foreground="White"
-                                               Width="120"
+                                               Width="120"  
                                                VerticalAlignment="Center">
                                         <TextBlock.Effect>
                                             <DropShadowEffect Color="Black"
@@ -90,7 +90,7 @@
                                     <TextBlock Text="{Binding TimeRemainingFormatted}"
                                                Foreground="LightGray"
                                                VerticalAlignment="Center"
-                                               Margin="0,0,2,0"> 
+                                               Margin="0,0,2,0"> <!-- Additional space -->
                                         <TextBlock.Effect>
                                             <DropShadowEffect Color="Black"
                                                               BlurRadius="0"
@@ -131,4 +131,3 @@
         </Border>
     </Grid>
 </Window>
-

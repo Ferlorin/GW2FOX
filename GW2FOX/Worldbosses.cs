@@ -2015,9 +2015,16 @@ namespace GW2FOX
 
         private void button66_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(SearchResults.Text))
+            {
+                MessageBox.Show("Enter first a Number in the field down below.", "Input Required", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             Clipboard.SetText(SearchResults.Text);
             BringGw2ToFront();
         }
+
 
         private void button68_Click(object sender, EventArgs e)
         {
