@@ -13,9 +13,13 @@ namespace GW2FOX
 {
     public partial class OverlayWindow : Window
     {
+        private System.Windows.Controls.ListView myListView;
+
         public OverlayWindow()
         {
             InitializeComponent();
+            myListView = new System.Windows.Controls.ListView();
+
             LoadBossList();
         }
 
@@ -23,7 +27,7 @@ namespace GW2FOX
         {
             public string BossName { get; set; }
             public string Waypoint { get; set; }
-            public string Time { get; set; } // z.B. "15:30"
+            public string Time { get; set; }
             public BitmapImage WaypointImage => new BitmapImage(new Uri("pack://application:,,,/Icons/waypoint.png"));
         }
 
@@ -33,9 +37,9 @@ namespace GW2FOX
             var bossEvents = BossTimerService.GetBossEvents();
 
             // Datenquelle an ListView binden
+            BossTimings.UpdateBossList(myListView);
             BossListView.ItemsSource = bossEvents;
         }
-
 
         private void Waypoint_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -45,7 +49,6 @@ namespace GW2FOX
                 ShowCopiedMessage();
             }
         }
-
 
 
         private void ShowCopiedMessage()
