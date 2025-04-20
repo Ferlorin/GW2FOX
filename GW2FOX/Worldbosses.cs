@@ -1357,6 +1357,7 @@ namespace GW2FOX
                         fileStream.Close();
                         SaveTextToFile(GlobalVariables.DEFAULT_BOSSES, "Bosses", true);
                         SaveTextToFile(GlobalVariables.DEFAULT_META, "Meta", true);
+                        SaveTextToFile(GlobalVariables.DEFAULT_FIDO, "Fido", true);
                         SaveTextToFile(GlobalVariables.DEFAULT_WORLD, "World", true);
                         SaveTextToFile(GlobalVariables.DEFAULT_MIXED, "Mixed", true);
                         SaveTextToFile(GlobalVariables.DEFAULT_GUILD, "Guild", true);
