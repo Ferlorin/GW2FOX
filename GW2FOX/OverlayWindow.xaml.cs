@@ -21,10 +21,11 @@ namespace GW2FOX
 
         public OverlayWindow()
         {
-            InitializeComponent();
-            myListView = new System.Windows.Controls.ListView();
 
-            LoadBossList();
+            _instance = this;
+            InitializeComponent(); // Stelle sicher, dass dies korrekt ausgeführt wird
+            myListView = new System.Windows.Controls.ListView();
+            BossListView.ItemsSource = BossTimerService.BossListItems;
             StartBossTimer();
         }
 
@@ -43,20 +44,9 @@ namespace GW2FOX
             BossTimerService.Timer_Click(sender, e);
         }
 
-        public static OverlayWindow GetInstance()
+        public static OverlayWindow? GetInstance()
         {
-            if (_instance == null)
-            {
-                _instance = new OverlayWindow();
-            }
             return _instance;
-            
-        }
-
-        private void LoadBossList()
-        {
-            Console.WriteLine("Loading Boss List...");
-            BossTimings.UpdateBossList(BossListView);
         }
 
         private void Waypoint_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -95,6 +85,11 @@ namespace GW2FOX
         private void ListViewItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             // Hier könnten weitere Interaktionen mit der Liste eingefügt werden
+        }
+        protected override void OnClosed(EventArgs e)
+        {
+            _instance = null;
+            base.OnClosed(e);
         }
     }
 }

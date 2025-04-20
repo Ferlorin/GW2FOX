@@ -68,6 +68,12 @@ namespace GW2FOX
 
                 _overlayWindow = OverlayWindow.GetInstance();
 
+                if (_overlayWindow == null)
+                {
+                    Console.WriteLine("OverlayWindow.GetInstance() returned null!");
+                    return;
+                }
+
                 // Punkt 2: Closed-Handler nicht mehrfach registrieren
                 _overlayWindow.Closed -= OverlayWindow_Closed;
                 _overlayWindow.Closed += OverlayWindow_Closed;
@@ -83,6 +89,7 @@ namespace GW2FOX
                 LogError("InitializeBossTimerAndOverlay", ex);
             }
         }
+
 
         private static void OverlayWindow_Closed(object? sender, EventArgs e)
         {
