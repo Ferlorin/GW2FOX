@@ -11,6 +11,7 @@ namespace GW2FOX
         public string Waypoint { get; }
         public TimeSpan Timing { get; }
         public string Category { get; }
+        
 
         public BossEvent(string bossName, TimeSpan timing, string category, string waypoint = "")
         {
@@ -59,18 +60,18 @@ namespace GW2FOX
         public string TimeRemainingFormatted =>
             $"{(int)TimeRemaining.TotalHours:D2}:{TimeRemaining.Minutes:D2}:{TimeRemaining.Seconds:D2}";
 
-        public Color ForeColor =>
-            IsPreviousBoss ? PastBossFontColor : Category switch
+        public System.Drawing.Color ForeColor =>
+            Category switch
             {
-                "Maguuma" => Color.LimeGreen,
-                "Desert" => Color.DeepPink,
-                "WBs" => Color.WhiteSmoke,
-                "Ice" => Color.DeepSkyBlue,
-                "Cantha" => Color.Blue,
-                "SotO" => Color.Yellow,
-                "LWS2" => Color.LightYellow,
-                "LWS3" => Color.ForestGreen,
-                _ => DefaultFontColor
+                "Maguuma" => System.Drawing.Color.LimeGreen,
+                "Desert" => System.Drawing.Color.DeepPink,
+                "WBs" => System.Drawing.Color.WhiteSmoke,
+                "Ice" => System.Drawing.Color.DeepSkyBlue,
+                "Cantha" => System.Drawing.Color.Blue,
+                "SotO" => System.Drawing.Color.Yellow,
+                "LWS2" => System.Drawing.Color.LightYellow,
+                "LWS3" => System.Drawing.Color.ForestGreen,
+                _ => System.Drawing.Color.White
             };
     }
 

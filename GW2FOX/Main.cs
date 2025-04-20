@@ -13,8 +13,7 @@ namespace GW2FOX
         private Worldbosses _worldbossesForm;
         private MiniOverlay _miniOverlay;
         private OverlayWindow _overlayWindow;
-
-
+        
         public Main()
         {
             InitializeComponent();
@@ -124,7 +123,6 @@ namespace GW2FOX
                 MessageBox.Show($"Error launching the shortcut: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
 
         private void CloseAll_Click(object sender, EventArgs e)
         {
@@ -265,7 +263,6 @@ namespace GW2FOX
             }
         }
 
-
         private void button5_Click(object sender, EventArgs e)
         {
             ShowAndHideForm(new Tutorial());
@@ -275,36 +272,14 @@ namespace GW2FOX
 
         protected void ShowAndHideForm(Form newForm)
         {
-
             newForm.BringToFront();
             newForm.Activate();
-
-           
-                this.Hide();
-           
+            this.Hide();
         }
-
 
         private void Leading_Click(object sender, EventArgs e)
         {
-            // 1. Worldbosses vorbereiten
-            if (_worldbossesForm == null || _worldbossesForm.IsDisposed)
-            {
-                Console.WriteLine("Worldbosses: Neue Instanz wird erstellt.");
-                _worldbossesForm = new Worldbosses();
-                _worldbossesForm.FormClosed += (s, args) =>
-                {
-                    Console.WriteLine("Worldbosses: Instanz geschlossen.");
-                    _worldbossesForm = null;
-                };
-                _worldbossesForm.Hide();
-            }
-            else
-            {
-                Console.WriteLine("Worldbosses: Bereits vorhanden.");
-            }
-
-            // 2. MiniOverlay togglen
+            // 1. MiniOverlay öffnen und anzeigen
             if (_miniOverlay == null || _miniOverlay.IsDisposed)
             {
                 Console.WriteLine("MiniOverlay: Neue Instanz wird erstellt und angezeigt.");
@@ -316,48 +291,44 @@ namespace GW2FOX
                 };
                 _miniOverlay.Show();
             }
-            else if (_miniOverlay.Visible)
-            {
-                Console.WriteLine("MiniOverlay: Wird ausgeblendet.");
-                _miniOverlay.Hide();
-            }
-            else
+            else if (!_miniOverlay.Visible)
             {
                 Console.WriteLine("MiniOverlay: Wird angezeigt.");
                 _miniOverlay.Show();
                 _miniOverlay.BringToFront();
             }
 
-            // 3. Timer
-            Console.WriteLine("BossTimerService: Timer_Click ausgelöst.");
-            BossTimerService.Timer_Click(sender, e);
-
-            // 4. OverlayWindow.xaml togglen
-            if (_overlayWindow == null)
+            // 2. Worldbosses öffnen und anzeigen
+            if (_worldbossesForm == null || _worldbossesForm.IsDisposed)
             {
-                Console.WriteLine("OverlayWindow: Neue Instanz wird erstellt und angezeigt.");
-                _overlayWindow = new OverlayWindow();
-                _overlayWindow.Closed += (s, args) =>
+                Console.WriteLine("Worldbosses: Neue Instanz wird erstellt und angezeigt.");
+                _worldbossesForm = new Worldbosses();
+                _worldbossesForm.FormClosed += (s, args) =>
                 {
-                    Console.WriteLine("OverlayWindow: Instanz geschlossen.");
-                    _overlayWindow = null;
+                    Console.WriteLine("Worldbosses: Instanz geschlossen.");
+                    _worldbossesForm = null;
                 };
-                _overlayWindow.Show();
+                _worldbossesForm.Show();
             }
-            else if (_overlayWindow.IsVisible)
+            else if (!_worldbossesForm.Visible)
             {
-                Console.WriteLine("OverlayWindow: Wird ausgeblendet.");
-                _overlayWindow.Hide();
+                Console.WriteLine("Worldbosses: Wird angezeigt.");
+                _worldbossesForm.Show();
+                _worldbossesForm.BringToFront();
             }
-            else
+
+            // 3. OverlayWindow starten (Singleton verwenden)
+            _overlayWindow = OverlayWindow.GetInstance();
+            if (!_overlayWindow.IsVisible)
             {
                 Console.WriteLine("OverlayWindow: Wird angezeigt.");
                 _overlayWindow.Show();
+            }
+            else
+            {
+                Console.WriteLine("OverlayWindow: Wird aktiviert.");
                 _overlayWindow.Activate();
             }
         }
     }
 }
-
-
-

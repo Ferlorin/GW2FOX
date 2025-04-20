@@ -45,6 +45,11 @@
 
                     <!-- ListView für Boss-Timer -->
                     <ListView x:Name="BossListView">
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="Foreground" Value="{Binding ForegroundBrush}" />
+                            </Style>
+                        </ListView.ItemContainerStyle>
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn Header="Waypoint" DisplayMemberBinding="{Binding Waypoint}" />

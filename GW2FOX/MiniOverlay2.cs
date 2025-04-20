@@ -58,19 +58,12 @@ namespace GW2FOX
             }
 
             // 2. WPF-Overlay prüfen
-            if (_overlayWindow != null)
+            if (_overlayWindow == null)
             {
-                if (_overlayWindow.IsVisible)
-                {
-                    _overlayWindow.Hide();
-                }
-                else
-                {
-                    _overlayWindow.Show();
-                }
-
-                return; // Falls OverlayWindow getoggelt wurde, ist fertig
+                _overlayWindow = new OverlayWindow();
+                _overlayWindow.Closed += (s, args) => _overlayWindow = null; // Fenster löschen bei Schließen
             }
+
 
             // 3. Worldbosses Fenster wie bisher
             if (lastOpenedBoss == null || lastOpenedBoss.IsDisposed)

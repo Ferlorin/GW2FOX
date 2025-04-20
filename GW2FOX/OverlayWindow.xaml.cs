@@ -5,7 +5,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Controls;
 using System.Windows.Threading;
 using System.Linq;
-using System.Windows; // Clipboard für WPF
 using System.Collections.Generic;
 
 
@@ -14,6 +13,7 @@ namespace GW2FOX
     public partial class OverlayWindow : Window
     {
         private System.Windows.Controls.ListView myListView;
+        private static OverlayWindow? _instance;
 
         public OverlayWindow()
         {
@@ -28,7 +28,16 @@ namespace GW2FOX
             public string BossName { get; set; }
             public string Waypoint { get; set; }
             public TimeSpan Timing { get; set; }
-            public BitmapImage WaypointImage => new BitmapImage(new Uri("pack://application:,,,/Icons/waypoint.png"));
+            public static BitmapImage WaypointImage => new(new Uri("pack://application:,,,/Icons/waypoint.png"));
+        }
+
+        public static OverlayWindow GetInstance()
+        {
+            if (_instance == null)
+            {
+                _instance = new OverlayWindow();
+            }
+            return _instance;
         }
 
         private void LoadBossList()

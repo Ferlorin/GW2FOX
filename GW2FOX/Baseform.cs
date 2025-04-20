@@ -85,8 +85,12 @@ namespace GW2FOX
         protected void InitializeBossTimerAndOverlay()
         {
             bossTimer = new BossTimer(customBossList);
-            overlayWindow = new OverlayWindow(); // Ersetzt Overlay durch OverlayWindow
-            overlayWindow.Show(); // Zeigt das OverlayWindow an
+            overlayWindow = OverlayWindow.GetInstance(); // Singleton-Instanz verwenden
+            if (!overlayWindow.IsVisible)
+            {
+                overlayWindow.Show(); // Zeigt das OverlayWindow an
+            }
+
         }
 
         protected void SetFormTransparency()

@@ -50,9 +50,11 @@ namespace GW2FOX
             {
                 _bossTimer = new BossTimer(CustomBossList);
 
-                if (_overlayWindow == null)
+                // Verwende die GetInstance-Methode, um die Singleton-Instanz zu erhalten
+                _overlayWindow = OverlayWindow.GetInstance();
+
+                if (!_overlayWindow.IsVisible)
                 {
-                    _overlayWindow = new OverlayWindow();
                     _overlayWindow.Closed += (s, e) => _overlayWindow = null;
                     _overlayWindow.Show();
                     Console.WriteLine("Overlay window initialized.");
