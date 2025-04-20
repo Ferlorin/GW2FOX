@@ -22,6 +22,14 @@ namespace GW2FOX
             Initialize();
         }
 
+        public static List<BossEventRun> GetBossEvents()
+        {
+            // Beispiel: Boss-Events aus der internen Liste abrufen
+            return BossEventGroups
+                .SelectMany(group => group.GetNextRuns())
+                .ToList();
+        }
+
         public static void UpdateCustomBossList(System.Windows.Controls.ListView updatedList)
         {
             try

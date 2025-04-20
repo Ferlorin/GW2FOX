@@ -6,6 +6,8 @@ using System.Windows.Controls;
 using System.Windows.Threading;
 using System.Linq;
 using System.Windows; // Clipboard für WPF
+using System.Collections.Generic;
+
 
 namespace GW2FOX
 {
@@ -14,7 +16,7 @@ namespace GW2FOX
         public OverlayWindow()
         {
             InitializeComponent();
-            InitializeBossList();
+            LoadBossList();
         }
 
         public class BossListItem
@@ -25,22 +27,13 @@ namespace GW2FOX
             public BitmapImage WaypointImage => new BitmapImage(new Uri("pack://application:,,,/Icons/waypoint.png"));
         }
 
-        private void InitializeBossList()
+        private void LoadBossList()
         {
-            // Alle zukünftigen Runs sammeln
-            var upcomingRuns = BossTimings.BossEvents
-                .SelectMany(kvp => new BossTimings.BossEventGroup(kvp.Key, kvp.Value).GetNextRuns())
-                .OrderBy(run => run.NextRunTime) // Verwende NextRunTime statt EventTime
-                .ToList();
+            // Daten aus BossTimerService abrufen
+            var bossEvents = BossTimerService.GetBossEvents();
 
-            var bossList = upcomingRuns.Select(run => new BossListItem
-            {
-                BossName = run.BossName,
-                Waypoint = run.Waypoint,
-                Time = run.NextRunTime.ToString("HH:mm") // Verwende NextRunTime statt EventTime
-            }).ToList();
-
-            BossListView.ItemsSource = bossList;
+            // Datenquelle an ListView binden
+            BossListView.ItemsSource = bossEvents;
         }
 
 
