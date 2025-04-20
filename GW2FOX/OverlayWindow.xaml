@@ -2,6 +2,7 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:wfi="clr-namespace:System.Windows.Forms.Integration;assembly=WindowsFormsIntegration"
+        xmlns:local="clr-namespace:GW2FOX"
         WindowStyle="None"
         AllowsTransparency="True"
         Background="Transparent"
@@ -11,17 +12,18 @@
         ShowInTaskbar="False"
         Title="OverlayWindow">
 
-    <!-- Wrap the existing content in a single container -->
+    <Window.Resources>
+        <local:ColorToBrushConverter x:Key="ColorToBrushConverter" />
+    </Window.Resources>
+
     <Grid>
         <Border CornerRadius="8" Background="Transparent" BorderBrush="#333" BorderThickness="0">
             <Grid>
-                <!-- Layout mit zwei Zeilen -->
                 <Grid.RowDefinitions>
                     <RowDefinition Height="30"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
-                <!-- Titelleiste mit transparentem Hintergrund -->
                 <Grid Background="Transparent" Grid.Row="0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
@@ -48,18 +50,15 @@
                     </TextBlock>
                 </Grid>
 
-                <!-- Inhalt (unter Titelleiste) -->
                 <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="93*"/>
                         <ColumnDefinition Width="185*"/>
                     </Grid.ColumnDefinitions>
 
-                    <!-- ListView für Boss-Timer -->
                     <ListView x:Name="BossListView" Background="Transparent" BorderBrush="Transparent" MouseDoubleClick="ListViewItem_MouseDoubleClick">
                         <ListView.View>
                             <GridView>
-                                <!-- Waypoint-Spalte mit Icon -->
                                 <GridViewColumn Header="Waypoint" Width="40">
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
@@ -70,17 +69,21 @@
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>
 
-                                <!-- Boss Name-Spalte -->
-                                <GridViewColumn Header="Boss Name" DisplayMemberBinding="{Binding BossName}" Width="138"/>
+                                <GridViewColumn Header="Boss Name" Width="138">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding BossName}" 
+                                                       Foreground="{Binding ForeColor, Converter={StaticResource ColorToBrushConverter}}" />
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
 
-                                <!-- Time-Spalte -->
                                 <GridViewColumn Header="Time" DisplayMemberBinding="{Binding Time}" Width="120"/>
                             </GridView>
                         </ListView.View>
                     </ListView>
                 </Grid>
 
-                <!-- Copied message, sichtbar nach Waypoint-Klick -->
                 <TextBlock x:Name="CopiedMessage"
                            Text="Copied!"
                            HorizontalAlignment="Center"

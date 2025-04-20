@@ -284,15 +284,6 @@ namespace GW2FOX
                     Console.WriteLine($"Stack Trace: {ex.StackTrace}");
                 }
             }
-
-
-            /// <summary>
-            /// Calculates Next Runs based on DaysExtraToCalculate and NextRunsToShow.
-            /// </summary>
-            /// <remarks>
-            /// <b><code>DaysExtraToCalculate</code></b> is how many more days it should calculate after the current date (to calculate also tomorrow insert 1
-            /// <b><code>NextRunsToShow</code></b> is how many more runs of the same Category/Boss it will show. I have inserted the default 2 but it could be more
-            /// </remarks>
             public IEnumerable<BossEventRun> GetNextRuns()
             {
                 try
@@ -305,19 +296,21 @@ namespace GW2FOX
                     {
                         toReturn.AddRange(
                             _timings
-                                .Select(bossEvent => new BossEventRun(bossEvent.BossName, bossEvent.Timing, bossEvent.Category,
-                                    GlobalVariables
-                                        .CURRENT_DATE_TIME
-                                        .Date
-                                        .Add(new TimeSpan(0, i * 24, 0, 0, 0))
-                                    + bossEvent.Timing,
+                                .Select(bossEvent => new BossEventRun(
+                                    bossEvent.BossName,
+                                    bossEvent.Timing,
+                                    bossEvent.Category,
+                                    GlobalVariables.CURRENT_DATE_TIME.Date
+                                        .Add(new TimeSpan(0, i * 24, 0, 0, 0)) + bossEvent.Timing,
                                     bossEvent.Waypoint))
                                 .ToList()
                         );
                     }
 
                     var result = toReturn
-                        .Where(bossEvent => bossEvent.TimeToShow >= GlobalVariables.CURRENT_DATE_TIME)
+                        .Where(bossEvent =>
+                            bossEvent.TimeToShow >= GlobalVariables.CURRENT_DATE_TIME &&
+                            bossEvent.TimeToShow <= GlobalVariables.CURRENT_DATE_TIME.AddHours(3))
                         .OrderBy(bossEvent => bossEvent.TimeToShow)
                         .Take(NextRunsToShow)
                         .ToList();
@@ -330,7 +323,7 @@ namespace GW2FOX
                 {
                     Console.WriteLine($"Error in GetNextRuns for {BossName}: {ex.Message}");
                     Console.WriteLine($"Stack Trace: {ex.StackTrace}");
-                    return Enumerable.Empty<BossEventRun>(); // Falls ein Fehler auftritt, gibt eine leere Liste zurück
+                    return Enumerable.Empty<BossEventRun>();
                 }
             }
 
@@ -342,10 +335,14 @@ namespace GW2FOX
 
                     var result = _timings
                         .Where(bossEvent =>
-                            bossEvent.Timing > GlobalVariables.CURRENT_TIME.Subtract(new TimeSpan(0, 14, 59)) &&
+                            bossEvent.Timing > GlobalVariables.CURRENT_TIME.Subtract(new TimeSpan(0, 15, 0)) &&
                             bossEvent.Timing < GlobalVariables.CURRENT_TIME)
-                        .Select(bossEvent => new BossEventRun(bossEvent.BossName, bossEvent.Timing, bossEvent.Category,
-                            GlobalVariables.CURRENT_DATE_TIME.Date + bossEvent.Timing, bossEvent.Waypoint))
+                        .Select(bossEvent => new BossEventRun(
+                            bossEvent.BossName,
+                            bossEvent.Timing,
+                            bossEvent.Category,
+                            GlobalVariables.CURRENT_DATE_TIME.Date + bossEvent.Timing,
+                            bossEvent.Waypoint))
                         .ToList();
 
                     Console.WriteLine($"{result.Count} previous runs found for {BossName}");
@@ -356,11 +353,12 @@ namespace GW2FOX
                 {
                     Console.WriteLine($"Error in GetPreviousRuns for {BossName}: {ex.Message}");
                     Console.WriteLine($"Stack Trace: {ex.StackTrace}");
-                    return Enumerable.Empty<BossEventRun>(); // Falls ein Fehler auftritt, gibt eine leere Liste zurück
+                    return Enumerable.Empty<BossEventRun>();
                 }
             }
         }
 
+       
         public class BossEvent(string bossName, TimeSpan timing, string category, string waypoint = "")
         {
             public string BossName { get; } = bossName;
