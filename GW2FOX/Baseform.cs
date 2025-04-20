@@ -24,6 +24,7 @@ namespace GW2FOX
         protected OverlayWindow overlayWindow; // Ersetzt Overlay durch OverlayWindow
         protected System.Windows.Controls.ListView customBossList;
         protected BossTimer bossTimer;
+        private GlobalKeyboardHook? _globalKeyboardHook;
         protected Form lastOpenedBoss = null;
         public static System.Windows.Controls.ListView CustomBossList { get; private set; } = new System.Windows.Controls.ListView();
 
@@ -38,6 +39,7 @@ namespace GW2FOX
             CustomBossList = customBossList;
             CustomBossList.ItemsSource = BossListItems;
             InitializeCustomBossList();
+            InitializeGlobalKeyboardHook();
             SetFormTransparency();
         }
 
@@ -54,6 +56,23 @@ namespace GW2FOX
         public static extern bool SetForegroundWindow(IntPtr hWnd);
 
         protected const int SW_RESTORE = 9;
+
+        private void InitializeGlobalKeyboardHook()
+        {
+            _globalKeyboardHook = new GlobalKeyboardHook();
+            _globalKeyboardHook.KeyPressed += GlobalKeyboardHook_KeyPressed;
+        }
+
+        private void GlobalKeyboardHook_KeyPressed(object sender, KeyPressedEventArgs e)
+        {
+            if (ModifierKeys == Keys.Alt && e.Key == Keys.T)
+            {
+                if (this is Main)
+                {
+                    Timer_Click(sender, e);
+                }
+            }
+        }
 
         protected void ShowAndHideForm(Form newForm)
         {
