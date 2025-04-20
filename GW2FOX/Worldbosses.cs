@@ -1340,27 +1340,6 @@ namespace GW2FOX
             }
         }
 
-
-        public static void WriteConfigFile(string[] lines)
-        {
-            try
-            {
-                string[] existingLines = ReadConfigFile();
-
-                File.WriteAllLines(GlobalVariables.FILE_PATH, lines);
-
-                UpdateBossUiBosses();
-
-
-
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error writing to config file: {ex.Message}");
-                throw new Exception($"Error writing to config file: {ex.Message}");
-            }
-        }
-
         public static string[] ReadConfigFile()
         {
             try
@@ -1663,15 +1642,6 @@ namespace GW2FOX
             }
         }
 
-
-        public static void UpdateBossUiBosses()
-        {
-            BossTimings.SetBossListFromConfig_Bosses();
-            if (CustomBossList != null)
-            {
-                BossTimerService.UpdateCustomBossList(CustomBossList);
-            }
-        }
 
         public static void SetBossListFromConfig_Bosses()
         {
@@ -2185,7 +2155,34 @@ namespace GW2FOX
             }
         }
 
+        public static void WriteConfigFile(string[] lines)
+        {
+            try
+            {
+                string[] existingLines = ReadConfigFile();
 
+                File.WriteAllLines(GlobalVariables.FILE_PATH, lines);
+
+                UpdateBossUiBosses();
+
+
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error writing to config file: {ex.Message}");
+                throw new Exception($"Error writing to config file: {ex.Message}");
+            }
+        }
+
+        public static void UpdateBossUiBosses()
+        {
+            BossTimings.SetBossListFromConfig_Bosses();
+            if (CustomBossList != null)
+            {
+                BossTimerService._bossTimer?.UpdateBossList();
+            }
+        }
 
     }
 }

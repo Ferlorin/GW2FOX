@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using System.IO;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Windows.Media.Imaging;
+using System.Windows.Threading;
 
 namespace GW2FOX
 {
@@ -281,6 +283,5 @@ namespace GW2FOX
 
             listView.ItemsSource = items;
         }
-
     }
 }
