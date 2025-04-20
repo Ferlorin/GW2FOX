@@ -11,6 +11,7 @@ namespace GW2FOX
     {
         public static System.Windows.Controls.ListView? CustomBossList { get; private set; }
         public static Dictionary<string, CheckBox> bossCheckBoxMap;
+        
 
         public Worldbosses()
         {
@@ -2168,23 +2169,22 @@ namespace GW2FOX
 
         private void button69_Click(object sender, EventArgs e)
         {
-            // Find the overlay form or control
-            var overlayForm = Application.OpenForms.Cast<Form>().FirstOrDefault(f => f is Overlay);
-
-            if (overlayForm != null)
+            if (_overlayWindow == null)
             {
-                // If the overlay is visible, hide it
-                if (overlayForm.Visible)
-                {
-                    overlayForm.Hide();
-                }
-                // If the overlay is hidden, show it
-                else
-                {
-                    overlayForm.Show();
-                }
+                _overlayWindow = new OverlayWindow();
+                _overlayWindow.Closed += (s, args) => _overlayWindow = null; // Clean up on close
+            }
+
+            if (_overlayWindow.IsVisible)
+            {
+                _overlayWindow.Hide();
+            }
+            else
+            {
+                _overlayWindow.Show();
             }
         }
+
 
 
     }

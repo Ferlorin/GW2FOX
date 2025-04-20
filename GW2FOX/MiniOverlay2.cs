@@ -12,6 +12,7 @@ namespace GW2FOX
     {
         private Form lastOpenedForm;
         private Form lastOpenedBoss = null;
+        private OverlayWindow _overlayWindow;
 
         public MiniOverlay2(Worldbosses worldbosses)
         {
@@ -32,14 +33,15 @@ namespace GW2FOX
 
         private void button1_Click(object sender, EventArgs e)
         {
-            var allowedTypes = new[] { typeof(Main), typeof(MiniOverlay), typeof(Overlay), typeof(Worldbosses) };
+            var allowedTypes = new[] { typeof(Main), typeof(MiniOverlay), typeof(Worldbosses) };
 
+            // 1. WinForms-Fenster durchgehen
             foreach (Form openForm in Application.OpenForms)
             {
                 if (!allowedTypes.Contains(openForm.GetType()))
                 {
-                    // Toggle Verhalten für "andere" Fenster
-                    openForm.ShowInTaskbar = false; // Verhindert Taskleisten-Eintrag
+                    // Toggle Verhalten für "andere" WinForms-Fenster
+                    openForm.ShowInTaskbar = false;
                     if (openForm.Visible)
                     {
                         openForm.Hide();
@@ -55,11 +57,27 @@ namespace GW2FOX
                 }
             }
 
+            // 2. WPF-Overlay prüfen
+            if (_overlayWindow != null)
+            {
+                if (_overlayWindow.IsVisible)
+                {
+                    _overlayWindow.Hide();
+                }
+                else
+                {
+                    _overlayWindow.Show();
+                }
+
+                return; // Falls OverlayWindow getoggelt wurde, ist fertig
+            }
+
+            // 3. Worldbosses Fenster wie bisher
             if (lastOpenedBoss == null || lastOpenedBoss.IsDisposed)
             {
                 lastOpenedBoss = new Worldbosses
                 {
-                    ShowInTaskbar = false // Wichtig: keine Taskleiste
+                    ShowInTaskbar = false
                 };
                 lastOpenedBoss.Show();
             }
@@ -75,6 +93,7 @@ namespace GW2FOX
                 SetForegroundWindow(lastOpenedBoss.Handle);
             }
         }
+
 
 
 
@@ -171,20 +190,19 @@ namespace GW2FOX
 
         private void button5_Click(object sender, EventArgs e)
         {
-            var overlayForm = Application.OpenForms.Cast<Form>().FirstOrDefault(f => f is Overlay);
-
-            if (overlayForm != null)
+            if (_overlayWindow == null)
             {
-                // If the overlay is visible, hide it
-                if (overlayForm.Visible)
-                {
-                    overlayForm.Hide();
-                }
-                // If the overlay is hidden, show it
-                else
-                {
-                    overlayForm.Show();
-                }
+                _overlayWindow = new OverlayWindow();
+                _overlayWindow.Closed += (s, args) => _overlayWindow = null; // Fenster löschen bei Schließen
+            }
+
+            if (_overlayWindow.IsVisible)
+            {
+                _overlayWindow.Hide();
+            }
+            else
+            {
+                _overlayWindow.Show();
             }
         }
     }
