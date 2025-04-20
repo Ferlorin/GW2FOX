@@ -19,7 +19,7 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <!-- Titelleiste mit transparentem Hintergrund (kein Event-Handler mehr) -->
+                <!-- Titelleiste mit transparentem Hintergrund -->
             <Grid Background="Transparent" Grid.Row="0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
