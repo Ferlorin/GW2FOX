@@ -8,9 +8,8 @@ using System.IO;
 
 namespace GW2FOX
 {
-    public partial class Main : BaseForm
+    public partial class Main : Form
     {
-        private GlobalKeyboardHook? _globalKeyboardHook;
         private Worldbosses _worldbossesForm;
         private OverlayWindow _overlayWindow;
 
@@ -18,22 +17,7 @@ namespace GW2FOX
         public Main()
         {
             InitializeComponent();
-            InitializeGlobalKeyboardHook();
             // Updater.CheckForUpdates(Worldbosses.getConfigLineForItem("Version"));
-        }
-
-        private void InitializeGlobalKeyboardHook()
-        {
-            _globalKeyboardHook = new GlobalKeyboardHook();
-            _globalKeyboardHook.KeyPressed += GlobalKeyboardHook_KeyPressed;
-        }
-
-        private void GlobalKeyboardHook_KeyPressed(object sender, KeyPressedEventArgs e)
-        {
-            if (ModifierKeys == Keys.Alt && e.Key == Keys.T)
-            {
-                Timer_Click(sender, e);
-            }
         }
 
         private void Timer_Click(object sender, EventArgs e)
@@ -317,6 +301,17 @@ namespace GW2FOX
             ShowAndHideForm(new Tutorial());
             ShowAndHideForm(new MiniOverlay2(_worldbossesForm));
             BossTimerService.Timer_Click(sender, e);
+        }
+
+        protected void ShowAndHideForm(Form newForm)
+        {
+
+            newForm.BringToFront();
+            newForm.Activate();
+
+           
+                this.Hide();
+           
         }
     }
 }

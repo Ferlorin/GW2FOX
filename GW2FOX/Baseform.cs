@@ -9,19 +9,11 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Windows.Controls;
 using WinFormsButton = System.Windows.Forms.Button;
-using WpfButton = System.Windows.Controls.Button;
 using System.Windows;
-// Alias für WinForms
 using WF = System.Windows.Forms;
 using WFApp = System.Windows.Forms.Application;
 using WFBox = System.Windows.Forms.MessageBox;
 using WFSize = System.Drawing.Size;
-
-// Alias für WPF
-using WPF = System.Windows;
-using WPFBox = System.Windows.MessageBox;
-using WPFApp = System.Windows.Application;
-using WPFSize = System.Windows.Size;
 
 
 namespace GW2FOX
@@ -32,7 +24,6 @@ namespace GW2FOX
         protected OverlayWindow overlayWindow; // Ersetzt Overlay durch OverlayWindow
         protected System.Windows.Controls.ListView customBossList;
         protected BossTimer bossTimer;
-        private GlobalKeyboardHook? _globalKeyboardHook;
         protected Form lastOpenedBoss = null;
         public static System.Windows.Controls.ListView CustomBossList { get; private set; } = new System.Windows.Controls.ListView();
 
