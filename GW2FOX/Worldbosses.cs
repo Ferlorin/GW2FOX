@@ -4,6 +4,11 @@ using System.Windows.Forms;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.IO;
+using System.Windows;
+using WF = System.Windows.Forms;
+using WFApp = System.Windows.Forms.Application;
+using WFBox = System.Windows.Forms.MessageBox;
+using WFSize = System.Drawing.Size;
 
 namespace GW2FOX
 {
@@ -227,15 +232,15 @@ namespace GW2FOX
 
         private void Runinfo_Click(object sender, EventArgs e)
         {
-            Clipboard.SetText(Runinfo.Text);
+            System.Windows.Forms.Clipboard.SetText(Runinfo.Text);
 
             BringGw2ToFront();
         }
 
         private void Squadinfos_Click(object sender, EventArgs e)
         {
-            // Copy the text from Leyline60 TextBox to the clipboard
-            Clipboard.SetText(Squadinfo.Text);
+            // Copy the text from Leyline60 TextBox to the System.Windows.Forms.Clipboard
+            System.Windows.Forms.Clipboard.SetText(Squadinfo.Text);
 
             // Bring the Gw2-64.exe window to the foreground
             BringGw2ToFront();
@@ -243,7 +248,7 @@ namespace GW2FOX
 
         private void Guildcopy_Click(object sender, EventArgs e)
         {
-            Clipboard.SetText(Guild.Text);
+            System.Windows.Forms.Clipboard.SetText(Guild.Text);
 
             // Bring the Gw2-64.exe window to the foreground
             BringGw2ToFront();
@@ -251,7 +256,7 @@ namespace GW2FOX
 
         private void Welcomecopy_Click(object sender, EventArgs e)
         {
-            Clipboard.SetText(Welcome.Text);
+            System.Windows.Forms.Clipboard.SetText(Welcome.Text);
 
             // Bring the Gw2-64.exe window to the foreground
             BringGw2ToFront();
@@ -1996,7 +2001,7 @@ namespace GW2FOX
                     string bossNamesString = string.Join("," + Environment.NewLine, bossNames);
 
                     // Die Bossnamen in die Zwischenablage kopieren
-                    Clipboard.SetText(bossNamesString);
+                    System.Windows.Forms.Clipboard.SetText(bossNamesString);
 
                     // Bossnamen in ResultTextBox anzeigen
                     SearchResults.Text = bossNamesString;
@@ -2021,7 +2026,7 @@ namespace GW2FOX
                 return;
             }
 
-            Clipboard.SetText(SearchResults.Text);
+            System.Windows.Forms.Clipboard.SetText(SearchResults.Text);
             BringGw2ToFront();
         }
 
@@ -2053,25 +2058,25 @@ namespace GW2FOX
 
         private void button30_Click(object sender, EventArgs e)
         {
-            Clipboard.SetText(Runinfo.Text);
+            System.Windows.Forms.Clipboard.SetText(Runinfo.Text);
             BringGw2ToFront();
         }
 
         private void button29_Click(object sender, EventArgs e)
         {
-            Clipboard.SetText(Squadinfo.Text);
+            System.Windows.Forms.Clipboard.SetText(Squadinfo.Text);
             BringGw2ToFront();
         }
 
         private void button28_Click(object sender, EventArgs e)
         {
-            Clipboard.SetText(Guild.Text);
+            System.Windows.Forms.Clipboard.SetText(Guild.Text);
             BringGw2ToFront();
         }
 
         private void button27_Click(object sender, EventArgs e)
         {
-            Clipboard.SetText(Welcome.Text);
+            System.Windows.Forms.Clipboard.SetText(Welcome.Text);
             BringGw2ToFront();
         }
 
@@ -2142,7 +2147,7 @@ namespace GW2FOX
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Application.Restart();
+            System.Windows.Forms.Application.Restart();
         }
 
         private void button69_Click(object sender, EventArgs e)
