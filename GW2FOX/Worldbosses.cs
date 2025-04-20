@@ -2186,12 +2186,17 @@ namespace GW2FOX
         public static void UpdateBossUiBosses()
         {
             BossTimings.SetBossListFromConfig_Bosses();
-            if (CustomBossList != null)
+
+            BossTimerService._overlayWindow?.Dispatcher.Invoke(() =>
             {
                 BossTimerService._bossTimer?.UpdateBossList();
-            }
-        }
 
+                if (!BossTimerService._overlayWindow.IsVisible)
+                {
+                    BossTimerService._overlayWindow.Show();
+                }
+            });
+        }
     }
 }
 
