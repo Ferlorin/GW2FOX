@@ -1341,7 +1341,7 @@ namespace GW2FOX
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error adding boss {bossName}: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                WFBox.Show($"Error adding boss {bossName}: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -1449,7 +1449,7 @@ namespace GW2FOX
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error removing boss {bossName}: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                WFBox.Show($"Error removing boss {bossName}: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -1492,7 +1492,7 @@ namespace GW2FOX
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error loading Meta bosses: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                WFBox.Show($"Error loading Meta bosses: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -1547,7 +1547,7 @@ namespace GW2FOX
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error checking all bosses: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                WFBox.Show($"Error checking all bosses: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -1625,7 +1625,7 @@ namespace GW2FOX
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error loading Mixed bosses: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                WFBox.Show($"Error loading Mixed bosses: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -1685,7 +1685,7 @@ namespace GW2FOX
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error setting boss checkboxes: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                WFBox.Show($"Error setting boss checkboxes: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -1844,7 +1844,7 @@ namespace GW2FOX
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error loading World bosses: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                WFBox.Show($"Error loading World bosses: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -1889,7 +1889,7 @@ namespace GW2FOX
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error loading World bosses: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                WFBox.Show($"Error loading World bosses: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -1923,7 +1923,7 @@ namespace GW2FOX
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error unchecking all bosses: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                WFBox.Show($"Error unchecking all bosses: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -1961,12 +1961,12 @@ namespace GW2FOX
                 {
                     SaveTextToFile(GlobalVariables.DEFAULT_BOSSES, "Bosses");
                     World_Click(sender, e);
-                    MessageBox.Show($"World section not found in config.", "Not Found", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    WFBox.Show($"World section not found in config.", "Not Found", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error loading World bosses: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                WFBox.Show($"Error loading World bosses: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -2008,12 +2008,12 @@ namespace GW2FOX
                 }
                 else
                 {
-                    MessageBox.Show("A Number please!.", "Do you know the meaning of a NUMBER, try 10!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    WFBox.Show("A Number please!.", "Do you know the meaning of a NUMBER, try 10!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                WFBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -2022,7 +2022,7 @@ namespace GW2FOX
         {
             if (string.IsNullOrWhiteSpace(SearchResults.Text))
             {
-                MessageBox.Show("Enter first a Number in the field down below.", "Input Required", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                WFBox.Show("Enter first a Number in the field down below.", "Input Required", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
