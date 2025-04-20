@@ -4,11 +4,6 @@ using System.Windows.Forms;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.IO;
-using System.Windows;
-using WF = System.Windows.Forms;
-using WFApp = System.Windows.Forms.Application;
-using WFBox = System.Windows.Forms.MessageBox;
-using WFSize = System.Drawing.Size;
 
 namespace GW2FOX
 {
@@ -16,7 +11,7 @@ namespace GW2FOX
     {
         public static System.Windows.Controls.ListView? CustomBossList { get; private set; }
         public static Dictionary<string, CheckBox> bossCheckBoxMap;
-        
+
 
         public Worldbosses()
         {
@@ -232,15 +227,15 @@ namespace GW2FOX
 
         private void Runinfo_Click(object sender, EventArgs e)
         {
-            System.Windows.Forms.Clipboard.SetText(Runinfo.Text);
+            Clipboard.SetText(Runinfo.Text);
 
             BringGw2ToFront();
         }
 
         private void Squadinfos_Click(object sender, EventArgs e)
         {
-            // Copy the text from Leyline60 TextBox to the System.Windows.Forms.Clipboard
-            System.Windows.Forms.Clipboard.SetText(Squadinfo.Text);
+            // Copy the text from Leyline60 TextBox to the clipboard
+            Clipboard.SetText(Squadinfo.Text);
 
             // Bring the Gw2-64.exe window to the foreground
             BringGw2ToFront();
@@ -248,7 +243,7 @@ namespace GW2FOX
 
         private void Guildcopy_Click(object sender, EventArgs e)
         {
-            System.Windows.Forms.Clipboard.SetText(Guild.Text);
+            Clipboard.SetText(Guild.Text);
 
             // Bring the Gw2-64.exe window to the foreground
             BringGw2ToFront();
@@ -256,7 +251,7 @@ namespace GW2FOX
 
         private void Welcomecopy_Click(object sender, EventArgs e)
         {
-            System.Windows.Forms.Clipboard.SetText(Welcome.Text);
+            Clipboard.SetText(Welcome.Text);
 
             // Bring the Gw2-64.exe window to the foreground
             BringGw2ToFront();
@@ -1341,7 +1336,7 @@ namespace GW2FOX
             }
             catch (Exception ex)
             {
-                WFBox.Show($"Error adding boss {bossName}: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error adding boss {bossName}: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -1362,7 +1357,6 @@ namespace GW2FOX
                         fileStream.Close();
                         SaveTextToFile(GlobalVariables.DEFAULT_BOSSES, "Bosses", true);
                         SaveTextToFile(GlobalVariables.DEFAULT_META, "Meta", true);
-                        SaveTextToFile(GlobalVariables.DEFAULT_FIDO, "Fido", true);
                         SaveTextToFile(GlobalVariables.DEFAULT_WORLD, "World", true);
                         SaveTextToFile(GlobalVariables.DEFAULT_MIXED, "Mixed", true);
                         SaveTextToFile(GlobalVariables.DEFAULT_GUILD, "Guild", true);
@@ -1449,7 +1443,7 @@ namespace GW2FOX
             }
             catch (Exception ex)
             {
-                WFBox.Show($"Error removing boss {bossName}: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error removing boss {bossName}: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -1492,7 +1486,7 @@ namespace GW2FOX
             }
             catch (Exception ex)
             {
-                WFBox.Show($"Error loading Meta bosses: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error loading Meta bosses: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -1547,7 +1541,7 @@ namespace GW2FOX
             }
             catch (Exception ex)
             {
-                WFBox.Show($"Error checking all bosses: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error checking all bosses: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -1625,7 +1619,7 @@ namespace GW2FOX
             }
             catch (Exception ex)
             {
-                WFBox.Show($"Error loading Mixed bosses: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error loading Mixed bosses: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -1685,7 +1679,7 @@ namespace GW2FOX
             }
             catch (Exception ex)
             {
-                WFBox.Show($"Error setting boss checkboxes: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error setting boss checkboxes: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -1844,7 +1838,7 @@ namespace GW2FOX
             }
             catch (Exception ex)
             {
-                WFBox.Show($"Error loading World bosses: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error loading World bosses: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -1889,7 +1883,7 @@ namespace GW2FOX
             }
             catch (Exception ex)
             {
-                WFBox.Show($"Error loading World bosses: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error loading World bosses: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -1923,7 +1917,7 @@ namespace GW2FOX
             }
             catch (Exception ex)
             {
-                WFBox.Show($"Error unchecking all bosses: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error unchecking all bosses: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -1961,12 +1955,12 @@ namespace GW2FOX
                 {
                     SaveTextToFile(GlobalVariables.DEFAULT_BOSSES, "Bosses");
                     World_Click(sender, e);
-                    WFBox.Show($"World section not found in config.", "Not Found", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show($"World section not found in config.", "Not Found", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             catch (Exception ex)
             {
-                WFBox.Show($"Error loading World bosses: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error loading World bosses: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -2001,35 +1995,28 @@ namespace GW2FOX
                     string bossNamesString = string.Join("," + Environment.NewLine, bossNames);
 
                     // Die Bossnamen in die Zwischenablage kopieren
-                    System.Windows.Forms.Clipboard.SetText(bossNamesString);
+                    Clipboard.SetText(bossNamesString);
 
                     // Bossnamen in ResultTextBox anzeigen
                     SearchResults.Text = bossNamesString;
                 }
                 else
                 {
-                    WFBox.Show("A Number please!.", "Do you know the meaning of a NUMBER, try 10!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("A Number please!.", "Do you know the meaning of a NUMBER, try 10!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
             catch (Exception ex)
             {
-                WFBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
 
         private void button66_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(SearchResults.Text))
-            {
-                WFBox.Show("Enter first a Number in the field down below.", "Input Required", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            System.Windows.Forms.Clipboard.SetText(SearchResults.Text);
+            Clipboard.SetText(SearchResults.Text);
             BringGw2ToFront();
         }
-
 
         private void button68_Click(object sender, EventArgs e)
         {
@@ -2058,25 +2045,25 @@ namespace GW2FOX
 
         private void button30_Click(object sender, EventArgs e)
         {
-            System.Windows.Forms.Clipboard.SetText(Runinfo.Text);
+            Clipboard.SetText(Runinfo.Text);
             BringGw2ToFront();
         }
 
         private void button29_Click(object sender, EventArgs e)
         {
-            System.Windows.Forms.Clipboard.SetText(Squadinfo.Text);
+            Clipboard.SetText(Squadinfo.Text);
             BringGw2ToFront();
         }
 
         private void button28_Click(object sender, EventArgs e)
         {
-            System.Windows.Forms.Clipboard.SetText(Guild.Text);
+            Clipboard.SetText(Guild.Text);
             BringGw2ToFront();
         }
 
         private void button27_Click(object sender, EventArgs e)
         {
-            System.Windows.Forms.Clipboard.SetText(Welcome.Text);
+            Clipboard.SetText(Welcome.Text);
             BringGw2ToFront();
         }
 
@@ -2147,7 +2134,7 @@ namespace GW2FOX
 
         private void button1_Click(object sender, EventArgs e)
         {
-            System.Windows.Forms.Application.Restart();
+            Application.Restart();
         }
 
         private void button69_Click(object sender, EventArgs e)
@@ -2191,17 +2178,12 @@ namespace GW2FOX
         public static void UpdateBossUiBosses()
         {
             BossTimings.SetBossListFromConfig_Bosses();
-
-            BossTimerService._overlayWindow?.Dispatcher.Invoke(() =>
+            if (CustomBossList != null)
             {
                 BossTimerService._bossTimer?.UpdateBossList();
-
-                if (!BossTimerService._overlayWindow.IsVisible)
-                {
-                    BossTimerService._overlayWindow.Show();
-                }
-            });
+            }
         }
+
     }
 }
 

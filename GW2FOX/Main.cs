@@ -8,7 +8,7 @@ using System.IO;
 
 namespace GW2FOX
 {
-    public partial class Main : Form
+    public partial class Main : BaseForm
     {
         private Worldbosses _worldbossesForm;
         private MiniOverlay _miniOverlay;
