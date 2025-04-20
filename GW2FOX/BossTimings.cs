@@ -134,11 +134,11 @@ namespace GW2FOX
         {
             try
             {
-                Debug.WriteLine("Start of SetBossListFromConfig_Bosses");
+                Console.WriteLine("Start of SetBossListFromConfig_Bosses");
 
                 // Vorhandenen Inhalt aus der Datei lesen
                 var lines = File.ReadAllLines(GlobalVariables.FILE_PATH);
-                Debug.WriteLine("File read successfully.");
+                Console.WriteLine("File read successfully.");
 
                 // Index der Zeile mit dem Bossnamen finden
                 var bossIndex = -1;
@@ -151,11 +151,11 @@ namespace GW2FOX
 
                 if (bossIndex == -1 || bossIndex >= lines.Length)
                 {
-                    Debug.WriteLine("No 'Bosses:' line found or invalid index.");
+                    Console.WriteLine("No 'Bosses:' line found or invalid index.");
                     return;
                 }
 
-                Debug.WriteLine("Bosses found at line: " + bossIndex);
+                Console.WriteLine("Bosses found at line: " + bossIndex);
 
                 // Extrahiere die Bosse aus der Zeile zwischen den Anführungszeichen
                 var bossLine = lines[bossIndex].Replace("Bosses:", "").Trim();
@@ -165,7 +165,7 @@ namespace GW2FOX
                     .Select(name => name.Trim()) // Entferne führende und abschließende Leerzeichen
                     .ToArray();
 
-                Debug.WriteLine($"Boss names extracted: {string.Join(", ", bossNames)}");
+                Console.WriteLine($"Boss names extracted: {string.Join(", ", bossNames)}");
 
                 var newBossList = new List<string>();
                 newBossList.AddRange(bossNames);
@@ -179,7 +179,7 @@ namespace GW2FOX
                         .Select(timing => timing.Trim())
                         .ToArray();
 
-                    Debug.WriteLine($"Timings found: {string.Join(", ", timings)}");
+                    Console.WriteLine($"Timings found: {string.Join(", ", timings)}");
 
                     if (timings.Length == bossNames.Length)
                     {
@@ -190,7 +190,7 @@ namespace GW2FOX
                     }
                     else
                     {
-                        Debug.WriteLine("Number of timings does not match the number of bosses.");
+                        Console.WriteLine("Number of timings does not match the number of bosses.");
                     }
 
                     break; // Da wir die Timings gefunden haben, können wir die Schleife beenden
@@ -198,12 +198,12 @@ namespace GW2FOX
 
                 // Jetzt kannst du die alte BossList23 durch die neue Liste ersetzen
                 BossList23 = newBossList;
-                Debug.WriteLine("Boss list updated successfully.");
+                Console.WriteLine("Boss list updated successfully.");
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"Error in SetBossListFromConfig_Bosses: {ex.Message}");
-                Debug.WriteLine($"Stack Trace: {ex.StackTrace}");
+                Console.WriteLine($"Error in SetBossListFromConfig_Bosses: {ex.Message}");
+                Console.WriteLine($"Stack Trace: {ex.StackTrace}");
             }
         }
 
@@ -224,19 +224,19 @@ namespace GW2FOX
         {
             try
             {
-                Debug.WriteLine($"Adding BossEvents for: {bossName}, Category: {category}, Waypoint: {waypoint}");
+                Console.WriteLine($"Adding BossEvents for: {bossName}, Category: {category}, Waypoint: {waypoint}");
 
                 foreach (var timing in timings)
                 {
                     Events.Add(new BossEvent(bossName, timing, category, waypoint));
                 }
 
-                Debug.WriteLine("Boss events added successfully.");
+                Console.WriteLine("Boss events added successfully.");
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"Error in AddBossEvent (multiple timings): {ex.Message}");
-                Debug.WriteLine($"Stack Trace: {ex.StackTrace}");
+                Console.WriteLine($"Error in AddBossEvent (multiple timings): {ex.Message}");
+                Console.WriteLine($"Stack Trace: {ex.StackTrace}");
             }
         }
 
@@ -245,16 +245,16 @@ namespace GW2FOX
         {
             try
             {
-                Debug.WriteLine($"Adding BossEvent: {bossName}, Timing: {timing}, Category: {category}, Waypoint: {waypoint}");
+                Console.WriteLine($"Adding BossEvent: {bossName}, Timing: {timing}, Category: {category}, Waypoint: {waypoint}");
 
                 Events.Add(new BossEvent(bossName, timing, category, waypoint));
 
-                Debug.WriteLine("Boss event added successfully.");
+                Console.WriteLine("Boss event added successfully.");
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"Error in AddBossEvent (single timing): {ex.Message}");
-                Debug.WriteLine($"Stack Trace: {ex.StackTrace}");
+                Console.WriteLine($"Error in AddBossEvent (single timing): {ex.Message}");
+                Console.WriteLine($"Stack Trace: {ex.StackTrace}");
             }
         }
 
@@ -268,7 +268,7 @@ namespace GW2FOX
             {
                 try
                 {
-                    Debug.WriteLine($"Creating BossEventGroup for: {bossName}");
+                    Console.WriteLine($"Creating BossEventGroup for: {bossName}");
 
                     BossName = bossName;
                     _timings = events
@@ -276,12 +276,12 @@ namespace GW2FOX
                         .OrderBy(span => span.Timing)
                         .ToList();
 
-                    Debug.WriteLine($"BossEventGroup created for {BossName} with {_timings.Count} events.");
+                    Console.WriteLine($"BossEventGroup created for {BossName} with {_timings.Count} events.");
                 }
                 catch (Exception ex)
                 {
-                    Debug.WriteLine($"Error in BossEventGroup constructor: {ex.Message}");
-                    Debug.WriteLine($"Stack Trace: {ex.StackTrace}");
+                    Console.WriteLine($"Error in BossEventGroup constructor: {ex.Message}");
+                    Console.WriteLine($"Stack Trace: {ex.StackTrace}");
                 }
             }
 
@@ -297,7 +297,7 @@ namespace GW2FOX
             {
                 try
                 {
-                    Debug.WriteLine($"Getting next runs for {BossName}");
+                    Console.WriteLine($"Getting next runs for {BossName}");
 
                     List<BossEventRun> toReturn = new List<BossEventRun>();
 
@@ -322,14 +322,14 @@ namespace GW2FOX
                         .Take(NextRunsToShow)
                         .ToList();
 
-                    Debug.WriteLine($"{result.Count} next runs found for {BossName}");
+                    Console.WriteLine($"{result.Count} next runs found for {BossName}");
 
                     return result;
                 }
                 catch (Exception ex)
                 {
-                    Debug.WriteLine($"Error in GetNextRuns for {BossName}: {ex.Message}");
-                    Debug.WriteLine($"Stack Trace: {ex.StackTrace}");
+                    Console.WriteLine($"Error in GetNextRuns for {BossName}: {ex.Message}");
+                    Console.WriteLine($"Stack Trace: {ex.StackTrace}");
                     return Enumerable.Empty<BossEventRun>(); // Falls ein Fehler auftritt, gibt eine leere Liste zurück
                 }
             }
@@ -338,7 +338,7 @@ namespace GW2FOX
             {
                 try
                 {
-                    Debug.WriteLine($"Getting previous runs for {BossName}");
+                    Console.WriteLine($"Getting previous runs for {BossName}");
 
                     var result = _timings
                         .Where(bossEvent =>
@@ -348,14 +348,14 @@ namespace GW2FOX
                             GlobalVariables.CURRENT_DATE_TIME.Date + bossEvent.Timing, bossEvent.Waypoint))
                         .ToList();
 
-                    Debug.WriteLine($"{result.Count} previous runs found for {BossName}");
+                    Console.WriteLine($"{result.Count} previous runs found for {BossName}");
 
                     return result;
                 }
                 catch (Exception ex)
                 {
-                    Debug.WriteLine($"Error in GetPreviousRuns for {BossName}: {ex.Message}");
-                    Debug.WriteLine($"Stack Trace: {ex.StackTrace}");
+                    Console.WriteLine($"Error in GetPreviousRuns for {BossName}: {ex.Message}");
+                    Console.WriteLine($"Stack Trace: {ex.StackTrace}");
                     return Enumerable.Empty<BossEventRun>(); // Falls ein Fehler auftritt, gibt eine leere Liste zurück
                 }
             }

@@ -28,7 +28,7 @@ namespace GW2FOX
             {
                 CustomBossList = updatedList;
                 CustomBossList.ItemsSource = BossListItems;
-                Debug.WriteLine("CustomBossList updated successfully.");
+                Console.WriteLine("CustomBossList updated successfully.");
             }
             catch (Exception ex)
             {
@@ -47,7 +47,7 @@ namespace GW2FOX
                     _overlayWindow = new OverlayWindow();
                     _overlayWindow.Closed += (s, e) => _overlayWindow = null;
                     _overlayWindow.Show();
-                    Debug.WriteLine("Overlay window initialized.");
+                    Console.WriteLine("Overlay window initialized.");
                 }
             }
             catch (Exception ex)
@@ -64,7 +64,7 @@ namespace GW2FOX
                 {
                     ItemTemplate = (DataTemplate)System.Windows.Application.Current.Resources["BossListTemplate"]
                 };
-                Debug.WriteLine("CustomBossList initialized.");
+                Console.WriteLine("CustomBossList initialized.");
             }
             catch (Exception ex)
             {
@@ -93,7 +93,7 @@ namespace GW2FOX
                 {
                     InitializeBossTimerAndOverlay();
                 }
-                Debug.WriteLine("Initialization complete.");
+                Console.WriteLine("Initialization complete.");
             }
             catch (Exception ex)
             {
@@ -116,7 +116,7 @@ namespace GW2FOX
                 if (_overlayWindow != null && !_overlayWindow.IsVisible)
                 {
                     _overlayWindow.Show();
-                    Debug.WriteLine("Overlay window shown.");
+                    Console.WriteLine("Overlay window shown.");
                 }
             }
             catch (Exception ex)
@@ -138,7 +138,7 @@ namespace GW2FOX
                 this._bossList = bossList;
                 Timer.Interval = TimeSpan.FromSeconds(1);
                 Timer.Tick += TimerCallback;
-                Debug.WriteLine("BossTimer initialized.");
+                Console.WriteLine("BossTimer initialized.");
             }
 
             public void Start()
@@ -147,7 +147,7 @@ namespace GW2FOX
                 {
                     if (!_isRunning)
                     {
-                        Debug.WriteLine("Starting Timer");
+                        Console.WriteLine("Starting Timer");
                         Timer.Start();
                         _isRunning = true;
                     }
@@ -164,7 +164,7 @@ namespace GW2FOX
                 {
                     if (_isRunning)
                     {
-                        Debug.WriteLine("Stopping Timer");
+                        Console.WriteLine("Stopping Timer");
                         Timer.Stop();
                         _isRunning = false;
                     }
@@ -179,7 +179,7 @@ namespace GW2FOX
             {
                 try
                 {
-                    Debug.WriteLine("Timer Tick: " + DateTime.Now);
+                    Console.WriteLine("Timer Tick: " + DateTime.Now);
                     UpdateBossList();
                 }
                 catch (Exception ex)
@@ -218,7 +218,7 @@ namespace GW2FOX
                             });
                         }
                     });
-                    Debug.WriteLine("Boss list updated.");
+                    Console.WriteLine("Boss list updated.");
                 }
                 catch (Exception ex)
                 {
@@ -237,7 +237,7 @@ namespace GW2FOX
             {
                 if (!disposing) return;
                 Timer.Stop();
-                Debug.WriteLine("Disposed.");
+                Console.WriteLine("Disposed.");
             }
         }
 
@@ -250,9 +250,9 @@ namespace GW2FOX
 
         private static void LogError(string methodName, Exception ex)
         {
-            Debug.WriteLine($"Error in {methodName}: {ex.Message}");
+            Console.WriteLine($"Error in {methodName}: {ex.Message}");
             // Du kannst auch die Exception-Details loggen, wenn nötig:
-            Debug.WriteLine($"Stack Trace: {ex.StackTrace}");
+            Console.WriteLine($"Stack Trace: {ex.StackTrace}");
         }
     }
 }
