@@ -8,7 +8,7 @@
         Background="Transparent"
         Topmost="True"
         ResizeMode="NoResize"
-        Width="280" Height="400"
+        Width="240" Height="370"
         ShowInTaskbar="False"
         Title="OverlayWindow">
 
@@ -51,8 +51,12 @@
                 <!-- Hauptinhalt -->
                 <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="93*"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <!-- Fixed width for Icon -->
+                        <ColumnDefinition Width="120"/>
+                        <!-- Fixed width for BossName -->
                         <ColumnDefinition Width="*"/>
+                        <!-- Remaining space for TimeRemaining -->
                     </Grid.ColumnDefinitions>
 
                     <!-- ListView für Boss-Timer -->
@@ -67,31 +71,32 @@
                                            MouseLeftButtonDown="Waypoint_MouseLeftButtonDown"
                                            VerticalAlignment="Center"/>
 
-                                    <!-- Bossname mit Schatten -->
+                                    <!-- Bossname mit fester Breite -->
                                     <TextBlock Text="{Binding BossName}"
                                                FontWeight="Bold"
                                                Foreground="White"
-                                               Margin="0,0,10,0"
+                                               Width="120"
                                                VerticalAlignment="Center">
                                         <TextBlock.Effect>
                                             <DropShadowEffect Color="Black"
-                          BlurRadius="0"
-                          Direction="0"
-                          ShadowDepth="0"
-                          Opacity="1"/>
+                                                              BlurRadius="0"
+                                                              Direction="0"
+                                                              ShadowDepth="0"
+                                                              Opacity="1"/>
                                         </TextBlock.Effect>
                                     </TextBlock>
 
-                                    <!-- Timer mit Schatten -->
+                                    <!-- Timer mit zusätzlichem Platz -->
                                     <TextBlock Text="{Binding TimeRemainingFormatted}"
                                                Foreground="LightGray"
-                                               VerticalAlignment="Center">
+                                               VerticalAlignment="Center"
+                                               Margin="0,0,2,0"> 
                                         <TextBlock.Effect>
                                             <DropShadowEffect Color="Black"
-                          BlurRadius="0"
-                          Direction="0"
-                          ShadowDepth="0"
-                          Opacity="1"/>
+                                                              BlurRadius="0"
+                                                              Direction="0"
+                                                              ShadowDepth="0"
+                                                              Opacity="1"/>
                                         </TextBlock.Effect>
                                     </TextBlock>
                                 </StackPanel>
@@ -126,3 +131,4 @@
         </Border>
     </Grid>
 </Window>
+
