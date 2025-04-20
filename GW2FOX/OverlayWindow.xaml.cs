@@ -44,10 +44,20 @@ namespace GW2FOX
             BossTimerService.Timer_Click(sender, e);
         }
 
-        public static OverlayWindow? GetInstance()
+        public static OverlayWindow GetInstance()
         {
+            if (_instance == null)
+            {
+                Console.WriteLine("Erstelle neue Instanz von OverlayWindow.");
+                _instance = new OverlayWindow();
+            }
+            else
+            {
+                Console.WriteLine("Verwende bestehende Instanz von OverlayWindow.");
+            }
             return _instance;
         }
+
 
         private void Waypoint_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
