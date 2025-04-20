@@ -51,8 +51,6 @@ namespace GW2FOX
                 var remainingTime = !IsPreviousBoss
                     ? TimeToShow - GlobalVariables.CURRENT_DATE_TIME
                     : GlobalVariables.CURRENT_DATE_TIME.AddMinutes(15) - TimeToShow;
-
-                Console.WriteLine($"Boss: {BossName}, TimeToShow: {TimeToShow}, CurrentTime: {GlobalVariables.CURRENT_DATE_TIME}, RemainingTime: {remainingTime}");
                 return remainingTime;
             }
         }

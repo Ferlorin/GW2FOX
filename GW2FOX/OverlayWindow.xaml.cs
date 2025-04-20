@@ -6,6 +6,9 @@ using System.Windows.Controls;
 using System.Windows.Threading;
 using System.Linq;
 using System.Collections.Generic;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+using System.Windows.Media.Media3D;
+using System.IO;
 
 
 namespace GW2FOX
@@ -14,6 +17,7 @@ namespace GW2FOX
     {
         private System.Windows.Controls.ListView myListView;
         private static OverlayWindow? _instance;
+        private DispatcherTimer bossTimer;
 
         public OverlayWindow()
         {
@@ -21,14 +25,22 @@ namespace GW2FOX
             myListView = new System.Windows.Controls.ListView();
 
             LoadBossList();
+            StartBossTimer();
         }
 
-        public class BossListItem
+        private void StartBossTimer()
         {
-            public string BossName { get; set; }
-            public string Waypoint { get; set; }
-            public TimeSpan Timing { get; set; }
-            public static BitmapImage WaypointImage => new(new Uri("pack://application:,,,/Icons/waypoint.png"));
+            bossTimer = new DispatcherTimer
+            {
+                Interval = TimeSpan.FromSeconds(1)
+            };
+            bossTimer.Tick += BossTimer_Tick;
+            bossTimer.Start();
+        }
+
+        private void BossTimer_Tick(object? sender, EventArgs e)
+        {
+            BossTimerService.Timer_Click(sender, e);
         }
 
         public static OverlayWindow GetInstance()
@@ -38,6 +50,7 @@ namespace GW2FOX
                 _instance = new OverlayWindow();
             }
             return _instance;
+            
         }
 
         private void LoadBossList()
@@ -50,7 +63,7 @@ namespace GW2FOX
         {
             if (sender is System.Windows.Controls.Image img && img.DataContext is BossListItem boss)
             {
-                System.Windows.Clipboard.SetText(boss.Waypoint); // Verwende den WPF Clipboard-Namespace
+                System.Windows.Clipboard.SetText(boss.Waypoint); // Kopiert die Wegmarke in die Zwischenablage
                 ShowCopiedMessage();
             }
         }

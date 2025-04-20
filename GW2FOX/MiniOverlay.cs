@@ -89,9 +89,6 @@ namespace GW2FOX
 
 
 
-
-
-
         private void button2_Click(object sender, EventArgs e)
         {
             string exeDirectory = Path.GetDirectoryName(Application.ExecutablePath);

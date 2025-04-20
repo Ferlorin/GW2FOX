@@ -1,42 +1,54 @@
-﻿<Window x:Class="GW2FOX.OverlayWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:wfi="clr-namespace:System.Windows.Forms.Integration;assembly=WindowsFormsIntegration" WindowStyle="None" AllowsTransparency="True" Background="Transparent" Topmost="True" ResizeMode="NoResize" Width="280" Height="400" ShowInTaskbar="False" Title="OverlayWindow">
-    <!-- Wrap the existing content in a single container -->
+﻿<Window x:Class="GW2FOX.OverlayWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:GW2FOX"
+        xmlns:wfi="clr-namespace:System.Windows.Forms.Integration;assembly=WindowsFormsIntegration"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        Topmost="True"
+        ResizeMode="NoResize"
+        Width="280" Height="400"
+        ShowInTaskbar="False"
+        Title="OverlayWindow">
+
     <Grid>
         <Border CornerRadius="8" Background="Transparent" BorderBrush="#333" BorderThickness="0">
             <Grid>
-                <!-- Layout mit zwei Zeilen -->
                 <Grid.RowDefinitions>
                     <RowDefinition Height="30"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
-                <!-- Titelleiste mit transparentem Hintergrund -->
+                <!-- Titelleiste -->
                 <Grid Background="Transparent" Grid.Row="0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
-                    <Image x:Name="Com" Source="/Com.png"
-                       Width="20" Height="20" Margin="6,5,4,5"
-                       MouseLeftButtonDown="Icon_MouseLeftButtonDown"/>
+                    <Image x:Name="Com"
+                           Source="/Com.png"
+                           Width="20" Height="20" Margin="6,5,4,5"
+                           MouseLeftButtonDown="Icon_MouseLeftButtonDown"/>
 
                     <TextBlock Grid.Column="1"
-                           VerticalAlignment="Center"
-                           Foreground="Black"
-                           FontWeight="Bold"
-                           FontSize="14"
-                           Text="Event Timer">
+                               VerticalAlignment="Center"
+                               Foreground="White"
+                               FontWeight="Bold"
+                               FontSize="14"
+                               Text="Event Timer">
                         <TextBlock.Effect>
                             <DropShadowEffect Color="Black"
-                                          BlurRadius="0"
-                                          Direction="0"
-                                          ShadowDepth="0"
-                                          Opacity="1"/>
+                                              BlurRadius="0"
+                                              Direction="0"
+                                              ShadowDepth="0"
+                                              Opacity="1"/>
                         </TextBlock.Effect>
                     </TextBlock>
                 </Grid>
 
-                <!-- Inhalt (unter Titelleiste) -->
+                <!-- Hauptinhalt -->
                 <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="93*"/>
@@ -44,35 +56,72 @@
                     </Grid.ColumnDefinitions>
 
                     <!-- ListView für Boss-Timer -->
-                    <ListView x:Name="BossListView">
-                        <ListView.ItemContainerStyle>
-                            <Style TargetType="ListViewItem">
-                                <Setter Property="Foreground" Value="{Binding ForegroundBrush}" />
-                            </Style>
-                        </ListView.ItemContainerStyle>
-                        <ListView.View>
-                            <GridView>
-                                <GridViewColumn Header="Waypoint" DisplayMemberBinding="{Binding Waypoint}" />
-                                <GridViewColumn Header="Boss Name" DisplayMemberBinding="{Binding BossName}" />
-                                <GridViewColumn Header="Remaining Time" DisplayMemberBinding="{Binding TimeRemainingFormatted}" />
-                            </GridView>
-                        </ListView.View>
+                    <ListView x:Name="BossListView" BorderThickness="0" Background="Transparent">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" Margin="4" VerticalAlignment="Center">
+                                    <!-- ICON links -->
+                                    <Image Source="{x:Static local:BossListItem.WaypointImage}"
+                                           Width="20" Height="20" Margin="0,0,8,0"
+                                           Cursor="Hand"
+                                           MouseLeftButtonDown="Waypoint_MouseLeftButtonDown"
+                                           VerticalAlignment="Center"/>
+
+                                    <!-- Bossname mit Schatten -->
+                                    <TextBlock Text="{Binding BossName}"
+                                               FontWeight="Bold"
+                                               Foreground="White"
+                                               Margin="0,0,10,0"
+                                               VerticalAlignment="Center">
+                                        <TextBlock.Effect>
+                                            <DropShadowEffect Color="Black"
+                          BlurRadius="0"
+                          Direction="0"
+                          ShadowDepth="0"
+                          Opacity="1"/>
+                                        </TextBlock.Effect>
+                                    </TextBlock>
+
+                                    <!-- Timer mit Schatten -->
+                                    <TextBlock Text="{Binding TimeRemainingFormatted}"
+                                               Foreground="LightGray"
+                                               VerticalAlignment="Center">
+                                        <TextBlock.Effect>
+                                            <DropShadowEffect Color="Black"
+                          BlurRadius="0"
+                          Direction="0"
+                          ShadowDepth="0"
+                          Opacity="1"/>
+                                        </TextBlock.Effect>
+                                    </TextBlock>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
                     </ListView>
                 </Grid>
 
-                <!-- Copied message, sichtbar nach Waypoint-Klick -->
+                <!-- Kopiert-Benachrichtigung -->
                 <TextBlock x:Name="CopiedMessage"
-                       Text="Copied!"
-                       HorizontalAlignment="Center"
-                       VerticalAlignment="Top"
-                       Margin="0,10,0,0"
-                       Padding="6,2"
-                       Background="Black"
-                       Foreground="White"
-                       FontWeight="Bold"
-                       Opacity="0.9"
-                       Visibility="Collapsed"
-                       FontSize="14" Grid.Row="1"/>
+                           Text="Copied!"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Top"
+                           Margin="0,10,0,0"
+                           Padding="6,2"
+                           Background="Black"
+                           Foreground="White"
+                           FontWeight="Bold"
+                           Opacity="0.9"
+                           Visibility="Collapsed"
+                           FontSize="14"
+                           Grid.Row="1">
+                    <TextBlock.Effect>
+                        <DropShadowEffect Color="Black"
+                          BlurRadius="0"
+                          Direction="0"
+                          ShadowDepth="0"
+                          Opacity="1"/>
+                    </TextBlock.Effect>
+                </TextBlock>
             </Grid>
         </Border>
     </Grid>

@@ -163,7 +163,7 @@ namespace GW2FOX
                     .Select(name => name.Trim()) // Entferne führende und abschließende Leerzeichen
                     .ToArray();
 
-                Console.WriteLine($"Boss names extracted: {string.Join(", ", bossNames)}");
+               
 
                 var newBossList = new List<string>();
                 newBossList.AddRange(bossNames);
@@ -259,38 +259,28 @@ namespace GW2FOX
         public static void UpdateBossList(System.Windows.Controls.ListView listView)
         {
             Console.WriteLine($"Number of events: {Events.Count}");
-            foreach (var boss in Events)
-            {
-                Console.WriteLine($"Boss: {boss.BossName}, Timing: {boss.Timing}, Waypoint: {boss.Waypoint}");
-            }
+
             var currentTime = GlobalVariables.CURRENT_DATE_TIME;
 
-            // Kommende Boss-Events ermitteln
             var upcomingBosses = Events
                 .SelectMany(bossEvent => new BossEventGroup(bossEvent.BossName, Events).GetNextRuns())
                 .OrderBy(boss => boss.TimeToShow)
                 .ToList();
 
-            // ListView leeren
-            listView.Items.Clear();
+            var items = new List<BossListItem>();
 
-            if (upcomingBosses.Count > 0)
+            foreach (var boss in upcomingBosses)
             {
-                foreach (var boss in upcomingBosses)
+                items.Add(new BossListItem
                 {
-                    var listViewItem = new System.Windows.Controls.ListViewItem
-                    {
-                        Content = new
-                        {
-                            BossName = boss.BossName,
-                            RemainingTime = boss.TimeRemainingFormatted,
-                            Waypoint = boss.Waypoint
-                        }
-                    };
-                    listView.Items.Add(listViewItem);
-                }
+                    BossName = boss.BossName,
+                    TimeRemainingFormatted = boss.TimeRemainingFormatted,
+                    Waypoint = boss.Waypoint
+                });
             }
+
+            listView.ItemsSource = items;
         }
+
     }
-    
 }

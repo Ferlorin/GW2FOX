@@ -20,11 +20,6 @@ namespace GW2FOX
             // Updater.CheckForUpdates(Worldbosses.getConfigLineForItem("Version"));
         }
 
-        private void Timer_Click(object sender, EventArgs e)
-        {
-            BossTimerService.Timer_Click(sender, e);
-        }
-
         private void HandleException(Exception ex)
         {
             MessageBox.Show($"An error occurred: {ex.Message}\n\nStack Trace: {ex.StackTrace}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
