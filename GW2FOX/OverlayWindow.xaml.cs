@@ -27,18 +27,14 @@ namespace GW2FOX
         {
             public string BossName { get; set; }
             public string Waypoint { get; set; }
-            public string Time { get; set; }
+            public TimeSpan Timing { get; set; }
             public BitmapImage WaypointImage => new BitmapImage(new Uri("pack://application:,,,/Icons/waypoint.png"));
         }
 
         private void LoadBossList()
         {
-            // Daten aus BossTimerService abrufen
-            var bossEvents = BossTimerService.GetBossEvents();
-
-            // Datenquelle an ListView binden
-            BossTimings.UpdateBossList(myListView);
-            BossListView.ItemsSource = bossEvents;
+            Console.WriteLine("Loading Boss List...");
+            BossTimings.UpdateBossList(BossListView);
         }
 
         private void Waypoint_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

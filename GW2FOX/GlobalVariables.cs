@@ -8,6 +8,7 @@ namespace GW2FOX;
 public class GlobalVariables
 {
     public static TimeZoneInfo TIMEZONE_TO_USE = TimeZoneInfo.FindSystemTimeZoneById("W. Europe Standard Time");
+    
     public static DateTime CURRENT_DATE_TIME =>
         TimeZoneInfo
             .ConvertTimeFromUtc(

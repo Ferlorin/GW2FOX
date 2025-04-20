@@ -44,12 +44,12 @@
                     </Grid.ColumnDefinitions>
 
                     <!-- ListView für Boss-Timer -->
-                    <ListView x:Name="BossListView" ItemsSource="{Binding}">
+                    <ListView x:Name="BossListView">
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn Header="Waypoint" DisplayMemberBinding="{Binding Waypoint}" />
                                 <GridViewColumn Header="Boss Name" DisplayMemberBinding="{Binding BossName}" />
-                                <GridViewColumn Header="Remaining Time" DisplayMemberBinding="{Binding RemainingTime}" />
+                                <GridViewColumn Header="Remaining Time" DisplayMemberBinding="{Binding TimeRemainingFormatted}" />
                             </GridView>
                         </ListView.View>
                     </ListView>

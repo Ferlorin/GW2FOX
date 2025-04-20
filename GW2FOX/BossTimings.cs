@@ -133,7 +133,6 @@ namespace GW2FOX
         {
             try
             {
-                Console.WriteLine("Start of SetBossListFromConfig_Bosses");
 
                 // Vorhandenen Inhalt aus der Datei lesen
                 var lines = File.ReadAllLines(GlobalVariables.FILE_PATH);
@@ -259,13 +258,17 @@ namespace GW2FOX
 
         public static void UpdateBossList(System.Windows.Controls.ListView listView)
         {
-            // Aktuelle Zeit abrufen
+            Console.WriteLine($"Number of events: {Events.Count}");
+            foreach (var boss in Events)
+            {
+                Console.WriteLine($"Boss: {boss.BossName}, Timing: {boss.Timing}, Waypoint: {boss.Waypoint}");
+            }
             var currentTime = GlobalVariables.CURRENT_DATE_TIME;
 
             // Kommende Boss-Events ermitteln
             var upcomingBosses = Events
-                .Where(boss => boss.Timing >= currentTime.TimeOfDay)
-                .OrderBy(boss => boss.Timing)
+                .SelectMany(bossEvent => new BossEventGroup(bossEvent.BossName, Events).GetNextRuns())
+                .OrderBy(boss => boss.TimeToShow)
                 .ToList();
 
             // ListView leeren
@@ -273,27 +276,16 @@ namespace GW2FOX
 
             if (upcomingBosses.Count > 0)
             {
-                // Nächstes Event bestimmen
-                var nextEventTime = upcomingBosses.First().Timing;
-
-                // Alle Events mit der gleichen Zeit (gleichzeitig) markieren
-                var simultaneousEvents = upcomingBosses
-                    .Where(boss => boss.Timing == nextEventTime)
-                    .ToList();
-
-                foreach (var boss in simultaneousEvents)
+                foreach (var boss in upcomingBosses)
                 {
-                    var remainingTime = boss.Timing - currentTime.TimeOfDay;
-
                     var listViewItem = new System.Windows.Controls.ListViewItem
                     {
                         Content = new
                         {
                             BossName = boss.BossName,
-                            RemainingTime = $"{(int)remainingTime.TotalHours:D2}:{remainingTime.Minutes:D2}:{remainingTime.Seconds:D2}",
+                            RemainingTime = boss.TimeRemainingFormatted,
                             Waypoint = boss.Waypoint
-                        },
-                        FontStyle = System.Windows.FontStyles.Italic // Kursiv für gleichzeitige Events
+                        }
                     };
                     listView.Items.Add(listViewItem);
                 }
