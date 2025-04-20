@@ -9,7 +9,7 @@ namespace GW2FOX
 {
     public partial class Worldbosses : BaseForm
     {
-        public static ListView? CustomBossList { get; private set; }
+        public static System.Windows.Controls.ListView? CustomBossList { get; private set; }
         public static Dictionary<string, CheckBox> bossCheckBoxMap;
 
         public Worldbosses()

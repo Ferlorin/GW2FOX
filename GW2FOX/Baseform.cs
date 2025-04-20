@@ -10,12 +10,25 @@ using System.IO;
 using System.Windows.Controls;
 using WinFormsButton = System.Windows.Forms.Button;
 using WpfButton = System.Windows.Controls.Button;
+using System.Windows;
+// Alias für WinForms
+using WF = System.Windows.Forms;
+using WFApp = System.Windows.Forms.Application;
+using WFBox = System.Windows.Forms.MessageBox;
+using WFSize = System.Drawing.Size;
+
+// Alias für WPF
+using WPF = System.Windows;
+using WPFBox = System.Windows.MessageBox;
+using WPFApp = System.Windows.Application;
+using WPFSize = System.Windows.Size;
+
 
 namespace GW2FOX
 {
     public partial class BaseForm : Form
     {
-        private readonly Dictionary<WinFormsButton, Size> originalSizes = new();
+        private readonly Dictionary<WF.Button, WFSize> originalSizes = new();
         protected OverlayWindow overlayWindow; // Ersetzt Overlay durch OverlayWindow
         protected System.Windows.Controls.ListView customBossList;
         protected BossTimer bossTimer;
@@ -25,7 +38,16 @@ namespace GW2FOX
 
         public BaseForm()
         {
-            InitializeGlobalKeyboardHook();
+            // InitializeComponent();
+            InitializeBossTimerAndOverlay();
+            customBossList = new System.Windows.Controls.ListView
+            {
+                ItemTemplate = (DataTemplate)System.Windows.Application.Current.Resources["BossListTemplate"]
+            };
+            CustomBossList = customBossList;
+            CustomBossList.ItemsSource = BossListItems;
+            InitializeCustomBossList();
+            SetFormTransparency();
         }
 
         protected override void OnLoad(EventArgs e)
@@ -76,24 +98,15 @@ namespace GW2FOX
             overlayWindow.Show(); // Zeigt das OverlayWindow an
         }
 
-
-        private void InitializeGlobalKeyboardHook()
+        protected void SetFormTransparency()
         {
-            _globalKeyboardHook = new GlobalKeyboardHook();
-            _globalKeyboardHook.KeyPressed += GlobalKeyboardHook_KeyPressed;
+            this.FormBorderStyle = FormBorderStyle.None;
+            this.AllowTransparency = true;
+            this.BackColor = Color.Magenta;
+            this.TransparencyKey = Color.Magenta;
+            this.Opacity = 0.90;
+            this.TopMost = true;
         }
-
-        private void GlobalKeyboardHook_KeyPressed(object sender, KeyPressedEventArgs e)
-        {
-            if (ModifierKeys == Keys.Alt && e.Key == Keys.T)
-            {
-                if (this is Main)
-                {
-                    Timer_Click(sender, e);
-                }
-            }
-        }
-       
 
         private void ShowFormWithoutActivation(Form form)
         {
@@ -154,13 +167,13 @@ namespace GW2FOX
 
                 if (!hideMessages)
                 {
-                    MessageBox.Show($"{headerToUse} saved.", "Saved!", MessageBoxButtons.OK,
+                    WFBox.Show($"{headerToUse} saved.", "Saved!", MessageBoxButtons.OK,
                         MessageBoxIcon.Information);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error {headerToUse}: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                WFBox.Show($"Error {headerToUse}: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -208,17 +221,17 @@ namespace GW2FOX
                     }
                     else
                     {
-                        MessageBox.Show("Fensterhandle von Gw2-64.exe nicht gefunden.", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        WFBox.Show("Fensterhandle von Gw2-64.exe nicht gefunden.", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Gw2-64.exe läuft nicht.", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    WFBox.Show("Gw2-64.exe läuft nicht.", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Fehler beim Fokussieren von Gw2-64.exe: {ex.Message}", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                WFBox.Show($"Fehler beim Fokussieren von Gw2-64.exe: {ex.Message}", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -271,7 +284,7 @@ namespace GW2FOX
             catch (Exception ex)
             {
                 // Fehler beim Laden der Konfigurationsdatei
-                MessageBox.Show($"Fehler beim Laden der Konfigurationsdatei: {ex.Message}", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                WFBox.Show($"Fehler beim Laden der Konfigurationsdatei: {ex.Message}", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -283,7 +296,7 @@ namespace GW2FOX
 
             if (this is Main)
             {
-                Application.Exit();
+                WFApp.Exit();
             }
         }
 
@@ -306,13 +319,13 @@ namespace GW2FOX
                 // Vergrößere die Größe um 10%
                 int newWidth = (int)(originalSizes[button].Width * 1.03);
                 int newHeight = (int)(originalSizes[button].Height * 1.03);
-                button.Size = new Size(newWidth, newHeight);
+                button.Size = new WFSize(newWidth, newHeight);
             }
         }
 
         private void Button_MouseLeave(object sender, EventArgs e)
         {
-            if (sender is System.Windows.Forms. Button button && originalSizes.TryGetValue(button, out Size originalSize))
+            if (sender is System.Windows.Forms. Button button && originalSizes.TryGetValue(button, out WFSize originalSize))
             {
                 // Setze die Originalgröße wieder her
                 button.Size = originalSize;
@@ -331,13 +344,13 @@ namespace GW2FOX
                 // Verkleinere die Größe um 3%
                 int newWidth = (int)(originalSizes[button].Width * 0.97);
                 int newHeight = (int)(originalSizes[button].Height * 0.97);
-                button.Size = new Size(newWidth, newHeight);
+                button.Size = new WFSize(newWidth, newHeight);
             }
         }
 
         private void Button_MouseUp(object sender, MouseEventArgs e)
         {
-            if (sender is System.Windows.Forms.Button button && originalSizes.TryGetValue(button, out Size originalSize))
+            if (sender is System.Windows.Forms.Button button && originalSizes.TryGetValue(button, out WFSize originalSize))
             {
                 button.Size = originalSize;
             }

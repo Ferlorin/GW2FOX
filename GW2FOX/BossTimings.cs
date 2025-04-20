@@ -3,11 +3,14 @@ using System.Windows.Forms;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.IO;
+using System.ComponentModel;
+using System.Diagnostics;
 
 namespace GW2FOX
 {
     public static class BossTimings
     {
+        
         public static Dictionary<string, List<BossEvent>> BossEvents { get; } =
             new Dictionary<string, List<BossEvent>>();
 
@@ -131,8 +134,11 @@ namespace GW2FOX
         {
             try
             {
+                Debug.WriteLine("Start of SetBossListFromConfig_Bosses");
+
                 // Vorhandenen Inhalt aus der Datei lesen
                 var lines = File.ReadAllLines(GlobalVariables.FILE_PATH);
+                Debug.WriteLine("File read successfully.");
 
                 // Index der Zeile mit dem Bossnamen finden
                 var bossIndex = -1;
@@ -143,58 +149,61 @@ namespace GW2FOX
                     break;
                 }
 
-                // Wenn der Bossname gefunden wird, setze die BossList23
-                if (bossIndex == -1 || bossIndex >= lines.Length) return;
+                if (bossIndex == -1 || bossIndex >= lines.Length)
                 {
-                    // Extrahiere die Bosse aus der Zeile zwischen den Anführungszeichen
-                    var bossLine = lines[bossIndex].Replace("Bosses:", "").Trim();
+                    Debug.WriteLine("No 'Bosses:' line found or invalid index.");
+                    return;
+                }
 
-                    // Entferne die äußeren Anführungszeichen und teile die Bosse
-                    var bossNames = bossLine
-                        .Trim('"') // Entferne äußere Anführungszeichen
-                        .Split(Separator, StringSplitOptions.RemoveEmptyEntries)
-                        .Select(name => name.Trim()) // Entferne führende und abschließende Leerzeichen
+                Debug.WriteLine("Bosses found at line: " + bossIndex);
+
+                // Extrahiere die Bosse aus der Zeile zwischen den Anführungszeichen
+                var bossLine = lines[bossIndex].Replace("Bosses:", "").Trim();
+                var bossNames = bossLine
+                    .Trim('"') // Entferne äußere Anführungszeichen
+                    .Split(Separator, StringSplitOptions.RemoveEmptyEntries)
+                    .Select(name => name.Trim()) // Entferne führende und abschließende Leerzeichen
+                    .ToArray();
+
+                Debug.WriteLine($"Boss names extracted: {string.Join(", ", bossNames)}");
+
+                var newBossList = new List<string>();
+                newBossList.AddRange(bossNames);
+
+                // Iteriere durch die Zeilen, um Timings zu extrahieren
+                for (var i = bossIndex + 1; i < lines.Length; i++)
+                {
+                    if (!lines[i].StartsWith("Timings:")) continue;
+                    var timingLine = lines[i].Replace("Timings:", "").Trim();
+                    var timings = timingLine.Split(Separator, StringSplitOptions.RemoveEmptyEntries)
+                        .Select(timing => timing.Trim())
                         .ToArray();
 
-                    // Erstelle eine neue List, um BossList23 zu ersetzen
-                    var newBossList = new List<string>();
+                    Debug.WriteLine($"Timings found: {string.Join(", ", timings)}");
 
-                    // Füge jeden Bossnamen zur neuen Liste hinzu
-                    newBossList.AddRange(bossNames);
-
-                    // Iteriere durch die Zeilen, um Timings zu extrahieren
-                    for (var i = bossIndex + 1; i < lines.Length; i++)
+                    if (timings.Length == bossNames.Length)
                     {
-                        if (!lines[i].StartsWith("Timings:")) continue;
-                        var timingLine = lines[i].Replace("Timings:", "").Trim();
-                        var timings = timingLine.Split(Separator, StringSplitOptions.RemoveEmptyEntries)
-                            .Select(timing => timing.Trim())
-                            .ToArray();
-
-                        // Überprüfe, ob die Anzahl der Timings mit der Anzahl der Bosse übereinstimmt
-                        if (timings.Length == bossNames.Length)
+                        for (var j = 0; j < bossNames.Length; j++)
                         {
-                            for (var j = 0; j < bossNames.Length; j++)
-                            {
-                                // Füge das BossEvent zur neuen Liste hinzu
-                                AddBossEvent(bossNames[j], timings[j], "WBs");
-                            }
+                            AddBossEvent(bossNames[j], timings[j], "WBs");
                         }
-                        else
-                        {
-                            // Handle den Fall, wenn die Anzahl der Timings nicht mit der Anzahl der Bosse übereinstimmt
-                        }
-
-                        break; // Da wir die Timings gefunden haben, können wir die Schleife beenden
+                    }
+                    else
+                    {
+                        Debug.WriteLine("Number of timings does not match the number of bosses.");
                     }
 
-                    // Jetzt kannst du die alte BossList23 durch die neue Liste ersetzen
-                    BossList23 = newBossList;
+                    break; // Da wir die Timings gefunden haben, können wir die Schleife beenden
                 }
+
+                // Jetzt kannst du die alte BossList23 durch die neue Liste ersetzen
+                BossList23 = newBossList;
+                Debug.WriteLine("Boss list updated successfully.");
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                // Hier kann eine Fehlermeldung protokolliert oder geloggt werden, wenn gewünscht
+                Debug.WriteLine($"Error in SetBossListFromConfig_Bosses: {ex.Message}");
+                Debug.WriteLine($"Stack Trace: {ex.StackTrace}");
             }
         }
 
@@ -213,16 +222,40 @@ namespace GW2FOX
 
         private static void AddBossEvent(string bossName, string[] timings, string category, string waypoint = "")
         {
-            foreach (var timing in timings)
+            try
             {
-                Events.Add(new BossEvent(bossName, timing, category, waypoint));
+                Debug.WriteLine($"Adding BossEvents for: {bossName}, Category: {category}, Waypoint: {waypoint}");
+
+                foreach (var timing in timings)
+                {
+                    Events.Add(new BossEvent(bossName, timing, category, waypoint));
+                }
+
+                Debug.WriteLine("Boss events added successfully.");
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Error in AddBossEvent (multiple timings): {ex.Message}");
+                Debug.WriteLine($"Stack Trace: {ex.StackTrace}");
             }
         }
 
 
         private static void AddBossEvent(string bossName, string timing, string category, string waypoint = "")
         {
-            Events.Add(new BossEvent(bossName, timing, category, waypoint));
+            try
+            {
+                Debug.WriteLine($"Adding BossEvent: {bossName}, Timing: {timing}, Category: {category}, Waypoint: {waypoint}");
+
+                Events.Add(new BossEvent(bossName, timing, category, waypoint));
+
+                Debug.WriteLine("Boss event added successfully.");
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Error in AddBossEvent (single timing): {ex.Message}");
+                Debug.WriteLine($"Stack Trace: {ex.StackTrace}");
+            }
         }
 
         public class BossEventGroup
@@ -231,22 +264,28 @@ namespace GW2FOX
             public TimeSpan Duration { get; set; }
             private readonly List<BossEvent> _timings;
 
-
             public BossEventGroup(string bossName, IEnumerable<BossEvent> events)
             {
-                BossName = bossName;
-                _timings = events
-                    .Where(bossEvent => bossEvent.BossName.Equals(BossName))
-                    .OrderBy(span => span.Timing)
-                    .ToList();
-                // BossEvent? firstEvent = events.FirstOrDefault();
-                // if (firstEvent != null)
-                // {
-                //     Category = firstEvent.Category;
-                // }
+                try
+                {
+                    Debug.WriteLine($"Creating BossEventGroup for: {bossName}");
+
+                    BossName = bossName;
+                    _timings = events
+                        .Where(bossEvent => bossEvent.BossName.Equals(BossName))
+                        .OrderBy(span => span.Timing)
+                        .ToList();
+
+                    Debug.WriteLine($"BossEventGroup created for {BossName} with {_timings.Count} events.");
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine($"Error in BossEventGroup constructor: {ex.Message}");
+                    Debug.WriteLine($"Stack Trace: {ex.StackTrace}");
+                }
             }
 
-            
+
             /// <summary>
             /// Calculates Next Runs based on DaysExtraToCalculate and NextRunsToShow.
             /// </summary>
@@ -256,45 +295,69 @@ namespace GW2FOX
             /// </remarks>
             public IEnumerable<BossEventRun> GetNextRuns()
             {
-                //changed the logic to always calculate more than one day
-                List<BossEventRun> toReturn = new List<BossEventRun>();
-                
-                for (var i = -1; i <= DaysExtraToCalculate; i++)
+                try
                 {
-                    toReturn.AddRange(
-                        _timings
-                            .Select(bossEvent => new BossEventRun(bossEvent.BossName, bossEvent.Timing, bossEvent.Category,
-                                GlobalVariables
-                                    .CURRENT_DATE_TIME
-                                    .Date
-                                    .Add(new TimeSpan(0, i * 24, 0, 0, 0))
-                                + bossEvent.Timing,
-                                bossEvent.Waypoint))
-                            .ToList()
-                    );
-                }
+                    Debug.WriteLine($"Getting next runs for {BossName}");
 
-               return toReturn
-                    .Where(bossEvent => bossEvent.getTimeToShow() >= GlobalVariables.CURRENT_DATE_TIME)
-                    .OrderBy(bossEvent => bossEvent.getTimeToShow())
-                    .Take(NextRunsToShow)
-                    .ToList()
-                    ;
-                
-                
+                    List<BossEventRun> toReturn = new List<BossEventRun>();
+
+                    for (var i = -1; i <= DaysExtraToCalculate; i++)
+                    {
+                        toReturn.AddRange(
+                            _timings
+                                .Select(bossEvent => new BossEventRun(bossEvent.BossName, bossEvent.Timing, bossEvent.Category,
+                                    GlobalVariables
+                                        .CURRENT_DATE_TIME
+                                        .Date
+                                        .Add(new TimeSpan(0, i * 24, 0, 0, 0))
+                                    + bossEvent.Timing,
+                                    bossEvent.Waypoint))
+                                .ToList()
+                        );
+                    }
+
+                    var result = toReturn
+                        .Where(bossEvent => bossEvent.TimeToShow >= GlobalVariables.CURRENT_DATE_TIME)
+                        .OrderBy(bossEvent => bossEvent.TimeToShow)
+                        .Take(NextRunsToShow)
+                        .ToList();
+
+                    Debug.WriteLine($"{result.Count} next runs found for {BossName}");
+
+                    return result;
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine($"Error in GetNextRuns for {BossName}: {ex.Message}");
+                    Debug.WriteLine($"Stack Trace: {ex.StackTrace}");
+                    return Enumerable.Empty<BossEventRun>(); // Falls ein Fehler auftritt, gibt eine leere Liste zurück
+                }
             }
 
             public IEnumerable<BossEventRun> GetPreviousRuns()
             {
-                return _timings
-                    .Where(bossEvent =>
-                        bossEvent.Timing > GlobalVariables.CURRENT_TIME.Subtract(new TimeSpan(0, 14, 59)) &&
-                        bossEvent.Timing < GlobalVariables.CURRENT_TIME)
-                    .Select(bossEvent => new BossEventRun(bossEvent.BossName, bossEvent.Timing, bossEvent.Category,
-                        GlobalVariables.CURRENT_DATE_TIME.Date + bossEvent.Timing
-                        , bossEvent.Waypoint))
-                    // .Where(bossEventRun => !DoneBosses.ContainsKey(bossEventRun.NextRunTime.Date) || !DoneBosses[bossEventRun.NextRunTime.Date].Contains(bossEventRun.BossName))
-                    .ToList();
+                try
+                {
+                    Debug.WriteLine($"Getting previous runs for {BossName}");
+
+                    var result = _timings
+                        .Where(bossEvent =>
+                            bossEvent.Timing > GlobalVariables.CURRENT_TIME.Subtract(new TimeSpan(0, 14, 59)) &&
+                            bossEvent.Timing < GlobalVariables.CURRENT_TIME)
+                        .Select(bossEvent => new BossEventRun(bossEvent.BossName, bossEvent.Timing, bossEvent.Category,
+                            GlobalVariables.CURRENT_DATE_TIME.Date + bossEvent.Timing, bossEvent.Waypoint))
+                        .ToList();
+
+                    Debug.WriteLine($"{result.Count} previous runs found for {BossName}");
+
+                    return result;
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine($"Error in GetPreviousRuns for {BossName}: {ex.Message}");
+                    Debug.WriteLine($"Stack Trace: {ex.StackTrace}");
+                    return Enumerable.Empty<BossEventRun>(); // Falls ein Fehler auftritt, gibt eine leere Liste zurück
+                }
             }
         }
 
@@ -336,88 +399,47 @@ namespace GW2FOX
                 return hashBossName ^ hashTiming;
             }
         }
-
-
-        public class BossEventRun(
-            string bossName,
-            TimeSpan timing,
-            string category,
-            DateTime nextRunTime,
-            string waypoint = "")
-            : BossEvent(bossName, timing, category, waypoint)
+        public class BossEventRun : BossEvent
         {
-
             private static readonly Color DefaultFontColor = Color.White;
             private static readonly Color PastBossFontColor = Color.OrangeRed;
 
-            public DateTime NextRunTime { get; set; } = nextRunTime;
+            public DateTime NextRunTime { get; set; }
 
-            public bool isPreviousBoss => NextRunTime < GlobalVariables.CURRENT_DATE_TIME;
+            public bool IsPreviousBoss => NextRunTime < GlobalVariables.CURRENT_DATE_TIME;
+
+            public BossEventRun(string bossName, TimeSpan timing, string category, DateTime nextRunTime, string waypoint = "")
+                : base(bossName, timing, category, waypoint)
+            {
+                NextRunTime = nextRunTime;
+            }
+
+            public DateTime TimeToShow =>
+                IsPreviousBoss ? NextRunTimeEnding : NextRunTime;
+
             public DateTime NextRunTimeEnding => NextRunTime.AddMinutes(14).AddSeconds(59);
 
-            public DateTime getTimeToShow()
-            {
-                if (isPreviousBoss)
-                {
-                    return NextRunTimeEnding;
-                }
+            public TimeSpan TimeRemaining =>
+                !IsPreviousBoss
+                    ? TimeToShow - GlobalVariables.CURRENT_DATE_TIME
+                    : GlobalVariables.CURRENT_DATE_TIME.AddMinutes(15) - TimeToShow;
 
-                return NextRunTime;
-            }
-            public TimeSpan getTimeRemaining()
-            {
-                if (!isPreviousBoss)
-                {
-                    return getTimeToShow() - GlobalVariables.CURRENT_DATE_TIME;
-                }
-                else
-                {
-                    return GlobalVariables.CURRENT_DATE_TIME
-                        .Add(new TimeSpan(0, 0, 15, 0, 0))
-                        // .Subtract(new TimeSpan(0, 0,0, 2, 0))
-                        .Subtract(getTimeToShow());
-                }
-            }
-            public string getTimeRemainingFormatted()
-            {
-                var remainingTime = getTimeRemaining();
-                return $"{(int)remainingTime.TotalHours:D2}:{remainingTime.Minutes:D2}:{remainingTime.Seconds:D2}";
-            }
+            public string TimeRemainingFormatted =>
+                $"{(int)TimeRemaining.TotalHours:D2}:{TimeRemaining.Minutes:D2}:{TimeRemaining.Seconds:D2}";
 
-            public Color getForeColor()
-            {
-                if (isPreviousBoss)
+            public Color ForeColor =>
+                IsPreviousBoss ? PastBossFontColor : Category switch
                 {
-                    return PastBossFontColor; // Setzen Sie die Farbe auf OrangeRed für PreviewBosses
-                }
-                else
-                {
-                    // Setzen Sie die Farbe basierend auf der Kategorie des BossEvents
-                    switch (Category)
-                    {
-                        case "Maguuma":
-                            return Color.LimeGreen;
-                        case "Desert":
-                            return Color.DeepPink;
-                        case "WBs":
-                            return Color.WhiteSmoke;
-                        case "Ice":
-                            return Color.DeepSkyBlue;
-                        case "Cantha":
-                            return Color.Blue;
-                        case "SotO":
-                            return Color.Yellow;
-                        case "LWS2":
-                            return Color.LightYellow;
-                        case "LWS3":
-                            return Color.ForestGreen;
-                        default:
-                            return DefaultFontColor;
-                    }
-                }
-            }
+                    "Maguuma" => Color.LimeGreen,
+                    "Desert" => Color.DeepPink,
+                    "WBs" => Color.WhiteSmoke,
+                    "Ice" => Color.DeepSkyBlue,
+                    "Cantha" => Color.Blue,
+                    "SotO" => Color.Yellow,
+                    "LWS2" => Color.LightYellow,
+                    "LWS3" => Color.ForestGreen,
+                    _ => DefaultFontColor
+                };
         }
     }
-
-
 }

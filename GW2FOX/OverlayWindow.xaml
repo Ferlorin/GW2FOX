@@ -11,72 +11,89 @@
         ShowInTaskbar="False"
         Title="OverlayWindow">
 
-    <Border CornerRadius="8" Background="Transparent" BorderBrush="#333" BorderThickness="0">
-        <Grid>
-            <!-- Layout mit zwei Zeilen -->
-            <Grid.RowDefinitions>
-                <RowDefinition Height="30"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
+    <!-- Wrap the existing content in a single container -->
+    <Grid>
+        <Border CornerRadius="8" Background="Transparent" BorderBrush="#333" BorderThickness="0">
+            <Grid>
+                <!-- Layout mit zwei Zeilen -->
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
 
                 <!-- Titelleiste mit transparentem Hintergrund -->
-            <Grid Background="Transparent" Grid.Row="0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
+                <Grid Background="Transparent" Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
 
-                <Image x:Name="Com" Source="/Com.png"
-                       Width="20" Height="20" Margin="6,5,4,5"
-                       MouseLeftButtonDown="Icon_MouseLeftButtonDown"/>
+                    <Image x:Name="Com" Source="/Com.png"
+                           Width="20" Height="20" Margin="6,5,4,5"
+                           MouseLeftButtonDown="Icon_MouseLeftButtonDown"/>
 
-                <TextBlock Grid.Column="1"
-                           VerticalAlignment="Center"
-                           Foreground="Black"
+                    <TextBlock Grid.Column="1"
+                               VerticalAlignment="Center"
+                               Foreground="Black"
+                               FontWeight="Bold"
+                               FontSize="14"
+                               Text="Event Timer">
+                        <TextBlock.Effect>
+                            <DropShadowEffect Color="Black"
+                                              BlurRadius="0"
+                                              Direction="0"
+                                              ShadowDepth="0"
+                                              Opacity="1"/>
+                        </TextBlock.Effect>
+                    </TextBlock>
+                </Grid>
+
+                <!-- Inhalt (unter Titelleiste) -->
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="93*"/>
+                        <ColumnDefinition Width="185*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- ListView für Boss-Timer -->
+                    <ListView x:Name="BossListView" Background="Transparent" BorderBrush="Transparent" MouseDoubleClick="ListViewItem_MouseDoubleClick">
+                        <ListView.View>
+                            <GridView>
+                                <!-- Waypoint-Spalte mit Icon -->
+                                <GridViewColumn Header="Waypoint" Width="40">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <Image Source="{Binding WaypointImage}" Width="16" Height="16" MouseLeftButtonDown="Waypoint_MouseLeftButtonDown"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+
+                                <!-- Boss Name-Spalte -->
+                                <GridViewColumn Header="Boss Name" DisplayMemberBinding="{Binding BossName}" Width="138"/>
+
+                                <!-- Time-Spalte -->
+                                <GridViewColumn Header="Time" DisplayMemberBinding="{Binding Time}" Width="120"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </Grid>
+
+                <!-- Copied message, sichtbar nach Waypoint-Klick -->
+                <TextBlock x:Name="CopiedMessage"
+                           Text="Copied!"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Top"
+                           Margin="0,10,0,0"
+                           Padding="6,2"
+                           Background="Black"
+                           Foreground="White"
                            FontWeight="Bold"
-                           FontSize="14"
-                           Text="Event Timer">
-                    <TextBlock.Effect>
-                        <DropShadowEffect Color="Black"
-                                          BlurRadius="0"
-                                          Direction="0"
-                                          ShadowDepth="0"
-                                          Opacity="1"/>
-                    </TextBlock.Effect>
-                </TextBlock>
+                           Opacity="0.9"
+                           Visibility="Collapsed"
+                           FontSize="14" Grid.Row="1"/>
             </Grid>
-
-            <!-- Inhalt (unter Titelleiste) -->
-            <Grid Grid.Row="1">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="93*"/>
-                    <ColumnDefinition Width="185*"/>
-                </Grid.ColumnDefinitions>
-
-                <!-- ListView für Boss-Timer -->
-                <ListView x:Name="BossListView" Background="Transparent" BorderBrush="Transparent" MouseDoubleClick="ListViewItem_MouseDoubleClick">
-                    <ListView.View>
-                        <GridView>
-                            <!-- Waypoint-Spalte mit Icon -->
-                            <GridViewColumn Header="Waypoint" Width="40">
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <StackPanel Orientation="Horizontal">
-                                            <Image Source="{Binding WaypointImage}" Width="16" Height="16" MouseLeftButtonDown="Waypoint_MouseLeftButtonDown"/>
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
-
-                            <!-- Boss Name-Spalte -->
-                            <GridViewColumn Header="Boss Name" DisplayMemberBinding="{Binding BossName}" Width="138"/>
-
-                            <!-- Time-Spalte -->
-                            <GridViewColumn Header="Time" DisplayMemberBinding="{Binding Time}" Width="120"/>
-                        </GridView>
-                    </ListView.View>
-                </ListView>
-            </Grid>
-        </Grid>
-    </Border>
+        </Border>
+    </Grid>
 </Window>

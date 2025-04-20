@@ -14,6 +14,7 @@ namespace GW2FOX
         private Worldbosses _worldbossesForm;
         private OverlayWindow _overlayWindow;
 
+
         public Main()
         {
             InitializeComponent();
@@ -146,7 +147,6 @@ namespace GW2FOX
             {
                 BossTimerService._bossTimer?.Stop();
                 BossTimerService._bossTimer?.Dispose();
-
                 BossTimerService._overlayWindow?.Close();
 
                 Application.Exit();
@@ -283,28 +283,6 @@ namespace GW2FOX
 
         private void Leading_Click(object sender, EventArgs e)
         {
-            // Wenn Worldbosses noch nicht existiert, erstelle es
-            if (_worldbossesForm == null || _worldbossesForm.IsDisposed)
-            {
-                _worldbossesForm = new Worldbosses();
-                _worldbossesForm.FormClosed += (s, args) => _worldbossesForm = null;
-                _worldbossesForm.Hide(); // Worldbosses verstecken
-            }
-
-            // MiniOverlay mit der Worldbosses-Instanz übergeben
-            ShowAndHideForm(new MiniOverlay(_worldbossesForm));
-            BossTimerService.Timer_Click(sender, e);
-        }
-
-        private void button5_Click(object sender, EventArgs e)
-        {
-            ShowAndHideForm(new Tutorial());
-            ShowAndHideForm(new MiniOverlay2(_worldbossesForm));
-            BossTimerService.Timer_Click(sender, e);
-        }
-
-        private void button7_Click(object sender, EventArgs e)
-        {
             if (_worldbossesForm == null || _worldbossesForm.IsDisposed)
             {
                 _worldbossesForm = new Worldbosses();
@@ -329,8 +307,17 @@ namespace GW2FOX
                 _overlayWindow.Show();
                 _overlayWindow.Activate();
             }
+        
+        ShowAndHideForm(new MiniOverlay(_worldbossesForm));
+            BossTimerService.Timer_Click(sender, e);
         }
 
+        private void button5_Click(object sender, EventArgs e)
+        {
+            ShowAndHideForm(new Tutorial());
+            ShowAndHideForm(new MiniOverlay2(_worldbossesForm));
+            BossTimerService.Timer_Click(sender, e);
+        }
     }
 }
 

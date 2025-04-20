@@ -1,9 +1,10 @@
 ﻿using System.Collections.ObjectModel;
 using System.Reflection;
 using static GW2FOX.BossTimings;
-using System.Windows.Controls; // WPF ListView
+using System.Windows.Controls;
 using System.Windows.Threading;
 using System.Windows;
+using System.Diagnostics;
 
 namespace GW2FOX
 {
@@ -13,7 +14,7 @@ namespace GW2FOX
 
         public static OverlayWindow? _overlayWindow { get; set; }
         public static BossTimer? _bossTimer { get; set; }
-        public static System.Windows.Controls.ListView CustomBossList { get; set; } = new(); // WPF ListView
+        public static System.Windows.Controls.ListView CustomBossList { get; set; } = new();
         public static ObservableCollection<BossEventDisplay> BossListItems { get; set; } = new();
 
         static BossTimerService()
@@ -21,61 +22,106 @@ namespace GW2FOX
             Initialize();
         }
 
-        public static void UpdateCustomBossList(System.Windows.Controls.ListView updatedList) // WPF ListView
+        public static void UpdateCustomBossList(System.Windows.Controls.ListView updatedList)
         {
-            CustomBossList = updatedList;
-            CustomBossList.ItemsSource = BossListItems;
+            try
+            {
+                CustomBossList = updatedList;
+                CustomBossList.ItemsSource = BossListItems;
+                Debug.WriteLine("CustomBossList updated successfully.");
+            }
+            catch (Exception ex)
+            {
+                LogError("UpdateCustomBossList", ex);
+            }
         }
 
         private static void InitializeBossTimerAndOverlay()
         {
-            _bossTimer = new BossTimer(CustomBossList);
-
-            if (_overlayWindow == null)
+            try
             {
-                _overlayWindow = new OverlayWindow();
-                _overlayWindow.Closed += (s, e) => _overlayWindow = null;
-                _overlayWindow.Show();
+                _bossTimer = new BossTimer(CustomBossList);
+
+                if (_overlayWindow == null)
+                {
+                    _overlayWindow = new OverlayWindow();
+                    _overlayWindow.Closed += (s, e) => _overlayWindow = null;
+                    _overlayWindow.Show();
+                    Debug.WriteLine("Overlay window initialized.");
+                }
+            }
+            catch (Exception ex)
+            {
+                LogError("InitializeBossTimerAndOverlay", ex);
             }
         }
 
-        private static void InitializeCustomBossList()
+        public static void InitializeCustomBossList()
         {
-            CustomBossList = new System.Windows.Controls.ListView // WPF ListView
+            try
             {
-                // Set a basic template for the ListView to display BossName, TimeRemaining, and Category.
-                ItemTemplate = (DataTemplate)System.Windows.Application.Current.Resources["BossListTemplate"]
-            };
+                CustomBossList = new System.Windows.Controls.ListView
+                {
+                    ItemTemplate = (DataTemplate)System.Windows.Application.Current.Resources["BossListTemplate"]
+                };
+                Debug.WriteLine("CustomBossList initialized.");
+            }
+            catch (Exception ex)
+            {
+                LogError("InitializeCustomBossList", ex);
+            }
         }
 
         public static void Timer_Click(object sender, EventArgs e)
         {
-            Update();
+            try
+            {
+                Update();
+            }
+            catch (Exception ex)
+            {
+                LogError("Timer_Click", ex);
+            }
         }
 
         private static void Initialize()
         {
-            InitializeCustomBossList();
-            if (_overlayWindow == null)
+            try
             {
-                InitializeBossTimerAndOverlay();
+                InitializeCustomBossList();
+                if (_overlayWindow == null)
+                {
+                    InitializeBossTimerAndOverlay();
+                }
+                Debug.WriteLine("Initialization complete.");
+            }
+            catch (Exception ex)
+            {
+                LogError("Initialize", ex);
             }
         }
 
         public static void Update()
         {
-            if (_bossTimer == null)
+            try
             {
-                Initialize();
+                if (_bossTimer == null)
+                {
+                    Initialize();
+                }
+
+                _bossTimer?.Start();
+                GC.KeepAlive(_bossTimer);
+
+                if (_overlayWindow != null && !_overlayWindow.IsVisible)
+                {
+                    _overlayWindow.Show();
+                    Debug.WriteLine("Overlay window shown.");
+                }
             }
-
-            _bossTimer?.Start();
-
-            GC.KeepAlive(_bossTimer);
-
-            if (_overlayWindow != null && !_overlayWindow.IsVisible)
+            catch (Exception ex)
             {
-                _overlayWindow.Show();
+                LogError("Update", ex);
             }
         }
 
@@ -92,74 +138,92 @@ namespace GW2FOX
                 this._bossList = bossList;
                 Timer.Interval = TimeSpan.FromSeconds(1);
                 Timer.Tick += TimerCallback;
+                Debug.WriteLine("BossTimer initialized.");
             }
 
             public void Start()
             {
-                if (!_isRunning)
+                try
                 {
-                    Console.WriteLine("Starting Timer");
-                    Timer.Start();
-                    _isRunning = true;
+                    if (!_isRunning)
+                    {
+                        Debug.WriteLine("Starting Timer");
+                        Timer.Start();
+                        _isRunning = true;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    LogError("Start", ex);
                 }
             }
 
             public void Stop()
             {
-                if (_isRunning)
+                try
                 {
-                    Console.WriteLine("Stopping Timer");
-                    Timer.Stop();
-                    _isRunning = false;
+                    if (_isRunning)
+                    {
+                        Debug.WriteLine("Stopping Timer");
+                        Timer.Stop();
+                        _isRunning = false;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    LogError("Stop", ex);
                 }
             }
 
             private void TimerCallback(object? sender, EventArgs e)
             {
-                Console.WriteLine("Timer Tick: " + DateTime.Now);
                 try
                 {
+                    Debug.WriteLine("Timer Tick: " + DateTime.Now);
                     UpdateBossList();
                 }
                 catch (Exception ex)
                 {
-                    HandleException(ex, "TimerCallback");
+                    LogError("TimerCallback", ex);
                 }
             }
 
             public void UpdateBossList()
             {
-                var allBosses = BossEventGroups
-                    .SelectMany(bossEventGroup => bossEventGroup.GetNextRuns())
-                    .ToList();
-
-                // Sortieren nach nächster Laufzeit und Kategorie
-                allBosses.Sort((bossEvent1, bossEvent2) =>
+                try
                 {
-                    int timeComparison = bossEvent1.NextRunTime.CompareTo(bossEvent2.NextRunTime);
-                    if (timeComparison != 0) return timeComparison;
-                    return string.Compare(bossEvent1.Category, bossEvent2.Category, StringComparison.Ordinal);
-                });
+                    var allBosses = BossEventGroups
+                        .SelectMany(bossEventGroup => bossEventGroup.GetNextRuns())
+                        .ToList();
 
-                // Aktualisiere die ObservableCollection
-                System.Windows.Application.Current.Dispatcher.Invoke(() =>
-                {
-                    BossListItems.Clear();
-                    foreach (var bossEvent in allBosses)
+                    // Sortieren nach nächster Laufzeit und Kategorie
+                    allBosses.Sort((bossEvent1, bossEvent2) =>
                     {
-                        BossListItems.Add(new BossEventDisplay
-                        {
-                            BossName = bossEvent.BossName,
-                            TimeRemaining = bossEvent.getTimeRemainingFormatted(),
-                            Category = bossEvent.Category
-                        });
-                    }
-                });
-            }
+                        int timeComparison = bossEvent1.NextRunTime.CompareTo(bossEvent2.NextRunTime);
+                        if (timeComparison != 0) return timeComparison;
+                        return string.Compare(bossEvent1.Category, bossEvent2.Category, StringComparison.Ordinal);
+                    });
 
-            private void HandleException(Exception ex, string methodName)
-            {
-                Console.WriteLine($"Exception in {methodName}: {ex}");
+                    // Aktualisiere die ObservableCollection
+                    System.Windows.Application.Current.Dispatcher.Invoke(() =>
+                    {
+                        BossListItems.Clear();
+                        foreach (var bossEvent in allBosses)
+                        {
+                            BossListItems.Add(new BossEventDisplay
+                            {
+                                BossName = bossEvent.BossName,
+                                TimeRemaining = bossEvent.TimeRemainingFormatted,
+                                Category = bossEvent.Category
+                            });
+                        }
+                    });
+                    Debug.WriteLine("Boss list updated.");
+                }
+                catch (Exception ex)
+                {
+                    LogError("UpdateBossList", ex);
+                }
             }
 
             public void Dispose()
@@ -173,6 +237,7 @@ namespace GW2FOX
             {
                 if (!disposing) return;
                 Timer.Stop();
+                Debug.WriteLine("Disposed.");
             }
         }
 
@@ -181,6 +246,13 @@ namespace GW2FOX
             public string BossName { get; set; }
             public string TimeRemaining { get; set; }
             public string Category { get; set; }
+        }
+
+        private static void LogError(string methodName, Exception ex)
+        {
+            Debug.WriteLine($"Error in {methodName}: {ex.Message}");
+            // Du kannst auch die Exception-Details loggen, wenn nötig:
+            Debug.WriteLine($"Stack Trace: {ex.StackTrace}");
         }
     }
 }

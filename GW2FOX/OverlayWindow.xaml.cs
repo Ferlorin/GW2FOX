@@ -4,9 +4,8 @@ using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using System.Windows.Controls;
 using System.Windows.Threading;
-using System.Windows.Media;
-using System.Windows.Shapes;
-using System.Windows.Controls.Primitives;
+using System.Linq;
+using System.Windows; // Clipboard für WPF
 
 namespace GW2FOX
 {
@@ -18,61 +17,55 @@ namespace GW2FOX
             InitializeBossList();
         }
 
-        private void InitializeBossList()
+        public class BossListItem
         {
-            // Beispielhafte Datenquelle für Boss-Daten
-            var bosses = new[]
-            {
-                new { Waypoint = "Way1", BossName = "Boss 1", Time = "12:00", WaypointImage = "/Images/Waypoint.png" },
-                new { Waypoint = "Way2", BossName = "Boss 2", Time = "14:00", WaypointImage = "/Images/Waypoint.png" }
-            };
-
-            // Setzen der ItemsSource für die ListView
-            BossListView.ItemsSource = bosses;
+            public string BossName { get; set; }
+            public string Waypoint { get; set; }
+            public string Time { get; set; } // z.B. "15:30"
+            public BitmapImage WaypointImage => new BitmapImage(new Uri("pack://application:,,,/Icons/waypoint.png"));
         }
 
-        // Event-Handler, wenn auf das Waypoint-Icon geklickt wird
+        private void InitializeBossList()
+        {
+            // Alle zukünftigen Runs sammeln
+            var upcomingRuns = BossTimings.BossEvents
+                .SelectMany(kvp => new BossTimings.BossEventGroup(kvp.Key, kvp.Value).GetNextRuns())
+                .OrderBy(run => run.NextRunTime) // Verwende NextRunTime statt EventTime
+                .ToList();
+
+            var bossList = upcomingRuns.Select(run => new BossListItem
+            {
+                BossName = run.BossName,
+                Waypoint = run.Waypoint,
+                Time = run.NextRunTime.ToString("HH:mm") // Verwende NextRunTime statt EventTime
+            }).ToList();
+
+            BossListView.ItemsSource = bossList;
+        }
+
+
         private void Waypoint_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            var image = sender as Image;
-            if (image != null)
+            if (sender is System.Windows.Controls.Image img && img.DataContext is BossListItem boss)
             {
-                var boss = image.DataContext as dynamic;
-                if (boss != null)
-                {
-                    Clipboard.SetText(boss.Waypoint); // Kopiere den Wegpunkt in die Zwischenablage
-                    ShowCopiedMessage(); // Zeige "Copied!" Nachricht an
-                }
+                System.Windows.Clipboard.SetText(boss.Waypoint); // Verwende den WPF Clipboard-Namespace
+                ShowCopiedMessage();
             }
         }
 
-        // Methode, um die "Copied!" Nachricht anzuzeigen
+
+
         private void ShowCopiedMessage()
         {
-            var message = new TextBlock
-            {
-                Text = "Copied!",
-                Foreground = Brushes.White,
-                Background = Brushes.Black,
-                Padding = new Thickness(5),
-                Margin = new Thickness(5),
-                Visibility = Visibility.Visible
-            };
+            CopiedMessage.Visibility = Visibility.Visible;
 
-            // Zeige die Nachricht im Overlay
-            this.Content = message;
-
-            // Timer, um die Nachricht nach 0.5 Sekunden auszublenden
-            var dispatcherTimer = new DispatcherTimer
+            var timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(0.8) };
+            timer.Tick += (s, e) =>
             {
-                Interval = TimeSpan.FromSeconds(0.5)
+                CopiedMessage.Visibility = Visibility.Collapsed;
+                timer.Stop();
             };
-            dispatcherTimer.Tick += (s, e) =>
-            {
-                message.Visibility = Visibility.Collapsed;
-                dispatcherTimer.Stop();
-            };
-            dispatcherTimer.Start();
+            timer.Start();
         }
 
         // Event-Handler, um das Fenster zu verschieben
