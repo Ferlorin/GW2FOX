@@ -26,12 +26,6 @@ namespace GW2FOX
 
         public BaseForm()
         {
-            customBossList = new System.Windows.Controls.ListView
-            {
-                ItemTemplate = (DataTemplate)System.Windows.Application.Current.Resources["BossListTemplate"]
-            };
-            CustomBossList = customBossList;
-            CustomBossList.ItemsSource = BossListItems;
             InitializeGlobalKeyboardHook();
             SetFormTransparency();
         }
@@ -91,18 +85,6 @@ namespace GW2FOX
             {
                 this.Hide();
             }
-        }
-
-
-        protected void InitializeBossTimerAndOverlay()
-        {
-            bossTimer = new BossTimer(customBossList);
-            overlayWindow = OverlayWindow.GetInstance(); // Singleton-Instanz verwenden
-            if (!overlayWindow.IsVisible)
-            {
-                overlayWindow.Show(); // Zeigt das OverlayWindow an
-            }
-
         }
 
         protected void SetFormTransparency()
