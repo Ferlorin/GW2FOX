@@ -73,6 +73,11 @@ public static class BossOverlayHelper
 
         return overlayItems;
     }
+    public static string FormatRemainingTime(TimeSpan remaining)
+    {
+        int totalHours = (int)remaining.TotalHours;
+        return $"{totalHours:D2}:{remaining.Minutes:D2}:{remaining.Seconds:D2}";
+    }
 
 
 

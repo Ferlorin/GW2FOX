@@ -254,9 +254,10 @@ namespace GW2FOX
 
                 var dynamicBosses = DynamicEventManager.GetActiveBossEventRuns();
                 var combinedBosses = staticBosses
-                    .Concat(dynamicBosses)
-                    .OrderBy(run => run.NextRunTime)
-                    .ToList();
+     .Concat(dynamicBosses)
+     .OrderBy(run => run.TimeToShow)
+     .ToList();
+
 
                 var items = BossOverlayHelper.GetBossOverlayItems(combinedBosses, now);
 
@@ -266,16 +267,16 @@ namespace GW2FOX
                     var window = OverlayWindow.GetInstance();
                     window.OverlayItems.Clear();
 
-                    foreach (var item in items)
+                    foreach (var item in items.OrderBy(i => i.TimeToShow))
                     {
                         item.UpdateCountdown();
                         window.OverlayItems.Add(item);
                     }
                 });
 
-                foreach (var boss in combinedBosses.OrderBy(b => b.NextRunTime))
+                foreach (var boss in combinedBosses.OrderBy(b => b.TimeToShow))
                 {
-                    Console.WriteLine($"- {boss.BossName} @ {boss.NextRunTime}");
+                    Console.WriteLine($"- {boss.BossName} @ {boss.NextRunTime} | Show: {boss.TimeToShow}");
                 }
             }
             catch (Exception ex)

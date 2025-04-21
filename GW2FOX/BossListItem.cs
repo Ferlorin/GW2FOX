@@ -5,13 +5,46 @@ using System.Windows.Media.Imaging;
 using System.Windows.Media;
 using Imaging = System.Drawing.Imaging;
 
-
 namespace GW2FOX
 {
     public class BossListItem : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler? PropertyChanged;
+
+        public string BossName { get; set; } = string.Empty;
+
+        private string _countdown = string.Empty;
+        public string Countdown
+        {
+            get => _countdown;
+            set
+            {
+                if (_countdown != value)
+                {
+                    _countdown = value;
+                    OnPropertyChanged(nameof(Countdown));
+                }
+            }
+        }
+
+        private string _waypoint = string.Empty;
+        public string Waypoint
+        {
+            get => _waypoint;
+            set
+            {
+                if (_waypoint != value)
+                {
+                    _waypoint = value;
+                    OnPropertyChanged(nameof(Waypoint));
+                }
+            }
+        }
+
+        public DateTime TimeToShow { get; set; }
+
         public DateTime NextRunTime { get; set; }
+
         private double _opacity = 1.0;
         public double Opacity
         {
@@ -25,25 +58,6 @@ namespace GW2FOX
                 }
             }
         }
-
-        public void UpdateCountdown()
-        {
-            var now = DateTime.UtcNow;
-            var nextEndTime = NextRunTime.AddMinutes(14).AddSeconds(59);
-            var timeToShow = NextRunTime < now ? nextEndTime : NextRunTime;
-
-            var remaining = timeToShow - now;
-
-            // Update Formatted String
-            TimeRemainingFormatted = $"{(int)remaining.TotalHours:D2}:{remaining.Minutes:D2}:{remaining.Seconds:D2}";
-            SecondsRemaining = (int)remaining.TotalSeconds;
-            IsPastEvent = NextRunTime < now;
-            Console.WriteLine($"[{BossName}] Updated countdown: {TimeRemainingFormatted}");
-            Console.WriteLine($"[{BossName}] now: {now}, NextRunTime: {NextRunTime}, TimeToShow: {timeToShow}");
-
-        }
-
-        public string BossName { get; set; } = string.Empty;
 
         private string _timeRemainingFormatted = string.Empty;
         public string TimeRemainingFormatted
@@ -73,20 +87,6 @@ namespace GW2FOX
             }
         }
 
-        private string _waypoint = string.Empty;
-        public string Waypoint
-        {
-            get => _waypoint;
-            set
-            {
-                if (_waypoint != value)
-                {
-                    _waypoint = value;
-                    OnPropertyChanged(nameof(Waypoint));
-                }
-            }
-        }
-
         private bool _isPastEvent;
         public bool IsPastEvent
         {
@@ -102,7 +102,6 @@ namespace GW2FOX
         }
 
         private static BitmapImage? _waypointImage;
-
         public static BitmapImage WaypointImage
         {
             get
@@ -128,13 +127,6 @@ namespace GW2FOX
             }
         }
 
-       
-
-        protected void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
         public bool IsConcurrentEvent { get; set; } = false;
 
         private string _category = string.Empty;
@@ -147,25 +139,45 @@ namespace GW2FOX
                 {
                     _category = value;
                     OnPropertyChanged(nameof(Category));
-                    OnPropertyChanged(nameof(CategoryBrush)); // Brush auch updaten
+                    OnPropertyChanged(nameof(CategoryBrush));
                 }
             }
         }
 
-
         public System.Windows.Media.Brush CategoryBrush =>
-   Category switch
-   {
-       "Maguuma" => System.Windows.Media.Brushes.LimeGreen,
-       "WBs" => System.Windows.Media.Brushes.WhiteSmoke,
-       "Ice" => System.Windows.Media.Brushes.DeepSkyBlue,
-       "Cantha" => System.Windows.Media.Brushes.Blue,
-       "SotO" => System.Windows.Media.Brushes.Yellow,
-       "LWS2" => System.Windows.Media.Brushes.LightYellow,
-       "LWS3" => System.Windows.Media.Brushes.ForestGreen,
-       "Desert" => System.Windows.Media.Brushes.DeepPink,
-       _ => System.Windows.Media.Brushes.White
-   };
+Category switch
+{
+"Maguuma" => System.Windows.Media.Brushes.LimeGreen,
+"WBs" => System.Windows.Media.Brushes.WhiteSmoke,
+"Ice" => System.Windows.Media.Brushes.DeepSkyBlue,
+"Cantha" => System.Windows.Media.Brushes.Blue,
+"SotO" => System.Windows.Media.Brushes.Yellow,
+"LWS2" => System.Windows.Media.Brushes.LightYellow,
+"LWS3" => System.Windows.Media.Brushes.ForestGreen,
+"Desert" => System.Windows.Media.Brushes.DeepPink,
+_ => System.Windows.Media.Brushes.White
+};
 
+        public void UpdateCountdown()
+        {
+            var now = DateTime.UtcNow;
+            var nextEndTime = NextRunTime.AddMinutes(14).AddSeconds(59);
+            TimeToShow = NextRunTime < now ? nextEndTime : NextRunTime;
+
+            var remaining = TimeToShow - now;
+
+            TimeRemainingFormatted = $"{(int)remaining.TotalHours:D2}:{remaining.Minutes:D2}:{remaining.Seconds:D2}";
+            SecondsRemaining = (int)remaining.TotalSeconds;
+            IsPastEvent = NextRunTime < now;
+            Countdown = TimeRemainingFormatted;
+
+            // Debug falls gebraucht
+            // Console.WriteLine($"[{BossName}] Updated countdown: {TimeRemainingFormatted}");
+        }
+
+        protected void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }
