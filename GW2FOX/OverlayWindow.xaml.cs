@@ -14,19 +14,14 @@ namespace GW2FOX
 {
     public partial class OverlayWindow : Window, INotifyPropertyChanged
     {
-
         public event PropertyChangedEventHandler? PropertyChanged;
+
         private DispatcherTimer? _copiedTimer;
-        private DispatcherTimer? _updateTimer;
         private DispatcherTimer? _countdownTimer;
 
-        protected void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+        private static OverlayWindow? _instance;
 
         public ObservableCollection<BossListItem> OverlayItems { get; set; } = new();
-        private static OverlayWindow? _instance;
 
         private double _scrollValue;
         public double ScrollValue
@@ -38,7 +33,7 @@ namespace GW2FOX
                 {
                     _scrollValue = value;
                     BossScrollViewer.ScrollToVerticalOffset(value);
-                    OnPropertyChanged(nameof(ScrollValue));
+                    OnPropertyChanged(nameof(ScrollValue));   // HIER IST DER 2te FEHLER
                 }
             }
         }
@@ -48,35 +43,24 @@ namespace GW2FOX
             this.Left = 1315;
             this.Top = 700;
             _instance = this;
-            InitializeComponent();
-            UpdateBossOverlayList();
-            DataContext = this;
-            this.PreviewMouseWheel += OverlayWindow_PreviewMouseWheel;
-            BossTimings.RegisterListView(BossListView);;
 
-            _updateTimer = new DispatcherTimer
-            {
-                Interval = TimeSpan.FromSeconds(1)
-            };
-            _updateTimer.Tick += (s, e) =>
-            {
-                foreach (var item in OverlayItems)
-                {
-                    item.UpdateCountdown();
-                }
-            };
-            _updateTimer.Start();
+            InitializeComponent();
+            DataContext = this;
+
+            UpdateBossOverlayList();
+
+            this.PreviewMouseWheel += OverlayWindow_PreviewMouseWheel;
+            BossTimings.RegisterListView(BossListView);
+
             _countdownTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
             _countdownTimer.Tick += (s, e) =>
             {
                 foreach (var item in OverlayItems)
-                {
                     item.UpdateCountdown();
-                }
+
+                SortOverlayItems();
             };
             _countdownTimer.Start();
-            Console.WriteLine($"UpdateTimer running: {_updateTimer?.IsEnabled}");
-            Console.WriteLine($"CountdownTimer running: {_countdownTimer?.IsEnabled}");
         }
 
         private void OverlayWindow_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
@@ -116,7 +100,7 @@ namespace GW2FOX
         {
             CopiedMessage.Visibility = Visibility.Visible;
 
-            _copiedTimer?.Stop(); // Verhindert mehrere Timer gleichzeitig
+            _copiedTimer?.Stop();
             _copiedTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(0.8) };
             _copiedTimer.Tick += (s, e) =>
             {
@@ -136,10 +120,7 @@ namespace GW2FOX
 
         public static OverlayWindow GetInstance()
         {
-            if (_instance == null)
-            {
-                _instance = new OverlayWindow();
-            }
+            _instance ??= new OverlayWindow();
             return _instance;
         }
 
@@ -149,7 +130,6 @@ namespace GW2FOX
             _instance = null;
             base.OnClosed(e);
         }
-
 
         public void UpdateBossOverlayList()
         {
@@ -165,8 +145,7 @@ namespace GW2FOX
                 var newItems = BossOverlayHelper.GetBossOverlayItems(combinedRuns, now);
                 Console.WriteLine($"Overlay: newItems.Count = {newItems.Count}");
 
-                newItems = new ObservableCollection<BossListItem>(newItems.OrderBy(b => b.SecondsRemaining));
-
+                // Entferne nicht mehr vorhandene Einträge
                 for (int i = OverlayItems.Count - 1; i >= 0; i--)
                 {
                     var existing = OverlayItems[i];
@@ -176,6 +155,7 @@ namespace GW2FOX
                     }
                 }
 
+                // Ergänze oder aktualisiere Einträge
                 foreach (var newItem in newItems)
                 {
                     var match = OverlayItems.FirstOrDefault(x => x.BossName == newItem.BossName);
@@ -191,6 +171,8 @@ namespace GW2FOX
                         match.UpdateCountdown();
                     }
                 }
+
+                SortOverlayItems();
             }
             catch (Exception ex)
             {
@@ -198,7 +180,13 @@ namespace GW2FOX
             }
         }
 
-
+        private void SortOverlayItems()
+        {
+            var sorted = OverlayItems.OrderBy(b => b.SecondsRemaining).ToList();
+            OverlayItems.Clear();
+            foreach (var item in sorted)
+                OverlayItems.Add(item);
+        }
 
         private string _timeRemainingFormatted;
         public string TimeRemainingFormatted
@@ -209,9 +197,14 @@ namespace GW2FOX
                 if (_timeRemainingFormatted != value)
                 {
                     _timeRemainingFormatted = value;
-                    OnPropertyChanged(nameof(TimeRemainingFormatted));
+                    OnPropertyChanged(nameof(TimeRemainingFormatted)); // HIER IST DER ERSTE FEHLER
                 }
             }
+        }
+
+        protected void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         public class ItalicConverter : IValueConverter
@@ -223,6 +216,5 @@ namespace GW2FOX
 
             public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) => throw new NotImplementedException();
         }
-
     }
 }
