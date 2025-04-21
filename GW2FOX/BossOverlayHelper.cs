@@ -14,15 +14,18 @@ namespace GW2FOX
                 var timeRemaining = run.NextRunTime - DateTime.UtcNow;
                 bool isPast = timeRemaining.TotalSeconds < 0;
 
-                // 👇 Wenn das Event mehr als 15 Minuten vorbei ist, skippen
+                // ⏱ Wenn das Event älter als 14:59 ist, überspringen
                 if (isPast && timeRemaining.TotalMinutes <= -15)
                     continue;
 
                 if (isPast)
+                {
                     timeRemaining = -timeRemaining;
+                }
 
-                // ⏱ Zeit schön formatieren (z. B. 04:36)
-                string formattedTime = timeRemaining.ToString(@"mm\:ss");
+                string formattedTime = isPast
+                    ? timeRemaining.ToString(@"mm\:ss")     // vergangen: nur Minuten+Sekunden
+                    : timeRemaining.ToString(@"hh\:mm\:ss"); // zukünftig: volle Stundenanzeige
 
                 overlayItems.Add(new BossListItem
                 {
