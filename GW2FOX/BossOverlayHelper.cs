@@ -3,10 +3,10 @@ using System.Collections.ObjectModel;
 
 public static class BossOverlayHelper
 {
-    public static ObservableCollection<BossListItem> GetBossOverlayItems(IEnumerable<BossEventRun> bossRuns)
+    public static ObservableCollection<BossListItem> GetBossOverlayItems(IEnumerable<BossEventRun> bossRuns, DateTime now)
+
     {
         var overlayItems = new ObservableCollection<BossListItem>();
-        var now = DateTime.UtcNow;
 
         var items = bossRuns
             .Select(run =>
