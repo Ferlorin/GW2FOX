@@ -14,8 +14,11 @@ namespace GW2FOX
 {
     public partial class OverlayWindow : Window, INotifyPropertyChanged
     {
+
         public event PropertyChangedEventHandler? PropertyChanged;
         private DispatcherTimer? _copiedTimer;
+        private DispatcherTimer? _updateTimer;
+        private DispatcherTimer? _countdownTimer;
 
         protected void OnPropertyChanged(string propertyName)
         {
@@ -49,7 +52,31 @@ namespace GW2FOX
             UpdateBossOverlayList();
             DataContext = this;
             this.PreviewMouseWheel += OverlayWindow_PreviewMouseWheel;
-            BossTimings.RegisterListView(BossListView);
+            BossTimings.RegisterListView(BossListView);;
+
+            _updateTimer = new DispatcherTimer
+            {
+                Interval = TimeSpan.FromSeconds(1)
+            };
+            _updateTimer.Tick += (s, e) =>
+            {
+                foreach (var item in OverlayItems)
+                {
+                    item.UpdateCountdown();
+                }
+            };
+            _updateTimer.Start();
+            _countdownTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
+            _countdownTimer.Tick += (s, e) =>
+            {
+                foreach (var item in OverlayItems)
+                {
+                    item.UpdateCountdown();
+                }
+            };
+            _countdownTimer.Start();
+            Console.WriteLine($"UpdateTimer running: {_updateTimer?.IsEnabled}");
+            Console.WriteLine($"CountdownTimer running: {_countdownTimer?.IsEnabled}");
         }
 
         private void OverlayWindow_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
@@ -70,9 +97,6 @@ namespace GW2FOX
                 ScrollValue = e.VerticalOffset;
             }
         }
-
-       
-
 
         private void Waypoint_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -121,9 +145,11 @@ namespace GW2FOX
 
         protected override void OnClosed(EventArgs e)
         {
+            _countdownTimer?.Stop();
             _instance = null;
             base.OnClosed(e);
         }
+
 
         public void UpdateBossOverlayList()
         {

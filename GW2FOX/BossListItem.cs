@@ -10,11 +10,24 @@ namespace GW2FOX
 {
     public class BossListItem : INotifyPropertyChanged
     {
-        public DateTime NextRunTime { get; set; }
+        private DateTime _nextRunTime;
+        public DateTime NextRunTime
+        {
+            get => _nextRunTime;
+            set
+            {
+                if (_nextRunTime != value)
+                {
+                    _nextRunTime = value;
+                    OnPropertyChanged(nameof(NextRunTime));
+                    UpdateCountdown(); // ← wichtig, damit sich alles bei Änderung aktualisiert!
+                }
+            }
+        }
 
         public void UpdateCountdown()
         {
-            var now = GlobalVariables.CURRENT_DATE_TIME;
+            var now = DateTime.UtcNow;
             var nextEndTime = NextRunTime.AddMinutes(14).AddSeconds(59);
             var timeToShow = NextRunTime < now ? nextEndTime : NextRunTime;
 
@@ -24,6 +37,9 @@ namespace GW2FOX
             TimeRemainingFormatted = $"{(int)remaining.TotalHours:D2}:{remaining.Minutes:D2}:{remaining.Seconds:D2}";
             SecondsRemaining = (int)remaining.TotalSeconds;
             IsPastEvent = NextRunTime < now;
+            Console.WriteLine($"[{BossName}] Updated countdown: {TimeRemainingFormatted}");
+            Console.WriteLine($"[{BossName}] now: {now}, NextRunTime: {NextRunTime}, TimeToShow: {timeToShow}");
+
         }
 
         public string BossName { get; set; } = string.Empty;

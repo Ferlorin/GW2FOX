@@ -140,35 +140,28 @@ namespace GW2FOX
         {
             try
             {
+                BossEventGroups.Clear();
+                Events.Clear();
 
-                // Vorhandenen Inhalt aus der Datei lesen
                 var lines = File.ReadAllLines(GlobalVariables.FILE_PATH);
-        
 
-                // Index der Zeile mit dem Bossnamen finden
                 var bossIndex = -1;
                 for (var i = 0; i < lines.Length; i++)
                 {
                     if (!lines[i].StartsWith("Bosses:")) continue;
-                    bossIndex = i; // Die aktuelle Zeile enthält den Namen
+                    bossIndex = i;
                     break;
                 }
 
                 if (bossIndex == -1 || bossIndex >= lines.Length)
-                {
                     return;
-                }
 
-
-                // Extrahiere die Bosse aus der Zeile zwischen den Anführungszeichen
                 var bossLine = lines[bossIndex].Replace("Bosses:", "").Trim();
                 var bossNames = bossLine
-                    .Trim('"') // Entferne äußere Anführungszeichen
+                    .Trim().Trim('"') // sicherer trimmen
                     .Split(Separator, StringSplitOptions.RemoveEmptyEntries)
-                    .Select(name => name.Trim()) // Entferne führende und abschließende Leerzeichen
+                    .Select(name => name.Trim())
                     .ToArray();
-
-               
 
                 var newBossList = new List<string>();
                 newBossList.AddRange(bossNames);
@@ -178,7 +171,7 @@ namespace GW2FOX
                     if (!lines[i].StartsWith("Timings:")) continue;
                     var timingLine = lines[i].Replace("Timings:", "").Trim();
                     var timings = timingLine.Split(Separator, StringSplitOptions.RemoveEmptyEntries)
-                        .Select(timing => timing.Trim())
+                        .Select(t => t.Trim())
                         .ToArray();
 
                     if (timings.Length == bossNames.Length)
@@ -188,22 +181,21 @@ namespace GW2FOX
                             AddBossEvent(bossNames[j], timings[j], "WBs");
                         }
                     }
-                    else
-                    {
-                      //  Console.WriteLine("Number of timings does not match the number of bosses.");
-                    }
 
-                    break; 
+                    break;
                 }
 
-                // Jetzt kannst du die alte BossList23 durch die neue Liste ersetzen
                 BossList23 = newBossList;
+
+                // 👇 Diese Zeilen MÜSSEN innerhalb des try-Blocks liegen
+                UpdateBossOverlayList();
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Error in SetBossListFromConfig_Bosses: {ex.Message}");
             }
         }
+
 
 
         private static void AddBossEvent(string bossName, string firstTiming, int happensEveryInHours, string category,
