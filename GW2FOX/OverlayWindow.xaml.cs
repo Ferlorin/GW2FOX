@@ -13,8 +13,6 @@ namespace GW2FOX
     {
         private static OverlayWindow? _instance;
         private DispatcherTimer bossTimer;
-        private DispatcherTimer scrollBarTimer;
-        private bool isMouseOver = false;
 
         private double _scrollValue;
         public double ScrollValue
@@ -42,26 +40,27 @@ namespace GW2FOX
             DataContext = this;
             this.PreviewMouseWheel += OverlayWindow_PreviewMouseWheel;
             BossTimings.RegisterListView(BossListView);
-
         }
 
-        private void MainGrid_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        private void OverlayWindow_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
         {
-            isMouseOver = true;
-
-            // Fokus aufs Fenster erzwingen
-            if (!this.IsActive)
+            if (BossScrollViewer.IsMouseOver || this.IsActive)
             {
-                this.Activate();
-                this.Focus();
+                var newOffset = BossScrollViewer.VerticalOffset - e.Delta;
+                BossScrollViewer.ScrollToVerticalOffset(newOffset);
+                ScrollValue = newOffset; // Update auch manuell setzen
+                e.Handled = true;
             }
         }
 
-        private void MainGrid_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
+        private void BossScrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e)
         {
-            isMouseOver = false;
+            // Sync ScrollValue wenn manuell oder per Mausrad gescrollt wird
+            if (ScrollValue != e.VerticalOffset)
+            {
+                ScrollValue = e.VerticalOffset;
+            }
         }
-
 
         private void StartBossTimer()
         {
@@ -70,33 +69,9 @@ namespace GW2FOX
             bossTimer.Start();
         }
 
-        private void OverlayWindow_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
-        {
-            if (BossScrollViewer.IsMouseOver || this.IsActive)
-            {
-                BossScrollViewer.ScrollToVerticalOffset(BossScrollViewer.VerticalOffset - e.Delta);
-                e.Handled = true;
-            }
-        }
-
-
         private void BossTimer_Tick(object? sender, EventArgs e)
         {
             UpdateBossOverlayList();
-        }
-
-        public static OverlayWindow GetInstance()
-        {
-            if (_instance == null)
-            {
-                Console.WriteLine("Erstelle neue Instanz von OverlayWindow.");
-                _instance = new OverlayWindow();
-            }
-            else
-            {
-                Console.WriteLine("Verwende bestehende Instanz von OverlayWindow.");
-            }
-            return _instance;
         }
 
         private void Waypoint_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -105,12 +80,15 @@ namespace GW2FOX
 
             if (sender is System.Windows.Controls.Image img && img.DataContext is BossListItem boss)
             {
-                System.Windows.Clipboard.SetText(boss.Waypoint);
-
+                System.Windows.Clipboard.SetText(boss.Waypoint); // <- explizit
                 ShowCopiedMessage();
             }
         }
 
+        private void ManualScrollBar_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            BossScrollViewer.ScrollToVerticalOffset(e.NewValue);
+        }
 
         private void ShowCopiedMessage()
         {
@@ -132,6 +110,20 @@ namespace GW2FOX
             }
         }
 
+        public static OverlayWindow GetInstance()
+        {
+            if (_instance == null)
+            {
+                Console.WriteLine("Erstelle neue Instanz von OverlayWindow.");
+                _instance = new OverlayWindow();
+            }
+            else
+            {
+                Console.WriteLine("Verwende bestehende Instanz von OverlayWindow.");
+            }
+            return _instance;
+        }
+
         protected override void OnClosed(EventArgs e)
         {
             _instance = null;
@@ -142,7 +134,7 @@ namespace GW2FOX
         {
             try
             {
-                var combinedRuns = BossTimerService.GetBossRunsForOverlay(); // nutzt die neue Methode!
+                var combinedRuns = BossTimerService.GetBossRunsForOverlay();
                 var overlayItems = BossOverlayHelper.GetBossOverlayItems(combinedRuns);
 
                 Dispatcher.Invoke(() =>
@@ -163,12 +155,8 @@ namespace GW2FOX
             }
         }
 
-
-
         public event PropertyChangedEventHandler? PropertyChanged;
         protected void OnPropertyChanged(string name) =>
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-
     }
-
 }
