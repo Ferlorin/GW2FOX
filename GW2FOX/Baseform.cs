@@ -10,10 +10,6 @@ using System.IO;
 using System.Windows.Controls;
 using WinFormsButton = System.Windows.Forms.Button;
 using System.Windows;
-//using WF = System.Windows.Forms;
-//using WFApp = System.Windows.Forms.Application;
-//using WFBox = System.Windows.Forms.MessageBox;
-//using WFSize = System.Drawing.Size;
 
 
 namespace GW2FOX
