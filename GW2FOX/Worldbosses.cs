@@ -2171,12 +2171,9 @@ namespace GW2FOX
         public static void UpdateBossUiBosses()
         {
             BossTimings.SetBossListFromConfig_Bosses();
-
-            var overlay = OverlayWindow.GetInstance();
-            if (overlay != null)
+            if (CustomBossList != null)
             {
-                BossTimings.UpdateBossList(overlay.ListViewControl);
-                overlay.RefreshBossList(); // Optional, wenn nötig
+                BossTimer.UpdateBossList();
             }
         }
 

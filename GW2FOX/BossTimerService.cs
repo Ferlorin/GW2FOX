@@ -124,13 +124,14 @@ namespace GW2FOX
         {
             try
             {
-                _bossTimer?.UpdateBossList();
+                BossTimer.UpdateBossList();
             }
             catch (Exception ex)
             {
                 LogError("Timer_Click", ex);
             }
         }
+
 
         public class BossTimer : IDisposable
         {
@@ -187,7 +188,7 @@ namespace GW2FOX
                 }
             }
 
-            public void UpdateBossList()
+            public static void UpdateBossList()
             {
                 try
                 {
@@ -209,7 +210,6 @@ namespace GW2FOX
                             BossListItems.Add(boss);
                            
                         }
-                        _overlayWindow?.RefreshBossList();
                     });
 
                     Console.WriteLine("Boss list updated.");
