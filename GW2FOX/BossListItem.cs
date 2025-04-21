@@ -10,17 +10,18 @@ namespace GW2FOX
 {
     public class BossListItem : INotifyPropertyChanged
     {
-        private DateTime _nextRunTime;
-        public DateTime NextRunTime
+        public event PropertyChangedEventHandler? PropertyChanged;
+        public DateTime NextRunTime { get; set; }
+        private double _opacity = 1.0;
+        public double Opacity
         {
-            get => _nextRunTime;
+            get => _opacity;
             set
             {
-                if (_nextRunTime != value)
+                if (_opacity != value)
                 {
-                    _nextRunTime = value;
-                    OnPropertyChanged(nameof(NextRunTime));
-                    UpdateCountdown(); // ← wichtig, damit sich alles bei Änderung aktualisiert!
+                    _opacity = value;
+                    OnPropertyChanged(nameof(Opacity));
                 }
             }
         }
@@ -127,7 +128,7 @@ namespace GW2FOX
             }
         }
 
-        public event PropertyChangedEventHandler? PropertyChanged;
+       
 
         protected void OnPropertyChanged(string propertyName)
         {

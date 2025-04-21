@@ -8,8 +8,13 @@ public static class BossOverlayHelper
         var overlayItems = new ObservableCollection<BossListItem>();
 
         var items = bossRuns
+
+
+
             .Select(run =>
             {
+                Console.WriteLine($"[Overlay] {run.BossName,-25} NextRun: {run.NextRunTime:HH:mm:ss}, Now: {now:HH:mm:ss}, Diff: {(run.NextRunTime - now).TotalMinutes:F1} min");
+
                 var timeRemaining = run.NextRunTime - now;
                 bool isPast = timeRemaining.TotalSeconds < 0;
 
@@ -60,6 +65,11 @@ public static class BossOverlayHelper
 
         foreach (var item in past.Concat(future))
             overlayItems.Add(item);
+
+        // DEBUG: Finale Reihenfolge ausgeben
+        Console.WriteLine("Finale Reihenfolge:");
+        foreach (var item in overlayItems)
+            Console.WriteLine($"{item.BossName,-25} {item.TimeRemainingFormatted} {(item.IsPastEvent ? "(past)" : "")}");
 
         return overlayItems;
     }

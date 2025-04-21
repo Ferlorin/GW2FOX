@@ -253,12 +253,13 @@ namespace GW2FOX
                     .SelectMany(group => group.GetNextRuns());
 
                 var dynamicBosses = DynamicEventManager.GetActiveBossEventRuns();
-
                 var combinedBosses = staticBosses
                     .Concat(dynamicBosses)
+                    .OrderBy(run => run.NextRunTime)
                     .ToList();
 
-                var items = BossOverlayHelper.GetBossOverlayItems(combinedBosses, now); // <- Wichtig
+                var items = BossOverlayHelper.GetBossOverlayItems(combinedBosses, now);
+
 
                 BossListView.Dispatcher.Invoke(() =>
                 {

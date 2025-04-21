@@ -363,21 +363,19 @@ namespace GW2FOX
                             bossEvent.BossName,
                             bossEvent.Timing,
                             bossEvent.Category,
-                            GlobalVariables.CURRENT_DATE_TIME.Date
-                                .Add(new TimeSpan(0, i * 24, 0, 0, 0)) + bossEvent.Timing,
+                            GlobalVariables.CURRENT_DATE_TIME.Date.AddDays(i) + bossEvent.Timing,
                             bossEvent.Waypoint))
-                        .ToList()
                 );
             }
 
             return toReturn
                 .Where(bossEvent =>
                     bossEvent.TimeToShow >= GlobalVariables.CURRENT_DATE_TIME &&
-                    bossEvent.TimeToShow <= GlobalVariables.CURRENT_DATE_TIME.AddHours(3))
+                    bossEvent.TimeToShow <= GlobalVariables.CURRENT_DATE_TIME.AddHours(4)) // z. B. 4h statt 3h
                 .OrderBy(bossEvent => bossEvent.TimeToShow)
-                .Take(NextRunsToShow)
                 .ToList();
         }
+
 
         public IEnumerable<BossEventRun> GetAllRuns()
         {
