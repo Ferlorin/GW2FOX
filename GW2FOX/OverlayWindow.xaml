@@ -8,7 +8,7 @@
         Background="Transparent"
         Topmost="True"
         ResizeMode="NoResize"
-        Width="240" Height="370"
+        Width="260" Height="400"
         ShowInTaskbar="False"
         Title="OverlayWindow">
 
@@ -37,6 +37,7 @@
                                Foreground="White"
                                FontWeight="Bold"
                                FontSize="14"
+                               FontFamily="Segoe UI"
                                Text="Event Timer">
                         <TextBlock.Effect>
                             <DropShadowEffect Color="Black"
@@ -50,33 +51,29 @@
 
                 <!-- Hauptinhalt -->
                 <Grid Grid.Row="1">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <!-- Fixed width for Icon -->
-                        <ColumnDefinition Width="120"/>
-                        <!-- Fixed width for BossName -->
-                        <ColumnDefinition Width="*"/>
-                        <!-- Remaining space for TimeRemaining -->
-                    </Grid.ColumnDefinitions>
-
-                    <!-- ListView für Boss-Timer -->
-                    <ListView x:Name="BossListView" BorderThickness="0" Background="Transparent">
+                    <ListView x:Name="BossListView"
+                              BorderThickness="0"
+                              Background="Transparent"
+                              Margin="2,0,2,0">
                         <ListView.ItemTemplate>
                             <DataTemplate>
-                                <StackPanel Orientation="Horizontal" Margin="4" VerticalAlignment="Center">
-                                    <!-- ICON links -->
+                                <StackPanel Orientation="Horizontal" Margin="2" VerticalAlignment="Center">
+                                    <!-- ICON -->
                                     <Image Source="{x:Static local:BossListItem.WaypointImage}"
-                                           Width="20" Height="20" Margin="0,0,8,0"
+                                           Width="22" Height="22" Margin="0,0,8,0"
                                            Cursor="Hand"
                                            MouseLeftButtonDown="Waypoint_MouseLeftButtonDown"
                                            VerticalAlignment="Center"/>
 
-                                    <!-- Bossname mit fester Breite -->
+                                    <!-- Bossname -->
                                     <TextBlock Text="{Binding BossName}"
                                                FontWeight="Bold"
-                                               Foreground="White"
-                                               Width="120"  
-                                               VerticalAlignment="Center">
+                                               FontSize="14"
+                                               FontFamily="Segoe UI"
+                                               Foreground="{Binding CategoryBrush}"
+                                               Width="100"
+                                               VerticalAlignment="Center"
+                                               TextTrimming="CharacterEllipsis">
                                         <TextBlock.Effect>
                                             <DropShadowEffect Color="Black"
                                                               BlurRadius="0"
@@ -86,11 +83,15 @@
                                         </TextBlock.Effect>
                                     </TextBlock>
 
-                                    <!-- Timer mit zusätzlichem Platz -->
+                                    <!-- Timer -->
                                     <TextBlock Text="{Binding TimeRemainingFormatted}"
-                                               Foreground="LightGray"
+                                               FontWeight="Bold"
+                                               FontSize="14"
+                                               FontFamily="Segoe UI"
+                                               Foreground="{Binding CategoryBrush}"
                                                VerticalAlignment="Center"
-                                               Margin="0,0,2,0"> <!-- Additional space -->
+                                               Margin="4,0,0,0"
+                                               TextAlignment="Right">
                                         <TextBlock.Effect>
                                             <DropShadowEffect Color="Black"
                                                               BlurRadius="0"
@@ -115,16 +116,17 @@
                            Background="Black"
                            Foreground="White"
                            FontWeight="Bold"
+                           FontSize="14"
+                           FontFamily="Segoe UI"
                            Opacity="0.9"
                            Visibility="Collapsed"
-                           FontSize="14"
                            Grid.Row="1">
                     <TextBlock.Effect>
                         <DropShadowEffect Color="Black"
-                          BlurRadius="0"
-                          Direction="0"
-                          ShadowDepth="0"
-                          Opacity="1"/>
+                                          BlurRadius="0"
+                                          Direction="0"
+                                          ShadowDepth="0"
+                                          Opacity="1"/>
                     </TextBlock.Effect>
                 </TextBlock>
             </Grid>

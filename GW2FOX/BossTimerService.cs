@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.ComponentModel;
 using System.IO;
 using System.Windows.Media.Imaging;
+using System.Windows.Media;
 
 namespace GW2FOX
 {
@@ -295,19 +296,19 @@ namespace GW2FOX
 
 
 
-        public System.Drawing.Color ForeColor =>
-            Category switch
-            {
-                "Maguuma" => System.Drawing.Color.LimeGreen,
-                "Desert" => System.Drawing.Color.DeepPink,
-                "WBs" => System.Drawing.Color.WhiteSmoke,
-                "Ice" => System.Drawing.Color.DeepSkyBlue,
-                "Cantha" => System.Drawing.Color.Blue,
-                "SotO" => System.Drawing.Color.Yellow,
-                "LWS2" => System.Drawing.Color.LightYellow,
-                "LWS3" => System.Drawing.Color.ForestGreen,
-                _ => System.Drawing.Color.White
-            };
+        public System.Windows.Media.Brush CategoryBrush =>
+     Category switch
+     {
+         "Maguuma" => System.Windows.Media.Brushes.LimeGreen,
+         "Desert" => System.Windows.Media.Brushes.DeepPink,
+         "WBs" => System.Windows.Media.Brushes.WhiteSmoke,
+         "Ice" => System.Windows.Media.Brushes.DeepSkyBlue,
+         "Cantha" => System.Windows.Media.Brushes.Blue,
+         "SotO" => System.Windows.Media.Brushes.Yellow,
+         "LWS2" => System.Windows.Media.Brushes.LightYellow,
+         "LWS3" => System.Windows.Media.Brushes.ForestGreen,
+         _ => System.Windows.Media.Brushes.White
+     };
     }
 
     public class BossEventGroup
