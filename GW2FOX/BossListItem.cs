@@ -2,6 +2,9 @@
 using System.ComponentModel;
 using System.IO;
 using System.Windows.Media.Imaging;
+using System.Windows.Media;
+using Imaging = System.Drawing.Imaging;
+
 
 namespace GW2FOX
 {
@@ -91,7 +94,7 @@ namespace GW2FOX
                 {
                     using var bitmap = Properties.Resources.Waypoint;
                     using var ms = new MemoryStream();
-                    bitmap.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+                    bitmap.Save(ms, Imaging.ImageFormat.Png);
                     ms.Position = 0;
 
                     var image = new BitmapImage();
@@ -114,5 +117,38 @@ namespace GW2FOX
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        public bool IsConcurrentEvent { get; set; } = false;
+
+        private string _category = string.Empty;
+        public string Category
+        {
+            get => _category;
+            set
+            {
+                if (_category != value)
+                {
+                    _category = value;
+                    OnPropertyChanged(nameof(Category));
+                    OnPropertyChanged(nameof(CategoryBrush)); // Brush auch updaten
+                }
+            }
+        }
+
+
+        public Brush CategoryBrush =>
+   Category switch
+   {
+       "Maguuma" => Brushes.LimeGreen,
+       "Desert" => Brushes.DeepPink,
+       "WBs" => Brushes.WhiteSmoke,
+       "Ice" => Brushes.DeepSkyBlue,
+       "Cantha" => Brushes.Blue,
+       "SotO" => Brushes.Yellow,
+       "LWS2" => Brushes.LightYellow,
+       "LWS3" => Brushes.ForestGreen,
+       _ => Brushes.White
+   };
+
     }
 }

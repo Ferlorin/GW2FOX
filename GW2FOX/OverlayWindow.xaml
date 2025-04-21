@@ -16,41 +16,32 @@
     <Window.Resources>
         <local:StrikeConverter x:Key="StrikeConverter"/>
         <local:PastEventColorConverter x:Key="PastEventColorConverter"/>
-
-        <!-- Leeres Button-Template für Scrollbar (deaktiviert Pfeile) -->
+        <local:ItalicConverter x:Key="ItalicConverter"/>
         <ControlTemplate x:Key="EmptyButtonTemplate" TargetType="RepeatButton">
             <Grid/>
         </ControlTemplate>
     </Window.Resources>
 
     <Grid x:Name="MainGrid" Background="Transparent">
-
-        <!-- Rahmen um alles -->
         <Border Background="Transparent" BorderBrush="#333" BorderThickness="0">
             <Grid>
-
-                <!-- Layout: Titel oben, Inhalt unten -->
                 <Grid.RowDefinitions>
                     <RowDefinition Height="30"/>
-                    <!-- Titelzeile -->
                     <RowDefinition Height="*"/>
-                    <!-- Inhalte -->
                 </Grid.RowDefinitions>
 
-                <!-- TITELZEILE -->
+                <!-- TITEL -->
                 <Grid Background="Transparent" Grid.Row="0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
-                    <!-- Icon -->
                     <Image x:Name="Com"
                            Source="/Com.png"
                            Width="20" Height="20" Margin="6,5,4,5"
                            MouseLeftButtonDown="Icon_MouseLeftButtonDown"/>
 
-                    <!-- Titeltext -->
                     <TextBlock Grid.Column="1"
                                VerticalAlignment="Center"
                                Foreground="White"
@@ -63,7 +54,6 @@
                         </TextBlock.Effect>
                     </TextBlock>
 
-                    <!-- Dezente Linie unten -->
                     <Rectangle VerticalAlignment="Bottom" Grid.ColumnSpan="2" Height="1" IsHitTestVisible="False">
                         <Rectangle.Fill>
                             <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
@@ -79,13 +69,9 @@
                 <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
-                        <!-- Inhalt -->
-                     
                         <ColumnDefinition Width="16"/>
-                        <!-- Scrollbar -->
                     </Grid.ColumnDefinitions>
 
-                    <!-- ScrollViewer für ListView -->
                     <ScrollViewer x:Name="BossScrollViewer"
                                   Grid.Column="0"
                                   VerticalScrollBarVisibility="Hidden"
@@ -93,7 +79,6 @@
                                   Background="Transparent"
                                   ScrollChanged="BossScrollViewer_ScrollChanged">
 
-                        <!-- BOSS-LISTE -->
                         <ListView x:Name="BossListView"
                                   ItemsSource="{Binding OverlayItems}"
                                   BorderThickness="0"
@@ -108,7 +93,7 @@
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Background="Transparent">
 
-                                        <!-- Waypoint-Button -->
+                                        <!-- Waypoint -->
                                         <Image Source="{x:Static local:BossListItem.WaypointImage}"
                                                Width="20" Height="20" Margin="0,0,6,0"
                                                Cursor="Hand"
@@ -117,7 +102,8 @@
 
                                         <!-- Bossname -->
                                         <TextBlock Text="{Binding BossName}"
-                                                   Foreground="{Binding IsPastEvent, Converter={StaticResource PastEventColorConverter}}"
+                                                   Foreground="{Binding CategoryBrush}"
+                                                   FontStyle="{Binding IsConcurrentEvent, Converter={StaticResource ItalicConverter}}"
                                                    TextDecorations="{Binding IsPastEvent, Converter={StaticResource StrikeConverter}}"
                                                    VerticalAlignment="Center"
                                                    Width="141"
@@ -129,7 +115,8 @@
 
                                         <!-- Zeit -->
                                         <TextBlock Text="{Binding TimeRemainingFormatted}"
-                                                   Foreground="{Binding IsPastEvent, Converter={StaticResource PastEventColorConverter}}"
+                                                   Foreground="{Binding CategoryBrush}"
+                                                   FontStyle="{Binding IsConcurrentEvent, Converter={StaticResource ItalicConverter}}"
                                                    TextDecorations="{Binding IsPastEvent, Converter={StaticResource StrikeConverter}}"
                                                    VerticalAlignment="Center"
                                                    Margin="1,0,0,0">
@@ -137,14 +124,13 @@
                                                 <DropShadowEffect Color="Black" BlurRadius="0" ShadowDepth="0" Opacity="1"/>
                                             </TextBlock.Effect>
                                         </TextBlock>
-
                                     </StackPanel>
                                 </DataTemplate>
                             </ListView.ItemTemplate>
                         </ListView>
                     </ScrollViewer>
 
-                    <!-- MANUELLE SCROLLBAR -->
+                    <!-- Scrollbar -->
                     <ScrollBar Orientation="Vertical"
                                Grid.Column="1"
                                Width="12"
@@ -160,8 +146,6 @@
                                         <ControlTemplate TargetType="ScrollBar">
                                             <Grid Background="Transparent">
                                                 <Track Name="PART_Track" IsDirectionReversed="true">
-
-                                                    <!-- Thumb (der Punkt) -->
                                                     <Track.Thumb>
                                                         <Thumb Height="40" Width="12"
                                                                Background="#88FFFFFF"
@@ -177,8 +161,6 @@
                                                             </Thumb.Template>
                                                         </Thumb>
                                                     </Track.Thumb>
-
-                                                    <!-- Unsichtbare Buttons -->
                                                     <Track.IncreaseRepeatButton>
                                                         <RepeatButton Height="0" Width="0"
                                                                       Template="{StaticResource EmptyButtonTemplate}"/>
@@ -196,7 +178,7 @@
                         </ScrollBar.Style>
                     </ScrollBar>
 
-                    <!-- KOPIERT-MELDUNG -->
+                    <!-- Kopiert-Meldung -->
                     <TextBlock x:Name="CopiedMessage"
                                Text="Copied!"
                                Grid.Column="0"
