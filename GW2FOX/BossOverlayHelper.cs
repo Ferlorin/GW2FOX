@@ -35,14 +35,15 @@ namespace GW2FOX
                         ? timeRemaining.ToString(@"mm\:ss") // vergangen: Minuten:Sekunden
                         : timeRemaining.ToString(@"hh\:mm\:ss"); // zukünftig: Stunden:Minuten:Sekunden
 
-                    overlayItems.Add(new BossListItem
-                    {
-                        BossName = run.BossName,
-                        Waypoint = run.Waypoint,
-                        IsPastEvent = isPast,
-                        TimeRemainingFormatted = isPast ? "-" + formattedTime : formattedTime
-                    });
-                }
+                overlayItems.Add(new BossListItem
+                {
+                    BossName = run.BossName,
+                    Waypoint = run.Waypoint,
+                    IsPastEvent = isPast,
+                    TimeRemainingFormatted = isPast ? "-" + formattedTime : formattedTime,
+                    SecondsRemaining = (int)(isPast ? -timeRemaining.TotalSeconds : timeRemaining.TotalSeconds)
+                });
+            }
 
                 return overlayItems;
             }

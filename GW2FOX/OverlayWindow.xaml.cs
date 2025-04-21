@@ -6,11 +6,19 @@ using System.Windows.Threading;
 using System.Linq;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Collections.ObjectModel;
 
 namespace GW2FOX
 {
     public partial class OverlayWindow : Window, INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        protected void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+        public ObservableCollection<BossListItem> OverlayItems { get; } = new ObservableCollection<BossListItem>();
         private static OverlayWindow? _instance;
         private DispatcherTimer bossTimer;
 
@@ -135,16 +143,41 @@ namespace GW2FOX
             try
             {
                 var combinedRuns = BossTimerService.GetBossRunsForOverlay();
-                var overlayItems = BossOverlayHelper.GetBossOverlayItems(combinedRuns);
+                var newItems = BossOverlayHelper.GetBossOverlayItems(combinedRuns);
 
-                Dispatcher.Invoke(() =>
+                // Sortiere optional nach verbleibender Zeit
+                newItems = newItems.OrderBy(b => b.SecondsRemaining).ToList();
+
+                // Sync: entferne alte, aktualisiere bestehende, füge neue hinzu
+                for (int i = OverlayItems.Count - 1; i >= 0; i--)
                 {
-                    BossListView.ItemsSource = null;
-                    BossListView.ItemsSource = overlayItems;
-                });
+                    var existing = OverlayItems[i];
+                    if (!newItems.Any(x => x.BossName == existing.BossName))
+                    {
+                        OverlayItems.RemoveAt(i); // Entfernt nicht mehr vorhandene Bosse
+                    }
+                }
+
+                foreach (var newItem in newItems)
+                {
+                    var match = OverlayItems.FirstOrDefault(x => x.BossName == newItem.BossName);
+                    if (match == null)
+                    {
+                        OverlayItems.Add(newItem); // Neuer Boss
+                    }
+                    else
+                    {
+                        // Optional: bestehende Properties aktualisieren
+                        match.TimeRemainingFormatted = newItem.TimeRemainingFormatted;
+                        match.SecondsRemaining = newItem.SecondsRemaining;
+                        match.IsPastEvent = newItem.IsPastEvent;
+                        match.Waypoint = newItem.Waypoint;
+                        // OnPropertyChanged innerhalb von BossListItem nicht vergessen!
+                    }
+                }
 
                 Console.WriteLine("Overlay updated. Combined entries:");
-                foreach (var boss in overlayItems)
+                foreach (var boss in OverlayItems)
                 {
                     Console.WriteLine($"- {boss.BossName} | {boss.TimeRemainingFormatted} | Vergangen: {boss.IsPastEvent}");
                 }
@@ -155,8 +188,20 @@ namespace GW2FOX
             }
         }
 
-        public event PropertyChangedEventHandler? PropertyChanged;
-        protected void OnPropertyChanged(string name) =>
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+
+
+        private string _timeRemainingFormatted;
+        public string TimeRemainingFormatted
+        {
+            get => _timeRemainingFormatted;
+            set
+            {
+                if (_timeRemainingFormatted != value)
+                {
+                    _timeRemainingFormatted = value;
+                    OnPropertyChanged(nameof(TimeRemainingFormatted));
+                }
+            }
+        }
     }
 }

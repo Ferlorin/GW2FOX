@@ -95,6 +95,7 @@
 
                         <!-- BOSS-LISTE -->
                         <ListView x:Name="BossListView"
+                                  ItemsSource="{Binding OverlayItems}"
                                   BorderThickness="0"
                                   Background="Transparent"
                                   FontFamily="Segoe UI"
