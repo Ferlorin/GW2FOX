@@ -196,20 +196,43 @@ namespace GW2FOX
             {
                 try
                 {
-                    UpdateBossList();
+                    // Holen der kombinierten Liste von statischen und dynamischen Bossen
+                    var staticBosses = BossEventGroups
+                        .SelectMany(group => group.GetAllRuns());
 
-                    // Punkt 1: Nur hier PropertyChanged triggern
-                    foreach (var boss in BossListItems)
+                    var dynamicBosses = DynamicEventManager.GetActiveBossEventRuns();
+
+                    var combinedBosses = staticBosses
+                        .Concat(dynamicBosses)
+                        .ToList();
+
+                    // Sortiere nach dem nächsten Run-Time
+                    combinedBosses.Sort((a, b) =>
                     {
-                        boss.TriggerTimeRemainingChanged();
-                        Console.WriteLine($"{boss.BossName} – {boss.TimeRemainingFormatted}");
+                        int timeComparison = a.NextRunTime.CompareTo(b.NextRunTime);
+                        return timeComparison != 0 ? timeComparison : string.Compare(a.Category, b.Category, StringComparison.Ordinal);
+                    });
+
+                    // Begrenze die Liste auf 50 Bosse
+                    var limitedBosses = combinedBosses.Take(50).ToList();
+
+                    // Gib die verbleibende Zeit für jedes Boss-Event in der Konsole aus
+                    foreach (var boss in limitedBosses)
+                    {
+                        var timeRemaining = boss.NextRunTime - DateTime.UtcNow;
+                        var formattedTime = $"{(int)timeRemaining.TotalHours:D2}:{timeRemaining.Minutes:D2}:{timeRemaining.Seconds:D2}";
+
+                        // Konsolenausgabe
+                        Console.WriteLine($"[{boss.BossName}] Verbleibende Zeit: {formattedTime}");
                     }
                 }
                 catch (Exception ex)
                 {
-                    //LogError("TimerCallback", ex);
+                    // Fehlerbehandlung
+                    Console.WriteLine($"Fehler im TimerCallback: {ex.Message}");
                 }
             }
+
 
 
             public static void UpdateBossList()

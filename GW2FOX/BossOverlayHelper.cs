@@ -24,9 +24,14 @@ public static class BossOverlayHelper
                     return null;
 
                 var remaining = isPast ? -timeRemaining : timeRemaining;
-                string formatted = isPast
-                    ? "-" + remaining.ToString(@"mm\:ss")
-                    : remaining.ToString(@"hh\:mm\:ss");
+                string formatted = remaining.ToString(@"hh\:mm\:ss");
+
+                // Nur für vergangene Events das Minuszeichen setzen
+                if (isPast)
+                {
+                    // Vermeidung von negativen Minuten und Sekunden
+                    formatted = $"-{remaining.Minutes:D2}:{remaining.Seconds:D2}";
+                }
 
                 return new BossListItem
                 {
@@ -67,9 +72,15 @@ public static class BossOverlayHelper
         return overlayItems;
     }
 
+
+
     public static string FormatRemainingTime(TimeSpan remaining)
     {
+        // Ensure positive time by using Duration(), which returns the absolute value
+        remaining = remaining.Duration();
+
         int totalHours = (int)remaining.TotalHours;
         return $"{totalHours:D2}:{remaining.Minutes:D2}:{remaining.Seconds:D2}";
     }
+
 }
