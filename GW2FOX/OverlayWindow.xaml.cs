@@ -41,12 +41,8 @@ namespace GW2FOX
             StartBossTimer();
             DataContext = this;
             this.PreviewMouseWheel += OverlayWindow_PreviewMouseWheel;
-            
+
         }
-
-      
-
-
 
         private void MainGrid_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
         {
@@ -104,14 +100,15 @@ namespace GW2FOX
 
         private void Waypoint_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            Console.WriteLine("Waypoint wurde angeklickt."); // Debug-Test
+
             if (sender is System.Windows.Controls.Image img && img.DataContext is BossListItem boss)
             {
-                System.Windows.Clipboard.SetText(boss.Waypoint); // Kopiert die Wegmarke in die Zwischenablage
+                System.Windows.Clipboard.SetText(boss.Waypoint);
+
                 ShowCopiedMessage();
             }
         }
-
-
 
 
         private void ShowCopiedMessage()
