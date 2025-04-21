@@ -26,7 +26,7 @@ namespace GW2FOX
             _instance = this;
             InitializeComponent(); // Stelle sicher, dass dies korrekt ausgeführt wird
             myListView = new System.Windows.Controls.ListView();
-            BossListView.ItemsSource = BossTimerService.BossListItems;
+            UpdateBossOverlayList();
             StartBossTimer();
         }
 
@@ -42,7 +42,7 @@ namespace GW2FOX
 
         private void BossTimer_Tick(object? sender, EventArgs e)
         {
-            BossTimerService.Timer_Click(sender, e);
+            UpdateBossOverlayList();
         }
 
         public static OverlayWindow GetInstance()
@@ -102,5 +102,29 @@ namespace GW2FOX
             _instance = null;
             base.OnClosed(e);
         }
+
+        public void UpdateBossOverlayList()
+        {
+            try
+            {
+                var filteredBosses = BossTimings.BossEventGroups
+    .Where(group => BossTimings.BossList23.Contains(group.BossName))
+    .SelectMany(group => group.GetNextRuns())
+    .OrderBy(run => run.NextRunTime)
+    .ThenBy(run => run.Category)
+    .ToList();
+
+                System.Windows.Application.Current.Dispatcher.Invoke(() =>
+                {
+                    BossListView.ItemsSource = null;
+                    BossListView.ItemsSource = filteredBosses;
+                });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Fehler beim Aktualisieren der BossOverlay-Liste: {ex.Message}");
+            }
+        }
+
     }
 }

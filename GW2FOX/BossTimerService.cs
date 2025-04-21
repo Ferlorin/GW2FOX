@@ -208,8 +208,8 @@ namespace GW2FOX
                         foreach (var boss in allBosses)
                         {
                             BossListItems.Add(boss);
-                           
                         }
+                        OverlayWindow.GetInstance().UpdateBossOverlayList();
                     });
 
                     Console.WriteLine("Boss list updated.");
