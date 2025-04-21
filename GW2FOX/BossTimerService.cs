@@ -297,6 +297,19 @@ namespace GW2FOX
         public DateTime NextRunTime { get; set; }
 
         public bool IsPreviousBoss => NextRunTime < GlobalVariables.CURRENT_DATE_TIME;
+        private bool _isPastEvent;
+        public bool IsPastEvent
+        {
+            get => _isPastEvent;
+            set
+            {
+                if (_isPastEvent != value)
+                {
+                    _isPastEvent = value;
+                    OnPropertyChanged(nameof(IsPastEvent));
+                }
+            }
+        }
 
         public BossEventRun(string bossName, TimeSpan timing, string category, DateTime nextRunTime, string waypoint = "")
             : base(bossName, timing, category, waypoint)
