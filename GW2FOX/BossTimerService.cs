@@ -91,6 +91,26 @@ namespace GW2FOX
             }
         }
 
+        public static List<BossEventRun> GetBossRunsForOverlay()
+        {
+            var staticBosses = BossEventGroups
+                .SelectMany(group => group.GetAllRuns());
+
+            var dynamicBosses = DynamicEventManager.GetActiveBossEventRuns();
+
+            var combinedBosses = staticBosses
+                .Concat(dynamicBosses)
+                .ToList();
+
+            combinedBosses.Sort((a, b) =>
+            {
+                int timeComparison = a.NextRunTime.CompareTo(b.NextRunTime);
+                return timeComparison != 0 ? timeComparison : string.Compare(a.Category, b.Category, StringComparison.Ordinal);
+            });
+
+            return combinedBosses;
+        }
+
 
         private static void OverlayWindow_Closed(object? sender, EventArgs e)
         {
@@ -362,39 +382,28 @@ namespace GW2FOX
                 .Take(NextRunsToShow)
                 .ToList();
         }
-    }
-    public class BossListItem
-    {
-        public string BossName { get; set; } = string.Empty;
-        public string TimeRemainingFormatted { get; set; } = string.Empty;
-        public string Waypoint { get; set; } = string.Empty;
 
-        private static BitmapImage? _waypointImage;
-
-        public static BitmapImage WaypointImage
+        public IEnumerable<BossEventRun> GetAllRuns()
         {
-            get
+            List<BossEventRun> toReturn = new();
+
+            for (var i = -1; i <= DaysExtraToCalculate; i++)
             {
-                if (_waypointImage == null)
-                {
-                    using var bitmap = Properties.Resources.Waypoint;
-                    using var ms = new MemoryStream();
-                    bitmap.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
-                    ms.Position = 0;
-
-                    var image = new BitmapImage();
-                    image.BeginInit();
-                    image.CacheOption = BitmapCacheOption.OnLoad;
-                    image.StreamSource = ms;
-                    image.EndInit();
-                    image.Freeze();
-
-                    _waypointImage = image;
-                }
-
-                return _waypointImage;
+                toReturn.AddRange(
+                    _timings.Select(bossEvent => new BossEventRun(
+                        bossEvent.BossName,
+                        bossEvent.Timing,
+                        bossEvent.Category,
+                        GlobalVariables.CURRENT_DATE_TIME.Date.AddDays(i) + bossEvent.Timing,
+                        bossEvent.Waypoint))
+                );
             }
+
+            return toReturn
+                .OrderBy(bossEvent => bossEvent.TimeToShow)
+                .ToList();
         }
     }
 }
+
 

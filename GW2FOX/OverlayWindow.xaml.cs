@@ -41,6 +41,7 @@ namespace GW2FOX
             StartBossTimer();
             DataContext = this;
             this.PreviewMouseWheel += OverlayWindow_PreviewMouseWheel;
+            BossTimings.RegisterListView(BossListView);
 
         }
 
@@ -141,28 +142,19 @@ namespace GW2FOX
         {
             try
             {
-                var staticBosses = BossTimings.BossEventGroups
-                    .Where(group => BossTimings.BossList23.Contains(group.BossName))
-                    .SelectMany(group => group.GetNextRuns());
-
-                var dynamicBosses = DynamicEventManager.GetActiveBossEventRuns();
-
-                var combinedBosses = staticBosses
-                    .Concat(dynamicBosses)
-                    .OrderBy(run => run.NextRunTime)
-                    .ThenBy(run => run.Category)
-                    .ToList();
+                var combinedRuns = BossTimerService.GetBossRunsForOverlay(); // nutzt die neue Methode!
+                var overlayItems = BossOverlayHelper.GetBossOverlayItems(combinedRuns);
 
                 Dispatcher.Invoke(() =>
                 {
                     BossListView.ItemsSource = null;
-                    BossListView.ItemsSource = combinedBosses;
+                    BossListView.ItemsSource = overlayItems;
                 });
 
                 Console.WriteLine("Overlay updated. Combined entries:");
-                foreach (var boss in combinedBosses)
+                foreach (var boss in overlayItems)
                 {
-                    Console.WriteLine($"- {boss.BossName} @ {boss.NextRunTime}");
+                    Console.WriteLine($"- {boss.BossName} | {boss.TimeRemainingFormatted} | Vergangen: {boss.IsPastEvent}");
                 }
             }
             catch (Exception ex)
@@ -170,6 +162,7 @@ namespace GW2FOX
                 Console.WriteLine($"Fehler beim Aktualisieren der BossOverlay-Liste: {ex.Message}");
             }
         }
+
 
 
         public event PropertyChangedEventHandler? PropertyChanged;

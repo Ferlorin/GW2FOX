@@ -12,6 +12,11 @@
         Title="OverlayWindow"
         Name="MainOverlayWindow">
 
+    <Window.Resources>
+        <local:StrikeConverter x:Key="StrikeConverter"/>
+        <local:PastEventColorConverter x:Key="PastEventColorConverter"/>
+    </Window.Resources>
+
     <Grid x:Name="MainGrid" Background="Transparent">
         <Border Background="Transparent" BorderBrush="#333" BorderThickness="0">
             <Grid>
@@ -45,10 +50,10 @@
                     </TextBlock>
 
                     <Rectangle VerticalAlignment="Bottom"
-           Grid.ColumnSpan="2"
-           Height="1"
-           IsHitTestVisible="False"
-           Margin="0,0,0,0">
+                               Grid.ColumnSpan="2"
+                               Height="1"
+                               IsHitTestVisible="False"
+                               Margin="0,0,0,0">
                         <Rectangle.Fill>
                             <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
                                 <GradientStop Color="#00FFFFFF" Offset="0.0" />
@@ -57,8 +62,6 @@
                             </LinearGradientBrush>
                         </Rectangle.Fill>
                     </Rectangle>
-
-
                 </Grid>
 
                 <!-- Inhalt -->
@@ -90,7 +93,8 @@
                                                VerticalAlignment="Center"/>
 
                                         <TextBlock Text="{Binding BossName}"
-                                                   Foreground="{Binding CategoryBrush}"
+                                                   Foreground="{Binding IsPastEvent, Converter={StaticResource PastEventColorConverter}}"
+                                                   TextDecorations="{Binding IsPastEvent, Converter={StaticResource StrikeConverter}}"
                                                    VerticalAlignment="Center"
                                                    FontFamily="Segoe UI"
                                                    FontWeight="Bold"
@@ -103,7 +107,8 @@
                                         </TextBlock>
 
                                         <TextBlock Text="{Binding TimeRemainingFormatted}"
-                                                   Foreground="{Binding CategoryBrush}"
+                                                   Foreground="{Binding IsPastEvent, Converter={StaticResource PastEventColorConverter}}"
+                                                   TextDecorations="{Binding IsPastEvent, Converter={StaticResource StrikeConverter}}"
                                                    VerticalAlignment="Center"
                                                    FontFamily="Segoe UI"
                                                    FontWeight="Bold"

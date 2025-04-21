@@ -20,8 +20,9 @@ namespace GW2FOX
         public static Dictionary<DateTime, List<string>> DoneBosses { get; private set; } = [];
         public static readonly List<BossEvent> Events = [];
         internal static readonly List<BossEventGroup> BossEventGroups = [];
-
-        
+        internal static System.Windows.Controls.ListView? BossListView { get; set; }
+        public static List<BossEventRun> StaticBossEvents { get; set; } = new();
+        public static List<BossEventRun> DynamicBossEvents { get; set; } = new();
 
         // internal static int PREVIOUS_RUNS_TO_SHOW = 1;
         private static readonly char[] Separator = new char[] { ',' };
@@ -30,6 +31,11 @@ namespace GW2FOX
         {
             Events.Clear();
             BossEventGroups.Clear();
+        }
+
+        public static void RegisterListView(System.Windows.Controls.ListView listView)
+        {
+            BossListView = listView;
         }
 
         static BossTimings()
@@ -257,49 +263,52 @@ namespace GW2FOX
                 Console.WriteLine($"Stack Trace: {ex.StackTrace}");
             }
         }
-
-        public static void UpdateBossList(System.Windows.Controls.ListView listView)
+        public static void UpdateBossOverlayList()
         {
-            Console.WriteLine($"Number of static events: {Events.Count}");
-
-            var currentTime = GlobalVariables.CURRENT_DATE_TIME;
-
-            // Hole reguläre Bosse
-            var staticBosses = Events
-                .SelectMany(bossEvent => new BossEventGroup(bossEvent.BossName, Events).GetNextRuns());
-
-            // Hole dynamische Bosse (manuell getriggert)
-            var dynamicBosses = DynamicEventManager.GetActiveBossEventRuns();
-
-            foreach (var dyn in dynamicBosses)
+            try
             {
-                Console.WriteLine($"[Dynamic Event] {dyn.BossName} -> {dyn.NextRunTime}");
-            }
+                if (BossListView == null)
+                    return;
 
-            // Kombiniere beide Listen und sortiere sie
-            var upcomingBosses = staticBosses
-                .Concat(dynamicBosses)
-                .OrderBy(boss => boss.TimeToShow)
-                .ToList();
+                var selectedBosses = BossTimings.BossList23 ?? new List<string>();
 
-            // Erstelle neue ListItems
-            var items = new List<BossListItem>();
-            foreach (var boss in upcomingBosses)
-            {
-                items.Add(new BossListItem
+                var staticBosses = BossTimings.BossEventGroups
+                    .Where(group => selectedBosses.Contains(group.BossName))
+                    .SelectMany(group => group.GetNextRuns());
+
+                var dynamicBosses = DynamicEventManager.GetActiveBossEventRuns();
+
+                var combinedBosses = staticBosses
+                    .Concat(dynamicBosses)
+                    .OrderBy(run => run.NextRunTime)
+                    .ThenBy(run => run.Category)
+                    .ToList();
+
+                BossListView.Dispatcher.Invoke(() =>
                 {
-                    BossName = boss.BossName,
-                    TimeRemainingFormatted = boss.TimeRemainingFormatted,
-                    Waypoint = boss.Waypoint
+                    BossListView.ItemsSource = combinedBosses;
                 });
+
+
+                Console.WriteLine("Overlay updated. Combined entries:");
+                foreach (var boss in combinedBosses)
+                {
+                    Console.WriteLine($"- {boss.BossName} @ {boss.NextRunTime}");
+                }
             }
-
-            // Weise Items dem ListView zu
-            listView.ItemsSource = items;
-
-            Console.WriteLine("Boss list (static + dynamic) updated and bound to ListView.");
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Fehler beim Aktualisieren der BossOverlay-Liste: {ex.Message}");
+            }
         }
 
+
+        public static List<BossEventRun> GetCombinedBossEvents()
+        {
+            return StaticBossEvents
+                .Concat(DynamicBossEvents)
+                .ToList();
+        }
 
 
     }
