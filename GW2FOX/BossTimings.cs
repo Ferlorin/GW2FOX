@@ -24,7 +24,6 @@ namespace GW2FOX
         public static List<BossEventRun> StaticBossEvents { get; set; } = new();
         public static List<BossEventRun> DynamicBossEvents { get; set; } = new();
 
-        // internal static int PREVIOUS_RUNS_TO_SHOW = 1;
         private static readonly char[] Separator = new char[] { ',' };
 
         private static void Init()
@@ -144,7 +143,7 @@ namespace GW2FOX
 
                 // Vorhandenen Inhalt aus der Datei lesen
                 var lines = File.ReadAllLines(GlobalVariables.FILE_PATH);
-                Console.WriteLine("File read successfully.");
+        
 
                 // Index der Zeile mit dem Bossnamen finden
                 var bossIndex = -1;
@@ -157,11 +156,9 @@ namespace GW2FOX
 
                 if (bossIndex == -1 || bossIndex >= lines.Length)
                 {
-                    Console.WriteLine("No 'Bosses:' line found or invalid index.");
                     return;
                 }
 
-                Console.WriteLine("Bosses found at line: " + bossIndex);
 
                 // Extrahiere die Bosse aus der Zeile zwischen den Anführungszeichen
                 var bossLine = lines[bossIndex].Replace("Bosses:", "").Trim();
@@ -176,7 +173,6 @@ namespace GW2FOX
                 var newBossList = new List<string>();
                 newBossList.AddRange(bossNames);
 
-                // Iteriere durch die Zeilen, um Timings zu extrahieren
                 for (var i = bossIndex + 1; i < lines.Length; i++)
                 {
                     if (!lines[i].StartsWith("Timings:")) continue;
@@ -184,8 +180,6 @@ namespace GW2FOX
                     var timings = timingLine.Split(Separator, StringSplitOptions.RemoveEmptyEntries)
                         .Select(timing => timing.Trim())
                         .ToArray();
-
-                    Console.WriteLine($"Timings found: {string.Join(", ", timings)}");
 
                     if (timings.Length == bossNames.Length)
                     {
@@ -196,20 +190,18 @@ namespace GW2FOX
                     }
                     else
                     {
-                        Console.WriteLine("Number of timings does not match the number of bosses.");
+                      //  Console.WriteLine("Number of timings does not match the number of bosses.");
                     }
 
-                    break; // Da wir die Timings gefunden haben, können wir die Schleife beenden
+                    break; 
                 }
 
                 // Jetzt kannst du die alte BossList23 durch die neue Liste ersetzen
                 BossList23 = newBossList;
-                Console.WriteLine("Boss list updated successfully.");
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Error in SetBossListFromConfig_Bosses: {ex.Message}");
-                Console.WriteLine($"Stack Trace: {ex.StackTrace}");
             }
         }
 
@@ -229,20 +221,17 @@ namespace GW2FOX
         private static void AddBossEvent(string bossName, string[] timings, string category, string waypoint = "")
         {
             try
-            {
-                Console.WriteLine($"Adding BossEvents for: {bossName}, Category: {category}, Waypoint: {waypoint}");
+            {;
 
                 foreach (var timing in timings)
                 {
                     Events.Add(new BossEvent(bossName, timing, category, waypoint));
                 }
-
-                Console.WriteLine("Boss events added successfully.");
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Error in AddBossEvent (multiple timings): {ex.Message}");
-                Console.WriteLine($"Stack Trace: {ex.StackTrace}");
+              
             }
         }
 
@@ -251,16 +240,13 @@ namespace GW2FOX
         {
             try
             {
-                Console.WriteLine($"Adding BossEvent: {bossName}, Timing: {timing}, Category: {category}, Waypoint: {waypoint}");
 
                 Events.Add(new BossEvent(bossName, timing, category, waypoint));
-
-                Console.WriteLine("Boss event added successfully.");
+;
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Error in AddBossEvent (single timing): {ex.Message}");
-                Console.WriteLine($"Stack Trace: {ex.StackTrace}");
             }
         }
         public static void UpdateBossOverlayList()
@@ -286,11 +272,25 @@ namespace GW2FOX
 
                 BossListView.Dispatcher.Invoke(() =>
                 {
-                    BossListView.ItemsSource = combinedBosses;
+                    var window = OverlayWindow.GetInstance();
+
+                    window.OverlayItems.Clear();
+
+                    foreach (var bossRun in combinedBosses)
+                    {
+                        var item = new BossListItem
+                        {
+                            BossName = bossRun.BossName,
+                            Waypoint = bossRun.Waypoint,
+                            NextRunTime = bossRun.NextRunTime
+                        };
+
+                        item.UpdateCountdown();
+                        window.OverlayItems.Add(item);
+                    }
+
                 });
 
-
-                Console.WriteLine("Overlay updated. Combined entries:");
                 foreach (var boss in combinedBosses)
                 {
                     Console.WriteLine($"- {boss.BossName} @ {boss.NextRunTime}");

@@ -17,10 +17,9 @@ namespace GW2FOX
         private static readonly string TimeZoneId = "W. Europe Standard Time";
 
         public static OverlayWindow? _overlayWindow { get; set; }
-        public static BossTimer? _bossTimer { get; private set; } // Punkt 3: Singleton artiger Zugriff
+        public static BossTimer? _bossTimer { get; private set; } 
         public static System.Windows.Controls.ListView CustomBossList { get; set; } = new();
 
-        // Punkt 4: set privat machen
         public static ObservableCollection<BossEventRun> BossListItems { get; private set; } = new();
 
         static BossTimerService()
@@ -37,11 +36,10 @@ namespace GW2FOX
                 {
                     InitializeBossTimerAndOverlay();
                 }
-                Console.WriteLine("Initialization complete.");
             }
             catch (Exception ex)
             {
-                LogError("Initialize", ex);
+               // LogError("Initialize", ex);
             }
         }
 
@@ -53,11 +51,10 @@ namespace GW2FOX
                 {
                     ItemTemplate = (DataTemplate)System.Windows.Application.Current.Resources["BossListTemplate"]
                 };
-                Console.WriteLine("CustomBossList initialized.");
             }
             catch (Exception ex)
             {
-                LogError("InitializeCustomBossList", ex);
+               // LogError("InitializeCustomBossList", ex);
             }
         }
 
@@ -71,7 +68,6 @@ namespace GW2FOX
 
                 if (_overlayWindow == null)
                 {
-                    Console.WriteLine("OverlayWindow.GetInstance() returned null!");
                     return;
                 }
 
@@ -82,14 +78,18 @@ namespace GW2FOX
                 if (!_overlayWindow.IsVisible)
                 {
                     _overlayWindow.Show();
-                    Console.WriteLine("Overlay window initialized.");
+
                 }
+
+                // ✅ Das hier sorgt dafür, dass die Timer-Logik loslegt
+                _bossTimer?.Start();
             }
             catch (Exception ex)
             {
-                LogError("InitializeBossTimerAndOverlay", ex);
+               // LogError("InitializeBossTimerAndOverlay", ex);
             }
         }
+
 
         public static List<BossEventRun> GetBossRunsForOverlay()
         {
@@ -127,17 +127,15 @@ namespace GW2FOX
                 }
 
                 _bossTimer?.Start();
-                GC.KeepAlive(_bossTimer);
 
                 if (_overlayWindow != null && !_overlayWindow.IsVisible)
                 {
                     _overlayWindow.Show();
-                    Console.WriteLine("Overlay window shown.");
                 }
             }
             catch (Exception ex)
             {
-                LogError("Update", ex);
+                // LogError("Update", ex);
             }
         }
 
@@ -149,7 +147,7 @@ namespace GW2FOX
             }
             catch (Exception ex)
             {
-                LogError("Timer_Click", ex);
+               // LogError("Timer_Click", ex);
             }
         }
 
@@ -167,14 +165,12 @@ namespace GW2FOX
                 this._bossList = bossList;
                 Timer.Interval = TimeSpan.FromSeconds(1);
                 Timer.Tick += TimerCallback;
-                Console.WriteLine("BossTimer initialized.");
             }
 
             public void Start()
             {
                 if (!_isRunning)
                 {
-                    Console.WriteLine("Starting Timer");
                     Timer.Start();
                     _isRunning = true;
                 }
@@ -184,7 +180,6 @@ namespace GW2FOX
             {
                 if (_isRunning)
                 {
-                    Console.WriteLine("Stopping Timer");
                     Timer.Stop();
                     _isRunning = false;
                 }
@@ -194,20 +189,21 @@ namespace GW2FOX
             {
                 try
                 {
-                    Console.WriteLine("Timer Tick: " + DateTime.Now);
                     UpdateBossList();
 
                     // Punkt 1: Nur hier PropertyChanged triggern
                     foreach (var boss in BossListItems)
                     {
                         boss.TriggerTimeRemainingChanged();
+                        Console.WriteLine($"{boss.BossName} – {boss.TimeRemainingFormatted}");
                     }
                 }
                 catch (Exception ex)
                 {
-                    LogError("TimerCallback", ex);
+                    //LogError("TimerCallback", ex);
                 }
             }
+
 
             public static void UpdateBossList()
             {
@@ -239,11 +235,10 @@ namespace GW2FOX
                         OverlayWindow.GetInstance().UpdateBossOverlayList();
                     });
 
-                    Console.WriteLine("Combined boss list updated. Entries: " + combinedBosses.Count);
                 }
                 catch (Exception ex)
                 {
-                    LogError("UpdateBossList", ex);
+                   // LogError("UpdateBossList", ex);
                 }
             }
 
@@ -259,7 +254,7 @@ namespace GW2FOX
             {
                 if (!disposing) return;
                 Timer.Stop();
-                Console.WriteLine("Disposed.");
+                Timer.Tick -= TimerCallback;
             }
         }
 

@@ -13,14 +13,15 @@ namespace GW2FOX
     public partial class OverlayWindow : Window, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler? PropertyChanged;
+        private DispatcherTimer? _copiedTimer;
 
         protected void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-        public ObservableCollection<BossListItem> OverlayItems { get; } = new ObservableCollection<BossListItem>();
+
+        public ObservableCollection<BossListItem> OverlayItems { get; set; } = new();
         private static OverlayWindow? _instance;
-        private DispatcherTimer bossTimer;
 
         private double _scrollValue;
         public double ScrollValue
@@ -44,7 +45,6 @@ namespace GW2FOX
             _instance = this;
             InitializeComponent();
             UpdateBossOverlayList();
-            StartBossTimer();
             DataContext = this;
             this.PreviewMouseWheel += OverlayWindow_PreviewMouseWheel;
             BossTimings.RegisterListView(BossListView);
@@ -56,39 +56,27 @@ namespace GW2FOX
             {
                 var newOffset = BossScrollViewer.VerticalOffset - e.Delta;
                 BossScrollViewer.ScrollToVerticalOffset(newOffset);
-                ScrollValue = newOffset; // Update auch manuell setzen
+                ScrollValue = newOffset;
                 e.Handled = true;
             }
         }
 
         private void BossScrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e)
         {
-            // Sync ScrollValue wenn manuell oder per Mausrad gescrollt wird
             if (ScrollValue != e.VerticalOffset)
             {
                 ScrollValue = e.VerticalOffset;
             }
         }
 
-        private void StartBossTimer()
-        {
-            bossTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
-            bossTimer.Tick += BossTimer_Tick;
-            bossTimer.Start();
-        }
+       
 
-        private void BossTimer_Tick(object? sender, EventArgs e)
-        {
-            UpdateBossOverlayList();
-        }
 
         private void Waypoint_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            Console.WriteLine("Waypoint wurde angeklickt."); // Debug-Test
-
             if (sender is System.Windows.Controls.Image img && img.DataContext is BossListItem boss)
             {
-                System.Windows.Clipboard.SetText(boss.Waypoint); // <- explizit
+                System.Windows.Clipboard.SetText(boss.Waypoint);
                 ShowCopiedMessage();
             }
         }
@@ -101,13 +89,15 @@ namespace GW2FOX
         private void ShowCopiedMessage()
         {
             CopiedMessage.Visibility = Visibility.Visible;
-            var timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(0.8) };
-            timer.Tick += (s, e) =>
+
+            _copiedTimer?.Stop(); // Verhindert mehrere Timer gleichzeitig
+            _copiedTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(0.8) };
+            _copiedTimer.Tick += (s, e) =>
             {
                 CopiedMessage.Visibility = Visibility.Collapsed;
-                timer.Stop();
+                _copiedTimer?.Stop();
             };
-            timer.Start();
+            _copiedTimer.Start();
         }
 
         private void Icon_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -122,12 +112,7 @@ namespace GW2FOX
         {
             if (_instance == null)
             {
-                Console.WriteLine("Erstelle neue Instanz von OverlayWindow.");
                 _instance = new OverlayWindow();
-            }
-            else
-            {
-                Console.WriteLine("Verwende bestehende Instanz von OverlayWindow.");
             }
             return _instance;
         }
@@ -144,17 +129,14 @@ namespace GW2FOX
             {
                 var combinedRuns = BossTimerService.GetBossRunsForOverlay();
                 var newItems = BossOverlayHelper.GetBossOverlayItems(combinedRuns);
+                newItems = new ObservableCollection<BossListItem>(newItems.OrderBy(b => b.SecondsRemaining));
 
-                // Sortiere optional nach verbleibender Zeit
-                newItems = newItems.OrderBy(b => b.SecondsRemaining).ToList();
-
-                // Sync: entferne alte, aktualisiere bestehende, füge neue hinzu
                 for (int i = OverlayItems.Count - 1; i >= 0; i--)
                 {
                     var existing = OverlayItems[i];
                     if (!newItems.Any(x => x.BossName == existing.BossName))
                     {
-                        OverlayItems.RemoveAt(i); // Entfernt nicht mehr vorhandene Bosse
+                        OverlayItems.RemoveAt(i);
                     }
                 }
 
@@ -163,23 +145,15 @@ namespace GW2FOX
                     var match = OverlayItems.FirstOrDefault(x => x.BossName == newItem.BossName);
                     if (match == null)
                     {
-                        OverlayItems.Add(newItem); // Neuer Boss
+                        newItem.UpdateCountdown();
+                        OverlayItems.Add(newItem);
                     }
                     else
                     {
-                        // Optional: bestehende Properties aktualisieren
-                        match.TimeRemainingFormatted = newItem.TimeRemainingFormatted;
-                        match.SecondsRemaining = newItem.SecondsRemaining;
-                        match.IsPastEvent = newItem.IsPastEvent;
+                        match.NextRunTime = newItem.NextRunTime;
                         match.Waypoint = newItem.Waypoint;
-                        // OnPropertyChanged innerhalb von BossListItem nicht vergessen!
+                        match.UpdateCountdown();
                     }
-                }
-
-                Console.WriteLine("Overlay updated. Combined entries:");
-                foreach (var boss in OverlayItems)
-                {
-                    Console.WriteLine($"- {boss.BossName} | {boss.TimeRemainingFormatted} | Vergangen: {boss.IsPastEvent}");
                 }
             }
             catch (Exception ex)
@@ -187,7 +161,6 @@ namespace GW2FOX
                 Console.WriteLine($"Fehler beim Aktualisieren der BossOverlay-Liste: {ex.Message}");
             }
         }
-
 
 
         private string _timeRemainingFormatted;

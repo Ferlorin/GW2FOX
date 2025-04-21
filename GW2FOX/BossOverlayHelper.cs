@@ -1,39 +1,39 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace GW2FOX
 {
-    using System;
-    using System.Collections.Generic;
-
- 
-        public static class BossOverlayHelper
+    public static class BossOverlayHelper
+    {
+        public static ObservableCollection<BossListItem> GetBossOverlayItems(List<BossEventRun> combinedBosses)
         {
-            public static List<BossListItem> GetBossOverlayItems(List<BossEventRun> combinedBosses)
+            var overlayItems = new ObservableCollection<BossListItem>();
+            var now = DateTime.UtcNow;
+
+            foreach (var run in combinedBosses)
             {
-                var overlayItems = new List<BossListItem>();
-                var now = DateTime.UtcNow;
+                TimeSpan timeRemaining = run.NextRunTime - now;
+                bool isPast = timeRemaining.TotalSeconds < 0;
 
-                foreach (var run in combinedBosses)
+                if (isPast)
                 {
-                    var timeRemaining = run.NextRunTime - now;
-                    bool isPast = timeRemaining.TotalSeconds < 0;
-
-                    // Vergangene Events: nur anzeigen, wenn sie max. 15 Minuten her sind
-                    if (isPast && timeRemaining.TotalMinutes <= -15)
+                    // Vergangene Events nur anzeigen, wenn max. 15 Minuten her
+                    if (timeRemaining.TotalMinutes <= -15)
                         continue;
 
-                    // Zukünftige Events: nur anzeigen, wenn sie in den nächsten 4 Stunden sind
-                    if (!isPast && timeRemaining.TotalHours > 4)
+                    timeRemaining = -timeRemaining; // Absoluten Wert berechnen
+                }
+                else
+                {
+                    // Zukünftige Events nur anzeigen, wenn sie in den nächsten 4 Stunden sind
+                    if (timeRemaining.TotalHours > 4)
                         continue;
+                }
 
-                    // Zeit korrekt formatieren
-                    if (isPast)
-                        timeRemaining = -timeRemaining;
-
-                    string formattedTime = isPast
-                        ? timeRemaining.ToString(@"mm\:ss") // vergangen: Minuten:Sekunden
-                        : timeRemaining.ToString(@"hh\:mm\:ss"); // zukünftig: Stunden:Minuten:Sekunden
+                string formattedTime = isPast
+                    ? timeRemaining.ToString(@"mm\:ss")
+                    : timeRemaining.ToString(@"hh\:mm\:ss");
 
                 overlayItems.Add(new BossListItem
                 {
@@ -45,9 +45,9 @@ namespace GW2FOX
                 });
             }
 
-                return overlayItems;
-            }
+            return overlayItems;
         }
     }
+}
 
 

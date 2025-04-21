@@ -57,7 +57,8 @@ namespace GW2FOX
                 throw new InvalidOperationException("Event not triggered");
             }
 
-            DateTime nextRunTime = StartTime.Value.ToLocalTime() + Delay;
+            DateTime nextRunTime = StartTime.Value + Delay;
+
             Console.WriteLine($"[Convert] {BossName} will run again at {nextRunTime}");
 
             return new BossEventRun(

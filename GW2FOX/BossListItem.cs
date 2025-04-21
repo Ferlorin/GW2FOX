@@ -7,6 +7,22 @@ namespace GW2FOX
 {
     public class BossListItem : INotifyPropertyChanged
     {
+        public DateTime NextRunTime { get; set; }
+
+        public void UpdateCountdown()
+        {
+            var now = GlobalVariables.CURRENT_DATE_TIME;
+            var nextEndTime = NextRunTime.AddMinutes(14).AddSeconds(59);
+            var timeToShow = NextRunTime < now ? nextEndTime : NextRunTime;
+
+            var remaining = timeToShow - now;
+
+            // Update Formatted String
+            TimeRemainingFormatted = $"{(int)remaining.TotalHours:D2}:{remaining.Minutes:D2}:{remaining.Seconds:D2}";
+            SecondsRemaining = (int)remaining.TotalSeconds;
+            IsPastEvent = NextRunTime < now;
+        }
+
         public string BossName { get; set; } = string.Empty;
 
         private string _timeRemainingFormatted = string.Empty;
