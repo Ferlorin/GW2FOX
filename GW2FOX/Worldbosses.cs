@@ -16,9 +16,12 @@ namespace GW2FOX
         public Worldbosses()
         {
             InitializeComponent();
+            
             bossCheckBoxMap = new Dictionary<string, CheckBox>();
             InitializeBossCheckBoxMap();
             UpdateBossUiBosses();
+            InitializeBossTimerAndOverlay();
+            InitializeCustomBossList();
             LoadConfigText(Runinfo, Squadinfo, Guild, Welcome, Symbols);
 
             Load += Worldbosses_Load_1;
