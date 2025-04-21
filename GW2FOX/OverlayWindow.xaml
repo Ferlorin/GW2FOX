@@ -18,7 +18,6 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="30"/>
                     <RowDefinition Height="*"/>
-                    <RowDefinition Height="3"/>
                 </Grid.RowDefinitions>
 
                 <!-- Titel -->
@@ -44,6 +43,22 @@
                             <DropShadowEffect Color="Black" BlurRadius="0" Direction="0" ShadowDepth="0" Opacity="1"/>
                         </TextBlock.Effect>
                     </TextBlock>
+
+                    <Rectangle VerticalAlignment="Bottom"
+           Grid.ColumnSpan="2"
+           Height="1"
+           IsHitTestVisible="False"
+           Margin="0,0,0,0">
+                        <Rectangle.Fill>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                <GradientStop Color="#00FFFFFF" Offset="0.0" />
+                                <GradientStop Color="#66FFFFFF" Offset="0.5" />
+                                <GradientStop Color="#00FFFFFF" Offset="1.0" />
+                            </LinearGradientBrush>
+                        </Rectangle.Fill>
+                    </Rectangle>
+
+
                 </Grid>
 
                 <!-- Inhalt -->
@@ -103,29 +118,25 @@
                             </ListView.ItemTemplate>
                         </ListView>
                     </ScrollViewer>
+
+                    <!-- Kopiert-Meldung -->
+                    <TextBlock x:Name="CopiedMessage"
+                               Text="Copied!"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Top"
+                               Margin="0,10,0,0"
+                               Padding="6,2"
+                               Background="Black"
+                               Foreground="White"
+                               FontWeight="Bold"
+                               Opacity="0.9"
+                               Visibility="Collapsed"
+                               FontSize="14">
+                        <TextBlock.Effect>
+                            <DropShadowEffect Color="Black" BlurRadius="0" Direction="0" ShadowDepth="0" Opacity="1"/>
+                        </TextBlock.Effect>
+                    </TextBlock>
                 </Grid>
-
-                <!-- Linie unten -->
-                <Rectangle Grid.Row="2" Height="3" Fill="White" Opacity="0.4" VerticalAlignment="Bottom"/>
-
-                <!-- Kopiert -->
-                <TextBlock x:Name="CopiedMessage"
-                           Text="Copied!"
-                           HorizontalAlignment="Center"
-                           VerticalAlignment="Top"
-                           Margin="0,10,0,0"
-                           Padding="6,2"
-                           Background="Black"
-                           Foreground="White"
-                           FontWeight="Bold"
-                           Opacity="0.9"
-                           Visibility="Collapsed"
-                           FontSize="14"
-                           Grid.Row="1">
-                    <TextBlock.Effect>
-                        <DropShadowEffect Color="Black" BlurRadius="0" Direction="0" ShadowDepth="0" Opacity="1"/>
-                    </TextBlock.Effect>
-                </TextBlock>
             </Grid>
         </Border>
     </Grid>
