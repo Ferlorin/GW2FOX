@@ -260,17 +260,30 @@ namespace GW2FOX
 
         public static void UpdateBossList(System.Windows.Controls.ListView listView)
         {
-            Console.WriteLine($"Number of events: {Events.Count}");
+            Console.WriteLine($"Number of static events: {Events.Count}");
 
             var currentTime = GlobalVariables.CURRENT_DATE_TIME;
 
-            var upcomingBosses = Events
-                .SelectMany(bossEvent => new BossEventGroup(bossEvent.BossName, Events).GetNextRuns())
+            // Hole reguläre Bosse
+            var staticBosses = Events
+                .SelectMany(bossEvent => new BossEventGroup(bossEvent.BossName, Events).GetNextRuns());
+
+            // Hole dynamische Bosse (manuell getriggert)
+            var dynamicBosses = DynamicEventManager.GetActiveBossEventRuns();
+
+            foreach (var dyn in dynamicBosses)
+            {
+                Console.WriteLine($"[Dynamic Event] {dyn.BossName} -> {dyn.NextRunTime}");
+            }
+
+            // Kombiniere beide Listen und sortiere sie
+            var upcomingBosses = staticBosses
+                .Concat(dynamicBosses)
                 .OrderBy(boss => boss.TimeToShow)
                 .ToList();
 
+            // Erstelle neue ListItems
             var items = new List<BossListItem>();
-
             foreach (var boss in upcomingBosses)
             {
                 items.Add(new BossListItem
@@ -281,9 +294,13 @@ namespace GW2FOX
                 });
             }
 
+            // Weise Items dem ListView zu
             listView.ItemsSource = items;
+
+            Console.WriteLine("Boss list (static + dynamic) updated and bound to ListView.");
         }
-        
+
+
 
     }
 }

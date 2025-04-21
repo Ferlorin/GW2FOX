@@ -42,21 +42,34 @@ namespace GW2FOX
         {
             var ev = Events.FirstOrDefault(e => e.BossName == bossName);
             if (ev == null)
+            {
+                Console.WriteLine($"[Trigger] No dynamic event found for {bossName}");
                 return;
+            }
 
             ev.Trigger();
             SavePersistedState();
+            Console.WriteLine($"[Trigger] Triggered dynamic event: {bossName} at {DateTime.UtcNow}");
         }
+
 
         /// <summary>
         /// Get all currently running events as BossEventRuns.
         /// </summary>
         public static IEnumerable<BossEventRun> GetActiveBossEventRuns()
         {
+            var running = Events
+                .Where(e => e.IsRunning)
+                .Select(e => e.BossName)
+                .ToList();
+
+            Console.WriteLine("Running dynamic events: " + string.Join(", ", running));
+
             return Events
                 .Where(e => e.IsRunning)
                 .Select(e => e.ToBossEventRun());
         }
+
 
         private static void LoadPersistedState()
         {

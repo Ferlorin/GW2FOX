@@ -52,9 +52,14 @@ namespace GW2FOX
         public BossEventRun ToBossEventRun()
         {
             if (!StartTime.HasValue)
+            {
+                Console.WriteLine($"[WARN] Tried to convert {BossName} but StartTime is null!");
                 throw new InvalidOperationException("Event not triggered");
+            }
 
             DateTime nextRunTime = StartTime.Value.ToLocalTime() + Delay;
+            Console.WriteLine($"[Convert] {BossName} will run again at {nextRunTime}");
+
             return new BossEventRun(
                 bossName: BossName,
                 timing: Delay,
@@ -63,5 +68,6 @@ namespace GW2FOX
                 waypoint: Waypoint
             );
         }
+
     }
 }

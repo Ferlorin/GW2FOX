@@ -402,49 +402,50 @@ namespace GW2FOX
         private void EyeButton_Click(object sender, EventArgs e)
         {
             DynamicEventManager.Trigger("The Eye of Zhaitan");
-            BossTimerService.Update();
+;
+            UpdateBossUiBosses();
         }
 
         private void DwanyButton_Click(object sender, EventArgs e)
         {
             DynamicEventManager.Trigger("Statue of Dwanya");
-            BossTimerService.Update();
+            UpdateBossUiBosses();
         }
 
         private void LyssaButton_Click(object sender, EventArgs e)
         {
             DynamicEventManager.Trigger("Priestess of Lyssa");
-            BossTimerService.Update();
+            UpdateBossUiBosses();
         }
 
         private void OgresButton_Click(object sender, EventArgs e)
         {
             DynamicEventManager.Trigger("Ogrewars");
-            BossTimerService.Update();
+            UpdateBossUiBosses();
         }
 
         private void RhendakButton_Click(object sender, EventArgs e)
         {
             DynamicEventManager.Trigger("Rhendak");
-            BossTimerService.Update();
+            UpdateBossUiBosses();
         }
 
         private void CommissarButton_Click(object sender, EventArgs e)
         {
             DynamicEventManager.Trigger("Dredge Commissar");
-            BossTimerService.Update();
+            UpdateBossUiBosses();
         }
 
         private void GeneralsButton_Click(object sender, EventArgs e)
         {
             DynamicEventManager.Trigger("Branded Generals");
-            BossTimerService.Update();
+            UpdateBossUiBosses();
         }
 
         private void ArahButton_Click(object sender, EventArgs e)
         {
             DynamicEventManager.Trigger("Gates of Arah");
-            BossTimerService.Update();
+            UpdateBossUiBosses();
         }
 
         private void MawsOfTorment_Click(object sender, EventArgs e)
@@ -2184,6 +2185,8 @@ namespace GW2FOX
                 BossTimer.UpdateBossList();
             }
         }
+
+
 
     }
 }

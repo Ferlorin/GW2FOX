@@ -193,11 +193,16 @@ namespace GW2FOX
             {
                 try
                 {
-                    var allBosses = BossEventGroups
-                        .SelectMany(group => group.GetNextRuns())
+                    var staticBosses = BossEventGroups
+                        .SelectMany(group => group.GetNextRuns());
+
+                    var dynamicBosses = DynamicEventManager.GetActiveBossEventRuns();
+
+                    var combinedBosses = staticBosses
+                        .Concat(dynamicBosses)
                         .ToList();
 
-                    allBosses.Sort((a, b) =>
+                    combinedBosses.Sort((a, b) =>
                     {
                         int timeComparison = a.NextRunTime.CompareTo(b.NextRunTime);
                         return timeComparison != 0 ? timeComparison : string.Compare(a.Category, b.Category, StringComparison.Ordinal);
@@ -206,20 +211,23 @@ namespace GW2FOX
                     System.Windows.Application.Current.Dispatcher.Invoke(() =>
                     {
                         BossListItems.Clear();
-                        foreach (var boss in allBosses)
+                        foreach (var boss in combinedBosses)
                         {
                             BossListItems.Add(boss);
                         }
+
                         OverlayWindow.GetInstance().UpdateBossOverlayList();
                     });
 
-                    Console.WriteLine("Boss list updated.");
+                    Console.WriteLine("Combined boss list updated. Entries: " + combinedBosses.Count);
                 }
                 catch (Exception ex)
                 {
                     LogError("UpdateBossList", ex);
                 }
             }
+
+
 
             public void Dispose()
             {

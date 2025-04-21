@@ -141,9 +141,14 @@ namespace GW2FOX
         {
             try
             {
-                var filteredBosses = BossTimings.BossEventGroups
+                var staticBosses = BossTimings.BossEventGroups
                     .Where(group => BossTimings.BossList23.Contains(group.BossName))
-                    .SelectMany(group => group.GetNextRuns())
+                    .SelectMany(group => group.GetNextRuns());
+
+                var dynamicBosses = DynamicEventManager.GetActiveBossEventRuns();
+
+                var combinedBosses = staticBosses
+                    .Concat(dynamicBosses)
                     .OrderBy(run => run.NextRunTime)
                     .ThenBy(run => run.Category)
                     .ToList();
@@ -151,14 +156,21 @@ namespace GW2FOX
                 Dispatcher.Invoke(() =>
                 {
                     BossListView.ItemsSource = null;
-                    BossListView.ItemsSource = filteredBosses;
+                    BossListView.ItemsSource = combinedBosses;
                 });
+
+                Console.WriteLine("Overlay updated. Combined entries:");
+                foreach (var boss in combinedBosses)
+                {
+                    Console.WriteLine($"- {boss.BossName} @ {boss.NextRunTime}");
+                }
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Fehler beim Aktualisieren der BossOverlay-Liste: {ex.Message}");
             }
         }
+
 
         public event PropertyChangedEventHandler? PropertyChanged;
         protected void OnPropertyChanged(string name) =>
