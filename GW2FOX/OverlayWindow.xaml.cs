@@ -1,44 +1,87 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Input;
-using System.Windows.Media.Imaging;
 using System.Windows.Controls;
 using System.Windows.Threading;
 using System.Linq;
 using System.Collections.Generic;
-using static System.Runtime.InteropServices.JavaScript.JSType;
-using System.Windows.Media.Media3D;
-using System.IO;
-
+using System.ComponentModel;
 
 namespace GW2FOX
 {
-    public partial class OverlayWindow : Window
+    public partial class OverlayWindow : Window, INotifyPropertyChanged
     {
-        private System.Windows.Controls.ListView myListView;
         private static OverlayWindow? _instance;
         private DispatcherTimer bossTimer;
+        private DispatcherTimer scrollBarTimer;
+        private bool isMouseOver = false;
+
+        private double _scrollValue;
+        public double ScrollValue
+        {
+            get => _scrollValue;
+            set
+            {
+                if (_scrollValue != value)
+                {
+                    _scrollValue = value;
+                    BossScrollViewer.ScrollToVerticalOffset(value);
+                    OnPropertyChanged(nameof(ScrollValue));
+                }
+            }
+        }
 
         public OverlayWindow()
         {
             this.Left = 1315;
             this.Top = 700;
             _instance = this;
-            InitializeComponent(); // Stelle sicher, dass dies korrekt ausgeführt wird
-            myListView = new System.Windows.Controls.ListView();
+            InitializeComponent();
             UpdateBossOverlayList();
             StartBossTimer();
+            DataContext = this;
+            this.PreviewMouseWheel += OverlayWindow_PreviewMouseWheel;
+            
         }
+
+      
+
+
+
+        private void MainGrid_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            isMouseOver = true;
+
+            // Fokus aufs Fenster erzwingen
+            if (!this.IsActive)
+            {
+                this.Activate();
+                this.Focus();
+            }
+        }
+
+        private void MainGrid_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            isMouseOver = false;
+        }
+
 
         private void StartBossTimer()
         {
-            bossTimer = new DispatcherTimer
-            {
-                Interval = TimeSpan.FromSeconds(1)
-            };
+            bossTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
             bossTimer.Tick += BossTimer_Tick;
             bossTimer.Start();
         }
+
+        private void OverlayWindow_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            if (BossScrollViewer.IsMouseOver || this.IsActive)
+            {
+                BossScrollViewer.ScrollToVerticalOffset(BossScrollViewer.VerticalOffset - e.Delta);
+                e.Handled = true;
+            }
+        }
+
 
         private void BossTimer_Tick(object? sender, EventArgs e)
         {
@@ -59,7 +102,6 @@ namespace GW2FOX
             return _instance;
         }
 
-
         private void Waypoint_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (sender is System.Windows.Controls.Image img && img.DataContext is BossListItem boss)
@@ -70,10 +112,11 @@ namespace GW2FOX
         }
 
 
+
+
         private void ShowCopiedMessage()
         {
             CopiedMessage.Visibility = Visibility.Visible;
-
             var timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(0.8) };
             timer.Tick += (s, e) =>
             {
@@ -83,20 +126,14 @@ namespace GW2FOX
             timer.Start();
         }
 
-        // Event-Handler, um das Fenster zu verschieben
         private void Icon_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left)
             {
-                this.DragMove(); // Verschiebe das Fenster
+                this.DragMove();
             }
         }
 
-        // Event-Handler für den Doppelklick auf ein ListView-Item
-        private void ListViewItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            // Hier könnten weitere Interaktionen mit der Liste eingefügt werden
-        }
         protected override void OnClosed(EventArgs e)
         {
             _instance = null;
@@ -108,13 +145,13 @@ namespace GW2FOX
             try
             {
                 var filteredBosses = BossTimings.BossEventGroups
-    .Where(group => BossTimings.BossList23.Contains(group.BossName))
-    .SelectMany(group => group.GetNextRuns())
-    .OrderBy(run => run.NextRunTime)
-    .ThenBy(run => run.Category)
-    .ToList();
+                    .Where(group => BossTimings.BossList23.Contains(group.BossName))
+                    .SelectMany(group => group.GetNextRuns())
+                    .OrderBy(run => run.NextRunTime)
+                    .ThenBy(run => run.Category)
+                    .ToList();
 
-                System.Windows.Application.Current.Dispatcher.Invoke(() =>
+                Dispatcher.Invoke(() =>
                 {
                     BossListView.ItemsSource = null;
                     BossListView.ItemsSource = filteredBosses;
@@ -126,5 +163,10 @@ namespace GW2FOX
             }
         }
 
+        public event PropertyChangedEventHandler? PropertyChanged;
+        protected void OnPropertyChanged(string name) =>
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+
     }
+
 }

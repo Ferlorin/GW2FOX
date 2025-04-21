@@ -8,16 +8,18 @@
         Background="Transparent"
         Topmost="True"
         ResizeMode="NoResize"
-        Width="260" Height="400"
+        Width="240" Height="370"
         ShowInTaskbar="False"
-        Title="OverlayWindow">
+        Title="OverlayWindow"
+        Name="MainOverlayWindow">
 
-    <Grid>
-        <Border CornerRadius="8" Background="Transparent" BorderBrush="#333" BorderThickness="0">
+    <Grid x:Name="MainGrid" Background="Transparent">
+        <Border Background="Transparent" BorderBrush="#333" BorderThickness="0">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="30"/>
                     <RowDefinition Height="*"/>
+                    <RowDefinition Height="3"/>
                 </Grid.RowDefinitions>
 
                 <!-- Titelleiste -->
@@ -35,9 +37,9 @@
                     <TextBlock Grid.Column="1"
                                VerticalAlignment="Center"
                                Foreground="White"
+                               FontFamily="Segoe UI"
                                FontWeight="Bold"
                                FontSize="14"
-                               FontFamily="Segoe UI"
                                Text="Event Timer">
                         <TextBlock.Effect>
                             <DropShadowEffect Color="Black"
@@ -51,60 +53,61 @@
 
                 <!-- Hauptinhalt -->
                 <Grid Grid.Row="1">
-                    <ListView x:Name="BossListView"
-                              BorderThickness="0"
-                              Background="Transparent"
-                              Margin="2,0,2,0">
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Horizontal" Margin="2" VerticalAlignment="Center">
-                                    <!-- ICON -->
-                                    <Image Source="{x:Static local:BossListItem.WaypointImage}"
-                                           Width="22" Height="22" Margin="0,0,8,0"
-                                           Cursor="Hand"
-                                           MouseLeftButtonDown="Waypoint_MouseLeftButtonDown"
-                                           VerticalAlignment="Center"/>
+                    <ScrollViewer x:Name="BossScrollViewer"
+                                  VerticalScrollBarVisibility="Hidden"
+                                  HorizontalScrollBarVisibility="Disabled"
+                                  Background="Transparent">
 
-                                    <!-- Bossname -->
-                                    <TextBlock Text="{Binding BossName}"
-                                               FontWeight="Bold"
-                                               FontSize="14"
-                                               FontFamily="Segoe UI"
-                                               Foreground="{Binding CategoryBrush}"
-                                               Width="100"
-                                               VerticalAlignment="Center"
-                                               TextTrimming="CharacterEllipsis">
-                                        <TextBlock.Effect>
-                                            <DropShadowEffect Color="Black"
-                                                              BlurRadius="0"
-                                                              Direction="0"
-                                                              ShadowDepth="0"
-                                                              Opacity="1"/>
-                                        </TextBlock.Effect>
-                                    </TextBlock>
+                        <ListView x:Name="BossListView"
+                                  BorderThickness="0"
+                                  Background="Transparent"
+                                  FontFamily="Segoe UI"
+                                  FontWeight="Bold"
+                                  FontSize="14"
+                                  ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                                  Margin="0"
+                                  Padding="0"
+                                  ItemContainerStyle="{StaticResource {x:Type ListViewItem}}">
 
-                                    <!-- Timer -->
-                                    <TextBlock Text="{Binding TimeRemainingFormatted}"
-                                               FontWeight="Bold"
-                                               FontSize="14"
-                                               FontFamily="Segoe UI"
-                                               Foreground="{Binding CategoryBrush}"
-                                               VerticalAlignment="Center"
-                                               Margin="4,0,0,0"
-                                               TextAlignment="Right">
-                                        <TextBlock.Effect>
-                                            <DropShadowEffect Color="Black"
-                                                              BlurRadius="0"
-                                                              Direction="0"
-                                                              ShadowDepth="0"
-                                                              Opacity="1"/>
-                                        </TextBlock.Effect>
-                                    </TextBlock>
-                                </StackPanel>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal"
+                                                Margin="0"
+                                                VerticalAlignment="Center"
+                                                Height="32">
+                                        <Image Source="{x:Static local:BossListItem.WaypointImage}"
+                                               Width="20" Height="20" Margin="0,0,8,0"
+                                               Cursor="Hand"
+                                               MouseLeftButtonDown="Waypoint_MouseLeftButtonDown"
+                                               VerticalAlignment="Center"/>
+
+                                        <TextBlock Text="{Binding BossName}"
+                                                   Foreground="{Binding CategoryBrush}"
+                                                   Width="100"
+                                                   VerticalAlignment="Center"
+                                                   TextTrimming="CharacterEllipsis">
+                                            <TextBlock.Effect>
+                                                <DropShadowEffect Color="Black" BlurRadius="0" Direction="0" ShadowDepth="0" Opacity="1"/>
+                                            </TextBlock.Effect>
+                                        </TextBlock>
+
+                                        <TextBlock Text="{Binding TimeRemainingFormatted}"
+                                                   Foreground="LightGray"
+                                                   VerticalAlignment="Center"
+                                                   Margin="0,0,0,0">
+                                            <TextBlock.Effect>
+                                                <DropShadowEffect Color="Black" BlurRadius="0" Direction="0" ShadowDepth="0" Opacity="1"/>
+                                            </TextBlock.Effect>
+                                        </TextBlock>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </ScrollViewer>
                 </Grid>
+
+                <!-- Untere Linie -->
+                <Rectangle Grid.Row="2" Height="3" Fill="White" Opacity="0.4" VerticalAlignment="Bottom"/>
 
                 <!-- Kopiert-Benachrichtigung -->
                 <TextBlock x:Name="CopiedMessage"
@@ -112,21 +115,15 @@
                            HorizontalAlignment="Center"
                            VerticalAlignment="Top"
                            Margin="0,10,0,0"
-                           Padding="6,2"
                            Background="Black"
                            Foreground="White"
                            FontWeight="Bold"
-                           FontSize="14"
-                           FontFamily="Segoe UI"
                            Opacity="0.9"
                            Visibility="Collapsed"
+                           FontSize="14"
                            Grid.Row="1">
                     <TextBlock.Effect>
-                        <DropShadowEffect Color="Black"
-                                          BlurRadius="0"
-                                          Direction="0"
-                                          ShadowDepth="0"
-                                          Opacity="1"/>
+                        <DropShadowEffect Color="Black" BlurRadius="0" Direction="0" ShadowDepth="0" Opacity="1"/>
                     </TextBlock.Effect>
                 </TextBlock>
             </Grid>
