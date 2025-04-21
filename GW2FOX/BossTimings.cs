@@ -194,15 +194,16 @@ namespace GW2FOX
 
 
 
-        private static void AddBossEvent(string bossName, string firstTiming, int happensEveryInHours, string category,
-            string waypoint = "")
+        private static void AddBossEvent(string bossName, string firstTiming, int happensEveryInHours, string category, string waypoint = "")
         {
             var startTimeUtc = ConvertToUtcFromConfigTime(firstTiming);
-                while (startTimeUtc.TimeOfDay <= TimeSpan.Parse("23:59:59"))
-                {
-                    Events.Add(new BossEvent(bossName, startTimeUtc.TimeOfDay, category, waypoint));
-                    startTimeUtc = startTimeUtc.AddHours(happensEveryInHours);
-                }
+            int maxRuns = 24 / happensEveryInHours;
+
+            for (int i = 0; i < maxRuns; i++)
+            {
+                Events.Add(new BossEvent(bossName, startTimeUtc.TimeOfDay, category, waypoint));
+                startTimeUtc = startTimeUtc.AddHours(happensEveryInHours);
+            }
         }
 
 
@@ -211,17 +212,16 @@ namespace GW2FOX
             try
             {
                 foreach (var timing in timings)
-                    {
-                        var utcTime = ConvertToUtcFromConfigTime(timing);
-                        Events.Add(new BossEvent(bossName, utcTime.TimeOfDay, category, waypoint));
-                    }
+                {
+                    var utcTime = ConvertToUtcFromConfigTime(timing);
+                    Events.Add(new BossEvent(bossName, utcTime.TimeOfDay, category, waypoint));
+                }
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Error in AddBossEvent (multiple timings): {ex.Message}");
             }
         }
-
 
 
         private static void AddBossEvent(string bossName, string timing, string category, string waypoint = "")
@@ -236,6 +236,7 @@ namespace GW2FOX
                 Console.WriteLine($"Error in AddBossEvent (single timing): {ex.Message}");
             }
         }
+
 
         public static void UpdateBossOverlayList()
         {

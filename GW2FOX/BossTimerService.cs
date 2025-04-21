@@ -371,7 +371,7 @@ namespace GW2FOX
             return toReturn
                 .Where(bossEvent =>
                     bossEvent.TimeToShow >= GlobalVariables.CURRENT_DATE_TIME &&
-                    bossEvent.TimeToShow <= GlobalVariables.CURRENT_DATE_TIME.AddHours(4)) // z. B. 4h statt 3h
+                    bossEvent.TimeToShow <= GlobalVariables.CURRENT_DATE_TIME.AddHours(5)) 
                 .OrderBy(bossEvent => bossEvent.TimeToShow)
                 .ToList();
         }

@@ -8,24 +8,22 @@ public static class BossOverlayHelper
         var overlayItems = new ObservableCollection<BossListItem>();
 
         var items = bossRuns
-
-
-
             .Select(run =>
             {
-                Console.WriteLine($"[Overlay] {run.BossName,-25} NextRun: {run.NextRunTime:HH:mm:ss}, Now: {now:HH:mm:ss}, Diff: {(run.NextRunTime - now).TotalMinutes:F1} min");
+                // Konvertiere UTC-Zeit des Boss-Events in lokale Zeit
+                var localBossEventTime = GlobalVariables.ConvertUtcToLocal(run.NextRunTime);
 
-                var timeRemaining = run.NextRunTime - now;
+                // Berechne verbleibende Zeit bis zum Event
+                var timeRemaining = localBossEventTime - now;
                 bool isPast = timeRemaining.TotalSeconds < 0;
 
-                // Exclude events older than 15 minutes in the past or further than 4h in the future
+                // Ignoriere Events, die mehr als 15 Minuten in der Vergangenheit liegen oder mehr als 4 Stunden in der Zukunft
                 if (isPast && timeRemaining.TotalMinutes <= -15)
                     return null;
                 if (!isPast && timeRemaining.TotalHours > 4)
                     return null;
 
                 var remaining = isPast ? -timeRemaining : timeRemaining;
-
                 string formatted = isPast
                     ? "-" + remaining.ToString(@"mm\:ss")
                     : remaining.ToString(@"hh\:mm\:ss");
@@ -38,13 +36,13 @@ public static class BossOverlayHelper
                     IsPastEvent = isPast,
                     TimeRemainingFormatted = formatted,
                     SecondsRemaining = (int)(isPast ? -remaining.TotalSeconds : remaining.TotalSeconds),
-                    NextRunTime = run.NextRunTime
+                    NextRunTime = localBossEventTime // Lokale Zeit für Anzeige
                 };
             })
             .Where(item => item != null)
             .ToList();
 
-        // Sort: past (newest first), future (soonest first)
+        // Vergangene Events (absteigend) und zukünftige Events (aufsteigend) sortieren
         var past = items
             .Where(x => x.IsPastEvent)
             .OrderByDescending(x => x.SecondsRemaining);
@@ -54,7 +52,7 @@ public static class BossOverlayHelper
             .OrderBy(x => x.NextRunTime)
             .ToList();
 
-        // Detect concurrent events (within 60s of each other)
+        // Events innerhalb von 60 Sekunden markieren als gleichzeitig
         for (int i = 0; i < future.Count; i++)
         {
             var current = future[i];
@@ -66,19 +64,12 @@ public static class BossOverlayHelper
         foreach (var item in past.Concat(future))
             overlayItems.Add(item);
 
-        // DEBUG: Finale Reihenfolge ausgeben
-        Console.WriteLine("Finale Reihenfolge:");
-        foreach (var item in overlayItems)
-            Console.WriteLine($"{item.BossName,-25} {item.TimeRemainingFormatted} {(item.IsPastEvent ? "(past)" : "")}");
-
         return overlayItems;
     }
+
     public static string FormatRemainingTime(TimeSpan remaining)
     {
         int totalHours = (int)remaining.TotalHours;
         return $"{totalHours:D2}:{remaining.Minutes:D2}:{remaining.Seconds:D2}";
     }
-
-
-
 }

@@ -33,7 +33,7 @@ namespace GW2FOX
                 {
                     _scrollValue = value;
                     BossScrollViewer.ScrollToVerticalOffset(value);
-                    OnPropertyChanged(nameof(ScrollValue));   // HIER IST DER 2te FEHLER
+                    OnPropertyChanged(nameof(ScrollValue));
                 }
             }
         }
@@ -136,14 +136,8 @@ namespace GW2FOX
             try
             {
                 var now = GlobalVariables.CURRENT_DATE_TIME;
-                Console.WriteLine($"Overlay: Starte UpdateBossOverlayList()");
-                Console.WriteLine($"GlobalVariables.CURRENT_DATE_TIME: {now}");
-
                 var combinedRuns = BossTimerService.GetBossRunsForOverlay();
-                Console.WriteLine($"Overlay: combinedRuns.Count = {combinedRuns.Count}");
-
                 var newItems = BossOverlayHelper.GetBossOverlayItems(combinedRuns, now);
-                Console.WriteLine($"Overlay: newItems.Count = {newItems.Count}");
 
                 // Entferne nicht mehr vorhandene Einträge
                 for (int i = OverlayItems.Count - 1; i >= 0; i--)
@@ -197,7 +191,7 @@ namespace GW2FOX
                 if (_timeRemainingFormatted != value)
                 {
                     _timeRemainingFormatted = value;
-                    OnPropertyChanged(nameof(TimeRemainingFormatted)); // HIER IST DER ERSTE FEHLER
+                    OnPropertyChanged(nameof(TimeRemainingFormatted));
                 }
             }
         }
