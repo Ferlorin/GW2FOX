@@ -129,8 +129,9 @@ namespace GW2FOX
         {
             try
             {
+                var now = GlobalVariables.CURRENT_DATE_TIME; // <--- Zeit einmal definieren
                 var combinedRuns = BossTimerService.GetBossRunsForOverlay();
-                var newItems = BossOverlayHelper.GetBossOverlayItems(combinedRuns);
+                var newItems = BossOverlayHelper.GetBossOverlayItems(combinedRuns, now); // <--- Zeit übergeben
                 newItems = new ObservableCollection<BossListItem>(newItems.OrderBy(b => b.SecondsRemaining));
 
                 for (int i = OverlayItems.Count - 1; i >= 0; i--)

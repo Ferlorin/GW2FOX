@@ -31,6 +31,9 @@ namespace GW2FOX
         {
             try
             {
+                BossTimings.SetBossListFromConfig_Bosses(); // Wichtig
+                BossTimings.UpdateBossOverlayList();        // Erstellt initiale Items
+
                 InitializeCustomBossList();
                 if (_overlayWindow == null)
                 {
@@ -39,7 +42,7 @@ namespace GW2FOX
             }
             catch (Exception ex)
             {
-               // LogError("Initialize", ex);
+                // LogError("Initialize", ex);
             }
         }
 
@@ -93,8 +96,11 @@ namespace GW2FOX
 
         public static List<BossEventRun> GetBossRunsForOverlay()
         {
+            var selectedBosses = BossList23 ?? new List<string>();
+
             var staticBosses = BossEventGroups
-                .SelectMany(group => group.GetAllRuns());
+                .Where(group => selectedBosses.Contains(group.BossName))
+                .SelectMany(group => group.GetNextRuns());
 
             var dynamicBosses = DynamicEventManager.GetActiveBossEventRuns();
 
@@ -110,6 +116,7 @@ namespace GW2FOX
 
             return combinedBosses;
         }
+
 
 
         private static void OverlayWindow_Closed(object? sender, EventArgs e)
@@ -258,11 +265,6 @@ namespace GW2FOX
             }
         }
 
-        private static void LogError(string method, Exception ex)
-        {
-            Console.WriteLine($"Error in {method}: {ex.Message}");
-            Console.WriteLine($"Stack Trace: {ex.StackTrace}");
-        }
     }
 
     public class BossEvent

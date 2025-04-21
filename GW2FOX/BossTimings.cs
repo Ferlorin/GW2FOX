@@ -256,9 +256,11 @@ namespace GW2FOX
                 if (BossListView == null)
                     return;
 
-                var selectedBosses = BossTimings.BossList23 ?? new List<string>();
+                var now = GlobalVariables.CURRENT_DATE_TIME;
 
-                var staticBosses = BossTimings.BossEventGroups
+                var selectedBosses = BossList23 ?? new List<string>();
+
+                var staticBosses = BossEventGroups
                     .Where(group => selectedBosses.Contains(group.BossName))
                     .SelectMany(group => group.GetNextRuns());
 
@@ -266,32 +268,23 @@ namespace GW2FOX
 
                 var combinedBosses = staticBosses
                     .Concat(dynamicBosses)
-                    .OrderBy(run => run.NextRunTime)
-                    .ThenBy(run => run.Category)
                     .ToList();
+
+                var items = BossOverlayHelper.GetBossOverlayItems(combinedBosses, now); // <- Wichtig
 
                 BossListView.Dispatcher.Invoke(() =>
                 {
                     var window = OverlayWindow.GetInstance();
-
                     window.OverlayItems.Clear();
 
-                    foreach (var bossRun in combinedBosses)
+                    foreach (var item in items)
                     {
-                        var item = new BossListItem
-                        {
-                            BossName = bossRun.BossName,
-                            Waypoint = bossRun.Waypoint,
-                            NextRunTime = bossRun.NextRunTime
-                        };
-
                         item.UpdateCountdown();
                         window.OverlayItems.Add(item);
                     }
-
                 });
 
-                foreach (var boss in combinedBosses)
+                foreach (var boss in combinedBosses.OrderBy(b => b.NextRunTime))
                 {
                     Console.WriteLine($"- {boss.BossName} @ {boss.NextRunTime}");
                 }
@@ -301,6 +294,7 @@ namespace GW2FOX
                 Console.WriteLine($"Fehler beim Aktualisieren der BossOverlay-Liste: {ex.Message}");
             }
         }
+
 
 
         public static List<BossEventRun> GetCombinedBossEvents()

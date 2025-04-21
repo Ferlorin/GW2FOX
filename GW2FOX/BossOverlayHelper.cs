@@ -4,7 +4,6 @@ using System.Collections.ObjectModel;
 public static class BossOverlayHelper
 {
     public static ObservableCollection<BossListItem> GetBossOverlayItems(IEnumerable<BossEventRun> bossRuns, DateTime now)
-
     {
         var overlayItems = new ObservableCollection<BossListItem>();
 
@@ -37,11 +36,9 @@ public static class BossOverlayHelper
             .Where(item => item != null)
             .ToList();
 
-        // Sortieren: Vergangenheit zuerst, dann Zukunft aufsteigend
         var past = items.Where(x => x.IsPastEvent).OrderBy(x => x.SecondsRemaining);
         var future = items.Where(x => !x.IsPastEvent).OrderBy(x => x.NextRunTime).ToList();
 
-        // Kursive Markierung für gleichzeitige Events (innerhalb 1 Minute)
         for (int i = 0; i < future.Count; i++)
         {
             var current = future[i];
@@ -55,7 +52,5 @@ public static class BossOverlayHelper
 
         return overlayItems;
     }
-
-
 
 }
