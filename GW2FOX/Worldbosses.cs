@@ -233,6 +233,7 @@ namespace GW2FOX
             BringGw2ToFront();
         }
 
+
         private void Squadinfos_Click(object sender, EventArgs e)
         {
             // Copy the text from Leyline60 TextBox to the clipboard
@@ -256,6 +257,101 @@ namespace GW2FOX
 
             // Bring the Gw2-64.exe window to the foreground
             BringGw2ToFront();
+        }
+
+        private void button66_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetText(SearchResults.Text);
+            BringGw2ToFront();
+        }
+
+        private void button68_Click(object sender, EventArgs e)
+        {
+            ShowAndHideForm(new LLA());
+        }
+
+        private void button65_Click(object sender, EventArgs e)
+        {
+            ShowAndHideForm(new CaptainRotbeard());
+        }
+
+        private void button63_Click(object sender, EventArgs e)
+        {
+            ShowAndHideForm(new DredgeComissar());
+        }
+
+        private void button42_Click(object sender, EventArgs e)
+        {
+            ShowAndHideForm(new BrandedGenerals());
+        }
+
+        private void button31_Click(object sender, EventArgs e)
+        {
+            ShowAndHideForm(new GatesOfArah());
+        }
+
+        private void button30_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetText(Runinfo.Text);
+            BringGw2ToFront();
+        }
+
+        private void button29_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetText(Squadinfo.Text);
+            BringGw2ToFront();
+        }
+
+        private void button28_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetText(Guild.Text);
+            BringGw2ToFront();
+        }
+
+        private void button27_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetText(Welcome.Text);
+            BringGw2ToFront();
+        }
+
+        private void EyeButton_Click(object sender, EventArgs e)
+        {
+            ShowAndHideForm(new Eye());
+        }
+
+        private void DwanyButton_Click(object sender, EventArgs e)
+        {
+            ShowAndHideForm(new Dwayna());
+        }
+
+        private void LyssaButton_Click(object sender, EventArgs e)
+        {
+            ShowAndHideForm(new Lyssa());
+        }
+
+        private void OgresButton_Click(object sender, EventArgs e)
+        {
+            ShowAndHideForm(new Ogrewars());
+        }
+
+        private void RhendakButton_Click(object sender, EventArgs e)
+        {
+            ShowAndHideForm(new Rhendak());
+        }
+
+        private void CommissarButton_Click(object sender, EventArgs e)
+        {
+            ShowAndHideForm(new DredgeComissar());
+        }
+
+        private void GeneralsButton_Click(object sender, EventArgs e)
+        {
+            ShowAndHideForm(new BrandedGenerals());
+        }
+
+        private void ArahButton_Click(object sender, EventArgs e)
+        {
+            ShowAndHideForm(new GatesOfArah());
         }
 
         private void MawsOfTorment_Click(object sender, EventArgs e)
@@ -2010,110 +2106,6 @@ namespace GW2FOX
             {
                 MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
-
-
-        private void button66_Click(object sender, EventArgs e)
-        {
-            Clipboard.SetText(SearchResults.Text);
-            BringGw2ToFront();
-        }
-
-        private void button68_Click(object sender, EventArgs e)
-        {
-            ShowAndHideForm(new LLA());
-        }
-
-        private void button65_Click(object sender, EventArgs e)
-        {
-            ShowAndHideForm(new CaptainRotbeard());
-        }
-
-        private void button63_Click(object sender, EventArgs e)
-        {
-            ShowAndHideForm(new DredgeComissar());
-        }
-
-        private void button42_Click(object sender, EventArgs e)
-        {
-            ShowAndHideForm(new BrandedGenerals());
-        }
-
-        private void button31_Click(object sender, EventArgs e)
-        {
-            ShowAndHideForm(new GatesOfArah());
-        }
-
-        private void button30_Click(object sender, EventArgs e)
-        {
-            Clipboard.SetText(Runinfo.Text);
-            BringGw2ToFront();
-        }
-
-        private void button29_Click(object sender, EventArgs e)
-        {
-            Clipboard.SetText(Squadinfo.Text);
-            BringGw2ToFront();
-        }
-
-        private void button28_Click(object sender, EventArgs e)
-        {
-            Clipboard.SetText(Guild.Text);
-            BringGw2ToFront();
-        }
-
-        private void button27_Click(object sender, EventArgs e)
-        {
-            Clipboard.SetText(Welcome.Text);
-            BringGw2ToFront();
-        }
-
-        private void EyeButton_Click(object sender, EventArgs e)
-        {
-            DynamicEventManager.Trigger("The Eye of Zhaitan");
-            BossTimerService.Update();
-        }
-
-        private void DwanyButton_Click(object sender, EventArgs e)
-        {
-            DynamicEventManager.Trigger("Statue of Dwanya");
-            BossTimerService.Update();
-        }
-
-        private void LyssaButton_Click(object sender, EventArgs e)
-        {
-            DynamicEventManager.Trigger("Priestess of Lyssa");
-            BossTimerService.Update();
-        }
-
-        private void OgresButton_Click(object sender, EventArgs e)
-        {
-            DynamicEventManager.Trigger("Ogrewars");
-            BossTimerService.Update();
-        }
-
-        private void RhendakButton_Click(object sender, EventArgs e)
-        {
-            DynamicEventManager.Trigger("Rhendak");
-            BossTimerService.Update();
-        }
-
-        private void CommissarButton_Click(object sender, EventArgs e)
-        {
-            DynamicEventManager.Trigger("Dredge Commissar");
-            BossTimerService.Update();
-        }
-
-        private void GeneralsButton_Click(object sender, EventArgs e)
-        {
-            DynamicEventManager.Trigger("Branded Generals");
-            BossTimerService.Update();
-        }
-
-        private void ArahButton_Click(object sender, EventArgs e)
-        {
-            DynamicEventManager.Trigger("Gates of Arah");
-            BossTimerService.Update();
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
