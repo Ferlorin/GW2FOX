@@ -180,11 +180,7 @@ namespace GW2FOX
 
         private void button5_Click(object sender, EventArgs e)
         {
-            if (_overlayWindow == null)
-            {
-                _overlayWindow = new OverlayWindow();
-                _overlayWindow.Closed += (s, args) => _overlayWindow = null; // Fenster löschen bei Schließen
-            }
+            _overlayWindow = OverlayWindow.GetInstance(); // Hole Singleton
 
             if (_overlayWindow.IsVisible)
             {
@@ -193,7 +189,9 @@ namespace GW2FOX
             else
             {
                 _overlayWindow.Show();
+                _overlayWindow.Activate(); // Fokus und bringt es in den Vordergrund
             }
         }
+
     }
 }
