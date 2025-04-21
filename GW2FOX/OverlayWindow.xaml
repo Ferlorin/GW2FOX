@@ -17,6 +17,7 @@
         <local:StrikeConverter x:Key="StrikeConverter"/>
         <local:PastEventColorConverter x:Key="PastEventColorConverter"/>
         <local:ItalicConverter x:Key="ItalicConverter"/>
+        <DropShadowEffect x:Key="TextShadow" Color="Black" BlurRadius="0" ShadowDepth="0" Opacity="1"/>
         <ControlTemplate x:Key="EmptyButtonTemplate" TargetType="RepeatButton">
             <Grid/>
         </ControlTemplate>
@@ -89,42 +90,56 @@
                                   Padding="0"
                                   ScrollViewer.VerticalScrollBarVisibility="Disabled">
 
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <Setter Property="Background" Value="Transparent"/>
+                                    <Setter Property="Padding" Value="2"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#22000000"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </ListView.ItemContainerStyle>
+
                             <ListView.ItemTemplate>
                                 <DataTemplate>
-                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Background="Transparent">
+                                    <Grid Opacity="{Binding Opacity}" Margin="2,2,2,2">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="20"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
 
                                         <!-- Waypoint -->
-                                        <Image Source="{x:Static local:BossListItem.WaypointImage}"
-                                               Width="20" Height="20" Margin="0,0,6,0"
+                                        <Image Grid.Column="0"
+                                               Source="{x:Static local:BossListItem.WaypointImage}"
+                                               Width="20" Height="20"
+                                               Margin="0,0,6,0"
                                                Cursor="Hand"
                                                MouseLeftButtonDown="Waypoint_MouseLeftButtonDown"
                                                VerticalAlignment="Center"/>
 
                                         <!-- Bossname -->
-                                        <TextBlock Text="{Binding BossName}"
+                                        <TextBlock Grid.Column="1"
+                                                   Text="{Binding BossName}"
                                                    Foreground="{Binding CategoryBrush}"
                                                    FontStyle="{Binding IsConcurrentEvent, Converter={StaticResource ItalicConverter}}"
                                                    TextDecorations="{Binding IsPastEvent, Converter={StaticResource StrikeConverter}}"
                                                    VerticalAlignment="Center"
-                                                   Width="141"
-                                                   TextTrimming="CharacterEllipsis">
-                                            <TextBlock.Effect>
-                                                <DropShadowEffect Color="Black" BlurRadius="0" ShadowDepth="0" Opacity="1"/>
-                                            </TextBlock.Effect>
-                                        </TextBlock>
+                                                   TextTrimming="CharacterEllipsis"
+                                                   Effect="{StaticResource TextShadow}"/>
 
                                         <!-- Zeit -->
-                                        <TextBlock Text="{Binding TimeRemainingFormatted}"
+                                        <TextBlock Grid.Column="2"
+                                                   Text="{Binding TimeRemainingFormatted}"
                                                    Foreground="{Binding CategoryBrush}"
                                                    FontStyle="{Binding IsConcurrentEvent, Converter={StaticResource ItalicConverter}}"
                                                    TextDecorations="{Binding IsPastEvent, Converter={StaticResource StrikeConverter}}"
                                                    VerticalAlignment="Center"
-                                                   Margin="1,0,0,0">
-                                            <TextBlock.Effect>
-                                                <DropShadowEffect Color="Black" BlurRadius="0" ShadowDepth="0" Opacity="1"/>
-                                            </TextBlock.Effect>
-                                        </TextBlock>
-                                    </StackPanel>
+                                                   Margin="8,0,0,0"
+                                                   Effect="{StaticResource TextShadow}"/>
+                                    </Grid>
                                 </DataTemplate>
                             </ListView.ItemTemplate>
                         </ListView>

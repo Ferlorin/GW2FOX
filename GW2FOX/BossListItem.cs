@@ -162,6 +162,7 @@ namespace GW2FOX
        "SotO" => System.Windows.Media.Brushes.Yellow,
        "LWS2" => System.Windows.Media.Brushes.LightYellow,
        "LWS3" => System.Windows.Media.Brushes.ForestGreen,
+       "Desert" => System.Windows.Media.Brushes.DeepPink,
        _ => System.Windows.Media.Brushes.White
    };
 

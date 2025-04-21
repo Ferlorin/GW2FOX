@@ -12,12 +12,15 @@ public static class BossOverlayHelper
             {
                 var timeRemaining = run.NextRunTime - now;
                 bool isPast = timeRemaining.TotalSeconds < 0;
+
+                // Exclude events older than 15 minutes in the past or further than 4h in the future
                 if (isPast && timeRemaining.TotalMinutes <= -15)
                     return null;
                 if (!isPast && timeRemaining.TotalHours > 4)
                     return null;
 
                 var remaining = isPast ? -timeRemaining : timeRemaining;
+
                 string formatted = isPast
                     ? "-" + remaining.ToString(@"mm\:ss")
                     : remaining.ToString(@"hh\:mm\:ss");
@@ -36,9 +39,17 @@ public static class BossOverlayHelper
             .Where(item => item != null)
             .ToList();
 
-        var past = items.Where(x => x.IsPastEvent).OrderBy(x => x.SecondsRemaining);
-        var future = items.Where(x => !x.IsPastEvent).OrderBy(x => x.NextRunTime).ToList();
+        // Sort: past (newest first), future (soonest first)
+        var past = items
+            .Where(x => x.IsPastEvent)
+            .OrderByDescending(x => x.SecondsRemaining);
 
+        var future = items
+            .Where(x => !x.IsPastEvent)
+            .OrderBy(x => x.NextRunTime)
+            .ToList();
+
+        // Detect concurrent events (within 60s of each other)
         for (int i = 0; i < future.Count; i++)
         {
             var current = future[i];
@@ -52,6 +63,7 @@ public static class BossOverlayHelper
 
         return overlayItems;
     }
+
 
 
 }

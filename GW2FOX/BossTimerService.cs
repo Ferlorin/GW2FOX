@@ -333,20 +333,6 @@ namespace GW2FOX
             $"{(int)TimeRemaining.TotalHours:D2}:{TimeRemaining.Minutes:D2}:{TimeRemaining.Seconds:D2}";
 
 
-
-        public System.Windows.Media.Brush CategoryBrush =>
-     Category switch
-     {
-         "Maguuma" => System.Windows.Media.Brushes.LimeGreen,
-         "Desert" => System.Windows.Media.Brushes.DeepPink,
-         "WBs" => System.Windows.Media.Brushes.WhiteSmoke,
-         "Ice" => System.Windows.Media.Brushes.DeepSkyBlue,
-         "Cantha" => System.Windows.Media.Brushes.Blue,
-         "SotO" => System.Windows.Media.Brushes.Yellow,
-         "LWS2" => System.Windows.Media.Brushes.LightYellow,
-         "LWS3" => System.Windows.Media.Brushes.ForestGreen,
-         _ => System.Windows.Media.Brushes.White
-     };
     }
 
     public class BossEventGroup
