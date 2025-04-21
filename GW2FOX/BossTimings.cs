@@ -34,8 +34,8 @@ namespace GW2FOX
 
         static BossTimings()
         {
-            SetBossListFromConfig_Bosses();
             Init();
+            SetBossListFromConfig_Bosses();
 
             AddBossEvent("The frozen Maw", "01:15:00", 2, "WBs", "[&BMIDAAA=]");
             AddBossEvent("FireShaman", "01:10:00", 2, "WBs", "[&BO4BAAA=]");
@@ -283,5 +283,7 @@ namespace GW2FOX
 
             listView.ItemsSource = items;
         }
+        
+
     }
 }

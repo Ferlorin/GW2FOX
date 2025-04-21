@@ -207,7 +207,9 @@ namespace GW2FOX
                         foreach (var boss in allBosses)
                         {
                             BossListItems.Add(boss);
+                           
                         }
+                        _overlayWindow?.RefreshBossList();
                     });
 
                     Console.WriteLine("Boss list updated.");

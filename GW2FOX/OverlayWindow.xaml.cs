@@ -15,7 +15,8 @@ namespace GW2FOX
 {
     public partial class OverlayWindow : Window
     {
-        private System.Windows.Controls.ListView myListView;
+        public System.Windows.Controls.ListView myListView;
+        public System.Windows.Controls.ListView ListViewControl => BossListView;
         private static OverlayWindow? _instance;
         private DispatcherTimer bossTimer;
 
@@ -97,6 +98,12 @@ namespace GW2FOX
         {
             // Hier könnten weitere Interaktionen mit der Liste eingefügt werden
         }
+
+        public void RefreshBossList()
+        {
+            BossListView.Items.Refresh();
+        }
+
         protected override void OnClosed(EventArgs e)
         {
             _instance = null;

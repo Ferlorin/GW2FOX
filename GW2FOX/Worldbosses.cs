@@ -176,6 +176,91 @@ namespace GW2FOX
             ShowAndHideForm(new Drakkar());
         }
 
+        private void Effigy_Click(object sender, EventArgs e)
+        {
+            ShowAndHideForm(new Effigy());
+        }
+
+        private void DoomloreShrine_Click(object sender, EventArgs e)
+        {
+            ShowAndHideForm(new DoomloreShrine());
+        }
+
+        private void StormsOfWinter_Click(object sender, EventArgs e)
+        {
+            ShowAndHideForm(new StormsOfWinter());
+        }
+
+        private void DefendJorasKeep_Click(object sender, EventArgs e)
+        {
+            ShowAndHideForm(new DefendJorasKeep());
+        }
+
+        private void Sandstorm_Click(object sender, EventArgs e)
+        {
+            ShowAndHideForm(new Sandstorm());
+        }
+
+        private void SaidrasHaven_Click(object sender, EventArgs e)
+        {
+            ShowAndHideForm(new SaidrasHaven());
+        }
+
+        private void NewLoamhurst_Click(object sender, EventArgs e)
+        {
+            ShowAndHideForm(new NewLoamhurst());
+        }
+
+        private void NoransHomestead_Click(object sender, EventArgs e)
+        {
+            ShowAndHideForm(new NoransHomestead());
+        }
+
+        private void AetherbladeAssault_Click(object sender, EventArgs e)
+        {
+            ShowAndHideForm(new AetherbladeAssault());
+        }
+
+        private void KainengBlackout_Click(object sender, EventArgs e)
+        {
+            ShowAndHideForm(new KainengBlackout());
+        }
+
+        private void GangWar_Click(object sender, EventArgs e)
+        {
+            ShowAndHideForm(new GangWar());
+        }
+
+        private void Aspenwood_Click(object sender, EventArgs e)
+        {
+            ShowAndHideForm(new Aspenwood());
+        }
+
+        private void JadeSea_Click(object sender, EventArgs e)
+        {
+            ShowAndHideForm(new JadeSea());
+        }
+
+        private void WizardsTower_Click(object sender, EventArgs e)
+        {
+            ShowAndHideForm(new WizardsTower());
+        }
+
+        private void FlyByNight_Click(object sender, EventArgs e)
+        {
+            ShowAndHideForm(new FlyByNight());
+        }
+
+        private void DefenseOfAmnytas_Click(object sender, EventArgs e)
+        {
+            ShowAndHideForm(new DefenseOfAmnytas());
+        }
+
+        private void Convergences_Click(object sender, EventArgs e)
+        {
+            ShowAndHideForm(new Convergences());
+        }
+
         private void Eye_Click(object sender, EventArgs e)
         {
             ShowAndHideForm(new Eye());
@@ -1810,91 +1895,6 @@ namespace GW2FOX
             }
         }
 
-        private void Effigy_Click(object sender, EventArgs e)
-        {
-            ShowAndHideForm(new Effigy());
-        }
-
-        private void DoomloreShrine_Click(object sender, EventArgs e)
-        {
-            ShowAndHideForm(new DoomloreShrine());
-        }
-
-        private void StormsOfWinter_Click(object sender, EventArgs e)
-        {
-            ShowAndHideForm(new StormsOfWinter());
-        }
-
-        private void DefendJorasKeep_Click(object sender, EventArgs e)
-        {
-            ShowAndHideForm(new DefendJorasKeep());
-        }
-
-        private void Sandstorm_Click(object sender, EventArgs e)
-        {
-            ShowAndHideForm(new Sandstorm());
-        }
-
-        private void SaidrasHaven_Click(object sender, EventArgs e)
-        {
-            ShowAndHideForm(new SaidrasHaven());
-        }
-
-        private void NewLoamhurst_Click(object sender, EventArgs e)
-        {
-            ShowAndHideForm(new NewLoamhurst());
-        }
-
-        private void NoransHomestead_Click(object sender, EventArgs e)
-        {
-            ShowAndHideForm(new NoransHomestead());
-        }
-
-        private void AetherbladeAssault_Click(object sender, EventArgs e)
-        {
-            ShowAndHideForm(new AetherbladeAssault());
-        }
-
-        private void KainengBlackout_Click(object sender, EventArgs e)
-        {
-            ShowAndHideForm(new KainengBlackout());
-        }
-
-        private void GangWar_Click(object sender, EventArgs e)
-        {
-            ShowAndHideForm(new GangWar());
-        }
-
-        private void Aspenwood_Click(object sender, EventArgs e)
-        {
-            ShowAndHideForm(new Aspenwood());
-        }
-
-        private void JadeSea_Click(object sender, EventArgs e)
-        {
-            ShowAndHideForm(new JadeSea());
-        }
-
-        private void WizardsTower_Click(object sender, EventArgs e)
-        {
-            ShowAndHideForm(new WizardsTower());
-        }
-
-        private void FlyByNight_Click(object sender, EventArgs e)
-        {
-            ShowAndHideForm(new FlyByNight());
-        }
-
-        private void DefenseOfAmnytas_Click(object sender, EventArgs e)
-        {
-            ShowAndHideForm(new DefenseOfAmnytas());
-        }
-
-        private void Convergences_Click(object sender, EventArgs e)
-        {
-            ShowAndHideForm(new Convergences());
-        }
-
         private void FidosSpecial_Click(object sender, EventArgs e)
         {
             try
@@ -2171,9 +2171,12 @@ namespace GW2FOX
         public static void UpdateBossUiBosses()
         {
             BossTimings.SetBossListFromConfig_Bosses();
-            if (CustomBossList != null)
+
+            var overlay = OverlayWindow.GetInstance();
+            if (overlay != null)
             {
-                BossTimerService._bossTimer?.UpdateBossList();
+                BossTimings.UpdateBossList(overlay.ListViewControl);
+                overlay.RefreshBossList(); // Optional, wenn nötig
             }
         }
 
