@@ -197,46 +197,46 @@ namespace GW2FOX
         private static void AddBossEvent(string bossName, string firstTiming, int happensEveryInHours, string category,
             string waypoint = "")
         {
-            var timeSpan = TimeSpan.Parse(firstTiming);
-            while (timeSpan <= TimeSpan.Parse("23:59:59"))
-            {
-                Events.Add(new BossEvent(bossName, timeSpan, category, waypoint));
-                timeSpan = timeSpan.Add(TimeSpan.FromHours(happensEveryInHours));
-            }
+            var startTimeUtc = ConvertToUtcFromConfigTime(firstTiming);
+                while (startTimeUtc.TimeOfDay <= TimeSpan.Parse("23:59:59"))
+                {
+                    Events.Add(new BossEvent(bossName, startTimeUtc.TimeOfDay, category, waypoint));
+                    startTimeUtc = startTimeUtc.AddHours(happensEveryInHours);
+                }
         }
 
 
         private static void AddBossEvent(string bossName, string[] timings, string category, string waypoint = "")
         {
             try
-            {;
-
+            {
                 foreach (var timing in timings)
-                {
-                    Events.Add(new BossEvent(bossName, timing, category, waypoint));
-                }
+                    {
+                        var utcTime = ConvertToUtcFromConfigTime(timing);
+                        Events.Add(new BossEvent(bossName, utcTime.TimeOfDay, category, waypoint));
+                    }
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Error in AddBossEvent (multiple timings): {ex.Message}");
-              
             }
         }
+
 
 
         private static void AddBossEvent(string bossName, string timing, string category, string waypoint = "")
         {
             try
             {
-
-                Events.Add(new BossEvent(bossName, timing, category, waypoint));
-;
+                var utcTime = ConvertToUtcFromConfigTime(timing);
+                Events.Add(new BossEvent(bossName, utcTime.TimeOfDay, category, waypoint));
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Error in AddBossEvent (single timing): {ex.Message}");
             }
         }
+
         public static void UpdateBossOverlayList()
         {
             try
@@ -286,12 +286,26 @@ namespace GW2FOX
         }
 
 
-
         public static List<BossEventRun> GetCombinedBossEvents()
         {
             return StaticBossEvents
                 .Concat(DynamicBossEvents)
                 .ToList();
+        }
+
+        private static DateTime ConvertToUtcFromConfigTime(string time)
+        {
+            var today = GlobalVariables.CURRENT_DATE_TIME.Date;
+            var timeParts = TimeSpan.Parse(time);
+
+            var localUnspecified = new DateTime(
+                today.Year, today.Month, today.Day,
+                timeParts.Hours, timeParts.Minutes, timeParts.Seconds,
+                DateTimeKind.Unspecified
+            );
+
+            var utcTime = TimeZoneInfo.ConvertTimeToUtc(localUnspecified, GlobalVariables.TIMEZONE_TO_USE);
+            return utcTime;
         }
 
 
