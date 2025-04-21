@@ -1,53 +1,48 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using GW2FOX;
 using System.Collections.ObjectModel;
 
-namespace GW2FOX
+public static class BossOverlayHelper
 {
-    public static class BossOverlayHelper
+    public static ObservableCollection<BossListItem> GetBossOverlayItems(IEnumerable<BossEventRun> bossRuns)
     {
-        public static ObservableCollection<BossListItem> GetBossOverlayItems(List<BossEventRun> combinedBosses)
+        var overlayItems = new ObservableCollection<BossListItem>();
+        var now = DateTime.UtcNow;
+
+        foreach (var run in bossRuns)
         {
-            var overlayItems = new ObservableCollection<BossListItem>();
-            var now = DateTime.UtcNow;
+            TimeSpan timeRemaining = run.NextRunTime - now;
+            bool isPast = timeRemaining.TotalSeconds < 0;
 
-            foreach (var run in combinedBosses)
+            if (isPast)
             {
-                TimeSpan timeRemaining = run.NextRunTime - now;
-                bool isPast = timeRemaining.TotalSeconds < 0;
+                if (timeRemaining.TotalMinutes <= -15)
+                    continue;
 
-                if (isPast)
-                {
-                    // Vergangene Events nur anzeigen, wenn max. 15 Minuten her
-                    if (timeRemaining.TotalMinutes <= -15)
-                        continue;
-
-                    timeRemaining = -timeRemaining; // Absoluten Wert berechnen
-                }
-                else
-                {
-                    // Zukünftige Events nur anzeigen, wenn sie in den nächsten 4 Stunden sind
-                    if (timeRemaining.TotalHours > 4)
-                        continue;
-                }
-
-                string formattedTime = isPast
-                    ? timeRemaining.ToString(@"mm\:ss")
-                    : timeRemaining.ToString(@"hh\:mm\:ss");
-
-                overlayItems.Add(new BossListItem
-                {
-                    BossName = run.BossName,
-                    Waypoint = run.Waypoint,
-                    IsPastEvent = isPast,
-                    TimeRemainingFormatted = isPast ? "-" + formattedTime : formattedTime,
-                    SecondsRemaining = (int)(isPast ? -timeRemaining.TotalSeconds : timeRemaining.TotalSeconds)
-                });
+                timeRemaining = -timeRemaining;
+            }
+            else
+            {
+                if (timeRemaining.TotalHours > 4)
+                    continue;
             }
 
-            return overlayItems;
+            string formattedTime = isPast
+                ? timeRemaining.ToString(@"mm\:ss")
+                : timeRemaining.ToString(@"hh\:mm\:ss");
+
+            overlayItems.Add(new BossListItem
+            {
+                BossName = run.BossName,
+                Waypoint = run.Waypoint,
+                IsPastEvent = isPast,
+                TimeRemainingFormatted = isPast ? "-" + formattedTime : formattedTime,
+                SecondsRemaining = (int)(isPast ? -timeRemaining.TotalSeconds : timeRemaining.TotalSeconds),
+                NextRunTime = run.NextRunTime // falls du das für Updates brauchst
+            });
         }
+
+        return overlayItems;
     }
+
+
 }
-
-
