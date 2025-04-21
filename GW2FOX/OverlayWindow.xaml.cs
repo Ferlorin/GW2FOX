@@ -155,9 +155,16 @@ namespace GW2FOX
         {
             try
             {
-                var now = GlobalVariables.CURRENT_DATE_TIME; // <--- Zeit einmal definieren
+                var now = GlobalVariables.CURRENT_DATE_TIME;
+                Console.WriteLine($"Overlay: Starte UpdateBossOverlayList()");
+                Console.WriteLine($"GlobalVariables.CURRENT_DATE_TIME: {now}");
+
                 var combinedRuns = BossTimerService.GetBossRunsForOverlay();
-                var newItems = BossOverlayHelper.GetBossOverlayItems(combinedRuns, now); // <--- Zeit übergeben
+                Console.WriteLine($"Overlay: combinedRuns.Count = {combinedRuns.Count}");
+
+                var newItems = BossOverlayHelper.GetBossOverlayItems(combinedRuns, now);
+                Console.WriteLine($"Overlay: newItems.Count = {newItems.Count}");
+
                 newItems = new ObservableCollection<BossListItem>(newItems.OrderBy(b => b.SecondsRemaining));
 
                 for (int i = OverlayItems.Count - 1; i >= 0; i--)
@@ -190,6 +197,7 @@ namespace GW2FOX
                 Console.WriteLine($"Fehler beim Aktualisieren der BossOverlay-Liste: {ex.Message}");
             }
         }
+
 
 
         private string _timeRemainingFormatted;

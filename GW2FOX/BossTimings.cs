@@ -140,9 +140,6 @@ namespace GW2FOX
         {
             try
             {
-                BossEventGroups.Clear();
-                Events.Clear();
-
                 var lines = File.ReadAllLines(GlobalVariables.FILE_PATH);
 
                 var bossIndex = -1;
@@ -187,7 +184,6 @@ namespace GW2FOX
 
                 BossList23 = newBossList;
 
-                // 👇 Diese Zeilen MÜSSEN innerhalb des try-Blocks liegen
                 UpdateBossOverlayList();
             }
             catch (Exception ex)

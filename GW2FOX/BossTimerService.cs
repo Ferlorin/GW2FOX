@@ -217,7 +217,7 @@ namespace GW2FOX
                 try
                 {
                     var staticBosses = BossEventGroups
-                        .SelectMany(group => group.GetNextRuns());
+                        .SelectMany(group => group.GetAllRuns());
 
                     var dynamicBosses = DynamicEventManager.GetActiveBossEventRuns();
 
