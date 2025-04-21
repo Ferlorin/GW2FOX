@@ -37,7 +37,6 @@ namespace GW2FOX
             bossCheckBoxMap = new Dictionary<string, CheckBox>
         {
         { "LLA Timberline", LLA },
-        { "FireShaman", Shaman },
         { "LLA Iron Marches", LLA },
         { "LLA Gendarran", LLA },
         { "The frozen Maw", Maw },
@@ -88,6 +87,7 @@ namespace GW2FOX
         { "Fly by Night", Flybynigtht },
         { "Defense of Amnytas", Amnytas },
         { "Convergences", Convergence },
+        { "FireShaman", FireShaman },
         };
         }
 
@@ -401,42 +401,50 @@ namespace GW2FOX
 
         private void EyeButton_Click(object sender, EventArgs e)
         {
-            ShowAndHideForm(new Eye());
+            DynamicEventManager.Trigger("The Eye of Zhaitan");
+            BossTimerService.Update();
         }
 
         private void DwanyButton_Click(object sender, EventArgs e)
         {
-            ShowAndHideForm(new Dwayna());
+            DynamicEventManager.Trigger("Statue of Dwanya");
+            BossTimerService.Update();
         }
 
         private void LyssaButton_Click(object sender, EventArgs e)
         {
-            ShowAndHideForm(new Lyssa());
+            DynamicEventManager.Trigger("Priestess of Lyssa");
+            BossTimerService.Update();
         }
 
         private void OgresButton_Click(object sender, EventArgs e)
         {
-            ShowAndHideForm(new Ogrewars());
+            DynamicEventManager.Trigger("Ogrewars");
+            BossTimerService.Update();
         }
 
         private void RhendakButton_Click(object sender, EventArgs e)
         {
-            ShowAndHideForm(new Rhendak());
+            DynamicEventManager.Trigger("Rhendak");
+            BossTimerService.Update();
         }
 
         private void CommissarButton_Click(object sender, EventArgs e)
         {
-            ShowAndHideForm(new DredgeComissar());
+            DynamicEventManager.Trigger("Dredge Commissar");
+            BossTimerService.Update();
         }
 
         private void GeneralsButton_Click(object sender, EventArgs e)
         {
-            ShowAndHideForm(new BrandedGenerals());
+            DynamicEventManager.Trigger("Branded Generals");
+            BossTimerService.Update();
         }
 
         private void ArahButton_Click(object sender, EventArgs e)
         {
-            ShowAndHideForm(new GatesOfArah());
+            DynamicEventManager.Trigger("Gates of Arah");
+            BossTimerService.Update();
         }
 
         private void MawsOfTorment_Click(object sender, EventArgs e)
@@ -2114,7 +2122,7 @@ namespace GW2FOX
 
 
 
-            if (Shaman.Checked)
+            if (FireShaman.Checked)
             {
                 SaveBossNameToConfig(bossName);
             }
