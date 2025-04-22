@@ -22,7 +22,7 @@ namespace GW2FOX
             
             bossCheckBoxMap = new Dictionary<string, CheckBox>();
             InitializeBossCheckBoxMap();
-            BossTimerService.UpdateBossUiBosses();
+            UpdateBossUiBosses();
             LoadConfigText(Runinfo, Squadinfo, Guild, Welcome, Symbols);
 
             Load += Worldbosses_Load_1;
@@ -1625,6 +1625,39 @@ namespace GW2FOX
                 DateTimeKind.Utc
             );
         }
+
+        private void UpdateBossUiBosses()
+        {
+            if (!File.Exists("bosses_config.json"))
+                return;
+
+            try
+            {
+                var json = File.ReadAllText("bosses_config.json");
+                var config = JsonConvert.DeserializeObject<BossConfig>(json);
+
+                if (config?.Bosses != null)
+                {
+                    var selectedBossNames = config.Bosses.Select(b => b.Name).ToHashSet(StringComparer.OrdinalIgnoreCase);
+
+                    foreach (var entry in bossCheckBoxMap)
+                    {
+                        var checkBox = entry.Value;
+                        if (checkBox != null)
+                        {
+                            checkBox.Checked = selectedBossNames.Contains(entry.Key);
+                            checkBox.ForeColor = checkBox.Checked ? System.Drawing.Color.White : System.Drawing.Color.Gray;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Fehler beim Laden der Boss-Auswahl: {ex.Message}", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+
     }
 }
 

@@ -69,6 +69,8 @@ namespace GW2FOX
             return overlayItems;
         }
 
+
+
         public static List<BossEventRun> GetBossRunsForOverlay()
         {
             var selectedBosses = BossTimings.BossList23 ?? new List<string>();
