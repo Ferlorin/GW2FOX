@@ -1526,19 +1526,6 @@ namespace GW2FOX
             }
         }
 
-        private void ClearAll_Click(object? sender, EventArgs e)
-        {
-            foreach (var checkBox in bossCheckBoxMap.Values)
-            {
-                checkBox.Checked = false;
-                checkBox.Invalidate();
-            }
-
-            var config = LoadBossConfig();
-            config.Bosses.Clear();
-            SaveBossConfig(config);
-        }
-
 
         private void LoadBossGroup(string groupName)
         {
@@ -1657,7 +1644,181 @@ namespace GW2FOX
             }
         }
 
+        private void FidosSpecial_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                LoadBossGroup("Fido");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Fehler beim Laden der Fido-Gruppe: {ex.Message}", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
 
+
+
+        private void World_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                LoadBossGroup("World");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Fehler beim Laden der World-Gruppe: {ex.Message}", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+
+        private void ClearAll_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                foreach (var checkBox in bossCheckBoxMap.Values)
+                {
+                    checkBox.Checked = false;
+                    checkBox.Invalidate();
+                }
+
+                var config = LoadBossConfig();
+                config.Bosses.Clear();
+                SaveBossConfig(config);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Fehler beim Deaktivieren aller Bosse: {ex.Message}", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+
+        private void ShowAll_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                CheckAllBossCheckboxes();
+
+                var allBosses = BossEventGroups.Select(g => g.BossName).ToArray();
+                CheckBossCheckboxes(allBosses);
+
+                var config = LoadBossConfig();
+                config.Bosses = allBosses
+                    .Distinct(StringComparer.OrdinalIgnoreCase)
+                    .Select(name => new Boss
+                    {
+                        Name = name,
+                        Timings = new List<string> { "00:00:00" },
+                        Category = "WBs",
+                        Waypoint = ""
+                    }).ToList();
+
+                SaveBossConfig(config);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Fehler beim Laden aller Bosse: {ex.Message}", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+
+        private void button67_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Anzahl der Bosse aus dem Textfeld entnehmen (ScheduleTextBox)
+                if (int.TryParse(Quantity.Text, out int numberOfBosses) && numberOfBosses > 0)
+                {
+                    // Hier die Liste der kommenden Bosse laden (bereits vorhandene Methode)
+                    List<string> bossNamesFromConfig = BossList23;
+
+                    var bossEventGroups = BossEventGroups
+                        .Where(bossEventGroup => bossNamesFromConfig.Contains(bossEventGroup.BossName))
+                        .ToList();
+
+                    var allBosses = bossEventGroups
+                        .SelectMany(bossEventGroup => bossEventGroup.GetNextRuns())
+                        .ToList();
+
+                    // Sortierung nach der Zeit des nächsten Bosskampfs
+                    allBosses.Sort((bossEvent1, bossEvent2) =>
+                    {
+                        return bossEvent1.NextRunTime.CompareTo(bossEvent2.NextRunTime);
+                    });
+
+                    // Bossnamen extrahieren (bis zur gewünschten Anzahl)
+                    var bossNames = allBosses.Take(numberOfBosses).Select(bossEvent => bossEvent.BossName).ToList();
+
+                    // Bossnamen durch Kommas getrennt
+                    string bossNamesString = string.Join("," + Environment.NewLine, bossNames);
+
+                    // Die Bossnamen in die Zwischenablage kopieren
+                    Clipboard.SetText(bossNamesString);
+
+                    // Bossnamen in ResultTextBox anzeigen
+                    SearchResults.Text = bossNamesString;
+                }
+                else
+                {
+                    MessageBox.Show("A Number please!.", "Do you know the meaning of a NUMBER, try 10!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            string bossName = "FireShaman";
+
+
+
+            if (FireShaman.Checked)
+            {
+                SaveBossNameToConfig(bossName);
+            }
+            else
+            {
+                RemoveBossNameFromConfig(bossName);
+            }
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Application.Restart();
+        }
+
+
+
+        private void Mixed_Click_1(object sender, EventArgs e)
+        {
+            try
+            {
+                LoadBossGroup("Mixed");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Fehler beim Laden der Mixed-Gruppe: {ex.Message}", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+
+
+        private void Meta_Click_1(object sender, EventArgs e)
+        {
+            try
+            {
+                LoadBossGroup("Meta");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Fehler beim Laden der Meta-Gruppe: {ex.Message}", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
+
+
 }
 

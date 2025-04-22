@@ -62,6 +62,8 @@ namespace GW2FOX
             }
         }
 
+       
+
         protected void ShowAndHideForm(Form newForm)
         {
             if (lastOpenedBoss != null && !lastOpenedBoss.IsDisposed)

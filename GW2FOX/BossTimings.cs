@@ -115,13 +115,13 @@ namespace GW2FOX
 
                 BossListView.Dispatcher.Invoke(() =>
                 {
-                    var window = OverlayWindow.GetInstance();
-                    window.OverlayItems.Clear();
+                 //   var window = OverlayWindow.GetInstance();
+                   // window.OverlayItems.Clear();
 
                     foreach (var item in items.OrderBy(i => i.TimeToShow))
                     {
                         item.UpdateCountdown();
-                        window.OverlayItems.Add(item);
+                   //     window.OverlayItems.Add(item);
                     }
                 });
 

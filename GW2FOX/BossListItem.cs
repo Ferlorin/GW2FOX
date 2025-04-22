@@ -17,6 +17,15 @@ namespace GW2FOX
         public bool IsDynamicEvent { get; set; }     // für kursiven Text
         public bool IsConcurrentEvent { get; set; }
         public static readonly ImageSource WaypointImage = new BitmapImage(new Uri("pack://application:,,,/GW2FOX;component/Resources/Waypoint.png"));
-    }
+        public string Countdown { get; set; } = string.Empty;
+        public DateTime TimeToShow => NextRunTime;
+        public void UpdateCountdown()
+        {
+            var timeLeft = NextRunTime - GlobalVariables.CURRENT_DATE_TIME;
+            Countdown = timeLeft > TimeSpan.Zero
+                ? timeLeft.ToString(@"hh\:mm\:ss")
+                : "Läuft";
+        }
 
+    }
 }

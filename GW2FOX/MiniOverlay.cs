@@ -180,7 +180,7 @@ namespace GW2FOX
 
         private void button5_Click(object sender, EventArgs e)
         {
-            _overlayWindow = OverlayWindow.GetInstance(); // Hole Singleton
+            //_overlayWindow = OverlayWindow.GetInstance(); // Hole Singleton
 
             if (_overlayWindow.IsVisible)
             {
