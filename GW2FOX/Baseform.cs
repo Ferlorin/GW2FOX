@@ -11,6 +11,7 @@ using System.Windows.Controls;
 using WinFormsButton = System.Windows.Forms.Button;
 using System.Windows;
 using System.Text.Json;
+using Newtonsoft.Json;
 
 
 namespace GW2FOX
@@ -119,57 +120,6 @@ namespace GW2FOX
             public static extern int SetWindowLong(IntPtr hWnd, int nIndex, int dwNewLong);
         }
 
-        protected static void SaveTextToFile(string textToSave, string sectionHeader, bool hideMessages = false)
-        {
-            string jsonPath = "bosses_config.json";
-
-            try
-            {
-                Dictionary<string, string> config = File.Exists(jsonPath)
-                    ? JsonSerializer.Deserialize<Dictionary<string, string>>(File.ReadAllText(jsonPath)) ?? new()
-                    : new();
-
-                config[sectionHeader] = textToSave;
-
-                File.WriteAllText(jsonPath, JsonSerializer.Serialize(config, new JsonSerializerOptions { WriteIndented = true }));
-
-                if (!hideMessages)
-                {
-                    System.Windows.Forms.MessageBox.Show($"{sectionHeader} saved.", "Saved!", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-            }
-            catch (Exception ex)
-            {
-                System.Windows.Forms.MessageBox.Show($"Error {sectionHeader}: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void LoadTextFromConfig(string sectionHeader, System.Windows.Forms.TextBox textBox, string defaultToInsert)
-        {
-            string jsonPath = "bosses_config.json";
-
-            try
-            {
-                Dictionary<string, string> config = File.Exists(jsonPath)
-                    ? JsonSerializer.Deserialize<Dictionary<string, string>>(File.ReadAllText(jsonPath)) ?? new()
-                    : new();
-
-                if (config.TryGetValue(sectionHeader, out string value))
-                {
-                    textBox.Text = value;
-                }
-                else
-                {
-                    SaveTextToFile(defaultToInsert, sectionHeader, true);
-                    LoadTextFromConfig(sectionHeader, textBox, defaultToInsert); // Retry
-                }
-            }
-            catch (Exception ex)
-            {
-                System.Windows.Forms.MessageBox.Show($"Error loading {sectionHeader}: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
         protected void BringGw2ToFront()
         {
             try
@@ -204,6 +154,116 @@ namespace GW2FOX
                 System.Windows.Forms.MessageBox.Show($"Fehler beim Fokussieren von Gw2-64.exe: {ex.Message}", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        protected static void SaveTextToFile(string textToSave, string sectionHeader, bool hideMessages = false)
+        {
+            string jsonPath = "bosses_config.json";
+
+            try
+            {
+                Console.WriteLine($"[SaveTextToFile] Versuche '{sectionHeader}' zu speichern...");
+
+                var config = BossTimings.LoadedConfig ?? new BossConfig();
+
+                switch (sectionHeader)
+                {
+                    case "Runinfo":
+                        config.Runinfo = textToSave;
+                        break;
+                    case "Squadinfo":
+                        config.Squadinfo = textToSave;
+                        break;
+                    case "Guild":
+                        config.Guild = textToSave;
+                        break;
+                    case "Welcome":
+                        config.Welcome = textToSave;
+                        break;
+                    case "Symbols":
+                        config.Symbols = textToSave;
+                        break;
+                    case "Meta":
+                        config.Meta = textToSave;
+                        break;
+                    case "Mixed":
+                        config.Mixed = textToSave;
+                        break;
+                    case "World":
+                        config.World = textToSave;
+                        break;
+                    case "Fido":
+                        config.Fido = textToSave;
+                        break;
+                    default:
+                        Console.WriteLine($"[SaveTextToFile] Abschnitt '{sectionHeader}' wird nicht unterstützt.");
+                        if (!hideMessages)
+                        {
+                            System.Windows.Forms.MessageBox.Show($"Section '{sectionHeader}' not recognized.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
+                        return;
+                }
+
+                // Schreiben und global aktualisieren
+                File.WriteAllText(jsonPath, JsonConvert.SerializeObject(config, Formatting.Indented));
+                BossTimings.LoadedConfig = config;
+
+                Console.WriteLine($"[SaveTextToFile] '{sectionHeader}' erfolgreich gespeichert.");
+
+                if (!hideMessages)
+                {
+                    System.Windows.Forms.MessageBox.Show($"{sectionHeader} gespeichert.", "Gespeichert!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"[SaveTextToFile] Fehler: {ex.Message}");
+                System.Windows.Forms.MessageBox.Show($"Fehler beim Speichern von {sectionHeader}: {ex.Message}", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+
+        private void LoadTextFromConfig(string sectionHeader, System.Windows.Forms.TextBox textBox, string defaultToInsert)
+        {
+            string jsonPath = "bosses_config.json";
+
+            try
+            {
+                Console.WriteLine($"[LoadTextFromConfig] Versuche '{sectionHeader}' aus {jsonPath} zu laden...");
+
+                if (!File.Exists(jsonPath))
+                {
+                    Console.WriteLine($"[LoadTextFromConfig] Datei '{jsonPath}' existiert nicht – wird mit Defaultwert neu erstellt.");
+                    SaveTextToFile(defaultToInsert, sectionHeader, true);
+                    LoadTextFromConfig(sectionHeader, textBox, defaultToInsert); // Retry
+                    return;
+                }
+
+                string jsonContent = File.ReadAllText(jsonPath);
+                Console.WriteLine($"[LoadTextFromConfig] JSON geladen. Länge: {jsonContent.Length} Zeichen.");
+
+                var config = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, string>>(jsonContent) ?? new();
+
+                Console.WriteLine($"[LoadTextFromConfig] JSON deserialisiert. Einträge: {config.Count}");
+
+                if (config.TryGetValue(sectionHeader, out string value))
+                {
+                    Console.WriteLine($"[LoadTextFromConfig] Eintrag '{sectionHeader}' gefunden, wird in TextBox gesetzt.");
+                    textBox.Text = value;
+                }
+                else
+                {
+                    Console.WriteLine($"[LoadTextFromConfig] Eintrag '{sectionHeader}' fehlt – wird neu gespeichert und erneut geladen.");
+                    SaveTextToFile(defaultToInsert, sectionHeader, true);
+                    LoadTextFromConfig(sectionHeader, textBox, defaultToInsert); // Retry
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"[LoadTextFromConfig] Fehler: {ex.Message}");
+                System.Windows.Forms.MessageBox.Show($"Error loading {sectionHeader}: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
 
         protected void LoadConfigText(
             System.Windows.Forms.TextBox runinfoBox,

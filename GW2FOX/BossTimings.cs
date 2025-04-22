@@ -18,7 +18,8 @@ namespace GW2FOX
         public static List<BossEventRun> DynamicBossEvents { get; set; } = new();
 
         public static List<BossEventGroup> BossEventGroups { get; private set; } = new();
-        public static BossConfig LoadedConfig { get; private set; } = new();
+        public static BossConfig LoadedConfig { get; internal set; } = new();
+
 
         private static void Init()
         {
