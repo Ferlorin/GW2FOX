@@ -6,35 +6,63 @@ using System.IO;
 
 public class BossConfig
 {
+    [JsonProperty("Bosses")]
     public List<Boss> Bosses { get; set; } = new();
+
+    [JsonProperty("Meta")]
     public string Meta { get; set; } = "";
+
+    [JsonProperty("Mixed")]
     public string Mixed { get; set; } = "";
+
+    [JsonProperty("World")]
     public string World { get; set; } = "";
+
+    [JsonProperty("Fido")]
     public string Fido { get; set; } = "";
+
+    [JsonProperty("Runinfo")]
     public string Runinfo { get; set; } = "";
+
+    [JsonProperty("Squadinfo")]
     public string Squadinfo { get; set; } = "";
+
+    [JsonProperty("Guild")]
     public string Guild { get; set; } = "";
+
+    [JsonProperty("Welcome")]
     public string Welcome { get; set; } = "";
+
+    [JsonProperty("Symbols")]
     public string Symbols { get; set; } = "";
 }
 
 public class Boss
 {
+    [JsonProperty("Name")]
     public string Name { get; set; }
+
+    [JsonProperty("Timings")]
     public List<string> Timings { get; set; }
+
+    [JsonProperty("Category")]
     public string Category { get; set; }
+
+    [JsonProperty("Waypoint")]
     public string? Waypoint { get; set; } = "";
 }
+
 
 public static class BossTimings
 {
     public static void LoadBossConfig(string filePath)
     {
-
         try
         {
+
             var json = File.ReadAllText(filePath);
             var bossConfig = JsonConvert.DeserializeObject<BossConfig>(json);
+
             Console.WriteLine("[DEBUG] JSON-Inhalt nach Deserialisierung:");
             Console.WriteLine(JsonConvert.SerializeObject(bossConfig, Formatting.Indented));
 

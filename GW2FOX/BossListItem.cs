@@ -6,9 +6,24 @@ namespace GW2FOX
 {
     public class BossListItem
     {
-        public string BossName { get; set; }
+        public static readonly ImageSource? WaypointImage;
 
-        public string Waypoint { get; set; }         // <-- erforderlich für Button-Click oder Anzeige
+        // Statischer Konstruktor zum Initialisieren der statischen Ressource
+        static BossListItem()
+        {
+            try
+            {
+                WaypointImage = new BitmapImage(new Uri("pack://application:,,,/GW2FOX;component/Resources/Waypoint.png"));
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Fehler beim Laden des Waypoint-Bildes: " + ex.Message);
+                WaypointImage = null;
+            }
+        }
+
+        public string BossName { get; set; }
+        public string Waypoint { get; set; }         // z. B. [&BEEAAAA=]
         public string Category { get; set; }         // z. B. "Meta", "Worldboss", etc.
         public string TimeRemainingFormatted { get; set; }  // z. B. "08:13"
         public int SecondsRemaining { get; set; }    // für Sortierung oder Farben
@@ -16,9 +31,9 @@ namespace GW2FOX
         public bool IsPastEvent { get; set; }        // für graue Schrift/Durchstreichung
         public bool IsDynamicEvent { get; set; }     // für kursiven Text
         public bool IsConcurrentEvent { get; set; }
-        public static readonly ImageSource WaypointImage = new BitmapImage(new Uri("pack://application:,,,/GW2FOX;component/Resources/Waypoint.png"));
         public string Countdown { get; set; } = string.Empty;
         public DateTime TimeToShow => NextRunTime;
+
         public void UpdateCountdown()
         {
             var timeLeft = NextRunTime - GlobalVariables.CURRENT_DATE_TIME;
@@ -26,6 +41,5 @@ namespace GW2FOX
                 ? timeLeft.ToString(@"hh\:mm\:ss")
                 : "Läuft";
         }
-
     }
 }

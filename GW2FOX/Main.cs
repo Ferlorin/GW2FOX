@@ -20,8 +20,11 @@ namespace GW2FOX
 
             if (BossTimings.BossList23.Count == 0)
             {
-                BossTimings.LoadBossConfig("bosses_config.json");
-                Console.WriteLine("[Main] BossKonfig wurde nachgeladen. BossList23.Count = " + BossTimings.BossList23.Count);
+                string filePath = Path.GetFullPath("bosses_config.json");
+                BossTimings.LoadBossConfig(filePath);
+                Console.WriteLine($"[Config] Lade Boss-Konfiguration aus: {filePath}");
+
+
             }
             else
             {

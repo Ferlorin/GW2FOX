@@ -36,7 +36,7 @@ namespace GW2FOX
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
-            AddButtonAnimations(this); // 💥 wird auf jeder Form aufgerufen
+            AddButtonAnimations(this);
         }
 
         [DllImport("user32.dll")]
@@ -164,8 +164,20 @@ namespace GW2FOX
             {
                 Console.WriteLine($"[SaveTextToFile] Versuche '{sectionHeader}' zu speichern...");
 
-                var config = BossTimings.LoadedConfig ?? new BossConfig();
+                // Immer zuerst die Datei laden, nicht von LoadedConfig abhängig machen!
+                BossConfig config;
 
+                if (File.Exists(jsonPath))
+                {
+                    var json = File.ReadAllText(jsonPath);
+                    config = JsonConvert.DeserializeObject<BossConfig>(json) ?? new BossConfig();
+                }
+                else
+                {
+                    config = new BossConfig();
+                }
+
+                // Nur den gewünschten Abschnitt ändern
                 switch (sectionHeader)
                 {
                     case "Runinfo":
@@ -204,7 +216,7 @@ namespace GW2FOX
                         return;
                 }
 
-                // Schreiben und global aktualisieren
+                // Speichern
                 File.WriteAllText(jsonPath, JsonConvert.SerializeObject(config, Formatting.Indented));
                 BossTimings.LoadedConfig = config;
 
@@ -225,38 +237,59 @@ namespace GW2FOX
 
         private void LoadTextFromConfig(string sectionHeader, System.Windows.Forms.TextBox textBox, string defaultToInsert)
         {
-            string jsonPath = "bosses_config.json";
-
             try
             {
+                Console.WriteLine($"[LoadTextFromConfig] Lade Abschnitt '{sectionHeader}'...");
 
-                if (!File.Exists(jsonPath))
+                var config = BossTimings.LoadedConfig;
+
+                if (config == null)
                 {
-                    SaveTextToFile(defaultToInsert, sectionHeader, true);
-                    LoadTextFromConfig(sectionHeader, textBox, defaultToInsert); // Retry
-                    return;
+                    if (File.Exists("bosses_config.json"))
+                    {
+                        config = JsonConvert.DeserializeObject<BossConfig>(File.ReadAllText("bosses_config.json")) ?? new BossConfig();
+                    }
+                    else
+                    {
+                        config = new BossConfig();
+                    }
+
+                    BossTimings.LoadedConfig = config;
                 }
 
-                string jsonContent = File.ReadAllText(jsonPath);
+                string value = sectionHeader switch
+                {
+                    "Runinfo" => config.Runinfo,
+                    "Squadinfo" => config.Squadinfo,
+                    "Guild" => config.Guild,
+                    "Welcome" => config.Welcome,
+                    "Symbols" => config.Symbols,
+                    "Meta" => config.Meta,
+                    "Mixed" => config.Mixed,
+                    "World" => config.World,
+                    "Fido" => config.Fido,
+                    _ => null
+                };
 
-                var config = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, string>>(jsonContent) ?? new();
-
-
-                if (config.TryGetValue(sectionHeader, out string value))
+                if (value != null)
                 {
                     textBox.Text = value;
                 }
                 else
                 {
+                    // Wenn unbekannter oder leerer Abschnitt: Standard speichern
                     SaveTextToFile(defaultToInsert, sectionHeader, true);
-                    LoadTextFromConfig(sectionHeader, textBox, defaultToInsert); // Retry
+                    textBox.Text = defaultToInsert;
                 }
             }
             catch (Exception ex)
             {
-                System.Windows.Forms.MessageBox.Show($"Error loading {sectionHeader}: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Console.WriteLine($"[LoadTextFromConfig] Fehler: {ex.Message}");
+                System.Windows.Forms.MessageBox.Show($"Fehler beim Laden von {sectionHeader}: {ex.Message}", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+
 
 
         protected void LoadConfigText(

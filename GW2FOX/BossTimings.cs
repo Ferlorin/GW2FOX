@@ -8,6 +8,8 @@ namespace GW2FOX
 {
     public static class BossTimings
     {
+        public static BossConfig? LoadedConfig { get; set; }
+
         public static Dictionary<string, List<BossEvent>> BossEvents { get; } = new();
         public static List<string> BossList23 { get; private set; } = new();
         public static Dictionary<DateTime, List<string>> DoneBosses { get; private set; } = new();
@@ -18,7 +20,6 @@ namespace GW2FOX
         public static List<BossEventRun> DynamicBossEvents { get; set; } = new();
 
         public static List<BossEventGroup> BossEventGroups { get; private set; } = new();
-        public static BossConfig LoadedConfig { get; internal set; } = new();
 
 
         private static void Init()
@@ -191,6 +192,30 @@ namespace GW2FOX
             {
                 Console.WriteLine($"[Error] Fehler beim Laden der Boss-JSON: {ex.Message}");
             }
+        }
+        public static List<Boss> GetBossesByCategory(string categoryName)
+        {
+            if (LoadedConfig == null || LoadedConfig.Bosses == null)
+                return new();
+
+            var categoryList = categoryName switch
+            {
+                "Meta" => LoadedConfig.Meta,
+                "Mixed" => LoadedConfig.Mixed,
+                "World" => LoadedConfig.World,
+                "Fido" => LoadedConfig.Fido,
+                _ => ""
+            };
+
+            var names = categoryList
+                .Split(',')
+                .Select(name => name.Trim())
+                .Where(name => !string.IsNullOrWhiteSpace(name))
+                .ToHashSet(StringComparer.OrdinalIgnoreCase);
+
+            return LoadedConfig.Bosses
+                .Where(b => names.Contains(b.Name))
+                .ToList();
         }
 
 
