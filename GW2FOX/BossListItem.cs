@@ -1,38 +1,22 @@
 ﻿using System;
-using System.Globalization;
-using System.Windows;
-using System.Windows.Data;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace GW2FOX
 {
-    public class StrikeConverter : IValueConverter
+    public class BossListItem
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            return (bool)value ? TextDecorations.Strikethrough : null;
-        }
+        public string BossName { get; set; }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) => throw new NotImplementedException();
+        public string Waypoint { get; set; }         // <-- erforderlich für Button-Click oder Anzeige
+        public string Category { get; set; }         // z. B. "Meta", "Worldboss", etc.
+        public string TimeRemainingFormatted { get; set; }  // z. B. "08:13"
+        public int SecondsRemaining { get; set; }    // für Sortierung oder Farben
+        public DateTime NextRunTime { get; set; }    // Uhrzeit des nächsten Spawns
+        public bool IsPastEvent { get; set; }        // für graue Schrift/Durchstreichung
+        public bool IsDynamicEvent { get; set; }     // für kursiven Text
+        public bool IsConcurrentEvent { get; set; }
+        public static readonly ImageSource WaypointImage = new BitmapImage(new Uri("pack://application:,,,/GW2FOX;component/Resources/Waypoint.png"));
     }
 
-    public class ItalicConverter : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            return (bool)value ? FontStyles.Italic : FontStyles.Normal;
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) => throw new NotImplementedException();
-    }
-
-    public class PastEventColorConverter : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            return (bool)value ? Brushes.Gray : Brushes.White;
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) => throw new NotImplementedException();
-    }
 }

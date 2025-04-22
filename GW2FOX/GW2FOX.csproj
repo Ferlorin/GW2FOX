@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 <PropertyGroup>
-  <OutputType>Exe</OutputType>
+  <OutputType>WinExe</OutputType>
   <TargetFramework>net8.0-windows</TargetFramework>
   <Nullable>enable</Nullable>
   <UseWindowsForms>true</UseWindowsForms>
@@ -9,6 +9,10 @@
   <ImplicitUsings>enable</ImplicitUsings>
   <StartupObject>GW2FOX.Program</StartupObject>
   <ApplicationIcon>Resources\icon.ico</ApplicationIcon>
+</PropertyGroup>
+
+<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+  <Optimize>True</Optimize>
 </PropertyGroup>
 
 <ItemGroup>
@@ -79,6 +83,11 @@
     <Compile Update="Metas\Palawadan.cs" />
     <Compile Update="Metas\DragonsStand.cs" />
     <Compile Update="Metas\SerpentsIre.cs" />
+    <Compile Update="Properties\Settings.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
@@ -158,6 +167,13 @@
     <EmbeddedResource Update="Metas\SerpentsIre.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
 
 </Project>

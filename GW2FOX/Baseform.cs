@@ -10,6 +10,7 @@ using System.IO;
 using System.Windows.Controls;
 using WinFormsButton = System.Windows.Forms.Button;
 using System.Windows;
+using System.Text.Json;
 
 
 namespace GW2FOX
@@ -118,74 +119,52 @@ namespace GW2FOX
 
         protected static void SaveTextToFile(string textToSave, string sectionHeader, bool hideMessages = false)
         {
-            var headerToUse = sectionHeader;
-            if (headerToUse.EndsWith(':'))
-            {
-                headerToUse = headerToUse[..^1];
-            }
+            string jsonPath = "bosses_config.json";
 
             try
             {
-                // Vorhandenen Inhalt aus der Datei lesen
-                string[] lines = File.ReadAllLines(FILE_PATH);
+                Dictionary<string, string> config = File.Exists(jsonPath)
+                    ? JsonSerializer.Deserialize<Dictionary<string, string>>(File.ReadAllText(jsonPath)) ?? new()
+                    : new();
 
-                // Index der Zeile mit dem angegebenen Header finden
-                int headerIndex = -1;
-                for (int i = 0; i < lines.Length; i++)
-                {
-                    if (lines[i].StartsWith(headerToUse + ":"))
-                    {
-                        headerIndex = i;
-                        break;
-                    }
-                }
+                config[sectionHeader] = textToSave;
 
-                // Wenn der Header gefunden wird, den Text aktualisieren
-                if (headerIndex != -1)
-                {
-                    lines[headerIndex] = $"{headerToUse}: \"{textToSave}\"";
-                }
-                else
-                {
-                    // Wenn der Header nicht gefunden wird, eine neue Zeile hinzufügen
-                    lines = lines.Concat(new[] { $"{headerToUse}: \"{textToSave}\"" }).ToArray();
-                }
-
-                // Aktualisierten Inhalt zurück in die Datei schreiben
-                File.WriteAllLines(FILE_PATH, lines);
+                File.WriteAllText(jsonPath, JsonSerializer.Serialize(config, new JsonSerializerOptions { WriteIndented = true }));
 
                 if (!hideMessages)
                 {
-                    System.Windows.Forms.MessageBox.Show($"{headerToUse} saved.", "Saved!", MessageBoxButtons.OK,
-                        MessageBoxIcon.Information);
+                    System.Windows.Forms.MessageBox.Show($"{sectionHeader} saved.", "Saved!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             catch (Exception ex)
             {
-                System.Windows.Forms.MessageBox.Show($"Error {headerToUse}: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                System.Windows.Forms.MessageBox.Show($"Error {sectionHeader}: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        private void LoadTextFromConfig(string sectionHeader, System.Windows.Forms.TextBox textBox, string configText,
-            string defaultToInsert)
+        private void LoadTextFromConfig(string sectionHeader, System.Windows.Forms.TextBox textBox, string defaultToInsert)
         {
-            // Suchmuster für den Abschnitt und den eingeschlossenen Text in Anführungszeichen
-            string pattern = $@"{sectionHeader}\s*""([^""]*)""";
+            string jsonPath = "bosses_config.json";
 
-            // Mit einem regulären Ausdruck nach dem Muster suchen
-            var match = System.Text.RegularExpressions.Regex.Match(configText, pattern);
-
-            // Überprüfen, ob ein Treffer gefunden wurde
-            if (match.Success)
+            try
             {
-                // Den extrahierten Text in das Textfeld einfügen
-                textBox.Text = match.Groups[1].Value;
+                Dictionary<string, string> config = File.Exists(jsonPath)
+                    ? JsonSerializer.Deserialize<Dictionary<string, string>>(File.ReadAllText(jsonPath)) ?? new()
+                    : new();
+
+                if (config.TryGetValue(sectionHeader, out string value))
+                {
+                    textBox.Text = value;
+                }
+                else
+                {
+                    SaveTextToFile(defaultToInsert, sectionHeader, true);
+                    LoadTextFromConfig(sectionHeader, textBox, defaultToInsert); // Retry
+                }
             }
-            else
+            catch (Exception ex)
             {
-                SaveTextToFile(defaultToInsert, sectionHeader, true);
-                configText = File.ReadAllText(FILE_PATH);
-                LoadTextFromConfig(sectionHeader, textBox, configText, defaultToInsert);
+                System.Windows.Forms.MessageBox.Show($"Error loading {sectionHeader}: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -224,58 +203,52 @@ namespace GW2FOX
             }
         }
 
-        protected void LoadConfigText(System.Windows.Forms.TextBox Runinfo, System.Windows.Forms.TextBox Squadinfo, System.Windows.Forms.TextBox Guild, System.Windows.Forms.TextBox Welcome, System.Windows.Forms.TextBox Symbols)
+        protected void LoadConfigText(
+    System.Windows.Forms.TextBox Runinfo,
+    System.Windows.Forms.TextBox Squadinfo,
+    System.Windows.Forms.TextBox Guild,
+    System.Windows.Forms.TextBox Welcome,
+    System.Windows.Forms.TextBox Symbols)
         {
+            string jsonPath = "bosses_config.json";
+
             try
             {
+                // JSON laden oder leeres Dictionary erzeugen
+                Dictionary<string, string> config = File.Exists(jsonPath)
+                    ? JsonSerializer.Deserialize<Dictionary<string, string>>(File.ReadAllText(jsonPath)) ?? new()
+                    : new();
 
-                // Überprüfen, ob die Datei existiert
-                if (File.Exists(FILE_PATH))
+                // Helper-Funktion zum Einlesen + Erstellen falls nicht vorhanden
+                void LoadOrInsert(string key, System.Windows.Forms.TextBox box, string fallback)
                 {
-                    // Den gesamten Text aus der Datei lesen
-                    string configText = File.ReadAllText(FILE_PATH);
-
-                    // Laden von Runinfo
-                    LoadTextFromConfig("Runinfo:", Runinfo, configText, DEFAULT_RUN_INFO);
-
-                    // Laden von Squadinfo
-                    LoadTextFromConfig("Squadinfo:", Squadinfo, configText, DEFAULT_SQUAD_INFO);
-
-                    // Laden von Guild
-                    LoadTextFromConfig("Guild:", Guild, configText, DEFAULT_GUILD);
-
-                    // Laden von Welcome
-                    LoadTextFromConfig("Welcome:", Welcome, configText, DEFAULT_WELCOME);
-
-                    // Laden von Symbols
-                    LoadTextFromConfig("Symbols:", Symbols, configText, DEFAULT_SYMBOLS);
-                }
-                else
-                {
-
-                    Console.WriteLine($"Config file does not exist. Will try to create it");
-                    try
+                    if (config.TryGetValue(key, out string value))
                     {
-                        var fileStream = File.Create(FILE_PATH);
-                        fileStream.Close();
-                        LoadConfigText(Runinfo, Squadinfo, Guild, Welcome, Symbols);
+                        box.Text = value;
                     }
-                    catch (Exception ex)
+                    else
                     {
-                        // Log or handle the exception, but don't call ReadConfigFile recursively
-                        Console.WriteLine($"Error creating config file: {ex.Message}");
-                        throw; // Re-throw the exception to prevent infinite recursion
+                        config[key] = fallback;
+                        box.Text = fallback;
                     }
-                    // // Die Konfigurationsdatei existiert nicht
-                    // MessageBox.Show("Die Konfigurationsdatei 'config.txt' wurde nicht gefunden.", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+
+                // Standardtexte direkt hier definieren
+                LoadOrInsert("Runinfo", Runinfo, "«Meta-Train» with the old [FOX]");
+                LoadOrInsert("Squadinfo", Squadinfo, "• InstanceCheck:\n    - right click on me & join map\n• Don’t cancel invites!\n• No 3ple Trouble\n\n• https://gw2fox.wixsite.com/about");
+                LoadOrInsert("Guild", Guild, "☠ Young or old [FOX], we take every stray. Humor, respect and fun at the game are what distinguish us. No Obligations! Infos: wsp me or https://gw2fox.wixsite.com/about ☻");
+                LoadOrInsert("Welcome", Welcome, "Welcome to the FOXhole. Read the Message of the Day for Infos - Questions, ask us! Guides & Tools on our Homepage: https://gw2fox.wixsite.com/about");
+                LoadOrInsert("Symbols", Symbols, "☠ ★ ☣ ☮ ☢ ♪ ☜ ☞ ┌ ∩ ┐ ( ●̮̃ • ) ۶ ( • ◡ • ) ☿ ♀ ♂ ☀ ☁ ☂ ☃ ☄ ☾ ☽ ☇ ☉ ☐ ☒ ☑ ☝ ☚ • ☟ ☆ ♕ ♖ ♘ ♙ ♛ ♜ ♞ ♟ † ☨ ☥ ☦ ☓ ☩ ☯ ☧ ☬ ☸ ♁ ♆ ☭ ☪ ☫ © ™ ® ☎ ♥ 凸");
+
+                // Gespeicherte Änderungen zurückschreiben
+                File.WriteAllText(jsonPath, JsonSerializer.Serialize(config, new JsonSerializerOptions { WriteIndented = true }));
             }
             catch (Exception ex)
             {
-                // Fehler beim Laden der Konfigurationsdatei
                 System.Windows.Forms.MessageBox.Show($"Fehler beim Laden der Konfigurationsdatei: {ex.Message}", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
 
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
