@@ -38,10 +38,10 @@ namespace GW2FOX
         /// </summary>
         public void SetStartTime(DateTime utcStart)
         {
-            // Erzwinge Markierung als UTC
-            Console.WriteLine($"[LOAD] {BossName} StartTime={utcStart} Kind={utcStart.Kind} DST active={GlobalVariables.IsDaylightSavingTimeActive()}");
-
+            StartTime = DateTime.SpecifyKind(utcStart, DateTimeKind.Utc);
+            DebugTools.DebugTime($"{BossName} [SetStartTime]", StartTime.Value);
         }
+
 
         /// <summary>
         /// True if the event has been triggered and not yet expired.
@@ -55,16 +55,12 @@ namespace GW2FOX
         public BossEventRun ToBossEventRun()
         {
             if (!StartTime.HasValue)
-            {
-                Console.WriteLine($"[RUN] {BossName} → Start: {StartTime}, Delay: {Delay}, NextRun: {StartTime + Delay}");
-
                 throw new InvalidOperationException("Event not triggered");
-            }
 
+            // FINAL: Annahme, StartTime ist bereits lokal, Delay neutral
             DateTime nextRunTime = StartTime.Value + Delay;
 
-            Console.WriteLine($"[Convert] {BossName} will run again at {nextRunTime}");
-
+            // KEINE zusätzliche Konvertierung – das ist der Fehler!
             return new BossEventRun(
                 bossName: BossName,
                 timing: Delay,
@@ -73,6 +69,8 @@ namespace GW2FOX
                 waypoint: Waypoint
             );
         }
+
+
 
     }
 }

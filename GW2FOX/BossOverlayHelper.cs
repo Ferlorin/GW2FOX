@@ -9,14 +9,16 @@ public static class BossOverlayHelper
     {
         var overlayItems = new ObservableCollection<BossListItem>();
 
-        // ✅ Nur UTC verwenden
-        var nowUtc = DateTime.UtcNow;
+        // LOKALE Zeit, keine UTC!
+        var now = DateTime.Now;
 
         var items = bossRuns
             .Select(run =>
             {
-                var utcNextRun = run.NextRunTime; // UTC!
-                var timeRemaining = utcNextRun - nowUtc;
+                // LOKAL bleiben: keine Konvertierung
+                var eventTime = run.NextRunTime;
+
+                var timeRemaining = eventTime - now;
                 bool isPast = timeRemaining.TotalSeconds < 0;
 
                 if (isPast && timeRemaining.TotalMinutes <= -15)
@@ -37,14 +39,11 @@ public static class BossOverlayHelper
                     IsPastEvent = isPast,
                     TimeRemainingFormatted = formatted,
                     SecondsRemaining = (int)(isPast ? -remaining.TotalSeconds : remaining.TotalSeconds),
-
-                    // ✅ Jetzt sauber in lokale Zeit umwandeln
-                    NextRunTime = TimeZoneInfo.ConvertTimeFromUtc(utcNextRun, GlobalVariables.TIMEZONE_TO_USE)
+                    NextRunTime = eventTime // lokal, keine Konvertierung!
                 };
             })
             .Where(item => item != null)
             .ToList();
-
 
         var past = items
             .Where(x => x.IsPastEvent)
@@ -68,4 +67,5 @@ public static class BossOverlayHelper
 
         return overlayItems;
     }
+
 }

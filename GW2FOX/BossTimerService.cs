@@ -362,10 +362,10 @@ namespace GW2FOX
         private const int NextRunsToShow = 2;
         private const int DaysExtraToCalculate = 1;
 
-        public BossEventGroup(string bossName, IEnumerable<BossEvent> events)
+        public BossEventGroup(string bossName, IEnumerable<BossEvent> BossEventsList)
         {
             BossName = bossName;
-            _timings = events
+            _timings = BossEventsList
                 .Where(bossEvent => bossEvent.BossName.Equals(BossName))
                 .OrderBy(span => span.Timing)
                 .ToList();

@@ -79,7 +79,13 @@ namespace GW2FOX
                     return;
 
                 var json = File.ReadAllText(PersistFile);
-                var saved = JsonSerializer.Deserialize<List<PersistEntry>>(json);
+
+                var options = new JsonSerializerOptions
+                {
+                    Converters = { new UtcDateTimeConverter() }
+                };
+
+                var saved = JsonSerializer.Deserialize<List<PersistEntry>>(json, options); ;
                 if (saved == null) return;
 
                 foreach (var entry in saved)
@@ -104,8 +110,15 @@ namespace GW2FOX
                     .Select(e => new PersistEntry { BossName = e.BossName, UtcStartTime = e.StartTime.Value.ToUniversalTime() })
                     .ToList();
 
-                var json = JsonSerializer.Serialize(entries);
+                var options = new JsonSerializerOptions
+                {
+                    Converters = { new UtcDateTimeConverter() },
+                    WriteIndented = true
+                };
+
+                var json = JsonSerializer.Serialize(entries, options);
                 File.WriteAllText(PersistFile, json);
+
             }
             catch
             {

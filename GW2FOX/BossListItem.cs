@@ -160,7 +160,8 @@ _ => System.Windows.Media.Brushes.White
 
         public void UpdateCountdown()
         {
-            var now = DateTime.UtcNow;
+            var now = DateTime.Now;
+
             var nextEndTime = NextRunTime.AddMinutes(14).AddSeconds(59);
             TimeToShow = NextRunTime < now ? nextEndTime : NextRunTime;
 
@@ -171,6 +172,7 @@ _ => System.Windows.Media.Brushes.White
             IsPastEvent = NextRunTime < now;
             Countdown = TimeRemainingFormatted;
         }
+
 
 
 

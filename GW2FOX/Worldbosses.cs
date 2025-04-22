@@ -1834,45 +1834,77 @@ namespace GW2FOX
         }
 
 
-        public static void SetBossListFromConfig_Bosses()
+        public static readonly char[] Separator = { ';' };
+        public static List<string> BossList23 { get; set; } = new();
+
+        public static void AddBossEvent(string bossName, string[] timings, string category, string waypoint = "")
         {
             try
             {
-                string[] lines = ReadConfigFile();
-
-                if (lines == null)
+                foreach (var timing in timings)
                 {
-                    return;
-                }
+                    var utcTime = ConvertToUtcFromConfigTime(timing);
+                    BossEventsList.Add(new BossEvent(bossName, utcTime.TimeOfDay, category, waypoint));
 
-                int bossIndex = Array.FindIndex(lines, line => line.StartsWith("Bosses:"));
-
-                if (bossIndex != -1 && bossIndex < lines.Length)
-                {
-                    string bossLine = lines[bossIndex].Replace("Bosses:", "").Trim();
-
-                    List<string> bossNames = bossLine
-                        .Trim('"')  // Entferne äußere Anführungszeichen
-                        .Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
-                        .Select(name => name.Trim())
-                        .ToList();  // Konvertiere in eine Liste
-
-                    foreach (string bossName in bossNames)
-                    {
-                        CheckBox bossCheckBox = FindCheckBoxByBossName(bossName);
-                        if (bossCheckBox != null)
-                        {
-                            bossCheckBox.Checked = true;
-                            bossCheckBox.Invalidate();
-                        }
-                    }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error setting boss checkboxes: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Console.WriteLine($"Error in AddBossEvent (multiple timings): {ex.Message}");
             }
         }
+
+        public static void SetBossListFromConfig_Bosses()
+        {
+            try
+            {
+                var lines = File.ReadAllLines(GlobalVariables.FILE_PATH);
+
+                int bossIndex = Array.FindIndex(lines, line => line.StartsWith("Bosses:", StringComparison.OrdinalIgnoreCase));
+                if (bossIndex == -1 || bossIndex >= lines.Length)
+                    return;
+
+                var bossNames = lines[bossIndex]
+                    .Replace("Bosses:", "")
+                    .Trim().Trim('"')
+                    .Split(Separator, StringSplitOptions.RemoveEmptyEntries)
+                    .Select(name => name.Trim())
+                    .ToArray();
+
+                var newBossList = new List<string>(bossNames);
+
+                for (int i = bossIndex + 1; i < lines.Length; i++)
+                {
+                    if (!lines[i].StartsWith("Timings:", StringComparison.OrdinalIgnoreCase))
+                        continue;
+
+                    var timings = lines[i]
+                        .Replace("Timings:", "")
+                        .Trim()
+                        .Split(Separator, StringSplitOptions.RemoveEmptyEntries)
+                        .Select(t => t.Trim())
+                        .ToArray();
+
+                    if (timings.Length == bossNames.Length)
+                    {
+                        for (int j = 0; j < bossNames.Length; j++)
+                        {
+                            AddBossEvent(bossNames[j], new[] { timings[j] }, "WBs");
+                        }
+                    }
+
+                    break;
+                }
+
+                BossList23 = newBossList;
+                UpdateBossOverlayList();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error in SetBossListFromConfig_Bosses: {ex.Message}");
+            }
+        }
+
 
 
 
