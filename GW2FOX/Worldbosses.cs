@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.IO;
 using System.Globalization;
+using Newtonsoft.Json;
 
 namespace GW2FOX
 {
@@ -12,7 +13,8 @@ namespace GW2FOX
     {
         public static System.Windows.Controls.ListView? CustomBossList { get; private set; }
         public static Dictionary<string, CheckBox> bossCheckBoxMap;
-
+        public static readonly char[] Separator = { ',' };
+        public static List<string> BossList23 { get; set; } = new();
 
         public Worldbosses()
         {
@@ -20,7 +22,7 @@ namespace GW2FOX
             
             bossCheckBoxMap = new Dictionary<string, CheckBox>();
             InitializeBossCheckBoxMap();
-            UpdateBossUiBosses();
+            BossTimerService.UpdateBossUiBosses();
             LoadConfigText(Runinfo, Squadinfo, Guild, Welcome, Symbols);
 
             Load += Worldbosses_Load_1;
@@ -28,7 +30,7 @@ namespace GW2FOX
 
         private void Worldbosses_Load_1(object? sender, EventArgs e)
         {
-            
+            LoadBossGroup("World");
         }
 
         const int SW_RESTORE = 9;
@@ -771,17 +773,17 @@ namespace GW2FOX
 
         private void Tarir_CheckedChanged(object sender, EventArgs e)
         {
-            string[] bossNames = ["Battle in Tarir", "Octovine"];
+            string bossName = "Battle in Tarir";
 
 
 
             if (Tarir.Checked)
             {
-                SaveBossNameToConfig(bossNames);
+                SaveBossNameToConfig(bossName);
             }
             else
             {
-                RemoveBossNameFromConfig(bossNames);
+                RemoveBossNameFromConfig(bossName);
             }
 
         }
@@ -1451,772 +1453,168 @@ namespace GW2FOX
             }
 
         }
-
-        private static void SaveBossNameToConfig(string[] bossNames)
+        public class BossConfig
         {
-            foreach (var bossName in bossNames)
+            public List<Boss> Bosses { get; set; } = new();
+            public string Meta { get; set; } = "";
+            public string Mixed { get; set; } = "";
+            public string World { get; set; } = "";
+            public string Fido { get; set; } = "";
+            public string Runinfo { get; set; } = "";
+            public string Squadinfo { get; set; } = "";
+            public string Guild { get; set; } = "";
+            public string Welcome { get; set; } = "";
+            public string Symbols { get; set; } = "";
+        }
+
+        public class Boss
+        {
+            public string Name { get; set; }
+            public List<string> Timings { get; set; }
+            public string Category { get; set; }
+            public string Waypoint { get; set; }
+        }
+
+        private static BossConfig LoadBossConfig()
+        {
+            string path = "bosses_config.json";
+
+            if (File.Exists(path))
             {
-                SaveBossNameToConfig(bossName);
+                var json = File.ReadAllText(path);
+                var config = JsonConvert.DeserializeObject<BossConfig>(json);
+                if (config != null)
+                    return config;
             }
+
+            // Default-Fallback
+            return new BossConfig();
+        }
+
+        private static void SaveBossConfig(BossConfig config)
+        {
+            File.WriteAllText("bosses_config.json", JsonConvert.SerializeObject(config, Formatting.Indented));
         }
 
         private static void SaveBossNameToConfig(string bossName)
         {
-            try
+            var config = LoadBossConfig();
+
+            if (!config.Bosses.Any(b => b.Name.Equals(bossName, StringComparison.OrdinalIgnoreCase)))
             {
-                // Vorhandenen Inhalt aus der Datei lesen
-                string[] lines = ReadConfigFile();
-
-                if (lines == null)
+                config.Bosses.Add(new Boss
                 {
-                    // Fehler beim Lesen der Datei, abbrechen
-                    return;
-                }
+                    Name = bossName,
+                    Timings = new List<string> { "00:00:00" },
+                    Category = "WBs",
+                    Waypoint = ""
+                });
 
-                // Index der Zeile mit dem Bossnamen finden
-                int bossIndex = -1;
-                for (int i = 0; i < lines.Length; i++)
-                {
-                    if (lines[i].StartsWith("Bosses:"))
-                    {
-                        bossIndex = i; // Die aktuelle Zeile enthält den Namen
-                        break;
-                    }
-                }
-
-
-                // Wenn der Bossname gefunden wird, ihn hinzufügen
-                if (bossIndex != -1 && bossIndex < lines.Length)
-                {
-                    // Extrahiere die Bosse aus der Zeile zwischen den Anführungszeichen
-                    string bossLine = lines[bossIndex].Replace("Bosses:", "").Trim();
-
-                    // Entferne die äußeren Anführungszeichen und teile die Bosse
-                    string[] bossNames = bossLine
-                        .Trim('"')  // Entferne äußere Anführungszeichen
-                        .Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
-                        .Select(name => name.Trim())  // Entferne führende und abschließende Leerzeichen
-                        .ToArray();
-
-                    // Überprüfen, ob der Name bereits vorhanden ist (case-insensitive)
-                    bool nameExists = bossNames.Any(name => name.Equals(bossName, StringComparison.OrdinalIgnoreCase));
-
-                    if (!nameExists)
-                    {
-                        // Füge den Bossnamen hinzu
-                        lines[bossIndex] = $"Bosses: \"{string.Join(", ", bossNames.Concat(new[] { bossName }).ToArray())}\"".Trim();
-
-                        // Aktualisierten Inhalt zurück in die Datei schreiben
-                        WriteConfigFile(lines);
-
-                        // Setze das Häkchen im CheckBox-Control auf true
-                        CheckBox bossCheckBox = FindCheckBoxByBossName(bossName);
-                        if (bossCheckBox != null)
-                        {
-                            bossCheckBox.Checked = true;
-                        }
-
-                    }
-
-                }
-                else
-                {
-                    //This will create a new section
-                    SaveTextToFile(GlobalVariables.DEFAULT_BOSSES, "Bosses");
-                    SaveBossNameToConfig(bossName);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error adding boss {bossName}: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                SaveBossConfig(config);
             }
         }
 
-        public static string[] ReadConfigFile()
+        private static void RemoveBossNameFromConfig(string bossName)
         {
-            try
-            {
-                if (File.Exists(GlobalVariables.FILE_PATH))
-                {
-                    return File.ReadAllLines(GlobalVariables.FILE_PATH);
-                }
-                else
-                {
-                    Console.WriteLine($"Config file does not exist. Will try to create it");
-                    try
-                    {
-                        var fileStream = File.Create(GlobalVariables.FILE_PATH);
-                        fileStream.Close();
-                        SaveTextToFile(GlobalVariables.DEFAULT_BOSSES, "Bosses", true);
-                        SaveTextToFile(GlobalVariables.DEFAULT_META, "Meta", true);
-                        SaveTextToFile(GlobalVariables.DEFAULT_WORLD, "World", true);
-                        SaveTextToFile(GlobalVariables.DEFAULT_MIXED, "Mixed", true);
-                        SaveTextToFile(GlobalVariables.DEFAULT_GUILD, "Guild", true);
-                        SaveTextToFile(GlobalVariables.DEFAULT_RUN_INFO, "Runinfo", true);
-                        SaveTextToFile(GlobalVariables.DEFAULT_SQUAD_INFO, "Squadinfo", true);
-                        SaveTextToFile(GlobalVariables.DEFAULT_WELCOME, "Welcome", true);
-                        SaveTextToFile(GlobalVariables.DEFAULT_SYMBOLS, "Symbols", true);
+            var config = LoadBossConfig();
+            var boss = config.Bosses.FirstOrDefault(b => b.Name.Equals(bossName, StringComparison.OrdinalIgnoreCase));
 
-                        return ReadConfigFile();
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine($"Error creating config file: {ex.Message}");
-                        throw;
-                    }
-                }
-            }
-            catch (Exception ex)
+            if (boss != null)
             {
-                Console.WriteLine($"Error reading from config file: {ex.Message}");
-                throw;
+                config.Bosses.Remove(boss);
+                SaveBossConfig(config);
             }
         }
 
-        private static void RemoveBossNameFromConfig(string[] bossNames)
+        private void ClearAll_Click(object? sender, EventArgs e)
         {
-            foreach (var bossName in bossNames)
+            foreach (var checkBox in bossCheckBoxMap.Values)
             {
-                RemoveBossNameFromConfig(bossName);
+                checkBox.Checked = false;
+                checkBox.Invalidate();
             }
-        }
 
-        public static void RemoveBossNameFromConfig(string bossName)
-        {
-            try
-            {
-                string[] lines = ReadConfigFile();
-
-                if (lines == null)
-                {
-                    return;
-                }
-
-                int bossIndex = -1;
-                for (int i = 0; i < lines.Length; i++)
-                {
-                    if (lines[i].StartsWith("Bosses:"))
-                    {
-                        bossIndex = i;
-                        break;
-                    }
-                }
-
-                if (bossIndex != -1 && bossIndex < lines.Length)
-                {
-                    string bossLine = lines[bossIndex].Replace("Bosses:", "").Trim();
-
-                    List<string> bossNames = bossLine
-                        .Trim('"')
-                        .Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
-                        .Select(name => name.Trim())
-                        .ToList();
-
-                    bossNames.Remove(bossName);
-
-                    lines[bossIndex] = $"Bosses: \"{string.Join(", ", bossNames)}\"";
-                    WriteConfigFile(lines);
-
-                    CheckBox bossCheckBox = FindCheckBoxByBossName(bossName);
-                    if (bossCheckBox != null)
-                    {
-                        bossCheckBox.Checked = false;
-                        bossCheckBox.Invalidate(); // Füge diese Zeile hinzu
-                    }
-
-
-
-                }
-                else
-                {
-                    SaveTextToFile(GlobalVariables.DEFAULT_BOSSES, "Bosses");
-                    SaveBossNameToConfig(bossName);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error removing boss {bossName}: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            var config = LoadBossConfig();
+            config.Bosses.Clear();
+            SaveBossConfig(config);
         }
 
 
-        private void Meta_Click_1(object sender, EventArgs e)
+        private void LoadBossGroup(string groupName)
         {
             try
             {
                 ClearAll_Click(null, EventArgs.Empty);
-                string[] lines = ReadConfigFile();
 
-                int metaIndex = -1;
-                for (int i = 0; i < lines.Length; i++)
-                {
-                    if (lines[i].StartsWith("Meta:"))
-                    {
-                        metaIndex = i;
-                        break;
-                    }
-                }
+                var config = LoadBossConfig();
+                var groupLine = GetGroupLine(config, groupName);
 
-                if (metaIndex != -1 && metaIndex < lines.Length)
-                {
-                    string metaBossLine = lines[metaIndex].Replace("Meta:", "").Trim();
+                var bossNames = groupLine
+                    .Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+                    .Select(b => b.Trim())
+                    .ToArray();
 
-                    string[] metaBosses = metaBossLine
-                        .Trim('"')
-                        .Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
-                        .Select(boss => boss.Trim())
-                        .ToArray();
-                    CheckBossCheckboxes(metaBosses);
-                    UpdateBossesSection(metaBosses, lines);
+                CheckBossCheckboxes(bossNames);
 
-                }
-                else
-                {
-                    SaveTextToFile(GlobalVariables.DEFAULT_META, "Meta");
-                    Meta_Click_1(sender, e);
-                }
+                config.Bosses = config.Bosses
+                    .Where(b => bossNames.Contains(b.Name, StringComparer.OrdinalIgnoreCase))
+                    .ToList();
+
+                SaveBossConfig(config);
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error loading Meta bosses: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Fehler beim Laden von {groupName}: {ex.Message}", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        private void UpdateBossesSection(string[] metaBosses, string[] lines)
+        private string GetGroupLine(BossConfig config, string key) => key.ToLower() switch
         {
-            int bossesIndex = -1;
-            for (int i = 0; i < lines.Length; i++)
-            {
-                if (lines[i].StartsWith("Bosses:"))
-                {
-                    bossesIndex = i;
-                    break;
-                }
-            }
-
-            if (bossesIndex != -1 && bossesIndex < lines.Length)
-            {
-                lines[bossesIndex] = $"Bosses: \"{string.Join(", ", metaBosses)}\"";
-            }
-
-        }
-
-
+            "meta" => config.Meta,
+            "mixed" => config.Mixed,
+            "world" => config.World,
+            "fido" => config.Fido,
+            _ => ""
+        };
 
         public static void CheckAllBossCheckboxes()
         {
-            try
+            foreach (var checkBox in bossCheckBoxMap.Values)
             {
-                foreach (CheckBox checkBox in bossCheckBoxMap.Values)
-                {
-                    checkBox.Checked = true;
-                    checkBox.Invalidate();
-                }
-
-                string[] lines = ReadConfigFile();
-
-                int bossIndex = -1;
-                for (int i = 0; i < lines.Length; i++)
-                {
-                    if (lines[i].StartsWith("Bosses:"))
-                    {
-                        bossIndex = i;
-                        break;
-                    }
-                }
-
-                if (bossIndex != -1 && bossIndex < lines.Length)
-                {
-                    lines[bossIndex] = $"Bosses: \"{string.Join(", ", BossEventGroups.Select(group => group.BossName).ToList())}\"";
-                    WriteConfigFile(lines);
-                }
+                checkBox.Checked = true;
+                checkBox.Invalidate();
             }
-            catch (Exception ex)
+
+            var config = LoadBossConfig();
+            config.Bosses = BossEventGroups.Select(g => new Boss
             {
-                MessageBox.Show($"Error checking all bosses: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+                Name = g.BossName,
+                Timings = new List<string>(),
+                Category = "WBs",
+                Waypoint = ""
+            }).ToList();
+
+            SaveBossConfig(config);
         }
-
 
         private void CheckBossCheckboxes(string[] bossNames)
         {
-            foreach (string bossName in bossNames)
+            foreach (var bossName in bossNames)
             {
-                CheckBox bossCheckBox = FindCheckBoxByBossName(bossName);
-                if (bossCheckBox != null)
+                var checkBox = FindCheckBoxByBossName(bossName);
+                if (checkBox != null)
                 {
-                    bossCheckBox.Checked = true;
+                    checkBox.Checked = true;
                 }
             }
         }
-
-
-        private void UpdateBossesSection1(string[] metaBosses, string[] lines)
-        {
-            int bossesIndex = -1;
-            for (int i = 0; i < lines.Length; i++)
-            {
-                if (lines[i].StartsWith("Bosses:"))
-                {
-                    bossesIndex = i;
-                    break;
-                }
-            }
-
-            if (bossesIndex != -1 && bossesIndex < lines.Length)
-            {
-                lines[bossesIndex] = $"Bosses: \"{string.Join(", ", metaBosses)}\"";
-            }
-        }
-
-
-
-        private void Mixed_Click_1(object sender, EventArgs e)
-        {
-            try
-            {
-                ClearAll_Click(null, EventArgs.Empty);
-
-
-                string[] lines = ReadConfigFile();
-
-                int mixedIndex = -1;
-                for (int i = 0; i < lines.Length; i++)
-                {
-                    if (lines[i].StartsWith("Mixed:"))
-                    {
-                        mixedIndex = i;
-                        break;
-                    }
-                }
-
-                if (mixedIndex != -1 && mixedIndex < lines.Length)
-                {
-                    string mixedBossLine = lines[mixedIndex].Replace("Mixed:", "").Trim();
-
-                    string[] mixedBosses = mixedBossLine
-                        .Trim('"')
-                        .Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
-                        .Select(boss => boss.Trim())
-                        .ToArray();
-
-                    CheckBossCheckboxes(mixedBosses);
-                    UpdateBossesSection2(mixedBosses, lines);
-                }
-                else
-                {
-                    SaveTextToFile(GlobalVariables.DEFAULT_MIXED, "Mixed");
-                    Mixed_Click_1(sender, e);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error loading Mixed bosses: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-
-        private void UpdateBossesSection2(string[] mixedBosses, string[] lines)
-        {
-            int mixedIndex = -1;
-            for (int i = 0; i < lines.Length; i++)
-            {
-                if (lines[i].StartsWith("Bosses:"))
-                {
-                    mixedIndex = i;
-                    break;
-                }
-            }
-
-            if (mixedIndex != -1 && mixedIndex < lines.Length)
-            {
-                lines[mixedIndex] = $"Bosses: \"{string.Join(", ", mixedBosses)}\"";
-            }
-        }
-
-
-        public static readonly char[] Separator = { ';' };
-        public static List<string> BossList23 { get; set; } = new();
 
         public static void AddBossEvent(string bossName, string[] timings, string category, string waypoint = "")
         {
-            try
+            foreach (var timing in timings)
             {
-                foreach (var timing in timings)
-                {
-                    var utcTime = ConvertToUtcFromConfigTime(timing);
-                    BossEventsList.Add(new BossEvent(bossName, utcTime.TimeOfDay, category, waypoint));
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error in AddBossEvent (multiple timings): {ex.Message}");
-            }
-        }
-
-
-        public static void SetBossListFromConfig_Bosses()
-        {
-            try
-            {
-                var lines = File.ReadAllLines(GlobalVariables.FILE_PATH);
-
-                int bossIndex = Array.FindIndex(lines, line => line.StartsWith("Bosses:", StringComparison.OrdinalIgnoreCase));
-                if (bossIndex == -1 || bossIndex >= lines.Length)
-                    return;
-
-                var bossNames = lines[bossIndex]
-                    .Replace("Bosses:", "")
-                    .Trim().Trim('"')
-                    .Split(Separator, StringSplitOptions.RemoveEmptyEntries)
-                    .Select(name => name.Trim())
-                    .ToArray();
-
-                var newBossList = new List<string>(bossNames);
-
-                for (int i = bossIndex + 1; i < lines.Length; i++)
-                {
-                    if (!lines[i].StartsWith("Timings:", StringComparison.OrdinalIgnoreCase))
-                        continue;
-
-                    var timings = lines[i]
-                        .Replace("Timings:", "")
-                        .Trim()
-                        .Split(Separator, StringSplitOptions.RemoveEmptyEntries)
-                        .Select(t => t.Trim())
-                        .ToArray();
-
-                    if (timings.Length == bossNames.Length)
-                    {
-                        for (int j = 0; j < bossNames.Length; j++)
-                        {
-                            AddBossEvent(bossNames[j], new[] { timings[j] }, "WBs");
-                        }
-                    }
-
-                    break;
-                }
-
-                BossList23 = newBossList;
-                UpdateBossOverlayList();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error in SetBossListFromConfig_Bosses: {ex.Message}");
-            }
-        }
-
-        public static string getConfigLineForItem(string configItem)
-        {
-            string[] lines = ReadConfigFile();
-
-            // Index of the line with the Meta bosses
-            int versionIndex = -1;
-            for (int i = 0; i < lines.Length; i++)
-            {
-                if (lines[i].StartsWith(configItem + ":"))
-                {
-                    versionIndex = i;
-                    break;
-                }
-            }
-            if (versionIndex != -1 && versionIndex < lines.Length)
-            {
-                // Extract the bosses from the Meta line
-                return lines[versionIndex].Replace(configItem + ":", "").Trim();
-
-
-            }
-            else
-            {
-                SaveTextToFile("1", configItem);
-                return getConfigLineForItem(configItem);
-            }
-        }
-
-        private void FidosSpecial_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                ClearAll_Click(null, EventArgs.Empty);
-
-
-                string[] lines = ReadConfigFile();
-
-                int worldIndex = -1;
-                for (int i = 0; i < lines.Length; i++)
-                {
-                    if (lines[i].StartsWith("Fido:"))
-                    {
-                        worldIndex = i;
-                        break;
-                    }
-                }
-
-                if (worldIndex != -1 && worldIndex < lines.Length)
-                {
-                    string worldBossLine = lines[worldIndex].Replace("Fido:", "").Trim();
-
-                    string[] worldBosses = worldBossLine
-                        .Trim('"')
-                        .Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
-                        .Select(boss => boss.Trim())
-                        .ToArray();
-
-                    CheckBossCheckboxes(worldBosses);
-                    UpdateBossesSection1(worldBosses, lines);
-                }
-                else
-                {
-                    SaveTextToFile(GlobalVariables.DEFAULT_WORLD, "Fido");
-                    World_Click(sender, e);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error loading World bosses: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-
-        private void World_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                ClearAll_Click(null, EventArgs.Empty);
-
-
-                string[] lines = ReadConfigFile();
-
-                int worldIndex = -1;
-                for (int i = 0; i < lines.Length; i++)
-                {
-                    if (lines[i].StartsWith("World:"))
-                    {
-                        worldIndex = i;
-                        break;
-                    }
-                }
-
-                if (worldIndex != -1 && worldIndex < lines.Length)
-                {
-                    string worldBossLine = lines[worldIndex].Replace("World:", "").Trim();
-
-                    string[] worldBosses = worldBossLine
-                        .Trim('"')
-                        .Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
-                        .Select(boss => boss.Trim())
-                        .ToArray();
-
-                    CheckBossCheckboxes(worldBosses);
-                    UpdateBossesSection1(worldBosses, lines);
-                }
-                else
-                {
-                    SaveTextToFile(GlobalVariables.DEFAULT_WORLD, "World");
-                    World_Click(sender, e);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error loading World bosses: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void ClearAll_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                foreach (CheckBox checkBox in bossCheckBoxMap.Values)
-                {
-                    checkBox.Checked = false;
-                    checkBox.Invalidate();
-                }
-
-                string[] lines = ReadConfigFile();
-
-                int bossIndex = -1;
-                for (int i = 0; i < lines.Length; i++)
-                {
-                    if (lines[i].StartsWith("Bosses:"))
-                    {
-                        bossIndex = i;
-                        break;
-                    }
-                }
-
-                if (bossIndex != -1 && bossIndex < lines.Length)
-                {
-                    lines[bossIndex] = "Bosses: ";
-                    WriteConfigFile(lines);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error unchecking all bosses: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void ShowAll_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                CheckAllBossCheckboxes();
-                string[] lines = ReadConfigFile();
-
-                int bossIndex = -1;
-                for (int i = 0; i < lines.Length; i++)
-                {
-                    if (lines[i].StartsWith("Bosses:"))
-                    {
-                        bossIndex = i;
-                        break;
-                    }
-                }
-
-                if (bossIndex != -1 && bossIndex < lines.Length)
-                {
-                    string bossesLine = lines[bossIndex].Replace("Bosses:", "").Trim();
-
-                    string[] worldBosses = bossesLine
-                        .Trim('"')
-                        .Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
-                        .Select(boss => boss.Trim())
-                        .ToArray();
-
-                    CheckBossCheckboxes(worldBosses);
-                    UpdateBossesSection1(worldBosses, lines);
-                }
-                else
-                {
-                    SaveTextToFile(GlobalVariables.DEFAULT_BOSSES, "Bosses");
-                    World_Click(sender, e);
-                    MessageBox.Show($"World section not found in config.", "Not Found", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error loading World bosses: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void button67_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                // Anzahl der Bosse aus dem Textfeld entnehmen (ScheduleTextBox)
-                if (int.TryParse(Quantity.Text, out int numberOfBosses) && numberOfBosses > 0)
-                {
-                    // Hier die Liste der kommenden Bosse laden (bereits vorhandene Methode)
-                    List<string> bossNamesFromConfig = BossList23;
-
-                    var bossEventGroups = BossEventGroups
-                        .Where(bossEventGroup => bossNamesFromConfig.Contains(bossEventGroup.BossName))
-                        .ToList();
-
-                    var allBosses = bossEventGroups
-                        .SelectMany(bossEventGroup => bossEventGroup.GetNextRuns())
-                        .ToList();
-
-                    // Sortierung nach der Zeit des nächsten Bosskampfs
-                    allBosses.Sort((bossEvent1, bossEvent2) =>
-                    {
-                        return bossEvent1.NextRunTime.CompareTo(bossEvent2.NextRunTime);
-                    });
-
-                    // Bossnamen extrahieren (bis zur gewünschten Anzahl)
-                    var bossNames = allBosses.Take(numberOfBosses).Select(bossEvent => bossEvent.BossName).ToList();
-
-                    // Bossnamen durch Kommas getrennt
-                    string bossNamesString = string.Join("," + Environment.NewLine, bossNames);
-
-                    // Die Bossnamen in die Zwischenablage kopieren
-                    Clipboard.SetText(bossNamesString);
-
-                    // Bossnamen in ResultTextBox anzeigen
-                    SearchResults.Text = bossNamesString;
-                }
-                else
-                {
-                    MessageBox.Show("A Number please!.", "Do you know the meaning of a NUMBER, try 10!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
-            string bossName = "FireShaman";
-
-
-
-            if (FireShaman.Checked)
-            {
-                SaveBossNameToConfig(bossName);
-            }
-            else
-            {
-                RemoveBossNameFromConfig(bossName);
-            }
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            Application.Restart();
-        }
-
-        private void button69_Click(object sender, EventArgs e)
-        {
-            if (_overlayWindow == null)
-            {
-                _overlayWindow = new OverlayWindow();
-                _overlayWindow.Closed += (s, args) => _overlayWindow = null; // Clean up on close
-            }
-
-            if (_overlayWindow.IsVisible)
-            {
-                _overlayWindow.Hide();
-            }
-            else
-            {
-                _overlayWindow.Show();
-            }
-        }
-
-        public static void WriteConfigFile(string[] lines)
-        {
-            try
-            {
-                string[] existingLines = ReadConfigFile();
-
-                File.WriteAllLines(GlobalVariables.FILE_PATH, lines);
-
-                UpdateBossUiBosses();
-
-
-
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error writing to config file: {ex.Message}");
-                throw new Exception($"Error writing to config file: {ex.Message}");
-            }
-        }
-
-        public static void UpdateBossUiBosses()
-        {
-            BossTimings.SetBossListFromConfig_Bosses();
-            BossTimerService.BossTimer.UpdateBossList();
-
-            // Sicherstellen, dass Overlay aktualisiert wird:
-            var overlay = OverlayWindow.GetInstance();
-            if (overlay != null && overlay.IsVisible)
-            {
-                overlay.UpdateBossOverlayList();
+                var utcTime = ConvertToUtcFromConfigTime(timing);
+                BossEventsList.Add(new BossEvent(bossName, utcTime.TimeOfDay, category, waypoint));
             }
         }
 

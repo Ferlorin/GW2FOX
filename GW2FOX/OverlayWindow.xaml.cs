@@ -174,6 +174,8 @@ namespace GW2FOX
             }
         }
 
+
+
         private void SortOverlayItems()
         {
             var sorted = OverlayItems.OrderBy(b => b.SecondsRemaining).ToList();

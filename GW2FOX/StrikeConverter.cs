@@ -2,7 +2,6 @@
 using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
-using System.Windows.Media.TextFormatting;
 
 namespace GW2FOX
 {
@@ -13,7 +12,6 @@ namespace GW2FOX
             return (bool)value ? TextDecorations.Strikethrough : null;
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-            => throw new NotImplementedException();
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) => throw new NotImplementedException();
     }
 }

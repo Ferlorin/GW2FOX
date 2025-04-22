@@ -41,9 +41,62 @@ namespace GW2FOX
             }
         }
 
-        public DateTime TimeToShow { get; set; }
+        private string _category = string.Empty;
+        public string Category
+        {
+            get => _category;
+            set
+            {
+                if (_category != value)
+                {
+                    _category = value;
+                    OnPropertyChanged(nameof(Category));
+                    OnPropertyChanged(nameof(CategoryBrush));
+                }
+            }
+        }
 
-        public DateTime NextRunTime { get; set; }
+        public System.Windows.Media.Brush CategoryBrush => Category switch
+        {
+            "Maguuma" => System.Windows.Media.Brushes.LimeGreen,
+            "WBs" => System.Windows.Media.Brushes.WhiteSmoke,
+            "Ice" => System.Windows.Media.Brushes.DeepSkyBlue,
+            "Cantha" => System.Windows.Media.Brushes.Blue,
+            "SotO" => System.Windows.Media.Brushes.Yellow,
+            "LWS2" => System.Windows.Media.Brushes.LightYellow,
+            "LWS3" => System.Windows.Media.Brushes.ForestGreen,
+            "Desert" => System.Windows.Media.Brushes.DeepPink,
+            _ => System.Windows.Media.Brushes.White
+        };
+
+
+        private static BitmapImage? _waypointImage;
+        public static BitmapImage WaypointImage
+        {
+            get
+            {
+                if (_waypointImage == null)
+                {
+                    using var bitmap = Properties.Resources.Waypoint;
+                    using var ms = new MemoryStream();
+                    bitmap.Save(ms, Imaging.ImageFormat.Png);
+                    ms.Position = 0;
+
+                    var image = new BitmapImage();
+                    image.BeginInit();
+                    image.CacheOption = BitmapCacheOption.OnLoad;
+                    image.StreamSource = ms;
+                    image.EndInit();
+                    image.Freeze();
+
+                    _waypointImage = image;
+                }
+
+                return _waypointImage;
+            }
+        }
+
+        public bool IsConcurrentEvent { get; set; }
 
         private double _opacity = 1.0;
         public double Opacity
@@ -58,6 +111,10 @@ namespace GW2FOX
                 }
             }
         }
+
+        public DateTime NextRunTime { get; set; }
+
+        public DateTime TimeToShow => IsPastEvent ? NextRunTime.AddMinutes(15) : NextRunTime;
 
         private string _timeRemainingFormatted = string.Empty;
         public string TimeRemainingFormatted
@@ -101,70 +158,9 @@ namespace GW2FOX
             }
         }
 
-        private static BitmapImage? _waypointImage;
-        public static BitmapImage WaypointImage
-        {
-            get
-            {
-                if (_waypointImage == null)
-                {
-                    using var bitmap = Properties.Resources.Waypoint;
-                    using var ms = new MemoryStream();
-                    bitmap.Save(ms, Imaging.ImageFormat.Png);
-                    ms.Position = 0;
-
-                    var image = new BitmapImage();
-                    image.BeginInit();
-                    image.CacheOption = BitmapCacheOption.OnLoad;
-                    image.StreamSource = ms;
-                    image.EndInit();
-                    image.Freeze();
-
-                    _waypointImage = image;
-                }
-
-                return _waypointImage;
-            }
-        }
-
-        public bool IsConcurrentEvent { get; set; } = false;
-
-        private string _category = string.Empty;
-        public string Category
-        {
-            get => _category;
-            set
-            {
-                if (_category != value)
-                {
-                    _category = value;
-                    OnPropertyChanged(nameof(Category));
-                    OnPropertyChanged(nameof(CategoryBrush));
-                }
-            }
-        }
-
-        public System.Windows.Media.Brush CategoryBrush =>
-Category switch
-{
-"Maguuma" => System.Windows.Media.Brushes.LimeGreen,
-"WBs" => System.Windows.Media.Brushes.WhiteSmoke,
-"Ice" => System.Windows.Media.Brushes.DeepSkyBlue,
-"Cantha" => System.Windows.Media.Brushes.Blue,
-"SotO" => System.Windows.Media.Brushes.Yellow,
-"LWS2" => System.Windows.Media.Brushes.LightYellow,
-"LWS3" => System.Windows.Media.Brushes.ForestGreen,
-"Desert" => System.Windows.Media.Brushes.DeepPink,
-_ => System.Windows.Media.Brushes.White
-};
-
         public void UpdateCountdown()
         {
             var now = DateTime.Now;
-
-            var nextEndTime = NextRunTime.AddMinutes(14).AddSeconds(59);
-            TimeToShow = NextRunTime < now ? nextEndTime : NextRunTime;
-
             var remaining = TimeToShow - now;
 
             TimeRemainingFormatted = $"{(int)remaining.TotalHours:D2}:{remaining.Minutes:D2}:{remaining.Seconds:D2}";
@@ -172,9 +168,6 @@ _ => System.Windows.Media.Brushes.White
             IsPastEvent = NextRunTime < now;
             Countdown = TimeRemainingFormatted;
         }
-
-
-
 
         protected void OnPropertyChanged(string propertyName)
         {

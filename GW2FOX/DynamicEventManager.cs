@@ -2,45 +2,24 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text.Json;
-using static GW2FOX.BossTimings;
-using System.Windows.Forms;
-using System.Net.Http;
-using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace GW2FOX
 {
     internal static class DynamicEventManager
     {
-        private const string PersistFile = "dynamicEvents.json";
+        private const string PersistFile = "dynamic_events.json";
 
-        /// <summary>
-        /// Statically defined dynamic events.
-        /// </summary>
-        public static List<DynamicEvent> Events { get; } = new List<DynamicEvent>
-        {
-            new DynamicEvent("The Eye of Zhaitan", TimeSpan.FromMinutes(20), "Treasures", "[&BPgCAAA=]"), // correct all 20min from point i click
-            new DynamicEvent("Gates of Arah",        TimeSpan.FromMinutes(90), "Treasures", "[&BA8DAAA=]"), //???
-            new DynamicEvent("Branded Generals",     TimeSpan.FromMinutes(90), "Treasures", "[&BIMLAAA=]"), //???
-            new DynamicEvent("Dredge Commissar",     TimeSpan.FromMinutes(20), "Treasures", "[&BFYCAAA=]"), // correct same style like Eye
-            new DynamicEvent("Captain Rotbeard",     TimeSpan.FromMinutes(35), "Treasures", "[&BOQGAAA=]"), // correct same style like Eye
-            new DynamicEvent("Rhendak",              TimeSpan.FromMinutes(10), "Treasures", "[&BNwAAAA=]"), // correct same style like Eye
-            new DynamicEvent("Ogrewars",             TimeSpan.FromMinutes(20), "Treasures", "[&BDwEAAA=]"), // correct same style like Eye
-            new DynamicEvent("Statue of Dwanya",     TimeSpan.FromMinutes(50), "Treasures", "[&BLICAAA=]"), // correct same style like Eye
-            new DynamicEvent("Priestess of Lyssa",   TimeSpan.FromMinutes(90), "Treasures", "[&BKsCAAA=]"), //???
-        };
+        public static List<DynamicEvent> Events { get; private set; } = new();
 
         static DynamicEventManager()
         {
-            LoadPersistedState();
+            LoadPersistedEvents();
         }
 
-        /// <summary>
-        /// Trigger the event and persist state.
-        /// </summary>
         public static void Trigger(string bossName)
         {
-            var ev = Events.FirstOrDefault(e => e.BossName == bossName);
+            var ev = Events.FirstOrDefault(e => e.BossName.Equals(bossName, StringComparison.OrdinalIgnoreCase));
             if (ev == null)
             {
                 Console.WriteLine($"[Trigger] No dynamic event found for {bossName}");
@@ -48,90 +27,66 @@ namespace GW2FOX
             }
 
             ev.Trigger();
-            SavePersistedState();
-            Console.WriteLine($"[Trigger] Triggered dynamic event: {bossName} at {DateTime.UtcNow}");
+            SavePersistedEvents();
         }
 
-
-        /// <summary>
-        /// Get all currently running events as BossEventRuns.
-        /// </summary>
         public static IEnumerable<BossEventRun> GetActiveBossEventRuns()
         {
-            var running = Events
-                .Where(e => e.IsRunning)
-                .Select(e => e.BossName)
-                .ToList();
-
-            Console.WriteLine("Running dynamic events: " + string.Join(", ", running));
-
             return Events
                 .Where(e => e.IsRunning)
                 .Select(e => e.ToBossEventRun());
         }
 
-
-        private static void LoadPersistedState()
+        public static void LoadPersistedEvents()
         {
             try
             {
                 if (!File.Exists(PersistFile))
+                {
+                    LoadDefaultEvents();
                     return;
+                }
 
                 var json = File.ReadAllText(PersistFile);
+                var states = JsonConvert.DeserializeObject<List<DynamicEventState>>(json);
 
-                var options = new JsonSerializerOptions
-                {
-                    Converters = { new UtcDateTimeConverter() }
-                };
-
-                var saved = JsonSerializer.Deserialize<List<PersistEntry>>(json, options); ;
-                if (saved == null) return;
-
-                foreach (var entry in saved)
-                {
-                    var ev = Events.FirstOrDefault(e => e.BossName == entry.BossName);
-                    if (ev != null)
-                        ev.SetStartTime(entry.UtcStartTime);
-                }
+                Events = states?.Select(DynamicEvent.FromState).ToList() ?? new List<DynamicEvent>();
             }
-            catch
+            catch (Exception ex)
             {
-                // ignore errors or log
+                Console.WriteLine($"[Load] Failed to load dynamic events: {ex.Message}");
+                LoadDefaultEvents();
             }
         }
 
-        private static void SavePersistedState()
+        public static void SavePersistedEvents()
         {
             try
             {
-                var entries = Events
-                    .Where(e => e.StartTime.HasValue)
-                    .Select(e => new PersistEntry { BossName = e.BossName, UtcStartTime = e.StartTime.Value.ToUniversalTime() })
-                    .ToList();
-
-                var options = new JsonSerializerOptions
-                {
-                    Converters = { new UtcDateTimeConverter() },
-                    WriteIndented = true
-                };
-
-                var json = JsonSerializer.Serialize(entries, options);
+                var states = Events.Select(e => e.ToState()).ToList();
+                var json = JsonConvert.SerializeObject(states, Formatting.Indented);
                 File.WriteAllText(PersistFile, json);
-
             }
-            catch
+            catch (Exception ex)
             {
-                // ignore errors or log
+                Console.WriteLine($"[Save] Failed to persist dynamic events: {ex.Message}");
             }
         }
 
-        private class PersistEntry
+        private static void LoadDefaultEvents()
         {
-            public string BossName { get; set; } = string.Empty;
-            public DateTime UtcStartTime { get; set; }
+            Events = new List<DynamicEvent>
+            {
+                new("The Eye of Zhaitan", TimeSpan.FromMinutes(20), "Treasures", "[&BPgCAAA=]"),
+                new("Gates of Arah",        TimeSpan.FromMinutes(90), "Treasures", "[&BA8DAAA=]"),
+                new("Branded Generals",     TimeSpan.FromMinutes(90), "Treasures", "[&BIMLAAA=]"),
+                new("Dredge Commissar",     TimeSpan.FromMinutes(20), "Treasures", "[&BFYCAAA=]"),
+                new("Captain Rotbeard",     TimeSpan.FromMinutes(35), "Treasures", "[&BOQGAAA=]"),
+                new("Rhendak",              TimeSpan.FromMinutes(10), "Treasures", "[&BNwAAAA=]"),
+                new("Ogrewars",             TimeSpan.FromMinutes(20), "Treasures", "[&BDwEAAA=]"),
+                new("Statue of Dwanya",     TimeSpan.FromMinutes(50), "Treasures", "[&BLICAAA=]"),
+                new("Priestess of Lyssa",   TimeSpan.FromMinutes(90), "Treasures", "[&BKsCAAA=]")
+            };
         }
     }
 }
-
-

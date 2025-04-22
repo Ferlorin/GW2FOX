@@ -20,6 +20,12 @@ namespace GW2FOX
             // Updater.CheckForUpdates(Worldbosses.getConfigLineForItem("Version"));
         }
 
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            BossTimings.LoadBossConfig("bosses_config.json");
+        }
+
+
         private void HandleException(Exception ex)
         {
             MessageBox.Show($"An error occurred: {ex.Message}\n\nStack Trace: {ex.StackTrace}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);

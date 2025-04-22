@@ -9,14 +9,9 @@ namespace GW2FOX
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is bool isConcurrent && isConcurrent)
-                return FontStyles.Italic;
-            return FontStyles.Normal;
+            return value is bool b && b ? FontStyles.Italic : FontStyles.Normal;
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) => throw new NotImplementedException();
     }
 }

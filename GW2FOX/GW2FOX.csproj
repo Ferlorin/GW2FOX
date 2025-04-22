@@ -32,6 +32,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="GW2FOX.csproj.user" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 
