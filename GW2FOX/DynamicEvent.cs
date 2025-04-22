@@ -30,6 +30,7 @@ namespace GW2FOX
         public void Trigger()
         {
             StartTime = DateTime.UtcNow;
+            Console.WriteLine($"[Trigger] {BossName} triggered at {StartTime.Value} (UTC)");
         }
 
         /// <summary>
@@ -37,7 +38,9 @@ namespace GW2FOX
         /// </summary>
         public void SetStartTime(DateTime utcStart)
         {
-            StartTime = utcStart;
+            // Erzwinge Markierung als UTC
+            Console.WriteLine($"[LOAD] {BossName} StartTime={utcStart} Kind={utcStart.Kind} DST active={GlobalVariables.IsDaylightSavingTimeActive()}");
+
         }
 
         /// <summary>
@@ -53,7 +56,8 @@ namespace GW2FOX
         {
             if (!StartTime.HasValue)
             {
-                Console.WriteLine($"[WARN] Tried to convert {BossName} but StartTime is null!");
+                Console.WriteLine($"[RUN] {BossName} → Start: {StartTime}, Delay: {Delay}, NextRun: {StartTime + Delay}");
+
                 throw new InvalidOperationException("Event not triggered");
             }
 

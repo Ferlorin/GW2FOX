@@ -101,7 +101,7 @@ namespace GW2FOX
             {
                 var entries = Events
                     .Where(e => e.StartTime.HasValue)
-                    .Select(e => new PersistEntry { BossName = e.BossName, UtcStartTime = e.StartTime.Value })
+                    .Select(e => new PersistEntry { BossName = e.BossName, UtcStartTime = e.StartTime.Value.ToUniversalTime() })
                     .ToList();
 
                 var json = JsonSerializer.Serialize(entries);

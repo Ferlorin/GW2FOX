@@ -11,9 +11,15 @@ public class GlobalVariables
 
     public static DateTime ConvertUtcToLocal(DateTime utcDateTime)
     {
-        DateTime localTime = TimeZoneInfo.ConvertTimeFromUtc(utcDateTime, TIMEZONE_TO_USE);
-        return localTime;
+        if (utcDateTime.Kind != DateTimeKind.Utc)
+        {
+            // Falls die Zeit nicht als UTC markiert ist, setze sie auf UTC
+            utcDateTime = DateTime.SpecifyKind(utcDateTime, DateTimeKind.Utc);
+        }
+        return utcDateTime.ToLocalTime(); // Umwandlung in lokale Zeit
     }
+
+
 
     public static DateTime CURRENT_LOCAL_TIME
     {

@@ -160,7 +160,7 @@ _ => System.Windows.Media.Brushes.White
 
         public void UpdateCountdown()
         {
-            var now = DateTime.Now;  // Ändere zu DateTime.Now für lokale Zeit
+            var now = DateTime.UtcNow;
             var nextEndTime = NextRunTime.AddMinutes(14).AddSeconds(59);
             TimeToShow = NextRunTime < now ? nextEndTime : NextRunTime;
 
@@ -170,9 +170,9 @@ _ => System.Windows.Media.Brushes.White
             SecondsRemaining = (int)remaining.TotalSeconds;
             IsPastEvent = NextRunTime < now;
             Countdown = TimeRemainingFormatted;
-
-            Console.WriteLine($"[{BossName}] Updated countdown: {TimeRemainingFormatted}");
         }
+
+
 
         protected void OnPropertyChanged(string propertyName)
         {

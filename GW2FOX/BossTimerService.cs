@@ -14,8 +14,6 @@ namespace GW2FOX
 {
     public static class BossTimerService
     {
-        private static readonly string TimeZoneId = "W. Europe Standard Time";
-
         public static OverlayWindow? _overlayWindow { get; set; }
         public static BossTimer? _bossTimer { get; private set; } 
         public static System.Windows.Controls.ListView CustomBossList { get; set; } = new();
@@ -31,8 +29,8 @@ namespace GW2FOX
         {
             try
             {
-                BossTimings.SetBossListFromConfig_Bosses(); // Wichtig
-                BossTimings.UpdateBossOverlayList();        // Erstellt initiale Items
+                BossTimings.SetBossListFromConfig_Bosses();
+                BossTimings.UpdateBossOverlayList(); 
 
                 InitializeCustomBossList();
                 if (_overlayWindow == null)
@@ -84,7 +82,6 @@ namespace GW2FOX
 
                 }
 
-                // ✅ Das hier sorgt dafür, dass die Timer-Logik loslegt
                 _bossTimer?.Start();
             }
             catch (Exception ex)
