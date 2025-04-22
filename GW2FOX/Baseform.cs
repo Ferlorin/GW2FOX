@@ -30,6 +30,7 @@ namespace GW2FOX
         {
             InitializeGlobalKeyboardHook();
             SetFormTransparency();
+            BossTimings.LoadBossConfig("bosses_config.json");
         }
 
         protected override void OnLoad(EventArgs e)
@@ -228,58 +229,65 @@ namespace GW2FOX
 
             try
             {
-                Console.WriteLine($"[LoadTextFromConfig] Versuche '{sectionHeader}' aus {jsonPath} zu laden...");
 
                 if (!File.Exists(jsonPath))
                 {
-                    Console.WriteLine($"[LoadTextFromConfig] Datei '{jsonPath}' existiert nicht – wird mit Defaultwert neu erstellt.");
                     SaveTextToFile(defaultToInsert, sectionHeader, true);
                     LoadTextFromConfig(sectionHeader, textBox, defaultToInsert); // Retry
                     return;
                 }
 
                 string jsonContent = File.ReadAllText(jsonPath);
-                Console.WriteLine($"[LoadTextFromConfig] JSON geladen. Länge: {jsonContent.Length} Zeichen.");
 
                 var config = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, string>>(jsonContent) ?? new();
 
-                Console.WriteLine($"[LoadTextFromConfig] JSON deserialisiert. Einträge: {config.Count}");
 
                 if (config.TryGetValue(sectionHeader, out string value))
                 {
-                    Console.WriteLine($"[LoadTextFromConfig] Eintrag '{sectionHeader}' gefunden, wird in TextBox gesetzt.");
                     textBox.Text = value;
                 }
                 else
                 {
-                    Console.WriteLine($"[LoadTextFromConfig] Eintrag '{sectionHeader}' fehlt – wird neu gespeichert und erneut geladen.");
                     SaveTextToFile(defaultToInsert, sectionHeader, true);
                     LoadTextFromConfig(sectionHeader, textBox, defaultToInsert); // Retry
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"[LoadTextFromConfig] Fehler: {ex.Message}");
                 System.Windows.Forms.MessageBox.Show($"Error loading {sectionHeader}: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
 
         protected void LoadConfigText(
-            System.Windows.Forms.TextBox runinfoBox,
-            System.Windows.Forms.TextBox squadinfoBox,
-            System.Windows.Forms.TextBox guildBox,
-            System.Windows.Forms.TextBox welcomeBox,
-            System.Windows.Forms.TextBox symbolsBox)
+    System.Windows.Forms.TextBox runinfoBox,
+    System.Windows.Forms.TextBox squadinfoBox,
+    System.Windows.Forms.TextBox guildBox,
+    System.Windows.Forms.TextBox welcomeBox,
+    System.Windows.Forms.TextBox symbolsBox)
         {
+
             var config = BossTimings.LoadedConfig;
 
-            runinfoBox.Text = config?.Runinfo ?? "«Meta-Train» with the old [FOX]";
-            squadinfoBox.Text = config?.Squadinfo ?? "• InstanceCheck:\n    - right click on me & join map\n• Don’t cancel invites!\n• No 3ple Trouble\n\n• https://gw2fox.wixsite.com/about";
-            guildBox.Text = config?.Guild ?? "☠ Young or old [FOX], we take every stray. Humor, respect and fun at the game are what distinguish us. No Obligations! Infos: wsp me or https://gw2fox.wixsite.com/about ☻";
-            welcomeBox.Text = config?.Welcome ?? "Welcome to the FOXhole. Read the Message of the Day for Infos - Questions, ask us! Guides & Tools on our Homepage: https://gw2fox.wixsite.com/about";
-            symbolsBox.Text = config?.Symbols ?? "☠ ★ ☣ ☮ ☢ ♪ ☜ ☞ ┌ ∩ ┐ ( ●̮̃ • ) ۶ ( • ◡ • ) ☿ ♀ ♂ ☀ ☁ ☂ ☃ ☄ ☾ ☽ ☇ ☉ ☐ ☒ ☑ ☝ ☚ • ☟ ☆ ♕ ♖ ♘ ♙ ♛ ♜ ♞ ♟ † ☨ ☥ ☦ ☓ ☩ ☯ ☧ ☬ ☸ ♁ ♆ ☭ ☪ ☫ © ™ ® ☎ ♥ 凸";
+            if (config == null)
+            {
+                return;
+            }
+
+            Console.WriteLine("[LoadConfigText] Konfiguration geladen:");
+            Console.WriteLine($"  Runinfo: {config.Runinfo}");
+            Console.WriteLine($"  Squadinfo: {config.Squadinfo}");
+            Console.WriteLine($"  Guild: {config.Guild}");
+            Console.WriteLine($"  Welcome: {config.Welcome}");
+            Console.WriteLine($"  Symbols: {config.Symbols}");
+
+            runinfoBox.Text = config.Runinfo ?? "";
+            squadinfoBox.Text = config.Squadinfo ?? "";
+            guildBox.Text = config.Guild ?? "";
+            welcomeBox.Text = config.Welcome ?? "";
+            symbolsBox.Text = config.Symbols ?? "";
         }
+
 
 
         protected override void OnFormClosing(FormClosingEventArgs e)

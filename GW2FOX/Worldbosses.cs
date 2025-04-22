@@ -30,8 +30,12 @@ namespace GW2FOX
 
         private void Worldbosses_Load_1(object? sender, EventArgs e)
         {
+            Console.WriteLine("[Worldbosses] Load_1 wurde aufgerufen.");
+            Console.WriteLine($"[Worldbosses] BossList23.Count: {BossTimings.BossList23.Count}");
+
             LoadBossGroup("World");
         }
+
 
         const int SW_RESTORE = 9;
 

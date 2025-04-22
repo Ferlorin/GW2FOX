@@ -32,12 +32,14 @@ namespace GW2FOX
             BossListView = listView;
         }
 
-        
+
 
         private static void AddBossEvent(string bossName, string[] timings, string category, string waypoint = "")
         {
             try
             {
+                Console.WriteLine($"[AddBossEvent] {bossName}: {timings.Length} Zeiten, Kategorie: {category}, WP: {waypoint}");
+
                 foreach (var timing in timings)
                 {
                     var utcTime = ConvertToUtcFromConfigTime(timing);
@@ -46,9 +48,10 @@ namespace GW2FOX
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error in AddBossEvent (multiple timings): {ex.Message}");
+                Console.WriteLine($"[AddBossEvent] Fehler bei {bossName}: {ex.Message}");
             }
         }
+
 
         public static DateTime ConvertToUtcFromConfigTime(string configTime)
         {
@@ -122,41 +125,75 @@ namespace GW2FOX
 
         public static void LoadBossConfig(string filePath)
         {
-            Console.WriteLine("[Config] LoadBossConfig (JSON) wurde aufgerufen.");
+            Console.WriteLine($"[Config] Lade Boss-Konfiguration aus: {filePath}");
             Init();
 
             try
             {
-                var json = File.ReadAllText(filePath);
-                var bossConfig = JsonConvert.DeserializeObject<BossConfig>(json);
-
-                if (bossConfig?.Bosses == null || bossConfig.Bosses.Count == 0)
+                if (!File.Exists(filePath))
                 {
-                    Console.WriteLine("[Config] Keine Bosse gefunden oder ungültige JSON.");
+                    Console.WriteLine($"[Config] Datei nicht gefunden: {filePath}");
                     return;
                 }
 
-                LoadedConfig = bossConfig; // ✅ SPEICHERE die komplette Konfiguration
+                var json = File.ReadAllText(filePath);
+                Console.WriteLine($"[Config] JSON geladen. Länge: {json.Length} Zeichen");
+
+                var bossConfig = JsonConvert.DeserializeObject<BossConfig>(json);
+
+                if (bossConfig == null)
+                {
+                    Console.WriteLine("[Config] ❌ BossConfig ist null!");
+                    return;
+                }
+
+                LoadedConfig = bossConfig;
+
+                if (bossConfig.Bosses == null)
+                {
+                    Console.WriteLine("[Config] ❌ BossConfig.Bosses ist null!");
+                    return;
+                }
+
+                if (bossConfig.Bosses.Count == 0)
+                {
+                    Console.WriteLine("[Config] ⚠️ BossConfig.Bosses ist leer.");
+                    return;
+                }
+
+                Console.WriteLine($"[Config] Bosses.Count: {bossConfig.Bosses.Count}");
 
                 var newBossList = new List<string>();
 
                 foreach (var boss in bossConfig.Bosses)
                 {
+                    if (boss?.Name == null || boss.Timings == null)
+                    {
+                        Console.WriteLine("[Config] ⚠️ Ungültiger Boss-Eintrag übersprungen.");
+                        continue;
+                    }
+
+                    Console.WriteLine($"[Config] Lade Boss: {boss.Name}, Kategorie: {boss.Category}, Zeiten: {string.Join(", ", boss.Timings)}");
+
                     newBossList.Add(boss.Name);
                     AddBossEvent(boss.Name, boss.Timings.ToArray(), boss.Category ?? "WBs", boss.Waypoint ?? "");
                 }
 
                 BossList23 = newBossList;
+
+                Console.WriteLine($"[Config] BossList23 enthält {BossList23.Count} Einträge.");
                 GenerateBossEventGroups();
                 UpdateBossOverlayList();
 
-                Console.WriteLine($"[Config] {BossEventsList.Count} BossEvents erfolgreich geladen.");
+                Console.WriteLine($"[Config] ✅ {BossEventsList.Count} BossEvents erfolgreich geladen.");
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"[Error] Fehler beim Laden der Boss-JSON: {ex.Message}");
             }
         }
+
+
 
     }
 }

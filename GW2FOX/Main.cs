@@ -13,11 +13,20 @@ namespace GW2FOX
         private Worldbosses _worldbossesForm;
         private MiniOverlay _miniOverlay;
         private OverlayWindow _overlayWindow;
-        
+
         public Main()
         {
             InitializeComponent();
-            // Updater.CheckForUpdates(Worldbosses.getConfigLineForItem("Version"));
+
+            if (BossTimings.BossList23.Count == 0)
+            {
+                BossTimings.LoadBossConfig("bosses_config.json");
+                Console.WriteLine("[Main] BossKonfig wurde nachgeladen. BossList23.Count = " + BossTimings.BossList23.Count);
+            }
+            else
+            {
+                Console.WriteLine("[Main] BossKonfig war schon vorhanden.");
+            }
         }
 
         private void MainForm_Load(object sender, EventArgs e)

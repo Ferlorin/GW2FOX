@@ -30,10 +30,13 @@ public static class BossTimings
 {
     public static void LoadBossConfig(string filePath)
     {
+
         try
         {
             var json = File.ReadAllText(filePath);
             var bossConfig = JsonConvert.DeserializeObject<BossConfig>(json);
+            Console.WriteLine("[DEBUG] JSON-Inhalt nach Deserialisierung:");
+            Console.WriteLine(JsonConvert.SerializeObject(bossConfig, Formatting.Indented));
 
             foreach (var boss in bossConfig.Bosses)
             {
