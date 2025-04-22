@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.IO;
+using System.Globalization;
 
 namespace GW2FOX
 {
@@ -27,7 +28,7 @@ namespace GW2FOX
 
         private void Worldbosses_Load_1(object? sender, EventArgs e)
         {
-            SetBossListFromConfig_Bosses();
+            
         }
 
         const int SW_RESTORE = 9;
@@ -1845,7 +1846,6 @@ namespace GW2FOX
                 {
                     var utcTime = ConvertToUtcFromConfigTime(timing);
                     BossEventsList.Add(new BossEvent(bossName, utcTime.TimeOfDay, category, waypoint));
-
                 }
             }
             catch (Exception ex)
@@ -1853,6 +1853,7 @@ namespace GW2FOX
                 Console.WriteLine($"Error in AddBossEvent (multiple timings): {ex.Message}");
             }
         }
+
 
         public static void SetBossListFromConfig_Bosses()
         {
@@ -1904,9 +1905,6 @@ namespace GW2FOX
                 Console.WriteLine($"Error in SetBossListFromConfig_Bosses: {ex.Message}");
             }
         }
-
-
-
 
         public static string getConfigLineForItem(string configItem)
         {
@@ -2222,9 +2220,13 @@ namespace GW2FOX
             }
         }
 
-
-
-
+        public static DateTime ConvertToUtcFromConfigTime(string configTime)
+        {
+            return DateTime.SpecifyKind(
+                DateTime.ParseExact(configTime, "HH:mm:ss", CultureInfo.InvariantCulture),
+                DateTimeKind.Utc
+            );
+        }
     }
 }
 
