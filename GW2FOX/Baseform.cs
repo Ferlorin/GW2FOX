@@ -206,49 +206,19 @@ namespace GW2FOX
         }
 
         protected void LoadConfigText(
-    System.Windows.Forms.TextBox Runinfo,
-    System.Windows.Forms.TextBox Squadinfo,
-    System.Windows.Forms.TextBox Guild,
-    System.Windows.Forms.TextBox Welcome,
-    System.Windows.Forms.TextBox Symbols)
+            System.Windows.Forms.TextBox runinfoBox,
+            System.Windows.Forms.TextBox squadinfoBox,
+            System.Windows.Forms.TextBox guildBox,
+            System.Windows.Forms.TextBox welcomeBox,
+            System.Windows.Forms.TextBox symbolsBox)
         {
-            string jsonPath = "bosses_config.json";
+            var config = BossTimings.LoadedConfig;
 
-            try
-            {
-                // JSON laden oder leeres Dictionary erzeugen
-                Dictionary<string, string> config = File.Exists(jsonPath)
-                    ? JsonSerializer.Deserialize<Dictionary<string, string>>(File.ReadAllText(jsonPath)) ?? new()
-                    : new();
-
-                // Helper-Funktion zum Einlesen + Erstellen falls nicht vorhanden
-                void LoadOrInsert(string key, System.Windows.Forms.TextBox box, string fallback)
-                {
-                    if (config.TryGetValue(key, out string value))
-                    {
-                        box.Text = value;
-                    }
-                    else
-                    {
-                        config[key] = fallback;
-                        box.Text = fallback;
-                    }
-                }
-
-                // Standardtexte direkt hier definieren
-                LoadOrInsert("Runinfo", Runinfo, "«Meta-Train» with the old [FOX]");
-                LoadOrInsert("Squadinfo", Squadinfo, "• InstanceCheck:\n    - right click on me & join map\n• Don’t cancel invites!\n• No 3ple Trouble\n\n• https://gw2fox.wixsite.com/about");
-                LoadOrInsert("Guild", Guild, "☠ Young or old [FOX], we take every stray. Humor, respect and fun at the game are what distinguish us. No Obligations! Infos: wsp me or https://gw2fox.wixsite.com/about ☻");
-                LoadOrInsert("Welcome", Welcome, "Welcome to the FOXhole. Read the Message of the Day for Infos - Questions, ask us! Guides & Tools on our Homepage: https://gw2fox.wixsite.com/about");
-                LoadOrInsert("Symbols", Symbols, "☠ ★ ☣ ☮ ☢ ♪ ☜ ☞ ┌ ∩ ┐ ( ●̮̃ • ) ۶ ( • ◡ • ) ☿ ♀ ♂ ☀ ☁ ☂ ☃ ☄ ☾ ☽ ☇ ☉ ☐ ☒ ☑ ☝ ☚ • ☟ ☆ ♕ ♖ ♘ ♙ ♛ ♜ ♞ ♟ † ☨ ☥ ☦ ☓ ☩ ☯ ☧ ☬ ☸ ♁ ♆ ☭ ☪ ☫ © ™ ® ☎ ♥ 凸");
-
-                // Gespeicherte Änderungen zurückschreiben
-                File.WriteAllText(jsonPath, JsonSerializer.Serialize(config, new JsonSerializerOptions { WriteIndented = true }));
-            }
-            catch (Exception ex)
-            {
-                System.Windows.Forms.MessageBox.Show($"Fehler beim Laden der Konfigurationsdatei: {ex.Message}", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            runinfoBox.Text = config?.Runinfo ?? "«Meta-Train» with the old [FOX]";
+            squadinfoBox.Text = config?.Squadinfo ?? "• InstanceCheck:\n    - right click on me & join map\n• Don’t cancel invites!\n• No 3ple Trouble\n\n• https://gw2fox.wixsite.com/about";
+            guildBox.Text = config?.Guild ?? "☠ Young or old [FOX], we take every stray. Humor, respect and fun at the game are what distinguish us. No Obligations! Infos: wsp me or https://gw2fox.wixsite.com/about ☻";
+            welcomeBox.Text = config?.Welcome ?? "Welcome to the FOXhole. Read the Message of the Day for Infos - Questions, ask us! Guides & Tools on our Homepage: https://gw2fox.wixsite.com/about";
+            symbolsBox.Text = config?.Symbols ?? "☠ ★ ☣ ☮ ☢ ♪ ☜ ☞ ┌ ∩ ┐ ( ●̮̃ • ) ۶ ( • ◡ • ) ☿ ♀ ♂ ☀ ☁ ☂ ☃ ☄ ☾ ☽ ☇ ☉ ☐ ☒ ☑ ☝ ☚ • ☟ ☆ ♕ ♖ ♘ ♙ ♛ ♜ ♞ ♟ † ☨ ☥ ☦ ☓ ☩ ☯ ☧ ☬ ☸ ♁ ♆ ☭ ☪ ☫ © ™ ® ☎ ♥ 凸";
         }
 
 

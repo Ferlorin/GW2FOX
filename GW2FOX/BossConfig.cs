@@ -6,7 +6,16 @@ using System.IO;
 
 public class BossConfig
 {
-    public List<Boss> Bosses { get; set; }
+    public List<Boss> Bosses { get; set; } = new();
+    public string Meta { get; set; } = "";
+    public string Mixed { get; set; } = "";
+    public string World { get; set; } = "";
+    public string Fido { get; set; } = "";
+    public string Runinfo { get; set; } = "";
+    public string Squadinfo { get; set; } = "";
+    public string Guild { get; set; } = "";
+    public string Welcome { get; set; } = "";
+    public string Symbols { get; set; } = "";
 }
 
 public class Boss
@@ -14,7 +23,7 @@ public class Boss
     public string Name { get; set; }
     public List<string> Timings { get; set; }
     public string Category { get; set; }
-    public string Waypoint { get; set; }
+    public string? Waypoint { get; set; } = "";
 }
 
 public static class BossTimings
@@ -43,7 +52,6 @@ public static class BossTimings
     {
         foreach (var timing in timings)
         {
-            // Annahme: ConvertToUtcFromConfigTime ist definiert in BossTimings
             var utcTime = ConvertToUtcFromConfigTime(timing);
             BossEventsList.Add(new BossEvent(bossName, utcTime.TimeOfDay, category, waypoint));
         }

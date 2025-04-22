@@ -319,7 +319,7 @@ namespace GW2FOX
             }
 
             // 3. OverlayWindow starten (Singleton verwenden)
-           // _overlayWindow = OverlayWindow.GetInstance();
+            _overlayWindow = OverlayWindow.GetInstance();
             if (!_overlayWindow.IsVisible)
             {
                 Console.WriteLine("OverlayWindow: Wird angezeigt.");

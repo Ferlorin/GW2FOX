@@ -5,19 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GW2FOX"
         mc:Ignorable="d"
-         WindowStyle="None"
+        WindowStyle="None"
         AllowsTransparency="True"
         Background="Transparent"
         Topmost="True"
         ResizeMode="NoResize"
-        Width="250" Height="370"
+        Width="250"
+        Height="370"
         ShowInTaskbar="False"
         Title="OverlayWindow"
         Name="MainOverlayWindow">
+
     <Window.Resources>
         <local:StrikeConverter x:Key="StrikeConverter"/>
         <local:PastEventColorConverter x:Key="PastEventColorConverter"/>
-        <local:ItalicConverter x:Key="ItalicConverter"/>
 
         <ControlTemplate x:Key="EmptyButtonTemplate" TargetType="RepeatButton">
             <Grid/>
@@ -27,31 +28,30 @@
     <Grid x:Name="MainGrid" Background="Transparent">
         <Border Background="Transparent" BorderBrush="#333" BorderThickness="0">
             <Grid>
-                <!-- Kopiert!-Nachricht -->
-                <TextBlock x:Name="CopiedMessage"
-           Foreground="White"
-           Background="#AA000000"
-           FontSize="12"
-           Padding="6,2"
-           HorizontalAlignment="Center"
-           VerticalAlignment="Top"
-           Margin="0,34,0,0"
-           Visibility="Collapsed"
-           Opacity="0"
-           Text="Kopiert!">
-                    <TextBlock.Effect>
-                        <DropShadowEffect Color="Black" BlurRadius="4" ShadowDepth="1" Opacity="0.5"/>
-                    </TextBlock.Effect>
-                </TextBlock>
-
-
                 <Grid.RowDefinitions>
                     <RowDefinition Height="30"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
+                <!-- Kopiert!-Nachricht -->
+                <TextBlock x:Name="CopiedMessage"
+                           Foreground="White"
+                           Background="#AA000000"
+                           FontSize="12"
+                           Padding="6,2"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Top"
+                           Margin="0,34,0,0"
+                           Visibility="Collapsed"
+                           Opacity="0"
+                           Text="Kopiert!">
+                    <TextBlock.Effect>
+                        <DropShadowEffect Color="Black" BlurRadius="4" ShadowDepth="1" Opacity="0.5"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+
                 <!-- Kopfzeile -->
-                <Grid Background="Transparent" Grid.Row="0">
+                <Grid Grid.Row="0" Background="Transparent">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="*"/>
@@ -59,23 +59,25 @@
 
                     <Image x:Name="Com"
                            Source="/Com.png"
-                           Width="20" Height="20"
+                           Width="20"
+                           Height="20"
                            Margin="6,5,4,5"
                            MouseLeftButtonDown="Icon_MouseLeftButtonDown"/>
 
                     <TextBlock Grid.Column="1"
-           VerticalAlignment="Center"
-           Foreground="White"
-           FontFamily="Segoe UI"
-           FontWeight="Bold"
-           FontSize="14">
+                               VerticalAlignment="Center"
+                               Foreground="White"
+                               FontFamily="Segoe UI"
+                               FontWeight="Bold"
+                               FontSize="14"
+                               Text="Boss-Timer">
                         <TextBlock.Effect>
                             <DropShadowEffect Color="Black" BlurRadius="0" ShadowDepth="0" Opacity="1"/>
                         </TextBlock.Effect>
                     </TextBlock>
 
-                    <Rectangle VerticalAlignment="Bottom"
-                               Grid.ColumnSpan="2"
+                    <Rectangle Grid.ColumnSpan="2"
+                               VerticalAlignment="Bottom"
                                Height="1"
                                IsHitTestVisible="False">
                         <Rectangle.Fill>
@@ -128,7 +130,6 @@
                                         <TextBlock Text="{Binding BossName}"
                                                    Foreground="{Binding IsPastEvent, Converter={StaticResource PastEventColorConverter}}"
                                                    TextDecorations="{Binding IsPastEvent, Converter={StaticResource StrikeConverter}}"
-                                                   FontStyle="{Binding IsDynamicEvent, Converter={StaticResource ItalicConverter}}"
                                                    VerticalAlignment="Center"
                                                    Width="141"
                                                    TextTrimming="CharacterEllipsis">
@@ -144,9 +145,8 @@
                         </ListView>
                     </ScrollViewer>
                 </Grid>
+
             </Grid>
         </Border>
     </Grid>
 </Window>
-
-

@@ -146,7 +146,6 @@ namespace GW2FOX
             base.OnClosed(e);
         }
 
-        // ▓▓▓ Aktualisiert die Bossliste im Overlay ▓▓▓
         public void UpdateBossOverlayList()
         {
             try

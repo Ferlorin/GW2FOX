@@ -18,6 +18,7 @@ namespace GW2FOX
         public static List<BossEventRun> DynamicBossEvents { get; set; } = new();
 
         public static List<BossEventGroup> BossEventGroups { get; private set; } = new();
+        public static BossConfig LoadedConfig { get; private set; } = new();
 
         private static void Init()
         {
@@ -30,41 +31,7 @@ namespace GW2FOX
             BossListView = listView;
         }
 
-        public static void LoadBossConfig(string filePath)
-        {
-            Console.WriteLine("[Config] LoadBossConfig (JSON) wurde aufgerufen.");
-            Init();
-
-            try
-            {
-                var json = File.ReadAllText(filePath);
-                var bossConfig = JsonConvert.DeserializeObject<BossConfig>(json);
-
-                if (bossConfig?.Bosses == null || bossConfig.Bosses.Count == 0)
-                {
-                    Console.WriteLine("[Config] Keine Bosse gefunden oder ungültige JSON.");
-                    return;
-                }
-
-                var newBossList = new List<string>();
-
-                foreach (var boss in bossConfig.Bosses)
-                {
-                    newBossList.Add(boss.Name);
-                    AddBossEvent(boss.Name, boss.Timings.ToArray(), boss.Category ?? "WBs", boss.Waypoint ?? "");
-                }
-
-                BossList23 = newBossList;
-                GenerateBossEventGroups();
-                UpdateBossOverlayList();
-
-                Console.WriteLine($"[Config] {BossEventsList.Count} BossEvents erfolgreich geladen.");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"[Error] Fehler beim Laden der Boss-JSON: {ex.Message}");
-            }
-        }
+        
 
         private static void AddBossEvent(string bossName, string[] timings, string category, string waypoint = "")
         {
@@ -151,5 +118,44 @@ namespace GW2FOX
 
             BossEventGroups.AddRange(grouped);
         }
+
+        public static void LoadBossConfig(string filePath)
+        {
+            Console.WriteLine("[Config] LoadBossConfig (JSON) wurde aufgerufen.");
+            Init();
+
+            try
+            {
+                var json = File.ReadAllText(filePath);
+                var bossConfig = JsonConvert.DeserializeObject<BossConfig>(json);
+
+                if (bossConfig?.Bosses == null || bossConfig.Bosses.Count == 0)
+                {
+                    Console.WriteLine("[Config] Keine Bosse gefunden oder ungültige JSON.");
+                    return;
+                }
+
+                LoadedConfig = bossConfig; // ✅ SPEICHERE die komplette Konfiguration
+
+                var newBossList = new List<string>();
+
+                foreach (var boss in bossConfig.Bosses)
+                {
+                    newBossList.Add(boss.Name);
+                    AddBossEvent(boss.Name, boss.Timings.ToArray(), boss.Category ?? "WBs", boss.Waypoint ?? "");
+                }
+
+                BossList23 = newBossList;
+                GenerateBossEventGroups();
+                UpdateBossOverlayList();
+
+                Console.WriteLine($"[Config] {BossEventsList.Count} BossEvents erfolgreich geladen.");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"[Error] Fehler beim Laden der Boss-JSON: {ex.Message}");
+            }
+        }
+
     }
 }

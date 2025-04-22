@@ -35,64 +35,7 @@ namespace GW2FOX
 
         const int SW_RESTORE = 9;
 
-        private void InitializeBossCheckBoxMap()
-        {
-            bossCheckBoxMap = new Dictionary<string, CheckBox>
-        {
-        { "LLA Timberline", LLA },
-        { "LLA Iron Marches", LLA },
-        { "LLA Gendarran", LLA },
-        { "The frozen Maw", Maw },
-        { "Shadow Behemoth", Behemoth },
-        { "Fire Elemental", Fire_Elemental },
-        { "Great Jungle Wurm", JungleWurm },
-        { "Ulgoth the Modniir", Ulgoth },
-        { "Taidha Covington", Thaida },
-        { "Megadestroyer", Megadestroyer },
-        { "Inquest Golem M2", MarkTwo },
-        { "Tequatl the Sunless", Tequatl },
-        { "The Shatterer", Shatterer },
-        { "Karka Queen", Karka },
-        { "Claw of Jormag", Claw },
-        { "Chak Gerent", Chak },
-        { "Battle in Tarir", Tarir },
-        { "Nightbosses", Mascen },
-        { "Dragon's Stand", DS },
-        { "DB Shatterer", DBS },
-        { "Junundu Rising", Junundu },
-        { "Path to Ascension", PTA },
-        { "Doppelganger", Doppelganger },
-        { "Forged with Fire", Doggies },
-        { "Choya Piñata", Pinata },
-        { "Serpents' Ire", SerpentsIre },
-        { "Palawadan", Palawadan },
-        { "Thunderhead Keep", ThunderheadKeep },
-        { "Maws of Torment", MawsOfTorment },
-        { "The Oil Floes", Oil },
-        { "Drakkar", Drakkar },
-        { "Metal Concert", Metalconcert },
-        { "Dragonstorm", Dragonstorm },
-        { "Ooze Pits", OozePits },
-        { "Effigy", Effigy },
-        { "Doomlore Shrine", Doomlore },
-        { "Storms of Winter", SormsOfWinter },
-        { "Defend Jora's Keep", JorasKeep },
-        { "Sandstorm", Sandstorm },
-        { "Saidra's Haven", SaidrasHeaven },
-        { "New Loamhurst", Loamhurst },
-        { "Noran's Homestead", Homestead },
-        { "Aetherblade Assault", Atherblade },
-        { "Kaineng Blackout", Blackout },
-        { "Gang War", GangWar },
-        { "Aspenwood", Aspenwood },
-        { "Battle for Jade Sea", JadeSea },
-        { "Wizard's Tower", WizzardsTower },
-        { "Fly by Night", Flybynigtht },
-        { "Defense of Amnytas", Amnytas },
-        { "Convergences", Convergence },
-        { "FireShaman", FireShaman },
-        };
-        }
+        
 
         private void Saverun_Click(object sender, EventArgs e)
         {
@@ -1410,23 +1353,66 @@ namespace GW2FOX
             }
         }
 
-        public static List<string> GetSelectedBosses()
+        private void InitializeBossCheckBoxMap()
         {
-            List<string> selectedBosses = new List<string>();
-
-            foreach (var entry in bossCheckBoxMap)
-            {
-                if (entry.Value.Checked)
-                {
-                    selectedBosses.Add(entry.Key);
-                }
-            }
-
-            return selectedBosses;
+            bossCheckBoxMap = new Dictionary<string, CheckBox>
+        {
+        { "LLA Timberline", LLA },
+        { "LLA Iron Marches", LLA },
+        { "LLA Gendarran", LLA },
+        { "The frozen Maw", Maw },
+        { "Shadow Behemoth", Behemoth },
+        { "Fire Elemental", Fire_Elemental },
+        { "Great Jungle Wurm", JungleWurm },
+        { "Ulgoth the Modniir", Ulgoth },
+        { "Taidha Covington", Thaida },
+        { "Megadestroyer", Megadestroyer },
+        { "Inquest Golem M2", MarkTwo },
+        { "Tequatl the Sunless", Tequatl },
+        { "The Shatterer", Shatterer },
+        { "Karka Queen", Karka },
+        { "Claw of Jormag", Claw },
+        { "Chak Gerent", Chak },
+        { "Battle in Tarir", Tarir },
+        { "Nightbosses", Mascen },
+        { "Dragon's Stand", DS },
+        { "DB Shatterer", DBS },
+        { "Junundu Rising", Junundu },
+        { "Path to Ascension", PTA },
+        { "Doppelganger", Doppelganger },
+        { "Forged with Fire", Doggies },
+        { "Choya Piñata", Pinata },
+        { "Serpents' Ire", SerpentsIre },
+        { "Palawadan", Palawadan },
+        { "Thunderhead Keep", ThunderheadKeep },
+        { "Maws of Torment", MawsOfTorment },
+        { "The Oil Floes", Oil },
+        { "Drakkar", Drakkar },
+        { "Metal Concert", Metalconcert },
+        { "Dragonstorm", Dragonstorm },
+        { "Ooze Pits", OozePits },
+        { "Effigy", Effigy },
+        { "Doomlore Shrine", Doomlore },
+        { "Storms of Winter", SormsOfWinter },
+        { "Defend Jora's Keep", JorasKeep },
+        { "Sandstorm", Sandstorm },
+        { "Saidra's Haven", SaidrasHeaven },
+        { "New Loamhurst", Loamhurst },
+        { "Noran's Homestead", Homestead },
+        { "Aetherblade Assault", Atherblade },
+        { "Kaineng Blackout", Blackout },
+        { "Gang War", GangWar },
+        { "Aspenwood", Aspenwood },
+        { "Battle for Jade Sea", JadeSea },
+        { "Wizard's Tower", WizzardsTower },
+        { "Fly by Night", Flybynigtht },
+        { "Defense of Amnytas", Amnytas },
+        { "Convergences", Convergence },
+        { "FireShaman", FireShaman },
+        };
         }
 
-
-        public static CheckBox FindCheckBoxByBossName(string bossName)
+        public static CheckBox FindCheckBoxByName(string bossName)
         {
             if (bossCheckBoxMap != null && bossCheckBoxMap.TryGetValue(bossName, out var checkBox))
             {
@@ -1436,44 +1422,11 @@ namespace GW2FOX
         }
 
 
-        private void BossCheckbox_CheckedChanged(object sender, EventArgs e)
-        {
-            CheckBox checkBox = (CheckBox)sender;
-
-            if (checkBox.Checked)
-            {
-                string bossName = checkBox.Text;
-                SaveBossNameToConfig(bossName);
-            }
-            else
-            {
-                string bossName = checkBox.Text;
-                RemoveBossNameFromConfig(bossName);
-
-            }
-
-        }
-        public class BossConfig
-        {
-            public List<Boss> Bosses { get; set; } = new();
-            public string Meta { get; set; } = "";
-            public string Mixed { get; set; } = "";
-            public string World { get; set; } = "";
-            public string Fido { get; set; } = "";
-            public string Runinfo { get; set; } = "";
-            public string Squadinfo { get; set; } = "";
-            public string Guild { get; set; } = "";
-            public string Welcome { get; set; } = "";
-            public string Symbols { get; set; } = "";
-        }
-
-        public class Boss
-        {
-            public string Name { get; set; }
+        public string Name { get; set; }
             public List<string> Timings { get; set; }
             public string Category { get; set; }
             public string Waypoint { get; set; }
-        }
+        
 
         private static BossConfig LoadBossConfig()
         {
@@ -1588,7 +1541,7 @@ namespace GW2FOX
         {
             foreach (var bossName in bossNames)
             {
-                var checkBox = FindCheckBoxByBossName(bossName);
+                var checkBox = FindCheckBoxByName(bossName);
                 if (checkBox != null)
                 {
                     checkBox.Checked = true;
