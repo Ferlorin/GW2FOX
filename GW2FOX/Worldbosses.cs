@@ -1508,18 +1508,6 @@ namespace GW2FOX
         }
 
 
-
-
-        private string GetGroupLine(BossConfig config, string key) => key.ToLower() switch
-        {
-            "meta" => config.Meta,
-            "mixed" => config.Mixed,
-            "world" => config.World,
-            "fido" => config.Fido,
-            _ => ""
-        };
-
-
         public static void CheckAllBossCheckboxes()
         {
             foreach (var checkBox in bossCheckBoxMap.Values)
@@ -1773,36 +1761,6 @@ namespace GW2FOX
                 MessageBox.Show($"Fehler beim Laden der Meta-Gruppe: {ex.Message}", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-        private void SaveCustomSelectionToJson()
-        {
-            var config = LoadBossConfig();
-
-            var selectedNames = bossCheckBoxMap
-                .Where(pair => pair.Value.Checked)
-                .Select(pair => pair.Key)
-                .ToArray();
-
-            config.CustomSelection = string.Join(",", selectedNames);
-
-            SaveBossConfig(config);
-        }
-
-        private void LoadCustomSelectionFromJson()
-        {
-            var config = LoadBossConfig();
-
-            if (!string.IsNullOrWhiteSpace(config.CustomSelection))
-            {
-                var bossNames = config.CustomSelection
-                    .Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
-                    .Select(b => b.Trim())
-                    .ToArray();
-
-                CheckBossCheckboxes(bossNames);
-            }
-        }
-
 
     }
 

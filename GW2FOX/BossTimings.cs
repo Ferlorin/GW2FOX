@@ -37,14 +37,19 @@ namespace GW2FOX
 
         public static void ApplyBossGroupFromConfig(string groupName)
         {
-            var config = LoadBossConfigFromFile("BossTimings.json");
+            if (LoadedConfig == null || LoadedConfig.Bosses.Count == 0)
+            {
+                LoadedConfig = LoadBossConfigFromFile("BossTimings.json");
+            }
+
+            var config = LoadedConfig;
 
             string groupLine = groupName.ToLower() switch
             {
-                "Meta" => config.Meta,
-                "Mixed" => config.Mixed,
-                "Morld" => config.World,
-                "Fido" => config.Fido,
+                "meta" => config.Meta,
+                "mixed" => config.Mixed,
+                "world" => config.World,
+                "fido" => config.Fido,
                 _ => ""
             };
 
@@ -53,23 +58,29 @@ namespace GW2FOX
                 .Select(b => b.Trim())
                 .ToList();
 
-            // Filter Bosses aus der Konfiguration
+            Console.WriteLine($"[ApplyBossGroup] Gruppe '{groupName}' enthält {bossNames.Count} Bosse: {string.Join(", ", bossNames)}");
+
             var bosses = config.Bosses
                 .Where(b => bossNames.Contains(b.Name, StringComparer.OrdinalIgnoreCase))
                 .ToList();
+
+            Console.WriteLine($"[ApplyBossGroup] Treffer in BossConfig: {bosses.Count} Bosse");
 
             BossEventsList.Clear();
             BossList23 = bosses.Select(b => b.Name).ToList();
 
             foreach (var boss in bosses)
             {
+                Console.WriteLine($"[ApplyBossGroup] Hinzufügen: {boss.Name}");
                 AddBossEvent(boss.Name, boss.Timings.ToArray(), boss.Category, boss.Waypoint ?? "");
             }
 
-            GenerateBossEventGroups();  // neu erzeugen
-            BossTimer.UpdateBossList(); // ListView aktualisieren
-            UpdateBossOverlayList();    // Overlay aktualisieren
+            GenerateBossEventGroups();
+            BossTimer.UpdateBossList();
+            UpdateBossOverlayList();
         }
+
+
 
 
         public static BossConfig LoadBossConfigFromFile(string path)
@@ -175,36 +186,7 @@ namespace GW2FOX
             LoadBossConfig("BossTimings.json");
         }
 
-        // Speichern der Bosse
-        private static void SaveBossConfig(BossConfig config)
-        {
-            string path = "BossTimings.json";
-            var json = JsonConvert.SerializeObject(config, Formatting.Indented);
-            File.WriteAllText(path, json);
-        }
-
-        private static void UpdateChosenBosses(IEnumerable<string> selectedBossNames)
-        {
-            var config = LoadBossConfigAndReturn(); // <- jetzt korrekt
-
-            // Alte ChosenBosses entfernen
-            config.Bosses.RemoveAll(b => b.Category == "CustomSelection");
-
-            // Neue hinzufügen
-            foreach (var bossName in selectedBossNames.Distinct(StringComparer.OrdinalIgnoreCase))
-            {
-                config.Bosses.Add(new Boss
-                {
-                    Name = bossName,
-                    Timings = new List<string> { "00:00:00" },
-                    Category = "ChosenBosses",
-                    Waypoint = ""
-                });
-            }
-
-            SaveBossConfig(config);
-        }
-
+        
 
         public static void LoadChosenBossesToUI(Dictionary<string, CheckBox> bossCheckBoxMap)
         {
@@ -330,32 +312,8 @@ namespace GW2FOX
             }
         }
 
-        public static List<Boss> GetBossesByCategory(string categoryName)
-        {
-            if (LoadedConfig == null || LoadedConfig.Bosses == null)
-                return new();
-
-            var categoryList = categoryName switch
-            {
-                "Meta" => LoadedConfig.Meta,
-                "Mixed" => LoadedConfig.Mixed,
-                "World" => LoadedConfig.World,
-                "Fido" => LoadedConfig.Fido,
-                _ => ""
-            };
-
-            var names = categoryList
-                .Split(',')
-                .Select(name => name.Trim())
-                .Where(name => !string.IsNullOrWhiteSpace(name))
-                .ToHashSet(StringComparer.OrdinalIgnoreCase);
-
-            return LoadedConfig.Bosses
-                .Where(b => names.Contains(b.Name))
-                .ToList();
-        }
-
        
 
     }
+
 }
