@@ -102,7 +102,7 @@ namespace GW2FOX
                         BossTimerService.BossListItems.Add(boss);
                     }
 
-                //    OverlayWindow.GetInstance().UpdateBossOverlayList();
+                   OverlayWindow.GetInstance().UpdateBossOverlayList();
                 });
 
             }

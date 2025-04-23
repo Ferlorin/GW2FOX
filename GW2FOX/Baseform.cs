@@ -30,7 +30,7 @@ namespace GW2FOX
         {
             InitializeGlobalKeyboardHook();
             SetFormTransparency();
-            BossTimings.LoadBossConfig("bosses_config.json");
+            BossTimings.LoadBossConfig("BossTimings.json");
         }
 
         protected override void OnLoad(EventArgs e)
@@ -162,22 +162,18 @@ namespace GW2FOX
 
             try
             {
-                Console.WriteLine($"[SaveTextToFile] Versuche '{sectionHeader}' zu speichern...");
-
-                // Immer zuerst die Datei laden, nicht von LoadedConfig abhängig machen!
-                BossConfig config;
+                BossConfigInfos config;
 
                 if (File.Exists(jsonPath))
                 {
                     var json = File.ReadAllText(jsonPath);
-                    config = JsonConvert.DeserializeObject<BossConfig>(json) ?? new BossConfig();
+                    config = JsonConvert.DeserializeObject<BossConfigInfos>(json) ?? new BossConfigInfos();
                 }
                 else
                 {
-                    config = new BossConfig();
+                    config = new BossConfigInfos();
                 }
 
-                // Nur den gewünschten Abschnitt ändern
                 switch (sectionHeader)
                 {
                     case "Runinfo":
@@ -194,19 +190,7 @@ namespace GW2FOX
                         break;
                     case "Symbols":
                         config.Symbols = textToSave;
-                        break;
-                    case "Meta":
-                        config.Meta = textToSave;
-                        break;
-                    case "Mixed":
-                        config.Mixed = textToSave;
-                        break;
-                    case "World":
-                        config.World = textToSave;
-                        break;
-                    case "Fido":
-                        config.Fido = textToSave;
-                        break;
+                        break; // <- Das hat gefehlt!
                     default:
                         Console.WriteLine($"[SaveTextToFile] Abschnitt '{sectionHeader}' wird nicht unterstützt.");
                         if (!hideMessages)
@@ -216,11 +200,8 @@ namespace GW2FOX
                         return;
                 }
 
-                // Speichern
-                File.WriteAllText(jsonPath, JsonConvert.SerializeObject(config, Formatting.Indented));
-                BossTimings.LoadedConfig = config;
-
-                Console.WriteLine($"[SaveTextToFile] '{sectionHeader}' erfolgreich gespeichert.");
+                BossTimings.LoadedConfigInfos = config;
+;
 
                 if (!hideMessages)
                 {
@@ -229,67 +210,9 @@ namespace GW2FOX
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"[SaveTextToFile] Fehler: {ex.Message}");
                 System.Windows.Forms.MessageBox.Show($"Fehler beim Speichern von {sectionHeader}: {ex.Message}", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-
-        private void LoadTextFromConfig(string sectionHeader, System.Windows.Forms.TextBox textBox, string defaultToInsert)
-        {
-            try
-            {
-                Console.WriteLine($"[LoadTextFromConfig] Lade Abschnitt '{sectionHeader}'...");
-
-                var config = BossTimings.LoadedConfig;
-
-                if (config == null)
-                {
-                    if (File.Exists("bosses_config.json"))
-                    {
-                        config = JsonConvert.DeserializeObject<BossConfig>(File.ReadAllText("bosses_config.json")) ?? new BossConfig();
-                    }
-                    else
-                    {
-                        config = new BossConfig();
-                    }
-
-                    BossTimings.LoadedConfig = config;
-                }
-
-                string value = sectionHeader switch
-                {
-                    "Runinfo" => config.Runinfo,
-                    "Squadinfo" => config.Squadinfo,
-                    "Guild" => config.Guild,
-                    "Welcome" => config.Welcome,
-                    "Symbols" => config.Symbols,
-                    "Meta" => config.Meta,
-                    "Mixed" => config.Mixed,
-                    "World" => config.World,
-                    "Fido" => config.Fido,
-                    _ => null
-                };
-
-                if (value != null)
-                {
-                    textBox.Text = value;
-                }
-                else
-                {
-                    // Wenn unbekannter oder leerer Abschnitt: Standard speichern
-                    SaveTextToFile(defaultToInsert, sectionHeader, true);
-                    textBox.Text = defaultToInsert;
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"[LoadTextFromConfig] Fehler: {ex.Message}");
-                System.Windows.Forms.MessageBox.Show($"Fehler beim Laden von {sectionHeader}: {ex.Message}", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-
 
 
         protected void LoadConfigText(
@@ -300,19 +223,12 @@ namespace GW2FOX
     System.Windows.Forms.TextBox symbolsBox)
         {
 
-            var config = BossTimings.LoadedConfig;
+            var config = BossTimings.LoadedConfigInfos;
 
             if (config == null)
             {
                 return;
             }
-
-            Console.WriteLine("[LoadConfigText] Konfiguration geladen:");
-            Console.WriteLine($"  Runinfo: {config.Runinfo}");
-            Console.WriteLine($"  Squadinfo: {config.Squadinfo}");
-            Console.WriteLine($"  Guild: {config.Guild}");
-            Console.WriteLine($"  Welcome: {config.Welcome}");
-            Console.WriteLine($"  Symbols: {config.Symbols}");
 
             runinfoBox.Text = config.Runinfo ?? "";
             squadinfoBox.Text = config.Squadinfo ?? "";

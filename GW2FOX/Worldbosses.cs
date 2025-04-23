@@ -29,9 +29,7 @@ namespace GW2FOX
         }
 
         private void Worldbosses_Load_1(object? sender, EventArgs e)
-        {
-            Console.WriteLine("[Worldbosses] Load_1 wurde aufgerufen.");
-            Console.WriteLine($"[Worldbosses] BossList23.Count: {BossTimings.BossList23.Count}");
+        {;
 
             LoadBossGroup("World");
         }
@@ -1434,7 +1432,7 @@ namespace GW2FOX
 
         private static BossConfig LoadBossConfig()
         {
-            string path = "bosses_config.json";
+            string path = "BossTimings.json";
 
             if (File.Exists(path))
             {
@@ -1450,7 +1448,7 @@ namespace GW2FOX
 
         private static void SaveBossConfig(BossConfig config)
         {
-            File.WriteAllText("bosses_config.json", JsonConvert.SerializeObject(config, Formatting.Indented));
+            File.WriteAllText("BossTimings.json", JsonConvert.SerializeObject(config, Formatting.Indented));
         }
 
         private static void SaveBossNameToConfig(string bossName)
@@ -1572,12 +1570,12 @@ namespace GW2FOX
 
         private void UpdateBossUiBosses()
         {
-            if (!File.Exists("bosses_config.json"))
+            if (!File.Exists("BossTimings.json"))
                 return;
 
             try
             {
-                var json = File.ReadAllText("bosses_config.json");
+                var json = File.ReadAllText("BossTimings.json");
                 var config = JsonConvert.DeserializeObject<BossConfig>(json);
 
                 if (config?.Bosses != null)

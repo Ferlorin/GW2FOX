@@ -8,6 +8,7 @@ namespace GW2FOX
 {
     public static class BossTimings
     {
+        public static BossConfigInfos? LoadedConfigInfos { get; set; }
         public static BossConfig? LoadedConfig { get; set; }
 
         public static Dictionary<string, List<BossEvent>> BossEvents { get; } = new();
@@ -87,13 +88,13 @@ namespace GW2FOX
 
                 BossListView.Dispatcher.Invoke(() =>
                 {
-                 //   var window = OverlayWindow.GetInstance();
-                   // window.OverlayItems.Clear();
+                    var window = OverlayWindow.GetInstance();
+                    window.OverlayItems.Clear();
 
                     foreach (var item in items.OrderBy(i => i.TimeToShow))
                     {
                         item.UpdateCountdown();
-                   //     window.OverlayItems.Add(item);
+                        window.OverlayItems.Add(item);
                     }
                 });
 
@@ -193,6 +194,7 @@ namespace GW2FOX
                 Console.WriteLine($"[Error] Fehler beim Laden der Boss-JSON: {ex.Message}");
             }
         }
+
         public static List<Boss> GetBossesByCategory(string categoryName)
         {
             if (LoadedConfig == null || LoadedConfig.Bosses == null)

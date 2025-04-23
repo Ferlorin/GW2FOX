@@ -20,7 +20,10 @@ public class BossConfig
 
     [JsonProperty("Fido")]
     public string Fido { get; set; } = "";
+}
 
+public class BossConfigInfos
+{
     [JsonProperty("Runinfo")]
     public string Runinfo { get; set; } = "";
 

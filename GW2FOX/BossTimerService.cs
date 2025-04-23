@@ -118,8 +118,6 @@ namespace GW2FOX
             public int SecondsRemaining { get; set; }
             public DateTime NextRunTime { get; set; }
             public bool IsConcurrentEvent { get; set; }
-
-            // ✅ Richtige Position der Eigenschaft
             public DateTime TimeToShow => IsPastEvent ? NextRunTime.AddMinutes(15) : NextRunTime;
 
             public void UpdateCountdown()
