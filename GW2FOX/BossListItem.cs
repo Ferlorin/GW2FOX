@@ -13,7 +13,7 @@ namespace GW2FOX
         {
             try
             {
-                WaypointImage = new BitmapImage(new Uri("pack://application:,,,/GW2FOX;component/Resources/Waypoint.png"));
+                WaypointImage = new BitmapImage(new Uri("pack://application:,,,/GW2FOX;component/Waypoint.png"));
             }
             catch (Exception ex)
             {

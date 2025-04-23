@@ -72,19 +72,16 @@ public static class BossTimings
             var json = File.ReadAllText(filePath);
             var bossConfig = JsonConvert.DeserializeObject<BossConfig>(json);
 
-            Console.WriteLine("[DEBUG] JSON-Inhalt nach Deserialisierung:");
-            Console.WriteLine(JsonConvert.SerializeObject(bossConfig, Formatting.Indented));
 
             foreach (var boss in bossConfig.Bosses)
             {
                 AddBossEvent(boss.Name, boss.Timings.ToArray(), boss.Category, boss.Waypoint);
             }
 
-            Console.WriteLine("[Config] Bosses loaded from JSON.");
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Error loading boss config: {ex.Message}");
+            //Console.WriteLine($"Error loading boss config: {ex.Message}");
         }
     }
    

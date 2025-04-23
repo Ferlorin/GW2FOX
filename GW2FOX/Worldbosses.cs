@@ -1454,7 +1454,6 @@ namespace GW2FOX
             // Datei speichern
             File.WriteAllText(configPath, json.ToString(Formatting.Indented));
 
-            Console.WriteLine($"[SaveChoosenOnesToConfig] Gespeichert: {string.Join(", ", selectedBosses)}");
         }
 
 
@@ -1489,7 +1488,6 @@ namespace GW2FOX
 
         private static void RemoveBossNameFromConfig(string bossName)
         {
-            Console.WriteLine($"[RemoveBossNameFromConfig] → {bossName}");
 
             string configPath = "BossTimings.json";
             if (!File.Exists(configPath)) return;
@@ -1504,8 +1502,6 @@ namespace GW2FOX
 
             json["ChoosenOnes"] = JArray.FromObject(updated);
             File.WriteAllText(configPath, json.ToString(Formatting.Indented));
-
-            Console.WriteLine("[RemoveBossNameFromConfig] ✔ Boss entfernt.");
         }
 
 
@@ -1785,9 +1781,6 @@ namespace GW2FOX
                 var selectedBossNames = jObj["ChoosenOnes"] is JArray array
                     ? array.Select(x => x.ToString()).ToHashSet(StringComparer.OrdinalIgnoreCase)
                     : new HashSet<string>(StringComparer.OrdinalIgnoreCase);
-
-                Console.WriteLine("UpdateBossUiBosses() wurde aufgerufen");
-                Console.WriteLine("ChoosenOnes enthält: " + string.Join(", ", selectedBossNames));
 
                 // 2. Checkboxen setzen
                 foreach (var entry in bossCheckBoxMap)
