@@ -17,25 +17,7 @@ namespace GW2FOX
         public Main()
         {
             InitializeComponent();
-
-            if (BossTimings.BossList23.Count == 0)
-            {
-                string filePath = Path.GetFullPath("BossTimings.json");
-                BossTimings.LoadBossConfig(filePath);
-
-
-            }
-            else
-            {
-                Console.WriteLine("[Main] BossKonfig war schon vorhanden.");
-            }
         }
-
-        private void MainForm_Load(object sender, EventArgs e)
-        {
-            BossTimings.LoadBossConfig("BossTimings.json");
-        }
-
 
         private void HandleException(Exception ex)
         {

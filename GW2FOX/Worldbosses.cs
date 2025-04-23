@@ -31,9 +31,9 @@ namespace GW2FOX
 
         private void Worldbosses_Load_1(object? sender, EventArgs e)
         {
-            ;
 
-            BossTimings.LoadChosenBossesToUI(bossCheckBoxMap);
+
+            UpdateBossUiBosses();
         }
 
 
@@ -1425,6 +1425,38 @@ namespace GW2FOX
             return null;
         }
 
+        private static void SaveChoosenOnesToConfig()
+        {
+            string configPath = "BossTimings.json";
+            JObject json;
+
+            // Bestehende JSON laden oder neu erzeugen
+            if (File.Exists(configPath))
+            {
+                json = JObject.Parse(File.ReadAllText(configPath));
+            }
+            else
+            {
+                json = new JObject();
+            }
+
+            // Alle aktivierten Bosse sammeln
+            var selectedBosses = bossCheckBoxMap
+                .Where(kvp => kvp.Value.Checked)
+                .Select(kvp => kvp.Key)
+                .Distinct(StringComparer.OrdinalIgnoreCase)
+                .ToList();
+
+            // In die JSON schreiben (überschreibt ggf. bestehende Liste)
+            json["ChoosenOnes"] = JArray.FromObject(selectedBosses);
+
+            // Datei speichern
+            File.WriteAllText(configPath, json.ToString(Formatting.Indented));
+
+            Console.WriteLine($"[SaveChoosenOnesToConfig] Gespeichert: {string.Join(", ", selectedBosses)}");
+        }
+
+
 
         public string Name { get; set; }
         public List<string> Timings { get; set; }
@@ -1432,81 +1464,49 @@ namespace GW2FOX
         public string Waypoint { get; set; }
 
 
-        private static BossConfig LoadBossConfig()
-        {
-            string path = "BossTimings.json";
-
-            if (File.Exists(path))
-            {
-                var json = File.ReadAllText(path);
-                var config = JsonConvert.DeserializeObject<BossConfig>(json);
-                if (config != null)
-                    return config;
-            }
-
-            // Default-Fallback
-            return new BossConfig();
-        }
-
-        private static void SaveBossConfig(BossConfig config)
-        {
-            string filePath = "BossTimings.json";
-
-            JObject json;
-
-            // Bestehende Datei laden oder leeres Objekt erzeugen
-            if (File.Exists(filePath))
-            {
-                json = JObject.Parse(File.ReadAllText(filePath));
-
-                // Optional: bestehende DynamicBosses entfernen, um sie sauber zu ersetzen
-                json.Remove("DynamicBosses");
-            }
-            else
-            {
-                json = new JObject();
-            }
-
-            // Neue DynamicBosses einfügen
-            json["DynamicBosses"] = JArray.FromObject(config.DynamicBosses);
-
-            // Datei neu schreiben
-            File.WriteAllText(filePath, json.ToString(Formatting.Indented));
-        }
-
-
         private static void SaveBossNameToConfig(string bossName)
         {
-            var config = LoadBossConfig();
+            string configPath = "BossTimings.json";
+            JObject json = File.Exists(configPath)
+                ? JObject.Parse(File.ReadAllText(configPath))
+                : new JObject();
 
-            if (!config.Bosses.Any(b => b.Name.Equals(bossName, StringComparison.OrdinalIgnoreCase)))
+            // Aktuelle Liste laden oder neu anlegen
+            JArray choosen = (JArray?)json["ChoosenOnes"] ?? new JArray();
+            var bossNames = choosen.Select(t => t.ToString()).ToList();
+
+            if (bossNames.Contains(bossName, StringComparer.OrdinalIgnoreCase))
             {
-                config.Bosses.Add(new Boss
-                {
-                    Name = bossName,
-                    Timings = new List<string> { "00:00:00" },
-                    Category = "CustomSelection", // <- Eigene Kategorie
-                    Waypoint = ""
-                });
-
-                SaveBossConfig(config);
+                return;
             }
+
+            // Hinzufügen
+            bossNames.Add(bossName);
+            json["ChoosenOnes"] = JArray.FromObject(bossNames.Distinct(StringComparer.OrdinalIgnoreCase));
+
         }
-
-
-
 
         private static void RemoveBossNameFromConfig(string bossName)
         {
-            var config = LoadBossConfig();
-            var boss = config.Bosses.FirstOrDefault(b => b.Name.Equals(bossName, StringComparison.OrdinalIgnoreCase));
+            Console.WriteLine($"[RemoveBossNameFromConfig] → {bossName}");
 
-            if (boss != null)
-            {
-                config.Bosses.Remove(boss);
-                SaveBossConfig(config);
-            }
+            string configPath = "BossTimings.json";
+            if (!File.Exists(configPath)) return;
+
+            var json = JObject.Parse(File.ReadAllText(configPath));
+            var choosen = (JArray?)json["ChoosenOnes"] ?? new JArray();
+
+            var updated = choosen
+                .Select(t => t.ToString())
+                .Where(n => !n.Equals(bossName, StringComparison.OrdinalIgnoreCase))
+                .ToList();
+
+            json["ChoosenOnes"] = JArray.FromObject(updated);
+            File.WriteAllText(configPath, json.ToString(Formatting.Indented));
+
+            Console.WriteLine("[RemoveBossNameFromConfig] ✔ Boss entfernt.");
         }
+
 
 
         public static void CheckAllBossCheckboxesAll()
@@ -1514,20 +1514,14 @@ namespace GW2FOX
             foreach (var checkBox in bossCheckBoxMap.Values)
             {
                 checkBox.Checked = true;
+                checkBox.ForeColor = System.Drawing.Color.White;
                 checkBox.Invalidate();
             }
 
-            var config = LoadBossConfig();
-            config.Bosses = BossEventGroups.Select(g => new Boss
-            {
-                Name = g.BossName,
-                Timings = new List<string>(),
-                Category = "WBs",
-                Waypoint = ""
-            }).ToList();
-
-            SaveBossConfig(config);
+            // Speichere alle aktuell aktivierten Checkbox-Namen in "ChoosenOnes"
+            SaveChoosenOnesToConfig();
         }
+
 
         public static void CheckBossCheckboxes(IEnumerable<string> bossNames)
         {
@@ -1564,42 +1558,13 @@ namespace GW2FOX
             );
         }
 
-        private void UpdateBossUiBosses()
-        {
-            if (!File.Exists("BossTimings.json"))
-                return;
-
-            try
-            {
-                var json = File.ReadAllText("BossTimings.json");
-                var config = JsonConvert.DeserializeObject<BossConfig>(json);
-
-                if (config?.Bosses != null)
-                {
-                    var selectedBossNames = config.Bosses.Select(b => b.Name).ToHashSet(StringComparer.OrdinalIgnoreCase);
-
-                    foreach (var entry in bossCheckBoxMap)
-                    {
-                        var checkBox = entry.Value;
-                        if (checkBox != null)
-                        {
-                            checkBox.Checked = selectedBossNames.Contains(entry.Key);
-                            checkBox.ForeColor = checkBox.Checked ? System.Drawing.Color.White : System.Drawing.Color.Gray;
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Fehler beim Laden der Boss-Auswahl: {ex.Message}", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
 
         private void FidosSpecial_Click(object sender, EventArgs e)
         {
             try
             {
                 BossTimings.ApplyBossGroupFromConfig("Fido");
+                SaveChoosenOnesToConfig();
             }
             catch (Exception ex)
             {
@@ -1614,6 +1579,7 @@ namespace GW2FOX
             try
             {
                 BossTimings.ApplyBossGroupFromConfig("World");
+                SaveChoosenOnesToConfig();
             }
             catch (Exception ex)
             {
@@ -1626,15 +1592,31 @@ namespace GW2FOX
         {
             try
             {
-                foreach (var checkBox in bossCheckBoxMap.Values)
+                // 1. Checkboxen deaktivieren
+                foreach (var checkBox in Worldbosses.bossCheckBoxMap.Values)
                 {
                     checkBox.Checked = false;
+                    checkBox.ForeColor = System.Drawing.Color.Gray;
                     checkBox.Invalidate();
                 }
 
-                var config = LoadBossConfig();
-                config.Bosses.Clear();
-                SaveBossConfig(config);
+                // 2. "ChoosenOnes" in der JSON leeren
+                string configPath = "BossTimings.json";
+                if (File.Exists(configPath))
+                {
+                    var json = JObject.Parse(File.ReadAllText(configPath));
+                    json["ChoosenOnes"] = new JArray(); // ← Liste leeren
+                    File.WriteAllText(configPath, json.ToString(Formatting.Indented));
+                }
+
+                // 3. Runtime-Listen leeren
+                BossTimings.BossList23.Clear();
+                BossTimings.BossEventsList.Clear();
+                BossTimings.BossEventGroups.Clear();
+
+                // 4. Overlay und Timer aktualisieren
+                BossTimer.UpdateBossList();
+                BossTimings.UpdateBossOverlayList();
             }
             catch (Exception ex)
             {
@@ -1643,33 +1625,50 @@ namespace GW2FOX
         }
 
 
+
         private void ShowAll_Click(object sender, EventArgs e)
         {
             try
             {
-                CheckAllBossCheckboxesAll();
+                var config = BossTimings.LoadBossConfigAndReturn();
 
-                var allBosses = BossEventGroups.Select(g => g.BossName).ToArray();
-                CheckBossCheckboxes(allBosses);
-
-                var config = LoadBossConfig();
-                config.Bosses = allBosses
+                // 1. Alle Namen aus JSON
+                var allBossNames = config.Bosses
+                    .Where(b => !string.IsNullOrWhiteSpace(b.Name))
+                    .Select(b => b.Name)
                     .Distinct(StringComparer.OrdinalIgnoreCase)
-                    .Select(name => new Boss
-                    {
-                        Name = name,
-                        Timings = new List<string> { "00:00:00" },
-                        Category = "WBs",
-                        Waypoint = ""
-                    }).ToList();
+                    .ToList();
 
-                SaveBossConfig(config);
+                // 2. Checkboxen aktivieren
+                BossTimings.CheckBossCheckboxes(allBossNames.ToArray(), Worldbosses.bossCheckBoxMap);
+
+                // 3. BossList23 setzen
+                BossTimings.BossList23 = allBossNames;
+
+                // 4. Events neu aufbauen
+                BossTimings.BossEventsList.Clear();
+                BossTimings.BossEventGroups.Clear();
+                foreach (var boss in config.Bosses)
+                {
+                    if (boss.Name != null && boss.Timings != null)
+                    {
+                        BossTimings.AddBossEvent(boss.Name, boss.Timings.ToArray(), boss.Category ?? "WBs", boss.Waypoint ?? "");
+                    }
+                }
+
+                BossTimings.GenerateBossEventGroups();
+
+                // 5. UI & Overlay aktualisieren
+                BossTimer.UpdateBossList();
+                BossTimings.UpdateBossOverlayList();
+                SaveChoosenOnesToConfig();
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Fehler beim Laden aller Bosse: {ex.Message}", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Fehler beim Anzeigen aller Bosse: {ex.Message}", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
 
 
         private void button67_Click(object sender, EventArgs e)
@@ -1748,6 +1747,7 @@ namespace GW2FOX
             try
             {
                 BossTimings.ApplyBossGroupFromConfig("Mixed");
+                SaveChoosenOnesToConfig();
             }
             catch (Exception ex)
             {
@@ -1762,6 +1762,7 @@ namespace GW2FOX
             try
             {
                 BossTimings.ApplyBossGroupFromConfig("Meta");
+                SaveChoosenOnesToConfig();
             }
             catch (Exception ex)
             {
@@ -1769,7 +1770,53 @@ namespace GW2FOX
             }
         }
 
+        private void UpdateBossUiBosses()
+        {
+            if (!File.Exists("BossTimings.json"))
+                return;
 
+            try
+            {
+                var json = File.ReadAllText("BossTimings.json");
+                var jObj = JObject.Parse(json);
+
+                // Voreingestellte Liste: zuerst "ChoosenOnes", fallback zu "Bosses"
+                HashSet<string> selectedBossNames;
+
+                if (jObj.TryGetValue("ChoosenOnes", out JToken? choosenToken) && choosenToken is JArray choosenArray)
+                {
+                    selectedBossNames = choosenArray
+                        .Select(x => x.ToString())
+                        .Where(n => !string.IsNullOrWhiteSpace(n))
+                        .ToHashSet(StringComparer.OrdinalIgnoreCase);
+                }
+                else if (jObj.TryGetValue("Bosses", out JToken? bossesToken))
+                {
+                    var bosses = bossesToken.ToObject<List<Boss>>();
+                    selectedBossNames = bosses?.Select(b => b.Name).ToHashSet(StringComparer.OrdinalIgnoreCase)
+                                          ?? new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+                }
+                else
+                {
+                    selectedBossNames = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+                }
+
+                // Checkboxen setzen
+                foreach (var entry in bossCheckBoxMap)
+                {
+                    var checkBox = entry.Value;
+                    if (checkBox != null)
+                    {
+                        checkBox.Checked = selectedBossNames.Contains(entry.Key);
+                        checkBox.ForeColor = checkBox.Checked ? System.Drawing.Color.White : System.Drawing.Color.Gray;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Fehler beim Laden der Boss-Auswahl: {ex.Message}", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
 
 
     }

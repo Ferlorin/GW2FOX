@@ -107,10 +107,6 @@ namespace GW2FOX
         }
 
 
-
-
-
-
         public static void CheckBossCheckboxes(IEnumerable<string> bossNames, Dictionary<string, CheckBox> checkBoxMap)
         {
             foreach (var bossName in bossNames)
@@ -137,7 +133,7 @@ namespace GW2FOX
         }
 
 
-        private static void AddBossEvent(string bossName, string[] timings, string category, string waypoint = "")
+        public static void AddBossEvent(string bossName, string[] timings, string category, string waypoint = "")
         {
             try
             {
@@ -214,7 +210,7 @@ namespace GW2FOX
             return StaticBossEvents.Concat(DynamicBossEvents).ToList();
         }
 
-        private static void GenerateBossEventGroups()
+        public static void GenerateBossEventGroups()
         {
             BossEventGroups.Clear();
 
@@ -225,11 +221,6 @@ namespace GW2FOX
             BossEventGroups.AddRange(grouped);
         }
 
-        public static void LoadBossConfig()
-        {
-            LoadBossConfig("BossTimings.json");
-        }
-
         
 
         public static void LoadChosenBossesToUI(Dictionary<string, CheckBox> bossCheckBoxMap)
@@ -237,7 +228,7 @@ namespace GW2FOX
             var config = LoadBossConfigAndReturn();
 
             var chosenBossNames = config.Bosses
-                .Where(b => b.Category == "CustomSelection")
+                .Where(b => b.Category == "ChoosenOnes")
                 .Select(b => b.Name)
                 .ToHashSet(StringComparer.OrdinalIgnoreCase);
 
@@ -248,7 +239,7 @@ namespace GW2FOX
             }
         }
 
-        private static BossConfig LoadBossConfigAndReturn()
+        public static BossConfig LoadBossConfigAndReturn()
         {
             string path = "BossTimings.json";
 
@@ -341,7 +332,7 @@ namespace GW2FOX
 
 
                     newBossList.Add(boss.Name);
-                    AddBossEvent(boss.Name, boss.Timings.ToArray(), boss.Category ?? "WBs", boss.Waypoint ?? "");
+                    AddBossEvent(boss.Name, boss.Timings.ToArray(), boss.Category ?? "ChoosenOnes", boss.Waypoint ?? "");
                 }
 
                 BossList23 = newBossList;

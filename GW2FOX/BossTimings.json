@@ -1,990 +1,991 @@
 {
-  "Runinfo": "«Meta-Train» with the old [FOX]",
-  "Squadinfo": "• InstanceCheck:\n    - right click on me & join map\n• Don’t cancel invites!\n• No 3ple Trouble\n\n• https://gw2fox.wixsite.com/about",
-  "Guild": "☠ Young or old [FOX], we take every stray. Humor, respect and fun at the game are what distinguish us. No Obligations! Infos: wsp me or https://gw2fox.wixsite.com/about ☻",
-  "Welcome": "Welcome to the FOXhole. Read the Message of the Day for Infos - Questions, ask us! Guides & Tools on our Homepage: https://gw2fox.wixsite.com/about",
-  "Symbols": "☠ ★ ☣ ☮ ☢ ♪ ☜ ☞ ┌ ∩ ┐ ( ●̮̃ • ) ۶ ( • ◡ • ) ☿ ♀ ♂ ☀ ☁ ☂ ☃ ☄ ☾ ☽ ☇ ☉ ☐ ☒ ☑ ☝ ☚ • ☟ ☆ ♕ ♖ ♘ ♙ ♛ ♜ ♞ ♟ † ☨ ☥ ☦ ☓ ☩ ☯ ☧ ☬ ☸ ♁ ♆ ☭ ☪ ☫ © ™ ® ☎ ♥ 凸",
-  "World": "FireShaman, LLA Timberline, LLA Iron Marches, LLA Gendarran, The frozen Maw, Shadow Behemoth, Fire Elemental, Great Jungle Wurm, Ulgoth the Modniir, Taidha Covington, Megadestroyer, Inquest Golem M2, Tequatl the Sunless, The Shatterer, Karka Queen, Claw of Jormag",
-  "Fido": "Tequatl the Sunless, Effigy, Karka Queen, LLA Timberline, Chak Gerent, Doomlore Shrine, The Oil Floes, Battle in Tarir, DB Shatterer, Path to Ascension, Doppelganger, Palawadan, Choya Piñata, Nightbosses, Dragonstorm, Forged with Fire, Ooze Pits, Aetherblade Assault",
-  "Meta": "Chak Gerent, Battle in Tarir, Death-Branded Shatterer, Junundu Rising, Path to Ascension, Doppelganger, Forged with Fire, Choya Piñata, Nightbosses, Drakkar, Dragonstorm, Claw of Jormag",
-  "Mixed": "FireShaman, Battle in Tarir, Chak Gerent, Death-Branded Shatterer, Junundu Rising, Path to Ascension, Doppelganger, Forged with Fire, Choya Piñata, Nightbosses, Drakkar, Dragonstorm, LLA Timberline, LLA Iron Marches, LLA Gendarran, The frozen Maw, Shadow Behemoth, Fire Elemental, Great Jungle Wurm, Ulgoth the Modniir, Taidha Covington, Megadestroyer, Inquest Golem M2, Tequatl the Sunless, The Shatterer, Karka Queen, Claw of Jormag",
-  "Bosses": [
-    {
-      "Name": "The frozen Maw",
-      "Timings": [
-        "01:15:00",
-        "03:15:00",
-        "05:15:00",
-        "07:15:00",
-        "09:15:00",
-        "11:15:00",
-        "13:15:00",
-        "15:15:00",
-        "17:15:00",
-        "19:15:00",
-        "21:15:00",
-        "23:15:00"
-      ],
-      "Category": "WBs",
-      "Waypoint": "[&BMIDAAA=]"
-    },
-    {
-      "Name": "FireShaman",
-      "Timings": [
-        "01:10:00",
-        "03:10:00",
-        "05:10:00",
-        "07:10:00",
-        "09:10:00",
-        "11:10:00",
-        "13:10:00",
-        "15:10:00",
-        "17:10:00",
-        "19:10:00",
-        "21:10:00",
-        "23:10:00"
-      ],
-      "Category": "WBs",
-      "Waypoint": "[&BO4BAAA=]"
-    },
-    {
-      "Name": "LLA Timberline",
-      "Timings": [
-        "01:20:00",
-        "07:20:00",
-        "13:20:00",
-        "19:20:00"
-      ],
-      "Category": "WBs"
-    },
-    {
-      "Name": "LLA Iron Marches",
-      "Timings": [
-        "03:20:00",
-        "09:20:00",
-        "15:20:00",
-        "21:20:00"
-      ],
-      "Category": "WBs",
-      "Waypoint": "[&BOcBAAA=]"
-    },
-    {
-      "Name": "LLA Gendarran",
-      "Timings": [
-        "05:20:00",
-        "11:20:00",
-        "17:20:00",
-        "23:20:00"
-      ],
-      "Category": "WBs"
-    },
-    {
-      "Name": "Fire Elemental",
-      "Timings": [
-        "01:45:00",
-        "03:45:00",
-        "05:45:00",
-        "07:45:00",
-        "09:45:00",
-        "11:45:00",
-        "13:45:00",
-        "15:45:00",
-        "17:45:00",
-        "19:45:00",
-        "21:45:00",
-        "23:45:00"
-      ],
-      "Category": "WBs",
-      "Waypoint": "[&BEcAAAA=]"
-    },
-    {
-      "Name": "Great Jungle Wurm",
-      "Timings": [
-        "00:15:00",
-        "02:15:00",
-        "04:15:00",
-        "06:15:00",
-        "08:15:00",
-        "10:15:00",
-        "12:15:00",
-        "14:15:00",
-        "16:15:00",
-        "18:15:00",
-        "20:15:00",
-        "22:15:00"
-      ],
-      "Category": "WBs",
-      "Waypoint": "[&BEEFAAA=]"
-    },
-    {
-      "Name": "Ulgoth the Modniir",
-      "Timings": [
-        "02:30:00",
-        "05:30:00",
-        "08:30:00",
-        "11:30:00",
-        "14:30:00",
-        "17:30:00",
-        "20:30:00",
-        "23:30:00"
-      ],
-      "Category": "WBs",
-      "Waypoint": "[&BLAAAAA=]"
-    },
-    {
-      "Name": "Taidha Covington",
-      "Timings": [
-        "01:00:00",
-        "04:00:00",
-        "07:00:00",
-        "10:00:00",
-        "13:00:00",
-        "16:00:00",
-        "19:00:00",
-        "22:00:00"
-      ],
-      "Category": "WBs",
-      "Waypoint": "[&BKgBAAA=]"
-    },
-    {
-      "Name": "The Shatterer",
-      "Timings": [
-        "02:00:00",
-        "05:00:00",
-        "08:00:00",
-        "11:00:00",
-        "14:00:00",
-        "17:00:00",
-        "20:00:00",
-        "23:00:00"
-      ],
-      "Category": "WBs",
-      "Waypoint": "[&BE4DAAA=]"
-    },
-    {
-      "Name": "Shadow Behemoth",
-      "Timings": [
-        "00:45:00",
-        "02:45:00",
-        "04:45:00",
-        "06:45:00",
-        "08:45:00",
-        "10:45:00",
-        "12:45:00",
-        "14:45:00",
-        "16:45:00",
-        "18:45:00",
-        "20:45:00",
-        "22:45:00"
-      ],
-      "Category": "WBs",
-      "Waypoint": "[&BPcAAAA=]"
-    },
-    {
-      "Name": "Tequatl the Sunless",
-      "Timings": [
-        "01:00:00",
-        "04:00:00",
-        "08:00:00",
-        "12:30:00",
-        "17:00:00",
-        "20:00:00"
-      ],
-      "Category": "WBs",
-      "Waypoint": "[&BNABAAA=]"
-    },
-    {
-      "Name": "Megadestroyer",
-      "Timings": [
-        "01:30:00",
-        "04:30:00",
-        "07:30:00",
-        "10:30:00",
-        "13:30:00",
-        "16:30:00",
-        "19:30:00",
-        "22:30:00"
-      ],
-      "Category": "WBs",
-      "Waypoint": "[&BM0CAAA=]"
-    },
-    {
-      "Name": "Inquest Golem M2",
-      "Timings": [
-        "00:03:00",
-        "03:03:00",
-        "06:03:00",
-        "09:03:00",
-        "12:03:00",
-        "15:03:00",
-        "18:03:00",
-        "21:03:00"
-      ],
-      "Category": "WBs",
-      "Waypoint": "[&BNQCAAA=]"
-    },
-    {
-      "Name": "Karka Queen",
-      "Timings": [
-        "00:00:00",
-        "03:00:00",
-        "07:00:00",
-        "11:30:00",
-        "16:00:00",
-        "19:00:00"
-      ],
-      "Category": "WBs",
-      "Waypoint": "[&BNUGAAA=]"
-    },
-    {
-      "Name": "Claw of Jormag",
-      "Timings": [
-        "00:30:00",
-        "03:30:00",
-        "06:30:00",
-        "09:30:00",
-        "12:30:00",
-        "15:30:00",
-        "18:30:00",
-        "21:30:00"
-      ],
-      "Category": "WBs",
-      "Waypoint": "[&BHoCAAA=]"
-    },
-    {
-      "Name": "Sandstorm",
-      "Timings": [
-        "00:40:00",
-        "01:40:00",
-        "02:40:00",
-        "03:40:00",
-        "04:40:00",
-        "05:40:00",
-        "06:40:00",
-        "07:40:00",
-        "08:40:00",
-        "09:40:00",
-        "10:40:00",
-        "11:40:00",
-        "12:40:00",
-        "13:40:00",
-        "14:40:00",
-        "15:40:00",
-        "16:40:00",
-        "17:40:00",
-        "18:40:00",
-        "19:40:00",
-        "20:40:00",
-        "21:40:00",
-        "22:40:00",
-        "23:40:00"
-      ],
-      "Category": "LWS2",
-      "Waypoint": "[&BIAHAAA=]"
-    },
-    {
-      "Name": "Saidra's Haven",
-      "Timings": [
-        "00:00:00",
-        "02:00:00",
-        "04:00:00",
-        "06:00:00",
-        "08:00:00",
-        "10:00:00",
-        "12:00:00",
-        "14:00:00",
-        "16:00:00",
-        "18:00:00",
-        "20:00:00",
-        "22:00:00"
-      ],
-      "Category": "LWS3",
-      "Waypoint": "[&BK0JAAA=]"
-    },
-    {
-      "Name": "New Loamhurst",
-      "Timings": [
-        "00:45:00",
-        "02:45:00",
-        "04:45:00",
-        "06:45:00",
-        "08:45:00",
-        "10:45:00",
-        "12:45:00",
-        "14:45:00",
-        "16:45:00",
-        "18:45:00",
-        "20:45:00",
-        "22:45:00"
-      ],
-      "Category": "LWS3",
-      "Waypoint": "[&BLQJAAA=]"
-    },
-    {
-      "Name": "Noran's Homestead",
-      "Timings": [
-        "01:40:00",
-        "03:40:00",
-        "05:40:00",
-        "07:40:00",
-        "09:40:00",
-        "11:40:00",
-        "13:40:00",
-        "15:40:00",
-        "17:40:00",
-        "19:40:00",
-        "21:40:00",
-        "23:40:00"
-      ],
-      "Category": "LWS3",
-      "Waypoint": "[&BK8JAAA=]"
-    },
-    {
-      "Name": "Defend Jora's Keep",
-      "Timings": [
-        "00:45:00",
-        "02:45:00",
-        "04:45:00",
-        "06:45:00",
-        "08:45:00",
-        "10:45:00",
-        "12:45:00",
-        "14:45:00",
-        "16:45:00",
-        "18:45:00",
-        "20:45:00",
-        "22:45:00"
-      ],
-      "Category": "Ice",
-      "Waypoint": "[&BCcMAAA=]"
-    },
-    {
-      "Name": "Doomlore Shrine",
-      "Timings": [
-        "01:38:00",
-        "03:38:00",
-        "05:38:00",
-        "07:38:00",
-        "09:38:00",
-        "11:38:00",
-        "13:38:00",
-        "15:38:00",
-        "17:38:00",
-        "19:38:00",
-        "21:38:00",
-        "23:38:00"
-      ],
-      "Category": "Ice",
-      "Waypoint": "[&BA4MAAA=]"
-    },
-    {
-      "Name": "Storms of Winter",
-      "Timings": [
-        "01:00:00",
-        "03:00:00",
-        "05:00:00",
-        "07:00:00",
-        "09:00:00",
-        "11:00:00",
-        "13:00:00",
-        "15:00:00",
-        "17:00:00",
-        "19:00:00",
-        "21:00:00",
-        "23:00:00"
-      ],
-      "Category": "Ice",
-      "Waypoint": "[&BCcMAAA=]"
-    },
-    {
-      "Name": "Effigy",
-      "Timings": [
-        "01:10:00",
-        "03:10:00",
-        "05:10:00",
-        "07:10:00",
-        "09:10:00",
-        "11:10:00",
-        "13:10:00",
-        "15:10:00",
-        "17:10:00",
-        "19:10:00",
-        "21:10:00",
-        "23:10:00"
-      ],
-      "Category": "Ice",
-      "Waypoint": "[&BA4MAAA=]"
-    },
-    {
-      "Name": "Ooze Pits",
-      "Timings": [
-        "00:05:00",
-        "02:05:00",
-        "04:05:00",
-        "06:05:00",
-        "08:05:00",
-        "10:05:00",
-        "12:05:00",
-        "14:05:00",
-        "16:05:00",
-        "18:05:00",
-        "20:05:00",
-        "22:05:00"
-      ],
-      "Category": "Ice",
-      "Waypoint": "[&BPgLAAA=]"
-    },
-    {
-      "Name": "Dragonstorm",
-      "Timings": [
-        "00:00:00",
-        "02:00:00",
-        "04:00:00",
-        "06:00:00",
-        "08:00:00",
-        "10:00:00",
-        "12:00:00",
-        "14:00:00",
-        "16:00:00",
-        "18:00:00",
-        "20:00:00",
-        "22:00:00"
-      ],
-      "Category": "Ice",
-      "Waypoint": "[&BAkMAAA=]"
-    },
-    {
-      "Name": "Drakkar",
-      "Timings": [
-        "00:05:00",
-        "02:05:00",
-        "04:05:00",
-        "06:05:00",
-        "08:05:00",
-        "10:05:00",
-        "12:05:00",
-        "14:05:00",
-        "16:05:00",
-        "18:05:00",
-        "20:05:00",
-        "22:05:00"
-      ],
-      "Category": "Ice",
-      "Waypoint": "[&BDkMAAA=]"
-    },
-    {
-      "Name": "Metal Concert",
-      "Timings": [
-        "00:40:00",
-        "02:40:00",
-        "04:40:00",
-        "06:40:00",
-        "08:40:00",
-        "10:40:00",
-        "12:40:00",
-        "14:40:00",
-        "16:40:00",
-        "18:40:00",
-        "20:40:00",
-        "22:40:00"
-      ],
-      "Category": "Ice",
-      "Waypoint": "[&BPgLAAA=]"
-    },
-    {
-      "Name": "Chak Gerent",
-      "Timings": [
-        "01:30:00",
-        "03:30:00",
-        "05:30:00",
-        "07:30:00",
-        "09:30:00",
-        "11:30:00",
-        "13:30:00",
-        "15:30:00",
-        "17:30:00",
-        "19:30:00",
-        "21:30:00",
-        "23:30:00"
-      ],
-      "Category": "Maguuma",
-      "Waypoint": "[&BPUHAAA=]"
-    },
-    {
-      "Name": "Battle in Tarir",
-      "Timings": [
-        "01:45:00",
-        "03:45:00",
-        "05:45:00",
-        "07:45:00",
-        "09:45:00",
-        "11:45:00",
-        "13:45:00",
-        "15:45:00",
-        "17:45:00",
-        "19:45:00",
-        "21:45:00",
-        "23:45:00"
-      ],
-      "Category": "Maguuma",
-      "Waypoint": "[&BN0HAAA=][&BGwIAAA=][&BAIIAAA=][&BAYIAAA=]"
-    },
-    {
-      "Name": "Octovine",
-      "Timings": [
-        "02:00:00",
-        "04:00:00",
-        "06:00:00",
-        "08:00:00",
-        "10:00:00",
-        "12:00:00",
-        "14:00:00",
-        "16:00:00",
-        "18:00:00",
-        "20:00:00",
-        "22:00:00",
-        "00:00:00"
-      ],
-      "Category": "Maguuma",
-      "Waypoint": "[&BN0HAAA=][&BGwIAAA=][&BAIIAAA=][&BAYIAAA=]"
-    },
-    {
-      "Name": "Nightbosses",
-      "Timings": [
-        "01:10:00",
-        "03:10:00",
-        "05:10:00",
-        "07:10:00",
-        "09:10:00",
-        "11:10:00",
-        "13:10:00",
-        "15:10:00",
-        "17:10:00",
-        "19:10:00",
-        "21:10:00",
-        "23:10:00"
-      ],
-      "Category": "Maguuma",
-      "Waypoint": "[&BO8HAAA=]"
-    },
-    {
-      "Name": "Dragon's Stand",
-      "Timings": [
-        "00:30:00",
-        "02:30:00",
-        "04:30:00",
-        "06:30:00",
-        "08:30:00",
-        "10:30:00",
-        "12:30:00",
-        "14:30:00",
-        "16:30:00",
-        "18:30:00",
-        "20:30:00",
-        "22:30:00"
-      ],
-      "Category": "Maguuma",
-      "Waypoint": "[&BBAIAAA=]"
-    },
-    {
-      "Name": "The Oil Floes",
-      "Timings": [
-        "01:45:00",
-        "03:45:00",
-        "05:45:00",
-        "07:45:00",
-        "09:45:00",
-        "11:45:00",
-        "13:45:00",
-        "15:45:00",
-        "17:45:00",
-        "19:45:00",
-        "21:45:00",
-        "23:45:00"
-      ],
-      "Category": "Desert",
-      "Waypoint": "[&BKYLAAA=]"
-    },
-    {
-      "Name": "Maws of Torment",
-      "Timings": [
-        "00:00:00",
-        "02:00:00",
-        "04:00:00",
-        "06:00:00",
-        "08:00:00",
-        "10:00:00",
-        "12:00:00",
-        "14:00:00",
-        "16:00:00",
-        "18:00:00",
-        "20:00:00",
-        "22:00:00"
-      ],
-      "Category": "Desert",
-      "Waypoint": "[&BKMKAAA=]"
-    },
-    {
-      "Name": "Palawadan",
-      "Timings": [
-        "00:45:00",
-        "02:45:00",
-        "04:45:00",
-        "06:45:00",
-        "08:45:00",
-        "10:45:00",
-        "12:45:00",
-        "14:45:00",
-        "16:45:00",
-        "18:45:00",
-        "20:45:00",
-        "22:45:00"
-      ],
-      "Category": "Desert",
-      "Waypoint": "[&BAkLAAA=]"
-    },
-    {
-      "Name": "Thunderhead Keep",
-      "Timings": [
-        "00:45:00",
-        "02:45:00",
-        "04:45:00",
-        "06:45:00",
-        "08:45:00",
-        "10:45:00",
-        "12:45:00",
-        "14:45:00",
-        "16:45:00",
-        "18:45:00",
-        "20:45:00",
-        "22:45:00"
-      ],
-      "Category": "Desert",
-      "Waypoint": "[&BLsLAAA=]"
-    },
-    {
-      "Name": "Serpents' Ire",
-      "Timings": [
-        "01:30:00",
-        "03:30:00",
-        "05:30:00",
-        "07:30:00",
-        "09:30:00",
-        "11:30:00",
-        "13:30:00",
-        "15:30:00",
-        "17:30:00",
-        "19:30:00",
-        "21:30:00",
-        "23:30:00"
-      ],
-      "Category": "Desert",
-      "Waypoint": "[&BHQKAAA=]"
-    },
-    {
-      "Name": "DB Shatterer",
-      "Timings": [
-        "00:00:00",
-        "02:00:00",
-        "04:00:00",
-        "06:00:00",
-        "08:00:00",
-        "10:00:00",
-        "12:00:00",
-        "14:00:00",
-        "16:00:00",
-        "18:00:00",
-        "20:00:00",
-        "22:00:00"
-      ],
-      "Category": "Desert",
-      "Waypoint": "[&BJMLAAA=]"
-    },
-    {
-      "Name": "Junundu Rising",
-      "Timings": [
-        "00:30:00",
-        "01:30:00",
-        "02:30:00",
-        "03:30:00",
-        "04:30:00",
-        "05:30:00",
-        "06:30:00",
-        "07:30:00",
-        "08:30:00",
-        "09:30:00",
-        "10:30:00",
-        "11:30:00",
-        "12:30:00",
-        "13:30:00",
-        "14:30:00",
-        "15:30:00",
-        "16:30:00",
-        "17:30:00",
-        "18:30:00",
-        "19:30:00",
-        "20:30:00",
-        "21:30:00",
-        "22:30:00",
-        "23:30:00"
-      ],
-      "Category": "Desert",
-      "Waypoint": "[&BMEKAAA=]"
-    },
-    {
-      "Name": "Path to Ascension",
-      "Timings": [
-        "00:30:00",
-        "02:30:00",
-        "04:30:00",
-        "06:30:00",
-        "08:30:00",
-        "10:30:00",
-        "12:30:00",
-        "14:30:00",
-        "16:30:00",
-        "18:30:00",
-        "20:30:00",
-        "22:30:00"
-      ],
-      "Category": "Desert",
-      "Waypoint": "[&BFMKAAA=]"
-    },
-    {
-      "Name": "Doppelganger",
-      "Timings": [
-        "00:55:00",
-        "02:55:00",
-        "04:55:00",
-        "06:55:00",
-        "08:55:00",
-        "10:55:00",
-        "12:55:00",
-        "14:55:00",
-        "16:55:00",
-        "18:55:00",
-        "20:55:00",
-        "22:55:00"
-      ],
-      "Category": "Desert",
-      "Waypoint": "[&BFMKAAA=]"
-    },
-    {
-      "Name": "Forged with Fire",
-      "Timings": [
-        "01:00:00",
-        "02:00:00",
-        "03:00:00",
-        "04:00:00",
-        "05:00:00",
-        "06:00:00",
-        "07:00:00",
-        "08:00:00",
-        "09:00:00",
-        "10:00:00",
-        "11:00:00",
-        "12:00:00",
-        "13:00:00",
-        "14:00:00",
-        "15:00:00",
-        "16:00:00",
-        "17:00:00",
-        "18:00:00",
-        "19:00:00",
-        "20:00:00",
-        "21:00:00",
-        "22:00:00",
-        "23:00:00",
-        "00:00:00"
-      ],
-      "Category": "Desert",
-      "Waypoint": "[&BO0KAAA=]"
-    },
-    {
-      "Name": "Choya Piñata",
-      "Timings": [
-        "01:20:00",
-        "03:20:00",
-        "05:20:00",
-        "07:20:00",
-        "09:20:00",
-        "11:20:00",
-        "13:20:00",
-        "15:20:00",
-        "17:20:00",
-        "19:20:00",
-        "21:20:00",
-        "23:20:00"
-      ],
-      "Category": "Desert",
-      "Waypoint": "[&BLsKAAA=]"
-    },
-    {
-      "Name": "Aetherblade Assault",
-      "Timings": [
-        "00:30:00",
-        "02:30:00",
-        "04:30:00",
-        "06:30:00",
-        "08:30:00",
-        "10:30:00",
-        "12:30:00",
-        "14:30:00",
-        "16:30:00",
-        "18:30:00",
-        "20:30:00",
-        "22:30:00"
-      ],
-      "Category": "Cantha",
-      "Waypoint": "[&BGUNAAA=]"
-    },
-    {
-      "Name": "Kaineng Blackout",
-      "Timings": [
-        "01:00:00",
-        "03:00:00",
-        "05:00:00",
-        "07:00:00",
-        "09:00:00",
-        "11:00:00",
-        "13:00:00",
-        "15:00:00",
-        "17:00:00",
-        "19:00:00",
-        "21:00:00",
-        "23:00:00"
-      ],
-      "Category": "Cantha",
-      "Waypoint": "[&BBkNAAA=]"
-    },
-    {
-      "Name": "Gang War",
-      "Timings": [
-        "01:30:00",
-        "03:30:00",
-        "05:30:00",
-        "07:30:00",
-        "09:30:00",
-        "11:30:00",
-        "13:30:00",
-        "15:30:00",
-        "17:30:00",
-        "19:30:00",
-        "21:30:00",
-        "23:30:00"
-      ],
-      "Category": "Cantha",
-      "Waypoint": "[&BMwMAAA=]"
-    },
-    {
-      "Name": "Aspenwood",
-      "Timings": [
-        "00:40:00",
-        "02:40:00",
-        "04:40:00",
-        "06:40:00",
-        "08:40:00",
-        "10:40:00",
-        "12:40:00",
-        "14:40:00",
-        "16:40:00",
-        "18:40:00",
-        "20:40:00",
-        "22:40:00"
-      ],
-      "Category": "Cantha",
-      "Waypoint": "[&BPkMAAA=]"
-    },
-    {
-      "Name": "Battle for Jade Sea",
-      "Timings": [
-        "00:00:00",
-        "02:00:00",
-        "04:00:00",
-        "06:00:00",
-        "08:00:00",
-        "10:00:00",
-        "12:00:00",
-        "14:00:00",
-        "16:00:00",
-        "18:00:00",
-        "20:00:00",
-        "22:00:00"
-      ],
-      "Category": "Cantha",
-      "Waypoint": "[&BKIMAAA=]"
-    },
-    {
-      "Name": "Wizard's Tower",
-      "Timings": [
-        "00:00:00",
-        "02:00:00",
-        "04:00:00",
-        "06:00:00",
-        "08:00:00",
-        "10:00:00",
-        "12:00:00",
-        "14:00:00",
-        "16:00:00",
-        "18:00:00",
-        "20:00:00",
-        "22:00:00"
-      ],
-      "Category": "SotO",
-      "Waypoint": "[&BL4NAAA=]"
-    },
-    {
-      "Name": "Fly by Night",
-      "Timings": [
-        "00:55:00",
-        "02:55:00",
-        "04:55:00",
-        "06:55:00",
-        "08:55:00",
-        "10:55:00",
-        "12:55:00",
-        "14:55:00",
-        "16:55:00",
-        "18:55:00",
-        "20:55:00",
-        "22:55:00"
-      ],
-      "Category": "SotO",
-      "Waypoint": "[&BB8OAAA=]"
-    },
-    {
-      "Name": "Defense of Amnytas",
-      "Timings": [
-        "01:00:00",
-        "03:00:00",
-        "05:00:00",
-        "07:00:00",
-        "09:00:00",
-        "11:00:00",
-        "13:00:00",
-        "15:00:00",
-        "17:00:00",
-        "19:00:00",
-        "21:00:00",
-        "23:00:00"
-      ],
-      "Category": "SotO",
-      "Waypoint": "[&BDQOAAA=]"
-    },
-    {
-      "Name": "Convergences",
-      "Timings": [
-        "02:30:00",
-        "05:30:00",
-        "08:30:00",
-        "11:30:00",
-        "14:30:00",
-        "17:30:00",
-        "20:30:00",
-        "23:30:00"
-      ],
-      "Category": "SotO",
-      "Waypoint": "[&BB8OAAA=]"
-    }
-  ]
+    "Runinfo": "«Meta-Train» with the old [FOX]",
+    "Squadinfo": "• InstanceCheck:\n    - right click on me & join map\n• Don’t cancel invites!\n• No 3ple Trouble\n\n• https://gw2fox.wixsite.com/about",
+    "Guild": "☠ Young or old [FOX], we take every stray. Humor, respect and fun at the game are what distinguish us. No Obligations! Infos: wsp me or https://gw2fox.wixsite.com/about ☻",
+    "Welcome": "Welcome to the FOXhole. Read the Message of the Day for Infos - Questions, ask us! Guides & Tools on our Homepage: https://gw2fox.wixsite.com/about",
+    "Symbols": "☠ ★ ☣ ☮ ☢ ♪ ☜ ☞ ┌ ∩ ┐ ( ●̮̃ • ) ۶ ( • ◡ • ) ☿ ♀ ♂ ☀ ☁ ☂ ☃ ☄ ☾ ☽ ☇ ☉ ☐ ☒ ☑ ☝ ☚ • ☟ ☆ ♕ ♖ ♘ ♙ ♛ ♜ ♞ ♟ † ☨ ☥ ☦ ☓ ☩ ☯ ☧ ☬ ☸ ♁ ♆ ☭ ☪ ☫ © ™ ® ☎ ♥ 凸",
+    "World": "FireShaman, LLA Timberline, LLA Iron Marches, LLA Gendarran, The frozen Maw, Shadow Behemoth, Fire Elemental, Great Jungle Wurm, Ulgoth the Modniir, Taidha Covington, Megadestroyer, Inquest Golem M2, Tequatl the Sunless, The Shatterer, Karka Queen, Claw of Jormag",
+    "Fido": "Tequatl the Sunless, Effigy, Karka Queen, LLA Timberline, Chak Gerent, Doomlore Shrine, The Oil Floes, Battle in Tarir, DB Shatterer, Path to Ascension, Doppelganger, Palawadan, Choya Piñata, Nightbosses, Dragonstorm, Forged with Fire, Ooze Pits, Aetherblade Assault",
+    "Meta": "Chak Gerent, Battle in Tarir, Death-Branded Shatterer, Junundu Rising, Path to Ascension, Doppelganger, Forged with Fire, Choya Piñata, Nightbosses, Drakkar, Dragonstorm, Claw of Jormag",
+    "Mixed": "FireShaman, Battle in Tarir, Chak Gerent, Death-Branded Shatterer, Junundu Rising, Path to Ascension, Doppelganger, Forged with Fire, Choya Piñata, Nightbosses, Drakkar, Dragonstorm, LLA Timberline, LLA Iron Marches, LLA Gendarran, The frozen Maw, Shadow Behemoth, Fire Elemental, Great Jungle Wurm, Ulgoth the Modniir, Taidha Covington, Megadestroyer, Inquest Golem M2, Tequatl the Sunless, The Shatterer, Karka Queen, Claw of Jormag",
+    "ChoosenOnes": "",
+    "Bosses": [
+        {
+            "Name": "The frozen Maw",
+            "Timings": [
+                "01:15:00",
+                "03:15:00",
+                "05:15:00",
+                "07:15:00",
+                "09:15:00",
+                "11:15:00",
+                "13:15:00",
+                "15:15:00",
+                "17:15:00",
+                "19:15:00",
+                "21:15:00",
+                "23:15:00"
+            ],
+            "Category": "WBs",
+            "Waypoint": "[&BMIDAAA=]"
+        },
+        {
+            "Name": "FireShaman",
+            "Timings": [
+                "01:10:00",
+                "03:10:00",
+                "05:10:00",
+                "07:10:00",
+                "09:10:00",
+                "11:10:00",
+                "13:10:00",
+                "15:10:00",
+                "17:10:00",
+                "19:10:00",
+                "21:10:00",
+                "23:10:00"
+            ],
+            "Category": "WBs",
+            "Waypoint": "[&BO4BAAA=]"
+        },
+        {
+            "Name": "LLA Timberline",
+            "Timings": [
+                "01:20:00",
+                "07:20:00",
+                "13:20:00",
+                "19:20:00"
+            ],
+            "Category": "WBs"
+        },
+        {
+            "Name": "LLA Iron Marches",
+            "Timings": [
+                "03:20:00",
+                "09:20:00",
+                "15:20:00",
+                "21:20:00"
+            ],
+            "Category": "WBs",
+            "Waypoint": "[&BOcBAAA=]"
+        },
+        {
+            "Name": "LLA Gendarran",
+            "Timings": [
+                "05:20:00",
+                "11:20:00",
+                "17:20:00",
+                "23:20:00"
+            ],
+            "Category": "WBs"
+        },
+        {
+            "Name": "Fire Elemental",
+            "Timings": [
+                "01:45:00",
+                "03:45:00",
+                "05:45:00",
+                "07:45:00",
+                "09:45:00",
+                "11:45:00",
+                "13:45:00",
+                "15:45:00",
+                "17:45:00",
+                "19:45:00",
+                "21:45:00",
+                "23:45:00"
+            ],
+            "Category": "WBs",
+            "Waypoint": "[&BEcAAAA=]"
+        },
+        {
+            "Name": "Great Jungle Wurm",
+            "Timings": [
+                "00:15:00",
+                "02:15:00",
+                "04:15:00",
+                "06:15:00",
+                "08:15:00",
+                "10:15:00",
+                "12:15:00",
+                "14:15:00",
+                "16:15:00",
+                "18:15:00",
+                "20:15:00",
+                "22:15:00"
+            ],
+            "Category": "WBs",
+            "Waypoint": "[&BEEFAAA=]"
+        },
+        {
+            "Name": "Ulgoth the Modniir",
+            "Timings": [
+                "02:30:00",
+                "05:30:00",
+                "08:30:00",
+                "11:30:00",
+                "14:30:00",
+                "17:30:00",
+                "20:30:00",
+                "23:30:00"
+            ],
+            "Category": "WBs",
+            "Waypoint": "[&BLAAAAA=]"
+        },
+        {
+            "Name": "Taidha Covington",
+            "Timings": [
+                "01:00:00",
+                "04:00:00",
+                "07:00:00",
+                "10:00:00",
+                "13:00:00",
+                "16:00:00",
+                "19:00:00",
+                "22:00:00"
+            ],
+            "Category": "WBs",
+            "Waypoint": "[&BKgBAAA=]"
+        },
+        {
+            "Name": "The Shatterer",
+            "Timings": [
+                "02:00:00",
+                "05:00:00",
+                "08:00:00",
+                "11:00:00",
+                "14:00:00",
+                "17:00:00",
+                "20:00:00",
+                "23:00:00"
+            ],
+            "Category": "WBs",
+            "Waypoint": "[&BE4DAAA=]"
+        },
+        {
+            "Name": "Shadow Behemoth",
+            "Timings": [
+                "00:45:00",
+                "02:45:00",
+                "04:45:00",
+                "06:45:00",
+                "08:45:00",
+                "10:45:00",
+                "12:45:00",
+                "14:45:00",
+                "16:45:00",
+                "18:45:00",
+                "20:45:00",
+                "22:45:00"
+            ],
+            "Category": "WBs",
+            "Waypoint": "[&BPcAAAA=]"
+        },
+        {
+            "Name": "Tequatl the Sunless",
+            "Timings": [
+                "01:00:00",
+                "04:00:00",
+                "08:00:00",
+                "12:30:00",
+                "17:00:00",
+                "20:00:00"
+            ],
+            "Category": "WBs",
+            "Waypoint": "[&BNABAAA=]"
+        },
+        {
+            "Name": "Megadestroyer",
+            "Timings": [
+                "01:30:00",
+                "04:30:00",
+                "07:30:00",
+                "10:30:00",
+                "13:30:00",
+                "16:30:00",
+                "19:30:00",
+                "22:30:00"
+            ],
+            "Category": "WBs",
+            "Waypoint": "[&BM0CAAA=]"
+        },
+        {
+            "Name": "Inquest Golem M2",
+            "Timings": [
+                "00:03:00",
+                "03:03:00",
+                "06:03:00",
+                "09:03:00",
+                "12:03:00",
+                "15:03:00",
+                "18:03:00",
+                "21:03:00"
+            ],
+            "Category": "WBs",
+            "Waypoint": "[&BNQCAAA=]"
+        },
+        {
+            "Name": "Karka Queen",
+            "Timings": [
+                "00:00:00",
+                "03:00:00",
+                "07:00:00",
+                "11:30:00",
+                "16:00:00",
+                "19:00:00"
+            ],
+            "Category": "WBs",
+            "Waypoint": "[&BNUGAAA=]"
+        },
+        {
+            "Name": "Claw of Jormag",
+            "Timings": [
+                "00:30:00",
+                "03:30:00",
+                "06:30:00",
+                "09:30:00",
+                "12:30:00",
+                "15:30:00",
+                "18:30:00",
+                "21:30:00"
+            ],
+            "Category": "WBs",
+            "Waypoint": "[&BHoCAAA=]"
+        },
+        {
+            "Name": "Sandstorm",
+            "Timings": [
+                "00:40:00",
+                "01:40:00",
+                "02:40:00",
+                "03:40:00",
+                "04:40:00",
+                "05:40:00",
+                "06:40:00",
+                "07:40:00",
+                "08:40:00",
+                "09:40:00",
+                "10:40:00",
+                "11:40:00",
+                "12:40:00",
+                "13:40:00",
+                "14:40:00",
+                "15:40:00",
+                "16:40:00",
+                "17:40:00",
+                "18:40:00",
+                "19:40:00",
+                "20:40:00",
+                "21:40:00",
+                "22:40:00",
+                "23:40:00"
+            ],
+            "Category": "LWS2",
+            "Waypoint": "[&BIAHAAA=]"
+        },
+        {
+            "Name": "Saidra's Haven",
+            "Timings": [
+                "00:00:00",
+                "02:00:00",
+                "04:00:00",
+                "06:00:00",
+                "08:00:00",
+                "10:00:00",
+                "12:00:00",
+                "14:00:00",
+                "16:00:00",
+                "18:00:00",
+                "20:00:00",
+                "22:00:00"
+            ],
+            "Category": "LWS3",
+            "Waypoint": "[&BK0JAAA=]"
+        },
+        {
+            "Name": "New Loamhurst",
+            "Timings": [
+                "00:45:00",
+                "02:45:00",
+                "04:45:00",
+                "06:45:00",
+                "08:45:00",
+                "10:45:00",
+                "12:45:00",
+                "14:45:00",
+                "16:45:00",
+                "18:45:00",
+                "20:45:00",
+                "22:45:00"
+            ],
+            "Category": "LWS3",
+            "Waypoint": "[&BLQJAAA=]"
+        },
+        {
+            "Name": "Noran's Homestead",
+            "Timings": [
+                "01:40:00",
+                "03:40:00",
+                "05:40:00",
+                "07:40:00",
+                "09:40:00",
+                "11:40:00",
+                "13:40:00",
+                "15:40:00",
+                "17:40:00",
+                "19:40:00",
+                "21:40:00",
+                "23:40:00"
+            ],
+            "Category": "LWS3",
+            "Waypoint": "[&BK8JAAA=]"
+        },
+        {
+            "Name": "Defend Jora's Keep",
+            "Timings": [
+                "00:45:00",
+                "02:45:00",
+                "04:45:00",
+                "06:45:00",
+                "08:45:00",
+                "10:45:00",
+                "12:45:00",
+                "14:45:00",
+                "16:45:00",
+                "18:45:00",
+                "20:45:00",
+                "22:45:00"
+            ],
+            "Category": "Ice",
+            "Waypoint": "[&BCcMAAA=]"
+        },
+        {
+            "Name": "Doomlore Shrine",
+            "Timings": [
+                "01:38:00",
+                "03:38:00",
+                "05:38:00",
+                "07:38:00",
+                "09:38:00",
+                "11:38:00",
+                "13:38:00",
+                "15:38:00",
+                "17:38:00",
+                "19:38:00",
+                "21:38:00",
+                "23:38:00"
+            ],
+            "Category": "Ice",
+            "Waypoint": "[&BA4MAAA=]"
+        },
+        {
+            "Name": "Storms of Winter",
+            "Timings": [
+                "01:00:00",
+                "03:00:00",
+                "05:00:00",
+                "07:00:00",
+                "09:00:00",
+                "11:00:00",
+                "13:00:00",
+                "15:00:00",
+                "17:00:00",
+                "19:00:00",
+                "21:00:00",
+                "23:00:00"
+            ],
+            "Category": "Ice",
+            "Waypoint": "[&BCcMAAA=]"
+        },
+        {
+            "Name": "Effigy",
+            "Timings": [
+                "01:10:00",
+                "03:10:00",
+                "05:10:00",
+                "07:10:00",
+                "09:10:00",
+                "11:10:00",
+                "13:10:00",
+                "15:10:00",
+                "17:10:00",
+                "19:10:00",
+                "21:10:00",
+                "23:10:00"
+            ],
+            "Category": "Ice",
+            "Waypoint": "[&BA4MAAA=]"
+        },
+        {
+            "Name": "Ooze Pits",
+            "Timings": [
+                "00:05:00",
+                "02:05:00",
+                "04:05:00",
+                "06:05:00",
+                "08:05:00",
+                "10:05:00",
+                "12:05:00",
+                "14:05:00",
+                "16:05:00",
+                "18:05:00",
+                "20:05:00",
+                "22:05:00"
+            ],
+            "Category": "Ice",
+            "Waypoint": "[&BPgLAAA=]"
+        },
+        {
+            "Name": "Dragonstorm",
+            "Timings": [
+                "00:00:00",
+                "02:00:00",
+                "04:00:00",
+                "06:00:00",
+                "08:00:00",
+                "10:00:00",
+                "12:00:00",
+                "14:00:00",
+                "16:00:00",
+                "18:00:00",
+                "20:00:00",
+                "22:00:00"
+            ],
+            "Category": "Ice",
+            "Waypoint": "[&BAkMAAA=]"
+        },
+        {
+            "Name": "Drakkar",
+            "Timings": [
+                "00:05:00",
+                "02:05:00",
+                "04:05:00",
+                "06:05:00",
+                "08:05:00",
+                "10:05:00",
+                "12:05:00",
+                "14:05:00",
+                "16:05:00",
+                "18:05:00",
+                "20:05:00",
+                "22:05:00"
+            ],
+            "Category": "Ice",
+            "Waypoint": "[&BDkMAAA=]"
+        },
+        {
+            "Name": "Metal Concert",
+            "Timings": [
+                "00:40:00",
+                "02:40:00",
+                "04:40:00",
+                "06:40:00",
+                "08:40:00",
+                "10:40:00",
+                "12:40:00",
+                "14:40:00",
+                "16:40:00",
+                "18:40:00",
+                "20:40:00",
+                "22:40:00"
+            ],
+            "Category": "Ice",
+            "Waypoint": "[&BPgLAAA=]"
+        },
+        {
+            "Name": "Chak Gerent",
+            "Timings": [
+                "01:30:00",
+                "03:30:00",
+                "05:30:00",
+                "07:30:00",
+                "09:30:00",
+                "11:30:00",
+                "13:30:00",
+                "15:30:00",
+                "17:30:00",
+                "19:30:00",
+                "21:30:00",
+                "23:30:00"
+            ],
+            "Category": "Maguuma",
+            "Waypoint": "[&BPUHAAA=]"
+        },
+        {
+            "Name": "Battle in Tarir",
+            "Timings": [
+                "01:45:00",
+                "03:45:00",
+                "05:45:00",
+                "07:45:00",
+                "09:45:00",
+                "11:45:00",
+                "13:45:00",
+                "15:45:00",
+                "17:45:00",
+                "19:45:00",
+                "21:45:00",
+                "23:45:00"
+            ],
+            "Category": "Maguuma",
+            "Waypoint": "[&BN0HAAA=][&BGwIAAA=][&BAIIAAA=][&BAYIAAA=]"
+        },
+        {
+            "Name": "Octovine",
+            "Timings": [
+                "02:00:00",
+                "04:00:00",
+                "06:00:00",
+                "08:00:00",
+                "10:00:00",
+                "12:00:00",
+                "14:00:00",
+                "16:00:00",
+                "18:00:00",
+                "20:00:00",
+                "22:00:00",
+                "00:00:00"
+            ],
+            "Category": "Maguuma",
+            "Waypoint": "[&BN0HAAA=][&BGwIAAA=][&BAIIAAA=][&BAYIAAA=]"
+        },
+        {
+            "Name": "Nightbosses",
+            "Timings": [
+                "01:10:00",
+                "03:10:00",
+                "05:10:00",
+                "07:10:00",
+                "09:10:00",
+                "11:10:00",
+                "13:10:00",
+                "15:10:00",
+                "17:10:00",
+                "19:10:00",
+                "21:10:00",
+                "23:10:00"
+            ],
+            "Category": "Maguuma",
+            "Waypoint": "[&BO8HAAA=]"
+        },
+        {
+            "Name": "Dragon's Stand",
+            "Timings": [
+                "00:30:00",
+                "02:30:00",
+                "04:30:00",
+                "06:30:00",
+                "08:30:00",
+                "10:30:00",
+                "12:30:00",
+                "14:30:00",
+                "16:30:00",
+                "18:30:00",
+                "20:30:00",
+                "22:30:00"
+            ],
+            "Category": "Maguuma",
+            "Waypoint": "[&BBAIAAA=]"
+        },
+        {
+            "Name": "The Oil Floes",
+            "Timings": [
+                "01:45:00",
+                "03:45:00",
+                "05:45:00",
+                "07:45:00",
+                "09:45:00",
+                "11:45:00",
+                "13:45:00",
+                "15:45:00",
+                "17:45:00",
+                "19:45:00",
+                "21:45:00",
+                "23:45:00"
+            ],
+            "Category": "Desert",
+            "Waypoint": "[&BKYLAAA=]"
+        },
+        {
+            "Name": "Maws of Torment",
+            "Timings": [
+                "00:00:00",
+                "02:00:00",
+                "04:00:00",
+                "06:00:00",
+                "08:00:00",
+                "10:00:00",
+                "12:00:00",
+                "14:00:00",
+                "16:00:00",
+                "18:00:00",
+                "20:00:00",
+                "22:00:00"
+            ],
+            "Category": "Desert",
+            "Waypoint": "[&BKMKAAA=]"
+        },
+        {
+            "Name": "Palawadan",
+            "Timings": [
+                "00:45:00",
+                "02:45:00",
+                "04:45:00",
+                "06:45:00",
+                "08:45:00",
+                "10:45:00",
+                "12:45:00",
+                "14:45:00",
+                "16:45:00",
+                "18:45:00",
+                "20:45:00",
+                "22:45:00"
+            ],
+            "Category": "Desert",
+            "Waypoint": "[&BAkLAAA=]"
+        },
+        {
+            "Name": "Thunderhead Keep",
+            "Timings": [
+                "00:45:00",
+                "02:45:00",
+                "04:45:00",
+                "06:45:00",
+                "08:45:00",
+                "10:45:00",
+                "12:45:00",
+                "14:45:00",
+                "16:45:00",
+                "18:45:00",
+                "20:45:00",
+                "22:45:00"
+            ],
+            "Category": "Desert",
+            "Waypoint": "[&BLsLAAA=]"
+        },
+        {
+            "Name": "Serpents' Ire",
+            "Timings": [
+                "01:30:00",
+                "03:30:00",
+                "05:30:00",
+                "07:30:00",
+                "09:30:00",
+                "11:30:00",
+                "13:30:00",
+                "15:30:00",
+                "17:30:00",
+                "19:30:00",
+                "21:30:00",
+                "23:30:00"
+            ],
+            "Category": "Desert",
+            "Waypoint": "[&BHQKAAA=]"
+        },
+        {
+            "Name": "DB Shatterer",
+            "Timings": [
+                "00:00:00",
+                "02:00:00",
+                "04:00:00",
+                "06:00:00",
+                "08:00:00",
+                "10:00:00",
+                "12:00:00",
+                "14:00:00",
+                "16:00:00",
+                "18:00:00",
+                "20:00:00",
+                "22:00:00"
+            ],
+            "Category": "Desert",
+            "Waypoint": "[&BJMLAAA=]"
+        },
+        {
+            "Name": "Junundu Rising",
+            "Timings": [
+                "00:30:00",
+                "01:30:00",
+                "02:30:00",
+                "03:30:00",
+                "04:30:00",
+                "05:30:00",
+                "06:30:00",
+                "07:30:00",
+                "08:30:00",
+                "09:30:00",
+                "10:30:00",
+                "11:30:00",
+                "12:30:00",
+                "13:30:00",
+                "14:30:00",
+                "15:30:00",
+                "16:30:00",
+                "17:30:00",
+                "18:30:00",
+                "19:30:00",
+                "20:30:00",
+                "21:30:00",
+                "22:30:00",
+                "23:30:00"
+            ],
+            "Category": "Desert",
+            "Waypoint": "[&BMEKAAA=]"
+        },
+        {
+            "Name": "Path to Ascension",
+            "Timings": [
+                "00:30:00",
+                "02:30:00",
+                "04:30:00",
+                "06:30:00",
+                "08:30:00",
+                "10:30:00",
+                "12:30:00",
+                "14:30:00",
+                "16:30:00",
+                "18:30:00",
+                "20:30:00",
+                "22:30:00"
+            ],
+            "Category": "Desert",
+            "Waypoint": "[&BFMKAAA=]"
+        },
+        {
+            "Name": "Doppelganger",
+            "Timings": [
+                "00:55:00",
+                "02:55:00",
+                "04:55:00",
+                "06:55:00",
+                "08:55:00",
+                "10:55:00",
+                "12:55:00",
+                "14:55:00",
+                "16:55:00",
+                "18:55:00",
+                "20:55:00",
+                "22:55:00"
+            ],
+            "Category": "Desert",
+            "Waypoint": "[&BFMKAAA=]"
+        },
+        {
+            "Name": "Forged with Fire",
+            "Timings": [
+                "01:00:00",
+                "02:00:00",
+                "03:00:00",
+                "04:00:00",
+                "05:00:00",
+                "06:00:00",
+                "07:00:00",
+                "08:00:00",
+                "09:00:00",
+                "10:00:00",
+                "11:00:00",
+                "12:00:00",
+                "13:00:00",
+                "14:00:00",
+                "15:00:00",
+                "16:00:00",
+                "17:00:00",
+                "18:00:00",
+                "19:00:00",
+                "20:00:00",
+                "21:00:00",
+                "22:00:00",
+                "23:00:00",
+                "00:00:00"
+            ],
+            "Category": "Desert",
+            "Waypoint": "[&BO0KAAA=]"
+        },
+        {
+            "Name": "Choya Piñata",
+            "Timings": [
+                "01:20:00",
+                "03:20:00",
+                "05:20:00",
+                "07:20:00",
+                "09:20:00",
+                "11:20:00",
+                "13:20:00",
+                "15:20:00",
+                "17:20:00",
+                "19:20:00",
+                "21:20:00",
+                "23:20:00"
+            ],
+            "Category": "Desert",
+            "Waypoint": "[&BLsKAAA=]"
+        },
+        {
+            "Name": "Aetherblade Assault",
+            "Timings": [
+                "00:30:00",
+                "02:30:00",
+                "04:30:00",
+                "06:30:00",
+                "08:30:00",
+                "10:30:00",
+                "12:30:00",
+                "14:30:00",
+                "16:30:00",
+                "18:30:00",
+                "20:30:00",
+                "22:30:00"
+            ],
+            "Category": "Cantha",
+            "Waypoint": "[&BGUNAAA=]"
+        },
+        {
+            "Name": "Kaineng Blackout",
+            "Timings": [
+                "01:00:00",
+                "03:00:00",
+                "05:00:00",
+                "07:00:00",
+                "09:00:00",
+                "11:00:00",
+                "13:00:00",
+                "15:00:00",
+                "17:00:00",
+                "19:00:00",
+                "21:00:00",
+                "23:00:00"
+            ],
+            "Category": "Cantha",
+            "Waypoint": "[&BBkNAAA=]"
+        },
+        {
+            "Name": "Gang War",
+            "Timings": [
+                "01:30:00",
+                "03:30:00",
+                "05:30:00",
+                "07:30:00",
+                "09:30:00",
+                "11:30:00",
+                "13:30:00",
+                "15:30:00",
+                "17:30:00",
+                "19:30:00",
+                "21:30:00",
+                "23:30:00"
+            ],
+            "Category": "Cantha",
+            "Waypoint": "[&BMwMAAA=]"
+        },
+        {
+            "Name": "Aspenwood",
+            "Timings": [
+                "00:40:00",
+                "02:40:00",
+                "04:40:00",
+                "06:40:00",
+                "08:40:00",
+                "10:40:00",
+                "12:40:00",
+                "14:40:00",
+                "16:40:00",
+                "18:40:00",
+                "20:40:00",
+                "22:40:00"
+            ],
+            "Category": "Cantha",
+            "Waypoint": "[&BPkMAAA=]"
+        },
+        {
+            "Name": "Battle for Jade Sea",
+            "Timings": [
+                "00:00:00",
+                "02:00:00",
+                "04:00:00",
+                "06:00:00",
+                "08:00:00",
+                "10:00:00",
+                "12:00:00",
+                "14:00:00",
+                "16:00:00",
+                "18:00:00",
+                "20:00:00",
+                "22:00:00"
+            ],
+            "Category": "Cantha",
+            "Waypoint": "[&BKIMAAA=]"
+        },
+        {
+            "Name": "Wizard's Tower",
+            "Timings": [
+                "00:00:00",
+                "02:00:00",
+                "04:00:00",
+                "06:00:00",
+                "08:00:00",
+                "10:00:00",
+                "12:00:00",
+                "14:00:00",
+                "16:00:00",
+                "18:00:00",
+                "20:00:00",
+                "22:00:00"
+            ],
+            "Category": "SotO",
+            "Waypoint": "[&BL4NAAA=]"
+        },
+        {
+            "Name": "Fly by Night",
+            "Timings": [
+                "00:55:00",
+                "02:55:00",
+                "04:55:00",
+                "06:55:00",
+                "08:55:00",
+                "10:55:00",
+                "12:55:00",
+                "14:55:00",
+                "16:55:00",
+                "18:55:00",
+                "20:55:00",
+                "22:55:00"
+            ],
+            "Category": "SotO",
+            "Waypoint": "[&BB8OAAA=]"
+        },
+        {
+            "Name": "Defense of Amnytas",
+            "Timings": [
+                "01:00:00",
+                "03:00:00",
+                "05:00:00",
+                "07:00:00",
+                "09:00:00",
+                "11:00:00",
+                "13:00:00",
+                "15:00:00",
+                "17:00:00",
+                "19:00:00",
+                "21:00:00",
+                "23:00:00"
+            ],
+            "Category": "SotO",
+            "Waypoint": "[&BDQOAAA=]"
+        },
+        {
+            "Name": "Convergences",
+            "Timings": [
+                "02:30:00",
+                "05:30:00",
+                "08:30:00",
+                "11:30:00",
+                "14:30:00",
+                "17:30:00",
+                "20:30:00",
+                "23:30:00"
+            ],
+            "Category": "SotO",
+            "Waypoint": "[&BB8OAAA=]"
+        }
+    ]
 }

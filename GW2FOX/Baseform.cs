@@ -30,7 +30,6 @@ namespace GW2FOX
         {
             InitializeGlobalKeyboardHook();
             SetFormTransparency();
-            BossTimings.LoadBossConfigInfos("BossTimings.json");
         }
 
         protected override void OnLoad(EventArgs e)
