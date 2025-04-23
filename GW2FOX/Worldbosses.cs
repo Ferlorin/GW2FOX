@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Globalization;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace GW2FOX
 {
@@ -1448,8 +1449,30 @@ namespace GW2FOX
 
         private static void SaveBossConfig(BossConfig config)
         {
-            File.WriteAllText("BossTimings.json", JsonConvert.SerializeObject(config, Formatting.Indented));
+            string filePath = "BossTimings.json";
+
+            JObject json;
+
+            // Bestehende Datei laden oder leeres Objekt erzeugen
+            if (File.Exists(filePath))
+            {
+                json = JObject.Parse(File.ReadAllText(filePath));
+
+                // Optional: bestehende DynamicBosses entfernen, um sie sauber zu ersetzen
+                json.Remove("DynamicBosses");
+            }
+            else
+            {
+                json = new JObject();
+            }
+
+            // Neue DynamicBosses einfügen
+            json["DynamicBosses"] = JArray.FromObject(config.DynamicBosses);
+
+            // Datei neu schreiben
+            File.WriteAllText(filePath, json.ToString(Formatting.Indented));
         }
+
 
         private static void SaveBossNameToConfig(string bossName)
         {

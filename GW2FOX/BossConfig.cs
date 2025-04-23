@@ -1,5 +1,6 @@
 ﻿using GW2FOX;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -20,6 +21,8 @@ public class BossConfig
 
     [JsonProperty("Fido")]
     public string Fido { get; set; } = "";
+
+    public List<Boss> DynamicBosses { get; set; } = new List<Boss>();
 }
 
 public class BossConfigInfos
@@ -81,6 +84,9 @@ public static class BossTimings
             Console.WriteLine($"Error loading boss config: {ex.Message}");
         }
     }
+   
+    public static BossConfigInfos LoadedConfigInfos { get; set; } = new();
+
 
     public static void AddBossEvent(string bossName, string[] timings, string category, string waypoint = "")
     {

@@ -31,6 +31,7 @@ namespace GW2FOX
             InitializeGlobalKeyboardHook();
             SetFormTransparency();
             BossTimings.LoadBossConfig("BossTimings.json");
+            BossTimings.LoadBossConfigInfos("bosses_config.json");
         }
 
         protected override void OnLoad(EventArgs e)
@@ -63,8 +64,6 @@ namespace GW2FOX
                 }
             }
         }
-
-       
 
         protected void ShowAndHideForm(Form newForm)
         {

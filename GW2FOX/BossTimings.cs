@@ -3,6 +3,7 @@ using System.Windows.Forms;
 using System.IO;
 using System.Globalization;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace GW2FOX
 {
@@ -123,6 +124,45 @@ namespace GW2FOX
                 .Select(g => new BossEventGroup(g.Key, g.ToList()));
 
             BossEventGroups.AddRange(grouped);
+        }
+
+        public static void LoadBossConfigInfos(string filePath)
+        {
+            Console.WriteLine($"[ConfigText] Lade nur Konfig-Infos aus: {filePath}");
+
+            try
+            {
+                if (!File.Exists(filePath))
+                {
+                    Console.WriteLine($"[ConfigText] Datei nicht gefunden: {filePath}");
+                    return;
+                }
+
+                var json = File.ReadAllText(filePath);
+                var jObject = JObject.Parse(json);
+
+                // Direktes Mapping auf BossConfigInfos
+                var configInfos = jObject.ToObject<BossConfigInfos>();
+
+                if (configInfos == null)
+                {
+                    Console.WriteLine("[ConfigText] ❌ Konfig-Infos sind null!");
+                    return;
+                }
+
+                LoadedConfigInfos = configInfos;
+
+                Console.WriteLine("[ConfigText] ✅ Konfig-Infos erfolgreich geladen:");
+                Console.WriteLine($" - Runinfo: {configInfos.Runinfo}");
+                Console.WriteLine($" - Squadinfo: {configInfos.Squadinfo}");
+                Console.WriteLine($" - Guild: {configInfos.Guild}");
+                Console.WriteLine($" - Welcome: {configInfos.Welcome}");
+                Console.WriteLine($" - Symbols: {configInfos.Symbols}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"[Error] Fehler beim Laden der Konfig-Infos: {ex.Message}");
+            }
         }
 
         public static void LoadBossConfig(string filePath)
