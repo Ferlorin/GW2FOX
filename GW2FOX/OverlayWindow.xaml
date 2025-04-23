@@ -10,7 +10,7 @@
         Background="Transparent"
         Topmost="True"
         ResizeMode="NoResize"
-        Width="250"
+        Width="255"
         Height="370"
         ShowInTaskbar="False"
         Title="OverlayWindow"
@@ -114,48 +114,68 @@
                                   Padding="0"
                                   ScrollViewer.VerticalScrollBarVisibility="Disabled">
 
+                            
+                            
+                            
+                            
+                            
                             <ListView.ItemTemplate>
                                 <DataTemplate>
-                                    <StackPanel Orientation="Horizontal"
-                                                VerticalAlignment="Center"
-                                                Background="Transparent">
+                                    <Grid Background="Transparent"
+              VerticalAlignment="Center">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <!-- Waypoint-Icon -->
+                                            <ColumnDefinition Width="150"/>
+                                            <!-- BossName -->
+                                            <ColumnDefinition Width="Auto"/>
+                                            <!-- Zeit -->
+                                        </Grid.ColumnDefinitions>
 
                                         <!-- Waypoint-Icon -->
-                                        <Image Source="{x:Static local:BossListItem.WaypointImage}"
-                                               Width="20"
-                                               Height="20"
-                                               Margin="0,0,6,0"
-                                               Cursor="Hand"
-                                               MouseLeftButtonDown="Waypoint_MouseLeftButtonDown"
-                                               VerticalAlignment="Center"/>
+                                        <Image Grid.Column="0"
+                   Source="{x:Static local:BossListItem.WaypointImage}"
+                   Width="20"
+                   Height="20"
+                   Margin="0,0,6,0"
+                   Cursor="Hand"
+                   MouseLeftButtonDown="Waypoint_MouseLeftButtonDown"
+                   VerticalAlignment="Center"/>
 
                                         <!-- Bossname -->
-                                        <TextBlock Text="{Binding BossName}"
-                                                   Foreground="{Binding Category, Converter={StaticResource CategoryColorConverter}}"
-                                                   TextDecorations="{Binding IsPastEvent, Converter={StaticResource StrikeConverter}}"
-                                                   VerticalAlignment="Center"
-                                                   Width="95"
-                                                   TextTrimming="CharacterEllipsis">
+                                        <TextBlock Grid.Column="1"
+                       Text="{Binding BossName}"
+                       Foreground="{Binding Category, Converter={StaticResource CategoryColorConverter}}"
+                       TextDecorations="{Binding IsPastEvent, Converter={StaticResource StrikeConverter}}"
+                       VerticalAlignment="Center"
+                       Width="140"
+                       TextTrimming="CharacterEllipsis">
                                             <TextBlock.Effect>
                                                 <DropShadowEffect Color="Black" BlurRadius="0" ShadowDepth="0" Opacity="1"/>
                                             </TextBlock.Effect>
                                         </TextBlock>
 
                                         <!-- Zeit -->
-                                        <TextBlock Text="{Binding TimeRemainingFormatted}"
-                                                   Foreground="{Binding Category, Converter={StaticResource CategoryColorConverter}}"
-                                                   TextDecorations="{Binding IsPastEvent, Converter={StaticResource StrikeConverter}}"
-                                                   VerticalAlignment="Center"
-                                                   Margin="2,0,0,0"
-                                                   Width="40">
+                                        <TextBlock Grid.Column="2"
+                       Text="{Binding TimeRemainingFormatted}"
+                       Foreground="{Binding Category, Converter={StaticResource CategoryColorConverter}}"
+                       TextDecorations="{Binding IsPastEvent, Converter={StaticResource StrikeConverter}}"
+                       VerticalAlignment="Center"
+                       Margin="0,0,0,0">
                                             <TextBlock.Effect>
                                                 <DropShadowEffect Color="Black" BlurRadius="0" ShadowDepth="0" Opacity="1"/>
                                             </TextBlock.Effect>
                                         </TextBlock>
-
-                                    </StackPanel>
+                                    </Grid>
                                 </DataTemplate>
                             </ListView.ItemTemplate>
+
+
+                            
+                            
+                            
+                            
+                            
                         </ListView>
                     </ScrollViewer>
 
