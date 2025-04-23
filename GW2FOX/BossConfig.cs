@@ -90,6 +90,8 @@ public static class BossTimings
             BossEventsList.Add(new BossEvent(bossName, utcTime.TimeOfDay, category, waypoint));
         }
     }
+
+
     public static List<BossEvent> BossEventsList { get; set; } = new();
 
     public static DateTime ConvertToUtcFromConfigTime(string configTime)

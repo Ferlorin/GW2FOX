@@ -43,7 +43,7 @@
                            VerticalAlignment="Top"
                            Margin="0,34,0,0"
                            Visibility="Collapsed"
-                           Opacity="0"
+                           Opacity="0.9"
                            Text="Kopiert!">
                     <TextBlock.Effect>
                         <DropShadowEffect Color="Black" BlurRadius="4" ShadowDepth="1" Opacity="0.5"/>
@@ -119,6 +119,7 @@
                                                 VerticalAlignment="Center"
                                                 Background="Transparent">
 
+                                        <!-- Waypoint-Icon -->
                                         <Image Source="{x:Static local:BossListItem.WaypointImage}"
                                                Width="20"
                                                Height="20"
@@ -127,12 +128,38 @@
                                                MouseLeftButtonDown="Waypoint_MouseLeftButtonDown"
                                                VerticalAlignment="Center"/>
 
+                                        <!-- Bossname -->
                                         <TextBlock Text="{Binding BossName}"
                                                    Foreground="{Binding IsPastEvent, Converter={StaticResource PastEventColorConverter}}"
                                                    TextDecorations="{Binding IsPastEvent, Converter={StaticResource StrikeConverter}}"
                                                    VerticalAlignment="Center"
-                                                   Width="141"
+                                                   Width="95"
                                                    TextTrimming="CharacterEllipsis">
+                                            <TextBlock.Effect>
+                                                <DropShadowEffect Color="Black" BlurRadius="0" ShadowDepth="0" Opacity="1"/>
+                                            </TextBlock.Effect>
+                                        </TextBlock>
+
+                                        <!-- Zeit -->
+                                        <TextBlock Text="{Binding TimeRemainingFormatted}"
+                                                   Foreground="{Binding IsPastEvent, Converter={StaticResource PastEventColorConverter}}"
+                                                   TextDecorations="{Binding IsPastEvent, Converter={StaticResource StrikeConverter}}"
+                                                   VerticalAlignment="Center"
+                                                   Margin="2,0,0,0"
+                                                   Width="40">
+                                            <TextBlock.Effect>
+                                                <DropShadowEffect Color="Black" BlurRadius="0" ShadowDepth="0" Opacity="1"/>
+                                            </TextBlock.Effect>
+                                        </TextBlock>
+
+                                        <!-- Kategorie -->
+                                        <TextBlock Text="{Binding Category}"
+                                                   Foreground="White"
+                                                   FontSize="12"
+                                                   VerticalAlignment="Center"
+                                                   Margin="4,0,0,0"
+                                                   TextTrimming="CharacterEllipsis"
+                                                   Width="40">
                                             <TextBlock.Effect>
                                                 <DropShadowEffect Color="Black" BlurRadius="0" ShadowDepth="0" Opacity="1"/>
                                             </TextBlock.Effect>
@@ -144,6 +171,52 @@
 
                         </ListView>
                     </ScrollViewer>
+
+                    <!-- Manuelle Scrollbar -->
+                    <ScrollBar Orientation="Vertical"
+                               Grid.Column="1"
+                               Width="12"
+                               Minimum="0"
+                               Maximum="{Binding ElementName=BossScrollViewer, Path=ScrollableHeight}"
+                               Value="{Binding ElementName=BossScrollViewer, Path=VerticalOffset, Mode=OneWay}"
+                               ViewportSize="{Binding ElementName=BossScrollViewer, Path=ViewportHeight}"
+                               ValueChanged="ManualScrollBar_ValueChanged">
+                        <ScrollBar.Style>
+                            <Style TargetType="ScrollBar">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="ScrollBar">
+                                            <Grid Background="Transparent">
+                                                <Track Name="PART_Track" IsDirectionReversed="true">
+                                                    <Track.Thumb>
+                                                        <Thumb Height="40" Width="12"
+                                                               Background="#88FFFFFF"
+                                                               BorderBrush="#44FFFFFF"
+                                                               BorderThickness="1">
+                                                            <Thumb.Template>
+                                                                <ControlTemplate TargetType="Thumb">
+                                                                    <Border Background="{TemplateBinding Background}"
+                                                                            BorderBrush="{TemplateBinding BorderBrush}"
+                                                                            BorderThickness="{TemplateBinding BorderThickness}"
+                                                                            CornerRadius="6"/>
+                                                                </ControlTemplate>
+                                                            </Thumb.Template>
+                                                        </Thumb>
+                                                    </Track.Thumb>
+                                                    <Track.IncreaseRepeatButton>
+                                                        <RepeatButton Height="0" Width="0" Template="{StaticResource EmptyButtonTemplate}"/>
+                                                    </Track.IncreaseRepeatButton>
+                                                    <Track.DecreaseRepeatButton>
+                                                        <RepeatButton Height="0" Width="0" Template="{StaticResource EmptyButtonTemplate}"/>
+                                                    </Track.DecreaseRepeatButton>
+                                                </Track>
+                                            </Grid>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </ScrollBar.Style>
+                    </ScrollBar>
                 </Grid>
 
             </Grid>
