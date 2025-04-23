@@ -22,11 +22,12 @@ namespace GW2FOX
             InitializeComponent();
 
             bossCheckBoxMap = new Dictionary<string, CheckBox>();
-            InitializeBossCheckBoxMap();
+            InitializeBossCheckBoxMap();          // ← MUSS vor UpdateBossUiBosses sein!
             UpdateBossUiBosses();
+
             LoadConfigText(Runinfo, Squadinfo, Guild, Welcome, Symbols);
 
-            Load += Worldbosses_Load_1;
+            Load += Worldbosses_Load_1;           // ← Auch wichtig
         }
 
         private void Worldbosses_Load_1(object? sender, EventArgs e)
@@ -1772,36 +1773,23 @@ namespace GW2FOX
 
         private void UpdateBossUiBosses()
         {
-            if (!File.Exists("BossTimings.json"))
-                return;
+            string configPath = "BossTimings.json";
+            if (!File.Exists(configPath)) return;
 
             try
             {
-                var json = File.ReadAllText("BossTimings.json");
+                var json = File.ReadAllText(configPath);
                 var jObj = JObject.Parse(json);
 
-                // Voreingestellte Liste: zuerst "ChoosenOnes", fallback zu "Bosses"
-                HashSet<string> selectedBossNames;
+                // 1. Lade ChoosenOnes
+                var selectedBossNames = jObj["ChoosenOnes"] is JArray array
+                    ? array.Select(x => x.ToString()).ToHashSet(StringComparer.OrdinalIgnoreCase)
+                    : new HashSet<string>(StringComparer.OrdinalIgnoreCase);
 
-                if (jObj.TryGetValue("ChoosenOnes", out JToken? choosenToken) && choosenToken is JArray choosenArray)
-                {
-                    selectedBossNames = choosenArray
-                        .Select(x => x.ToString())
-                        .Where(n => !string.IsNullOrWhiteSpace(n))
-                        .ToHashSet(StringComparer.OrdinalIgnoreCase);
-                }
-                else if (jObj.TryGetValue("Bosses", out JToken? bossesToken))
-                {
-                    var bosses = bossesToken.ToObject<List<Boss>>();
-                    selectedBossNames = bosses?.Select(b => b.Name).ToHashSet(StringComparer.OrdinalIgnoreCase)
-                                          ?? new HashSet<string>(StringComparer.OrdinalIgnoreCase);
-                }
-                else
-                {
-                    selectedBossNames = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
-                }
+                Console.WriteLine("UpdateBossUiBosses() wurde aufgerufen");
+                Console.WriteLine("ChoosenOnes enthält: " + string.Join(", ", selectedBossNames));
 
-                // Checkboxen setzen
+                // 2. Checkboxen setzen
                 foreach (var entry in bossCheckBoxMap)
                 {
                     var checkBox = entry.Value;
@@ -1811,17 +1799,39 @@ namespace GW2FOX
                         checkBox.ForeColor = checkBox.Checked ? System.Drawing.Color.White : System.Drawing.Color.Gray;
                     }
                 }
+
+                // 3. BossList23 aktualisieren
+                BossList23 = selectedBossNames.ToList();
+
+                // 4. Events und Gruppen neu aufbauen
+                BossEventsList.Clear();
+                BossEventGroups.Clear();
+
+                var config = BossTimings.LoadBossConfigAndReturn();
+
+                foreach (var bossName in BossList23)
+                {
+                    var boss = config.Bosses.FirstOrDefault(b => b.Name.Equals(bossName, StringComparison.OrdinalIgnoreCase));
+                    if (boss != null)
+                    {
+                        AddBossEvent(boss.Name, boss.Timings.ToArray(), boss.Category ?? "WBs", boss.Waypoint ?? "");
+                        Console.WriteLine($"[AddBossEvent] → {boss.Name}");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"⚠ Boss '{bossName}' nicht in Bosses gefunden.");
+                    }
+                }
+
+                GenerateBossEventGroups();
+                BossTimer.UpdateBossList(); // nur nötig, wenn MiniOverlay das braucht
+                UpdateBossOverlayList();    // wichtig für WPF-Overlay
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Fehler beim Laden der Boss-Auswahl: {ex.Message}", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Fehler beim Laden von ChoosenOnes: {ex.Message}", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-
     }
-
-
-
 }
 

@@ -81,18 +81,11 @@ namespace GW2FOX
 
             var dynamicBosses = DynamicEventManager.GetActiveBossEventRuns();
 
-            var combinedBosses = staticBosses
-                .Concat(dynamicBosses)
-                .ToList();
-
-            combinedBosses.Sort((a, b) =>
-            {
-                int timeComparison = a.NextRunTime.CompareTo(b.NextRunTime);
-                return timeComparison != 0 ? timeComparison : string.Compare(a.Category, b.Category, StringComparison.Ordinal);
-            });
-
-            return combinedBosses;
+            return staticBosses.Concat(dynamicBosses)
+                               .OrderBy(run => run.TimeToShow)
+                               .ToList();
         }
+
 
 
         public static void Timer_Click(object? sender, EventArgs e)

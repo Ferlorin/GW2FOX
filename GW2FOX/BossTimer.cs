@@ -78,20 +78,16 @@ namespace GW2FOX
         {
             try
             {
-                Console.WriteLine("[UpdateBossList] Start...");
 
                 var selectedBosses = BossTimings.BossList23?.ToHashSet(StringComparer.OrdinalIgnoreCase) ?? new();
-                Console.WriteLine($"[UpdateBossList] Anzahl ausgewählter Bosse (BossList23): {selectedBosses.Count}");
 
                 var staticBosses = BossTimings.BossEventGroups
                     .Where(group => selectedBosses.Contains(group.BossName))
                     .SelectMany(group => group.GetAllRuns())
                     .ToList();
 
-                Console.WriteLine($"[UpdateBossList] Gefundene statische Bosse: {staticBosses.Count}");
 
                 var dynamicBosses = DynamicEventManager.GetActiveBossEventRuns().ToList();
-                Console.WriteLine($"[UpdateBossList] Gefundene dynamische Bosse: {dynamicBosses.Count}");
 
                 var combinedBosses = staticBosses
                     .Concat(dynamicBosses)
@@ -103,21 +99,17 @@ namespace GW2FOX
                     return timeComparison != 0 ? timeComparison : string.Compare(a.Category, b.Category, StringComparison.Ordinal);
                 });
 
-                Console.WriteLine($"[UpdateBossList] Gesamtanzahl kombinierter Bosse: {combinedBosses.Count}");
-
                 System.Windows.Application.Current.Dispatcher.Invoke(() =>
                 {
                     BossTimerService.BossListItems.Clear();
                     foreach (var boss in combinedBosses)
                     {
-                        Console.WriteLine($"[UpdateBossList] → {boss.BossName} um {boss.NextRunTime} ({boss.Category})");
                         BossTimerService.BossListItems.Add(boss);
                     }
 
                     OverlayWindow.GetInstance().UpdateBossOverlayList();
                 });
 
-                Console.WriteLine("[UpdateBossList] Overlay aktualisiert.");
             }
             catch (Exception ex)
             {

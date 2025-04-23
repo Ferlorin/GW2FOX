@@ -221,7 +221,7 @@ namespace GW2FOX
             BossEventGroups.AddRange(grouped);
         }
 
-        
+
 
         public static void LoadChosenBossesToUI(Dictionary<string, CheckBox> bossCheckBoxMap)
         {
@@ -237,7 +237,11 @@ namespace GW2FOX
                 entry.Value.Checked = chosenBossNames.Contains(entry.Key);
                 entry.Value.ForeColor = entry.Value.Checked ? System.Drawing.Color.White : System.Drawing.Color.Gray;
             }
+
+            // 🔥 Diese Zeile sorgt dafür, dass auch das Overlay aktualisiert werden kann:
+            BossList23 = chosenBossNames.ToList();
         }
+
 
         public static BossConfig LoadBossConfigAndReturn()
         {

@@ -16,9 +16,12 @@ public class BossEventGroup
             .ToList();
     }
 
-    // 🔓 Zugriff auf interne Event-Liste ermöglichen
+    // Optional: Zugriff auf interne Liste (kann hilfreich sein)
     public List<BossEvent> Events => _timings;
 
+    /// <summary>
+    /// Liefert alle kommenden (und kürzlich vergangenen) Runs für diesen Boss.
+    /// </summary>
     public IEnumerable<BossEventRun> GetNextRuns()
     {
         List<BossEventRun> result = new();
@@ -34,13 +37,29 @@ public class BossEventGroup
             )));
         }
 
-        return result
+        DateTime now = GlobalVariables.CURRENT_DATE_TIME;
+
+        var filtered = result
             .Where(run =>
-                run.TimeToShow >= GlobalVariables.CURRENT_DATE_TIME &&
-                run.TimeToShow <= GlobalVariables.CURRENT_DATE_TIME.AddHours(5))
-            .OrderBy(run => run.TimeToShow);
+                run.TimeToShow >= now.AddHours(-1) &&   // 1h Rückblick
+                run.TimeToShow <= now.AddHours(8))      // 8h Vorschau
+            .OrderBy(run => run.TimeToShow)
+            .ToList();
+
+        // 🔍 Debug-Ausgabe aller relevanten Runs
+        Console.WriteLine($"[GetNextRuns] {BossName}: {filtered.Count} Runs im sichtbaren Bereich");
+        foreach (var run in filtered)
+        {
+            var inMin = (run.TimeToShow - now).TotalMinutes;
+            Console.WriteLine($" - {run.BossName} @ {run.TimeToShow:HH:mm} ({inMin:F0} min)");
+        }
+
+        return filtered;
     }
 
+    /// <summary>
+    /// Gibt ALLE Events (unabhängig von Zeitpunkt) zurück – als Fallback oder Liste.
+    /// </summary>
     public IEnumerable<BossEventRun> GetAllRuns()
     {
         List<BossEventRun> result = new();
