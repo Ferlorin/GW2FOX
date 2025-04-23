@@ -63,7 +63,13 @@ public static class BossOverlayHelper
             foreach (var item in past.Concat(future))
                 overlayItems.Add(item);
 
-            return overlayItems;
+        foreach (var boss in overlayItems)
+        {
+            Console.WriteLine($"{boss.BossName}: Category = {boss.Category}");
+        }
+
+
+        return overlayItems;
         }
 
  

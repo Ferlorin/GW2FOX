@@ -19,6 +19,7 @@
     <Window.Resources>
         <local:StrikeConverter x:Key="StrikeConverter"/>
         <local:PastEventColorConverter x:Key="PastEventColorConverter"/>
+        <local:CategoryColorConverter x:Key="CategoryColorConverter"/>
 
         <ControlTemplate x:Key="EmptyButtonTemplate" TargetType="RepeatButton">
             <Grid/>
@@ -130,7 +131,7 @@
 
                                         <!-- Bossname -->
                                         <TextBlock Text="{Binding BossName}"
-                                                   Foreground="{Binding IsPastEvent, Converter={StaticResource PastEventColorConverter}}"
+                                                   Foreground="{Binding Category, Converter={StaticResource CategoryColorConverter}}"
                                                    TextDecorations="{Binding IsPastEvent, Converter={StaticResource StrikeConverter}}"
                                                    VerticalAlignment="Center"
                                                    Width="95"
@@ -142,7 +143,7 @@
 
                                         <!-- Zeit -->
                                         <TextBlock Text="{Binding TimeRemainingFormatted}"
-                                                   Foreground="{Binding IsPastEvent, Converter={StaticResource PastEventColorConverter}}"
+                                                   Foreground="{Binding Category, Converter={StaticResource CategoryColorConverter}}"
                                                    TextDecorations="{Binding IsPastEvent, Converter={StaticResource StrikeConverter}}"
                                                    VerticalAlignment="Center"
                                                    Margin="2,0,0,0"
@@ -152,23 +153,9 @@
                                             </TextBlock.Effect>
                                         </TextBlock>
 
-                                        <!-- Kategorie -->
-                                        <TextBlock Text="{Binding Category}"
-                                                   Foreground="White"
-                                                   FontSize="12"
-                                                   VerticalAlignment="Center"
-                                                   Margin="4,0,0,0"
-                                                   TextTrimming="CharacterEllipsis"
-                                                   Width="40">
-                                            <TextBlock.Effect>
-                                                <DropShadowEffect Color="Black" BlurRadius="0" ShadowDepth="0" Opacity="1"/>
-                                            </TextBlock.Effect>
-                                        </TextBlock>
-
                                     </StackPanel>
                                 </DataTemplate>
                             </ListView.ItemTemplate>
-
                         </ListView>
                     </ScrollViewer>
 
@@ -218,7 +205,6 @@
                         </ScrollBar.Style>
                     </ScrollBar>
                 </Grid>
-
             </Grid>
         </Border>
     </Grid>

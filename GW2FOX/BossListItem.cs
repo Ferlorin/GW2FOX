@@ -24,7 +24,7 @@ namespace GW2FOX
 
         public string BossName { get; set; }
         public string Waypoint { get; set; }         // z. B. [&BEEAAAA=]
-        public string Category { get; set; }         // z. B. "Meta", "Worldboss", etc.
+        public string Category { get; set; }         
         public string TimeRemainingFormatted { get; set; }  // z. B. "08:13"
         public int SecondsRemaining { get; set; }    // für Sortierung oder Farben
         public DateTime NextRunTime { get; set; }    // Uhrzeit des nächsten Spawns
