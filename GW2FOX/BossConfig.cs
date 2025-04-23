@@ -22,6 +22,9 @@ public class BossConfig
     [JsonProperty("Fido")]
     public string Fido { get; set; } = "";
 
+    [JsonProperty("CustomSelection")]
+    public string CustomSelection { get; set; } = "";
+
     public List<Boss> DynamicBosses { get; set; } = new List<Boss>();
 }
 

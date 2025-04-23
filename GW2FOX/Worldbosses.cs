@@ -32,7 +32,7 @@ namespace GW2FOX
         private void Worldbosses_Load_1(object? sender, EventArgs e)
         {;
 
-            LoadBossGroup("World");
+            BossTimings.LoadChosenBossesToUI(bossCheckBoxMap);
         }
 
 
@@ -1484,13 +1484,16 @@ namespace GW2FOX
                 {
                     Name = bossName,
                     Timings = new List<string> { "00:00:00" },
-                    Category = "WBs",
+                    Category = "CustomSelection", // <- Eigene Kategorie
                     Waypoint = ""
                 });
 
                 SaveBossConfig(config);
             }
         }
+
+      
+
 
         private static void RemoveBossNameFromConfig(string bossName)
         {
@@ -1505,33 +1508,7 @@ namespace GW2FOX
         }
 
 
-        private void LoadBossGroup(string groupName)
-        {
-            try
-            {
-                ClearAll_Click(null, EventArgs.Empty);
 
-                var config = LoadBossConfig();
-                var groupLine = GetGroupLine(config, groupName);
-
-                var bossNames = groupLine
-                    .Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
-                    .Select(b => b.Trim())
-                    .ToArray();
-
-                CheckBossCheckboxes(bossNames);
-
-                config.Bosses = config.Bosses
-                    .Where(b => bossNames.Contains(b.Name, StringComparer.OrdinalIgnoreCase))
-                    .ToList();
-
-                SaveBossConfig(config);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Fehler beim Laden von {groupName}: {ex.Message}", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
 
         private string GetGroupLine(BossConfig config, string key) => key.ToLower() switch
         {
@@ -1541,6 +1518,7 @@ namespace GW2FOX
             "fido" => config.Fido,
             _ => ""
         };
+
 
         public static void CheckAllBossCheckboxes()
         {
@@ -1626,7 +1604,7 @@ namespace GW2FOX
         {
             try
             {
-                LoadBossGroup("Fido");
+                BossTimings.ApplyBossGroupFromConfig("Fido");
             }
             catch (Exception ex)
             {
@@ -1640,7 +1618,7 @@ namespace GW2FOX
         {
             try
             {
-                LoadBossGroup("World");
+                BossTimings.ApplyBossGroupFromConfig("World");
             }
             catch (Exception ex)
             {
@@ -1774,7 +1752,7 @@ namespace GW2FOX
         {
             try
             {
-                LoadBossGroup("Mixed");
+                BossTimings.ApplyBossGroupFromConfig("Mixed");
             }
             catch (Exception ex)
             {
@@ -1788,14 +1766,46 @@ namespace GW2FOX
         {
             try
             {
-                LoadBossGroup("Meta");
+                BossTimings.ApplyBossGroupFromConfig("Meta");
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Fehler beim Laden der Meta-Gruppe: {ex.Message}", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void SaveCustomSelectionToJson()
+        {
+            var config = LoadBossConfig();
+
+            var selectedNames = bossCheckBoxMap
+                .Where(pair => pair.Value.Checked)
+                .Select(pair => pair.Key)
+                .ToArray();
+
+            config.CustomSelection = string.Join(",", selectedNames);
+
+            SaveBossConfig(config);
+        }
+
+        private void LoadCustomSelectionFromJson()
+        {
+            var config = LoadBossConfig();
+
+            if (!string.IsNullOrWhiteSpace(config.CustomSelection))
+            {
+                var bossNames = config.CustomSelection
+                    .Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+                    .Select(b => b.Trim())
+                    .ToArray();
+
+                CheckBossCheckboxes(bossNames);
+            }
+        }
+
+
     }
+
 
 
 }

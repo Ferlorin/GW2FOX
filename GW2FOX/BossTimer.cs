@@ -79,7 +79,11 @@ namespace GW2FOX
         {
             try
             {
+                // Gewählte Bosse – z. B. via CustomSelection oder BossList23
+                var selectedBosses = BossTimings.BossList23?.ToHashSet(StringComparer.OrdinalIgnoreCase) ?? new();
+
                 var staticBosses = BossTimings.BossEventGroups
+                    .Where(group => selectedBosses.Contains(group.BossName))
                     .SelectMany(group => group.GetAllRuns());
 
                 var dynamicBosses = DynamicEventManager.GetActiveBossEventRuns();
@@ -102,7 +106,7 @@ namespace GW2FOX
                         BossTimerService.BossListItems.Add(boss);
                     }
 
-                   OverlayWindow.GetInstance().UpdateBossOverlayList();
+                    OverlayWindow.GetInstance().UpdateBossOverlayList();
                 });
 
             }
@@ -111,6 +115,7 @@ namespace GW2FOX
                 Console.WriteLine($"Fehler bei UpdateBossList: {ex.Message}");
             }
         }
+
 
         public void Dispose()
         {
