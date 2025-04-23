@@ -37,12 +37,9 @@ namespace GW2FOX
 
         public static void ApplyBossGroupFromConfig(string groupName)
         {
-            if (LoadedConfig == null || LoadedConfig.Bosses.Count == 0)
-            {
-                LoadedConfig = LoadBossConfigFromFile("BossTimings.json");
-            }
+            Console.WriteLine($"[ApplyBossGroup] Lade Gruppe: {groupName}");
 
-            var config = LoadedConfig;
+            var config = LoadBossConfigFromFile("BossTimings.json");
 
             string groupLine = groupName.ToLower() switch
             {
@@ -58,26 +55,72 @@ namespace GW2FOX
                 .Select(b => b.Trim())
                 .ToList();
 
-            Console.WriteLine($"[ApplyBossGroup] Gruppe '{groupName}' enthält {bossNames.Count} Bosse: {string.Join(", ", bossNames)}");
+            BossList23 = bossNames;
 
-            var bosses = config.Bosses
+            Console.WriteLine($"[ApplyBossGroup] {groupName} enthält {bossNames.Count} Bosse:");
+            foreach (var name in bossNames)
+                Console.WriteLine($" - {name}");
+
+            Worldbosses.CheckBossCheckboxes(bossNames, Worldbosses.bossCheckBoxMap);
+
+            // Alle bisherigen Events löschen
+            BossEventsList.Clear();
+            BossEventGroups.Clear();
+
+            // 1. JSON-basierte Bosse hinzufügen
+            var matched = config.Bosses
                 .Where(b => bossNames.Contains(b.Name, StringComparer.OrdinalIgnoreCase))
                 .ToList();
 
-            Console.WriteLine($"[ApplyBossGroup] Treffer in BossConfig: {bosses.Count} Bosse");
+            Console.WriteLine($"[ApplyBossGroup] Übereinstimmende Bosse im Config: {matched.Count}");
 
-            BossEventsList.Clear();
-            BossList23 = bosses.Select(b => b.Name).ToList();
-
-            foreach (var boss in bosses)
+            foreach (var boss in matched)
             {
-                Console.WriteLine($"[ApplyBossGroup] Hinzufügen: {boss.Name}");
                 AddBossEvent(boss.Name, boss.Timings.ToArray(), boss.Category, boss.Waypoint ?? "");
             }
 
+            // 2. Fallback: Statische Bosse aus EventGroups verwenden
+            if (matched.Count == 0)
+            {
+                Console.WriteLine("[ApplyBossGroup] Keine Konfig-Bosse gefunden – versuche statisch bekannte Events als Fallback.");
+
+                var fallback = BossEventGroups
+                    .Where(g => bossNames.Contains(g.BossName, StringComparer.OrdinalIgnoreCase))
+                    .ToList();
+
+                foreach (var group in fallback)
+                {
+                    foreach (var evt in group.Events)
+                    {
+                        AddBossEvent(evt.BossName, new[] { evt.Timing.ToString(@"hh\\:mm\\:ss") }, evt.Category, evt.Waypoint);
+
+                    }
+                }
+            }
+
+            // Neue Gruppenstruktur erzeugen
             GenerateBossEventGroups();
+
+            // UI & Overlay aktualisieren
             BossTimer.UpdateBossList();
             UpdateBossOverlayList();
+        }
+
+
+
+
+
+
+        public static void CheckBossCheckboxes(IEnumerable<string> bossNames, Dictionary<string, CheckBox> checkBoxMap)
+        {
+            foreach (var bossName in bossNames)
+            {
+                if (checkBoxMap.TryGetValue(bossName, out var checkBox))
+                {
+                    checkBox.Checked = true;
+                    checkBox.ForeColor = System.Drawing.Color.White;
+                }
+            }
         }
 
 
@@ -181,6 +224,7 @@ namespace GW2FOX
 
             BossEventGroups.AddRange(grouped);
         }
+
         public static void LoadBossConfig()
         {
             LoadBossConfig("BossTimings.json");

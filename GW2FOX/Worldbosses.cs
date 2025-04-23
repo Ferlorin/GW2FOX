@@ -20,7 +20,7 @@ namespace GW2FOX
         public Worldbosses()
         {
             InitializeComponent();
-            
+
             bossCheckBoxMap = new Dictionary<string, CheckBox>();
             InitializeBossCheckBoxMap();
             UpdateBossUiBosses();
@@ -30,7 +30,8 @@ namespace GW2FOX
         }
 
         private void Worldbosses_Load_1(object? sender, EventArgs e)
-        {;
+        {
+            ;
 
             BossTimings.LoadChosenBossesToUI(bossCheckBoxMap);
         }
@@ -38,7 +39,7 @@ namespace GW2FOX
 
         const int SW_RESTORE = 9;
 
-        
+
 
         private void Saverun_Click(object sender, EventArgs e)
         {
@@ -351,7 +352,7 @@ namespace GW2FOX
         private void EyeButton_Click(object sender, EventArgs e)
         {
             DynamicEventManager.Trigger("The Eye of Zhaitan");
-;
+            ;
             UpdateBossUiBosses();
         }
 
@@ -1426,10 +1427,10 @@ namespace GW2FOX
 
 
         public string Name { get; set; }
-            public List<string> Timings { get; set; }
-            public string Category { get; set; }
-            public string Waypoint { get; set; }
-        
+        public List<string> Timings { get; set; }
+        public string Category { get; set; }
+        public string Waypoint { get; set; }
+
 
         private static BossConfig LoadBossConfig()
         {
@@ -1492,7 +1493,7 @@ namespace GW2FOX
             }
         }
 
-      
+
 
 
         private static void RemoveBossNameFromConfig(string bossName)
@@ -1508,7 +1509,7 @@ namespace GW2FOX
         }
 
 
-        public static void CheckAllBossCheckboxes()
+        public static void CheckAllBossCheckboxesAll()
         {
             foreach (var checkBox in bossCheckBoxMap.Values)
             {
@@ -1528,17 +1529,23 @@ namespace GW2FOX
             SaveBossConfig(config);
         }
 
-        private void CheckBossCheckboxes(string[] bossNames)
+        public static void CheckBossCheckboxes(IEnumerable<string> bossNames)
+        {
+            CheckBossCheckboxes(bossNames, bossCheckBoxMap);
+        }
+
+        public static void CheckBossCheckboxes(IEnumerable<string> bossNames, Dictionary<string, CheckBox> checkBoxMap)
         {
             foreach (var bossName in bossNames)
             {
-                var checkBox = FindCheckBoxByName(bossName);
-                if (checkBox != null)
+                if (checkBoxMap.TryGetValue(bossName, out var checkBox))
                 {
                     checkBox.Checked = true;
+                    checkBox.ForeColor = System.Drawing.Color.White;
                 }
             }
         }
+
 
         public static void AddBossEvent(string bossName, string[] timings, string category, string waypoint = "")
         {
@@ -1640,7 +1647,7 @@ namespace GW2FOX
         {
             try
             {
-                CheckAllBossCheckboxes();
+                CheckAllBossCheckboxesAll();
 
                 var allBosses = BossEventGroups.Select(g => g.BossName).ToArray();
                 CheckBossCheckboxes(allBosses);
@@ -1761,6 +1768,9 @@ namespace GW2FOX
                 MessageBox.Show($"Fehler beim Laden der Meta-Gruppe: {ex.Message}", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+
+
 
     }
 

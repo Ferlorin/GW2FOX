@@ -30,7 +30,7 @@ namespace GW2FOX
         {
             InitializeGlobalKeyboardHook();
             SetFormTransparency();
-            BossTimings.LoadBossConfigInfos("bosses_config.json");
+            BossTimings.LoadBossConfigInfos("BossTimings.json");
         }
 
         protected override void OnLoad(EventArgs e)
@@ -156,7 +156,7 @@ namespace GW2FOX
 
         protected static void SaveTextToFile(string textToSave, string sectionHeader, bool hideMessages = false)
         {
-            string jsonPath = "bosses_config.json";
+            string jsonPath = "BossTimings.json";
 
             try
             {

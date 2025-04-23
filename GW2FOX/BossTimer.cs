@@ -65,8 +65,7 @@ namespace GW2FOX
                 {
                     var timeRemaining = boss.NextRunTime - DateTime.UtcNow;
                     var formattedTime = $"{(int)timeRemaining.TotalHours:D2}:{timeRemaining.Minutes:D2}:{timeRemaining.Seconds:D2}";
-
-                    Console.WriteLine($"[{boss.BossName}] Verbleibende Zeit: {formattedTime}");
+;
                 }
             }
             catch (Exception ex)
@@ -79,14 +78,20 @@ namespace GW2FOX
         {
             try
             {
-                // Gewählte Bosse – z. B. via CustomSelection oder BossList23
+                Console.WriteLine("[UpdateBossList] Start...");
+
                 var selectedBosses = BossTimings.BossList23?.ToHashSet(StringComparer.OrdinalIgnoreCase) ?? new();
+                Console.WriteLine($"[UpdateBossList] Anzahl ausgewählter Bosse (BossList23): {selectedBosses.Count}");
 
                 var staticBosses = BossTimings.BossEventGroups
                     .Where(group => selectedBosses.Contains(group.BossName))
-                    .SelectMany(group => group.GetAllRuns());
+                    .SelectMany(group => group.GetAllRuns())
+                    .ToList();
 
-                var dynamicBosses = DynamicEventManager.GetActiveBossEventRuns();
+                Console.WriteLine($"[UpdateBossList] Gefundene statische Bosse: {staticBosses.Count}");
+
+                var dynamicBosses = DynamicEventManager.GetActiveBossEventRuns().ToList();
+                Console.WriteLine($"[UpdateBossList] Gefundene dynamische Bosse: {dynamicBosses.Count}");
 
                 var combinedBosses = staticBosses
                     .Concat(dynamicBosses)
@@ -98,23 +103,28 @@ namespace GW2FOX
                     return timeComparison != 0 ? timeComparison : string.Compare(a.Category, b.Category, StringComparison.Ordinal);
                 });
 
+                Console.WriteLine($"[UpdateBossList] Gesamtanzahl kombinierter Bosse: {combinedBosses.Count}");
+
                 System.Windows.Application.Current.Dispatcher.Invoke(() =>
                 {
                     BossTimerService.BossListItems.Clear();
                     foreach (var boss in combinedBosses)
                     {
+                        Console.WriteLine($"[UpdateBossList] → {boss.BossName} um {boss.NextRunTime} ({boss.Category})");
                         BossTimerService.BossListItems.Add(boss);
                     }
 
                     OverlayWindow.GetInstance().UpdateBossOverlayList();
                 });
 
+                Console.WriteLine("[UpdateBossList] Overlay aktualisiert.");
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Fehler bei UpdateBossList: {ex.Message}");
             }
         }
+
 
 
         public void Dispose()
