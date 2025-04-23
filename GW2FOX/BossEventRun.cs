@@ -15,7 +15,7 @@ namespace GW2FOX
             NextRunTime = nextRunTime;
         }
 
-        public DateTime TimeToShow => IsPreviousBoss ? NextRunTime.AddMinutes(14).AddSeconds(59) : NextRunTime;
+        public DateTime TimeToShow => NextRunTime;
 
         public bool IsPreviousBoss => NextRunTime < GlobalVariables.CURRENT_DATE_TIME;
 

@@ -41,8 +41,8 @@ public class BossEventGroup
 
         var filtered = result
             .Where(run =>
-                run.TimeToShow >= now.AddHours(-1) &&   // 1h Rückblick
-                run.TimeToShow <= now.AddHours(8))      // 8h Vorschau
+                    run.TimeToShow >= now - TimeSpan.FromMinutes(15) &&
+    run.TimeToShow <= now + TimeSpan.FromHours(8))   // 8h Vorschau
             .OrderBy(run => run.TimeToShow)
             .ToList();
 

@@ -125,55 +125,50 @@ namespace GW2FOX
 
         public static IEnumerable<BossEventRun> GetActiveBossEventRuns()
         {
+            var now = GlobalVariables.CURRENT_DATE_TIME;
+            var minTime = now - TimeSpan.FromMinutes(15);
             var result = new List<BossEventRun>();
 
             // 1. Dynamische Events
             var dynamicEvents = Events
                 .Where(e => e.IsRunning)
                 .Select(e => e.ToBossEventRun())
+                .Where(e => e.NextRunTime >= minTime)
                 .ToList();
+            result.AddRange(dynamicEvents);
 
-            if (dynamicEvents.Count > 0)
-                result.AddRange(dynamicEvents);
+            // 2. ChoosenOnes
+            var config = BossTimings.LoadBossConfigFromFile("BossTimings.json");
+            var choosenBossNames = config.Bosses
+                .Where(b => b.Category?.Equals("ChoosenOnes", StringComparison.OrdinalIgnoreCase) == true)
+                .Select(b => b.Name)
+                .ToHashSet(StringComparer.OrdinalIgnoreCase);
 
-            // 2. ChoosenOnes laden (nur einmal pro Anwendungslauf)
-            if (!_choosenOnesLoaded)
-            {
-                BossTimings.ApplyBossGroupFromConfig("ChoosenOnes");
-                _choosenOnesLoaded = true;
-            }
-
-            var choosen = BossTimings.BossEventsList
-                .Where(b => BossTimings.BossList23.Contains(b.BossName, StringComparer.OrdinalIgnoreCase))
+            var choosenRuns = BossTimings.BossEventGroups
+                .Where(g => choosenBossNames.Contains(g.BossName))
+                .SelectMany(g => g.GetNextRuns())
+                .Where(r => r.NextRunTime >= minTime)
                 .ToList();
+            result.AddRange(choosenRuns);
 
-            if (choosen.Count > 0)
-            {
-                var chosenRuns = choosen.Select(b => new BossEventRun(
-                    bossName: b.BossName,
-                    timing: b.Timing,
-                    category: b.Category,
-                    nextRunTime: GlobalVariables.CURRENT_DATE_TIME + TimeSpan.FromMinutes(1),
-                    waypoint: b.Waypoint
-                ));
-                result.AddRange(chosenRuns);
-            }
-
-            // 3. Wenn wirklich nichts vorhanden ist, dann ALLE
+            // 3. Fallback nur wenn keine gültigen Events vorhanden sind
             if (result.Count == 0)
             {
-                result = BossTimings.BossEventsList
-                    .Select(b => new BossEventRun(
-                        bossName: b.BossName,
-                        timing: b.Timing,
-                        category: b.Category,
-                        nextRunTime: GlobalVariables.CURRENT_DATE_TIME + TimeSpan.FromMinutes(1),
-                        waypoint: b.Waypoint
-                    ))
+                result = BossTimings.BossEventGroups
+                    .SelectMany(g => g.GetNextRuns())
+                    .Where(r => r.NextRunTime >= minTime)
                     .ToList();
             }
 
-            return result.OrderBy(r => r.TimeToShow);
+            // Finaler Filter & Sortierung
+            result = result
+                .Where(r => r.NextRunTime >= minTime)
+                .GroupBy(r => new { r.BossName, r.NextRunTime })
+                .Select(g => g.First())
+                .OrderBy(r => r.NextRunTime)
+                .ToList();
+
+            return result;
         }
 
 
