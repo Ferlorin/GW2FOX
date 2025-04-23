@@ -65,8 +65,7 @@ public static class BossOverlayHelper
             overlayItems.Add(item);
 
         foreach (var boss in overlayItems)
-            Console.WriteLine($"{boss.BossName}: Category = {boss.Category}");
-
+          
         return overlayItems;
     }
 

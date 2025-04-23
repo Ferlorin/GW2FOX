@@ -70,7 +70,7 @@ namespace GW2FOX
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Fehler im TimerCallback: {ex.Message}");
+                //Console.WriteLine($"Fehler im TimerCallback: {ex.Message}");
             }
         }
 
@@ -113,7 +113,7 @@ namespace GW2FOX
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Fehler bei UpdateBossList: {ex.Message}");
+               // Console.WriteLine($"Fehler bei UpdateBossList: {ex.Message}");
             }
         }
 

@@ -43,7 +43,6 @@ namespace GW2FOX
         public void Trigger()
         {
             StartTime = DateTime.UtcNow;
-            Console.WriteLine($"[Trigger] {BossName} triggered at {StartTime.Value:HH:mm:ss} UTC");
         }
 
         /// <summary>
@@ -110,7 +109,6 @@ namespace GW2FOX
             var ev = Events.FirstOrDefault(e => e.BossName.Equals(bossName, StringComparison.OrdinalIgnoreCase));
             if (ev == null)
             {
-                Console.WriteLine($"[Trigger] No dynamic event found for {bossName}");
                 return;
             }
 
@@ -201,13 +199,11 @@ namespace GW2FOX
 
                 if (Events.Count != allEvents.Count)
                 {
-                    Console.WriteLine("[Cleanup] Removed expired dynamic events (15+ min past EndTime).");
                     SavePersistedEvents();
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"[Load] Failed to load dynamic events: {ex.Message}");
                 LoadDefaultEvents();
             }
         }
@@ -222,7 +218,7 @@ namespace GW2FOX
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"[Save] Failed to persist dynamic events: {ex.Message}");
+                //Console.WriteLine($"[Save] Failed to persist dynamic events: {ex.Message}");
             }
         }
 

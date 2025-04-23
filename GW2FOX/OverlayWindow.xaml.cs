@@ -130,12 +130,12 @@ namespace GW2FOX
         {
             if (_instance == null)
             {
-                Console.WriteLine("Erstelle neue Instanz von OverlayWindow.");
+                
                 _instance = new OverlayWindow();
             }
             else
             {
-                Console.WriteLine("Verwende bestehende Instanz von OverlayWindow.");
+               // Console.WriteLine("Verwende bestehende Instanz von OverlayWindow.");
             }
             return _instance;
         }
@@ -161,15 +161,14 @@ namespace GW2FOX
                     BossListView.ItemsSource = overlayItems;
                 });
 
-                Console.WriteLine("Overlay updated. Combined entries:");
                 foreach (var boss in overlayItems)
                 {
-                    Console.WriteLine($"- {boss.BossName} | {boss.TimeRemainingFormatted} | Vergangen: {boss.IsPastEvent}");
+                    //Console.WriteLine($"- {boss.BossName} | {boss.TimeRemainingFormatted} | Vergangen: {boss.IsPastEvent}");
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Fehler beim Aktualisieren der BossOverlay-Liste: {ex.Message}");
+                //Console.WriteLine($"Fehler beim Aktualisieren der BossOverlay-Liste: {ex.Message}");
             }
         }
 

@@ -1808,11 +1808,10 @@ namespace GW2FOX
                     if (boss != null)
                     {
                         AddBossEvent(boss.Name, boss.Timings.ToArray(), boss.Category ?? "WBs", boss.Waypoint ?? "");
-                        Console.WriteLine($"[AddBossEvent] → {boss.Name}");
                     }
                     else
                     {
-                        Console.WriteLine($"⚠ Boss '{bossName}' nicht in Bosses gefunden.");
+                        //Console.WriteLine($"⚠ Boss '{bossName}' nicht in Bosses gefunden.");
                     }
                 }
 
