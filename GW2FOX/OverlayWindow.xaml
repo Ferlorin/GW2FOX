@@ -18,7 +18,6 @@
 
     <Window.Resources>
         <local:StrikeConverter x:Key="StrikeConverter"/>
-        <local:PastEventColorConverter x:Key="PastEventColorConverter"/>
         <local:CategoryColorConverter x:Key="CategoryColorConverter"/>
 
         <ControlTemplate x:Key="EmptyButtonTemplate" TargetType="RepeatButton">
@@ -162,15 +161,7 @@
                                         </TextBlock>
                                     </Grid>
                                 </DataTemplate>
-                            </ListView.ItemTemplate>
-
-
-                            
-                            
-                            
-                            
-                            
-                        </ListView>
+                            </ListView.ItemTemplate> </ListView>
                     </ScrollViewer>
 
                     <!-- Manuelle Scrollbar -->

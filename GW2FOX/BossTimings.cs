@@ -199,8 +199,6 @@ namespace GW2FOX
         }
 
 
-
-
         public static void LoadChosenBossesToUI(Dictionary<string, CheckBox> bossCheckBoxMap)
         {
             var config = LoadBossConfigAndReturn();
