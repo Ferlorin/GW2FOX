@@ -196,8 +196,6 @@ namespace GW2FOX
                 .GroupBy(be => be.BossName)
                 .Select(g => new BossEventGroup(g.Key, g))
                 .ToList();
-
-            Console.WriteLine($"🛠 BossEventGroups regeneriert – {BossEventGroups.Count} Gruppen erzeugt.");
         }
 
 
