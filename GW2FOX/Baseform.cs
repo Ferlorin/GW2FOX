@@ -189,7 +189,6 @@ namespace GW2FOX
                         config.Symbols = textToSave;
                         break; // <- Das hat gefehlt!
                     default:
-                        Console.WriteLine($"[SaveTextToFile] Abschnitt '{sectionHeader}' wird nicht unterstützt.");
                         if (!hideMessages)
                         {
                             System.Windows.Forms.MessageBox.Show($"Section '{sectionHeader}' not recognized.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);

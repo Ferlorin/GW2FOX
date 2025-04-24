@@ -46,12 +46,9 @@ public class BossEventGroup
             .OrderBy(run => run.TimeToShow)
             .ToList();
 
-        // 🔍 Debug-Ausgabe aller relevanten Runs
-        Console.WriteLine($"[GetNextRuns] {BossName}: {filtered.Count} Runs im sichtbaren Bereich");
         foreach (var run in filtered)
         {
-            var inMin = (run.TimeToShow - now).TotalMinutes;
-            Console.WriteLine($" - {run.BossName} @ {run.TimeToShow:HH:mm} ({inMin:F0} min)");
+            var inMin = (run.TimeToShow - now).TotalMinutes; 
         }
 
         return filtered;

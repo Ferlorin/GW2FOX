@@ -43,7 +43,6 @@ namespace GW2FOX
         public void Trigger()
         {
             StartTime = DateTime.UtcNow;
-            Console.WriteLine($"[Trigger] {BossName} triggered at {StartTime.Value:HH:mm:ss} UTC");
         }
 
         /// <summary>
@@ -201,7 +200,6 @@ namespace GW2FOX
 
                 if (Events.Count != allEvents.Count)
                 {
-                    Console.WriteLine("[Cleanup] Removed expired dynamic events (15+ min past EndTime).");
                     SavePersistedEvents();
                 }
             }

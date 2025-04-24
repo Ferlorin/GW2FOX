@@ -37,7 +37,6 @@ namespace GW2FOX
 
         public static void ApplyBossGroupFromConfig(string groupName, bool updateUI = true)
         {
-            Console.WriteLine($"[ApplyBossGroup] Lade Gruppe: {groupName}");
 
             var config = LoadBossConfigFromFile("BossTimings.json");
 
@@ -60,10 +59,7 @@ namespace GW2FOX
 
             BossList23 = bossNames;
 
-            Console.WriteLine($"[ApplyBossGroup] {groupName} enthält {bossNames.Count} Bosse:");
-
             foreach (var name in bossNames)
-                Console.WriteLine($" - {name}");
 
             // Checkboxen aktualisieren, falls Map verfügbar
             Worldbosses.CheckBossCheckboxes(bossNames, Worldbosses.bossCheckBoxMap);

@@ -1453,8 +1453,6 @@ namespace GW2FOX
 
             // Datei speichern
             File.WriteAllText(configPath, json.ToString(Formatting.Indented));
-
-            Console.WriteLine($"[SaveChoosenOnesToConfig] Gespeichert: {string.Join(", ", selectedBosses)}");
         }
 
 
@@ -1489,8 +1487,6 @@ namespace GW2FOX
 
         private static void RemoveBossNameFromConfig(string bossName)
         {
-            Console.WriteLine($"[RemoveBossNameFromConfig] → {bossName}");
-
             string configPath = "BossTimings.json";
             if (!File.Exists(configPath)) return;
 
@@ -1504,8 +1500,6 @@ namespace GW2FOX
 
             json["ChoosenOnes"] = JArray.FromObject(updated);
             File.WriteAllText(configPath, json.ToString(Formatting.Indented));
-
-            Console.WriteLine("[RemoveBossNameFromConfig] ✔ Boss entfernt.");
         }
 
 
@@ -1786,9 +1780,6 @@ namespace GW2FOX
                     ? array.Select(x => x.ToString()).ToHashSet(StringComparer.OrdinalIgnoreCase)
                     : new HashSet<string>(StringComparer.OrdinalIgnoreCase);
 
-                Console.WriteLine("UpdateBossUiBosses() wurde aufgerufen");
-                Console.WriteLine("ChoosenOnes enthält: " + string.Join(", ", selectedBossNames));
-
                 // 2. Checkboxen setzen
                 foreach (var entry in bossCheckBoxMap)
                 {
@@ -1815,11 +1806,10 @@ namespace GW2FOX
                     if (boss != null)
                     {
                         AddBossEvent(boss.Name, boss.Timings.ToArray(), boss.Category ?? "WBs", boss.Waypoint ?? "");
-                        Console.WriteLine($"[AddBossEvent] → {boss.Name}");
                     }
                     else
                     {
-                        Console.WriteLine($"⚠ Boss '{bossName}' nicht in Bosses gefunden.");
+                        //Console.WriteLine($"⚠ Boss '{bossName}' nicht in Bosses gefunden.");
                     }
                 }
 

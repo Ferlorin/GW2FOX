@@ -276,18 +276,15 @@ namespace GW2FOX
             // 1. MiniOverlay öffnen und anzeigen
             if (_miniOverlay == null || _miniOverlay.IsDisposed)
             {
-                Console.WriteLine("MiniOverlay: Neue Instanz wird erstellt und angezeigt.");
                 _miniOverlay = new MiniOverlay(_worldbossesForm);
                 _miniOverlay.FormClosed += (s, args) =>
                 {
-                    Console.WriteLine("MiniOverlay: Instanz geschlossen.");
                     _miniOverlay = null;
                 };
                 _miniOverlay.Show();
             }
             else if (!_miniOverlay.Visible)
             {
-                Console.WriteLine("MiniOverlay: Wird angezeigt.");
                 _miniOverlay.Show();
                 _miniOverlay.BringToFront();
             }
@@ -295,18 +292,15 @@ namespace GW2FOX
             // 2. Worldbosses öffnen und anzeigen
             if (_worldbossesForm == null || _worldbossesForm.IsDisposed)
             {
-                Console.WriteLine("Worldbosses: Neue Instanz wird erstellt und angezeigt.");
                 _worldbossesForm = new Worldbosses();
                 _worldbossesForm.FormClosed += (s, args) =>
                 {
-                    Console.WriteLine("Worldbosses: Instanz geschlossen.");
                     _worldbossesForm = null;
                 };
                 _worldbossesForm.Show();
             }
             else if (!_worldbossesForm.Visible)
             {
-                Console.WriteLine("Worldbosses: Wird angezeigt.");
                 _worldbossesForm.Show();
                 _worldbossesForm.BringToFront();
             }
@@ -315,12 +309,10 @@ namespace GW2FOX
             _overlayWindow = OverlayWindow.GetInstance();
             if (!_overlayWindow.IsVisible)
             {
-                Console.WriteLine("OverlayWindow: Wird angezeigt.");
                 _overlayWindow.Show();
             }
             else
             {
-                Console.WriteLine("OverlayWindow: Wird aktiviert.");
                 _overlayWindow.Activate();
             }
         }

@@ -39,7 +39,7 @@ namespace GW2FOX
             var timeLeft = NextRunTime - GlobalVariables.CURRENT_DATE_TIME;
             Countdown = timeLeft > TimeSpan.Zero
                 ? timeLeft.ToString(@"hh\:mm\:ss")
-                : "Läuft";
+                : "Runs";
         }
     }
 }
