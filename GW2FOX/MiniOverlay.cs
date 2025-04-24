@@ -40,51 +40,56 @@ namespace GW2FOX
 
         private void button1_Click(object sender, EventArgs e)
         {
-            var excludedTypes = new[] { typeof(MiniOverlay) };
+            var excludedTypes = new[] { typeof(Main), typeof(MiniOverlay), typeof(OverlayWindow) };
+
             var topMostStates = new Dictionary<Form, bool>();
 
-            // 1. TopMost merken und ausschalten
             foreach (Form f in Application.OpenForms)
             {
                 topMostStates[f] = f.TopMost;
                 f.TopMost = false;
             }
 
-            // 2. Fokus ermitteln
             IntPtr activeHandle = GetForegroundWindow();
+            Form targetForm = null;
 
-            // 3. Form finden & toggeln
-            foreach (Form openForm in Application.OpenForms)
+            // Suche nach aktivem gültigen Fenster – aber NICHT Main
+            foreach (Form form in Application.OpenForms)
             {
-                if (openForm.Handle == activeHandle && !excludedTypes.Contains(openForm.GetType()))
+                if (form.Handle == activeHandle && !excludedTypes.Contains(form.GetType()))
                 {
-                    if (openForm.Visible)
-                    {
-                        openForm.Hide();
-                    }
-                    else
-                    {
-                        openForm.Show();
-                        openForm.BringToFront();
-                        openForm.Activate();
-                        SetForegroundWindow(openForm.Handle);
-                    }
-
-                    // 4. TopMost zurücksetzen und fertig
-                    foreach (var kvp in topMostStates)
-                        kvp.Key.TopMost = kvp.Value;
-
-                    return;
+                    targetForm = form;
+                    break;
                 }
             }
 
-            // 5. Kein gültiges Fenster → TopMost zurücksetzen
+            if (targetForm != null)
+            {
+                Debug.WriteLine($"[DEBUG] Aktives Fenster: {targetForm.Name} ({targetForm.GetType().Name})");
+
+                if (targetForm.Visible)
+                {
+                    Debug.WriteLine("[DEBUG] Fenster wird ausgeblendet");
+                    targetForm.Hide();
+                }
+                else
+                {
+                    Debug.WriteLine("[DEBUG] Fenster wird eingeblendet");
+                    targetForm.Show();
+                    targetForm.BringToFront();
+                    targetForm.Activate();
+                    SetForegroundWindow(targetForm.Handle);
+                }
+            }
+            else
+            {
+                Debug.WriteLine("[DEBUG] Kein aktives, gültiges Fenster gefunden (außer Main/MiniOverlay/OverlayWindow).");
+                MessageBox.Show("Kein anderes aktives Fenster deines Programms gefunden.", "Hinweis", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
             foreach (var kvp in topMostStates)
                 kvp.Key.TopMost = kvp.Value;
-
-            MessageBox.Show("Kein gültiges aktives Fenster deines Programms gefunden.", "Hinweis", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
-
 
         private void button2_Click(object sender, EventArgs e)
         {

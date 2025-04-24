@@ -290,8 +290,16 @@ namespace GW2FOX
                 _worldbossesForm.FormClosed += (s, args) =>
                 {
                     _worldbossesForm = null;
+
+                    // Main-Fenster wieder anzeigen, wenn Worldbosses geschlossen wird
+                    this.Show();
+                    this.BringToFront();
+                    this.Activate();
                 };
                 _worldbossesForm.Show();
+
+                // Main-Fenster ausblenden, sobald Worldbosses geöffnet ist
+                this.Hide();
             }
             else if (!_worldbossesForm.Visible)
             {
@@ -310,5 +318,6 @@ namespace GW2FOX
                 _overlayWindow.Activate();
             }
         }
+
     }
 }
