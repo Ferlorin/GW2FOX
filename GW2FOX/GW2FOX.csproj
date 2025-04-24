@@ -17,6 +17,7 @@
 
 <ItemGroup>
   <None Remove="Com.png" />
+  <None Remove="Waypoint.png" />
 </ItemGroup>
 
   <ItemGroup>
@@ -45,6 +46,7 @@
 
   <ItemGroup>
     <Resource Include="Com.png" />
+    <Resource Include="Waypoint.png" />
   </ItemGroup>
 
   <ItemGroup>
