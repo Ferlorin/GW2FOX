@@ -9,7 +9,7 @@ namespace GW2FOX
         public static OverlayWindow? _overlayWindow; // <- Standard
         public static BossTimer? _bossTimer;
         public static ObservableCollection<BossEventRun> BossListItems { get; private set; } = new();
-
+        
         public static ObservableCollection<BossListItem> GetBossOverlayItems(IEnumerable<BossEventRun> bossRuns, DateTime _)
         {
             var overlayItems = new ObservableCollection<BossListItem>();
