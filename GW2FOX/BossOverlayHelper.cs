@@ -18,7 +18,6 @@ public static class BossOverlayHelper
                 var timeRemaining = eventTime - now;
                 bool isPast = timeRemaining.TotalSeconds < 0;
 
-                // Anzeige: bis 1h vergangen oder 8h voraus
                 if (isPast && timeRemaining.TotalMinutes <= -60)
                     return null;
                 if (!isPast && timeRemaining.TotalHours > 8)
@@ -64,12 +63,7 @@ public static class BossOverlayHelper
         foreach (var item in past.Concat(future))
             overlayItems.Add(item);
 
-        foreach (var boss in overlayItems)
-
         return overlayItems;
     }
 
-
-
 }
-
