@@ -113,12 +113,6 @@
                                   FontSize="14"
                                   Padding="0"
                                   ScrollViewer.VerticalScrollBarVisibility="Disabled">
-
-                            
-                            
-                            
-                            
-                            
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <Grid Background="Transparent"

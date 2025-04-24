@@ -498,7 +498,7 @@ namespace GW2FOX
                 // Wenn das Kontrollkästchen nicht ausgewählt ist
                 RemoveBossNameFromConfig(bossName);
             }
-
+            UpdateBossUiBosses();
         }
 
 
@@ -519,7 +519,7 @@ namespace GW2FOX
                 // Wenn das Kontrollkästchen nicht ausgewählt ist
                 RemoveBossNameFromConfig(bossName);
             }
-
+            UpdateBossUiBosses();
         }
 
 
@@ -537,7 +537,7 @@ namespace GW2FOX
             {
                 RemoveBossNameFromConfig(bossName);
             }
-
+            UpdateBossUiBosses();
         }
 
         private void JungleWurm_CheckedChanged(object sender, EventArgs e)
@@ -554,7 +554,7 @@ namespace GW2FOX
             {
                 RemoveBossNameFromConfig(bossName);
             }
-
+            UpdateBossUiBosses();
         }
 
         private void Ulgoth_CheckedChanged(object sender, EventArgs e)
@@ -572,7 +572,7 @@ namespace GW2FOX
             {
                 RemoveBossNameFromConfig(bossName);
             }
-
+            UpdateBossUiBosses();
         }
 
 
@@ -591,7 +591,7 @@ namespace GW2FOX
                 {
                     RemoveBossNameFromConfig(bossName);
                 }
-
+                UpdateBossUiBosses();
             }
         }
 
@@ -610,7 +610,7 @@ namespace GW2FOX
             {
                 RemoveBossNameFromConfig(bossName);
             }
-
+            UpdateBossUiBosses();
         }
 
         private void MarkTwo_CheckedChanged(object sender, EventArgs e)
@@ -627,7 +627,7 @@ namespace GW2FOX
             {
                 RemoveBossNameFromConfig(bossName);
             }
-
+            UpdateBossUiBosses();
         }
 
 
@@ -645,7 +645,7 @@ namespace GW2FOX
             {
                 RemoveBossNameFromConfig(bossName);
             }
-
+            UpdateBossUiBosses();
         }
 
         private void Shatterer_CheckedChanged(object sender, EventArgs e)
@@ -662,7 +662,7 @@ namespace GW2FOX
             {
                 RemoveBossNameFromConfig(bossName);
             }
-
+            UpdateBossUiBosses();
         }
 
         private void Karka_CheckedChanged(object sender, EventArgs e)
@@ -679,7 +679,7 @@ namespace GW2FOX
             {
                 RemoveBossNameFromConfig(bossName);
             }
-
+            UpdateBossUiBosses();
         }
 
 
@@ -697,7 +697,7 @@ namespace GW2FOX
             {
                 RemoveBossNameFromConfig(bossName);
             }
-
+            UpdateBossUiBosses();
         }
 
         private void Chak_CheckedChanged(object sender, EventArgs e)
@@ -714,7 +714,7 @@ namespace GW2FOX
             {
                 RemoveBossNameFromConfig(bossName);
             }
-
+            UpdateBossUiBosses();
         }
 
 
@@ -733,7 +733,7 @@ namespace GW2FOX
             {
                 RemoveBossNameFromConfig(bossName);
             }
-
+            UpdateBossUiBosses();
         }
 
         private void Mascen_CheckedChanged(object sender, EventArgs e)
@@ -750,7 +750,7 @@ namespace GW2FOX
             {
                 RemoveBossNameFromConfig(bossName);
             }
-
+            UpdateBossUiBosses();
         }
 
         private void DS_CheckedChanged(object sender, EventArgs e)
@@ -767,7 +767,7 @@ namespace GW2FOX
             {
                 RemoveBossNameFromConfig(bossName);
             }
-
+            UpdateBossUiBosses();
         }
 
         private void DBS_CheckedChanged(object sender, EventArgs e)
@@ -784,7 +784,7 @@ namespace GW2FOX
             {
                 RemoveBossNameFromConfig(bossName);
             }
-
+            UpdateBossUiBosses();
         }
 
         private void Junundu_CheckedChanged(object sender, EventArgs e)
@@ -801,7 +801,7 @@ namespace GW2FOX
             {
                 RemoveBossNameFromConfig(bossName);
             }
-
+            UpdateBossUiBosses();
         }
 
 
@@ -819,7 +819,7 @@ namespace GW2FOX
             {
                 RemoveBossNameFromConfig(bossName);
             }
-
+            UpdateBossUiBosses();
         }
 
 
@@ -837,7 +837,7 @@ namespace GW2FOX
             {
                 RemoveBossNameFromConfig(bossName);
             }
-
+            UpdateBossUiBosses();
         }
 
         private void Doggies_CheckedChanged(object sender, EventArgs e)
@@ -854,7 +854,7 @@ namespace GW2FOX
             {
                 RemoveBossNameFromConfig(bossName);
             }
-
+            UpdateBossUiBosses();
         }
 
 
@@ -873,7 +873,7 @@ namespace GW2FOX
             {
                 RemoveBossNameFromConfig(bossName);
             }
-
+            UpdateBossUiBosses();
         }
 
 
@@ -891,7 +891,7 @@ namespace GW2FOX
             {
                 RemoveBossNameFromConfig(bossName);
             }
-
+            UpdateBossUiBosses();
         }
 
 
@@ -909,7 +909,7 @@ namespace GW2FOX
             {
                 RemoveBossNameFromConfig(bossName);
             }
-
+            UpdateBossUiBosses();
         }
 
         private void ThunderheadKeep_CheckedChanged(object sender, EventArgs e)
@@ -926,7 +926,7 @@ namespace GW2FOX
             {
                 RemoveBossNameFromConfig(bossName);
             }
-
+            UpdateBossUiBosses();
         }
 
 
@@ -944,7 +944,7 @@ namespace GW2FOX
             {
                 RemoveBossNameFromConfig(bossName);
             }
-
+            UpdateBossUiBosses();
         }
 
 
@@ -962,7 +962,7 @@ namespace GW2FOX
             {
                 RemoveBossNameFromConfig(bossName);
             }
-
+            UpdateBossUiBosses();
         }
 
 
@@ -980,7 +980,7 @@ namespace GW2FOX
             {
                 RemoveBossNameFromConfig(bossName);
             }
-
+            UpdateBossUiBosses();
         }
 
 
@@ -998,7 +998,7 @@ namespace GW2FOX
             {
                 RemoveBossNameFromConfig(bossName);
             }
-
+            UpdateBossUiBosses();
         }
 
 
@@ -1016,7 +1016,7 @@ namespace GW2FOX
             {
                 RemoveBossNameFromConfig(bossName);
             }
-
+            UpdateBossUiBosses();
         }
 
 
@@ -1034,7 +1034,7 @@ namespace GW2FOX
             {
                 RemoveBossNameFromConfig(bossName);
             }
-
+            UpdateBossUiBosses();
         }
 
 
@@ -1052,7 +1052,7 @@ namespace GW2FOX
             {
                 RemoveBossNameFromConfig(bossName);
             }
-
+            UpdateBossUiBosses();
         }
 
 
@@ -1070,7 +1070,7 @@ namespace GW2FOX
             {
                 RemoveBossNameFromConfig(bossName);
             }
-
+            UpdateBossUiBosses();
         }
 
 
@@ -1088,7 +1088,7 @@ namespace GW2FOX
             {
                 RemoveBossNameFromConfig(bossName);
             }
-
+            UpdateBossUiBosses();
         }
 
 
@@ -1106,7 +1106,7 @@ namespace GW2FOX
             {
                 RemoveBossNameFromConfig(bossName);
             }
-
+            UpdateBossUiBosses();
         }
 
 
@@ -1124,7 +1124,7 @@ namespace GW2FOX
             {
                 RemoveBossNameFromConfig(bossName);
             }
-
+            UpdateBossUiBosses();
         }
 
         private void SaidrasHeaven_CheckedChanged(object sender, EventArgs e)
@@ -1141,7 +1141,7 @@ namespace GW2FOX
             {
                 RemoveBossNameFromConfig(bossName);
             }
-
+            UpdateBossUiBosses();
         }
 
         private void Loamhurst_CheckedChanged(object sender, EventArgs e)
@@ -1158,7 +1158,7 @@ namespace GW2FOX
             {
                 RemoveBossNameFromConfig(bossName);
             }
-
+            UpdateBossUiBosses();
         }
 
         private void Homestead_CheckedChanged(object sender, EventArgs e)
@@ -1175,7 +1175,7 @@ namespace GW2FOX
             {
                 RemoveBossNameFromConfig(bossName);
             }
-
+            UpdateBossUiBosses();
         }
 
 
@@ -1193,7 +1193,7 @@ namespace GW2FOX
             {
                 RemoveBossNameFromConfig(bossName);
             }
-
+            UpdateBossUiBosses();
         }
 
 
@@ -1212,7 +1212,7 @@ namespace GW2FOX
             {
                 RemoveBossNameFromConfig(bossName);
             }
-
+            UpdateBossUiBosses();
         }
 
         private void GangWar_CheckedChanged(object sender, EventArgs e)
@@ -1229,7 +1229,7 @@ namespace GW2FOX
             {
                 RemoveBossNameFromConfig(bossName);
             }
-
+            UpdateBossUiBosses();
         }
 
 
@@ -1248,7 +1248,7 @@ namespace GW2FOX
             {
                 RemoveBossNameFromConfig(bossName);
             }
-
+            UpdateBossUiBosses();
         }
 
         private void JadeSea_CheckedChanged(object sender, EventArgs e)
@@ -1265,7 +1265,7 @@ namespace GW2FOX
             {
                 RemoveBossNameFromConfig(bossName);
             }
-
+            UpdateBossUiBosses();
         }
 
         private void WizzardsTower_CheckedChanged(object sender, EventArgs e)
@@ -1282,7 +1282,7 @@ namespace GW2FOX
             {
                 RemoveBossNameFromConfig(bossName);
             }
-
+            UpdateBossUiBosses();
         }
 
 
@@ -1300,7 +1300,7 @@ namespace GW2FOX
             {
                 RemoveBossNameFromConfig(bossName);
             }
-
+            UpdateBossUiBosses();
         }
 
 
@@ -1318,7 +1318,7 @@ namespace GW2FOX
             {
                 RemoveBossNameFromConfig(bossName);
             }
-
+            UpdateBossUiBosses();
         }
 
         private void Convergence_CheckedChanged(object sender, EventArgs e)
@@ -1335,7 +1335,7 @@ namespace GW2FOX
             {
                 RemoveBossNameFromConfig(bossName);
             }
-
+            UpdateBossUiBosses();
         }
 
         private void LLA_CheckedChanged(object sender, EventArgs e)
@@ -1356,6 +1356,7 @@ namespace GW2FOX
                     RemoveBossNameFromConfig(bossName);
                 }
             }
+            UpdateBossUiBosses();
         }
 
         private void InitializeBossCheckBoxMap()
@@ -1470,20 +1471,19 @@ namespace GW2FOX
                 ? JObject.Parse(File.ReadAllText(configPath))
                 : new JObject();
 
-            // Aktuelle Liste laden oder neu anlegen
             JArray choosen = (JArray?)json["ChoosenOnes"] ?? new JArray();
             var bossNames = choosen.Select(t => t.ToString()).ToList();
 
-            if (bossNames.Contains(bossName, StringComparer.OrdinalIgnoreCase))
+            if (!bossNames.Contains(bossName, StringComparer.OrdinalIgnoreCase))
             {
-                return;
+                bossNames.Add(bossName);
+                json["ChoosenOnes"] = JArray.FromObject(bossNames.Distinct(StringComparer.OrdinalIgnoreCase));
+
+                // ✅ Datei speichern nicht vergessen!
+                File.WriteAllText(configPath, json.ToString(Formatting.Indented));
             }
-
-            // Hinzufügen
-            bossNames.Add(bossName);
-            json["ChoosenOnes"] = JArray.FromObject(bossNames.Distinct(StringComparer.OrdinalIgnoreCase));
-
         }
+
 
         private static void RemoveBossNameFromConfig(string bossName)
         {
