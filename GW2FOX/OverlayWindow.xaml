@@ -92,13 +92,11 @@
                     </Grid.ColumnDefinitions>
 
                     <ScrollViewer x:Name="BossScrollViewer"
-              Grid.Column="0"
-              VerticalScrollBarVisibility="Visible"
-              HorizontalScrollBarVisibility="Disabled"
-              CanContentScroll="False"
-              Background="Transparent"
-              ScrollChanged="BossScrollViewer_ScrollChanged" Grid.ColumnSpan="2" Margin="0,0,-174,-340">
-
+                                  Grid.Column="0"
+                                  VerticalScrollBarVisibility="Hidden"
+                                  HorizontalScrollBarVisibility="Disabled"
+                                  Background="Transparent"
+                                  ScrollChanged="BossScrollViewer_ScrollChanged">
 
                         <ListView x:Name="BossListView"
                                   BorderThickness="0"
@@ -107,7 +105,8 @@
                                   FontWeight="Bold"
                                   FontSize="14"
                                   Padding="0"
-                                  ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                               ScrollViewer.VerticalScrollBarVisibility="Visible" Width="269" Height="340">
+
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <Grid Background="Transparent" VerticalAlignment="Center">
@@ -155,15 +154,12 @@
                     </ScrollViewer>
 
                     <ScrollBar Orientation="Vertical"
-           Grid.Column="1"
-           VerticalAlignment="Stretch"
-           Width="12"
-           Margin="0"
-           Minimum="0"
-           Maximum="{Binding ElementName=BossScrollViewer, Path=ScrollableHeight}"
-           ViewportSize="{Binding ElementName=BossScrollViewer, Path=ViewportHeight}"
-           ValueChanged="ManualScrollBar_ValueChanged"
-           Name="ManualScrollBar">
+                               Grid.Column="1"
+                               Minimum="0"
+                               Maximum="{Binding ElementName=BossScrollViewer, Path=ScrollableHeight}"
+                               Value="{Binding ElementName=BossScrollViewer, Path=VerticalOffset, Mode=OneWay}"
+                               ViewportSize="{Binding ElementName=BossScrollViewer, Path=ViewportHeight}"
+                               ValueChanged="ManualScrollBar_ValueChanged" Margin="8,0,-1,0">
                         <ScrollBar.Style>
                             <Style TargetType="ScrollBar">
                                 <Setter Property="Template">
@@ -173,15 +169,15 @@
                                                 <Track Name="PART_Track" IsDirectionReversed="true">
                                                     <Track.Thumb>
                                                         <Thumb Height="40" Width="12"
-                                           Background="#88FFFFFF"
-                                           BorderBrush="#44FFFFFF"
-                                           BorderThickness="1">
+                                                               Background="#88FFFFFF"
+                                                               BorderBrush="#44FFFFFF"
+                                                               BorderThickness="1">
                                                             <Thumb.Template>
                                                                 <ControlTemplate TargetType="Thumb">
                                                                     <Border Background="{TemplateBinding Background}"
-                                                        BorderBrush="{TemplateBinding BorderBrush}"
-                                                        BorderThickness="{TemplateBinding BorderThickness}"
-                                                        CornerRadius="6"/>
+                                                                            BorderBrush="{TemplateBinding BorderBrush}"
+                                                                            BorderThickness="{TemplateBinding BorderThickness}"
+                                                                            CornerRadius="6"/>
                                                                 </ControlTemplate>
                                                             </Thumb.Template>
                                                         </Thumb>
@@ -200,7 +196,6 @@
                             </Style>
                         </ScrollBar.Style>
                     </ScrollBar>
-
                 </Grid>
             </Grid>
         </Border>
