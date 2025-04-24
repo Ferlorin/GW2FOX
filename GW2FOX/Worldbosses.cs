@@ -1580,7 +1580,6 @@ namespace GW2FOX
             }
         }
 
-
         private void ClearAll_Click(object sender, EventArgs e)
         {
             try
@@ -1598,9 +1597,21 @@ namespace GW2FOX
                 if (File.Exists(configPath))
                 {
                     var json = JObject.Parse(File.ReadAllText(configPath));
-                    json["ChoosenOnes"] = new JArray(); // ← Liste leeren
+                    json["ChoosenOnes"] = new JArray(); // Liste leeren
                     File.WriteAllText(configPath, json.ToString(Formatting.Indented));
                 }
+
+                // 2.5. dynamic_events.json löschen
+                string dynamicEventsPath = "dynamic_events.json";
+                if (File.Exists(dynamicEventsPath))
+                {
+                    File.Delete(dynamicEventsPath);
+                }
+
+                // 2.6. Runtime-DynamicEvents löschen
+                DynamicEventManager.Events.Clear();
+                DynamicEventManager.SavePersistedEvents();
+
 
                 // 3. Runtime-Listen leeren
                 BossTimings.BossList23.Clear();
@@ -1610,6 +1621,7 @@ namespace GW2FOX
                 // 4. Overlay und Timer aktualisieren
                 BossTimer.UpdateBossList();
                 BossTimings.UpdateBossOverlayList();
+
             }
             catch (Exception ex)
             {

@@ -17,19 +17,14 @@
         Name="MainOverlayWindow">
 
     <Window.Resources>
-        <!-- Konverter -->
         <local:StrikeConverter x:Key="StrikeConverter"/>
         <local:CategoryColorConverter x:Key="CategoryColorConverter"/>
-
-        <!-- Leere Scrollbar Buttons -->
         <ControlTemplate x:Key="EmptyButtonTemplate" TargetType="RepeatButton">
             <Grid/>
         </ControlTemplate>
     </Window.Resources>
 
     <Canvas x:Name="MainCanvas" Background="Transparent">
-
-        <!-- Kopiert!-Nachricht -->
         <TextBlock x:Name="CopiedMessage"
                    Visibility="Collapsed"
                    Opacity="0.9"
@@ -44,7 +39,6 @@
             </TextBlock.Effect>
         </TextBlock>
 
-        <!-- Gesamtes Overlay -->
         <Border Background="Transparent" BorderBrush="#333" BorderThickness="0">
             <Grid>
                 <Grid.RowDefinitions>
@@ -52,7 +46,6 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
-                <!-- Kopfzeile -->
                 <Grid Grid.Row="0" Background="Transparent">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
@@ -92,7 +85,6 @@
                     </Rectangle>
                 </Grid>
 
-                <!-- Inhalt -->
                 <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -123,7 +115,6 @@
                                             <ColumnDefinition Width="Auto"/>
                                         </Grid.ColumnDefinitions>
 
-                                        <!-- Waypoint-Icon -->
                                         <Image Grid.Column="0"
                                                Source="{x:Static local:BossListItem.WaypointImage}"
                                                Width="20"
@@ -133,7 +124,6 @@
                                                MouseLeftButtonDown="Waypoint_MouseLeftButtonDown"
                                                VerticalAlignment="Center"/>
 
-                                        <!-- Bossname -->
                                         <TextBlock Grid.Column="1"
                                                    Text="{Binding BossName}"
                                                    Foreground="{Binding Category, Converter={StaticResource CategoryColorConverter}}"
@@ -146,7 +136,6 @@
                                             </TextBlock.Effect>
                                         </TextBlock>
 
-                                        <!-- Zeit -->
                                         <TextBlock Grid.Column="2"
                                                    Text="{Binding TimeRemainingFormatted}"
                                                    Foreground="{Binding Category, Converter={StaticResource CategoryColorConverter}}"
@@ -163,7 +152,6 @@
                         </ListView>
                     </ScrollViewer>
 
-                    <!-- Scrollbar -->
                     <ScrollBar Orientation="Vertical"
                                Grid.Column="1"
                                Width="12"
