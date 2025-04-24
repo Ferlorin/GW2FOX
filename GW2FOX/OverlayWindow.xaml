@@ -16,14 +16,33 @@
         Title="OverlayWindow"
         Name="MainOverlayWindow">
 
-    <Window.Resources>
-        <local:StrikeConverter x:Key="StrikeConverter"/>
-        <local:CategoryColorConverter x:Key="CategoryColorConverter"/>
+        <Window.Resources>
+            <!-- Konverter -->
+            <local:StrikeConverter x:Key="StrikeConverter"/>
+            <local:CategoryColorConverter x:Key="CategoryColorConverter"/>
 
-        <ControlTemplate x:Key="EmptyButtonTemplate" TargetType="RepeatButton">
-            <Grid/>
-        </ControlTemplate>
-    </Window.Resources>
+            <!-- Leere Scrollbar Buttons -->
+            <ControlTemplate x:Key="EmptyButtonTemplate" TargetType="RepeatButton">
+                <Grid/>
+            </ControlTemplate>
+
+            <!-- Animation für Kopiert!-Meldung -->
+            <Storyboard x:Key="ShowCopiedMessageStoryboard">
+                <DoubleAnimation
+                Storyboard.TargetName="CopiedMessage"
+                Storyboard.TargetProperty="Opacity"
+                From="0"
+                To="0.9"
+                Duration="0:0:0.2" />
+                <DoubleAnimation
+                Storyboard.TargetName="CopiedMessage"
+                Storyboard.TargetProperty="Opacity"
+                From="0.9"
+                To="0"
+                BeginTime="0:0:2"
+                Duration="0:0:0.5" />
+            </Storyboard>
+        </Window.Resources>
 
     <Grid x:Name="MainGrid" Background="Transparent">
         <Border Background="Transparent" BorderBrush="#333" BorderThickness="0">
@@ -34,21 +53,24 @@
                 </Grid.RowDefinitions>
 
                 <!-- Kopiert!-Nachricht -->
+                <!-- Kopiert!-Nachricht -->
                 <TextBlock x:Name="CopiedMessage"
-                           Foreground="White"
-                           Background="#AA000000"
-                           FontSize="12"
-                           Padding="6,2"
-                           HorizontalAlignment="Center"
-                           VerticalAlignment="Top"
-                           Margin="0,34,0,0"
-                           Visibility="Collapsed"
-                           Opacity="0.9"
-                           Text="Kopiert!">
+           Panel.ZIndex="999"
+           Foreground="White"
+           Background="#AA000000"
+           FontSize="12"
+           Padding="6,2"
+           HorizontalAlignment="Center"
+           VerticalAlignment="Top"
+           Margin="0,34,0,0"
+           Visibility="Collapsed"
+           Opacity="0.9"
+           Text="Kopiert!">
                     <TextBlock.Effect>
                         <DropShadowEffect Color="Black" BlurRadius="4" ShadowDepth="1" Opacity="0.5"/>
                     </TextBlock.Effect>
                 </TextBlock>
+
 
                 <!-- Kopfzeile -->
                 <Grid Grid.Row="0" Background="Transparent">
