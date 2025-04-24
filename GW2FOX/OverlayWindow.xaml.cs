@@ -35,7 +35,7 @@ namespace GW2FOX
 
         public OverlayWindow()
         {
-            InitializeComponent(); // ✅ MUSS zuerst sein
+            InitializeComponent();
 
             this.Left = 1315;
             this.Top = 700;
@@ -87,7 +87,6 @@ namespace GW2FOX
             {
                 System.Windows.Clipboard.SetText(boss.Waypoint);
 
-                // Position relativ zum Fenster bestimmen
                 System.Windows.Point position = img.TranslatePoint(new System.Windows.Point(0, img.ActualHeight), MainOverlayWindow);
                 ShowCopiedMessage(position);
             }
