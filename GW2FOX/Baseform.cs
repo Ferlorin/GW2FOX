@@ -36,6 +36,8 @@ namespace GW2FOX
         {
             base.OnLoad(e);
             AddButtonAnimations(this);
+            BossTimings.LoadBossConfig("BossTimings.json");
+            BossTimings.LoadBossConfigInfos("BossTimings.json");
         }
 
         [DllImport("user32.dll")]
@@ -231,6 +233,8 @@ namespace GW2FOX
             guildBox.Text = config.Guild ?? "";
             welcomeBox.Text = config.Welcome ?? "";
             symbolsBox.Text = config.Symbols ?? "";
+            Console.WriteLine("LoadedConfigInfos: " + (config != null ? "OK" : "NULL"));
+
         }
 
 
