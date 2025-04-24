@@ -354,12 +354,28 @@ namespace GW2FOX
         {
             string bossName = "The Eye of Zhaitan";
 
+            Console.WriteLine("==[ Eye Trigger Start ]==");
+
             DynamicEventManager.Trigger(bossName);
-            SaveBossNameToConfig(bossName); // ← das fixt die Anzeige im Overlay!
-            UpdateBossUiBosses(); // ← Checkbox + JSON-Neuladen
+            SaveBossNameToConfig(bossName);
+
+            // Dynamischen Boss absichern
+            EnsureBossGroupForDynamic(bossName);
+
+            // ❗ Nur BossList23 neu laden – KEINE Events neu generieren!
+            ReloadBossListFromConfig(); // <- Methode, die NUR BossList23 aktualisiert
+
+            // Falls der BossList23-Eintrag fehlt, nochmal absichern
+            if (!BossList23.Contains(bossName))
+            {
+                BossList23.Add(bossName);
+                Console.WriteLine("✔ Boss manuell zu BossList23 hinzugefügt.");
+            }
+
+            UpdateBossOverlayList();
+            UpdateBossUiBosses();
+            Console.WriteLine("==[ Eye Trigger Done ]==");
         }
-
-
 
 
         private void DwanyButton_Click(object sender, EventArgs e)
@@ -1814,7 +1830,7 @@ namespace GW2FOX
                     }
                     else
                     {
-                        Console.WriteLine($"⚠ Boss '{bossName}' nicht in Bosses gefunden.");
+                        //Console.WriteLine($"⚠ Boss '{bossName}' nicht in Bosses gefunden.");
                     }
                 }
 
@@ -1826,6 +1842,47 @@ namespace GW2FOX
             {
                 MessageBox.Show($"Fehler beim Laden von ChoosenOnes: {ex.Message}", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void EnsureBossGroupForDynamic(string bossName)
+        {
+            Console.WriteLine($"➡ EnsureBossGroupForDynamic aufgerufen für '{bossName}'");
+
+            var ev = DynamicEventManager.Events.FirstOrDefault(e => e.BossName.Equals(bossName, StringComparison.OrdinalIgnoreCase));
+            if (ev == null)
+            {
+                Console.WriteLine($"❌ DynamicEvent '{bossName}' NICHT gefunden in EnsureBossGroupForDynamic");
+                return;
+            }
+
+            // ✅ Nur hinzufügen, wenn nicht vorhanden
+            if (!BossEventsList.Any(be => be.BossName.Equals(bossName, StringComparison.OrdinalIgnoreCase)))
+            {
+                BossEventsList.Add(new BossEvent(
+                    ev.BossName,
+                    TimeSpan.Zero,
+                    ev.Category ?? "Treasures",
+                    ev.Waypoint ?? ""
+                ));
+                Console.WriteLine($"✅ BossEvent für '{bossName}' zur BossEventsList hinzugefügt.");
+            }
+
+            // ✅ Jetzt Gruppen NEU ERSTELLEN
+            GenerateBossEventGroups(); // <- dieser Aufruf ist entscheidend!
+            Console.WriteLine("🔁 GenerateBossEventGroups() wurde ausgeführt.");
+        }
+
+        private void ReloadBossListFromConfig()
+        {
+            var config = BossTimings.LoadBossConfigFromFile("BossTimings.json");
+            BossList23 = config.Bosses
+                .Where(b => config.ChoosenOnes.Contains(b.Name, StringComparer.OrdinalIgnoreCase))
+                .Select(b => b.Name)
+                .ToList();
+
+            Console.WriteLine("🟢 BossList23 wurde neu geladen:");
+            foreach (var b in BossList23)
+                Console.WriteLine(" • " + b);
         }
 
 

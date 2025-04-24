@@ -192,14 +192,14 @@ namespace GW2FOX
 
         public static void GenerateBossEventGroups()
         {
-            BossEventGroups.Clear();
+            BossEventGroups = BossEventsList
+                .GroupBy(be => be.BossName)
+                .Select(g => new BossEventGroup(g.Key, g))
+                .ToList();
 
-            var grouped = BossEventsList
-                .GroupBy(e => e.BossName)
-                .Select(g => new BossEventGroup(g.Key, g.ToList()));
-
-            BossEventGroups.AddRange(grouped);
+            Console.WriteLine($"🛠 BossEventGroups regeneriert – {BossEventGroups.Count} Gruppen erzeugt.");
         }
+
 
 
 

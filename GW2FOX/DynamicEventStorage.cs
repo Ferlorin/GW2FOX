@@ -43,7 +43,9 @@ namespace GW2FOX
         public void Trigger()
         {
             StartTime = DateTime.UtcNow;
+            Console.WriteLine($"🔔 Event '{BossName}' gestartet: {StartTime.Value} (läuft bis {EndTime})");
         }
+
 
         /// <summary>
         /// Endzeit = Startzeit + Dauer (falls getriggert).
@@ -60,17 +62,15 @@ namespace GW2FOX
         /// </summary>
         public BossEventRun ToBossEventRun()
         {
-            if (!StartTime.HasValue)
-                throw new InvalidOperationException("Event not triggered");
-
             return new BossEventRun(
                 bossName: BossName,
                 timing: Duration,
                 category: Category,
-                nextRunTime: EndTime.Value,
+                nextRunTime: EndTime.Value.ToLocalTime(), // ✅ NUR HIER lokale Zeit berechnen!
                 waypoint: Waypoint
             );
         }
+
 
         public DynamicEventState ToState() => new()
         {
@@ -126,55 +126,80 @@ namespace GW2FOX
         private static bool _choosenOnesLoaded = false;
 
         public static IEnumerable<BossEventRun> GetActiveBossEventRuns()
-        {
-            var now = GlobalVariables.CURRENT_DATE_TIME;
-            var minTime = now - TimeSpan.FromMinutes(15);
-            var result = new List<BossEventRun>();
+{
+    DateTime nowLocal = GlobalVariables.CURRENT_DATE_TIME;
+    DateTime nowUtc = DateTime.UtcNow;
+    DateTime minUtc = nowUtc - TimeSpan.FromMinutes(15);
 
-            // 1. Dynamische Events
-            var dynamicEvents = Events
-                .Where(e => e.IsRunning)
-                .Select(e => e.ToBossEventRun())
-                .Where(e => e.NextRunTime >= minTime)
-                .ToList();
-            result.AddRange(dynamicEvents);
+    var result = new List<BossEventRun>();
 
-            // 2. ChoosenOnes
-            var config = BossTimings.LoadBossConfigFromFile("BossTimings.json");
-            var choosenBossNames = config.Bosses
-                .Where(b => b.Category?.Equals("ChoosenOnes", StringComparison.OrdinalIgnoreCase) == true)
-                .Select(b => b.Name)
-                .ToHashSet(StringComparer.OrdinalIgnoreCase);
+    Console.WriteLine("🔎 [GetActiveBossEventRuns] START");
+    Console.WriteLine($"🕒 Local Time: {nowLocal:HH:mm:ss}");
+    Console.WriteLine($"🕒 UTC Time:   {nowUtc:HH:mm:ss} (Min UTC: {minUtc:HH:mm:ss})");
 
-            var choosenRuns = BossTimings.BossEventGroups
-                .Where(g => choosenBossNames.Contains(g.BossName))
-                .SelectMany(g => g.GetNextRuns())
-                .Where(r => r.NextRunTime >= minTime)
-                .ToList();
-            result.AddRange(choosenRuns);
+    // 🔍 Debug: Alle dynamischen Events
+    Console.WriteLine("🔍 Alle dynamischen Events:");
+    foreach (var e in Events)
+    {
+        Console.WriteLine($" - {e.BossName,-25} | Running: {e.IsRunning,-5} | Start: {e.StartTime} | Ends: {e.EndTime}");
+    }
 
-            // 3. Fallback nur wenn keine gültigen Events vorhanden sind
-            if (result.Count == 0)
-            {
-                result = BossTimings.BossEventGroups
-                    .SelectMany(g => g.GetNextRuns())
-                    .Where(r => r.NextRunTime >= minTime)
-                    .ToList();
-            }
+    // 1. Dynamische Events (Vergleich auf UTC-Basis!)
+    var dynamicEvents = Events
+        .Where(e => e.IsRunning)
+        .Select(e => e.ToBossEventRun())
+        .Where(e => e.NextRunTime.ToUniversalTime() >= minUtc)
+        .ToList();
 
-            // Finaler Filter & Sortierung
-            result = result
-                .Where(r => r.NextRunTime >= minTime)
-                .GroupBy(r => new { r.BossName, r.NextRunTime })
-                .Select(g => g.First())
-                .OrderBy(r => r.NextRunTime)
-                .ToList();
+    Console.WriteLine($"📦 Dynamische Events gefunden: {dynamicEvents.Count}");
+    foreach (var ev in dynamicEvents)
+        Console.WriteLine($" • {ev.BossName} (läuft bis {ev.NextRunTime:HH:mm:ss})");
 
-            return result;
-        }
+    result.AddRange(dynamicEvents);
 
+    // 2. ChoosenOnes aus JSON
+    var config = BossTimings.LoadBossConfigFromFile("BossTimings.json");
+    var choosenBossNames = config.ChoosenOnes
+        .ToHashSet(StringComparer.OrdinalIgnoreCase);
 
+    Console.WriteLine($"📦 ChoosenOnes geladen: {choosenBossNames.Count}");
+    foreach (var name in choosenBossNames)
+        Console.WriteLine($" • {name}");
 
+    var choosenRuns = BossTimings.BossEventGroups
+        .Where(g => choosenBossNames.Contains(g.BossName))
+        .SelectMany(g => g.GetNextRuns())
+        .Where(r => r.NextRunTime >= nowLocal - TimeSpan.FromMinutes(15))
+        .ToList();
+
+    Console.WriteLine($"📦 Geplante Runs aus ChoosenOnes: {choosenRuns.Count}");
+    result.AddRange(choosenRuns);
+
+    // 3. Fallback nur wenn alles leer ist
+    if (result.Count == 0)
+    {
+        Console.WriteLine("⚠ Keine aktiven Events gefunden – Fallback aktiv");
+        result = BossTimings.BossEventGroups
+            .SelectMany(g => g.GetNextRuns())
+            .Where(r => r.NextRunTime >= nowLocal - TimeSpan.FromMinutes(15))
+            .ToList();
+    }
+
+    // 4. Finaler Filter & Sortierung
+    var final = result
+        .GroupBy(r => new { r.BossName, r.NextRunTime })
+        .Select(g => g.First())
+        .OrderBy(r => r.NextRunTime)
+        .ToList();
+
+    Console.WriteLine($"✅ Finale Anzahl sichtbarer Events im Overlay: {final.Count}");
+    foreach (var f in final)
+        Console.WriteLine($" • {f.BossName} @ {f.NextRunTime:HH:mm:ss}");
+
+    Console.WriteLine("🔚 [GetActiveBossEventRuns] DONE");
+
+    return final;
+}
 
 
 

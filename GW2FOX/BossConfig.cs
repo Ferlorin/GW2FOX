@@ -10,6 +10,9 @@ public class BossConfig
     [JsonProperty("Bosses")]
     public List<Boss> Bosses { get; set; } = new();
 
+    [JsonProperty("ChoosenOnes")]
+    public List<string> ChoosenOnes { get; set; } = new(); // ✅ hinzugefügt!
+
     [JsonProperty("Meta")]
     public string Meta { get; set; } = "";
 
@@ -27,6 +30,7 @@ public class BossConfig
 
     public List<Boss> DynamicBosses { get; set; } = new List<Boss>();
 }
+
 
 public class BossConfigInfos
 {
