@@ -37,7 +37,7 @@ namespace GW2FOX
         {
             InitializeComponent();
 
-            this.Left = 1315;
+            this.Left = 1325;
             this.Top = 700;
             _instance = this;
 
