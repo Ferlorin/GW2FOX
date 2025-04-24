@@ -50,11 +50,6 @@ namespace GW2FOX
             }
         }
 
-
-
-
-
-
         public string BossName { get; set; }
         public string Waypoint { get; set; }
         public string Category { get; set; }

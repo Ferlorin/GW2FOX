@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using static GW2FOX.BossTimerService;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 
 namespace GW2FOX
 {
@@ -16,7 +17,6 @@ namespace GW2FOX
         private static OverlayWindow? _instance;
         private DispatcherTimer bossTimer;
         public ObservableCollection<BossListItem> OverlayItems { get; } = new ObservableCollection<BossListItem>();
-
 
         private double _scrollValue;
         public double ScrollValue
@@ -41,20 +41,27 @@ namespace GW2FOX
             this.Top = 700;
             _instance = this;
 
-            UpdateBossOverlayList();
-            StartBossTimer();
-
             DataContext = this;
             this.PreviewMouseWheel += OverlayWindow_PreviewMouseWheel;
+            this.Loaded += Window_Loaded;
 
             BossTimings.RegisterListView(BossListView);
+
+            StartBossTimer();
+            UpdateBossOverlayListAsync(); // Initial async call
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            ScrollValue = BossScrollViewer.VerticalOffset;
         }
 
         private void OverlayWindow_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
         {
             if (BossScrollViewer.IsMouseOver || this.IsActive)
             {
-                var newOffset = BossScrollViewer.VerticalOffset - e.Delta;
+                double scrollMultiplier = 3.0;
+                var newOffset = BossScrollViewer.VerticalOffset - (e.Delta / 120.0 * scrollMultiplier);
                 BossScrollViewer.ScrollToVerticalOffset(newOffset);
                 ScrollValue = newOffset;
                 e.Handled = true;
@@ -64,21 +71,33 @@ namespace GW2FOX
         private void BossScrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e)
         {
             if (ScrollValue != e.VerticalOffset)
-            {
                 ScrollValue = e.VerticalOffset;
-            }
         }
 
         private void StartBossTimer()
         {
             bossTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
-            bossTimer.Tick += BossTimer_Tick;
+            bossTimer.Tick += (s, e) => UpdateBossOverlayListAsync();
             bossTimer.Start();
         }
 
-        private void BossTimer_Tick(object? sender, EventArgs e)
+        private async void UpdateBossOverlayListAsync()
         {
-            UpdateBossOverlayList();
+            try
+            {
+                var combinedRuns = await Task.Run(() => BossTimerService.GetBossRunsForOverlay());
+                var overlayItems = await Task.Run(() => BossOverlayHelper.GetBossOverlayItems(combinedRuns, DateTime.Now));
+
+                Dispatcher.Invoke(() =>
+                {
+                    BossListView.ItemsSource = null;
+                    BossListView.ItemsSource = overlayItems;
+                });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Fehler beim Aktualisieren der BossOverlay-Liste: {ex.Message}");
+            }
         }
 
         private void Waypoint_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -86,12 +105,10 @@ namespace GW2FOX
             if (sender is System.Windows.Controls.Image img && img.DataContext is BossListItem boss)
             {
                 System.Windows.Clipboard.SetText(boss.Waypoint);
-
                 System.Windows.Point position = img.TranslatePoint(new System.Windows.Point(0, img.ActualHeight), MainOverlayWindow);
                 ShowCopiedMessage(position);
             }
         }
-
 
         private void ShowCopiedMessage(System.Windows.Point position)
         {
@@ -108,12 +125,10 @@ namespace GW2FOX
             timer.Start();
         }
 
-
         private void ManualScrollBar_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             BossScrollViewer.ScrollToVerticalOffset(e.NewValue);
         }
-
 
         private void Icon_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -123,19 +138,13 @@ namespace GW2FOX
 
         public static OverlayWindow GetInstance()
         {
-            if (_instance == null)
-            {
-                _instance = new OverlayWindow();
-            }
-            else
-            {
-                //Console.WriteLine("Verwende bestehende Instanz von OverlayWindow.");
-            }
-            return _instance;
+            return _instance ??= new OverlayWindow();
         }
 
         protected override void OnClosed(EventArgs e)
         {
+            bossTimer?.Stop();
+            bossTimer = null;
             _instance = null;
             base.OnClosed(e);
         }

@@ -176,12 +176,12 @@ namespace GW2FOX
 
                 foreach (var boss in combinedBosses.OrderBy(b => b.TimeToShow))
                 {
-                   // Console.WriteLine($"- {boss.BossName} @ {boss.NextRunTime} | Show: {boss.TimeToShow}");
+                    Console.WriteLine($"- {boss.BossName} @ {boss.NextRunTime} | Show: {boss.TimeToShow}");
                 }
             }
             catch (Exception ex)
             {
-               // Console.WriteLine($"Fehler beim Aktualisieren der BossOverlay-Liste: {ex.Message}");
+                Console.WriteLine($"Fehler beim Aktualisieren der BossOverlay-Liste: {ex.Message}");
             }
         }
 

@@ -117,8 +117,6 @@ namespace GW2FOX
             }
         }
 
-
-
         public void Dispose()
         {
             Dispose(true);
