@@ -300,7 +300,7 @@ namespace GW2FOX
                     return;
                 }
 
-
+                
                 var newBossList = new List<string>();
 
                 foreach (var boss in bossConfig.Bosses)
