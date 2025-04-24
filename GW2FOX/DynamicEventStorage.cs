@@ -109,13 +109,16 @@ namespace GW2FOX
             var ev = Events.FirstOrDefault(e => e.BossName.Equals(bossName, StringComparison.OrdinalIgnoreCase));
             if (ev == null)
             {
-                Console.WriteLine($"[Trigger] No dynamic event found for {bossName}");
+                Console.WriteLine($"❌ DynamicEvent '{bossName}' NICHT gefunden!");
                 return;
             }
 
             ev.Trigger();
             SavePersistedEvents();
+
+            Console.WriteLine($"✅ DynamicEvent getriggert: {ev.BossName}, läuft bis {ev.EndTime}");
         }
+
 
         /// <summary>
         /// Gibt nur aktive dynamische Events für das Overlay zurück.

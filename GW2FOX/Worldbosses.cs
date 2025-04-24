@@ -352,10 +352,15 @@ namespace GW2FOX
 
         private void EyeButton_Click(object sender, EventArgs e)
         {
-            DynamicEventManager.Trigger("The Eye of Zhaitan");
-            ;
-            UpdateBossUiBosses();
+            string bossName = "The Eye of Zhaitan";
+
+            DynamicEventManager.Trigger(bossName);
+            SaveBossNameToConfig(bossName); // ← das fixt die Anzeige im Overlay!
+            UpdateBossUiBosses(); // ← Checkbox + JSON-Neuladen
         }
+
+
+
 
         private void DwanyButton_Click(object sender, EventArgs e)
         {
@@ -1809,19 +1814,21 @@ namespace GW2FOX
                     }
                     else
                     {
-                        //Console.WriteLine($"⚠ Boss '{bossName}' nicht in Bosses gefunden.");
+                        Console.WriteLine($"⚠ Boss '{bossName}' nicht in Bosses gefunden.");
                     }
                 }
 
                 GenerateBossEventGroups();
-                BossTimer.UpdateBossList(); // nur nötig, wenn MiniOverlay das braucht
-                UpdateBossOverlayList();    // wichtig für WPF-Overlay
+                BossTimer.UpdateBossList();
+                UpdateBossOverlayList();
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Fehler beim Laden von ChoosenOnes: {ex.Message}", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+
     }
 }
 
