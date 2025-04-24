@@ -36,7 +36,6 @@ namespace GW2FOX
         {
             base.OnLoad(e);
             AddButtonAnimations(this);
-            BossTimings.LoadBossConfig("BossTimings.json");
             BossTimings.LoadBossConfigInfos("BossTimings.json");
         }
 

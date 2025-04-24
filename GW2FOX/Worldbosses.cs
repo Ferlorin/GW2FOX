@@ -351,50 +351,49 @@ namespace GW2FOX
 
         private void EyeButton_Click(object sender, EventArgs e)
         {
-            DynamicEventManager.Trigger("The Eye of Zhaitan");
-            ;
+            DynamicEventManager.TriggerIt("The Eye of Zhaitan");
             UpdateBossUiBosses();
         }
 
         private void DwanyButton_Click(object sender, EventArgs e)
         {
-            DynamicEventManager.Trigger("Statue of Dwanya");
+            DynamicEventManager.TriggerIt("Statue of Dwanya");
             UpdateBossUiBosses();
         }
 
         private void LyssaButton_Click(object sender, EventArgs e)
         {
-            DynamicEventManager.Trigger("Priestess of Lyssa");
+            DynamicEventManager.TriggerIt("Priestess of Lyssa");
             UpdateBossUiBosses();
         }
 
         private void OgresButton_Click(object sender, EventArgs e)
         {
-            DynamicEventManager.Trigger("Ogrewars");
+            DynamicEventManager.TriggerIt("Ogrewars");
             UpdateBossUiBosses();
         }
 
         private void RhendakButton_Click(object sender, EventArgs e)
         {
-            DynamicEventManager.Trigger("Rhendak");
+            DynamicEventManager.TriggerIt("Rhendak");
             UpdateBossUiBosses();
         }
 
         private void CommissarButton_Click(object sender, EventArgs e)
         {
-            DynamicEventManager.Trigger("Dredge Commissar");
+            DynamicEventManager.TriggerIt("Dredge Commissar");
             UpdateBossUiBosses();
         }
 
         private void GeneralsButton_Click(object sender, EventArgs e)
         {
-            DynamicEventManager.Trigger("Branded Generals");
+            DynamicEventManager.TriggerIt("Branded Generals");
             UpdateBossUiBosses();
         }
 
         private void ArahButton_Click(object sender, EventArgs e)
         {
-            DynamicEventManager.Trigger("Gates of Arah");
+            DynamicEventManager.TriggerIt("Gates of Arah");
             UpdateBossUiBosses();
         }
 

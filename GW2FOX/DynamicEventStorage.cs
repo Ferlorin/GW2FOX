@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace GW2FOX
 {
@@ -103,17 +104,42 @@ namespace GW2FOX
             LoadPersistedEvents();
         }
 
-        public static void Trigger(string bossName)
+        public static void TriggerIt(string bossName)
         {
-            var ev = Events.FirstOrDefault(e => e.BossName.Equals(bossName, StringComparison.OrdinalIgnoreCase));
-            if (ev == null)
+            // Zuerst die Event-Instanz für das Triggern erstellen
+            var dynamicEvent = Events.FirstOrDefault(e => e.BossName.Equals(bossName, StringComparison.OrdinalIgnoreCase));
+
+            if (dynamicEvent == null)
             {
-                return;
+                // Falls das Event noch nicht existiert, erstelle es
+                dynamicEvent = new DynamicEvent(bossName, TimeSpan.FromMinutes(30), "Unknown", "[&UNKNOWN=]");
+                Events.Add(dynamicEvent);
             }
 
-            ev.Trigger();
+            // Event auslösen
+            dynamicEvent.Trigger();
+
+            // In BossTimings.json -> ChoosenOnes eintragen
+            string configPath = "BossTimings.json";
+            if (!File.Exists(configPath)) return;
+
+            var json = File.ReadAllText(configPath);
+            var jObj = JObject.Parse(json);
+
+            var choosen = jObj["ChoosenOnes"] as JArray ?? new JArray();
+            if (!choosen.Any(x => x.ToString().Equals(bossName, StringComparison.OrdinalIgnoreCase)))
+            {
+                choosen.Add(bossName);
+                jObj["ChoosenOnes"] = choosen;
+                File.WriteAllText(configPath, jObj.ToString());
+            }
+
+            // Auch die aktuelle Event-Liste speichern
             SavePersistedEvents();
         }
+
+
+
 
 
         /// <summary>
