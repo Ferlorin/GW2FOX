@@ -43,7 +43,6 @@ namespace GW2FOX
         public void Trigger()
         {
             StartTime = DateTime.UtcNow;
-            Console.WriteLine($"🔔 Event '{BossName}' gestartet: {StartTime.Value} (läuft bis {EndTime})");
         }
 
 
