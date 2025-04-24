@@ -134,10 +134,12 @@ namespace GW2FOX
             }
         }
 
-        private void BlishHUD_Click(object sender, EventArgs e)
+      
+
+        private void LaunchExternalTool(string executableName)
         {
             string exeDirectory = Path.GetDirectoryName(Application.ExecutablePath);
-            string filePath = Path.Combine(exeDirectory, "data2", "Blish HUD.exe");
+            string filePath = Path.Combine(exeDirectory, executableName);
 
             if (File.Exists(filePath))
             {
@@ -147,35 +149,23 @@ namespace GW2FOX
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error opening the file: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show($"Fehler beim Starten von {executableName}:\n{ex.Message}", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             else
             {
-                MessageBox.Show("The file was not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"{executableName} wurde nicht gefunden im Verzeichnis:\n{exeDirectory}", "Datei nicht gefunden", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void BlishHUD_Click(object sender, EventArgs e)
+        {
+            LaunchExternalTool("Blish HUD.exe");
         }
 
         private void button8_Click(object sender, EventArgs e)
         {
-            string exeDirectory = Path.GetDirectoryName(Application.ExecutablePath);
-            string filePath = Path.Combine(exeDirectory, "data", "GW2TacO.exe");
-
-            if (File.Exists(filePath))
-            {
-                try
-                {
-                    Process.Start(filePath);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error opening the file: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            else
-            {
-                MessageBox.Show("The file was not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            LaunchExternalTool("GW2TacO.exe");
         }
 
         private void ArcDPSInstall_Click(object sender, EventArgs e)
@@ -207,26 +197,30 @@ namespace GW2FOX
             return null;
         }
 
-        private void InstallArcDPS(string gw2Verzeichnis)
+       private async void InstallArcDPS(string gw2Directory)
+{
+    string downloadUrl = "https://www.deltaconnected.com/arcdps/x64/d3d11.dll"; // official ArcDPS URL
+    string destinationPath = Path.Combine(gw2Directory, "d3d11.dll");
+
+    try
+    {
+        using (HttpClient client = new HttpClient())
         {
-            string d3d11DllQuelle = Path.Combine("data", "d3d11.dll");
-            string d3d11Md5SumQuelle = Path.Combine("data", "d3d11.dll.md5sum");
+            HttpResponseMessage response = await client.GetAsync(downloadUrl);
+            response.EnsureSuccessStatusCode(); // Throws exception if not 2xx success
 
-            string d3d11DllZiel = Path.Combine(gw2Verzeichnis, "d3d11.dll");
-            string d3d11Md5SumZiel = Path.Combine(gw2Verzeichnis, "d3d11.dll.md5sum");
+            byte[] data = await response.Content.ReadAsByteArrayAsync();
+            await File.WriteAllBytesAsync(destinationPath, data);
 
-            try
-            {
-                File.Copy(d3d11DllQuelle, d3d11DllZiel, true);
-                File.Copy(d3d11Md5SumQuelle, d3d11Md5SumZiel, true);
-
-                MessageBox.Show("Done.", "Done", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            MessageBox.Show("ArcDPS has been successfully installed!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
+    }
+    catch (Exception ex)
+    {
+        MessageBox.Show($"Error downloading/installing ArcDPS: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+    }
+}
+
 
         private void ArcDPSDeinstall_Click(object sender, EventArgs e)
         {

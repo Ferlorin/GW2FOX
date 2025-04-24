@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using System.Windows.Forms;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.Runtime.InteropServices;
 
 namespace GW2FOX
 {
@@ -31,17 +32,32 @@ namespace GW2FOX
             );
         }
 
+        [DllImport("user32.dll", SetLastError = true)]
+        private static extern IntPtr GetForegroundWindow();
+
+        [DllImport("user32.dll")]
+        private static extern bool SetForegroundWindow(IntPtr hWnd);
+
         private void button1_Click(object sender, EventArgs e)
         {
-            var allowedTypes = new[] { typeof(Main), typeof(MiniOverlay), typeof(Worldbosses) };
+            var excludedTypes = new[] { typeof(MiniOverlay) };
+            var topMostStates = new Dictionary<Form, bool>();
 
-            // 1. WinForms-Fenster durchgehen
+            // 1. TopMost merken und ausschalten
+            foreach (Form f in Application.OpenForms)
+            {
+                topMostStates[f] = f.TopMost;
+                f.TopMost = false;
+            }
+
+            // 2. Fokus ermitteln
+            IntPtr activeHandle = GetForegroundWindow();
+
+            // 3. Form finden & toggeln
             foreach (Form openForm in Application.OpenForms)
             {
-                if (!allowedTypes.Contains(openForm.GetType()))
+                if (openForm.Handle == activeHandle && !excludedTypes.Contains(openForm.GetType()))
                 {
-                    // Toggle Verhalten für "andere" WinForms-Fenster
-                    openForm.ShowInTaskbar = false;
                     if (openForm.Visible)
                     {
                         openForm.Hide();
@@ -53,84 +69,31 @@ namespace GW2FOX
                         openForm.Activate();
                         SetForegroundWindow(openForm.Handle);
                     }
+
+                    // 4. TopMost zurücksetzen und fertig
+                    foreach (var kvp in topMostStates)
+                        kvp.Key.TopMost = kvp.Value;
+
                     return;
                 }
             }
 
-            // 2. WPF-Overlay prüfen
-            if (_overlayWindow == null)
-            {
-                _overlayWindow = new OverlayWindow();
-                _overlayWindow.Closed += (s, args) => _overlayWindow = null; // Fenster löschen bei Schließen
-            }
+            // 5. Kein gültiges Fenster → TopMost zurücksetzen
+            foreach (var kvp in topMostStates)
+                kvp.Key.TopMost = kvp.Value;
 
-
-            // 3. Worldbosses Fenster wie bisher
-            if (lastOpenedBoss == null || lastOpenedBoss.IsDisposed)
-            {
-                lastOpenedBoss = new Worldbosses
-                {
-                    ShowInTaskbar = false
-                };
-                lastOpenedBoss.Show();
-            }
-            else if (lastOpenedBoss.Visible)
-            {
-                lastOpenedBoss.Hide();
-            }
-            else
-            {
-                lastOpenedBoss.Show();
-                lastOpenedBoss.BringToFront();
-                lastOpenedBoss.Activate();
-                SetForegroundWindow(lastOpenedBoss.Handle);
-            }
+            MessageBox.Show("Kein gültiges aktives Fenster deines Programms gefunden.", "Hinweis", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
-
 
 
         private void button2_Click(object sender, EventArgs e)
         {
-            string exeDirectory = Path.GetDirectoryName(Application.ExecutablePath);
-            string filePath = Path.Combine(exeDirectory, "data2", "Blish HUD.exe");
-
-            if (File.Exists(filePath))
-            {
-                try
-                {
-                    Process.Start(filePath);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error opening the file: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            else
-            {
-                MessageBox.Show("The file was not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            LaunchExternalTool("Blish HUD.exe");
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            string exeDirectory = Path.GetDirectoryName(Application.ExecutablePath);
-            string filePath = Path.Combine(exeDirectory, "data", "GW2TacO.exe");
-
-            if (File.Exists(filePath))
-            {
-                try
-                {
-                    Process.Start(filePath);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error opening the file: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            else
-            {
-                MessageBox.Show("The file was not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            LaunchExternalTool("GW2TacO.exe");
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -192,6 +155,26 @@ namespace GW2FOX
                 _overlayWindow.Activate(); // Fokus und bringt es in den Vordergrund
             }
         }
+        private void LaunchExternalTool(string executableName)
+        {
+            string exeDirectory = Path.GetDirectoryName(Application.ExecutablePath);
+            string filePath = Path.Combine(exeDirectory, executableName);
 
+            if (File.Exists(filePath))
+            {
+                try
+                {
+                    Process.Start(filePath);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Fehler beim Starten von {executableName}:\n{ex.Message}", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show($"{executableName} wurde nicht gefunden im Verzeichnis:\n{exeDirectory}", "Datei nicht gefunden", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }
