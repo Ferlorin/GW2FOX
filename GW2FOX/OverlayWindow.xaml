@@ -16,61 +16,41 @@
         Title="OverlayWindow"
         Name="MainOverlayWindow">
 
-        <Window.Resources>
-            <!-- Konverter -->
-            <local:StrikeConverter x:Key="StrikeConverter"/>
-            <local:CategoryColorConverter x:Key="CategoryColorConverter"/>
+    <Window.Resources>
+        <!-- Konverter -->
+        <local:StrikeConverter x:Key="StrikeConverter"/>
+        <local:CategoryColorConverter x:Key="CategoryColorConverter"/>
 
-            <!-- Leere Scrollbar Buttons -->
-            <ControlTemplate x:Key="EmptyButtonTemplate" TargetType="RepeatButton">
-                <Grid/>
-            </ControlTemplate>
+        <!-- Leere Scrollbar Buttons -->
+        <ControlTemplate x:Key="EmptyButtonTemplate" TargetType="RepeatButton">
+            <Grid/>
+        </ControlTemplate>
+    </Window.Resources>
 
-            <!-- Animation für Kopiert!-Meldung -->
-            <Storyboard x:Key="ShowCopiedMessageStoryboard">
-                <DoubleAnimation
-                Storyboard.TargetName="CopiedMessage"
-                Storyboard.TargetProperty="Opacity"
-                From="0"
-                To="0.9"
-                Duration="0:0:0.2" />
-                <DoubleAnimation
-                Storyboard.TargetName="CopiedMessage"
-                Storyboard.TargetProperty="Opacity"
-                From="0.9"
-                To="0"
-                BeginTime="0:0:2"
-                Duration="0:0:0.5" />
-            </Storyboard>
-        </Window.Resources>
+    <Canvas x:Name="MainCanvas" Background="Transparent">
 
-    <Grid x:Name="MainGrid" Background="Transparent">
+        <!-- Kopiert!-Nachricht -->
+        <TextBlock x:Name="CopiedMessage"
+                   Visibility="Collapsed"
+                   Opacity="0.9"
+                   Text="Copied!"
+                   Background="#AA000000"
+                   Foreground="White"
+                   Padding="6,2"
+                   FontSize="12"
+                   Panel.ZIndex="999">
+            <TextBlock.Effect>
+                <DropShadowEffect Color="Black" BlurRadius="4" ShadowDepth="1" Opacity="0.5"/>
+            </TextBlock.Effect>
+        </TextBlock>
+
+        <!-- Gesamtes Overlay -->
         <Border Background="Transparent" BorderBrush="#333" BorderThickness="0">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="30"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-
-                <!-- Kopiert!-Nachricht -->
-                <!-- Kopiert!-Nachricht -->
-                <TextBlock x:Name="CopiedMessage"
-           Panel.ZIndex="999"
-           Foreground="White"
-           Background="#AA000000"
-           FontSize="12"
-           Padding="6,2"
-           HorizontalAlignment="Center"
-           VerticalAlignment="Top"
-           Margin="0,34,0,0"
-           Visibility="Collapsed"
-           Opacity="0.9"
-           Text="Kopiert!">
-                    <TextBlock.Effect>
-                        <DropShadowEffect Color="Black" BlurRadius="4" ShadowDepth="1" Opacity="0.5"/>
-                    </TextBlock.Effect>
-                </TextBlock>
-
 
                 <!-- Kopfzeile -->
                 <Grid Grid.Row="0" Background="Transparent">
@@ -136,35 +116,31 @@
                                   ScrollViewer.VerticalScrollBarVisibility="Disabled">
                             <ListView.ItemTemplate>
                                 <DataTemplate>
-                                    <Grid Background="Transparent"
-              VerticalAlignment="Center">
+                                    <Grid Background="Transparent" VerticalAlignment="Center">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="Auto"/>
-                                            <!-- Waypoint-Icon -->
                                             <ColumnDefinition Width="150"/>
-                                            <!-- BossName -->
                                             <ColumnDefinition Width="Auto"/>
-                                            <!-- Zeit -->
                                         </Grid.ColumnDefinitions>
 
                                         <!-- Waypoint-Icon -->
                                         <Image Grid.Column="0"
-                   Source="{x:Static local:BossListItem.WaypointImage}"
-                   Width="20"
-                   Height="20"
-                   Margin="0,0,6,0"
-                   Cursor="Hand"
-                   MouseLeftButtonDown="Waypoint_MouseLeftButtonDown"
-                   VerticalAlignment="Center"/>
+                                               Source="{x:Static local:BossListItem.WaypointImage}"
+                                               Width="20"
+                                               Height="20"
+                                               Margin="0,0,6,0"
+                                               Cursor="Hand"
+                                               MouseLeftButtonDown="Waypoint_MouseLeftButtonDown"
+                                               VerticalAlignment="Center"/>
 
                                         <!-- Bossname -->
                                         <TextBlock Grid.Column="1"
-                       Text="{Binding BossName}"
-                       Foreground="{Binding Category, Converter={StaticResource CategoryColorConverter}}"
-                       TextDecorations="{Binding IsPastEvent, Converter={StaticResource StrikeConverter}}"
-                       VerticalAlignment="Center"
-                       Width="140"
-                       TextTrimming="CharacterEllipsis">
+                                                   Text="{Binding BossName}"
+                                                   Foreground="{Binding Category, Converter={StaticResource CategoryColorConverter}}"
+                                                   TextDecorations="{Binding IsPastEvent, Converter={StaticResource StrikeConverter}}"
+                                                   VerticalAlignment="Center"
+                                                   Width="140"
+                                                   TextTrimming="CharacterEllipsis">
                                             <TextBlock.Effect>
                                                 <DropShadowEffect Color="Black" BlurRadius="0" ShadowDepth="0" Opacity="1"/>
                                             </TextBlock.Effect>
@@ -172,21 +148,22 @@
 
                                         <!-- Zeit -->
                                         <TextBlock Grid.Column="2"
-                       Text="{Binding TimeRemainingFormatted}"
-                       Foreground="{Binding Category, Converter={StaticResource CategoryColorConverter}}"
-                       TextDecorations="{Binding IsPastEvent, Converter={StaticResource StrikeConverter}}"
-                       VerticalAlignment="Center"
-                       Margin="0,0,0,0">
+                                                   Text="{Binding TimeRemainingFormatted}"
+                                                   Foreground="{Binding Category, Converter={StaticResource CategoryColorConverter}}"
+                                                   TextDecorations="{Binding IsPastEvent, Converter={StaticResource StrikeConverter}}"
+                                                   VerticalAlignment="Center"
+                                                   Margin="0,0,0,0">
                                             <TextBlock.Effect>
                                                 <DropShadowEffect Color="Black" BlurRadius="0" ShadowDepth="0" Opacity="1"/>
                                             </TextBlock.Effect>
                                         </TextBlock>
                                     </Grid>
                                 </DataTemplate>
-                            </ListView.ItemTemplate> </ListView>
+                            </ListView.ItemTemplate>
+                        </ListView>
                     </ScrollViewer>
 
-                    <!-- Manuelle Scrollbar -->
+                    <!-- Scrollbar -->
                     <ScrollBar Orientation="Vertical"
                                Grid.Column="1"
                                Width="12"
@@ -234,5 +211,5 @@
                 </Grid>
             </Grid>
         </Border>
-    </Grid>
+    </Canvas>
 </Window>

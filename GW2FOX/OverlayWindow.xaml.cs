@@ -15,11 +15,9 @@ namespace GW2FOX
     {
         private static OverlayWindow? _instance;
         private DispatcherTimer bossTimer;
-
         public ObservableCollection<BossListItem> OverlayItems { get; } = new ObservableCollection<BossListItem>();
 
 
-        // Scroll-Sync zwischen ScrollViewer und Slider
         private double _scrollValue;
         public double ScrollValue
         {
@@ -35,7 +33,6 @@ namespace GW2FOX
             }
         }
 
-        // Konstruktor
         public OverlayWindow()
         {
             InitializeComponent(); // ✅ MUSS zuerst sein
@@ -53,7 +50,6 @@ namespace GW2FOX
             BossTimings.RegisterListView(BossListView);
         }
 
-        // ▓▓▓ Scroll per Mausrad ▓▓▓
         private void OverlayWindow_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
         {
             if (BossScrollViewer.IsMouseOver || this.IsActive)
@@ -65,7 +61,6 @@ namespace GW2FOX
             }
         }
 
-        // ▓▓▓ Scroll-Sync ▓▓▓
         private void BossScrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e)
         {
             if (ScrollValue != e.VerticalOffset)
@@ -74,7 +69,6 @@ namespace GW2FOX
             }
         }
 
-        // ▓▓▓ Startet den Timer für Sekundentakt ▓▓▓
         private void StartBossTimer()
         {
             bossTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
@@ -82,26 +76,29 @@ namespace GW2FOX
             bossTimer.Start();
         }
 
-        // ▓▓▓ Tick-Ereignis (1 Sekunde) ▓▓▓
         private void BossTimer_Tick(object? sender, EventArgs e)
         {
             UpdateBossOverlayList();
         }
 
-        // ▓▓▓ Klick auf Waypoint-Symbol ▓▓▓
         private void Waypoint_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (sender is System.Windows.Controls.Image img && img.DataContext is BossListItem boss)
             {
                 System.Windows.Clipboard.SetText(boss.Waypoint);
-                ShowCopiedMessage();
+
+                // Position relativ zum Fenster bestimmen
+                System.Windows.Point position = img.TranslatePoint(new System.Windows.Point(0, img.ActualHeight), MainOverlayWindow);
+                ShowCopiedMessage(position);
             }
         }
 
-        // ▓▓▓ Zeige "Kopiert"-Nachricht ▓▓▓
-        private void ShowCopiedMessage()
+
+        private void ShowCopiedMessage(System.Windows.Point position)
         {
             CopiedMessage.Visibility = Visibility.Visible;
+            Canvas.SetLeft(CopiedMessage, position.X);
+            Canvas.SetTop(CopiedMessage, position.Y);
 
             var timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(0.8) };
             timer.Tick += (s, e) =>
@@ -112,20 +109,19 @@ namespace GW2FOX
             timer.Start();
         }
 
-        // ▓▓▓ Scrollbar-Wertänderung ▓▓▓
+
         private void ManualScrollBar_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             BossScrollViewer.ScrollToVerticalOffset(e.NewValue);
         }
 
-        // ▓▓▓ Drag der Fensterleiste ▓▓▓
+
         private void Icon_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left)
                 this.DragMove();
         }
 
-        // ▓▓▓ Singleton-Instanz ▓▓▓
         public static OverlayWindow GetInstance()
         {
             if (_instance == null)
@@ -171,7 +167,6 @@ namespace GW2FOX
             }
         }
 
-        // ▓▓▓ PropertyChanged für DataBinding ▓▓▓
         public event PropertyChangedEventHandler? PropertyChanged;
         protected void OnPropertyChanged(string name) =>
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
