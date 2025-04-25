@@ -185,21 +185,17 @@
                                    Maximum="{TemplateBinding Maximum}"
                                    ViewportSize="{TemplateBinding ViewportSize}">
                                                     <Track.Thumb>
-                                                        <Thumb Background="#88FFFFFF"
-                                           BorderBrush="#44FFFFFF"
-                                           BorderThickness="1"
-                                           Height="40"
-                                           Width="12">
-                                                            <!-- angepasst, damit es in die 16er ScrollBar passt -->
+                                                        <Thumb Height="30" Width="18" Background="Transparent">
                                                             <Thumb.Template>
                                                                 <ControlTemplate TargetType="Thumb">
-                                                                    <Border Background="{TemplateBinding Background}"
-                                                        BorderBrush="{TemplateBinding BorderBrush}"
-                                                        BorderThickness="{TemplateBinding BorderThickness}"
-                                                        CornerRadius="12"/>
+                                                                    <Image Source="pack://application:,,,/GW2FOX;component/Resources/Thumb.png"
+                   Width="18"
+                   Height="30"/>
                                                                 </ControlTemplate>
                                                             </Thumb.Template>
                                                         </Thumb>
+
+
                                                     </Track.Thumb>
                                                 </Track>
                                             </Grid>
