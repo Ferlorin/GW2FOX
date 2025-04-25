@@ -60,13 +60,15 @@
 
                                 <!-- Thumb als Bild -->
                                 <Track.Thumb>
-                                    <Thumb Width="18" Height="30">
+                                    <Thumb Width="18" Height="30" Visibility="Visible">
                                         <Thumb.Template>
                                             <ControlTemplate TargetType="Thumb">
-                                                <Image Source="pack://application:,,,/GW2FOX;component/Thumb.png"
-       Width="18"
-       Height="30" />
-
+                                                <Image Source="/GW2FOX;component/Thumb.png"
+       Width="20"
+       Height="20"
+       Margin="5,0,0,0"
+       HorizontalAlignment="Center"
+       VerticalAlignment="Center"/>
                                             </ControlTemplate>
                                         </Thumb.Template>
                                     </Thumb>
@@ -159,7 +161,7 @@
                 <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="16" />
+                        <ColumnDefinition Width="20" />
                     </Grid.ColumnDefinitions>
 
                     <ScrollViewer x:Name="BossScrollViewer"
@@ -179,7 +181,7 @@
                               ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                               ScrollViewer.VerticalScrollBarVisibility="Disabled"
                               Width="245"
-                              Height="330">
+                              Height="313">
 
                             <ListView.ItemTemplate>
                                 <DataTemplate>
