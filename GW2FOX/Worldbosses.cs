@@ -1823,8 +1823,7 @@ namespace GW2FOX
                 }
 
                 GenerateBossEventGroups();
-                
-                UpdateBossOverlayList();    // wichtig für WPF-Overlay
+                UpdateBossOverlayList();
             }
             catch (Exception ex)
             {

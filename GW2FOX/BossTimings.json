@@ -65,12 +65,8 @@
       "Waypoint": "[&BKsCAAA=]"
     },
     {
-      "Name",
-
-      "The frozen Maw",
-      "Timings",
-
-      [
+      "Name": "The frozen Maw",
+      "Timings": [
         "01:15:00",
         "03:15:00",
         "05:15:00",
@@ -84,12 +80,8 @@
         "21:15:00",
         "23:15:00"
       ],
-      "Category",
-
-      "WBs",
-      "Waypoint",
-
-      "[&BMIDAAA=]"
+      "Category": "WBs",
+      "Waypoint":"[&BMIDAAA=]"
     },
     {
       "Name": "FireShaman",

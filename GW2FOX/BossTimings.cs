@@ -69,8 +69,6 @@ namespace GW2FOX
             File.WriteAllText(configPath, json.ToString(Formatting.Indented));
 
             BossList23.Clear();
-
-            // 5. Vorherige Events/Gruppen löschen
             BossEventsList.Clear();
             BossEventGroups.Clear();
 
