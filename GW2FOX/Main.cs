@@ -135,36 +135,41 @@ namespace GW2FOX
             }
         }
 
-        private void LaunchExternalTool(string executableName)
+        private void LaunchExternalTool(string relativePath)
         {
-            string exeDirectory = Path.GetDirectoryName(System.Windows.Forms.Application.ExecutablePath);
-            string filePath = Path.Combine(exeDirectory, executableName);
+            string fullPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, relativePath);
 
-            if (File.Exists(filePath))
+            if (!File.Exists(fullPath))
             {
-                try
-                {
-                    Process.Start(filePath);
-                }
-                catch (Exception ex)
-                {
-                    System.Windows.Forms.MessageBox.Show($"Fehler beim Starten von {executableName}:\n{ex.Message}", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                System.Windows.Forms.MessageBox.Show("Verknüpfung nicht gefunden: " + fullPath);
+                return;
             }
-            else
+
+            try
             {
-                System.Windows.Forms.MessageBox.Show($"{executableName} wurde nicht gefunden im Verzeichnis:\n{exeDirectory}", "Datei nicht gefunden", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ProcessStartInfo psi = new ProcessStartInfo
+                {
+                    FileName = fullPath,
+                    UseShellExecute = true 
+                };
+
+                Process.Start(psi);
+            }
+            catch (Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show("Fehler beim Starten: " + ex.Message);
             }
         }
 
+
         private void BlishHUD_Click(object sender, EventArgs e)
         {
-            LaunchExternalTool("Blish HUD.exe");
+            LaunchExternalTool("Blish HUD.lnk");
         }
 
         private void button8_Click(object sender, EventArgs e)
         {
-            LaunchExternalTool("GW2TacO.exe");
+            LaunchExternalTool("GW2TacO.lnk");
         }
 
         private void ArcDPSInstall_Click(object sender, EventArgs e)
