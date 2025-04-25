@@ -20,7 +20,7 @@ namespace GW2FOX
         public Worldbosses()
         {
             InitializeComponent();
-
+            InitializeBossCheckBoxMap();
             bossCheckBoxMap = new Dictionary<string, CheckBox>(); 
             UpdateBossUiBosses();
             LoadConfigText(Runinfo, Squadinfo, Guild, Welcome, Symbols);
@@ -31,7 +31,7 @@ namespace GW2FOX
         private void Worldbosses_Load_1(object? sender, EventArgs e)
         {
 
-
+            InitializeBossCheckBoxMap();
             UpdateBossUiBosses();
         }
 
