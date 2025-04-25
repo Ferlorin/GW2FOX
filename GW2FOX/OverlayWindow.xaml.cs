@@ -108,7 +108,8 @@ namespace GW2FOX
             if (sender is System.Windows.Controls.Image img && img.DataContext is BossListItem boss)
             {
                 System.Windows.Clipboard.SetText(boss.Waypoint);
-                System.Windows.Point position = img.TranslatePoint(new System.Windows.Point(0, img.ActualHeight), MainOverlayWindow);
+                System.Windows.Point position = img.TranslatePoint(new System.Windows.Point(0, img.ActualHeight), this);
+
                 ShowCopiedMessage(position);
             }
         }

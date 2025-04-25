@@ -52,7 +52,9 @@
 
   <ItemGroup>
     <Resource Include="Com.png" />
-    <Resource Include="Thumb.png" />
+    <Resource Include="Thumb.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Waypoint.png" />
   </ItemGroup>
 
