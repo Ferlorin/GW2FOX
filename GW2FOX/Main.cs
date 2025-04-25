@@ -309,6 +309,7 @@ namespace GW2FOX
             {
                 _overlayWindow.Activate();
             }
+            this.Hide();
         }
     }
 }

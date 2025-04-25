@@ -40,7 +40,7 @@ namespace GW2FOX
 
         private void button1_Click(object sender, EventArgs e)
         {
-            var excludedTypes = new[] { typeof(MiniOverlay) };
+            var excludedTypes = new[] { typeof(MiniOverlay), typeof(Main) };
             var topMostStates = new Dictionary<Form, bool>();
 
             // 1. TopMost merken und ausschalten
@@ -61,6 +61,11 @@ namespace GW2FOX
                     if (openForm.Visible)
                     {
                         openForm.Hide();
+                        // Main nur verstecken, wenn das aktive Fenster nicht Main selbst ist
+                        if (Application.OpenForms.OfType<Main>().FirstOrDefault() is Form mainForm && mainForm.Visible)
+                        {
+                            mainForm.Hide();
+                        }
                     }
                     else
                     {
@@ -84,6 +89,7 @@ namespace GW2FOX
 
             MessageBox.Show("Kein gültiges aktives Fenster deines Programms gefunden.", "Hinweis", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
+
 
 
         private void button2_Click(object sender, EventArgs e)
