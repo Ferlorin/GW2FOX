@@ -37,9 +37,15 @@ namespace GW2FOX
 
         public static void ApplyBossGroupFromConfig(string groupName, bool updateUI = true)
         {
+            const string configPath = "BossTimings.json";
+            if (!File.Exists(configPath))
+                return;
 
-            var config = LoadBossConfigFromFile("BossTimings.json");
+            // 1. JSON Datei laden
+            var json = JObject.Parse(File.ReadAllText(configPath));
+            var config = JsonConvert.DeserializeObject<BossConfig>(json.ToString()) ?? new BossConfig();
 
+            // 2. Bossnamen der gewählten Gruppe ermitteln
             string groupLine = groupName.ToLower() switch
             {
                 "meta" => config.Meta,
@@ -47,25 +53,32 @@ namespace GW2FOX
                 "world" => config.World,
                 "fido" => config.Fido,
                 "choosenones" => string.Join(",", config.Bosses
-                    .Where(b => b.Category?.Equals("ChoosenOnes", StringComparison.OrdinalIgnoreCase) == true)
-                    .Select(b => b.Name)),
+                                      .Where(b => string.Equals(b.Category, "ChoosenOnes", StringComparison.OrdinalIgnoreCase))
+                                      .Select(b => b.Name)),
                 _ => ""
             };
 
             var bossNames = groupLine
                 .Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
                 .Select(b => b.Trim())
+                .Distinct(StringComparer.OrdinalIgnoreCase)
                 .ToList();
 
+            // 3. In JSON unter "ChoosenOnes" schreiben und speichern
+            json["ChoosenOnes"] = JArray.FromObject(bossNames);
+            File.WriteAllText(configPath, json.ToString(Formatting.Indented));
+
+            // 4. In-Memory-Liste setzen (für spätere UI-Funktionen)
             BossList23 = bossNames;
 
-            foreach (var name in bossNames)
-
-            Worldbosses.CheckBossCheckboxes(bossNames, Worldbosses.bossCheckBoxMap);
-
+            // 5. Vorherige Events/Gruppen löschen
             BossEventsList.Clear();
             BossEventGroups.Clear();
 
+            // 6. Checkboxen anhand ChoosenOnes setzen
+            Worldbosses.CheckBossCheckboxes(bossNames, Worldbosses.bossCheckBoxMap);
+
+            // 7. BossEvents hinzufügen – nur aus ChoosenOnes
             var matched = config.Bosses
                 .Where(b => bossNames.Contains(b.Name, StringComparer.OrdinalIgnoreCase))
                 .ToList();
@@ -75,6 +88,7 @@ namespace GW2FOX
                 AddBossEvent(boss.Name, boss.Timings.ToArray(), boss.Category, boss.Waypoint ?? "");
             }
 
+            // 8. Gruppen neu generieren und UI aktualisieren
             GenerateBossEventGroups();
 
             if (updateUI)
