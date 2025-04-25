@@ -53,15 +53,23 @@ namespace GW2FOX
             _globalKeyboardHook.KeyPressed += GlobalKeyboardHook_KeyPressed;
         }
 
+
+
+
+
         private void GlobalKeyboardHook_KeyPressed(object sender, KeyPressedEventArgs e)
         {
-            if (ModifierKeys == Keys.Alt && e.Key == Keys.T)
+            var pressedKeys = _globalKeyboardHook.PressedKeys;
+
+            // Check if Alt (Menu) and T are both pressed simultaneously
+            if (pressedKeys.Contains(Keys.LMenu) && pressedKeys.Contains(Keys.T))
             {
                 if (this is Main)
                 {
-                    Timer_Click(sender, e);
+                    Timer_Click(sender, e); // Perform your desired logic
                 }
             }
+
         }
 
         protected void ShowAndHideForm(Form newForm)
@@ -243,6 +251,15 @@ namespace GW2FOX
             bossTimer?.Dispose();
             overlayWindow?.Close(); // Schließt das OverlayWindow
             base.OnFormClosing(e);
+            
+            
+            // Dispose of the keyboard hook to prevent memory leaks
+            if (_globalKeyboardHook != null)
+            {
+                _globalKeyboardHook.KeyPressed -= GlobalKeyboardHook_KeyPressed;
+                _globalKeyboardHook = null;
+            }
+
 
             if (this is Main)
             {

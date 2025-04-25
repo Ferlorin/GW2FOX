@@ -15,7 +15,6 @@ namespace GW2FOX
         public static System.Windows.Controls.ListView? CustomBossList { get; private set; }
         public static Dictionary<string, CheckBox> bossCheckBoxMap;
         public static readonly char[] Separator = { ',' };
-        public static List<string> BossList23 { get; set; } = new();
 
         public Worldbosses()
         {
@@ -1650,8 +1649,8 @@ namespace GW2FOX
                 BossList23.Clear();
 
                 // 4. Events neu aufbauen
-                BossTimings.BossEventsList.Clear();
-                BossTimings.BossEventGroups.Clear();
+                BossEventsList.Clear();
+                BossEventGroups.Clear();
                 foreach (var boss in config.Bosses)
                 {
                     if (boss.Name != null && boss.Timings != null)
@@ -1660,7 +1659,7 @@ namespace GW2FOX
                     }
                 }
 
-                BossTimings.GenerateBossEventGroups();
+                GenerateBossEventGroups();
 
                 // 5. UI & Overlay aktualisieren
                 BossTimer.UpdateBossList();
@@ -1801,7 +1800,7 @@ namespace GW2FOX
                 }
 
                 // 3. BossList23 aktualisieren
-                BossList23 = selectedBossNames.ToList();
+                BossList23.AddRange(selectedBossNames.ToList());
 
                 // 4. Events und Gruppen neu aufbauen
                 BossEventsList.Clear();

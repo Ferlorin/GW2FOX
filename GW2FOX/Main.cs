@@ -141,7 +141,7 @@ namespace GW2FOX
 
             if (!File.Exists(fullPath))
             {
-                System.Windows.Forms.MessageBox.Show("Verknüpfung nicht gefunden: " + fullPath);
+                System.Windows.Forms.MessageBox.Show("Verknï¿½pfung nicht gefunden: " + fullPath);
                 return;
             }
 
@@ -271,7 +271,7 @@ namespace GW2FOX
 
         private void Leading_Click(object sender, EventArgs e)
         {
-            // 1. MiniOverlay öffnen und anzeigen (WPF)
+            // 1. MiniOverlay ï¿½ffnen und anzeigen (WPF)
             if (_miniOverlay == null || !_miniOverlay.IsLoaded)
             {
                 _miniOverlay = new MiniOverlay(_worldbossesForm);
@@ -287,7 +287,7 @@ namespace GW2FOX
                 _miniOverlay.Activate();
             }
 
-            // 2. Worldbosses öffnen und anzeigen (WinForms)
+            // 2. Worldbosses ï¿½ffnen und anzeigen (WinForms)
             if (_worldbossesForm == null || _worldbossesForm.IsDisposed)
             {
                 _worldbossesForm = new Worldbosses();

@@ -9,6 +9,11 @@ public class GlobalKeyboardHook
     private const int WH_KEYBOARD_LL = 13;
     private const int WM_KEYDOWN = 0x0100;
     private const int WM_SYSKEYDOWN = 0x0104;
+    
+    private const int WM_KEYUP = 0x0101;       // Add key up message
+    private const int WM_SYSKEYUP = 0x0105;   // Add system key up message
+    private HashSet<Keys> _pressedKeys = new(); // Track currently pressed keys
+
 
     private readonly LowLevelKeyboardProc _proc;
     private IntPtr _hookId = IntPtr.Zero;
@@ -38,14 +43,30 @@ public class GlobalKeyboardHook
 
     private IntPtr HookCallback(int nCode, IntPtr wParam, IntPtr lParam)
     {
-        if (nCode >= 0 && (wParam == (IntPtr)WM_KEYDOWN || wParam == (IntPtr)WM_SYSKEYDOWN))
+        if (nCode >= 0)  // Process only if there's no error
         {
             int vkCode = Marshal.ReadInt32(lParam);
-            KeyPressed?.Invoke(this, new KeyPressedEventArgs((Keys)vkCode));
+            Keys key = (Keys)vkCode;
+
+            if (wParam == (IntPtr)WM_KEYDOWN || wParam == (IntPtr)WM_SYSKEYDOWN)
+            {
+                // Key is pressed, add to the set
+                _pressedKeys.Add(key);
+                KeyPressed?.Invoke(this, new KeyPressedEventArgs(key));
+            }
+
+            if (wParam == (IntPtr)WM_KEYUP || wParam == (IntPtr)WM_SYSKEYUP)
+            {
+                // Key is released, remove it from the set
+                _pressedKeys.Remove(key);
+            }
+
         }
 
         return CallNextHookEx(_hookId, nCode, wParam, lParam);
     }
+
+    public IReadOnlyCollection<Keys> PressedKeys => _pressedKeys;
 
     #region WinAPI-Importe
 
@@ -64,6 +85,7 @@ public class GlobalKeyboardHook
 
     #endregion
 }
+
 
 public class KeyPressedEventArgs : EventArgs
 {
