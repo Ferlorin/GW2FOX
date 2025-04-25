@@ -1647,7 +1647,7 @@ namespace GW2FOX
                 BossTimings.CheckBossCheckboxes(allBossNames.ToArray(), Worldbosses.bossCheckBoxMap);
 
                 // 3. BossList23 setzen
-                BossTimings.BossList23 = allBossNames;
+                BossList23.Clear();
 
                 // 4. Events neu aufbauen
                 BossTimings.BossEventsList.Clear();
