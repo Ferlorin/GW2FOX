@@ -9,9 +9,14 @@
   <ImplicitUsings>enable</ImplicitUsings>
   <StartupObject>GW2FOX.Program</StartupObject>
   <ApplicationIcon>Resources\icon.ico</ApplicationIcon>
+  <Platforms>AnyCPU;x64</Platforms>
 </PropertyGroup>
 
 <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+  <Optimize>True</Optimize>
+</PropertyGroup>
+
+<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
   <Optimize>True</Optimize>
 </PropertyGroup>
 

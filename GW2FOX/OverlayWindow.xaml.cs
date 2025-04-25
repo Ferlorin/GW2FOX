@@ -36,20 +36,7 @@ namespace GW2FOX
         public OverlayWindow()
         {
             InitializeComponent();
-            List<BossListItem> testData = new List<BossListItem>();
-            for (int i = 1; i <= 50; i++)
-            {
-                testData.Add(new BossListItem
-                {
-                    BossName = $"Test-Boss {i}",
-                    TimeRemainingFormatted = $"00:{(i % 60):D2}",
-                    Category = "WBs", // oder irgendwas Gültiges für deine Converter
-                    IsPastEvent = false
-                });
-            }
-            BossListView.ItemsSource = testData;
-
-
+           
             this.Left = 1325;
             this.Top = 700;
             _instance = this;

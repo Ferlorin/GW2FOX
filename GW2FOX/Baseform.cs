@@ -250,12 +250,6 @@ namespace GW2FOX
             }
         }
 
-        protected void Back_Click(object sender, EventArgs e)
-        {
-            Owner?.Show();
-            Dispose();
-        }
-
 
         private void Button_MouseEnter(object sender, EventArgs e)
         {
