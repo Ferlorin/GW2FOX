@@ -68,8 +68,7 @@ namespace GW2FOX
             json["ChoosenOnes"] = JArray.FromObject(bossNames);
             File.WriteAllText(configPath, json.ToString(Formatting.Indented));
 
-            // 4. In-Memory-Liste setzen (für spätere UI-Funktionen)
-            BossList23 = bossNames;
+            BossList23.Clear();
 
             // 5. Vorherige Events/Gruppen löschen
             BossEventsList.Clear();

@@ -1823,7 +1823,7 @@ namespace GW2FOX
                 }
 
                 GenerateBossEventGroups();
-                BossTimer.UpdateBossList(); // nur nötig, wenn MiniOverlay das braucht
+                
                 UpdateBossOverlayList();    // wichtig für WPF-Overlay
             }
             catch (Exception ex)

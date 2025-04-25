@@ -59,7 +59,7 @@ namespace GW2FOX
                     return timeComparison != 0 ? timeComparison : string.Compare(a.Category, b.Category, StringComparison.Ordinal);
                 });
 
-                var limitedBosses = combinedBosses.Take(50).ToList();
+                var limitedBosses = combinedBosses.Take(30).ToList();
 
                 foreach (var boss in limitedBosses)
                 {
