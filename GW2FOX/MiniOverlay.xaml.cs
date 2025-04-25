@@ -1,36 +1,20 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Windows.Forms;
-using System.Windows.Forms;
-using System.Net.Http;
-using System.Threading.Tasks;
+using System.Linq;
 using System.Runtime.InteropServices;
+using System.Windows;
+using System.Windows.Input;
+using Forms = System.Windows.Forms;
 
 namespace GW2FOX
 {
-    public partial class MiniOverlay : BaseForm
+    public partial class MiniOverlay : Window
     {
-        private Form lastOpenedForm;
-        private Form lastOpenedBoss = null;
+        private readonly Forms.Form lastOpenedForm;
+        private readonly Worldbosses _worldbossesForm;
         private OverlayWindow _overlayWindow;
-
-        public MiniOverlay(Worldbosses worldbosses)
-        {
-            InitializeComponent();
-            this.TopMost = true;
-            this.Load += MiniOverlay_Load;
-        }
-
-        private void MiniOverlay_Load(object sender, EventArgs e)
-        {
-            var screen = Screen.PrimaryScreen.WorkingArea;
-            this.StartPosition = FormStartPosition.Manual;
-            this.Location = new System.Drawing.Point(
-                (screen.Width - this.Width) / 2,
-                0
-            );
-        }
 
         [DllImport("user32.dll", SetLastError = true)]
         private static extern IntPtr GetForegroundWindow();
@@ -38,34 +22,48 @@ namespace GW2FOX
         [DllImport("user32.dll")]
         private static extern bool SetForegroundWindow(IntPtr hWnd);
 
-        private void button1_Click(object sender, EventArgs e)
+        public MiniOverlay(Worldbosses worldbossesForm)
         {
-            var excludedTypes = new[] { typeof(MiniOverlay), typeof(Main) };
-            var topMostStates = new Dictionary<Form, bool>();
+            InitializeComponent();
+            _worldbossesForm = worldbossesForm;
+            Topmost = true;
+            Loaded += MiniOverlay_Load;
+        }
 
-            // 1. TopMost merken und ausschalten
-            foreach (Form f in Application.OpenForms)
+        private void MiniOverlay_Load(object sender, RoutedEventArgs e)
+        {
+            var screen = Forms.Screen.PrimaryScreen.WorkingArea;
+            Left = (screen.Width - Width) / 2;
+            Top = 0;
+        }
+
+        private void BloodyCom_Click(object sender, MouseButtonEventArgs e)
+        {
+            // Original C# logic adapted for WPF host
+            var excludedTypes = new[] { typeof(MiniOverlay), typeof(Main) };
+            var topMostStates = new Dictionary<Forms.Form, bool>();
+
+            // Remember and disable TopMost on all WinForms
+            foreach (Forms.Form f in Forms.Application.OpenForms)
             {
                 topMostStates[f] = f.TopMost;
                 f.TopMost = false;
             }
 
-            // 2. Fokus ermitteln
+            // Determine focus
             IntPtr activeHandle = GetForegroundWindow();
 
-            // 3. Form finden & toggeln
-            foreach (Form openForm in Application.OpenForms)
+            // Find & toggle
+            foreach (Forms.Form openForm in Forms.Application.OpenForms)
             {
                 if (openForm.Handle == activeHandle && !excludedTypes.Contains(openForm.GetType()))
                 {
                     if (openForm.Visible)
                     {
                         openForm.Hide();
-                        // Main nur verstecken, wenn das aktive Fenster nicht Main selbst ist
-                        if (Application.OpenForms.OfType<Main>().FirstOrDefault() is Form mainForm && mainForm.Visible)
-                        {
+                        // Hide Main only if active window wasn't Main
+                        if (Forms.Application.OpenForms.OfType<Main>().FirstOrDefault() is Forms.Form mainForm && mainForm.Visible)
                             mainForm.Hide();
-                        }
                     }
                     else
                     {
@@ -75,7 +73,7 @@ namespace GW2FOX
                         SetForegroundWindow(openForm.Handle);
                     }
 
-                    // 4. TopMost zurücksetzen und fertig
+                    // Restore TopMost states
                     foreach (var kvp in topMostStates)
                         kvp.Key.TopMost = kvp.Value;
 
@@ -83,62 +81,54 @@ namespace GW2FOX
                 }
             }
 
-            // 5. Kein gültiges Fenster → TopMost zurücksetzen
+            // No valid window found → restore TopMost
             foreach (var kvp in topMostStates)
                 kvp.Key.TopMost = kvp.Value;
 
-            MessageBox.Show("Kein gültiges aktives Fenster deines Programms gefunden.", "Hinweis", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            Forms.MessageBox.Show("Kein gültiges aktives Fenster deines Programms gefunden.", "Hinweis", Forms.MessageBoxButtons.OK, Forms.MessageBoxIcon.Information);
         }
 
-
-
-        private void button2_Click(object sender, EventArgs e)
+        private void BlishHUD_Click(object sender, MouseButtonEventArgs e)
         {
             LaunchExternalTool("Blish HUD.exe");
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void GW2TacO_Click(object sender, MouseButtonEventArgs e)
         {
             LaunchExternalTool("GW2TacO.exe");
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private void Discord_Click(object sender, MouseButtonEventArgs e)
         {
             try
             {
-                // Discord-Ordner und Pfad zur Update.exe
                 string discordFolder = Path.Combine(
                     Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
                     "Discord");
-
                 string updaterPath = Path.Combine(discordFolder, "Update.exe");
                 string shortcutPath = Path.Combine(discordFolder, "StartDiscord.lnk");
 
-                // Prüfen ob Update.exe existiert
                 if (!File.Exists(updaterPath))
                 {
-                    MessageBox.Show("Install Discord first!", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Forms.MessageBox.Show("Install Discord first!", "Fehler", Forms.MessageBoxButtons.OK, Forms.MessageBoxIcon.Error);
                     return;
                 }
 
-                // Falls keine Verknüpfung vorhanden ist, erstellen
                 if (!File.Exists(shortcutPath))
                 {
                     CreateShortcut(shortcutPath, updaterPath, "--processStart \"Discord.exe\"", "Start Discord");
                 }
 
-                // Verknüpfung starten
                 Process.Start("explorer.exe", $"\"{shortcutPath}\"");
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error starting Dissi: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Forms.MessageBox.Show($"Error starting Dissi: {ex.Message}", "Error", Forms.MessageBoxButtons.OK, Forms.MessageBoxIcon.Error);
             }
         }
 
         private void CreateShortcut(string shortcutPath, string targetPath, string arguments, string description)
         {
-            // COM-Verweis nötig: "Windows Script Host Object Model"
             var wsh = new IWshRuntimeLibrary.WshShell();
             var shortcut = (IWshRuntimeLibrary.IWshShortcut)wsh.CreateShortcut(shortcutPath);
             shortcut.Description = description;
@@ -147,23 +137,21 @@ namespace GW2FOX
             shortcut.Save();
         }
 
-        private void button5_Click(object sender, EventArgs e)
+        private void Clock_Click(object sender, MouseButtonEventArgs e)
         {
-            _overlayWindow = OverlayWindow.GetInstance(); // Hole Singleton
-
+            _overlayWindow = OverlayWindow.GetInstance();
             if (_overlayWindow.IsVisible)
-            {
                 _overlayWindow.Hide();
-            }
             else
             {
                 _overlayWindow.Show();
-                _overlayWindow.Activate(); // Fokus und bringt es in den Vordergrund
+                _overlayWindow.Activate();
             }
         }
+
         private void LaunchExternalTool(string executableName)
         {
-            string exeDirectory = Path.GetDirectoryName(Application.ExecutablePath);
+            string exeDirectory = Path.GetDirectoryName(Forms.Application.ExecutablePath);
             string filePath = Path.Combine(exeDirectory, executableName);
 
             if (File.Exists(filePath))
@@ -174,12 +162,12 @@ namespace GW2FOX
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"Fehler beim Starten von {executableName}:\n{ex.Message}", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Forms.MessageBox.Show($"Fehler beim Starten von {executableName}:\n{ex.Message}", "Fehler", Forms.MessageBoxButtons.OK, Forms.MessageBoxIcon.Error);
                 }
             }
             else
             {
-                MessageBox.Show($"{executableName} wurde nicht gefunden im Verzeichnis:\n{exeDirectory}", "Datei nicht gefunden", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Forms.MessageBox.Show($"{executableName} wurde nicht gefunden im Verzeichnis:\n{exeDirectory}", "Datei nicht gefunden", Forms.MessageBoxButtons.OK, Forms.MessageBoxIcon.Error);
             }
         }
     }

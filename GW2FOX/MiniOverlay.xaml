@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Window x:Class="GW2FOX.MiniOverlay"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GW2FOX"
+        mc:Ignorable="d"
+        Title="MiniOverlay"
+        Width="117" Height="28"
+        Topmost="True"
+        Background="Black"
+        Opacity="0.7"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        ResizeMode="NoResize"
+        ShowInTaskbar="False">
+    <StackPanel Orientation="Horizontal" Margin="0">
+        <Image Source="Resources/BloodyCom.bmp" Width="28" MouseLeftButtonUp="BloodyCom_Click" Cursor="Hand"/>
+        <Image Source="Resources/BlishHUDmini.bmp" Width="28" MouseLeftButtonUp="BlishHUD_Click" Cursor="Hand"/>
+        <Image Source="Resources/Clock.bmp" Width="28" MouseLeftButtonUp="Clock_Click" Cursor="Hand"/>
+        <Image Source="Resources/Discord.bmp" Width="28" MouseLeftButtonUp="Discord_Click" Cursor="Hand"/>
+    </StackPanel>
+</Window>

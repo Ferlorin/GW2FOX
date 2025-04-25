@@ -184,8 +184,8 @@
     <Compile Update="Metas\WizardsTower.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="MiniOverlay.cs">
-      <SubType>Form</SubType>
+    <Compile Update="MiniOverlay.xaml.cs">
+      <SubType>Code</SubType>
     </Compile>
     <Compile Update="MiniOverlay2.cs">
       <SubType>Form</SubType>

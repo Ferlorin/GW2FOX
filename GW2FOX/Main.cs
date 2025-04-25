@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.IO;
+using System.Windows;
 
 namespace GW2FOX
 {
@@ -21,7 +22,7 @@ namespace GW2FOX
 
         private void HandleException(Exception ex)
         {
-            MessageBox.Show($"An error occurred: {ex.Message}\n\nStack Trace: {ex.StackTrace}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            System.Windows.Forms.MessageBox.Show($"An error occurred: {ex.Message}\n\nStack Trace: {ex.StackTrace}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private void OpenForm(Form newForm)
@@ -44,7 +45,7 @@ namespace GW2FOX
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"GREAT - you deleted the INTERNET!: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                System.Windows.Forms.MessageBox.Show($"GREAT - you deleted the INTERNET!: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -53,7 +54,7 @@ namespace GW2FOX
             string gw2ExecutablePath = GetGw2ExecutablePath();
             if (string.IsNullOrEmpty(gw2ExecutablePath))
             {
-                MessageBox.Show("No Gw2-64.exe selected! Please choose the Guild Wars 2 executable.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                System.Windows.Forms.MessageBox.Show("No Gw2-64.exe selected! Please choose the Guild Wars 2 executable.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -82,7 +83,7 @@ namespace GW2FOX
             {
                 if (File.Exists(shortcutPath))
                 {
-                    MessageBox.Show("Shortcut already exists. Launching existing shortcut.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    System.Windows.Forms.MessageBox.Show("Shortcut already exists. Launching existing shortcut.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
 
@@ -95,7 +96,7 @@ namespace GW2FOX
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error creating the shortcut: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                System.Windows.Forms.MessageBox.Show($"Error creating the shortcut: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -114,7 +115,7 @@ namespace GW2FOX
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error launching the shortcut: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                System.Windows.Forms.MessageBox.Show($"Error launching the shortcut: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -126,7 +127,7 @@ namespace GW2FOX
                 BossTimerService._bossTimer?.Dispose();
                 BossTimerService._overlayWindow?.Close();
 
-                Application.Exit();
+                System.Windows.Forms.Application.Exit();
             }
             catch (Exception ex)
             {
@@ -136,7 +137,7 @@ namespace GW2FOX
 
         private void LaunchExternalTool(string executableName)
         {
-            string exeDirectory = Path.GetDirectoryName(Application.ExecutablePath);
+            string exeDirectory = Path.GetDirectoryName(System.Windows.Forms.Application.ExecutablePath);
             string filePath = Path.Combine(exeDirectory, executableName);
 
             if (File.Exists(filePath))
@@ -147,12 +148,12 @@ namespace GW2FOX
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"Fehler beim Starten von {executableName}:\n{ex.Message}", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    System.Windows.Forms.MessageBox.Show($"Fehler beim Starten von {executableName}:\n{ex.Message}", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             else
             {
-                MessageBox.Show($"{executableName} wurde nicht gefunden im Verzeichnis:\n{exeDirectory}", "Datei nicht gefunden", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                System.Windows.Forms.MessageBox.Show($"{executableName} wurde nicht gefunden im Verzeichnis:\n{exeDirectory}", "Datei nicht gefunden", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -172,7 +173,7 @@ namespace GW2FOX
 
             if (string.IsNullOrEmpty(gw2Verzeichnis))
             {
-                MessageBox.Show("Please select the directory of Guild Wars 2 where the .exe file is located.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                System.Windows.Forms.MessageBox.Show("Please select the directory of Guild Wars 2 where the .exe file is located.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -210,12 +211,12 @@ namespace GW2FOX
             byte[] data = await response.Content.ReadAsByteArrayAsync();
             await File.WriteAllBytesAsync(destinationPath, data);
 
-            MessageBox.Show("ArcDPS has been successfully installed!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            System.Windows.Forms.MessageBox.Show("ArcDPS has been successfully installed!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
     catch (Exception ex)
     {
-        MessageBox.Show($"Error downloading/installing ArcDPS: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        System.Windows.Forms.MessageBox.Show($"Error downloading/installing ArcDPS: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
     }
 }
 
@@ -226,7 +227,7 @@ namespace GW2FOX
 
             if (string.IsNullOrEmpty(gw2Verzeichnis))
             {
-                MessageBox.Show("The Guild Wars 2 directory was not selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                System.Windows.Forms.MessageBox.Show("The Guild Wars 2 directory was not selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -241,11 +242,11 @@ namespace GW2FOX
                 if (File.Exists(d3d11Md5SumZiel))
                     File.Delete(d3d11Md5SumZiel);
 
-                MessageBox.Show("Done.", "Done", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                System.Windows.Forms.MessageBox.Show("Done.", "Done", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                System.Windows.Forms.MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -265,23 +266,23 @@ namespace GW2FOX
 
         private void Leading_Click(object sender, EventArgs e)
         {
-            // 1. MiniOverlay öffnen und anzeigen
-            if (_miniOverlay == null || _miniOverlay.IsDisposed)
+            // 1. MiniOverlay öffnen und anzeigen (WPF)
+            if (_miniOverlay == null || !_miniOverlay.IsLoaded)
             {
                 _miniOverlay = new MiniOverlay(_worldbossesForm);
-                _miniOverlay.FormClosed += (s, args) =>
+                _miniOverlay.Closed += (s, args) =>
                 {
                     _miniOverlay = null;
                 };
                 _miniOverlay.Show();
             }
-            else if (!_miniOverlay.Visible)
+            else if (_miniOverlay.Visibility != Visibility.Visible)
             {
                 _miniOverlay.Show();
-                _miniOverlay.BringToFront();
+                _miniOverlay.Activate();
             }
 
-            // 2. Worldbosses öffnen und anzeigen
+            // 2. Worldbosses öffnen und anzeigen (WinForms)
             if (_worldbossesForm == null || _worldbossesForm.IsDisposed)
             {
                 _worldbossesForm = new Worldbosses();
@@ -297,7 +298,7 @@ namespace GW2FOX
                 _worldbossesForm.BringToFront();
             }
 
-            // 3. OverlayWindow starten (Singleton verwenden)
+            // 3. OverlayWindow starten (WPF Singleton)
             _overlayWindow = OverlayWindow.GetInstance();
             if (!_overlayWindow.IsVisible)
             {
@@ -307,6 +308,8 @@ namespace GW2FOX
             {
                 _overlayWindow.Activate();
             }
+
+            // 4. Main-Fenster ausblenden (du befindest dich hier in einem WinForms-Form)
             this.Hide();
         }
     }
