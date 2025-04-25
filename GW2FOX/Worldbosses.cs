@@ -1556,7 +1556,7 @@ namespace GW2FOX
             try
             {
                 BossTimings.ApplyBossGroupFromConfig("Fido");
-                SaveChoosenOnesToConfig();
+                UpdateBossUiBosses();
             }
             catch (Exception ex)
             {
@@ -1571,7 +1571,7 @@ namespace GW2FOX
             try
             {
                 BossTimings.ApplyBossGroupFromConfig("World");
-                SaveChoosenOnesToConfig();
+                UpdateBossUiBosses();
             }
             catch (Exception ex)
             {
@@ -1665,7 +1665,7 @@ namespace GW2FOX
                 // 5. UI & Overlay aktualisieren
                 BossTimer.UpdateBossList();
                 BossTimings.UpdateBossOverlayList();
-                SaveChoosenOnesToConfig();
+                UpdateBossUiBosses();
             }
             catch (Exception ex)
             {
@@ -1751,7 +1751,7 @@ namespace GW2FOX
             try
             {
                 BossTimings.ApplyBossGroupFromConfig("Mixed");
-                SaveChoosenOnesToConfig();
+                UpdateBossUiBosses();
             }
             catch (Exception ex)
             {
