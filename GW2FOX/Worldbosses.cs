@@ -21,12 +21,11 @@ namespace GW2FOX
         {
             InitializeComponent();
 
-            bossCheckBoxMap = new Dictionary<string, CheckBox>();
-            InitializeBossCheckBoxMap();          // ← MUSS vor UpdateBossUiBosses sein!
+            bossCheckBoxMap = new Dictionary<string, CheckBox>(); 
             UpdateBossUiBosses();
             LoadConfigText(Runinfo, Squadinfo, Guild, Welcome, Symbols);
 
-            Load += Worldbosses_Load_1;           // ← Auch wichtig
+            Load += Worldbosses_Load_1;         
         }
 
         private void Worldbosses_Load_1(object? sender, EventArgs e)

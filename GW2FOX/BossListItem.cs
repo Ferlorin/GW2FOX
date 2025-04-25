@@ -13,15 +13,10 @@ namespace GW2FOX
             {
                 if (_waypointImage == null)
                 {
-                    Console.WriteLine("Versuche Waypoint.png zu laden...");
-
                     try
                     {
-                        // URI zur eingebetteten Resource
                         var uri = new Uri("pack://application:,,,/GW2FOX;component/Waypoint.png", UriKind.Absolute);
-                        Console.WriteLine("Verwende URI: " + uri);
 
-                        // Optional: Test, ob die Resource überhaupt eingebettet ist
                         var info = System.Windows.Application.GetResourceStream(uri);
                         if (info == null)
                         {
@@ -29,12 +24,11 @@ namespace GW2FOX
                         }
                         else
                         {
-                            Console.WriteLine("ResourceStream: Waypoint.png wurde erfolgreich gefunden.");
+                            //Console.WriteLine("ResourceStream: Waypoint.png wurde erfolgreich gefunden.");
                         }
 
                         // Bild laden
-                        _waypointImage = new BitmapImage(uri);
-                        Console.WriteLine("Waypoint.png erfolgreich als BitmapImage geladen.");
+                        _waypointImage = new BitmapImage(uri);Console.WriteLine("Waypoint.png erfolgreich als BitmapImage geladen.");
                     }
                     catch (Exception ex)
                     {
@@ -43,7 +37,7 @@ namespace GW2FOX
                 }
                 else
                 {
-                    Console.WriteLine("Waypoint.png wurde bereits geladen (aus Cache).");
+                    //Console.WriteLine("Waypoint.png wurde bereits geladen (aus Cache).");
                 }
 
                 return _waypointImage;

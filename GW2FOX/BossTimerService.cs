@@ -86,8 +86,6 @@ namespace GW2FOX
                                .ToList();
         }
 
-
-
         public static void Timer_Click(object? sender, EventArgs e)
         {
             try

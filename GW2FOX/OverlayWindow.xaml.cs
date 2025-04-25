@@ -36,6 +36,19 @@ namespace GW2FOX
         public OverlayWindow()
         {
             InitializeComponent();
+            List<BossListItem> testData = new List<BossListItem>();
+            for (int i = 1; i <= 50; i++)
+            {
+                testData.Add(new BossListItem
+                {
+                    BossName = $"Test-Boss {i}",
+                    TimeRemainingFormatted = $"00:{(i % 60):D2}",
+                    Category = "WBs", // oder irgendwas Gültiges für deine Converter
+                    IsPastEvent = false
+                });
+            }
+            BossListView.ItemsSource = testData;
+
 
             this.Left = 1325;
             this.Top = 700;
@@ -63,10 +76,13 @@ namespace GW2FOX
                 double scrollMultiplier = 3.0;
                 var newOffset = BossScrollViewer.VerticalOffset - (e.Delta / 120.0 * scrollMultiplier);
                 BossScrollViewer.ScrollToVerticalOffset(newOffset);
-                ScrollValue = newOffset;
+
+                if (Math.Abs(ScrollValue - newOffset) > 0.1)
+                    _scrollValue = newOffset;
                 e.Handled = true;
             }
         }
+
 
         private void BossScrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e)
         {
@@ -127,8 +143,12 @@ namespace GW2FOX
 
         private void ManualScrollBar_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            BossScrollViewer.ScrollToVerticalOffset(e.NewValue);
+            if (BossScrollViewer != null)
+            {
+                BossScrollViewer.ScrollToVerticalOffset(e.NewValue);
+            }
         }
+
 
         private void Icon_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -154,8 +174,6 @@ namespace GW2FOX
             try
             {
                 var combinedRuns = BossTimerService.GetBossRunsForOverlay();
-
-                // FIX: Übergabe von DateTime.Now als zweiter Parameter
                 var overlayItems = BossOverlayHelper.GetBossOverlayItems(combinedRuns, DateTime.Now);
 
                 Dispatcher.Invoke(() =>
@@ -178,5 +196,10 @@ namespace GW2FOX
         public event PropertyChangedEventHandler? PropertyChanged;
         protected void OnPropertyChanged(string name) =>
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+
+        private void BossListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

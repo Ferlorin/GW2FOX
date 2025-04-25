@@ -61,7 +61,6 @@ namespace GW2FOX
 
             foreach (var name in bossNames)
 
-            // Checkboxen aktualisieren, falls Map verfügbar
             Worldbosses.CheckBossCheckboxes(bossNames, Worldbosses.bossCheckBoxMap);
 
             BossEventsList.Clear();
@@ -99,9 +98,6 @@ namespace GW2FOX
             }
         }
 
-
-
-
         public static BossConfig LoadBossConfigFromFile(string path)
         {
             if (!File.Exists(path))
@@ -111,7 +107,6 @@ namespace GW2FOX
             var config = JsonConvert.DeserializeObject<BossConfig>(json);
             return config ?? new BossConfig();
         }
-
 
         public static void AddBossEvent(string bossName, string[] timings, string category, string waypoint = "")
         {
@@ -176,7 +171,7 @@ namespace GW2FOX
 
                 foreach (var boss in combinedBosses.OrderBy(b => b.TimeToShow))
                 {
-                    Console.WriteLine($"- {boss.BossName} @ {boss.NextRunTime} | Show: {boss.TimeToShow}");
+                    // Console.WriteLine($"- {boss.BossName} @ {boss.NextRunTime} | Show: {boss.TimeToShow}");
                 }
             }
             catch (Exception ex)
@@ -214,7 +209,6 @@ namespace GW2FOX
                 entry.Value.ForeColor = entry.Value.Checked ? System.Drawing.Color.White : System.Drawing.Color.Gray;
             }
 
-            // 🔥 Diese Zeile sorgt dafür, dass auch das Overlay aktualisiert werden kann:
             BossList23 = chosenBossNames.ToList();
         }
 
@@ -250,8 +244,6 @@ namespace GW2FOX
 
                 var json = File.ReadAllText(filePath);
                 var jObject = JObject.Parse(json);
-
-                // Direktes Mapping auf BossConfigInfos
                 var configInfos = jObject.ToObject<BossConfigInfos>();
 
                 if (configInfos == null)
