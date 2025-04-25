@@ -26,6 +26,7 @@
   <None Remove="Resources\BloodyCom.bmp" />
   <None Remove="Resources\Clock.bmp" />
   <None Remove="Resources\Discord.bmp" />
+  <None Remove="Resources\Tacomini.bmp" />
   <None Remove="Thumb.png" />
   <None Remove="Waypoint.png" />
 </ItemGroup>
@@ -60,6 +61,7 @@
     <Resource Include="Resources\BloodyCom.bmp" />
     <Resource Include="Resources\Clock.bmp" />
     <Resource Include="Resources\Discord.bmp" />
+    <Resource Include="Resources\Tacomini.bmp" />
     <Resource Include="Thumb.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>

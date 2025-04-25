@@ -7,18 +7,19 @@
         xmlns:local="clr-namespace:GW2FOX"
         mc:Ignorable="d"
         Title="MiniOverlay"
-        Width="117" Height="28"
+        Width="153" Height="28"
         Topmost="True"
-        Background="Black"
-        Opacity="0.7"
+        Background="Transparent"
+        Opacity="1"
         WindowStyle="None"
         AllowsTransparency="True"
         ResizeMode="NoResize"
         ShowInTaskbar="False">
     <StackPanel Orientation="Horizontal" Margin="0">
-        <Image Source="Resources/BloodyCom.bmp" Width="28" MouseLeftButtonUp="BloodyCom_Click" Cursor="Hand"/>
-        <Image Source="Resources/BlishHUDmini.bmp" Width="28" MouseLeftButtonUp="BlishHUD_Click" Cursor="Hand"/>
-        <Image Source="Resources/Clock.bmp" Width="28" MouseLeftButtonUp="Clock_Click" Cursor="Hand"/>
-        <Image Source="Resources/Discord.bmp" Width="28" MouseLeftButtonUp="Discord_Click" Cursor="Hand"/>
+        <Image Source="Resources/BloodyCom.bmp" Width="30" MouseLeftButtonUp="BloodyCom_Click" Cursor="Hand"/>
+        <Image Source="Resources/BlishHUDmini.bmp" Width="30" MouseLeftButtonUp="BlishHUD_Click" Cursor="Hand"/>
+        <Image Source="Resources/Tacomini.bmp" Width="30" MouseLeftButtonUp="GW2TacO_Click" Cursor="Hand"/>
+        <Image Source="Resources/Discord.bmp" Width="30" MouseLeftButtonUp="Discord_Click" Cursor="Hand"/>
+        <Image Source="Resources/Clock.bmp" Width="38" MouseLeftButtonUp="Clock_Click" Cursor="Hand"/>
     </StackPanel>
 </Window>
