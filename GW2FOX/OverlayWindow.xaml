@@ -176,8 +176,9 @@
                               FontWeight="Bold"
                               FontSize="14"
                               Padding="0"
+                              ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                               ScrollViewer.VerticalScrollBarVisibility="Disabled"
-                              Width="240"
+                              Width="245"
                               Height="330">
 
                             <ListView.ItemTemplate>
