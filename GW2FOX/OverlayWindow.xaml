@@ -19,6 +19,7 @@
 
     <Window.Resources>
         <local:StrikeConverter x:Key="StrikeConverter"/>
+        <local:ItalicConverter x:Key="ItalicConverter"/>
         <local:CategoryColorConverter x:Key="CategoryColorConverter"/>
         <BitmapImage x:Key="WaypointImage" UriSource="pack://application:,,,/GW2FOX;component/Waypoint.png" />
         <ControlTemplate x:Key="EmptyButtonTemplate" TargetType="RepeatButton">
