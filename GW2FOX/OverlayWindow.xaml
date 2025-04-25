@@ -105,7 +105,7 @@
                                   FontWeight="Bold"
                                   FontSize="14"
                                   Padding="0"
-                               ScrollViewer.VerticalScrollBarVisibility="Visible" Width="269" Height="340">
+                               ScrollViewer.VerticalScrollBarVisibility="Visible" Width="259" Height="340">
 
                             <ListView.ItemTemplate>
                                 <DataTemplate>
@@ -154,41 +154,35 @@
                     </ScrollViewer>
 
                     <ScrollBar Orientation="Vertical"
-                               Grid.Column="1"
-                               Minimum="0"
-                               Maximum="{Binding ElementName=BossScrollViewer, Path=ScrollableHeight}"
-                               Value="{Binding ElementName=BossScrollViewer, Path=VerticalOffset, Mode=OneWay}"
-                               ViewportSize="{Binding ElementName=BossScrollViewer, Path=ViewportHeight}"
-                               ValueChanged="ManualScrollBar_ValueChanged" Margin="8,0,-1,0">
+           Grid.Column="1"
+           Minimum="0"
+           Maximum="{Binding ElementName=BossScrollViewer, Path=ScrollableHeight}"
+           Value="{Binding ElementName=BossScrollViewer, Path=VerticalOffset, Mode=OneWay}"
+           ViewportSize="{Binding ElementName=BossScrollViewer, Path=ViewportHeight}"
+           ValueChanged="ManualScrollBar_ValueChanged"
+           Margin="8,0,-1,0"
+           Width="24"
+           Background="Transparent">
                         <ScrollBar.Style>
                             <Style TargetType="ScrollBar">
                                 <Setter Property="Template">
                                     <Setter.Value>
                                         <ControlTemplate TargetType="ScrollBar">
                                             <Grid Background="Transparent">
-                                                <Track Name="PART_Track" IsDirectionReversed="true">
-                                                    <Track.Thumb>
-                                                        <Thumb Height="40" Width="12"
-                                                               Background="#88FFFFFF"
-                                                               BorderBrush="#44FFFFFF"
-                                                               BorderThickness="1">
-                                                            <Thumb.Template>
-                                                                <ControlTemplate TargetType="Thumb">
-                                                                    <Border Background="{TemplateBinding Background}"
-                                                                            BorderBrush="{TemplateBinding BorderBrush}"
-                                                                            BorderThickness="{TemplateBinding BorderThickness}"
-                                                                            CornerRadius="6"/>
-                                                                </ControlTemplate>
-                                                            </Thumb.Template>
-                                                        </Thumb>
-                                                    </Track.Thumb>
-                                                    <Track.IncreaseRepeatButton>
-                                                        <RepeatButton Height="0" Width="0" Template="{StaticResource EmptyButtonTemplate}"/>
-                                                    </Track.IncreaseRepeatButton>
-                                                    <Track.DecreaseRepeatButton>
-                                                        <RepeatButton Height="0" Width="0" Template="{StaticResource EmptyButtonTemplate}"/>
-                                                    </Track.DecreaseRepeatButton>
-                                                </Track>
+                                                <Thumb Height="30" Width="24"
+                                   VerticalAlignment="Top"
+                                   Background="#88FFFFFF"
+                                   BorderBrush="#44FFFFFF"
+                                   BorderThickness="1">
+                                                    <Thumb.Template>
+                                                        <ControlTemplate TargetType="Thumb">
+                                                            <Border Background="{TemplateBinding Background}"
+                                                BorderBrush="{TemplateBinding BorderBrush}"
+                                                BorderThickness="{TemplateBinding BorderThickness}"
+                                                CornerRadius="12"/>
+                                                        </ControlTemplate>
+                                                    </Thumb.Template>
+                                                </Thumb>
                                             </Grid>
                                         </ControlTemplate>
                                     </Setter.Value>
@@ -196,6 +190,15 @@
                             </Style>
                         </ScrollBar.Style>
                     </ScrollBar>
+
+
+
+
+
+
+
+
+
                 </Grid>
             </Grid>
         </Border>
