@@ -236,15 +236,15 @@ namespace GW2FOX
         {
             System.Windows.Forms.Label savedLabel = new System.Windows.Forms.Label();
             savedLabel.Text = "Saved!";
-            savedLabel.BackColor = Color.Black;
+            savedLabel.BackColor = Color.FromArgb(230, 0, 0, 0); // 90% sichtbar
             savedLabel.ForeColor = Color.White;
             savedLabel.AutoSize = true;
             savedLabel.Font = new Font("Segoe UI", 9);
-            savedLabel.Padding = new Padding(5);
+            savedLabel.Padding = new Padding(6);
 
             // Position: Über dem Cursor
             var cursorPos = Cursor.Position;
-            savedLabel.Location = new System.Drawing.Point(cursorPos.X - this.Left, cursorPos.Y - this.Top - 40); // 40 Pixel höher, auf Form bezogen
+            savedLabel.Location = new System.Drawing.Point(cursorPos.X - this.Left, cursorPos.Y - this.Top - 40);
 
             this.Controls.Add(savedLabel);
             savedLabel.BringToFront();
@@ -261,6 +261,7 @@ namespace GW2FOX
             };
             timer.Start();
         }
+
 
 
 
