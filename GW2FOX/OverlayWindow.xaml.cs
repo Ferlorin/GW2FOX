@@ -118,9 +118,9 @@ namespace GW2FOX
         {
             CopiedMessage.Visibility = Visibility.Visible;
             Canvas.SetLeft(CopiedMessage, position.X);
-            Canvas.SetTop(CopiedMessage, position.Y);
+            Canvas.SetTop(CopiedMessage, position.Y - 40); // ← 20 Pixel höher!
 
-            var timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(0.3) };
+            var timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(0.2) };
             timer.Tick += (s, e) =>
             {
                 CopiedMessage.Visibility = Visibility.Collapsed;
@@ -128,6 +128,7 @@ namespace GW2FOX
             };
             timer.Start();
         }
+
 
         private void ManualScrollBar_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
