@@ -99,7 +99,7 @@ namespace GW2FOX
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Fehler beim Aktualisieren der BossOverlay-Liste: {ex.Message}");
+                Console.WriteLine($"Error: {ex.Message}");
             }
         }
 
@@ -178,7 +178,7 @@ namespace GW2FOX
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Fehler beim Aktualisieren der BossOverlay-Liste: {ex.Message}");
+                Console.WriteLine($"Error: {ex.Message}");
             }
         }
 

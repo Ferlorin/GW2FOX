@@ -1,14 +1,14 @@
 {
-    "Runinfo": "«Meta-Train» with the old [FOX]",
-    "Squadinfo": "• InstanceCheck:\n    - right click on me & join map\n• Don’t cancel invites!\n• No 3ple Trouble\n\n• https://gw2fox.wixsite.com/about",
-    "Guild": "☠ Young or old [FOX], we take every stray. Humor, respect and fun at the game are what distinguish us. No Obligations! Infos: wsp me or https://gw2fox.wixsite.com/about ☻",
-    "Welcome": "Welcome to the FOXhole. Read the Message of the Day for Infos - Questions, ask us! Guides & Tools on our Homepage: https://gw2fox.wixsite.com/about",
-    "Symbols": "☠ ★ ☣ ☮ ☢ ♪ ☜ ☞ ┌ ∩ ┐ ( ●̮̃ • ) ۶ ( • ◡ • ) ☿ ♀ ♂ ☀ ☁ ☂ ☃ ☄ ☾ ☽ ☇ ☉ ☐ ☒ ☑ ☝ ☚ • ☟ ☆ ♕ ♖ ♘ ♙ ♛ ♜ ♞ ♟ † ☨ ☥ ☦ ☓ ☩ ☯ ☧ ☬ ☸ ♁ ♆ ☭ ☪ ☫ © ™ ® ☎ ♥ 凸",
-    "World": "FireShaman, LLA Timberline, LLA Iron Marches, LLA Gendarran, The frozen Maw, Shadow Behemoth, Fire Elemental, Great Jungle Wurm, Ulgoth the Modniir, Taidha Covington, Megadestroyer, Inquest Golem M2, Tequatl the Sunless, The Shatterer, Karka Queen, Claw of Jormag",
-    "Fido": "Tequatl the Sunless, Effigy, Karka Queen, LLA Timberline, Chak Gerent, Doomlore Shrine, The Oil Floes, Battle in Tarir, DB Shatterer, Path to Ascension, Doppelganger, Palawadan, Choya Piñata, Nightbosses, Dragonstorm, Forged with Fire, Ooze Pits, Aetherblade Assault",
-    "Meta": "Chak Gerent, Battle in Tarir, Death-Branded Shatterer, Junundu Rising, Path to Ascension, Doppelganger, Forged with Fire, Choya Piñata, Nightbosses, Drakkar, Dragonstorm, Claw of Jormag",
-    "Mixed": "FireShaman, Battle in Tarir, Chak Gerent, Death-Branded Shatterer, Junundu Rising, Path to Ascension, Doppelganger, Forged with Fire, Choya Piñata, Nightbosses, Drakkar, Dragonstorm, LLA Timberline, LLA Iron Marches, LLA Gendarran, The frozen Maw, Shadow Behemoth, Fire Elemental, Great Jungle Wurm, Ulgoth the Modniir, Taidha Covington, Megadestroyer, Inquest Golem M2, Tequatl the Sunless, The Shatterer, Karka Queen, Claw of Jormag",
-    "ChoosenOnes": "",
+  "Runinfo": "«Meta-Train» with the old [FOX]",
+  "Squadinfo": "• InstanceCheck:• right click on me & join map• Don’t cancel invites!• No 3ple Trouble• https://gw2fox.wixsite.com/about",
+  "Guild": "☠ Young or old [FOX], we take every stray. Humor, respect and fun at the game are what distinguish us. No Obligations! Infos: wsp me or https://gw2fox.wixsite.com/about ☻",
+  "Welcome": "Welcome to the FOXhole. Read the Message of the Day for Infos - Questions, ask us! Guides & Tools on our Homepage: https://gw2fox.wixsite.com/about",
+  "Symbols": "☠ ★ ☣ ☮ ☢ ♪ ☜ ☞ ┌ ∩ ┐ ( ●̮̃ • ) ۶ ( • ◡ • ) ☿ ♀ ♂ ☀ ☁ ☂ ☃ ☄ ☾ ☽ ☇ ☉ ☐ ☒ ☑ ☝ ☚ • ☟ ☆ ♕ ♖ ♘ ♙ ♛ ♜ ♞ ♟ † ☨ ☥ ☦ ☓ ☩ ☯ ☧ ☬ ☸ ♁ ♆ ☭ ☪ ☫ © ™ ® ☎ ♥ 凸",
+  "World": "FireShaman, LLA Timberline, LLA Iron Marches, LLA Gendarran, The frozen Maw, Shadow Behemoth, Fire Elemental, Great Jungle Wurm, Ulgoth the Modniir, Taidha Covington, Megadestroyer, Inquest Golem M2, Tequatl the Sunless, The Shatterer, Karka Queen, Claw of Jormag",
+  "Fido": "Tequatl the Sunless, Effigy, Karka Queen, LLA Timberline, Chak Gerent, Doomlore Shrine, The Oil Floes, Battle in Tarir, DB Shatterer, Path to Ascension, Doppelganger, Palawadan, Choya Piñata, Nightbosses, Dragonstorm, Forged with Fire, Ooze Pits, Aetherblade Assault",
+  "Meta": "Chak Gerent, Battle in Tarir, Death-Branded Shatterer, Junundu Rising, Path to Ascension, Doppelganger, Forged with Fire, Choya Piñata, Nightbosses, Drakkar, Dragonstorm, Claw of Jormag",
+  "Mixed": "FireShaman, Battle in Tarir, Chak Gerent, Death-Branded Shatterer, Junundu Rising, Path to Ascension, Doppelganger, Forged with Fire, Choya Piñata, Nightbosses, Drakkar, Dragonstorm, LLA Timberline, LLA Iron Marches, LLA Gendarran, The frozen Maw, Shadow Behemoth, Fire Elemental, Great Jungle Wurm, Ulgoth the Modniir, Taidha Covington, Megadestroyer, Inquest Golem M2, Tequatl the Sunless, The Shatterer, Karka Queen, Claw of Jormag",
+  "ChoosenOnes": "",
   "Bosses": [
     {
       "Name": "The Eye of Zhaitan",
@@ -81,7 +81,7 @@
         "23:15:00"
       ],
       "Category": "WBs",
-      "Waypoint":"[&BMIDAAA=]"
+      "Waypoint": "[&BMIDAAA=]"
     },
     {
       "Name": "FireShaman",

@@ -188,6 +188,9 @@ namespace GW2FOX
                     config = new BossConfigInfos();
                 }
 
+                // 🪄 Hier ist die Magie: Normalize Line Breaks
+                textToSave = textToSave.Replace(Environment.NewLine, "\n");
+
                 switch (sectionHeader)
                 {
                     case "Runinfo":
@@ -213,8 +216,11 @@ namespace GW2FOX
                         return;
                 }
 
+                // Speichern zurück in Datei
+                var updatedJson = JsonConvert.SerializeObject(config, Formatting.Indented);
+                File.WriteAllText(jsonPath, updatedJson);
+
                 BossTimings.LoadedConfigInfos = config;
-;
 
                 if (!hideMessages)
                 {
@@ -226,6 +232,7 @@ namespace GW2FOX
                 System.Windows.Forms.MessageBox.Show($"Error {sectionHeader}: {ex.Message}", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
 
 
         protected void LoadConfigText(
@@ -243,11 +250,11 @@ namespace GW2FOX
                 return;
             }
 
-            runinfoBox.Text = config.Runinfo ?? "";
-            squadinfoBox.Text = config.Squadinfo ?? "";
-            guildBox.Text = config.Guild ?? "";
-            welcomeBox.Text = config.Welcome ?? "";
-            symbolsBox.Text = config.Symbols ?? "";
+            runinfoBox.Text = (config.Runinfo ?? "").Replace("\n", Environment.NewLine);
+            squadinfoBox.Text = (config.Squadinfo ?? "").Replace("\n", Environment.NewLine);
+            guildBox.Text = (config.Guild ?? "").Replace("\n", Environment.NewLine);
+            welcomeBox.Text = (config.Welcome ?? "").Replace("\n", Environment.NewLine);
+            symbolsBox.Text = (config.Symbols ?? "").Replace("\n", Environment.NewLine);
             Console.WriteLine("LoadedConfigInfos: " + (config != null ? "OK" : "NULL"));
 
         }
