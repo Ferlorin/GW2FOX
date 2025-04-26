@@ -153,7 +153,7 @@
             Oofmaw.ScrollBars = ScrollBars.Vertical;
             Oofmaw.Size = new Size(350, 39);
             Oofmaw.TabIndex = 26;
-            Oofmaw.Text = "≪ATTENTION≫ ☠Lvl 10 │ The frozen Maw with Achievement Svanirs Bane → Kill 1 Icebrood Elemental & the Chief │";
+            Oofmaw.Text = "≪ATTENTION≫ ☠Lvl 10 │ The frozen Maw with Achievement Svanirs Bane → Kill 1 Icebrood Elemental & the Chief │ Pre: ☣[&BMIDAAA=]☣";
             // 
             // Attentionmaw
             // 

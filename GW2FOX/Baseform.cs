@@ -12,7 +12,8 @@ using WinFormsButton = System.Windows.Forms.Button;
 using System.Windows;
 using System.Text.Json;
 using Newtonsoft.Json;
-
+using System;
+using System.Windows.Forms;
 
 namespace GW2FOX
 {
@@ -40,12 +41,21 @@ namespace GW2FOX
         }
 
         [DllImport("user32.dll")]
-        public static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
-
-        [DllImport("user32.dll")]
         public static extern bool SetForegroundWindow(IntPtr hWnd);
 
-        protected const int SW_RESTORE = 9;
+        [DllImport("user32.dll")]
+        private static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
+
+        [DllImport("user32.dll")]
+        private static extern uint GetWindowThreadProcessId(IntPtr hWnd, IntPtr ProcessId);
+
+        [DllImport("kernel32.dll")]
+        public static extern uint GetCurrentThreadId();
+
+        [DllImport("user32.dll")]
+        private static extern bool AttachThreadInput(uint idAttach, uint idAttachTo, bool fAttach);
+
+        private const int SW_RESTORE = 9;
 
         private void InitializeGlobalKeyboardHook()
         {
@@ -119,7 +129,7 @@ namespace GW2FOX
             public static extern int SetWindowLong(IntPtr hWnd, int nIndex, int dwNewLong);
         }
 
-        protected void BringGw2ToFront()
+        public static void BringGw2ToFront()
         {
             try
             {
@@ -132,25 +142,31 @@ namespace GW2FOX
 
                     if (mainWindowHandle != IntPtr.Zero)
                     {
-                        // Falls das Fenster minimiert ist, stelle es wieder her
+                        // Restore window if it's minimized
                         ShowWindow(mainWindowHandle, SW_RESTORE);
 
-                        // Setze das Fenster in den Vordergrund und fokussiere es
+                        // Force focus
+                        uint currentThreadId = GetCurrentThreadId();
+                        uint gw2ThreadId = GetWindowThreadProcessId(mainWindowHandle, IntPtr.Zero);
+
+                        // Temporarily attach input threads to force focus
+                        AttachThreadInput(gw2ThreadId, currentThreadId, true);
                         SetForegroundWindow(mainWindowHandle);
+                        AttachThreadInput(gw2ThreadId, currentThreadId, false);
                     }
                     else
                     {
-                        System.Windows.Forms.MessageBox.Show("Fensterhandle von Gw2-64.exe nicht gefunden.", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        System.Windows.Forms.MessageBox.Show("Could not find the main window handle of Gw2-64.exe.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 else
                 {
-                    System.Windows.Forms.MessageBox.Show("Gw2-64.exe läuft nicht.", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    System.Windows.Forms.MessageBox.Show("Gw2-64.exe is not running.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)
             {
-                System.Windows.Forms.MessageBox.Show($"Fehler beim Fokussieren von Gw2-64.exe: {ex.Message}", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                System.Windows.Forms.MessageBox.Show($"Failed to focus Gw2-64.exe: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -188,7 +204,7 @@ namespace GW2FOX
                         break;
                     case "Symbols":
                         config.Symbols = textToSave;
-                        break; // <- Das hat gefehlt!
+                        break;
                     default:
                         if (!hideMessages)
                         {
@@ -202,12 +218,12 @@ namespace GW2FOX
 
                 if (!hideMessages)
                 {
-                    System.Windows.Forms.MessageBox.Show($"{sectionHeader} gespeichert.", "Gespeichert!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    System.Windows.Forms.MessageBox.Show($"{sectionHeader} saved.", "Saved!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             catch (Exception ex)
             {
-                System.Windows.Forms.MessageBox.Show($"Fehler beim Speichern von {sectionHeader}: {ex.Message}", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                System.Windows.Forms.MessageBox.Show($"Error {sectionHeader}: {ex.Message}", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
