@@ -20,7 +20,7 @@ namespace GW2FOX
     public partial class BaseForm : Form
     {
         private readonly Dictionary<System.Windows.Forms.Button, System.Drawing.Size> originalSizes = new();
-        protected OverlayWindow overlayWindow; // Ersetzt Overlay durch OverlayWindow
+        protected OverlayWindow overlayWindow;
         protected System.Windows.Controls.ListView customBossList;
         protected BossTimer bossTimer;
         private GlobalKeyboardHook? _globalKeyboardHook;
