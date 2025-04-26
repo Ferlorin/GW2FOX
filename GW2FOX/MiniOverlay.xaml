@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:GW2FOX"
         mc:Ignorable="d"
         Title="MiniOverlay"
-        Width="153" Height="28"
+        Width="149" Height="28"
         Topmost="True"
         Background="Transparent"
         Opacity="1"
@@ -20,6 +20,6 @@
         <Image Source="Resources/BlishHUDmini.bmp" Width="30" MouseLeftButtonUp="BlishHUD_Click" Cursor="Hand"/>
         <Image Source="Resources/Tacomini.bmp" Width="30" MouseLeftButtonUp="GW2TacO_Click" Cursor="Hand"/>
         <Image Source="Resources/Discord.bmp" Width="30" MouseLeftButtonUp="Discord_Click" Cursor="Hand"/>
-        <Image Source="Resources/Clock.bmp" Width="38" MouseLeftButtonUp="Clock_Click" Cursor="Hand"/>
+        <Image Source="Resources/Clock.bmp" Width="30" MouseLeftButtonUp="Clock_Click" Cursor="Hand"/>
     </StackPanel>
 </Window>
