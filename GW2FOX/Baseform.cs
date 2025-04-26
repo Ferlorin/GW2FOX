@@ -176,37 +176,38 @@ namespace GW2FOX
 
             try
             {
-                BossConfigInfos config;
+                FullBossConfig fullConfig;
 
                 if (File.Exists(jsonPath))
                 {
                     var json = File.ReadAllText(jsonPath);
-                    config = JsonConvert.DeserializeObject<BossConfigInfos>(json) ?? new BossConfigInfos();
+                    fullConfig = JsonConvert.DeserializeObject<FullBossConfig>(json) ?? new FullBossConfig();
                 }
                 else
                 {
-                    config = new BossConfigInfos();
+                    fullConfig = new FullBossConfig();
                 }
 
-                // 🪄 Hier ist die Magie: Normalize Line Breaks
+                // Zeilenumbrüche normalisieren
                 textToSave = textToSave.Replace(Environment.NewLine, "\n");
 
+                // Nur den gewünschten Abschnitt überschreiben
                 switch (sectionHeader)
                 {
                     case "Runinfo":
-                        config.Runinfo = textToSave;
+                        fullConfig.Runinfo = textToSave;
                         break;
                     case "Squadinfo":
-                        config.Squadinfo = textToSave;
+                        fullConfig.Squadinfo = textToSave;
                         break;
                     case "Guild":
-                        config.Guild = textToSave;
+                        fullConfig.Guild = textToSave;
                         break;
                     case "Welcome":
-                        config.Welcome = textToSave;
+                        fullConfig.Welcome = textToSave;
                         break;
                     case "Symbols":
-                        config.Symbols = textToSave;
+                        fullConfig.Symbols = textToSave;
                         break;
                     default:
                         if (!hideMessages)
@@ -216,11 +217,9 @@ namespace GW2FOX
                         return;
                 }
 
-                // Speichern zurück in Datei
-                var updatedJson = JsonConvert.SerializeObject(config, Formatting.Indented);
+                // Alles wieder speichern
+                var updatedJson = JsonConvert.SerializeObject(fullConfig, Formatting.Indented);
                 File.WriteAllText(jsonPath, updatedJson);
-
-                BossTimings.LoadedConfigInfos = config;
 
                 if (!hideMessages)
                 {
@@ -232,6 +231,7 @@ namespace GW2FOX
                 System.Windows.Forms.MessageBox.Show($"Error {sectionHeader}: {ex.Message}", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
 
 
 
