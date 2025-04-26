@@ -37,23 +37,38 @@ namespace GW2FOX
             Top = 0;
         }
 
+        [DllImport("user32.dll")]
+        private static extern bool AttachThreadInput(uint idAttach, uint idAttachTo, bool fAttach);
+
+        [DllImport("user32.dll")]
+        private static extern uint GetWindowThreadProcessId(IntPtr hWnd, out uint lpdwProcessId);
+
+        [DllImport("kernel32.dll")]
+        private static extern uint GetCurrentThreadId();
+
+        private void FocusGw2Window()
+        {
+            var gw2Proc = Process.GetProcessesByName("Gw2-64").FirstOrDefault();
+            if (gw2Proc != null && gw2Proc.MainWindowHandle != IntPtr.Zero)
+            {
+                SetForegroundWindow(gw2Proc.MainWindowHandle);
+            }
+            // Else: GW2 not running → do nothing, keep focus where it is
+        }
+
         private void BloodyCom_Click(object sender, MouseButtonEventArgs e)
         {
-            // Original C# logic adapted for WPF host
             var excludedTypes = new[] { typeof(MiniOverlay), typeof(Main) };
             var topMostStates = new Dictionary<Forms.Form, bool>();
 
-            // Remember and disable TopMost on all WinForms
             foreach (Forms.Form f in Forms.Application.OpenForms)
             {
                 topMostStates[f] = f.TopMost;
                 f.TopMost = false;
             }
 
-            // Determine focus
             IntPtr activeHandle = GetForegroundWindow();
 
-            // Find & toggle
             foreach (Forms.Form openForm in Forms.Application.OpenForms)
             {
                 if (openForm.Handle == activeHandle && !excludedTypes.Contains(openForm.GetType()))
@@ -61,7 +76,7 @@ namespace GW2FOX
                     if (openForm.Visible)
                     {
                         openForm.Hide();
-                        // Hide Main only if active window wasn't Main
+                        FocusGw2Window(); // 🔁 Nur wenn GW2 läuft
                         if (Forms.Application.OpenForms.OfType<Main>().FirstOrDefault() is Forms.Form mainForm && mainForm.Visible)
                             mainForm.Hide();
                     }
@@ -70,10 +85,9 @@ namespace GW2FOX
                         openForm.Show();
                         openForm.BringToFront();
                         openForm.Activate();
-                        SetForegroundWindow(openForm.Handle);
+                        FocusGw2Window(); // 🔁 Nur wenn GW2 läuft
                     }
 
-                    // Restore TopMost states
                     foreach (var kvp in topMostStates)
                         kvp.Key.TopMost = kvp.Value;
 
@@ -81,12 +95,14 @@ namespace GW2FOX
                 }
             }
 
-            // No valid window found → restore TopMost
             foreach (var kvp in topMostStates)
                 kvp.Key.TopMost = kvp.Value;
 
-            Forms.MessageBox.Show("Kein gültiges aktives Fenster deines Programms gefunden.", "Hinweis", Forms.MessageBoxButtons.OK, Forms.MessageBoxIcon.Information);
+            Forms.MessageBox.Show(
+                "Could not find a valid window to toggle.\nMaybe it's hiding behind your popcorn 🍿",
+                "No Window Found", Forms.MessageBoxButtons.OK, Forms.MessageBoxIcon.Information);
         }
+
 
         private void BlishHUD_Click(object sender, MouseButtonEventArgs e)
         {
@@ -162,12 +178,12 @@ namespace GW2FOX
                 }
                 catch (Exception ex)
                 {
-                    Forms.MessageBox.Show($"Fehler beim Starten von {executableName}:\n{ex.Message}", "Fehler", Forms.MessageBoxButtons.OK, Forms.MessageBoxIcon.Error);
+                    Forms.MessageBox.Show($"Error {executableName}:\n{ex.Message}", "Error", Forms.MessageBoxButtons.OK, Forms.MessageBoxIcon.Error);
                 }
             }
             else
             {
-                Forms.MessageBox.Show($"{executableName} wurde nicht gefunden im Verzeichnis:\n{exeDirectory}", "Datei nicht gefunden", Forms.MessageBoxButtons.OK, Forms.MessageBoxIcon.Error);
+                Forms.MessageBox.Show($"{executableName} not found in directory:\n{exeDirectory}", "File not found", Forms.MessageBoxButtons.OK, Forms.MessageBoxIcon.Error);
             }
         }
     }

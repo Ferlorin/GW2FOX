@@ -120,7 +120,7 @@ namespace GW2FOX
             Canvas.SetLeft(CopiedMessage, position.X);
             Canvas.SetTop(CopiedMessage, position.Y);
 
-            var timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(0.8) };
+            var timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(0.3) };
             timer.Tick += (s, e) =>
             {
                 CopiedMessage.Visibility = Visibility.Collapsed;
