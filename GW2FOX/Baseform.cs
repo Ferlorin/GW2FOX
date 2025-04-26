@@ -170,7 +170,7 @@ namespace GW2FOX
             }
         }
 
-        protected static void SaveTextToFile(string textToSave, string sectionHeader, bool hideMessages = false)
+        protected  void SaveTextToFile(string textToSave, string sectionHeader, bool hideMessages = false)
         {
             string jsonPath = "BossTimings.json";
 
@@ -223,7 +223,7 @@ namespace GW2FOX
 
                 if (!hideMessages)
                 {
-                    System.Windows.Forms.MessageBox.Show($"{sectionHeader} saved.", "Saved!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    ShowSavedMessage();
                 }
             }
             catch (Exception ex)
@@ -232,6 +232,35 @@ namespace GW2FOX
             }
         }
 
+        private void ShowSavedMessage()
+        {
+            System.Windows.Forms.Label savedLabel = new System.Windows.Forms.Label();
+            savedLabel.Text = "Saved!";
+            savedLabel.BackColor = Color.Black;
+            savedLabel.ForeColor = Color.White;
+            savedLabel.AutoSize = true;
+            savedLabel.Font = new Font("Segoe UI", 9);
+            savedLabel.Padding = new Padding(5);
+
+            // Position: Über dem Cursor
+            var cursorPos = Cursor.Position;
+            savedLabel.Location = new System.Drawing.Point(cursorPos.X - this.Left, cursorPos.Y - this.Top - 40); // 40 Pixel höher, auf Form bezogen
+
+            this.Controls.Add(savedLabel);
+            savedLabel.BringToFront();
+
+            // Timer zum Entfernen nach 0,2 Sekunden
+            var timer = new System.Windows.Forms.Timer();
+            timer.Interval = 200; // Millisekunden
+            timer.Tick += (s, e) =>
+            {
+                this.Controls.Remove(savedLabel);
+                savedLabel.Dispose();
+                timer.Stop();
+                timer.Dispose();
+            };
+            timer.Start();
+        }
 
 
 

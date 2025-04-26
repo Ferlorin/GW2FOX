@@ -1728,7 +1728,7 @@
             World.BackgroundImageLayout = ImageLayout.Stretch;
             World.Cursor = Cursors.Cross;
             World.FlatStyle = FlatStyle.Flat;
-            World.Location = new Point(694, 28);
+            World.Location = new Point(689, 44);
             World.Name = "World";
             World.Size = new Size(127, 32);
             World.TabIndex = 222;
@@ -1741,7 +1741,7 @@
             Mixed.BackgroundImageLayout = ImageLayout.Stretch;
             Mixed.Cursor = Cursors.Cross;
             Mixed.FlatStyle = FlatStyle.Flat;
-            Mixed.Location = new Point(960, 28);
+            Mixed.Location = new Point(955, 44);
             Mixed.Name = "Mixed";
             Mixed.Size = new Size(127, 32);
             Mixed.TabIndex = 225;
@@ -1754,7 +1754,7 @@
             ClearAll.BackgroundImageLayout = ImageLayout.Stretch;
             ClearAll.Cursor = Cursors.Cross;
             ClearAll.FlatStyle = FlatStyle.Flat;
-            ClearAll.Location = new Point(827, 66);
+            ClearAll.Location = new Point(822, 82);
             ClearAll.Name = "ClearAll";
             ClearAll.Size = new Size(127, 32);
             ClearAll.TabIndex = 224;
@@ -1767,7 +1767,7 @@
             Meta.BackgroundImageLayout = ImageLayout.Stretch;
             Meta.Cursor = Cursors.Cross;
             Meta.FlatStyle = FlatStyle.Flat;
-            Meta.Location = new Point(827, 28);
+            Meta.Location = new Point(822, 44);
             Meta.Name = "Meta";
             Meta.Size = new Size(127, 32);
             Meta.TabIndex = 223;
@@ -1780,7 +1780,7 @@
             ShowAll.BackgroundImageLayout = ImageLayout.Stretch;
             ShowAll.Cursor = Cursors.Cross;
             ShowAll.FlatStyle = FlatStyle.Flat;
-            ShowAll.Location = new Point(960, 66);
+            ShowAll.Location = new Point(955, 82);
             ShowAll.Name = "ShowAll";
             ShowAll.Size = new Size(127, 32);
             ShowAll.TabIndex = 226;
@@ -1903,7 +1903,7 @@
             button1.BackgroundImage = (Image)resources.GetObject("button1.BackgroundImage");
             button1.BackgroundImageLayout = ImageLayout.Center;
             button1.FlatStyle = FlatStyle.Flat;
-            button1.Location = new Point(1852, 904);
+            button1.Location = new Point(935, 120);
             button1.Name = "button1";
             button1.Size = new Size(40, 40);
             button1.TabIndex = 236;
@@ -1928,7 +1928,7 @@
             FidosSpecial.BackgroundImageLayout = ImageLayout.Stretch;
             FidosSpecial.Cursor = Cursors.Cross;
             FidosSpecial.FlatStyle = FlatStyle.Flat;
-            FidosSpecial.Location = new Point(1093, 28);
+            FidosSpecial.Location = new Point(1088, 44);
             FidosSpecial.Name = "FidosSpecial";
             FidosSpecial.Size = new Size(127, 32);
             FidosSpecial.TabIndex = 239;
