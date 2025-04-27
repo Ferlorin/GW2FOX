@@ -74,6 +74,20 @@ namespace GW2FOX
             }
         }
 
+        public void BackButton()
+       {
+    if (this.Owner != null)
+    {
+            this.Owner.Show();
+            this.Owner.WindowState = FormWindowState.Maximized;
+            this.Owner.BringToFront();
+            this.Owner.Activate();
+            this.Owner.TopMost = true;
+            }
+
+    this.Dispose();
+}
+
         protected void ShowAndHideForm(Form newForm)
         {
             if (lastOpenedBoss != null && !lastOpenedBoss.IsDisposed)
@@ -262,9 +276,6 @@ namespace GW2FOX
             timer.Start();
         }
 
-
-
-
         protected void LoadConfigText(
     System.Windows.Forms.TextBox runinfoBox,
     System.Windows.Forms.TextBox squadinfoBox,
@@ -288,8 +299,6 @@ namespace GW2FOX
             Console.WriteLine("LoadedConfigInfos: " + (config != null ? "OK" : "NULL"));
 
         }
-
-
 
         protected override void OnFormClosing(FormClosingEventArgs e)
         {

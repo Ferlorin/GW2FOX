@@ -24,8 +24,7 @@ namespace GW2FOX
 
         private void Back_Click_1(object sender, EventArgs e)
         {
-            Owner.Show();
-            Dispose();
+            BackButton();
         }
 
         private void button2_Click(object sender, EventArgs e)

@@ -83,8 +83,7 @@ namespace GW2FOX
 
         private void Back_Click(object sender, EventArgs e)
         {
-            Owner.Show();
-            Dispose();
+            BackButton();
         }
 
         private void Inquestgoleminfo_Click(object sender, EventArgs e)
