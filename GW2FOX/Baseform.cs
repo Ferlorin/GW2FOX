@@ -333,7 +333,6 @@ namespace GW2FOX
         {
             if (sender is System.Windows.Forms. Button button && originalSizes.TryGetValue(button, out System.Drawing.Size originalSize))
             {
-                // Setze die Originalgröße wieder her
                 button.Size = originalSize;
             }
         }
@@ -352,7 +351,7 @@ namespace GW2FOX
                 }
 
                 button.BackgroundImage = DarkenImage(originalImages[button]);
-                button.Size = new System.Drawing.Size((int)(button.Width * 0.97), (int)(button.Height * 0.97));
+                button.Size = new System.Drawing.Size((int)(button.Width * 0.95), (int)(button.Height * 0.95));
             }
         }
 
@@ -378,7 +377,6 @@ namespace GW2FOX
                     button.MouseUp += Button_MouseUp;
                 }
 
-                // Rekursiv alle Child-Controls durchgehen
                 if (c.HasChildren)
                 {
                     AddButtonAnimations(c);
