@@ -338,29 +338,33 @@ namespace GW2FOX
             }
         }
 
+      
+
+        private Dictionary<System.Windows.Forms.Button, System.Drawing.Image> originalImages = new();
+
         private void Button_MouseDown(object sender, MouseEventArgs e)
         {
             if (sender is System.Windows.Forms.Button button)
             {
-                if (!originalSizes.ContainsKey(button))
+                if (!originalImages.ContainsKey(button))
                 {
-                    originalSizes[button] = button.Size;
+                    originalImages[button] = button.BackgroundImage;
                 }
 
-                // Verkleinere die Größe um 3%
-                int newWidth = (int)(originalSizes[button].Width * 0.97);
-                int newHeight = (int)(originalSizes[button].Height * 0.97);
-                button.Size = new System.Drawing.Size(newWidth, newHeight);
+                button.BackgroundImage = DarkenImage(originalImages[button]);
+                button.Size = new System.Drawing.Size((int)(button.Width * 0.97), (int)(button.Height * 0.97));
             }
         }
 
         private void Button_MouseUp(object sender, MouseEventArgs e)
         {
-            if (sender is System.Windows.Forms.Button button && originalSizes.TryGetValue(button, out System.Drawing.Size originalSize))
+            if (sender is System.Windows.Forms.Button button && originalImages.TryGetValue(button, out System.Drawing.Image originalImage))
             {
-                button.Size = originalSize;
+                button.BackgroundImage = originalImage;
+                button.Size = originalSizes[button];
             }
         }
+
 
         private void AddButtonAnimations(System.Windows.Forms.Control control)
         {
@@ -380,6 +384,28 @@ namespace GW2FOX
                     AddButtonAnimations(c);
                 }
             }
+        }
+        private System.Drawing.Image DarkenImage(System.Drawing.Image img, float brightnessFactor = 0.7f)
+        {
+            Bitmap tempBitmap = new Bitmap(img.Width, img.Height);
+            using (Graphics g = Graphics.FromImage(tempBitmap))
+            {
+                float[][] ptsArray ={
+            new float[] {brightnessFactor, 0, 0, 0, 0},
+            new float[] {0, brightnessFactor, 0, 0, 0},
+            new float[] {0, 0, brightnessFactor, 0, 0},
+            new float[] {0, 0, 0, 1f, 0},
+            new float[] {0, 0, 0, 0, 1f}
+        };
+
+                var colorMatrix = new System.Drawing.Imaging.ColorMatrix(ptsArray);
+                var attributes = new System.Drawing.Imaging.ImageAttributes();
+                attributes.SetColorMatrix(colorMatrix, System.Drawing.Imaging.ColorMatrixFlag.Default, System.Drawing.Imaging.ColorAdjustType.Bitmap);
+
+                g.DrawImage(img, new Rectangle(0, 0, img.Width, img.Height),
+                    0, 0, img.Width, img.Height, GraphicsUnit.Pixel, attributes);
+            }
+            return tempBitmap;
         }
 
     }
