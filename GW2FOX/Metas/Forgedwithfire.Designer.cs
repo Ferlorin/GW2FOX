@@ -60,7 +60,7 @@
             // 
             button8.BackgroundImage = (Image)resources.GetObject("button8.BackgroundImage");
             button8.BackgroundImageLayout = ImageLayout.Center;
-            button8.Cursor = Cursors.Cross;
+            button8.Cursor = Cursors.Hand;
             button8.FlatStyle = FlatStyle.Flat;
             button8.Location = new Point(371, 385);
             button8.Name = "button8";
@@ -73,7 +73,7 @@
             // 
             button7.BackgroundImage = (Image)resources.GetObject("button7.BackgroundImage");
             button7.BackgroundImageLayout = ImageLayout.Center;
-            button7.Cursor = Cursors.Cross;
+            button7.Cursor = Cursors.Hand;
             button7.FlatStyle = FlatStyle.Flat;
             button7.Location = new Point(371, 340);
             button7.Name = "button7";
@@ -86,7 +86,7 @@
             // 
             button5.BackgroundImage = (Image)resources.GetObject("button5.BackgroundImage");
             button5.BackgroundImageLayout = ImageLayout.Center;
-            button5.Cursor = Cursors.Cross;
+            button5.Cursor = Cursors.Hand;
             button5.FlatStyle = FlatStyle.Flat;
             button5.Location = new Point(1796, 295);
             button5.Name = "button5";
@@ -99,7 +99,7 @@
             // 
             button4.BackgroundImage = (Image)resources.GetObject("button4.BackgroundImage");
             button4.BackgroundImageLayout = ImageLayout.Center;
-            button4.Cursor = Cursors.Cross;
+            button4.Cursor = Cursors.Hand;
             button4.FlatStyle = FlatStyle.Flat;
             button4.Location = new Point(1321, 295);
             button4.Name = "button4";
@@ -112,7 +112,7 @@
             // 
             button3.BackgroundImage = (Image)resources.GetObject("button3.BackgroundImage");
             button3.BackgroundImageLayout = ImageLayout.Center;
-            button3.Cursor = Cursors.Cross;
+            button3.Cursor = Cursors.Hand;
             button3.FlatStyle = FlatStyle.Flat;
             button3.Location = new Point(846, 295);
             button3.Name = "button3";
@@ -125,7 +125,7 @@
             // 
             button2.BackgroundImage = (Image)resources.GetObject("button2.BackgroundImage");
             button2.BackgroundImageLayout = ImageLayout.Center;
-            button2.Cursor = Cursors.Cross;
+            button2.Cursor = Cursors.Hand;
             button2.FlatStyle = FlatStyle.Flat;
             button2.Location = new Point(371, 295);
             button2.Name = "button2";
@@ -163,7 +163,7 @@
             // 
             Back.BackgroundImage = (Image)resources.GetObject("Back.BackgroundImage");
             Back.BackgroundImageLayout = ImageLayout.Center;
-            Back.Cursor = Cursors.Cross;
+            Back.Cursor = Cursors.Hand;
             Back.FlatStyle = FlatStyle.Flat;
             Back.Location = new Point(1852, 904);
             Back.Name = "Back";
@@ -232,7 +232,7 @@
             // 
             button6.BackgroundImage = (Image)resources.GetObject("button6.BackgroundImage");
             button6.BackgroundImageLayout = ImageLayout.Center;
-            button6.Cursor = Cursors.Cross;
+            button6.Cursor = Cursors.Hand;
             button6.FlatStyle = FlatStyle.Flat;
             button6.Location = new Point(371, 430);
             button6.Name = "button6";

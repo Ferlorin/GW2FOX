@@ -96,7 +96,7 @@
             // 
             Welcomes.BackgroundImage = (Image)resources.GetObject("Welcomes.BackgroundImage");
             Welcomes.BackgroundImageLayout = ImageLayout.Center;
-            Welcomes.Cursor = Cursors.Cross;
+            Welcomes.Cursor = Cursors.Hand;
             Welcomes.FlatStyle = FlatStyle.Flat;
             Welcomes.Location = new Point(1796, 295);
             Welcomes.Name = "Welcomes";
@@ -109,7 +109,7 @@
             // 
             Guilds.BackgroundImage = (Image)resources.GetObject("Guilds.BackgroundImage");
             Guilds.BackgroundImageLayout = ImageLayout.Center;
-            Guilds.Cursor = Cursors.Cross;
+            Guilds.Cursor = Cursors.Hand;
             Guilds.FlatStyle = FlatStyle.Flat;
             Guilds.Location = new Point(1321, 295);
             Guilds.Name = "Guilds";
@@ -122,7 +122,7 @@
             // 
             Squadinfos.BackgroundImage = (Image)resources.GetObject("Squadinfos.BackgroundImage");
             Squadinfos.BackgroundImageLayout = ImageLayout.Center;
-            Squadinfos.Cursor = Cursors.Cross;
+            Squadinfos.Cursor = Cursors.Hand;
             Squadinfos.FlatStyle = FlatStyle.Flat;
             Squadinfos.Location = new Point(846, 295);
             Squadinfos.Name = "Squadinfos";
@@ -240,7 +240,7 @@
             // 
             Back.BackgroundImage = (Image)resources.GetObject("Back.BackgroundImage");
             Back.BackgroundImageLayout = ImageLayout.Center;
-            Back.Cursor = Cursors.Cross;
+            Back.Cursor = Cursors.Hand;
             Back.FlatStyle = FlatStyle.Flat;
             Back.Location = new Point(1852, 904);
             Back.Name = "Back";

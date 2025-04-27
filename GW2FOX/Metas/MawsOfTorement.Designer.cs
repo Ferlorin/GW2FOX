@@ -66,7 +66,7 @@
             // 
             WesternMawClick.BackgroundImage = (Image)resources.GetObject("WesternMawClick.BackgroundImage");
             WesternMawClick.BackgroundImageLayout = ImageLayout.Center;
-            WesternMawClick.Cursor = Cursors.Cross;
+            WesternMawClick.Cursor = Cursors.Hand;
             WesternMawClick.FlatStyle = FlatStyle.Flat;
             WesternMawClick.Location = new Point(846, 340);
             WesternMawClick.Name = "WesternMawClick";
@@ -128,7 +128,7 @@
             // 
             WelcomeClick.BackgroundImage = (Image)resources.GetObject("WelcomeClick.BackgroundImage");
             WelcomeClick.BackgroundImageLayout = ImageLayout.Center;
-            WelcomeClick.Cursor = Cursors.Cross;
+            WelcomeClick.Cursor = Cursors.Hand;
             WelcomeClick.FlatStyle = FlatStyle.Flat;
             WelcomeClick.Location = new Point(1796, 295);
             WelcomeClick.Name = "WelcomeClick";
@@ -141,7 +141,7 @@
             // 
             Guild_Click.BackgroundImage = (Image)resources.GetObject("Guild_Click.BackgroundImage");
             Guild_Click.BackgroundImageLayout = ImageLayout.Center;
-            Guild_Click.Cursor = Cursors.Cross;
+            Guild_Click.Cursor = Cursors.Hand;
             Guild_Click.FlatStyle = FlatStyle.Flat;
             Guild_Click.Location = new Point(1321, 295);
             Guild_Click.Name = "Guild_Click";
@@ -154,7 +154,7 @@
             // 
             Squadinfo_Click.BackgroundImage = (Image)resources.GetObject("Squadinfo_Click.BackgroundImage");
             Squadinfo_Click.BackgroundImageLayout = ImageLayout.Center;
-            Squadinfo_Click.Cursor = Cursors.Cross;
+            Squadinfo_Click.Cursor = Cursors.Hand;
             Squadinfo_Click.FlatStyle = FlatStyle.Flat;
             Squadinfo_Click.Location = new Point(846, 295);
             Squadinfo_Click.Name = "Squadinfo_Click";
@@ -272,7 +272,7 @@
             // 
             Back.BackgroundImage = (Image)resources.GetObject("Back.BackgroundImage");
             Back.BackgroundImageLayout = ImageLayout.Center;
-            Back.Cursor = Cursors.Cross;
+            Back.Cursor = Cursors.Hand;
             Back.FlatStyle = FlatStyle.Flat;
             Back.Location = new Point(1852, 904);
             Back.Name = "Back";
@@ -285,7 +285,7 @@
             // 
             EasternMawClick.BackgroundImage = (Image)resources.GetObject("EasternMawClick.BackgroundImage");
             EasternMawClick.BackgroundImageLayout = ImageLayout.Center;
-            EasternMawClick.Cursor = Cursors.Cross;
+            EasternMawClick.Cursor = Cursors.Hand;
             EasternMawClick.FlatStyle = FlatStyle.Flat;
             EasternMawClick.Location = new Point(846, 433);
             EasternMawClick.Name = "EasternMawClick";
@@ -311,7 +311,7 @@
             // 
             NorthernMawClick.BackgroundImage = (Image)resources.GetObject("NorthernMawClick.BackgroundImage");
             NorthernMawClick.BackgroundImageLayout = ImageLayout.Center;
-            NorthernMawClick.Cursor = Cursors.Cross;
+            NorthernMawClick.Cursor = Cursors.Hand;
             NorthernMawClick.FlatStyle = FlatStyle.Flat;
             NorthernMawClick.Location = new Point(846, 385);
             NorthernMawClick.Name = "NorthernMawClick";

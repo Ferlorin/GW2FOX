@@ -194,7 +194,7 @@
             // 
             Back.BackgroundImage = (Image)resources.GetObject("Back.BackgroundImage");
             Back.BackgroundImageLayout = ImageLayout.Center;
-            Back.Cursor = Cursors.Cross;
+            Back.Cursor = Cursors.Hand;
             Back.FlatStyle = FlatStyle.Flat;
             Back.Location = new Point(1852, 904);
             Back.Name = "Back";

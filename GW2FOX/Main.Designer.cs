@@ -44,7 +44,7 @@
             button4.BackColor = SystemColors.ActiveCaptionText;
             button4.BackgroundImage = (Image)resources.GetObject("button4.BackgroundImage");
             button4.BackgroundImageLayout = ImageLayout.Stretch;
-            button4.Cursor = Cursors.Cross;
+            button4.Cursor = Cursors.Hand;
             button4.FlatStyle = FlatStyle.Flat;
             button4.Location = new Point(12, 176);
             button4.Name = "button4";
@@ -58,7 +58,7 @@
             button3.BackColor = SystemColors.ActiveCaptionText;
             button3.BackgroundImage = (Image)resources.GetObject("button3.BackgroundImage");
             button3.BackgroundImageLayout = ImageLayout.Stretch;
-            button3.Cursor = Cursors.Cross;
+            button3.Cursor = Cursors.Hand;
             button3.FlatStyle = FlatStyle.Flat;
             button3.Location = new Point(12, 217);
             button3.Name = "button3";
@@ -72,7 +72,7 @@
             button1.BackColor = SystemColors.ActiveCaptionText;
             button1.BackgroundImage = (Image)resources.GetObject("button1.BackgroundImage");
             button1.BackgroundImageLayout = ImageLayout.Stretch;
-            button1.Cursor = Cursors.Cross;
+            button1.Cursor = Cursors.Hand;
             button1.FlatStyle = FlatStyle.Flat;
             button1.Location = new Point(12, 258);
             button1.Name = "button1";
@@ -86,7 +86,7 @@
             button2.BackColor = SystemColors.ActiveCaptionText;
             button2.BackgroundImage = (Image)resources.GetObject("button2.BackgroundImage");
             button2.BackgroundImageLayout = ImageLayout.Center;
-            button2.Cursor = Cursors.Cross;
+            button2.Cursor = Cursors.Hand;
             button2.FlatStyle = FlatStyle.Flat;
             button2.Location = new Point(41, 299);
             button2.Name = "button2";
@@ -100,7 +100,7 @@
             button6.BackColor = Color.Black;
             button6.BackgroundImage = (Image)resources.GetObject("button6.BackgroundImage");
             button6.BackgroundImageLayout = ImageLayout.Stretch;
-            button6.Cursor = Cursors.Cross;
+            button6.Cursor = Cursors.Hand;
             button6.FlatStyle = FlatStyle.Flat;
             button6.Location = new Point(12, 53);
             button6.Name = "button6";
@@ -114,7 +114,7 @@
             button8.BackColor = Color.Black;
             button8.BackgroundImage = (Image)resources.GetObject("button8.BackgroundImage");
             button8.BackgroundImageLayout = ImageLayout.Stretch;
-            button8.Cursor = Cursors.Cross;
+            button8.Cursor = Cursors.Hand;
             button8.FlatStyle = FlatStyle.Flat;
             button8.Location = new Point(12, 12);
             button8.Name = "button8";
@@ -127,7 +127,7 @@
             // 
             button9.BackgroundImage = (Image)resources.GetObject("button9.BackgroundImage");
             button9.BackgroundImageLayout = ImageLayout.Stretch;
-            button9.Cursor = Cursors.Cross;
+            button9.Cursor = Cursors.Hand;
             button9.FlatStyle = FlatStyle.Flat;
             button9.Location = new Point(12, 94);
             button9.Name = "button9";
@@ -140,7 +140,7 @@
             // 
             button10.BackgroundImage = (Image)resources.GetObject("button10.BackgroundImage");
             button10.BackgroundImageLayout = ImageLayout.Stretch;
-            button10.Cursor = Cursors.Cross;
+            button10.Cursor = Cursors.Hand;
             button10.FlatStyle = FlatStyle.Flat;
             button10.Location = new Point(12, 135);
             button10.Name = "button10";
