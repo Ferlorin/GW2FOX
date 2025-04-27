@@ -101,7 +101,7 @@ namespace GW2FOX
             ShowFormWithoutActivation(newForm);
 
             if (newForm.WindowState == FormWindowState.Minimized)
-                newForm.WindowState = FormWindowState.Normal;
+                newForm.WindowState = FormWindowState.Maximized;
 
             newForm.BringToFront();
             newForm.Activate();
