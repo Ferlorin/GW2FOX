@@ -8,7 +8,6 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.IO;
 using System.Windows.Controls;
-using WinFormsButton = System.Windows.Forms.Button;
 using System.Windows;
 using System.Text.Json;
 using Newtonsoft.Json;
@@ -315,7 +314,7 @@ namespace GW2FOX
 
         private void Button_MouseEnter(object sender, EventArgs e)
         {
-            if (sender is WinFormsButton button)
+            if (sender is System.Windows.Forms.Button button)
             {
                 if (!originalSizes.ContainsKey(button))
                 {
