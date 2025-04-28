@@ -8,22 +8,30 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
-
 using static GW2FOX.BossTimerService;
+
+// Aliases für eindeutige Verweise
+using WpfPoint = System.Windows.Point;
+using WpfImage = System.Windows.Controls.Image;
+using WpfClipboard = System.Windows.Clipboard;
+using WpfMouseEventArgs = System.Windows.Input.MouseEventArgs;
+using WpfMouseButtonEventArgs = System.Windows.Input.MouseButtonEventArgs;
 
 namespace GW2FOX
 {
     public partial class OverlayWindow : Window, INotifyPropertyChanged
     {
         private static OverlayWindow? _instance;
-        private bool _isDragging = false;
-        private System.Windows.Point _clickPosition;
-        private double _thumbStartTop;
-        private double _startOffsetTop = 0;
         private DispatcherTimer _bossTimer;
         private double _scrollValue;
-        private bool isDragging = false;
-        private System.Windows.Point clickPosition;
+
+        // Thumb-Drag State
+        private bool _isDragging = false;
+        private WpfPoint _dragStartPoint;
+        private double _thumbOriginalTop;
+
+        // Scroll Offset for initial thumb position
+        private double _startOffsetTop = 0;
 
         public ObservableCollection<BossListItem> OverlayItems { get; } = new ObservableCollection<BossListItem>();
 
@@ -52,6 +60,7 @@ namespace GW2FOX
             this.Left = 1320;
             this.Top = 710;
             _instance = this;
+
             Loaded += Window_Loaded;
             PreviewMouseWheel += OverlayWindow_PreviewMouseWheel;
 
@@ -62,20 +71,17 @@ namespace GW2FOX
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            // Initiale Position des Thumbs hinter dem ersten Eintrag
             if (BossListView.Items.Count > 0)
             {
-                // Das erste ItemContainer besorgen (visuelles Objekt der ersten Zeile)
-                var item = BossListView.ItemContainerGenerator.ContainerFromIndex(0) as FrameworkElement;
-                if (item != null)
+                if (BossListView.ItemContainerGenerator.ContainerFromIndex(0) is FrameworkElement item)
                 {
-                    var position = item.TranslatePoint(new System.Windows.Point(0, 0), BossListView);
+                    WpfPoint position = item.TranslatePoint(new WpfPoint(0, 0), BossListView);
                     _startOffsetTop = position.Y;
                 }
             }
-
             UpdateThumbPosition();
         }
-
 
         private void OverlayWindow_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
         {
@@ -113,7 +119,6 @@ namespace GW2FOX
             double percent = BossScrollViewer.VerticalOffset / (BossScrollViewer.ExtentHeight - BossScrollViewer.ViewportHeight);
             double calculatedTop = _startOffsetTop + (percent * maxMove);
 
-            // Nur wenn nicht gerade gezogen wird, neu positionieren
             if (!_isDragging)
                 Canvas.SetTop(ScrollThumb, calculatedTop);
         }
@@ -125,52 +130,51 @@ namespace GW2FOX
             _bossTimer.Start();
         }
 
-
-        private void Thumb_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e) // <-- Wichtig!
+        // Thumb Drag Handlers:
+        private void Thumb_MouseLeftButtonDown(object sender, WpfMouseButtonEventArgs e)
         {
-            if (!isDragging)
+            if (!_isDragging)
             {
-                isDragging = true;
-                clickPosition = e.GetPosition(MainCanvas);
+                _isDragging = true;
+                Canvas canvas = (Canvas)ScrollThumb.Parent;
+                _dragStartPoint = e.GetPosition(canvas);
+                _thumbOriginalTop = Canvas.GetTop(ScrollThumb);
                 ScrollThumb.CaptureMouse();
+                e.Handled = true;
             }
         }
 
-        private void Thumb_MouseMove(object sender, System.Windows.Input.MouseEventArgs e) // <-- Wichtig!
+        private void Thumb_MouseMove(object sender, WpfMouseEventArgs e)
         {
-            if (isDragging)
+            if (!_isDragging) return;
+
+            Canvas canvas = (Canvas)ScrollThumb.Parent;
+            WpfPoint pos = e.GetPosition(canvas);
+            double deltaY = pos.Y - _dragStartPoint.Y;
+
+            double maxTop = canvas.ActualHeight - ScrollThumb.ActualHeight;
+            double newTop = Math.Max(0, Math.Min(_thumbOriginalTop + deltaY, maxTop));
+            Canvas.SetTop(ScrollThumb, newTop);
+
+            double scrollable = BossScrollViewer.ScrollableHeight;
+            if (scrollable > 0)
             {
-                System.Windows.Point currentPosition = e.GetPosition(MainCanvas);
-                double deltaY = currentPosition.Y - clickPosition.Y;
-
-                double newTop = Canvas.GetTop(ScrollThumb) + deltaY;
-
-                double minTop = 0;
-                double maxTop = MainCanvas.ActualHeight - ScrollThumb.ActualHeight;
-                newTop = Math.Max(minTop, Math.Min(newTop, maxTop));
-
-                Canvas.SetTop(ScrollThumb, newTop);
-
-                double scrollableHeight = BossScrollViewer.ScrollableHeight;
-                if (scrollableHeight > 0)
-                {
-                    double scrollOffset = (newTop / maxTop) * scrollableHeight;
-                    BossScrollViewer.ScrollToVerticalOffset(scrollOffset);
-                }
-
-                clickPosition = currentPosition;
+                double percent = newTop / maxTop;
+                BossScrollViewer.ScrollToVerticalOffset(percent * scrollable);
             }
+
+            e.Handled = true;
         }
 
-        private void Thumb_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e) // <-- Wichtig!
+        private void Thumb_MouseLeftButtonUp(object sender, WpfMouseButtonEventArgs e)
         {
-            if (isDragging)
+            if (_isDragging)
             {
-                isDragging = false;
+                _isDragging = false;
                 ScrollThumb.ReleaseMouseCapture();
+                e.Handled = true;
             }
         }
-
 
         public async void UpdateBossOverlayListAsync()
         {
@@ -180,15 +184,10 @@ namespace GW2FOX
                 var items = await Task.Run(() => BossOverlayHelper.GetBossOverlayItems(runs, DateTime.Now));
                 Dispatcher.Invoke(() =>
                 {
-                    // 1) Aktuellen Scroll-Offset merken
                     double currentOffset = BossScrollViewer.VerticalOffset;
-
-                    // 2) ObservableCollection neu befüllen
                     OverlayItems.Clear();
                     foreach (var item in items)
                         OverlayItems.Add(item);
-
-                    // 3) Scroll-Offset wiederherstellen
                     BossScrollViewer.ScrollToVerticalOffset(currentOffset);
                 });
             }
@@ -198,30 +197,28 @@ namespace GW2FOX
             }
         }
 
-
-        private void Waypoint_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void Waypoint_MouseLeftButtonDown(object sender, WpfMouseButtonEventArgs e)
         {
-            if (sender is System.Windows.Controls.Image img && img.DataContext is BossListItem boss)
+            if (sender is WpfImage img && img.DataContext is BossListItem boss)
             {
-                System.Windows.Clipboard.SetText(boss.Waypoint);
-                var pos = img.TranslatePoint(new System.Windows.Point(0, img.ActualHeight), this);
+                WpfClipboard.SetText(boss.Waypoint);
+                WpfPoint pos = img.TranslatePoint(new WpfPoint(0, img.ActualHeight), this);
                 ShowCopiedMessage(pos);
             }
         }
 
-        private void ShowCopiedMessage(System.Windows.Point position)
+        private void ShowCopiedMessage(WpfPoint position)
         {
             CopiedMessage.Visibility = Visibility.Visible;
             Canvas.SetLeft(CopiedMessage, position.X);
             Canvas.SetTop(CopiedMessage, position.Y - 40);
 
-            var t = new DispatcherTimer { Interval = TimeSpan.FromSeconds(0.2) };
+            DispatcherTimer t = new DispatcherTimer { Interval = TimeSpan.FromSeconds(0.2) };
             t.Tick += (s, e) => { CopiedMessage.Visibility = Visibility.Collapsed; t.Stop(); };
             t.Start();
         }
 
-
-        private void Icon_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void Icon_MouseLeftButtonDown(object sender, WpfMouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left)
                 DragMove();
@@ -232,7 +229,7 @@ namespace GW2FOX
         protected override void OnClosed(EventArgs e)
         {
             _bossTimer?.Stop();
-            _bossTimer = null;
+            _bossTimer = null!;
             _instance = null;
             base.OnClosed(e);
         }
