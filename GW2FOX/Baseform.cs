@@ -85,7 +85,8 @@ namespace GW2FOX
             }
 
     this.Dispose();
-}
+            BringGw2ToFront();
+        }
 
         protected void ShowAndHideForm(Form newForm)
         {
