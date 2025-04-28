@@ -24,8 +24,7 @@
         <local:CategoryColorConverter x:Key="CategoryColorConverter" />
 
         <!-- Bild-Ressource für Waypoint -->
-        <BitmapImage x:Key="WaypointImage"
-                     UriSource="/Waypoint.png" />
+        <BitmapImage x:Key="WaypointImage" UriSource="/Waypoint.png" />
 
         <!-- Leeres ControlTemplate für RepeatButton -->
         <ControlTemplate x:Key="EmptyButtonTemplate" TargetType="RepeatButton">
@@ -47,16 +46,11 @@
                    FontSize="12"
                    Panel.ZIndex="999">
             <TextBlock.Effect>
-                <DropShadowEffect Color="Black"
-                                  BlurRadius="4"
-                                  ShadowDepth="1"
-                                  Opacity="0.5" />
+                <DropShadowEffect Color="Black" BlurRadius="4" ShadowDepth="1" Opacity="0.5" />
             </TextBlock.Effect>
         </TextBlock>
 
-        <Border Background="Transparent"
-                BorderBrush="#333"
-                BorderThickness="0">
+        <Border Background="Transparent" BorderBrush="#333" BorderThickness="0">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="30" />
@@ -85,10 +79,7 @@
                                FontSize="14"
                                Text="Boss-Timer">
                         <TextBlock.Effect>
-                            <DropShadowEffect Color="Black"
-                                              BlurRadius="0"
-                                              ShadowDepth="0"
-                                              Opacity="1" />
+                            <DropShadowEffect Color="Black" BlurRadius="0" ShadowDepth="0" Opacity="1" />
                         </TextBlock.Effect>
                     </TextBlock>
 
@@ -106,78 +97,81 @@
                     </Rectangle>
                 </Grid>
 
-                <!-- Content mit eigener ScrollThumb -->
+                <!-- Content mit ScrollViewer und eigenem Thumb -->
                 <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="30" />
-                        <!-- Platz für Thumb.png -->
                     </Grid.ColumnDefinitions>
 
-                    <!-- Unsichtbarer ScrollViewer -->
+                    <!-- Scrollbarer Boss-Content -->
                     <ScrollViewer x:Name="BossScrollViewer"
                                   Grid.Column="0"
                                   VerticalScrollBarVisibility="Hidden"
                                   HorizontalScrollBarVisibility="Disabled"
                                   Background="Transparent"
                                   ScrollChanged="BossScrollViewer_ScrollChanged">
-                        <ListView x:Name="BossListView"
-                                  BorderThickness="0"
-                                  Background="Transparent"
-                                  FontFamily="Segoe UI"
-                                  FontWeight="Bold"
-                                  FontSize="14"
-                                  Padding="0"
-                                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                                  ScrollViewer.VerticalScrollBarVisibility="Disabled"
-                                  Width="245"
-                                  Height="335">
-                            <ListView.ItemTemplate>
-                                <DataTemplate>
-                                    <Grid Background="Transparent" VerticalAlignment="Center">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="Auto" />
-                                            <ColumnDefinition Width="150" />
-                                            <ColumnDefinition Width="Auto" />
-                                        </Grid.ColumnDefinitions>
+                        <StackPanel>
+                            <ListView x:Name="BossListView"
+                                      BorderThickness="0"
+                                      Background="Transparent"
+                                      FontFamily="Segoe UI"
+                                      FontWeight="Bold"
+                                      FontSize="14"
+                                      Padding="0"
+                                      ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                                      ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                                      ScrollViewer.CanContentScroll="False"
+                                      Width="245"
+                                      Height="Auto"
+                                      ItemsSource="{Binding OverlayItems, RelativeSource={RelativeSource AncestorType=Window}}">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid Background="Transparent" VerticalAlignment="Center">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition Width="150" />
+                                                <ColumnDefinition Width="Auto" />
+                                            </Grid.ColumnDefinitions>
 
-                                        <Image Grid.Column="0"
-                                               Source="{StaticResource WaypointImage}"
-                                               Width="20"
-                                               Height="20"
-                                               Margin="0,0,6,0"
-                                               Cursor="Hand"
-                                               MouseLeftButtonDown="Waypoint_MouseLeftButtonDown"
-                                               VerticalAlignment="Center" />
+                                            <Image Grid.Column="0"
+                                                   Source="{StaticResource WaypointImage}"
+                                                   Width="20"
+                                                   Height="20"
+                                                   Margin="0,0,6,0"
+                                                   Cursor="Hand"
+                                                   MouseLeftButtonDown="Waypoint_MouseLeftButtonDown"
+                                                   VerticalAlignment="Center" />
 
-                                        <TextBlock Grid.Column="1"
-                                                   Text="{Binding BossName}"
-                                                   Foreground="{Binding Category, Converter={StaticResource CategoryColorConverter}}"
-                                                   TextDecorations="{Binding IsPastEvent, Converter={StaticResource StrikeConverter}}"
-                                                   VerticalAlignment="Center"
-                                                   Width="140"
-                                                   TextTrimming="CharacterEllipsis">
-                                            <TextBlock.Effect>
-                                                <DropShadowEffect Color="Black" BlurRadius="0" ShadowDepth="0" Opacity="1" />
-                                            </TextBlock.Effect>
-                                        </TextBlock>
+                                            <TextBlock Grid.Column="1"
+                                                       Text="{Binding BossName}"
+                                                       Foreground="{Binding Category, Converter={StaticResource CategoryColorConverter}}"
+                                                       TextDecorations="{Binding IsPastEvent, Converter={StaticResource StrikeConverter}}"
+                                                       VerticalAlignment="Center"
+                                                       Width="140"
+                                                       TextTrimming="CharacterEllipsis">
+                                                <TextBlock.Effect>
+                                                    <DropShadowEffect Color="Black" BlurRadius="0" ShadowDepth="0" Opacity="1" />
+                                                </TextBlock.Effect>
+                                            </TextBlock>
 
-                                        <TextBlock Grid.Column="2"
-                                                   Text="{Binding TimeRemainingFormatted}"
-                                                   Foreground="{Binding Category, Converter={StaticResource CategoryColorConverter}}"
-                                                   TextDecorations="{Binding IsPastEvent, Converter={StaticResource StrikeConverter}}"
-                                                   VerticalAlignment="Center">
-                                            <TextBlock.Effect>
-                                                <DropShadowEffect Color="Black" BlurRadius="0" ShadowDepth="0" Opacity="1" />
-                                            </TextBlock.Effect>
-                                        </TextBlock>
-                                    </Grid>
-                                </DataTemplate>
-                            </ListView.ItemTemplate>
-                        </ListView>
+                                            <TextBlock Grid.Column="2"
+                                                       Text="{Binding TimeRemainingFormatted}"
+                                                       Foreground="{Binding Category, Converter={StaticResource CategoryColorConverter}}"
+                                                       TextDecorations="{Binding IsPastEvent, Converter={StaticResource StrikeConverter}}"
+                                                       VerticalAlignment="Center">
+                                                <TextBlock.Effect>
+                                                    <DropShadowEffect Color="Black" BlurRadius="0" ShadowDepth="0" Opacity="1" />
+                                                </TextBlock.Effect>
+                                            </TextBlock>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                        </StackPanel>
                     </ScrollViewer>
 
-                    <!-- Eigenes Thumb-Image als Scroll-Handle -->
+                    <!-- Thumb für Scroll-Handle -->
                     <Canvas Grid.Column="1" Background="Transparent">
                         <Image x:Name="ScrollThumb"
                                Source="pack://application:,,,/GW2FOX;component/Resources/Thumb.png"

@@ -19,9 +19,11 @@ namespace GW2FOX
         private bool _isDragging = false;
         private System.Windows.Point _clickPosition;
         private double _thumbStartTop;
-
+        private double _startOffsetTop = 0;
         private DispatcherTimer _bossTimer;
         private double _scrollValue;
+        private bool isDragging = false;
+        private System.Windows.Point clickPosition;
 
         public ObservableCollection<BossListItem> OverlayItems { get; } = new ObservableCollection<BossListItem>();
 
@@ -43,6 +45,10 @@ namespace GW2FOX
         {
             InitializeComponent();
             DataContext = this;
+
+            // Einmalige Bindung an die ObservableCollection
+            BossListView.ItemsSource = OverlayItems;
+
             this.Left = 1320;
             this.Top = 710;
             _instance = this;
@@ -56,8 +62,20 @@ namespace GW2FOX
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            if (BossListView.Items.Count > 0)
+            {
+                // Das erste ItemContainer besorgen (visuelles Objekt der ersten Zeile)
+                var item = BossListView.ItemContainerGenerator.ContainerFromIndex(0) as FrameworkElement;
+                if (item != null)
+                {
+                    var position = item.TranslatePoint(new System.Windows.Point(0, 0), BossListView);
+                    _startOffsetTop = position.Y;
+                }
+            }
+
             UpdateThumbPosition();
         }
+
 
         private void OverlayWindow_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
         {
@@ -82,56 +100,22 @@ namespace GW2FOX
         {
             if (BossScrollViewer.ExtentHeight <= BossScrollViewer.ViewportHeight)
             {
-                Canvas.SetTop(ScrollThumb, 0);
+                Canvas.SetTop(ScrollThumb, _startOffsetTop);
                 return;
             }
 
             double trackHeight = BossListView.ActualHeight;
             double ratio = BossScrollViewer.ViewportHeight / BossScrollViewer.ExtentHeight;
             double thumbHeight = Math.Max(30, ratio * trackHeight);
-
             ScrollThumb.Height = thumbHeight;
 
             double maxMove = trackHeight - thumbHeight;
             double percent = BossScrollViewer.VerticalOffset / (BossScrollViewer.ExtentHeight - BossScrollViewer.ViewportHeight);
-            double top = percent * maxMove;
+            double calculatedTop = _startOffsetTop + (percent * maxMove);
 
-            Canvas.SetTop(ScrollThumb, top);
-        }
-
-        private void Thumb_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            _isDragging = true;
-            _clickPosition = e.GetPosition(ScrollThumb);
-            _thumbStartTop = Canvas.GetTop(ScrollThumb);
-            ScrollThumb.CaptureMouse();
-        }
-
-        private void Thumb_MouseMove(object sender, System.Windows.Input.MouseEventArgs e)
-        {
-            if (!_isDragging) return;
-
-            var canvas = (Canvas)ScrollThumb.Parent;
-            var pos = e.GetPosition(canvas);
-            double delta = pos.Y - _clickPosition.Y;
-
-            double trackHeight = BossListView.ActualHeight;
-            double thumbHeight = ScrollThumb.ActualHeight;
-            double maxMove = trackHeight - thumbHeight;
-            double newTop = Math.Max(0, Math.Min(maxMove, _thumbStartTop + delta));
-            Canvas.SetTop(ScrollThumb, newTop);
-
-            double scrollable = BossScrollViewer.ExtentHeight - BossScrollViewer.ViewportHeight;
-            double scrollPercent = maxMove > 0 ? newTop / maxMove : 0;
-            double newOffset = scrollPercent * scrollable;
-            BossScrollViewer.ScrollToVerticalOffset(newOffset);
-            ScrollValue = newOffset;
-        }
-
-        private void Thumb_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            _isDragging = false;
-            ScrollThumb.ReleaseMouseCapture();
+            // Nur wenn nicht gerade gezogen wird, neu positionieren
+            if (!_isDragging)
+                Canvas.SetTop(ScrollThumb, calculatedTop);
         }
 
         private void StartBossTimer()
@@ -141,19 +125,79 @@ namespace GW2FOX
             _bossTimer.Start();
         }
 
+
+        private void Thumb_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e) // <-- Wichtig!
+        {
+            if (!isDragging)
+            {
+                isDragging = true;
+                clickPosition = e.GetPosition(MainCanvas);
+                ScrollThumb.CaptureMouse();
+            }
+        }
+
+        private void Thumb_MouseMove(object sender, System.Windows.Input.MouseEventArgs e) // <-- Wichtig!
+        {
+            if (isDragging)
+            {
+                System.Windows.Point currentPosition = e.GetPosition(MainCanvas);
+                double deltaY = currentPosition.Y - clickPosition.Y;
+
+                double newTop = Canvas.GetTop(ScrollThumb) + deltaY;
+
+                double minTop = 0;
+                double maxTop = MainCanvas.ActualHeight - ScrollThumb.ActualHeight;
+                newTop = Math.Max(minTop, Math.Min(newTop, maxTop));
+
+                Canvas.SetTop(ScrollThumb, newTop);
+
+                double scrollableHeight = BossScrollViewer.ScrollableHeight;
+                if (scrollableHeight > 0)
+                {
+                    double scrollOffset = (newTop / maxTop) * scrollableHeight;
+                    BossScrollViewer.ScrollToVerticalOffset(scrollOffset);
+                }
+
+                clickPosition = currentPosition;
+            }
+        }
+
+        private void Thumb_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e) // <-- Wichtig!
+        {
+            if (isDragging)
+            {
+                isDragging = false;
+                ScrollThumb.ReleaseMouseCapture();
+            }
+        }
+
+
         public async void UpdateBossOverlayListAsync()
         {
             try
             {
                 var runs = await Task.Run(() => GetBossRunsForOverlay());
                 var items = await Task.Run(() => BossOverlayHelper.GetBossOverlayItems(runs, DateTime.Now));
-                Dispatcher.Invoke(() => BossListView.ItemsSource = items);
+                Dispatcher.Invoke(() =>
+                {
+                    // 1) Aktuellen Scroll-Offset merken
+                    double currentOffset = BossScrollViewer.VerticalOffset;
+
+                    // 2) ObservableCollection neu befüllen
+                    OverlayItems.Clear();
+                    foreach (var item in items)
+                        OverlayItems.Add(item);
+
+                    // 3) Scroll-Offset wiederherstellen
+                    BossScrollViewer.ScrollToVerticalOffset(currentOffset);
+                });
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Error: {ex.Message}");
             }
         }
+
 
         private void Waypoint_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
