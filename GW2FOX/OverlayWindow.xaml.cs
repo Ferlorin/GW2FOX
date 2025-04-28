@@ -1,24 +1,30 @@
 ﻿using System;
-using System.Windows;
-using System.Windows.Input;
-using System.Windows.Controls;
-using System.Windows.Threading;
-using System.Linq;
-using System.Collections.Generic;
-using System.ComponentModel;
-using static GW2FOX.BossTimerService;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
+using System.Windows.Input;
+using System.Windows.Media.Imaging;
+using System.Windows.Threading;
+
+using static GW2FOX.BossTimerService;
 
 namespace GW2FOX
 {
     public partial class OverlayWindow : Window, INotifyPropertyChanged
     {
         private static OverlayWindow? _instance;
-        private DispatcherTimer bossTimer;
+        private bool _isDragging = false;
+        private System.Windows.Point _clickPosition;
+        private double _thumbStartTop;
+
+        private DispatcherTimer _bossTimer;
+        private double _scrollValue;
+
         public ObservableCollection<BossListItem> OverlayItems { get; } = new ObservableCollection<BossListItem>();
 
-        private double _scrollValue;
         public double ScrollValue
         {
             get => _scrollValue;
@@ -36,66 +42,112 @@ namespace GW2FOX
         public OverlayWindow()
         {
             InitializeComponent();
-           
+            DataContext = this;
             this.Left = 1320;
             this.Top = 710;
             _instance = this;
-
-            DataContext = this;
-            this.PreviewMouseWheel += OverlayWindow_PreviewMouseWheel;
-            this.Loaded += Window_Loaded;
+            Loaded += Window_Loaded;
+            PreviewMouseWheel += OverlayWindow_PreviewMouseWheel;
 
             BossTimings.RegisterListView(BossListView);
-
             StartBossTimer();
-            UpdateBossOverlayListAsync(); // Initial async call
+            UpdateBossOverlayListAsync();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            ScrollValue = BossScrollViewer.VerticalOffset;
+            UpdateThumbPosition();
         }
 
         private void OverlayWindow_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
         {
-            if (BossScrollViewer.IsMouseOver || this.IsActive)
+            if (BossScrollViewer.IsMouseOver || IsActive)
             {
-                double scrollMultiplier = 3.0;
-                var newOffset = BossScrollViewer.VerticalOffset - (e.Delta / 120.0 * scrollMultiplier);
-                BossScrollViewer.ScrollToVerticalOffset(newOffset);
-
-                if (Math.Abs(ScrollValue - newOffset) > 0.1)
-                    _scrollValue = newOffset;
+                double multiplier = 3.0;
+                double offset = BossScrollViewer.VerticalOffset - (e.Delta / 120.0 * multiplier);
+                offset = Math.Max(0, Math.Min(BossScrollViewer.ScrollableHeight, offset));
+                BossScrollViewer.ScrollToVerticalOffset(offset);
+                ScrollValue = offset;
+                UpdateThumbPosition();
                 e.Handled = true;
             }
         }
 
-
         private void BossScrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e)
         {
-            if (ScrollValue != e.VerticalOffset)
-                ScrollValue = e.VerticalOffset;
+            UpdateThumbPosition();
+        }
+
+        private void UpdateThumbPosition()
+        {
+            if (BossScrollViewer.ExtentHeight <= BossScrollViewer.ViewportHeight)
+            {
+                Canvas.SetTop(ScrollThumb, 0);
+                return;
+            }
+
+            double trackHeight = BossListView.ActualHeight;
+            double ratio = BossScrollViewer.ViewportHeight / BossScrollViewer.ExtentHeight;
+            double thumbHeight = Math.Max(30, ratio * trackHeight);
+
+            ScrollThumb.Height = thumbHeight;
+
+            double maxMove = trackHeight - thumbHeight;
+            double percent = BossScrollViewer.VerticalOffset / (BossScrollViewer.ExtentHeight - BossScrollViewer.ViewportHeight);
+            double top = percent * maxMove;
+
+            Canvas.SetTop(ScrollThumb, top);
+        }
+
+        private void Thumb_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            _isDragging = true;
+            _clickPosition = e.GetPosition(ScrollThumb);
+            _thumbStartTop = Canvas.GetTop(ScrollThumb);
+            ScrollThumb.CaptureMouse();
+        }
+
+        private void Thumb_MouseMove(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            if (!_isDragging) return;
+
+            var canvas = (Canvas)ScrollThumb.Parent;
+            var pos = e.GetPosition(canvas);
+            double delta = pos.Y - _clickPosition.Y;
+
+            double trackHeight = BossListView.ActualHeight;
+            double thumbHeight = ScrollThumb.ActualHeight;
+            double maxMove = trackHeight - thumbHeight;
+            double newTop = Math.Max(0, Math.Min(maxMove, _thumbStartTop + delta));
+            Canvas.SetTop(ScrollThumb, newTop);
+
+            double scrollable = BossScrollViewer.ExtentHeight - BossScrollViewer.ViewportHeight;
+            double scrollPercent = maxMove > 0 ? newTop / maxMove : 0;
+            double newOffset = scrollPercent * scrollable;
+            BossScrollViewer.ScrollToVerticalOffset(newOffset);
+            ScrollValue = newOffset;
+        }
+
+        private void Thumb_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            _isDragging = false;
+            ScrollThumb.ReleaseMouseCapture();
         }
 
         private void StartBossTimer()
         {
-            bossTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
-            bossTimer.Tick += (s, e) => UpdateBossOverlayListAsync();
-            bossTimer.Start();
+            _bossTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
+            _bossTimer.Tick += (s, e) => UpdateBossOverlayListAsync();
+            _bossTimer.Start();
         }
 
-        private async void UpdateBossOverlayListAsync()
+        public async void UpdateBossOverlayListAsync()
         {
             try
             {
-                var combinedRuns = await Task.Run(() => BossTimerService.GetBossRunsForOverlay());
-                var overlayItems = await Task.Run(() => BossOverlayHelper.GetBossOverlayItems(combinedRuns, DateTime.Now));
-
-                Dispatcher.Invoke(() =>
-                {
-                    BossListView.ItemsSource = null;
-                    BossListView.ItemsSource = overlayItems;
-                });
+                var runs = await Task.Run(() => GetBossRunsForOverlay());
+                var items = await Task.Run(() => BossOverlayHelper.GetBossOverlayItems(runs, DateTime.Now));
+                Dispatcher.Invoke(() => BossListView.ItemsSource = items);
             }
             catch (Exception ex)
             {
@@ -108,9 +160,8 @@ namespace GW2FOX
             if (sender is System.Windows.Controls.Image img && img.DataContext is BossListItem boss)
             {
                 System.Windows.Clipboard.SetText(boss.Waypoint);
-                System.Windows.Point position = img.TranslatePoint(new System.Windows.Point(0, img.ActualHeight), this);
-
-                ShowCopiedMessage(position);
+                var pos = img.TranslatePoint(new System.Windows.Point(0, img.ActualHeight), this);
+                ShowCopiedMessage(pos);
             }
         }
 
@@ -118,68 +169,28 @@ namespace GW2FOX
         {
             CopiedMessage.Visibility = Visibility.Visible;
             Canvas.SetLeft(CopiedMessage, position.X);
-            Canvas.SetTop(CopiedMessage, position.Y - 40); // ← 20 Pixel höher!
+            Canvas.SetTop(CopiedMessage, position.Y - 40);
 
-            var timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(0.2) };
-            timer.Tick += (s, e) =>
-            {
-                CopiedMessage.Visibility = Visibility.Collapsed;
-                timer.Stop();
-            };
-            timer.Start();
-        }
-
-
-        private void ManualScrollBar_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-            if (BossScrollViewer != null)
-            {
-                BossScrollViewer.ScrollToVerticalOffset(e.NewValue);
-            }
+            var t = new DispatcherTimer { Interval = TimeSpan.FromSeconds(0.2) };
+            t.Tick += (s, e) => { CopiedMessage.Visibility = Visibility.Collapsed; t.Stop(); };
+            t.Start();
         }
 
 
         private void Icon_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left)
-                this.DragMove();
+                DragMove();
         }
 
-        public static OverlayWindow GetInstance()
-        {
-            return _instance ??= new OverlayWindow();
-        }
+        public static OverlayWindow GetInstance() => _instance ??= new OverlayWindow();
 
         protected override void OnClosed(EventArgs e)
         {
-            bossTimer?.Stop();
-            bossTimer = null;
+            _bossTimer?.Stop();
+            _bossTimer = null;
             _instance = null;
             base.OnClosed(e);
-        }
-
-        public void UpdateBossOverlayList()
-        {
-            try
-            {
-                var combinedRuns = BossTimerService.GetBossRunsForOverlay();
-                var overlayItems = BossOverlayHelper.GetBossOverlayItems(combinedRuns, DateTime.Now);
-
-                Dispatcher.Invoke(() =>
-                {
-                    BossListView.ItemsSource = null;
-                    BossListView.ItemsSource = overlayItems;
-                });
-
-                foreach (var boss in overlayItems)
-                {
-                    //Console.WriteLine($"- {boss.BossName} | {boss.TimeRemainingFormatted} | Vergangen: {boss.IsPastEvent}");
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error: {ex.Message}");
-            }
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;

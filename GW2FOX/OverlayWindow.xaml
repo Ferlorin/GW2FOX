@@ -1,4 +1,5 @@
-﻿<Window x:Class="GW2FOX.OverlayWindow"
+﻿<!-- OverlayWindow.xaml -->
+<Window x:Class="GW2FOX.OverlayWindow"
         x:Name="MainOverlayWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -22,92 +23,40 @@
         <local:ItalicConverter x:Key="ItalicConverter" />
         <local:CategoryColorConverter x:Key="CategoryColorConverter" />
 
-        <!-- Bild-Ressource -->
+        <!-- Bild-Ressource für Waypoint -->
         <BitmapImage x:Key="WaypointImage"
-         UriSource="/Waypoint.png" />
+                     UriSource="/Waypoint.png" />
 
         <!-- Leeres ControlTemplate für RepeatButton -->
         <ControlTemplate x:Key="EmptyButtonTemplate" TargetType="RepeatButton">
             <Grid />
         </ControlTemplate>
-
-        <!-- Style, um das ControlTemplate anzuwenden -->
         <Style x:Key="EmptyButtonStyle" TargetType="RepeatButton">
             <Setter Property="Template" Value="{StaticResource EmptyButtonTemplate}" />
-        </Style>
-
-        <!-- Custom ScrollBar-Style: nur Thumb.png -->
-        <Style x:Key="ImageOnlyScrollBar" TargetType="ScrollBar">
-            <Setter Property="Width" Value="16" />
-            <Setter Property="Background" Value="Transparent" />
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="ScrollBar">
-                        <Grid Background="Transparent">
-                            <Track x:Name="PART_Track"
-                               Orientation="Vertical"
-                               IsDirectionReversed="True"
-                               Focusable="False"
-                               Minimum="{TemplateBinding Minimum}"
-                               Maximum="{TemplateBinding Maximum}"
-                               Value="{TemplateBinding Value}"
-                               ViewportSize="{TemplateBinding ViewportSize}">
-
-                                <!-- unsichtbarer Pfeil oben -->
-                                <Track.DecreaseRepeatButton>
-                                    <RepeatButton Style="{StaticResource EmptyButtonStyle}" />
-                                </Track.DecreaseRepeatButton>
-
-                                <!-- Thumb als Bild -->
-                                <Track.Thumb>
-                                    <Thumb Width="18" Height="30" Visibility="Visible">
-                                        <Thumb.Template>
-                                            <ControlTemplate TargetType="Thumb">
-                                                <Image Source="/GW2FOX;component/Thumb.png"
-       Width="20"
-       Height="20"
-       Margin="5,0,0,0"
-       HorizontalAlignment="Center"
-       VerticalAlignment="Center"/>
-                                            </ControlTemplate>
-                                        </Thumb.Template>
-                                    </Thumb>
-                                </Track.Thumb>
-
-                                <!-- unsichtbarer Pfeil unten -->
-                                <Track.IncreaseRepeatButton>
-                                    <RepeatButton Style="{StaticResource EmptyButtonStyle}" />
-                                </Track.IncreaseRepeatButton>
-
-                            </Track>
-                        </Grid>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
         </Style>
     </Window.Resources>
 
     <Canvas x:Name="MainCanvas" Background="Transparent">
         <TextBlock x:Name="CopiedMessage"
-               Visibility="Collapsed"
-               Opacity="0.9"
-               Text="Copied!"
-               Background="#AA000000"
-               Foreground="White"
-               Padding="6,2"
-               FontSize="12"
-               Panel.ZIndex="999">
+                   Visibility="Collapsed"
+                   Opacity="0.9"
+                   Text="Copied!"
+                   Background="#AA000000"
+                   Foreground="White"
+                   Padding="6,2"
+                   FontSize="12"
+                   Panel.ZIndex="999">
             <TextBlock.Effect>
                 <DropShadowEffect Color="Black"
-                              BlurRadius="4"
-                              ShadowDepth="1"
-                              Opacity="0.5" />
+                                  BlurRadius="4"
+                                  ShadowDepth="1"
+                                  Opacity="0.5" />
             </TextBlock.Effect>
         </TextBlock>
 
         <Border Background="Transparent"
-            BorderBrush="#333"
-            BorderThickness="0">
+                BorderBrush="#333"
+                BorderThickness="0">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="30" />
@@ -122,31 +71,31 @@
                     </Grid.ColumnDefinitions>
 
                     <Image x:Name="Com"
-                       Source="/Com.png"
-                       Width="20"
-                       Height="20"
-                       Margin="6,5,4,5"
-                       MouseLeftButtonDown="Icon_MouseLeftButtonDown" />
+                           Source="/Com.png"
+                           Width="20"
+                           Height="20"
+                           Margin="6,5,4,5"
+                           MouseLeftButtonDown="Icon_MouseLeftButtonDown" />
 
                     <TextBlock Grid.Column="1"
-                           VerticalAlignment="Center"
-                           Foreground="White"
-                           FontFamily="Segoe UI"
-                           FontWeight="Bold"
-                           FontSize="14"
-                           Text="Boss-Timer">
+                               VerticalAlignment="Center"
+                               Foreground="White"
+                               FontFamily="Segoe UI"
+                               FontWeight="Bold"
+                               FontSize="14"
+                               Text="Boss-Timer">
                         <TextBlock.Effect>
                             <DropShadowEffect Color="Black"
-                                          BlurRadius="0"
-                                          ShadowDepth="0"
-                                          Opacity="1" />
+                                              BlurRadius="0"
+                                              ShadowDepth="0"
+                                              Opacity="1" />
                         </TextBlock.Effect>
                     </TextBlock>
 
                     <Rectangle Grid.ColumnSpan="2"
-                           VerticalAlignment="Bottom"
-                           Height="1"
-                           IsHitTestVisible="False">
+                               VerticalAlignment="Bottom"
+                               Height="1"
+                               IsHitTestVisible="False">
                         <Rectangle.Fill>
                             <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
                                 <GradientStop Color="#00FFFFFF" Offset="0.0" />
@@ -157,32 +106,32 @@
                     </Rectangle>
                 </Grid>
 
-                <!-- Content mit ListView und eigener ScrollBar -->
+                <!-- Content mit eigener ScrollThumb -->
                 <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="20" />
+                        <ColumnDefinition Width="30" />
+                        <!-- Platz für Thumb.png -->
                     </Grid.ColumnDefinitions>
 
+                    <!-- Unsichtbarer ScrollViewer -->
                     <ScrollViewer x:Name="BossScrollViewer"
-                              Grid.Column="0"
-                              VerticalScrollBarVisibility="Hidden"
-                              HorizontalScrollBarVisibility="Disabled"
-                              Background="Transparent"
-                              ScrollChanged="BossScrollViewer_ScrollChanged">
-
+                                  Grid.Column="0"
+                                  VerticalScrollBarVisibility="Hidden"
+                                  HorizontalScrollBarVisibility="Disabled"
+                                  Background="Transparent"
+                                  ScrollChanged="BossScrollViewer_ScrollChanged">
                         <ListView x:Name="BossListView"
-                              BorderThickness="0"
-                              Background="Transparent"
-                              FontFamily="Segoe UI"
-                              FontWeight="Bold"
-                              FontSize="14"
-                              Padding="0"
-                              ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                              ScrollViewer.VerticalScrollBarVisibility="Disabled"
-                              Width="245"
-                              Height="335">
-
+                                  BorderThickness="0"
+                                  Background="Transparent"
+                                  FontFamily="Segoe UI"
+                                  FontWeight="Bold"
+                                  FontSize="14"
+                                  Padding="0"
+                                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                                  ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                                  Width="245"
+                                  Height="335">
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <Grid Background="Transparent" VerticalAlignment="Center">
@@ -193,31 +142,31 @@
                                         </Grid.ColumnDefinitions>
 
                                         <Image Grid.Column="0"
-                                           Source="{StaticResource WaypointImage}"
-                                           Width="20"
-                                           Height="20"
-                                           Margin="0,0,6,0"
-                                           Cursor="Hand"
-                                           MouseLeftButtonDown="Waypoint_MouseLeftButtonDown"
-                                           VerticalAlignment="Center" />
+                                               Source="{StaticResource WaypointImage}"
+                                               Width="20"
+                                               Height="20"
+                                               Margin="0,0,6,0"
+                                               Cursor="Hand"
+                                               MouseLeftButtonDown="Waypoint_MouseLeftButtonDown"
+                                               VerticalAlignment="Center" />
 
                                         <TextBlock Grid.Column="1"
-                                               Text="{Binding BossName}"
-                                               Foreground="{Binding Category, Converter={StaticResource CategoryColorConverter}}"
-                                               TextDecorations="{Binding IsPastEvent, Converter={StaticResource StrikeConverter}}"
-                                               VerticalAlignment="Center"
-                                               Width="140"
-                                               TextTrimming="CharacterEllipsis">
+                                                   Text="{Binding BossName}"
+                                                   Foreground="{Binding Category, Converter={StaticResource CategoryColorConverter}}"
+                                                   TextDecorations="{Binding IsPastEvent, Converter={StaticResource StrikeConverter}}"
+                                                   VerticalAlignment="Center"
+                                                   Width="140"
+                                                   TextTrimming="CharacterEllipsis">
                                             <TextBlock.Effect>
                                                 <DropShadowEffect Color="Black" BlurRadius="0" ShadowDepth="0" Opacity="1" />
                                             </TextBlock.Effect>
                                         </TextBlock>
 
                                         <TextBlock Grid.Column="2"
-                                               Text="{Binding TimeRemainingFormatted}"
-                                               Foreground="{Binding Category, Converter={StaticResource CategoryColorConverter}}"
-                                               TextDecorations="{Binding IsPastEvent, Converter={StaticResource StrikeConverter}}"
-                                               VerticalAlignment="Center">
+                                                   Text="{Binding TimeRemainingFormatted}"
+                                                   Foreground="{Binding Category, Converter={StaticResource CategoryColorConverter}}"
+                                                   TextDecorations="{Binding IsPastEvent, Converter={StaticResource StrikeConverter}}"
+                                                   VerticalAlignment="Center">
                                             <TextBlock.Effect>
                                                 <DropShadowEffect Color="Black" BlurRadius="0" ShadowDepth="0" Opacity="1" />
                                             </TextBlock.Effect>
@@ -228,14 +177,17 @@
                         </ListView>
                     </ScrollViewer>
 
-                    <ScrollBar Style="{StaticResource ImageOnlyScrollBar}"
-                           Grid.Column="1"
-                           Minimum="0"
-                           Maximum="{Binding ElementName=BossScrollViewer, Path=ScrollableHeight}"
-                           Value="{Binding ElementName=BossScrollViewer, Path=VerticalOffset, Mode=OneWay}"
-                           ViewportSize="{Binding ElementName=BossScrollViewer, Path=ViewportHeight}"
-                           ValueChanged="ManualScrollBar_ValueChanged"
-                           Margin="1,0,0,0" />
+                    <!-- Eigenes Thumb-Image als Scroll-Handle -->
+                    <Canvas Grid.Column="1" Background="Transparent">
+                        <Image x:Name="ScrollThumb"
+                               Source="pack://application:,,,/GW2FOX;component/Resources/Thumb.png"
+                               Width="20"
+                               Height="40"
+                               Cursor="Hand"
+                               MouseLeftButtonDown="Thumb_MouseLeftButtonDown"
+                               MouseMove="Thumb_MouseMove"
+                               MouseLeftButtonUp="Thumb_MouseLeftButtonUp" />
+                    </Canvas>
                 </Grid>
             </Grid>
         </Border>
