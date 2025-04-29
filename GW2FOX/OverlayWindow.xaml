@@ -14,71 +14,34 @@
         Width="300"
         Height="375"
         ShowInTaskbar="False"
-        Title="OverlayWindow">
+        Title="OverlayWindow"
+        PreviewMouseWheel="OverlayWindow_PreviewMouseWheel">
 
     <Window.Resources>
-        <!-- Converters -->
         <local:StrikeConverter x:Key="StrikeConverter" />
         <local:ItalicConverter x:Key="ItalicConverter" />
         <local:CategoryColorConverter x:Key="CategoryColorConverter" />
+        <BitmapImage x:Key="WaypointImage" UriSource="/Waypoint.png" />
 
-        <!-- Bild-Ressource -->
-        <BitmapImage x:Key="WaypointImage"
-         UriSource="/Waypoint.png" />
-
-        <!-- Leeres ControlTemplate für RepeatButton -->
-        <ControlTemplate x:Key="EmptyButtonTemplate" TargetType="RepeatButton">
-            <Grid />
-        </ControlTemplate>
-
-        <!-- Style, um das ControlTemplate anzuwenden -->
-        <Style x:Key="EmptyButtonStyle" TargetType="RepeatButton">
-            <Setter Property="Template" Value="{StaticResource EmptyButtonTemplate}" />
-        </Style>
-
-        <!-- Custom ScrollBar-Style: nur Thumb.png -->
-        <Style x:Key="ImageOnlyScrollBar" TargetType="ScrollBar">
-            <Setter Property="Width" Value="16" />
-            <Setter Property="Background" Value="Transparent" />
+        <Style x:Key="StandardScrollBar" TargetType="ScrollBar">
+            <Setter Property="SnapsToDevicePixels" Value="True"/>
+            <Setter Property="OverridesDefaultStyle" Value="True"/>
+            <Setter Property="IsTabStop" Value="False"/>
+            <Setter Property="Focusable" Value="False"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="ScrollBar">
-                        <Grid Background="Transparent">
-                            <Track x:Name="PART_Track"
-                               Orientation="Vertical"
-                               IsDirectionReversed="True"
-                               Focusable="False"
-                               Minimum="{TemplateBinding Minimum}"
-                               Maximum="{TemplateBinding Maximum}"
-                               Value="{TemplateBinding Value}"
-                               ViewportSize="{TemplateBinding ViewportSize}">
-
-                                <!-- unsichtbarer Pfeil oben -->
+                        <Grid>
+                            <Track x:Name="PART_Track" IsDirectionReversed="True">
                                 <Track.DecreaseRepeatButton>
-                                    <RepeatButton Style="{StaticResource EmptyButtonStyle}" />
+                                    <RepeatButton Visibility="Collapsed" IsEnabled="False"/>
                                 </Track.DecreaseRepeatButton>
-
-                                <!-- Thumb als Bild -->
                                 <Track.Thumb>
-                                    <Thumb Width="18" Height="30" Visibility="Visible">
-                                        <Thumb.Template>
-                                            <ControlTemplate TargetType="Thumb">
-                                                <Image Source="/GW2FOX;component/Thumb.png"
-       Width="20"
-       Height="20"
-       Margin="5,0,0,0"
-       HorizontalAlignment="Center"
-       VerticalAlignment="Center"/>
-                                            </ControlTemplate>
-                                        </Thumb.Template>
-                                    </Thumb>
+                                    <Thumb Background="#FFBFBFBF" BorderBrush="#FF707070" BorderThickness="1"/>
                                 </Track.Thumb>
-
-                                <!-- unsichtbarer Pfeil unten -->
                                 <Track.IncreaseRepeatButton>
-                                    <RepeatButton Style="{StaticResource EmptyButtonStyle}" />
+                                    <RepeatButton Visibility="Collapsed" IsEnabled="False"/>
                                 </Track.IncreaseRepeatButton>
-
                             </Track>
                         </Grid>
                     </ControlTemplate>
@@ -87,157 +50,130 @@
         </Style>
     </Window.Resources>
 
-    <Canvas x:Name="MainCanvas" Background="Transparent">
+    <Grid Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Copied-Message -->
         <TextBlock x:Name="CopiedMessage"
-               Visibility="Collapsed"
-               Opacity="0.9"
-               Text="Copied!"
-               Background="#AA000000"
-               Foreground="White"
-               Padding="6,2"
-               FontSize="12"
-               Panel.ZIndex="999">
+                   Visibility="Collapsed"
+                   Opacity="0.9"
+                   Text="Copied!"
+                   Background="#AA000000"
+                   Foreground="White"
+                   Padding="6,2"
+                   FontSize="12"
+                   Panel.ZIndex="999"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
+                   Margin="0,40,0,0">
             <TextBlock.Effect>
-                <DropShadowEffect Color="Black"
-                              BlurRadius="4"
-                              ShadowDepth="1"
-                              Opacity="0.5" />
+                <DropShadowEffect Color="Black" BlurRadius="4" ShadowDepth="1" Opacity="0.5"/>
             </TextBlock.Effect>
         </TextBlock>
 
-        <Border Background="Transparent"
-            BorderBrush="#333"
-            BorderThickness="0">
+        <!-- Header -->
+        <Border Grid.Row="0" Background="Transparent" BorderThickness="0">
             <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="30" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
-
-                <!-- Header -->
-                <Grid Grid.Row="0" Background="Transparent">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-
-                    <Image x:Name="Com"
-                       Source="/Com.png"
-                       Width="20"
-                       Height="20"
-                       Margin="6,5,4,5"
-                       MouseLeftButtonDown="Icon_MouseLeftButtonDown" />
-
-                    <TextBlock Grid.Column="1"
-                           VerticalAlignment="Center"
-                           Foreground="White"
-                           FontFamily="Segoe UI"
-                           FontWeight="Bold"
-                           FontSize="14"
-                           Text="Boss-Timer">
-                        <TextBlock.Effect>
-                            <DropShadowEffect Color="Black"
-                                          BlurRadius="0"
-                                          ShadowDepth="0"
-                                          Opacity="1" />
-                        </TextBlock.Effect>
-                    </TextBlock>
-
-                    <Rectangle Grid.ColumnSpan="2"
-                           VerticalAlignment="Bottom"
-                           Height="1"
-                           IsHitTestVisible="False">
-                        <Rectangle.Fill>
-                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
-                                <GradientStop Color="#00FFFFFF" Offset="0.0" />
-                                <GradientStop Color="#66FFFFFF" Offset="0.5" />
-                                <GradientStop Color="#00FFFFFF" Offset="1.0" />
-                            </LinearGradientBrush>
-                        </Rectangle.Fill>
-                    </Rectangle>
-                </Grid>
-
-                <!-- Content mit ListView und eigener ScrollBar -->
-                <Grid Grid.Row="1">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="20" />
-                    </Grid.ColumnDefinitions>
-
-                    <ScrollViewer x:Name="BossScrollViewer"
-                              Grid.Column="0"
-                              VerticalScrollBarVisibility="Hidden"
-                              HorizontalScrollBarVisibility="Disabled"
-                              Background="Transparent"
-                              ScrollChanged="BossScrollViewer_ScrollChanged">
-
-                        <ListView x:Name="BossListView"
-                              BorderThickness="0"
-                              Background="Transparent"
-                              FontFamily="Segoe UI"
-                              FontWeight="Bold"
-                              FontSize="14"
-                              Padding="0"
-                              ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                              ScrollViewer.VerticalScrollBarVisibility="Disabled"
-                              Width="245"
-                              Height="335">
-
-                            <ListView.ItemTemplate>
-                                <DataTemplate>
-                                    <Grid Background="Transparent" VerticalAlignment="Center">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="Auto" />
-                                            <ColumnDefinition Width="150" />
-                                            <ColumnDefinition Width="Auto" />
-                                        </Grid.ColumnDefinitions>
-
-                                        <Image Grid.Column="0"
-                                           Source="{StaticResource WaypointImage}"
-                                           Width="20"
-                                           Height="20"
-                                           Margin="0,0,6,0"
-                                           Cursor="Hand"
-                                           MouseLeftButtonDown="Waypoint_MouseLeftButtonDown"
-                                           VerticalAlignment="Center" />
-
-                                        <TextBlock Grid.Column="1"
-                                               Text="{Binding BossName}"
-                                               Foreground="{Binding Category, Converter={StaticResource CategoryColorConverter}}"
-                                               TextDecorations="{Binding IsPastEvent, Converter={StaticResource StrikeConverter}}"
-                                               VerticalAlignment="Center"
-                                               Width="140"
-                                               TextTrimming="CharacterEllipsis">
-                                            <TextBlock.Effect>
-                                                <DropShadowEffect Color="Black" BlurRadius="0" ShadowDepth="0" Opacity="1" />
-                                            </TextBlock.Effect>
-                                        </TextBlock>
-
-                                        <TextBlock Grid.Column="2"
-                                               Text="{Binding TimeRemainingFormatted}"
-                                               Foreground="{Binding Category, Converter={StaticResource CategoryColorConverter}}"
-                                               TextDecorations="{Binding IsPastEvent, Converter={StaticResource StrikeConverter}}"
-                                               VerticalAlignment="Center">
-                                            <TextBlock.Effect>
-                                                <DropShadowEffect Color="Black" BlurRadius="0" ShadowDepth="0" Opacity="1" />
-                                            </TextBlock.Effect>
-                                        </TextBlock>
-                                    </Grid>
-                                </DataTemplate>
-                            </ListView.ItemTemplate>
-                        </ListView>
-                    </ScrollViewer>
-
-                    <ScrollBar Style="{StaticResource ImageOnlyScrollBar}"
-                           Grid.Column="1"
-                           Minimum="0"
-                           Maximum="{Binding ElementName=BossScrollViewer, Path=ScrollableHeight}"
-                           Value="{Binding ElementName=BossScrollViewer, Path=VerticalOffset, Mode=OneWay}"
-                           ViewportSize="{Binding ElementName=BossScrollViewer, Path=ViewportHeight}"
-                           ValueChanged="ManualScrollBar_ValueChanged"
-                           Margin="1,0,0,0" />
-                </Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Image x:Name="Com" Source="/Com.png" Width="20" Height="20" Margin="6,5,4,5"
+                       MouseLeftButtonDown="Icon_MouseLeftButtonDown"/>
+                <TextBlock Grid.Column="1" VerticalAlignment="Center" Foreground="White"
+                           FontFamily="Segoe UI" FontWeight="Bold" FontSize="14" Text="Boss-Timer">
+                    <TextBlock.Effect>
+                        <DropShadowEffect Color="Black" BlurRadius="0" ShadowDepth="0" Opacity="1"/>
+                    </TextBlock.Effect>
+                </TextBlock>
             </Grid>
         </Border>
-    </Canvas>
+
+        <!-- Content + Scrollbar -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="20"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Scrollable List -->
+            <ScrollViewer x:Name="BossScrollViewer"
+                          VerticalScrollBarVisibility="Hidden"
+                          HorizontalScrollBarVisibility="Disabled"
+                          Background="Transparent">
+                <ListView x:Name="BossListView"
+                          ItemsSource="{Binding OverlayItems}"
+                          Background="Transparent"
+                          BorderThickness="0"
+                          FontFamily="Segoe UI"
+                          FontWeight="Bold"
+                          FontSize="14"
+                          ScrollViewer.CanContentScroll="True"
+                          ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                          ScrollViewer.VerticalScrollBarVisibility="Hidden">
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="Padding" Value="0"/>
+                            <Setter Property="Margin" Value="0"/>
+                            <Setter Property="BorderThickness" Value="0"/>
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                            <Setter Property="VerticalContentAlignment" Value="Center"/>
+                            <Setter Property="Background" Value="Transparent"/>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Background="Transparent" VerticalAlignment="Center" Height="20">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="150"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Image Grid.Column="0" Source="{StaticResource WaypointImage}"
+                                       Width="20" Height="20" Margin="0,0,6,0"
+                                       Cursor="Hand"
+                                       MouseLeftButtonDown="Waypoint_MouseLeftButtonDown"/>
+
+                                <TextBlock Grid.Column="1" Text="{Binding BossName}"
+                                           Foreground="{Binding Category, Converter={StaticResource CategoryColorConverter}}"
+                                           TextDecorations="{Binding IsPastEvent, Converter={StaticResource StrikeConverter}}"
+                                           VerticalAlignment="Center"
+                                           Width="140"
+                                           TextTrimming="CharacterEllipsis">
+                                    <TextBlock.Effect>
+                                        <DropShadowEffect Color="Black" BlurRadius="0" ShadowDepth="0" Opacity="1"/>
+                                    </TextBlock.Effect>
+                                </TextBlock>
+
+                                <TextBlock Grid.Column="2" Text="{Binding TimeRemainingFormatted}"
+                                           Foreground="{Binding Category, Converter={StaticResource CategoryColorConverter}}"
+                                           TextDecorations="{Binding IsPastEvent, Converter={StaticResource StrikeConverter}}"
+                                           VerticalAlignment="Center">
+                                    <TextBlock.Effect>
+                                        <DropShadowEffect Color="Black" BlurRadius="0" ShadowDepth="0" Opacity="1"/>
+                                    </TextBlock.Effect>
+                                </TextBlock>
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </ScrollViewer>
+
+            <!-- Scrollbar -->
+            <ScrollBar x:Name="CustomScrollBar"
+                       Grid.Column="1"
+                       Orientation="Vertical"
+                       Style="{StaticResource StandardScrollBar}"
+                       Minimum="0"
+                       Maximum="{Binding ElementName=BossScrollViewer, Path=ScrollableHeight}"
+                       ViewportSize="{Binding ElementName=BossScrollViewer, Path=ViewportHeight}"
+                       Value="{Binding ElementName=BossScrollViewer, Path=VerticalOffset, Mode=OneWay}"
+                       ValueChanged="CustomScrollBar_ValueChanged"/>
+        </Grid>
+    </Grid>
 </Window>
