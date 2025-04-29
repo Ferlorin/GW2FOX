@@ -37,7 +37,14 @@
                                     <RepeatButton Visibility="Collapsed" IsEnabled="False"/>
                                 </Track.DecreaseRepeatButton>
                                 <Track.Thumb>
-                                    <Thumb Background="#FFBFBFBF" BorderBrush="#FF707070" BorderThickness="1"/>
+                                    <Thumb Width="9" Height="30">
+                                        <Thumb.Template>
+                                            <ControlTemplate TargetType="Thumb">
+                                                <Border Width="9" Height="30" Background="GhostWhite" 
+                                                CornerRadius="4.5" BorderBrush="Gray" BorderThickness="1"/>
+                                            </ControlTemplate>
+                                        </Thumb.Template>
+                                    </Thumb>
                                 </Track.Thumb>
                                 <Track.IncreaseRepeatButton>
                                     <RepeatButton Visibility="Collapsed" IsEnabled="False"/>
@@ -48,6 +55,8 @@
                 </Setter.Value>
             </Setter>
         </Style>
+
+
     </Window.Resources>
 
     <Grid Background="Transparent">
