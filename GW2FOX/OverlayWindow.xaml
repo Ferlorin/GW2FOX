@@ -37,10 +37,10 @@
                                     <RepeatButton Visibility="Collapsed" IsEnabled="False"/>
                                 </Track.DecreaseRepeatButton>
                                 <Track.Thumb>
-                                    <Thumb Width="10" Height="30">
+                                    <Thumb Width="9" Height="25">
                                         <Thumb.Template>
                                             <ControlTemplate TargetType="Thumb">
-                                                <Border Width="9" Height="30" Background="GhostWhite" 
+                                                <Border Width="9" Height="25" Background="GhostWhite" 
                     CornerRadius="4.5" BorderBrush="Gray" BorderThickness="1"/>
                                             </ControlTemplate>
                                         </Thumb.Template>
