@@ -15,6 +15,9 @@ using WpfClipboard = System.Windows.Clipboard;
 using WpfPoint = System.Windows.Point;
 using WpfMouseEventArgs = System.Windows.Input.MouseWheelEventArgs;
 using WpfMouseButtonEventArgs = System.Windows.Input.MouseButtonEventArgs;
+using WpfSize = System.Windows.Size;
+
+using System.Windows.Media.Animation;
 
 namespace GW2FOX
 {
@@ -92,30 +95,98 @@ namespace GW2FOX
             }
         }
 
-        private void Waypoint_MouseLeftButtonDown(object sender, WpfMouseButtonEventArgs e)
+        private void Waypoint_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
         {
-            if (sender is WpfImage img && img.DataContext is BossListItem boss)
+            if (sender is WpfImage img)
+                AnimateScale(img, 1.10);
+        }
+
+        private void Waypoint_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            if (sender is WpfImage img)
+                AnimateScale(img, 1.0);
+        }
+
+        private void Waypoint_MouseDown(object sender, WpfMouseButtonEventArgs e)
+        {
+            if (sender is WpfImage img)
             {
-                WpfClipboard.SetText(boss.Waypoint);
-                var pos = img.TranslatePoint(new WpfPoint(0, img.ActualHeight), this);
-                ShowCopiedMessage(pos);
+                AnimateScale(img, 0.90);
+                img.Opacity = 0.7;
             }
         }
 
-        private void ShowCopiedMessage(WpfPoint position)
+        private void Waypoint_MouseUp(object sender, WpfMouseButtonEventArgs e)
         {
-            CopiedMessage.Visibility = Visibility.Visible;
-            Canvas.SetLeft(CopiedMessage, position.X);
-            Canvas.SetTop(CopiedMessage, position.Y - 40);
-
-            var timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(0.5) };
-            timer.Tick += (s, e) =>
+            if (sender is WpfImage img)
             {
-                CopiedMessage.Visibility = Visibility.Collapsed;
-                timer.Stop();
-            };
-            timer.Start();
+                AnimateScale(img, 1.10);
+                img.Opacity = 1.0;
+            }
         }
+        
+
+        private void AnimateScale(WpfImage img, double toScale, double durationMs = 100)
+        {
+            if (img.RenderTransform is not ScaleTransform scale)
+                return;
+
+            // Freeze fix
+            if (scale.IsFrozen)
+            {
+                scale = scale.Clone();
+                img.RenderTransform = scale;
+            }
+
+            var animX = new DoubleAnimation
+            {
+                To = toScale,
+                Duration = TimeSpan.FromMilliseconds(durationMs),
+                EasingFunction = new QuadraticEase { EasingMode = EasingMode.EaseOut }
+            };
+            var animY = animX.Clone();
+
+            scale.BeginAnimation(ScaleTransform.ScaleXProperty, animX);
+            scale.BeginAnimation(ScaleTransform.ScaleYProperty, animY);
+        }
+
+
+        private void Waypoint_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (sender is FrameworkElement fe && fe.DataContext is BossListItem item)
+            {
+                // Waypoint kopieren
+                WpfClipboard.SetText(item.Waypoint);
+
+                // Position des Waypoints im Fenster ermitteln
+                var position = fe.TransformToAncestor(this).Transform(new WpfPoint(0, 0));
+
+                // Größe der Nachricht berechnen
+                CopiedMessage.Measure(new WpfSize(double.PositiveInfinity, double.PositiveInfinity));
+
+                // X: zentriert über dem Icon, Y: oberhalb des Icons
+                double left = position.X + (fe.ActualWidth / 2) - (CopiedMessage.DesiredSize.Width / 2);
+                double top = position.Y - CopiedMessage.DesiredSize.Height - 18; // 4px Abstand nach oben
+
+                // Setzen der Position
+                Canvas.SetLeft(CopiedMessage, left);
+                Canvas.SetTop(CopiedMessage, top);
+
+                CopiedMessage.Visibility = Visibility.Visible;
+
+                // Automatisch wieder ausblenden
+                var timer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(300) };
+                timer.Tick += (s, _) =>
+                {
+                    CopiedMessage.Visibility = Visibility.Collapsed;
+                    timer.Stop();
+                };
+                timer.Start();
+            }
+        }
+
+
+
 
         private void Icon_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
