@@ -155,8 +155,8 @@ namespace GW2FOX
         {
             if (sender is FrameworkElement fe && fe.DataContext is BossListItem item)
             {
-                // Waypoint kopieren
-                WpfClipboard.SetText(item.Waypoint);
+                // Bossname + Waypoint kopieren
+                WpfClipboard.SetText($"{item.BossName} - {item.Waypoint} in {item.TimeRemainingFormatted}");
 
                 // Position des Waypoints im Fenster ermitteln
                 var position = fe.TransformToAncestor(this).Transform(new WpfPoint(0, 0));
@@ -166,15 +166,12 @@ namespace GW2FOX
 
                 // X: zentriert über dem Icon, Y: oberhalb des Icons
                 double left = position.X + (fe.ActualWidth / 2) - (CopiedMessage.DesiredSize.Width / 2);
-                double top = position.Y - CopiedMessage.DesiredSize.Height - 18; // 4px Abstand nach oben
+                double top = position.Y - CopiedMessage.DesiredSize.Height - 18;
 
-                // Setzen der Position
                 Canvas.SetLeft(CopiedMessage, left);
                 Canvas.SetTop(CopiedMessage, top);
-
                 CopiedMessage.Visibility = Visibility.Visible;
 
-                // Automatisch wieder ausblenden
                 var timer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(300) };
                 timer.Tick += (s, _) =>
                 {
@@ -184,6 +181,7 @@ namespace GW2FOX
                 timer.Start();
             }
         }
+
 
 
 
