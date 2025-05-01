@@ -6,7 +6,13 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media.Animation;
+using System.Windows.Media;
 using Forms = System.Windows.Forms;
+using WpfImage = System.Windows.Controls.Image;
+using WpfMouseEventArgs = System.Windows.Input.MouseEventArgs;
+using WpfMouseButtonEventArgs = System.Windows.Input.MouseButtonEventArgs;
+using WpfPoint = System.Windows.Point;
 
 namespace GW2FOX
 {
@@ -186,5 +192,64 @@ namespace GW2FOX
                 Forms.MessageBox.Show($"{executableName} not found in directory:\n{exeDirectory}", "File not found", Forms.MessageBoxButtons.OK, Forms.MessageBoxIcon.Error);
             }
         }
+        private void AnimateScale(WpfImage image, double toScale, double durationMs = 100)
+        {
+            if (image.RenderTransform is not ScaleTransform scaleTransform)
+            {
+                scaleTransform = new ScaleTransform(1.0, 1.0);
+                image.RenderTransform = scaleTransform;
+                image.RenderTransformOrigin = new WpfPoint(0.5, 0.5);
+            }
+
+            var animX = new DoubleAnimation
+            {
+                To = toScale,
+                Duration = TimeSpan.FromMilliseconds(durationMs),
+                EasingFunction = new CubicEase { EasingMode = EasingMode.EaseOut }
+            };
+
+            var animY = new DoubleAnimation
+            {
+                To = toScale,
+                Duration = TimeSpan.FromMilliseconds(durationMs),
+                EasingFunction = new CubicEase { EasingMode = EasingMode.EaseOut }
+            };
+
+            scaleTransform.BeginAnimation(ScaleTransform.ScaleXProperty, animX);
+            scaleTransform.BeginAnimation(ScaleTransform.ScaleYProperty, animY);
+        }
+
+
+        private void Button_MouseEnter(object sender, WpfMouseEventArgs e)
+        {
+            if (sender is WpfImage img)
+                AnimateScale(img, 1.1, 150);
+        }
+
+        private void Button_MouseLeave(object sender, WpfMouseEventArgs e)
+        {
+            if (sender is WpfImage img)
+                AnimateScale(img, 1.0, 150);
+        }
+
+        private void Button_MouseDown(object sender, WpfMouseButtonEventArgs e)
+        {
+            if (sender is WpfImage img)
+            {
+                AnimateScale(img, 0.9, 80);
+                img.Opacity = 0.7;
+            }
+        }
+
+        private void Button_MouseUp(object sender, WpfMouseButtonEventArgs e)
+        {
+            if (sender is WpfImage img)
+            {
+                AnimateScale(img, 1.1, 100);
+                img.Opacity = 1.0;
+            }
+        }
+
+
     }
 }

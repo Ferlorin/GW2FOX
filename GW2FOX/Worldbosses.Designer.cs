@@ -1790,7 +1790,7 @@
             // Quantity
             // 
             Quantity.Font = new Font("Segoe UI", 11F);
-            Quantity.Location = new Point(16, 162);
+            Quantity.Location = new Point(330, 166);
             Quantity.Name = "Quantity";
             Quantity.Size = new Size(34, 27);
             Quantity.TabIndex = 230;
@@ -1803,7 +1803,7 @@
             button67.BackgroundImageLayout = ImageLayout.Center;
             button67.Cursor = Cursors.Hand;
             button67.FlatStyle = FlatStyle.Flat;
-            button67.Location = new Point(56, 162);
+            button67.Location = new Point(370, 166);
             button67.Name = "button67";
             button67.Size = new Size(75, 23);
             button67.TabIndex = 229;
@@ -1816,7 +1816,7 @@
             button66.BackgroundImageLayout = ImageLayout.Center;
             button66.Cursor = Cursors.Hand;
             button66.FlatStyle = FlatStyle.Flat;
-            button66.Location = new Point(137, 162);
+            button66.Location = new Point(451, 166);
             button66.Name = "button66";
             button66.Size = new Size(75, 23);
             button66.TabIndex = 228;
@@ -1827,11 +1827,11 @@
             // 
             SearchResults.Cursor = Cursors.Hand;
             SearchResults.Font = new Font("Segoe UI", 9F);
-            SearchResults.Location = new Point(12, 12);
+            SearchResults.Location = new Point(330, 12);
             SearchResults.Multiline = true;
             SearchResults.Name = "SearchResults";
             SearchResults.ScrollBars = ScrollBars.Vertical;
-            SearchResults.Size = new Size(164, 148);
+            SearchResults.Size = new Size(239, 148);
             SearchResults.TabIndex = 227;
             // 
             // button31
