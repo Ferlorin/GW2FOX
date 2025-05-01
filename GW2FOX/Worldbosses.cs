@@ -1679,36 +1679,41 @@ namespace GW2FOX
         {
             try
             {
-                // Anzahl der Bosse aus dem Textfeld entnehmen (ScheduleTextBox)
+                // Anzahl der Bosse aus dem Textfeld entnehmen (Quantity TextBox)
                 if (int.TryParse(Quantity.Text, out int numberOfBosses) && numberOfBosses > 0)
                 {
-                    // Hier die Liste der kommenden Bosse laden (bereits vorhandene Methode)
+                    // Liste der relevanten Bossnamen laden
                     List<string> bossNamesFromConfig = BossList23;
 
+                    // Die Gruppen (mit mehreren Zeitpunkten pro Boss) herausfiltern
                     var bossEventGroups = BossEventGroups
                         .Where(bossEventGroup => bossNamesFromConfig.Contains(bossEventGroup.BossName))
                         .ToList();
 
+                    // Alle einzelnen Runs (mit Zeitangabe) sammeln
                     var allBosses = bossEventGroups
                         .SelectMany(bossEventGroup => bossEventGroup.GetNextRuns())
                         .ToList();
 
-                    // Sortierung nach der Zeit des nächsten Bosskampfs
+                    // Sortierung nach dem nächsten Laufzeitpunkt
                     allBosses.Sort((bossEvent1, bossEvent2) =>
                     {
                         return bossEvent1.NextRunTime.CompareTo(bossEvent2.NextRunTime);
                     });
 
-                    // Bossnamen extrahieren (bis zur gewünschten Anzahl)
-                    var bossNames = allBosses.Take(numberOfBosses).Select(bossEvent => bossEvent.BossName).ToList();
+                    // Formatierte Bossinfos (Name + Waypoint) generieren
+                    var bossInfo = allBosses
+                        .Take(numberOfBosses)
+                        .Select(bossEvent => $"{bossEvent.BossName} - {bossEvent.Waypoint}")
+                        .ToList();
 
-                    // Bossnamen durch Kommas getrennt
-                    string bossNamesString = string.Join("," + Environment.NewLine, bossNames);
+                    // Zeilenweise Ausgabe erstellen
+                    string bossNamesString = string.Join(Environment.NewLine, bossInfo);
 
-                    // Die Bossnamen in die Zwischenablage kopieren
+                    // In die Zwischenablage kopieren
                     Clipboard.SetText(bossNamesString);
 
-                    // Bossnamen in ResultTextBox anzeigen
+                    // Im UI anzeigen
                     SearchResults.Text = bossNamesString;
                 }
                 else
@@ -1721,6 +1726,7 @@ namespace GW2FOX
                 MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
