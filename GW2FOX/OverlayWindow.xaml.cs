@@ -156,7 +156,7 @@ namespace GW2FOX
             if (sender is FrameworkElement fe && fe.DataContext is BossListItem item)
             {
                 // Bossname + Waypoint kopieren
-                WpfClipboard.SetText($"{item.BossName} - {item.Waypoint} in {item.TimeRemainingFormatted}");
+                WpfClipboard.SetText($"≪ATTENTION≫ Next Meta is │ {item.BossName} │ by {item.Waypoint} in {item.TimeRemainingFormatted}min │ ♥ Join us ♥");
 
                 // Position des Waypoints im Fenster ermitteln
                 var position = fe.TransformToAncestor(this).Transform(new WpfPoint(0, 0));
