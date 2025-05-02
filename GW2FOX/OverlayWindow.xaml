@@ -147,14 +147,14 @@
                             <DataTemplate>
                                 <Grid Background="Transparent" VerticalAlignment="Center" Height="20">
                                     <Grid.ColumnDefinitions>
-                                        <!-- Waypoint -->
+                                        <!-- Waypoint Icon -->
                                         <ColumnDefinition Width="Auto"/>
-                                        <!-- Chest -->
+                                        <!-- Chest Icon -->
                                         <ColumnDefinition Width="Auto"/>
-                                        <!-- Bossname -->
-                                        <ColumnDefinition Width="150"/>
-                                        <!-- Zeit -->
-                                        <ColumnDefinition Width="Auto"/>
+                                        <!-- Bossname: flexible Breite -->
+                                        <ColumnDefinition Width="*"/>
+                                        <!-- Zeit: feste Breite -->
+                                        <ColumnDefinition Width="60"/>
                                     </Grid.ColumnDefinitions>
 
                                     <!-- Waypoint Icon -->
@@ -202,18 +202,20 @@
                        Foreground="{Binding Category, Converter={StaticResource CategoryColorConverter}}"
                        TextDecorations="{Binding IsPastEvent, Converter={StaticResource StrikeConverter}}"
                        VerticalAlignment="Center"
-                       Width="140"
                        TextTrimming="CharacterEllipsis">
                                         <TextBlock.Effect>
                                             <DropShadowEffect Color="Black" BlurRadius="0" ShadowDepth="0" Opacity="1"/>
                                         </TextBlock.Effect>
                                     </TextBlock>
 
-                                    <!-- Zeit -->
+                                    <!-- Zeit (nicht mehr abgeschnitten) -->
                                     <TextBlock Grid.Column="3" Text="{Binding TimeRemainingFormatted}"
                        Foreground="{Binding Category, Converter={StaticResource CategoryColorConverter}}"
                        TextDecorations="{Binding IsPastEvent, Converter={StaticResource StrikeConverter}}"
-                       VerticalAlignment="Center">
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Right"
+                       Padding="4,0,0,0"
+                       TextAlignment="Right">
                                         <TextBlock.Effect>
                                             <DropShadowEffect Color="Black" BlurRadius="0" ShadowDepth="0" Opacity="1"/>
                                         </TextBlock.Effect>
@@ -221,6 +223,7 @@
                                 </Grid>
                             </DataTemplate>
                         </ListView.ItemTemplate>
+
 
                     </ListView>
                 </ScrollViewer>
