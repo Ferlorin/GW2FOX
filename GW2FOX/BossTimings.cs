@@ -16,7 +16,7 @@ namespace GW2FOX
         public static List<string> BossList23 { get; set; } = new();
         public static Dictionary<DateTime, List<string>> DoneBosses { get; private set; } = new();
         public static readonly List<BossEvent> BossEventsList = new();
-       
+
         internal static System.Windows.Controls.ListView? BossListView { get; set; }
         public static List<BossEventRun> StaticBossEvents { get; set; } = new();
         public static List<BossEventRun> DynamicBossEvents { get; set; } = new();
@@ -95,59 +95,6 @@ namespace GW2FOX
             }
         }
 
-        public static void SetChestState(string bossName, bool opened)
-        {
-            string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "BossTimings.json");
-            if (!File.Exists(path)) return;
-
-            var json = File.ReadAllText(path);
-            var jObject = JObject.Parse(json);
-            var bosses = jObject["Bosses"] as JArray;
-
-            if (bosses == null) return;
-
-            var boss = bosses.FirstOrDefault(b =>
-                string.Equals((string?)b["Name"], bossName, StringComparison.OrdinalIgnoreCase));
-            ;
-
-            if (boss != null)
-            {
-                boss["chestOpened"] = opened;
-                File.WriteAllText(path, jObject.ToString(Formatting.Indented));
-            }
-        }
-
-
-        public static bool IsChestOpened(string bossName)
-        {
-            string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "BossTimings.json");
-            if (!File.Exists(path))
-            {
-                return false;
-            }
-
-            var json = File.ReadAllText(path);
-            var jObject = JObject.Parse(json);
-            var bosses = jObject["Bosses"] as JArray; // GROSS geschrieben!
-
-            if (bosses == null)
-            {
-                Console.WriteLine("[ERROR] Kein 'Bosses'-Array gefunden.");
-                return false;
-            }
-
-            var boss = bosses.FirstOrDefault(b =>
-                string.Equals((string?)b["Name"], bossName, StringComparison.OrdinalIgnoreCase));
-
-            if (boss == null)
-            {
-                return false;
-            }
-
-            var state = boss["chestOpened"]?.ToObject<bool>() == true;
-            return state;
-        }
-
 
 
         public static void CheckBossCheckboxes(IEnumerable<string> bossNames, Dictionary<string, CheckBox> checkBoxMap)
@@ -185,7 +132,7 @@ namespace GW2FOX
             }
             catch (Exception ex)
             {
-               // Console.WriteLine($"[AddBossEvent] Fehler bei {bossName}: {ex.Message}");
+                // Console.WriteLine($"[AddBossEvent] Fehler bei {bossName}: {ex.Message}");
             }
         }
 
@@ -297,8 +244,7 @@ namespace GW2FOX
         }
 
         public static void LoadBossConfigInfos(string filePath)
-        {;
-
+        {
             try
             {
                 if (!File.Exists(filePath))
@@ -356,7 +302,7 @@ namespace GW2FOX
                     return;
                 }
 
-                
+
                 var newBossList = new List<string>();
 
                 foreach (var boss in bossConfig.Bosses)
@@ -383,10 +329,7 @@ namespace GW2FOX
             }
         }
 
-       
-
-    
-    public static void ResetAllChestStates()
+        public static void ResetAllChestStates()
         {
             string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "BossTimings.json");
             if (!File.Exists(path))
@@ -407,5 +350,59 @@ namespace GW2FOX
             File.WriteAllText(path, jObject.ToString(Formatting.Indented));
         }
 
+        public static void SetChestState(string bossName, bool opened)
+        {
+            string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "BossTimings.json");
+            if (!File.Exists(path)) return;
+
+            var json = File.ReadAllText(path);
+            var jObject = JObject.Parse(json);
+            var bosses = jObject["Bosses"] as JArray;
+
+            if (bosses == null) return;
+
+            var boss = bosses.FirstOrDefault(b =>
+                string.Equals((string?)b["Name"], bossName, StringComparison.OrdinalIgnoreCase));
+            ;
+
+            if (boss != null)
+            {
+                boss["chestOpened"] = opened;
+                File.WriteAllText(path, jObject.ToString(Formatting.Indented));
+            }
+        }
+
+
+        public static bool IsChestOpened(string bossName)
+        {
+            string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "BossTimings.json");
+            if (!File.Exists(path))
+            {
+                return false;
+            }
+
+            var json = File.ReadAllText(path);
+            var jObject = JObject.Parse(json);
+            var bosses = jObject["Bosses"] as JArray; // GROSS geschrieben!
+
+            if (bosses == null)
+            {
+                Console.WriteLine("[ERROR] Kein 'Bosses'-Array gefunden.");
+                return false;
+            }
+
+            var boss = bosses.FirstOrDefault(b =>
+                string.Equals((string?)b["Name"], bossName, StringComparison.OrdinalIgnoreCase));
+
+            if (boss == null)
+            {
+                return false;
+            }
+
+            var state = boss["chestOpened"]?.ToObject<bool>() == true;
+            return state;
+        }
+
     }
+
 }

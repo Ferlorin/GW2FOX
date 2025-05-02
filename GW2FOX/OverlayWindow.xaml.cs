@@ -39,20 +39,10 @@ namespace GW2FOX
             this.Left = 1320;
             this.Top = 710;
 
-            Loaded += OverlayWindow_Loaded;
-
             PreviewMouseWheel += OverlayWindow_PreviewMouseWheel;
             StartBossTimer();
+            UpdateBossOverlayListAsync();
             StartResetTimer();
-        }
-
-        private void OverlayWindow_Loaded(object sender, RoutedEventArgs e)
-        {
-
-            BossTimings.LoadBossConfig("BossTimings.json"); // ❗ Laden VOR Overlay-Update
-            BossTimings.RegisterListView(BossListView);
-
-            UpdateBossOverlayListAsync(); // danach
         }
 
 
