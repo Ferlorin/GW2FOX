@@ -243,10 +243,9 @@ namespace GW2FOX
             {
                 item.ChestOpened = !item.ChestOpened;
                 BossTimings.SetChestState(item.BossName, item.ChestOpened);
+                item.TriggerIconUpdate();
             }
         }
-
-
 
 
         private void CheckDailyChestReset()

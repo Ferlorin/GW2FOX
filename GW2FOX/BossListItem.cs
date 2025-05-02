@@ -70,7 +70,10 @@ namespace GW2FOX
             }
         }
 
-
+        public void TriggerIconUpdate()
+        {
+            OnPropertyChanged(nameof(ChestImagePath));
+        }
 
         public void UpdateCountdown()
         {
