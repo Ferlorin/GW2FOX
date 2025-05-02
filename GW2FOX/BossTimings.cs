@@ -95,6 +95,59 @@ namespace GW2FOX
             }
         }
 
+        public static void SetChestState(string bossName, bool opened)
+        {
+            string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "BossTimings.json");
+            if (!File.Exists(path)) return;
+
+            var json = File.ReadAllText(path);
+            var jObject = JObject.Parse(json);
+            var bosses = jObject["Bosses"] as JArray;
+
+            if (bosses == null) return;
+
+            var boss = bosses.FirstOrDefault(b =>
+                string.Equals((string?)b["Name"], bossName, StringComparison.OrdinalIgnoreCase));
+            ;
+
+            if (boss != null)
+            {
+                boss["chestOpened"] = opened;
+                File.WriteAllText(path, jObject.ToString(Formatting.Indented));
+            }
+        }
+
+
+        public static bool IsChestOpened(string bossName)
+        {
+            string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "BossTimings.json");
+            if (!File.Exists(path))
+            {
+                return false;
+            }
+
+            var json = File.ReadAllText(path);
+            var jObject = JObject.Parse(json);
+            var bosses = jObject["Bosses"] as JArray; // GROSS geschrieben!
+
+            if (bosses == null)
+            {
+                Console.WriteLine("[ERROR] Kein 'Bosses'-Array gefunden.");
+                return false;
+            }
+
+            var boss = bosses.FirstOrDefault(b =>
+                string.Equals((string?)b["Name"], bossName, StringComparison.OrdinalIgnoreCase));
+
+            if (boss == null)
+            {
+                return false;
+            }
+
+            var state = boss["chestOpened"]?.ToObject<bool>() == true;
+            return state;
+        }
+
 
 
         public static void CheckBossCheckboxes(IEnumerable<string> bossNames, Dictionary<string, CheckBox> checkBoxMap)
@@ -332,6 +385,27 @@ namespace GW2FOX
 
        
 
-    }
+    
+    public static void ResetAllChestStates()
+        {
+            string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "BossTimings.json");
+            if (!File.Exists(path))
+                return;
 
+            var json = File.ReadAllText(path);
+            var jObject = JObject.Parse(json);
+            var bosses = jObject["Bosses"] as JArray;
+
+            if (bosses == null)
+                return;
+
+            foreach (var boss in bosses)
+            {
+                boss["chestOpened"] = false;
+            }
+
+            File.WriteAllText(path, jObject.ToString(Formatting.Indented));
+        }
+
+    }
 }

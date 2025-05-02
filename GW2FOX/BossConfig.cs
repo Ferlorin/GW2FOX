@@ -27,7 +27,7 @@ public class BossConfig
 
     [JsonProperty("CustomSelection")]
     public string CustomSelection { get; set; } = "";
-
+    public bool ChestOpened { get; set; } = false;
     public List<Boss> DynamicBosses { get; set; } = new List<Boss>();
 }
 
@@ -63,6 +63,9 @@ public class Boss
 
     [JsonProperty("Waypoint")]
     public string? Waypoint { get; set; } = "";
+
+    [JsonProperty("chestOpened")]
+    public bool ChestOpened { get; set; } = false; // ✅ HIER ergänzen!
 }
 
 

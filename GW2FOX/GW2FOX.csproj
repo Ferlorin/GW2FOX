@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 <PropertyGroup>
-  <OutputType>WinExe</OutputType>
+  <OutputType>Exe</OutputType>
   <TargetFramework>net8.0-windows</TargetFramework>
   <Nullable>enable</Nullable>
   <UseWindowsForms>true</UseWindowsForms>
@@ -22,10 +22,12 @@
 
 <ItemGroup>
   <None Remove="Com.png" />
+  <None Remove="Resources\Black_Lion_Chest.png" />
   <None Remove="Resources\BlishHUDmini.bmp" />
   <None Remove="Resources\BloodyCom.bmp" />
   <None Remove="Resources\Clock.bmp" />
   <None Remove="Resources\Discord.bmp" />
+  <None Remove="Resources\OpenChest.png" />
   <None Remove="Resources\Tacomini.bmp" />
   <None Remove="Resources\Thumb.png" />
   <None Remove="Thumb.png" />
@@ -58,10 +60,16 @@
 
   <ItemGroup>
     <Resource Include="Com.png" />
+    <Resource Include="Resources\Black_Lion_Chest.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\BlishHUDmini.bmp" />
     <Resource Include="Resources\BloodyCom.bmp" />
     <Resource Include="Resources\Clock.bmp" />
     <Resource Include="Resources\Discord.bmp" />
+    <Resource Include="Resources\OpenChest.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\Tacomini.bmp" />
     <Resource Include="Resources\Thumb.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>

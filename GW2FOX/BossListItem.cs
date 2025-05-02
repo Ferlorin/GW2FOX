@@ -1,13 +1,13 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 
 namespace GW2FOX
 {
     public class BossListItem : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
+
+        // Benachrichtigt das UI, wenn sich eine Eigenschaft ändert
         protected void OnPropertyChanged(string name) =>
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 
@@ -24,7 +24,7 @@ namespace GW2FOX
                 }
             }
         }
-
+        public string ChestImagePath => ChestOpened ? "/Resources/OpenChest.png" : "/Resources/Black_Lion_Chest.png";
         public string BossName { get; set; }
         public string Waypoint { get; set; }
         public string Category { get; set; }
@@ -35,6 +35,42 @@ namespace GW2FOX
         public bool IsDynamicEvent { get; set; }
         public bool IsConcurrentEvent { get; set; }
         public DateTime TimeToShow => NextRunTime;
+
+        // Eine Definition für ChestOpened
+        private bool _chestOpened;
+        public bool ChestOpened
+        {
+            get => _chestOpened;
+            set
+            {
+                if (_chestOpened != value)
+                {
+                    _chestOpened = value;
+                    Console.WriteLine($"[DEBUG] SET ChestOpened for {BossName} = {value}");
+                    OnPropertyChanged(nameof(ChestOpened));
+                    OnPropertyChanged(nameof(ChestImagePath));
+                }
+            }
+        }
+
+
+        public void LoadChestState()
+        {
+            var value = BossTimings.IsChestOpened(BossName);
+            Console.WriteLine($"[DEBUG] LOADED {BossName} chestOpened = {value}");
+
+            if (ChestOpened != value)
+            {
+                ChestOpened = value;
+            }
+            else
+            {
+                OnPropertyChanged(nameof(ChestOpened));
+                OnPropertyChanged(nameof(ChestImagePath));
+            }
+        }
+
+
 
         public void UpdateCountdown()
         {

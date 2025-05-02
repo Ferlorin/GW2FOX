@@ -9,7 +9,7 @@ namespace GW2FOX
         public static OverlayWindow? _overlayWindow;
         public static BossTimer? _bossTimer;
         public static ObservableCollection<BossEventRun> BossListItems { get; private set; } = new();
-        
+
         public static ObservableCollection<BossListItem> GetBossOverlayItems(IEnumerable<BossEventRun> bossRuns, DateTime _)
         {
             var overlayItems = new ObservableCollection<BossListItem>();
@@ -32,7 +32,7 @@ namespace GW2FOX
                     if (isPast)
                         formatted = $"-{remaining.Minutes:D2}:{remaining.Seconds:D2}";
 
-                    return new BossListItem
+                    var item = new BossListItem
                     {
                         BossName = run.BossName,
                         Waypoint = run.Waypoint,
@@ -40,8 +40,13 @@ namespace GW2FOX
                         IsPastEvent = isPast,
                         TimeRemainingFormatted = formatted,
                         SecondsRemaining = (int)(isPast ? -remaining.TotalSeconds : remaining.TotalSeconds),
-                        NextRunTime = eventTime
+                        NextRunTime = eventTime,
                     };
+
+                    // Setze ChestOpened korrekt
+                    item.ChestOpened = BossTimings.IsChestOpened(run.BossName);
+
+                    return item;
                 })
                 .Where(item => item != null)
                 .ToList();
@@ -68,6 +73,8 @@ namespace GW2FOX
 
             return overlayItems;
         }
+
+
 
 
 
@@ -110,7 +117,7 @@ namespace GW2FOX
             public DateTime NextRunTime { get; set; }
             public bool IsConcurrentEvent { get; set; }
             public DateTime TimeToShow => IsPastEvent ? NextRunTime.AddMinutes(15) : NextRunTime;
-
+            public bool ChestOpened { get; set; }
             public void UpdateCountdown()
             {
                 var timeLeft = TimeToShow - DateTime.Now;

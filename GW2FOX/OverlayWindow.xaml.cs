@@ -25,7 +25,7 @@ namespace GW2FOX
     {
         private static OverlayWindow? _instance;
         private DispatcherTimer _bossTimer;
-
+        private DateTime _lastResetDate = DateTime.MinValue;
         public static OverlayWindow GetInstance() => _instance ??= new OverlayWindow();
 
         public ObservableCollection<BossListItem> OverlayItems { get; } = new ObservableCollection<BossListItem>();
@@ -39,12 +39,28 @@ namespace GW2FOX
             this.Left = 1320;
             this.Top = 710;
 
-            Loaded += (s, e) => Console.WriteLine("[DEBUG] Window Loaded.");
-            BossTimings.RegisterListView(BossListView);
+            Loaded += OverlayWindow_Loaded;
 
             PreviewMouseWheel += OverlayWindow_PreviewMouseWheel;
             StartBossTimer();
-            UpdateBossOverlayListAsync();
+            StartResetTimer();
+        }
+
+        private void OverlayWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+
+            BossTimings.LoadBossConfig("BossTimings.json"); // ❗ Laden VOR Overlay-Update
+            BossTimings.RegisterListView(BossListView);
+
+            UpdateBossOverlayListAsync(); // danach
+        }
+
+
+        private void StartResetTimer()
+        {
+            DispatcherTimer resetTimer = new() { Interval = TimeSpan.FromMinutes(1) };
+            resetTimer.Tick += (s, e) => CheckDailyChestReset();
+            resetTimer.Start();
         }
 
         private void OverlayWindow_PreviewMouseWheel(object sender, WpfMouseEventArgs e)
@@ -83,9 +99,27 @@ namespace GW2FOX
                 Dispatcher.Invoke(() =>
                 {
                     double oldOffset = BossScrollViewer.VerticalOffset;
+
+                    // Vorherige Einträge merken
+                    var previousItems = OverlayItems.ToList();
                     OverlayItems.Clear();
+
                     foreach (var item in items)
+                    {
+                        var previous = previousItems.FirstOrDefault(x => x.BossName == item.BossName);
+
+                        if (previous != null)
+                        {
+                            item.ChestOpened = previous.ChestOpened;
+                        }
+                        else
+                        {
+                            item.LoadChestState(); // 🔥 Hier: Zustand aus JSON laden und UI zwingen zu aktualisieren
+                        }
+
                         OverlayItems.Add(item);
+                    }
+
                     BossScrollViewer.ScrollToVerticalOffset(oldOffset);
                 });
             }
@@ -94,6 +128,9 @@ namespace GW2FOX
                 Console.WriteLine($"[ERROR] {ex.Message}");
             }
         }
+
+
+
 
         private void Waypoint_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
         {
@@ -182,8 +219,54 @@ namespace GW2FOX
             }
         }
 
+        private void Chest_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (sender is WpfImage img)
+            {
+                AnimateScale(img, 0.90);
+                img.Opacity = 0.7;
+            }
+        }
+
+        private void Chest_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            if (sender is WpfImage img)
+            {
+                AnimateScale(img, 1.10);
+                img.Opacity = 1.0;
+            }
+        }
+
+        private void Chest_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (sender is FrameworkElement fe && fe.DataContext is BossListItem item)
+            {
+                item.ChestOpened = !item.ChestOpened;
+                BossTimings.SetChestState(item.BossName, item.ChestOpened);
+            }
+        }
 
 
+
+
+        private void CheckDailyChestReset()
+        {
+            var now = DateTime.UtcNow;
+            if (_lastResetDate.Date == now.Date)
+                return;
+
+            // Täglich um 00:00 Uhr UTC zurücksetzen
+            if (now.Hour == 0 && now.Minute < 5)
+            {
+                BossTimings.ResetAllChestStates();
+                _lastResetDate = now.Date;
+
+                foreach (var item in OverlayItems)
+                {
+                    item.ChestOpened = false;
+                }
+            }
+        }
 
 
         private void Icon_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
