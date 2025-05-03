@@ -361,16 +361,41 @@ namespace GW2FOX
 
             if (bosses == null) return;
 
-            var boss = bosses.FirstOrDefault(b =>
-                string.Equals((string?)b["Name"], bossName, StringComparison.OrdinalIgnoreCase));
-            ;
+            // Die verknüpften Bossnamen
+            var linkedBosses = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+    {
+        "LLA Timberline",
+        "LLA Iron Marches",
+        "LLA Gendarran"
+    };
 
-            if (boss != null)
+            // Wenn der Boss einer der verknüpften ist: Alle gleichzeitig setzen
+            if (linkedBosses.Contains(bossName))
             {
-                boss["chestOpened"] = opened;
-                File.WriteAllText(path, jObject.ToString(Formatting.Indented));
+                foreach (var boss in bosses)
+                {
+                    var name = (string?)boss["Name"];
+                    if (name != null && linkedBosses.Contains(name))
+                    {
+                        boss["chestOpened"] = opened;
+                    }
+                }
             }
+            else
+            {
+                // Nur den angeklickten Boss ändern
+                var boss = bosses.FirstOrDefault(b =>
+                    string.Equals((string?)b["Name"], bossName, StringComparison.OrdinalIgnoreCase));
+
+                if (boss != null)
+                {
+                    boss["chestOpened"] = opened;
+                }
+            }
+
+            File.WriteAllText(path, jObject.ToString(Formatting.Indented));
         }
+
 
 
         public static bool IsChestOpened(string bossName)
