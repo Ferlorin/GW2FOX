@@ -2074,6 +2074,7 @@
             AutoScaleMode = AutoScaleMode.None;
             AutoValidate = AutoValidate.EnablePreventFocusChange;
             ClientSize = new Size(1904, 1100);
+            ControlBox = false;
             Controls.Add(FireShaman);
             Controls.Add(DwanyButton);
             Controls.Add(LyssaButton);
@@ -2231,10 +2232,16 @@
             Controls.Add(button2);
             Cursor = Cursors.Hand;
             Icon = (Icon)resources.GetObject("$this.Icon");
+            MaximizeBox = false;
+            MinimizeBox = false;
             Name = "Worldbosses";
             Opacity = 0.85D;
             RightToLeft = RightToLeft.No;
-            StartPosition = FormStartPosition.Manual;
+            ShowIcon = false;
+            ShowInTaskbar = false;
+            SizeGripStyle = SizeGripStyle.Hide;
+            StartPosition = FormStartPosition.CenterScreen;
+            WindowState = FormWindowState.Maximized;
             Load += Worldbosses_Load_1;
             ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();

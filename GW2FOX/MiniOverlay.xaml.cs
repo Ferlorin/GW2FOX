@@ -66,6 +66,7 @@ namespace GW2FOX
         {
             var excludedTypes = new[] { typeof(MiniOverlay), typeof(Main) };
             var topMostStates = new Dictionary<Forms.Form, bool>();
+            bool anyToggled = false;
 
             foreach (Forms.Form f in Forms.Application.OpenForms)
             {
@@ -73,43 +74,40 @@ namespace GW2FOX
                 f.TopMost = false;
             }
 
-            IntPtr activeHandle = GetForegroundWindow();
-
             foreach (Forms.Form openForm in Forms.Application.OpenForms)
             {
-                if (openForm.Handle == activeHandle && !excludedTypes.Contains(openForm.GetType()))
+                if (!excludedTypes.Contains(openForm.GetType()))
                 {
                     if (openForm.Visible)
                     {
                         openForm.Hide();
-                        FocusGw2Window(); // 🔁 Nur wenn GW2 läuft
-                        if (Forms.Application.OpenForms.OfType<Main>().FirstOrDefault() is Forms.Form mainForm && mainForm.Visible)
-                            mainForm.Hide();
+                        anyToggled = true;
                     }
                     else
                     {
                         openForm.Show();
                         openForm.BringToFront();
                         openForm.Activate();
-                        FocusGw2Window(); // 🔁 Nur wenn GW2 läuft
+                        anyToggled = true;
                     }
-
-                    foreach (var kvp in topMostStates)
-                        kvp.Key.TopMost = kvp.Value;
-
-                    return;
                 }
             }
 
             foreach (var kvp in topMostStates)
                 kvp.Key.TopMost = kvp.Value;
 
-            Forms.MessageBox.Show(
-                "Could not find a valid window to toggle.\nMaybe it's hiding behind your popcorn 🍿",
-                "No Window Found", Forms.MessageBoxButtons.OK, Forms.MessageBoxIcon.Information);
+            if (anyToggled)
+                FocusGw2Window();
+            else
+            {
+                Forms.MessageBox.Show(
+                    "No toggleable windows found.\nMaybe they're already gone? 🧐",
+                    "Nothing To Toggle", Forms.MessageBoxButtons.OK, Forms.MessageBoxIcon.Information);
+            }
         }
 
-        
+
+
 
         private void CreateShortcut(string shortcutPath, string targetPath, string arguments, string description)
         {
