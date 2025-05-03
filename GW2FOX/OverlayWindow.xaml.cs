@@ -224,11 +224,29 @@ namespace GW2FOX
             {
                 AnimateScale(img, 1.10);
                 img.Opacity = 1.0;
+
+                if (e.ChangedButton == MouseButton.Right)
+                {
+                    var result = System.Windows.MessageBox.Show("Reset all chests?", "Confirm Reset", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        BossTimings.ResetAllChestStates();
+                        foreach (var item in OverlayItems)
+                        {
+                            item.ChestOpened = false;
+                        }
+                    }
+                }
             }
         }
 
+
         private void Chest_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            if (e.ChangedButton != MouseButton.Left)
+                return;
+
             if (sender is FrameworkElement fe && fe.DataContext is BossListItem item)
             {
                 item.ChestOpened = !item.ChestOpened;
@@ -236,6 +254,7 @@ namespace GW2FOX
                 item.TriggerIconUpdate();
             }
         }
+
 
 
         private void CheckDailyChestReset()

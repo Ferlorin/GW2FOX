@@ -174,11 +174,13 @@
 
                                     <!-- Chest Icon -->
                                     <Image Grid.Column="1"
-                   Width="20" Height="20" Margin="0,0,6,0"
-                   Cursor="Hand"
-                   Source="{Binding ChestImagePath}"
-                   ToolTip="Kiste als geöffnet/geschlossen markieren"
-                   MouseLeftButtonDown="Chest_MouseLeftButtonDown">
+       Width="20" Height="20" Margin="0,0,6,0"
+       Cursor="Hand"
+       Source="{Binding ChestImagePath}"
+       ToolTip="Links: Kiste öffnen/schließen · Rechts: Alle zurücksetzen"
+       MouseLeftButtonDown="Chest_MouseLeftButtonDown"
+       MouseDown="Chest_MouseDown"
+       MouseUp="Chest_MouseUp">
                                         <Image.RenderTransform>
                                             <ScaleTransform ScaleX="1.0" ScaleY="1.0"/>
                                         </Image.RenderTransform>
@@ -188,14 +190,15 @@
                                                 <BeginStoryboard>
                                                     <Storyboard>
                                                         <DoubleAnimation Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleX)"
-                                                 To="1.3" Duration="0:0:0.1" AutoReverse="True"/>
+                                     To="1.3" Duration="0:0:0.1" AutoReverse="True"/>
                                                         <DoubleAnimation Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleY)"
-                                                 To="1.3" Duration="0:0:0.1" AutoReverse="True"/>
+                                     To="1.3" Duration="0:0:0.1" AutoReverse="True"/>
                                                     </Storyboard>
                                                 </BeginStoryboard>
                                             </EventTrigger>
                                         </Image.Triggers>
                                     </Image>
+
 
                                     <!-- Bossname -->
                                     <TextBlock Grid.Column="2" Text="{Binding BossName}"
