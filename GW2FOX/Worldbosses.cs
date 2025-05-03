@@ -67,22 +67,22 @@ namespace GW2FOX
 
         private void TheOilFloes_Click(object sender, EventArgs e)
         {
-            ShowAndHideForm(new TheOilFloes());
+            Oil.Checked = !Oil.Checked;
         }
 
         private void Behe_Click(object sender, EventArgs e)
         {
-            ShowAndHideForm(new Behemoth());
+            Behemoth.Checked = !Behemoth.Checked;
         }
 
         private void Fireelemental_Click(object sender, EventArgs e)
         {
-            ShowAndHideForm(new Fireelemental());
+            Fire_Elemental.Checked = !Fire_Elemental.Checked;
         }
 
         private void Junglewurm_Click(object sender, EventArgs e)
         {
-            ShowAndHideForm(new Junglewurm());
+            JungleWurm.Checked = !JungleWurm.Checked;
         }
 
         private void Rhendak_Click(object sender, EventArgs e)
@@ -92,122 +92,122 @@ namespace GW2FOX
 
         private void Ulgoth_Click(object sender, EventArgs e)
         {
-            ShowAndHideForm(new Ulgoth());
+            Ulgoth.Checked = !Ulgoth.Checked;
         }
 
         private void Thaida_Click(object sender, EventArgs e)
         {
-            ShowAndHideForm(new Thaida());
+            Thaida.Checked = !Thaida.Checked;
         }
 
         private void Fireshaman_Click(object sender, EventArgs e)
         {
-            ShowAndHideForm(new Fireshaman());
+            FireShaman.Checked = !FireShaman.Checked;
         }
 
         private void Megadestroyer_Click(object sender, EventArgs e)
         {
-            ShowAndHideForm(new Megadestroyer());
+            Megadestroyer.Checked = !Megadestroyer.Checked;
         }
 
         private void Karkaqueen_Click(object sender, EventArgs e)
         {
-            ShowAndHideForm(new Karkaqueen());
+            Karka.Checked = !Karka.Checked;
         }
 
         private void Dragonstorm_Click(object sender, EventArgs e)
         {
-            ShowAndHideForm(new Dragonstorm());
+            Dragonstorm.Checked = !Dragonstorm.Checked;
         }
 
         private void Drakkar_Click(object sender, EventArgs e)
         {
-            ShowAndHideForm(new Drakkar());
+            Drakkar.Checked = !Drakkar.Checked;
         }
 
         private void Effigy_Click(object sender, EventArgs e)
         {
-            ShowAndHideForm(new Effigy());
+            Effigy.Checked = !Effigy.Checked;
         }
 
         private void DoomloreShrine_Click(object sender, EventArgs e)
         {
-            ShowAndHideForm(new DoomloreShrine());
+            Doomlore.Checked = !Doomlore.Checked;
         }
 
         private void StormsOfWinter_Click(object sender, EventArgs e)
         {
-            ShowAndHideForm(new StormsOfWinter());
+            SormsOfWinter.Checked = !SormsOfWinter.Checked;
         }
 
         private void DefendJorasKeep_Click(object sender, EventArgs e)
         {
-            ShowAndHideForm(new DefendJorasKeep());
+            JorasKeep.Checked = !JorasKeep.Checked;
         }
 
         private void Sandstorm_Click(object sender, EventArgs e)
         {
-            ShowAndHideForm(new Sandstorm());
+            Sandstorm.Checked = !Sandstorm.Checked;
         }
 
         private void SaidrasHaven_Click(object sender, EventArgs e)
         {
-            ShowAndHideForm(new SaidrasHaven());
+            SaidrasHeaven.Checked = !SaidrasHeaven.Checked;
         }
 
         private void NewLoamhurst_Click(object sender, EventArgs e)
         {
-            ShowAndHideForm(new NewLoamhurst());
+            Loamhurst.Checked = !Loamhurst.Checked;
         }
 
         private void NoransHomestead_Click(object sender, EventArgs e)
         {
-            ShowAndHideForm(new NoransHomestead());
+            Homestead.Checked = !Homestead.Checked;
         }
 
         private void AetherbladeAssault_Click(object sender, EventArgs e)
         {
-            ShowAndHideForm(new AetherbladeAssault());
+            Atherblade.Checked = !Atherblade.Checked;
         }
 
         private void KainengBlackout_Click(object sender, EventArgs e)
         {
-            ShowAndHideForm(new KainengBlackout());
+            Blackout.Checked = !Blackout.Checked;
         }
 
         private void GangWar_Click(object sender, EventArgs e)
         {
-            ShowAndHideForm(new GangWar());
+            GangWar.Checked = !GangWar.Checked;
         }
 
         private void Aspenwood_Click(object sender, EventArgs e)
         {
-            ShowAndHideForm(new Aspenwood());
+            Aspenwood.Checked = !Aspenwood.Checked;
         }
 
         private void JadeSea_Click(object sender, EventArgs e)
         {
-            ShowAndHideForm(new JadeSea());
+            JadeSea.Checked = !JadeSea.Checked;
         }
 
         private void WizardsTower_Click(object sender, EventArgs e)
         {
-            ShowAndHideForm(new WizardsTower());
+            WizzardsTower.Checked = !WizzardsTower.Checked;
         }
 
         private void FlyByNight_Click(object sender, EventArgs e)
         {
-            ShowAndHideForm(new FlyByNight());
+            Flybynigtht.Checked = !Flybynigtht.Checked;
         }
 
         private void DefenseOfAmnytas_Click(object sender, EventArgs e)
         {
-            ShowAndHideForm(new DefenseOfAmnytas());
+            Amnytas.Checked = !Amnytas.Checked;
         }
 
         private void Convergences_Click(object sender, EventArgs e)
         {
-            ShowAndHideForm(new Convergences());
+            Convergence.Checked = !Convergence.Checked;
         }
 
         private void Eye_Click(object sender, EventArgs e)
@@ -227,22 +227,22 @@ namespace GW2FOX
 
         private void Tequatl_Click(object sender, EventArgs e)
         {
-            ShowAndHideForm(new Tequatl());
+            Tequatl.Checked = !Tequatl.Checked;
         }
 
         private void TheShatterer_Click(object sender, EventArgs e)
         {
-            ShowAndHideForm(new Theshatterer());
+            Shatterer.Checked = !Shatterer.Checked;
         }
 
         private void Inquestgolem_Click(object sender, EventArgs e)
         {
-            ShowAndHideForm(new Inquestgolem());
+            MarkTwo.Checked = !MarkTwo.Checked;
         }
 
         private void Clawjormag_Click(object sender, EventArgs e)
         {
-            ShowAndHideForm(new Clawofjormag());
+            Claw.Checked = Claw.Checked;
         }
 
         private void Lyssa_Click(object sender, EventArgs e)
@@ -252,12 +252,12 @@ namespace GW2FOX
 
         private void Maw_Click(object sender, EventArgs e)
         {
-            ShowAndHideForm(new Maw());
+            Maw.Checked = !Maw.Checked;
         }
 
         private void Concert_Click(object sender, EventArgs e)
         {
-            ShowAndHideForm(new Metalconcert());
+            Metalconcert.Checked = !Metalconcert.Checked;
         }
 
         private void Runinfo_Click(object sender, EventArgs e)
@@ -301,7 +301,7 @@ namespace GW2FOX
 
         private void button68_Click(object sender, EventArgs e)
         {
-            ShowAndHideForm(new LLA());
+            LLA.Checked = !LLA.Checked;
         }
 
         private void button65_Click(object sender, EventArgs e)
@@ -398,52 +398,52 @@ namespace GW2FOX
 
         private void MawsOfTorment_Click(object sender, EventArgs e)
         {
-            ShowAndHideForm(new MawsOfTorement());
+            MawsOfTorment.Checked = !MawsOfTorment.Checked;
         }
 
         private void Chak_Click(object sender, EventArgs e)
         {
-            ShowAndHideForm(new Chak());
+            Chak.Checked = !Chak.Checked;
         }
 
         private void Tarir_Click(object sender, EventArgs e)
         {
-            ShowAndHideForm(new Tarir());
+            Tarir.Checked = !Tarir.Checked;
         }
 
         private void Massen_Click(object sender, EventArgs e)
         {
-            ShowAndHideForm(new Spellmaster());
+            Mascen.Checked = !Mascen.Checked;
         }
 
         private void DBS_Click(object sender, EventArgs e)
         {
-            ShowAndHideForm(new Dbs());
+            DBS.Checked = !DBS.Checked;
         }
 
         private void Junundo_Click(object sender, EventArgs e)
         {
-            ShowAndHideForm(new Juundu());
+            Junundu.Checked = !Junundu.Checked;
         }
 
         private void PTA_Click(object sender, EventArgs e)
         {
-            ShowAndHideForm(new Pta());
+            PTA.Checked = !PTA.Checked;
         }
 
         private void Doppel_Click(object sender, EventArgs e)
         {
-            ShowAndHideForm(new Doppelganger());
+            Doppelganger.Checked = !Doppelganger.Checked;
         }
 
         private void Forged_Click(object sender, EventArgs e)
         {
-            ShowAndHideForm(new Forgedwithfire());
+            Doggies.Checked = !Doggies.Checked;
         }
 
         private void Pinata_Click(object sender, EventArgs e)
         {
-            ShowAndHideForm(new Pinatas());
+            Pinata.Checked = !Pinata.Checked;
         }
 
         private void Savesquadmessage_Click(object sender, EventArgs e)
@@ -454,27 +454,27 @@ namespace GW2FOX
 
         private void OozePits_Click(object sender, EventArgs e)
         {
-            ShowAndHideForm(new TheOozePits());
+            OozePits.Checked = !OozePits.Checked;
         }
 
         private void SerpentsIre_Click(object sender, EventArgs e)
         {
-            ShowAndHideForm(new SerpentsIre());
+            SerpentsIre.Checked = !SerpentsIre.Checked;
         }
 
         private void DragonsStand_Click(object sender, EventArgs e)
         {
-            ShowAndHideForm(new DragonStand());
+            DS.Checked = !DS.Checked;
         }
 
         private void Palawadan_Click(object sender, EventArgs e)
         {
-            ShowAndHideForm(new Palawadan());
+            Palawadan.Checked = !Palawadan.Checked;
         }
 
         private void ThunderheadKeep_Click(object sender, EventArgs e)
         {
-            ShowAndHideForm(new ThunderheadPeaks());
+            ThunderheadKeep.Checked = !ThunderheadKeep.Checked;
         }
 
 
