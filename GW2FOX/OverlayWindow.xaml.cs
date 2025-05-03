@@ -276,6 +276,18 @@ namespace GW2FOX
             }
         }
 
+        private void Chest_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            if (sender is WpfImage img)
+                AnimateScale(img, 1.10);
+        }
+
+        private void Chest_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            if (sender is WpfImage img)
+                AnimateScale(img, 1.0);
+        }
+
 
         private void Icon_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {

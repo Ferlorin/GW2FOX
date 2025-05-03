@@ -180,7 +180,9 @@
        ToolTip="Links: Kiste öffnen/schließen · Rechts: Alle zurücksetzen"
        MouseLeftButtonDown="Chest_MouseLeftButtonDown"
        MouseDown="Chest_MouseDown"
-       MouseUp="Chest_MouseUp">
+       MouseUp="Chest_MouseUp"
+       MouseEnter="Chest_MouseEnter"
+       MouseLeave="Chest_MouseLeave">
                                         <Image.RenderTransform>
                                             <ScaleTransform ScaleX="1.0" ScaleY="1.0"/>
                                         </Image.RenderTransform>
