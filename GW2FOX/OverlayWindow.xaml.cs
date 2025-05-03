@@ -181,16 +181,28 @@ namespace GW2FOX
         {
             if (sender is FrameworkElement fe && fe.DataContext is BossListItem item)
             {
-                // Bossname + Waypoint kopieren
-                WpfClipboard.SetText($"{item.BossName} at {item.Waypoint} in {item.TimeRemainingFormatted}min");
+                string clipboardText;
 
-                // Position des Waypoints im Fenster ermitteln
+                if (item.IsPastEvent)
+                {
+                    int minutesAgo = (int)Math.Round((DateTime.Now - item.NextRunTime).TotalMinutes);
+                    clipboardText = $"\"{item.BossName}\" at {item.Waypoint} started before {minutesAgo}min";
+                }
+                else
+                {
+                    TimeSpan remaining = item.NextRunTime - DateTime.Now;
+                    string timeFormatted = remaining.Hours > 0
+                        ? $"{remaining.Hours}h {remaining.Minutes}min"
+                        : $"{remaining.Minutes}min";
+
+                    clipboardText = $"\"{item.BossName}\" at {item.Waypoint} in {timeFormatted}";
+                }
+
+                WpfClipboard.SetText(clipboardText);
+
                 var position = fe.TransformToAncestor(this).Transform(new WpfPoint(0, 0));
-
-                // Größe der Nachricht berechnen
                 CopiedMessage.Measure(new WpfSize(double.PositiveInfinity, double.PositiveInfinity));
 
-                // X: zentriert über dem Icon, Y: oberhalb des Icons
                 double left = position.X + (fe.ActualWidth / 2) - (CopiedMessage.DesiredSize.Width / 2);
                 double top = position.Y - CopiedMessage.DesiredSize.Height - 18;
 
@@ -207,6 +219,8 @@ namespace GW2FOX
                 timer.Start();
             }
         }
+
+
 
         private void Chest_MouseDown(object sender, MouseButtonEventArgs e)
         {
