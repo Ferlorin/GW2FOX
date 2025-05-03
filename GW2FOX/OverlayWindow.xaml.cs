@@ -16,8 +16,12 @@ using WpfPoint = System.Windows.Point;
 using WpfMouseEventArgs = System.Windows.Input.MouseWheelEventArgs;
 using WpfMouseButtonEventArgs = System.Windows.Input.MouseButtonEventArgs;
 using WpfSize = System.Windows.Size;
-
+using Forms = System.Windows.Forms;
+using System.Diagnostics;
+using System.Linq;
+using System.Runtime.InteropServices;
 using System.Windows.Media.Animation;
+using System.Diagnostics;
 
 namespace GW2FOX
 {
@@ -44,6 +48,9 @@ namespace GW2FOX
             UpdateBossOverlayListAsync();
             StartResetTimer();
         }
+
+        [DllImport("user32.dll")]
+        private static extern bool SetForegroundWindow(IntPtr hWnd);
 
 
         private void StartResetTimer()
@@ -326,11 +333,76 @@ namespace GW2FOX
         }
 
 
+        private void BloodyCom_Click(object sender, MouseButtonEventArgs e)
+        {
+            _overlayWindow = OverlayWindow.GetInstance();
+            _overlayWindow.ToggleAllWindows();
+        }
+
         private void Icon_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left)
+            {
+                BloodyCom_Click(sender, e);
+            }
+            else if (e.ChangedButton == MouseButton.Right)
+            {
                 DragMove();
+            }
         }
+
+        public void ToggleAllWindows()
+        {
+            var excludedTypes = new[] { typeof(MiniOverlay), typeof(Main) };
+            var topMostStates = new Dictionary<Forms.Form, bool>();
+            bool anyToggled = false;
+
+            foreach (Forms.Form f in Forms.Application.OpenForms)
+            {
+                topMostStates[f] = f.TopMost;
+                f.TopMost = false;
+            }
+
+            foreach (Forms.Form openForm in Forms.Application.OpenForms)
+            {
+                if (!excludedTypes.Contains(openForm.GetType()))
+                {
+                    if (openForm.Visible)
+                    {
+                        openForm.Hide();
+                        anyToggled = true;
+                    }
+                    else
+                    {
+                        openForm.Show();
+                        openForm.BringToFront();
+                        openForm.Activate();
+                        anyToggled = true;
+                    }
+                }
+            }
+
+            foreach (var kvp in topMostStates)
+                kvp.Key.TopMost = kvp.Value;
+
+            if (anyToggled)
+            {
+                var gw2Proc = Process.GetProcessesByName("Gw2-64").FirstOrDefault();
+                if (gw2Proc != null && gw2Proc.MainWindowHandle != IntPtr.Zero)
+                {
+                    SetForegroundWindow(gw2Proc.MainWindowHandle);
+                }
+            }
+            else
+            {
+                System.Windows.MessageBox.Show(
+    "No toggleable windows found.\nMaybe they're already gone? 🧐",
+    "Nothing To Toggle", MessageBoxButton.OK, MessageBoxImage.Information);
+
+            }
+        }
+
+
 
         private void StartBossTimer()
         {

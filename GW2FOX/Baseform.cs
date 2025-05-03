@@ -12,7 +12,6 @@ using System.Windows;
 using System.Text.Json;
 using Newtonsoft.Json;
 using System;
-using System.Windows.Forms;
 
 namespace GW2FOX
 {

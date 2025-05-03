@@ -62,53 +62,6 @@ namespace GW2FOX
             // Else: GW2 not running → do nothing, keep focus where it is
         }
 
-        private void BloodyCom_Click(object sender, MouseButtonEventArgs e)
-        {
-            var excludedTypes = new[] { typeof(MiniOverlay), typeof(Main) };
-            var topMostStates = new Dictionary<Forms.Form, bool>();
-            bool anyToggled = false;
-
-            foreach (Forms.Form f in Forms.Application.OpenForms)
-            {
-                topMostStates[f] = f.TopMost;
-                f.TopMost = false;
-            }
-
-            foreach (Forms.Form openForm in Forms.Application.OpenForms)
-            {
-                if (!excludedTypes.Contains(openForm.GetType()))
-                {
-                    if (openForm.Visible)
-                    {
-                        openForm.Hide();
-                        anyToggled = true;
-                    }
-                    else
-                    {
-                        openForm.Show();
-                        openForm.BringToFront();
-                        openForm.Activate();
-                        anyToggled = true;
-                    }
-                }
-            }
-
-            foreach (var kvp in topMostStates)
-                kvp.Key.TopMost = kvp.Value;
-
-            if (anyToggled)
-                FocusGw2Window();
-            else
-            {
-                Forms.MessageBox.Show(
-                    "No toggleable windows found.\nMaybe they're already gone? 🧐",
-                    "Nothing To Toggle", Forms.MessageBoxButtons.OK, Forms.MessageBoxIcon.Information);
-            }
-        }
-
-
-
-
         private void CreateShortcut(string shortcutPath, string targetPath, string arguments, string description)
         {
             var wsh = new IWshRuntimeLibrary.WshShell();
