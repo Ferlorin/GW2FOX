@@ -339,17 +339,26 @@ namespace GW2FOX
             _overlayWindow.ToggleAllWindows();
         }
 
-        private void Icon_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void Icon_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (e.ChangedButton == MouseButton.Left)
+            if (e.ChangedButton == MouseButton.Right)
             {
                 BloodyCom_Click(sender, e);
             }
-            else if (e.ChangedButton == MouseButton.Right)
+            else if (e.ChangedButton == MouseButton.Left)
             {
-                DragMove();
+                try
+                {
+                    DragMove();
+                }
+                catch (InvalidOperationException)
+                {
+                    // Optional: Log oder ignorieren
+                }
             }
         }
+
+
 
         public void ToggleAllWindows()
         {

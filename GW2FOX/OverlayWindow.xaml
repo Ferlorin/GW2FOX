@@ -89,7 +89,7 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <Image x:Name="Com" Source="/Com.png" Width="20" Height="20" Margin="6,5,4,5"
-                           MouseLeftButtonDown="Icon_MouseLeftButtonDown"/>
+                          MouseDown="Icon_MouseDown"/>
                     <TextBlock Grid.Column="1" VerticalAlignment="Center" Foreground="White"
                                FontFamily="Segoe UI" FontWeight="Bold" FontSize="14" Text="Boss-Timer">
                         <TextBlock.Effect>
