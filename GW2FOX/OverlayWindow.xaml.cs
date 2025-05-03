@@ -111,6 +111,7 @@ namespace GW2FOX
                     }
 
                     BossScrollViewer.ScrollToVerticalOffset(oldOffset);
+                    
                 });
             }
             catch (Exception ex)
@@ -118,8 +119,6 @@ namespace GW2FOX
                 Console.WriteLine($"[ERROR] {ex.Message}");
             }
         }
-
-
 
 
         private void Waypoint_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
@@ -250,8 +249,32 @@ namespace GW2FOX
             if (sender is FrameworkElement fe && fe.DataContext is BossListItem item)
             {
                 item.ChestOpened = !item.ChestOpened;
+
                 BossTimings.SetChestState(item.BossName, item.ChestOpened);
-                item.TriggerIconUpdate();
+
+                // 🔥 Wenn LLA-Boss: alle 3 LLA-Einträge im Overlay updaten
+                var linkedBosses = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+        {
+            "LLA Timberline",
+            "LLA Iron Marches",
+            "LLA Gendarran"
+        };
+
+                if (linkedBosses.Contains(item.BossName))
+                {
+                    foreach (var otherItem in OverlayItems)
+                    {
+                        if (linkedBosses.Contains(otherItem.BossName))
+                        {
+                            otherItem.ChestOpened = item.ChestOpened;
+                            otherItem.TriggerIconUpdate(); // optional, falls UI-Iconwechsel notwendig
+                        }
+                    }
+                }
+                else
+                {
+                    item.TriggerIconUpdate();
+                }
             }
         }
 
