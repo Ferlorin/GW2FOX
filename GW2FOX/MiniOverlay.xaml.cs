@@ -109,45 +109,7 @@ namespace GW2FOX
                 "No Window Found", Forms.MessageBoxButtons.OK, Forms.MessageBoxIcon.Information);
         }
 
-
-        private void BlishHUD_Click(object sender, MouseButtonEventArgs e)
-        {
-            LaunchExternalTool("Blish HUD.exe");
-        }
-
-        private void GW2TacO_Click(object sender, MouseButtonEventArgs e)
-        {
-            LaunchExternalTool("GW2TacO.exe");
-        }
-
-        private void Discord_Click(object sender, MouseButtonEventArgs e)
-        {
-            try
-            {
-                string discordFolder = Path.Combine(
-                    Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-                    "Discord");
-                string updaterPath = Path.Combine(discordFolder, "Update.exe");
-                string shortcutPath = Path.Combine(discordFolder, "StartDiscord.lnk");
-
-                if (!File.Exists(updaterPath))
-                {
-                    Forms.MessageBox.Show("Install Discord first!", "Fehler", Forms.MessageBoxButtons.OK, Forms.MessageBoxIcon.Error);
-                    return;
-                }
-
-                if (!File.Exists(shortcutPath))
-                {
-                    CreateShortcut(shortcutPath, updaterPath, "--processStart \"Discord.exe\"", "Start Discord");
-                }
-
-                Process.Start("explorer.exe", $"\"{shortcutPath}\"");
-            }
-            catch (Exception ex)
-            {
-                Forms.MessageBox.Show($"Error starting Dissi: {ex.Message}", "Error", Forms.MessageBoxButtons.OK, Forms.MessageBoxIcon.Error);
-            }
-        }
+        
 
         private void CreateShortcut(string shortcutPath, string targetPath, string arguments, string description)
         {

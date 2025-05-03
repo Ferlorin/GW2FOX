@@ -19,15 +19,6 @@
         <Image Source="Resources/BloodyCom.bmp" Width="30" MouseLeftButtonUp="BloodyCom_Click" Cursor="Hand"
            MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave"
            MouseDown="Button_MouseDown" MouseUp="Button_MouseUp"/>
-        <Image Source="Resources/BlishHUDmini.bmp" Width="30" MouseLeftButtonUp="BlishHUD_Click" Cursor="Hand"
-           MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave"
-           MouseDown="Button_MouseDown" MouseUp="Button_MouseUp"/>
-        <Image Source="Resources/Tacomini.bmp" Width="30" MouseLeftButtonUp="GW2TacO_Click" Cursor="Hand"
-           MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave"
-           MouseDown="Button_MouseDown" MouseUp="Button_MouseUp"/>
-        <Image Source="Resources/Discord.bmp" Width="30" MouseLeftButtonUp="Discord_Click" Cursor="Hand"
-           MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave"
-           MouseDown="Button_MouseDown" MouseUp="Button_MouseUp"/>
         <Image Source="Resources/Clock.bmp" Width="30" MouseLeftButtonUp="Clock_Click" Cursor="Hand"
            MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave"
            MouseDown="Button_MouseDown" MouseUp="Button_MouseUp"/>

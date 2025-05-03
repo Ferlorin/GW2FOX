@@ -33,10 +33,6 @@
             button3 = new Button();
             button1 = new Button();
             button2 = new Button();
-            button6 = new Button();
-            button8 = new Button();
-            button9 = new Button();
-            button10 = new Button();
             SuspendLayout();
             // 
             // button4
@@ -46,7 +42,7 @@
             button4.BackgroundImageLayout = ImageLayout.Stretch;
             button4.Cursor = Cursors.Hand;
             button4.FlatStyle = FlatStyle.Flat;
-            button4.Location = new Point(12, 176);
+            button4.Location = new Point(12, 12);
             button4.Name = "button4";
             button4.Size = new Size(140, 35);
             button4.TabIndex = 5;
@@ -60,7 +56,7 @@
             button3.BackgroundImageLayout = ImageLayout.Stretch;
             button3.Cursor = Cursors.Hand;
             button3.FlatStyle = FlatStyle.Flat;
-            button3.Location = new Point(12, 217);
+            button3.Location = new Point(12, 53);
             button3.Name = "button3";
             button3.Size = new Size(140, 35);
             button3.TabIndex = 8;
@@ -74,7 +70,7 @@
             button1.BackgroundImageLayout = ImageLayout.Stretch;
             button1.Cursor = Cursors.Hand;
             button1.FlatStyle = FlatStyle.Flat;
-            button1.Location = new Point(12, 258);
+            button1.Location = new Point(12, 94);
             button1.Name = "button1";
             button1.Size = new Size(140, 35);
             button1.TabIndex = 11;
@@ -88,83 +84,26 @@
             button2.BackgroundImageLayout = ImageLayout.Center;
             button2.Cursor = Cursors.Hand;
             button2.FlatStyle = FlatStyle.Flat;
-            button2.Location = new Point(41, 299);
+            button2.Location = new Point(41, 162);
             button2.Name = "button2";
             button2.Size = new Size(75, 23);
             button2.TabIndex = 12;
             button2.UseVisualStyleBackColor = false;
             button2.Click += CloseAll_Click;
             // 
-            // button6
-            // 
-            button6.BackColor = Color.Black;
-            button6.BackgroundImage = (Image)resources.GetObject("button6.BackgroundImage");
-            button6.BackgroundImageLayout = ImageLayout.Stretch;
-            button6.Cursor = Cursors.Hand;
-            button6.FlatStyle = FlatStyle.Flat;
-            button6.Location = new Point(12, 53);
-            button6.Name = "button6";
-            button6.Size = new Size(140, 35);
-            button6.TabIndex = 14;
-            button6.UseVisualStyleBackColor = false;
-            button6.Click += BlishHUD_Click;
-            // 
-            // button8
-            // 
-            button8.BackColor = Color.Black;
-            button8.BackgroundImage = (Image)resources.GetObject("button8.BackgroundImage");
-            button8.BackgroundImageLayout = ImageLayout.Stretch;
-            button8.Cursor = Cursors.Hand;
-            button8.FlatStyle = FlatStyle.Flat;
-            button8.Location = new Point(12, 12);
-            button8.Name = "button8";
-            button8.Size = new Size(140, 35);
-            button8.TabIndex = 16;
-            button8.UseVisualStyleBackColor = false;
-            button8.Click += button8_Click;
-            // 
-            // button9
-            // 
-            button9.BackgroundImage = (Image)resources.GetObject("button9.BackgroundImage");
-            button9.BackgroundImageLayout = ImageLayout.Stretch;
-            button9.Cursor = Cursors.Hand;
-            button9.FlatStyle = FlatStyle.Flat;
-            button9.Location = new Point(12, 94);
-            button9.Name = "button9";
-            button9.Size = new Size(140, 35);
-            button9.TabIndex = 18;
-            button9.UseVisualStyleBackColor = true;
-            button9.Click += ArcDPSInstall_Click;
-            // 
-            // button10
-            // 
-            button10.BackgroundImage = (Image)resources.GetObject("button10.BackgroundImage");
-            button10.BackgroundImageLayout = ImageLayout.Stretch;
-            button10.Cursor = Cursors.Hand;
-            button10.FlatStyle = FlatStyle.Flat;
-            button10.Location = new Point(12, 135);
-            button10.Name = "button10";
-            button10.Size = new Size(140, 35);
-            button10.TabIndex = 19;
-            button10.UseVisualStyleBackColor = true;
-            button10.Click += ArcDPSDeinstall_Click;
-            // 
             // Main
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Black;
-            ClientSize = new Size(164, 331);
-            Controls.Add(button10);
-            Controls.Add(button9);
-            Controls.Add(button8);
-            Controls.Add(button6);
+            ClientSize = new Size(164, 197);
             Controls.Add(button2);
             Controls.Add(button1);
             Controls.Add(button3);
             Controls.Add(button4);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Main";
+            Opacity = 0.8D;
             StartPosition = FormStartPosition.CenterScreen;
             TopMost = false;
             ResumeLayout(false);
@@ -175,9 +114,5 @@
         private Button button3;
         private Button button1;
         private Button button2;
-        private Button button6;
-        private Button button8;
-        private Button button9;
-        private Button button10;
     }
 }

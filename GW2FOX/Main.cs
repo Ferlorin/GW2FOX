@@ -162,29 +162,6 @@ namespace GW2FOX
         }
 
 
-        private void BlishHUD_Click(object sender, EventArgs e)
-        {
-            LaunchExternalTool("Blish HUD.lnk");
-        }
-
-        private void button8_Click(object sender, EventArgs e)
-        {
-            LaunchExternalTool("GW2TacO.lnk");
-        }
-
-        private void ArcDPSInstall_Click(object sender, EventArgs e)
-        {
-            string gw2Verzeichnis = GetGw2Verzeichnis();
-
-            if (string.IsNullOrEmpty(gw2Verzeichnis))
-            {
-                System.Windows.Forms.MessageBox.Show("Please select the directory of Guild Wars 2 where the .exe file is located.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            InstallArcDPS(gw2Verzeichnis);
-        }
-
         private string GetGw2Verzeichnis()
         {
             using (var dialog = new FolderBrowserDialog())
@@ -201,59 +178,10 @@ namespace GW2FOX
             return null;
         }
 
-       private async void InstallArcDPS(string gw2Directory)
-{
-    string downloadUrl = "https://www.deltaconnected.com/arcdps/x64/d3d11.dll"; // official ArcDPS URL
-    string destinationPath = Path.Combine(gw2Directory, "d3d11.dll");
-
-    try
-    {
-        using (HttpClient client = new HttpClient())
-        {
-            HttpResponseMessage response = await client.GetAsync(downloadUrl);
-            response.EnsureSuccessStatusCode(); // Throws exception if not 2xx success
-
-            byte[] data = await response.Content.ReadAsByteArrayAsync();
-            await File.WriteAllBytesAsync(destinationPath, data);
-
-            System.Windows.Forms.MessageBox.Show("ArcDPS has been successfully installed!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
-    }
-    catch (Exception ex)
-    {
-        System.Windows.Forms.MessageBox.Show($"Error downloading/installing ArcDPS: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-    }
-}
+ 
 
 
-        private void ArcDPSDeinstall_Click(object sender, EventArgs e)
-        {
-            string gw2Verzeichnis = GetGw2Verzeichnis();
-
-            if (string.IsNullOrEmpty(gw2Verzeichnis))
-            {
-                System.Windows.Forms.MessageBox.Show("The Guild Wars 2 directory was not selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            try
-            {
-                string d3d11DllZiel = Path.Combine(gw2Verzeichnis, "d3d11.dll");
-                string d3d11Md5SumZiel = Path.Combine(gw2Verzeichnis, "d3d11.dll.md5sum");
-
-                if (File.Exists(d3d11DllZiel))
-                    File.Delete(d3d11DllZiel);
-
-                if (File.Exists(d3d11Md5SumZiel))
-                    File.Delete(d3d11Md5SumZiel);
-
-                System.Windows.Forms.MessageBox.Show("Done.", "Done", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            catch (Exception ex)
-            {
-                System.Windows.Forms.MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
+       
 
         protected void ShowAndHideForm(Form newForm)
         {
