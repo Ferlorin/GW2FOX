@@ -2076,9 +2076,9 @@
             // pictureBox15
             // 
             pictureBox15.BackColor = Color.DimGray;
-            pictureBox15.Location = new Point(613, 674);
+            pictureBox15.Location = new Point(633, 674);
             pictureBox15.Name = "pictureBox15";
-            pictureBox15.Size = new Size(338, 292);
+            pictureBox15.Size = new Size(318, 292);
             pictureBox15.TabIndex = 264;
             pictureBox15.TabStop = false;
             // 

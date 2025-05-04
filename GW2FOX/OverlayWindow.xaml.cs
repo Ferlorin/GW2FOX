@@ -198,12 +198,14 @@ namespace GW2FOX
                 else
                 {
                     TimeSpan remaining = item.NextRunTime - DateTime.Now;
+                    int displayMinutes = Math.Max(1, (int)Math.Ceiling(remaining.TotalMinutes));
                     string timeFormatted = remaining.Hours > 0
-                        ? $"{remaining.Hours}h {remaining.Minutes}min"
-                        : $"{remaining.Minutes}min";
+                        ? $"{remaining.Hours}h {displayMinutes % 60}min"
+                        : $"{displayMinutes}min";
 
-                    clipboardText = $"\"{item.BossName}\" at {item.Waypoint} in {timeFormatted}";
+                    clipboardText = $"\"{item.BossName}\" at {item.Waypoint} in ca {timeFormatted}";
                 }
+
 
                 WpfClipboard.SetText(clipboardText);
 
@@ -273,7 +275,6 @@ namespace GW2FOX
 
                 BossTimings.SetChestState(item.BossName, item.ChestOpened);
 
-                // 🔥 Wenn LLA-Boss: alle 3 LLA-Einträge im Overlay updaten
                 var linkedBosses = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
         {
             "LLA Timberline",
@@ -288,7 +289,7 @@ namespace GW2FOX
                         if (linkedBosses.Contains(otherItem.BossName))
                         {
                             otherItem.ChestOpened = item.ChestOpened;
-                            otherItem.TriggerIconUpdate(); // optional, falls UI-Iconwechsel notwendig
+                            otherItem.TriggerIconUpdate(); 
                         }
                     }
                 }
