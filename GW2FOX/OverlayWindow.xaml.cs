@@ -203,7 +203,7 @@ namespace GW2FOX
                         ? $"{remaining.Hours}h {displayMinutes % 60}min"
                         : $"{displayMinutes}min";
 
-                    clipboardText = $"\"{item.BossName}\" at {item.Waypoint} in ca {timeFormatted}min";
+                    clipboardText = $"\"{item.BossName}\" at {item.Waypoint} in ca {timeFormatted}";
                 }
 
 
@@ -226,7 +226,11 @@ namespace GW2FOX
                     timer.Stop();
                 };
                 timer.Start();
-                BaseForm.BringGw2ToFront();
+                var gw2Proc = Process.GetProcessesByName("Gw2-64").FirstOrDefault();
+                if (gw2Proc != null && gw2Proc.MainWindowHandle != IntPtr.Zero)
+                {
+                    SetForegroundWindow(gw2Proc.MainWindowHandle);
+                }
             }
         }
 
@@ -259,6 +263,11 @@ namespace GW2FOX
                         {
                             item.ChestOpened = false;
                         }
+                    }
+                    var gw2Proc = Process.GetProcessesByName("Gw2-64").FirstOrDefault();
+                    if (gw2Proc != null && gw2Proc.MainWindowHandle != IntPtr.Zero)
+                    {
+                        SetForegroundWindow(gw2Proc.MainWindowHandle);
                     }
                 }
             }
