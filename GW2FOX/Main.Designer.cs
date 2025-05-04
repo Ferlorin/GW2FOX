@@ -104,7 +104,7 @@
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Main";
             Opacity = 0.8D;
-            StartPosition = FormStartPosition.CenterScreen;
+            StartPosition = FormStartPosition.Manual;
             TopMost = false;
             ResumeLayout(false);
         }

@@ -20,7 +20,7 @@ namespace GW2FOX
         public GatesOfArah()
         {
             InitializeComponent();
-            LoadConfigText(Runinfo, Squadinfo, Guild, Welcome, Symbols);
+            LoadConfigText(Runinfo, Guild, Welcome, Symbols);
             _ = LoadItemPriceInformation();
         }
 

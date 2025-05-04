@@ -36,6 +36,12 @@ namespace GW2FOX
             base.OnLoad(e);
             AddButtonAnimations(this);
             BossTimings.LoadBossConfigInfos("BossTimings.json");
+            AfterControlsLoaded();
+        }
+
+        protected virtual void AfterControlsLoaded()
+        {
+            // Wird von der Kindklasse überschrieben
         }
 
         [DllImport("user32.dll")]
@@ -277,7 +283,6 @@ namespace GW2FOX
 
         protected void LoadConfigText(
     System.Windows.Forms.TextBox runinfoBox,
-    System.Windows.Forms.TextBox squadinfoBox,
     System.Windows.Forms.TextBox guildBox,
     System.Windows.Forms.TextBox welcomeBox,
     System.Windows.Forms.TextBox symbolsBox)
@@ -291,7 +296,6 @@ namespace GW2FOX
             }
 
             runinfoBox.Text = (config.Runinfo ?? "").Replace("\n", Environment.NewLine);
-            squadinfoBox.Text = (config.Squadinfo ?? "").Replace("\n", Environment.NewLine);
             guildBox.Text = (config.Guild ?? "").Replace("\n", Environment.NewLine);
             welcomeBox.Text = (config.Welcome ?? "").Replace("\n", Environment.NewLine);
             symbolsBox.Text = (config.Symbols ?? "").Replace("\n", Environment.NewLine);

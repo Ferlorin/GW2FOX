@@ -14,7 +14,7 @@ namespace GW2FOX
         public Ogrewars()
         {
             InitializeComponent();
-            LoadConfigText(Runinfo, Squadinfo, Guild, Welcome, Symbols);
+            LoadConfigText(Runinfo, Guild, Welcome, Symbols);
             InitializeItemPriceTextBox();
             _ = LoadItemPriceInformation();
         }

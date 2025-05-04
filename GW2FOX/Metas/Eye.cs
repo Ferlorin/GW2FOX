@@ -14,7 +14,7 @@ namespace GW2FOX
         public Eye()
         {
             InitializeComponent();
-            LoadConfigText(Runinfo, Squadinfo, Guild, Welcome, Symbols);
+            LoadConfigText(Runinfo, Guild, Welcome, Symbols);
             // No need to re-create the TextBox here
             _ = LoadItemPriceInformation();
         }

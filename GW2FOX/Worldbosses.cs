@@ -23,18 +23,21 @@ namespace GW2FOX
             InitializeBossCheckBoxMap();
             bossCheckBoxMap = new Dictionary<string, CheckBox>(); 
             UpdateBossUiBosses();
-            LoadConfigText(Runinfo, Squadinfo, Guild, Welcome, Symbols);
-
+            LoadConfigText(Runinfo, Guild, Welcome, Symbols);
             Load += Worldbosses_Load_1;         
         }
 
         private void Worldbosses_Load_1(object? sender, EventArgs e)
         {
-
             InitializeBossCheckBoxMap();
             UpdateBossUiBosses();
         }
 
+        protected override void AfterControlsLoaded()
+        {
+            base.AfterControlsLoaded();
+            LoadConfigText(Runinfo, Guild, Welcome, Symbols);
+        }
 
         const int SW_RESTORE = 9;
 
@@ -43,11 +46,6 @@ namespace GW2FOX
         private void Saverun_Click(object sender, EventArgs e)
         {
             SaveTextToFile(Runinfo.Text, "Runinfo");
-        }
-
-        private void Info_Click(object sender, EventArgs e)
-        {
-            SaveTextToFile(Squadinfo.Text, "Squadinfo");
         }
 
         private void Guild_Click(object sender, EventArgs e)
@@ -267,16 +265,6 @@ namespace GW2FOX
             BringGw2ToFront();
         }
 
-
-        private void Squadinfos_Click(object sender, EventArgs e)
-        {
-            // Copy the text from Leyline60 TextBox to the clipboard
-            Clipboard.SetText(Squadinfo.Text);
-
-            // Bring the Gw2-64.exe window to the foreground
-            BringGw2ToFront();
-        }
-
         private void Guildcopy_Click(object sender, EventArgs e)
         {
             Clipboard.SetText(Guild.Text);
@@ -327,12 +315,6 @@ namespace GW2FOX
         private void button30_Click(object sender, EventArgs e)
         {
             Clipboard.SetText(Runinfo.Text);
-            BringGw2ToFront();
-        }
-
-        private void button29_Click(object sender, EventArgs e)
-        {
-            Clipboard.SetText(Squadinfo.Text);
             BringGw2ToFront();
         }
 
@@ -446,10 +428,6 @@ namespace GW2FOX
             Pinata.Checked = !Pinata.Checked;
         }
 
-        private void Savesquadmessage_Click(object sender, EventArgs e)
-        {
-            SaveTextToFile(Squadinfo.Text, "Squadinfo");
-        }
 
 
         private void OozePits_Click(object sender, EventArgs e)
@@ -1679,41 +1657,29 @@ namespace GW2FOX
         {
             try
             {
-                // Anzahl der Bosse aus dem Textfeld entnehmen (Quantity TextBox)
                 if (int.TryParse(Quantity.Text, out int numberOfBosses) && numberOfBosses > 0)
                 {
-                    // Liste der relevanten Bossnamen laden
                     List<string> bossNamesFromConfig = BossList23;
 
-                    // Die Gruppen (mit mehreren Zeitpunkten pro Boss) herausfiltern
                     var bossEventGroups = BossEventGroups
                         .Where(bossEventGroup => bossNamesFromConfig.Contains(bossEventGroup.BossName))
                         .ToList();
 
-                    // Alle einzelnen Runs (mit Zeitangabe) sammeln
+                    // Alle Runs sammeln
                     var allBosses = bossEventGroups
                         .SelectMany(bossEventGroup => bossEventGroup.GetNextRuns())
+                        .Where(run => run.TimeToShow > GlobalVariables.CURRENT_DATE_TIME) // Nur zukünftige Runs!
+                        .OrderBy(run => run.TimeToShow)
                         .ToList();
 
-                    // Sortierung nach dem nächsten Laufzeitpunkt
-                    allBosses.Sort((bossEvent1, bossEvent2) =>
-                    {
-                        return bossEvent1.NextRunTime.CompareTo(bossEvent2.NextRunTime);
-                    });
-
-                    // Formatierte Bossinfos (Name + Waypoint) generieren
                     var bossInfo = allBosses
                         .Take(numberOfBosses)
                         .Select(bossEvent => $"{bossEvent.BossName} - {bossEvent.Waypoint}")
                         .ToList();
 
-                    // Zeilenweise Ausgabe erstellen
-                    string bossNamesString = string.Join(Environment.NewLine, bossInfo);
+                    string bossNamesString = "Upcoming Meta:" + Environment.NewLine + string.Join(Environment.NewLine, bossInfo);
 
-                    // In die Zwischenablage kopieren
                     Clipboard.SetText(bossNamesString);
-
-                    // Im UI anzeigen
                     SearchResults.Text = bossNamesString;
                 }
                 else
@@ -1726,6 +1692,8 @@ namespace GW2FOX
                 MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+
 
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
