@@ -181,6 +181,9 @@
             LyssaButton = new Button();
             DwanyButton = new Button();
             FireShaman = new CheckBox();
+            pictureBox13 = new PictureBox();
+            pictureBox14 = new PictureBox();
+            pictureBox15 = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
@@ -193,6 +196,9 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox6).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox7).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox13).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox14).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox15).BeginInit();
             SuspendLayout();
             // 
             // button2
@@ -956,7 +962,7 @@
             // Maw
             // 
             Maw.AutoSize = true;
-            Maw.BackColor = Color.Magenta;
+            Maw.BackColor = Color.Black;
             Maw.ForeColor = Color.Magenta;
             Maw.Location = new Point(13, 324);
             Maw.Name = "Maw";
@@ -968,7 +974,7 @@
             // MarkTwo
             // 
             MarkTwo.AutoSize = true;
-            MarkTwo.BackColor = Color.Magenta;
+            MarkTwo.BackColor = Color.Black;
             MarkTwo.ForeColor = Color.Magenta;
             MarkTwo.Location = new Point(13, 613);
             MarkTwo.Name = "MarkTwo";
@@ -980,7 +986,7 @@
             // Megadestroyer
             // 
             Megadestroyer.AutoSize = true;
-            Megadestroyer.BackColor = Color.Magenta;
+            Megadestroyer.BackColor = Color.Black;
             Megadestroyer.ForeColor = Color.Magenta;
             Megadestroyer.Location = new Point(13, 572);
             Megadestroyer.Name = "Megadestroyer";
@@ -992,7 +998,7 @@
             // Thaida
             // 
             Thaida.AutoSize = true;
-            Thaida.BackColor = Color.Magenta;
+            Thaida.BackColor = Color.Black;
             Thaida.ForeColor = Color.Magenta;
             Thaida.Location = new Point(13, 531);
             Thaida.Name = "Thaida";
@@ -1004,7 +1010,7 @@
             // Ulgoth
             // 
             Ulgoth.AutoSize = true;
-            Ulgoth.BackColor = Color.Magenta;
+            Ulgoth.BackColor = Color.Black;
             Ulgoth.ForeColor = Color.Magenta;
             Ulgoth.Location = new Point(13, 490);
             Ulgoth.Name = "Ulgoth";
@@ -1016,7 +1022,7 @@
             // JungleWurm
             // 
             JungleWurm.AutoSize = true;
-            JungleWurm.BackColor = Color.Magenta;
+            JungleWurm.BackColor = Color.Black;
             JungleWurm.ForeColor = Color.Magenta;
             JungleWurm.Location = new Point(13, 447);
             JungleWurm.Name = "JungleWurm";
@@ -1028,7 +1034,7 @@
             // Fire_Elemental
             // 
             Fire_Elemental.AutoSize = true;
-            Fire_Elemental.BackColor = Color.Magenta;
+            Fire_Elemental.BackColor = Color.Black;
             Fire_Elemental.ForeColor = Color.Magenta;
             Fire_Elemental.Location = new Point(13, 406);
             Fire_Elemental.Name = "Fire_Elemental";
@@ -1040,7 +1046,7 @@
             // Behemoth
             // 
             Behemoth.AutoSize = true;
-            Behemoth.BackColor = Color.Magenta;
+            Behemoth.BackColor = Color.Black;
             Behemoth.ForeColor = Color.Magenta;
             Behemoth.Location = new Point(13, 365);
             Behemoth.Name = "Behemoth";
@@ -1052,7 +1058,7 @@
             // Tarir
             // 
             Tarir.AutoSize = true;
-            Tarir.BackColor = Color.Magenta;
+            Tarir.BackColor = Color.Black;
             Tarir.Location = new Point(378, 365);
             Tarir.Name = "Tarir";
             Tarir.Size = new Size(15, 14);
@@ -1063,7 +1069,7 @@
             // Mascen
             // 
             Mascen.AutoSize = true;
-            Mascen.BackColor = Color.Magenta;
+            Mascen.BackColor = Color.Black;
             Mascen.Location = new Point(378, 406);
             Mascen.Name = "Mascen";
             Mascen.Size = new Size(15, 14);
@@ -1074,7 +1080,7 @@
             // DS
             // 
             DS.AutoSize = true;
-            DS.BackColor = Color.Magenta;
+            DS.BackColor = Color.Black;
             DS.Location = new Point(378, 447);
             DS.Name = "DS";
             DS.Size = new Size(15, 14);
@@ -1085,7 +1091,7 @@
             // Chak
             // 
             Chak.AutoSize = true;
-            Chak.BackColor = Color.Magenta;
+            Chak.BackColor = Color.Black;
             Chak.Location = new Point(378, 324);
             Chak.Name = "Chak";
             Chak.Size = new Size(15, 14);
@@ -1096,7 +1102,7 @@
             // Shatterer
             // 
             Shatterer.AutoSize = true;
-            Shatterer.BackColor = Color.Magenta;
+            Shatterer.BackColor = Color.Black;
             Shatterer.ForeColor = Color.Magenta;
             Shatterer.Location = new Point(13, 692);
             Shatterer.Name = "Shatterer";
@@ -1108,7 +1114,7 @@
             // Karka
             // 
             Karka.AutoSize = true;
-            Karka.BackColor = Color.Magenta;
+            Karka.BackColor = Color.Black;
             Karka.ForeColor = Color.Magenta;
             Karka.Location = new Point(13, 733);
             Karka.Name = "Karka";
@@ -1120,7 +1126,7 @@
             // Claw
             // 
             Claw.AutoSize = true;
-            Claw.BackColor = Color.Magenta;
+            Claw.BackColor = Color.Black;
             Claw.ForeColor = Color.Magenta;
             Claw.Location = new Point(13, 777);
             Claw.Name = "Claw";
@@ -1132,7 +1138,7 @@
             // Tequatl
             // 
             Tequatl.AutoSize = true;
-            Tequatl.BackColor = Color.Magenta;
+            Tequatl.BackColor = Color.Black;
             Tequatl.ForeColor = Color.Magenta;
             Tequatl.Location = new Point(13, 654);
             Tequatl.Name = "Tequatl";
@@ -1144,7 +1150,7 @@
             // MawsOfTorment
             // 
             MawsOfTorment.AutoSize = true;
-            MawsOfTorment.BackColor = Color.Magenta;
+            MawsOfTorment.BackColor = Color.Black;
             MawsOfTorment.Location = new Point(195, 692);
             MawsOfTorment.Name = "MawsOfTorment";
             MawsOfTorment.Size = new Size(15, 14);
@@ -1155,7 +1161,7 @@
             // Oil
             // 
             Oil.AutoSize = true;
-            Oil.BackColor = Color.Magenta;
+            Oil.BackColor = Color.Black;
             Oil.Location = new Point(195, 733);
             Oil.Name = "Oil";
             Oil.Size = new Size(15, 14);
@@ -1166,7 +1172,7 @@
             // ThunderheadKeep
             // 
             ThunderheadKeep.AutoSize = true;
-            ThunderheadKeep.BackColor = Color.Magenta;
+            ThunderheadKeep.BackColor = Color.Black;
             ThunderheadKeep.Location = new Point(195, 654);
             ThunderheadKeep.Name = "ThunderheadKeep";
             ThunderheadKeep.Size = new Size(15, 14);
@@ -1177,7 +1183,7 @@
             // Junundu
             // 
             Junundu.AutoSize = true;
-            Junundu.BackColor = Color.Magenta;
+            Junundu.BackColor = Color.Black;
             Junundu.Location = new Point(195, 365);
             Junundu.Name = "Junundu";
             Junundu.Size = new Size(15, 14);
@@ -1188,7 +1194,7 @@
             // PTA
             // 
             PTA.AutoSize = true;
-            PTA.BackColor = Color.Magenta;
+            PTA.BackColor = Color.Black;
             PTA.Location = new Point(195, 406);
             PTA.Name = "PTA";
             PTA.Size = new Size(15, 14);
@@ -1199,7 +1205,7 @@
             // Doppelganger
             // 
             Doppelganger.AutoSize = true;
-            Doppelganger.BackColor = Color.Magenta;
+            Doppelganger.BackColor = Color.Black;
             Doppelganger.Location = new Point(195, 447);
             Doppelganger.Name = "Doppelganger";
             Doppelganger.Size = new Size(15, 14);
@@ -1210,7 +1216,7 @@
             // Doggies
             // 
             Doggies.AutoSize = true;
-            Doggies.BackColor = Color.Magenta;
+            Doggies.BackColor = Color.Black;
             Doggies.Location = new Point(195, 490);
             Doggies.Name = "Doggies";
             Doggies.Size = new Size(15, 14);
@@ -1221,7 +1227,7 @@
             // Pinata
             // 
             Pinata.AutoSize = true;
-            Pinata.BackColor = Color.Magenta;
+            Pinata.BackColor = Color.Black;
             Pinata.Location = new Point(195, 529);
             Pinata.Name = "Pinata";
             Pinata.Size = new Size(15, 14);
@@ -1232,7 +1238,7 @@
             // SerpentsIre
             // 
             SerpentsIre.AutoSize = true;
-            SerpentsIre.BackColor = Color.Magenta;
+            SerpentsIre.BackColor = Color.Black;
             SerpentsIre.Location = new Point(195, 570);
             SerpentsIre.Name = "SerpentsIre";
             SerpentsIre.Size = new Size(15, 14);
@@ -1243,7 +1249,7 @@
             // Palawadan
             // 
             Palawadan.AutoSize = true;
-            Palawadan.BackColor = Color.Magenta;
+            Palawadan.BackColor = Color.Black;
             Palawadan.Location = new Point(195, 613);
             Palawadan.Name = "Palawadan";
             Palawadan.Size = new Size(15, 14);
@@ -1254,7 +1260,7 @@
             // DBS
             // 
             DBS.AutoSize = true;
-            DBS.BackColor = Color.Magenta;
+            DBS.BackColor = Color.Black;
             DBS.Location = new Point(195, 324);
             DBS.Name = "DBS";
             DBS.Size = new Size(15, 14);
@@ -1265,7 +1271,7 @@
             // Metalconcert
             // 
             Metalconcert.AutoSize = true;
-            Metalconcert.BackColor = Color.Magenta;
+            Metalconcert.BackColor = Color.Black;
             Metalconcert.Location = new Point(554, 365);
             Metalconcert.Name = "Metalconcert";
             Metalconcert.Size = new Size(15, 14);
@@ -1276,7 +1282,7 @@
             // Dragonstorm
             // 
             Dragonstorm.AutoSize = true;
-            Dragonstorm.BackColor = Color.Magenta;
+            Dragonstorm.BackColor = Color.Black;
             Dragonstorm.Location = new Point(554, 406);
             Dragonstorm.Name = "Dragonstorm";
             Dragonstorm.Size = new Size(15, 14);
@@ -1287,7 +1293,7 @@
             // OozePits
             // 
             OozePits.AutoSize = true;
-            OozePits.BackColor = Color.Magenta;
+            OozePits.BackColor = Color.Black;
             OozePits.Location = new Point(554, 447);
             OozePits.Name = "OozePits";
             OozePits.Size = new Size(15, 14);
@@ -1298,7 +1304,7 @@
             // Effigy
             // 
             Effigy.AutoSize = true;
-            Effigy.BackColor = Color.Magenta;
+            Effigy.BackColor = Color.Black;
             Effigy.Location = new Point(554, 490);
             Effigy.Name = "Effigy";
             Effigy.Size = new Size(15, 14);
@@ -1309,7 +1315,7 @@
             // Doomlore
             // 
             Doomlore.AutoSize = true;
-            Doomlore.BackColor = Color.Magenta;
+            Doomlore.BackColor = Color.Black;
             Doomlore.Location = new Point(554, 529);
             Doomlore.Name = "Doomlore";
             Doomlore.Size = new Size(15, 14);
@@ -1320,7 +1326,7 @@
             // SormsOfWinter
             // 
             SormsOfWinter.AutoSize = true;
-            SormsOfWinter.BackColor = Color.Magenta;
+            SormsOfWinter.BackColor = Color.Black;
             SormsOfWinter.Location = new Point(554, 570);
             SormsOfWinter.Name = "SormsOfWinter";
             SormsOfWinter.Size = new Size(15, 14);
@@ -1331,7 +1337,7 @@
             // JorasKeep
             // 
             JorasKeep.AutoSize = true;
-            JorasKeep.BackColor = Color.Magenta;
+            JorasKeep.BackColor = Color.Black;
             JorasKeep.Location = new Point(554, 613);
             JorasKeep.Name = "JorasKeep";
             JorasKeep.Size = new Size(15, 14);
@@ -1342,7 +1348,7 @@
             // Drakkar
             // 
             Drakkar.AutoSize = true;
-            Drakkar.BackColor = Color.Magenta;
+            Drakkar.BackColor = Color.Black;
             Drakkar.Location = new Point(554, 324);
             Drakkar.Name = "Drakkar";
             Drakkar.Size = new Size(15, 14);
@@ -1353,7 +1359,7 @@
             // SaidrasHeaven
             // 
             SaidrasHeaven.AutoSize = true;
-            SaidrasHeaven.BackColor = Color.Magenta;
+            SaidrasHeaven.BackColor = Color.Black;
             SaidrasHeaven.Location = new Point(377, 560);
             SaidrasHeaven.Name = "SaidrasHeaven";
             SaidrasHeaven.Size = new Size(15, 14);
@@ -1364,7 +1370,7 @@
             // Loamhurst
             // 
             Loamhurst.AutoSize = true;
-            Loamhurst.BackColor = Color.Magenta;
+            Loamhurst.BackColor = Color.Black;
             Loamhurst.Location = new Point(377, 601);
             Loamhurst.Name = "Loamhurst";
             Loamhurst.Size = new Size(15, 14);
@@ -1375,7 +1381,7 @@
             // Homestead
             // 
             Homestead.AutoSize = true;
-            Homestead.BackColor = Color.Magenta;
+            Homestead.BackColor = Color.Black;
             Homestead.Location = new Point(377, 642);
             Homestead.Name = "Homestead";
             Homestead.Size = new Size(15, 14);
@@ -1386,7 +1392,7 @@
             // Sandstorm
             // 
             Sandstorm.AutoSize = true;
-            Sandstorm.BackColor = Color.Magenta;
+            Sandstorm.BackColor = Color.Black;
             Sandstorm.Location = new Point(377, 519);
             Sandstorm.Name = "Sandstorm";
             Sandstorm.Size = new Size(15, 14);
@@ -1397,7 +1403,7 @@
             // Blackout
             // 
             Blackout.AutoSize = true;
-            Blackout.BackColor = Color.Magenta;
+            Blackout.BackColor = Color.Black;
             Blackout.Location = new Point(751, 375);
             Blackout.Name = "Blackout";
             Blackout.Size = new Size(15, 14);
@@ -1408,7 +1414,7 @@
             // GangWar
             // 
             GangWar.AutoSize = true;
-            GangWar.BackColor = Color.Magenta;
+            GangWar.BackColor = Color.Black;
             GangWar.Location = new Point(751, 416);
             GangWar.Name = "GangWar";
             GangWar.Size = new Size(15, 14);
@@ -1419,7 +1425,7 @@
             // Aspenwood
             // 
             Aspenwood.AutoSize = true;
-            Aspenwood.BackColor = Color.Magenta;
+            Aspenwood.BackColor = Color.Black;
             Aspenwood.Location = new Point(751, 457);
             Aspenwood.Name = "Aspenwood";
             Aspenwood.Size = new Size(15, 14);
@@ -1430,7 +1436,7 @@
             // JadeSea
             // 
             JadeSea.AutoSize = true;
-            JadeSea.BackColor = Color.Magenta;
+            JadeSea.BackColor = Color.Black;
             JadeSea.Location = new Point(751, 500);
             JadeSea.Name = "JadeSea";
             JadeSea.Size = new Size(15, 14);
@@ -1441,7 +1447,7 @@
             // Atherblade
             // 
             Atherblade.AutoSize = true;
-            Atherblade.BackColor = Color.Magenta;
+            Atherblade.BackColor = Color.Black;
             Atherblade.Location = new Point(751, 334);
             Atherblade.Name = "Atherblade";
             Atherblade.Size = new Size(15, 14);
@@ -1452,7 +1458,7 @@
             // WizzardsTower
             // 
             WizzardsTower.AutoSize = true;
-            WizzardsTower.BackColor = Color.Magenta;
+            WizzardsTower.BackColor = Color.Black;
             WizzardsTower.Location = new Point(194, 811);
             WizzardsTower.Name = "WizzardsTower";
             WizzardsTower.Size = new Size(15, 14);
@@ -1463,7 +1469,7 @@
             // Flybynigtht
             // 
             Flybynigtht.AutoSize = true;
-            Flybynigtht.BackColor = Color.Magenta;
+            Flybynigtht.BackColor = Color.Black;
             Flybynigtht.Location = new Point(194, 852);
             Flybynigtht.Name = "Flybynigtht";
             Flybynigtht.Size = new Size(15, 14);
@@ -1474,7 +1480,7 @@
             // Amnytas
             // 
             Amnytas.AutoSize = true;
-            Amnytas.BackColor = Color.Magenta;
+            Amnytas.BackColor = Color.Black;
             Amnytas.Location = new Point(194, 893);
             Amnytas.Name = "Amnytas";
             Amnytas.Size = new Size(15, 14);
@@ -1485,7 +1491,7 @@
             // Convergence
             // 
             Convergence.AutoSize = true;
-            Convergence.BackColor = Color.Magenta;
+            Convergence.BackColor = Color.Black;
             Convergence.Location = new Point(194, 934);
             Convergence.Name = "Convergence";
             Convergence.Size = new Size(15, 14);
@@ -1495,6 +1501,7 @@
             // 
             // pictureBox4
             // 
+            pictureBox4.BackColor = Color.DimGray;
             pictureBox4.BackgroundImage = (Image)resources.GetObject("pictureBox4.BackgroundImage");
             pictureBox4.BackgroundImageLayout = ImageLayout.Zoom;
             pictureBox4.Location = new Point(34, 12);
@@ -1505,6 +1512,7 @@
             // 
             // pictureBox3
             // 
+            pictureBox3.BackColor = Color.DimGray;
             pictureBox3.BackgroundImage = (Image)resources.GetObject("pictureBox3.BackgroundImage");
             pictureBox3.BackgroundImageLayout = ImageLayout.Zoom;
             pictureBox3.Location = new Point(309, 12);
@@ -1515,6 +1523,7 @@
             // 
             // pictureBox2
             // 
+            pictureBox2.BackColor = Color.DimGray;
             pictureBox2.BackgroundImage = (Image)resources.GetObject("pictureBox2.BackgroundImage");
             pictureBox2.BackgroundImageLayout = ImageLayout.Zoom;
             pictureBox2.Location = new Point(309, 127);
@@ -1525,6 +1534,7 @@
             // 
             // pictureBox1
             // 
+            pictureBox1.BackColor = Color.DimGray;
             pictureBox1.BackgroundImage = (Image)resources.GetObject("pictureBox1.BackgroundImage");
             pictureBox1.BackgroundImageLayout = ImageLayout.Zoom;
             pictureBox1.Location = new Point(614, 12);
@@ -1608,15 +1618,16 @@
             // 
             Runinfo.Cursor = Cursors.IBeam;
             Runinfo.Font = new Font("Segoe UI", 8F);
-            Runinfo.Location = new Point(614, 43);
+            Runinfo.Location = new Point(614, 48);
             Runinfo.Multiline = true;
             Runinfo.Name = "Runinfo";
             Runinfo.ScrollBars = ScrollBars.Vertical;
-            Runinfo.Size = new Size(232, 78);
+            Runinfo.Size = new Size(232, 73);
             Runinfo.TabIndex = 184;
             // 
             // pictureBox12
             // 
+            pictureBox12.BackColor = Color.DimGray;
             pictureBox12.BackgroundImage = (Image)resources.GetObject("pictureBox12.BackgroundImage");
             pictureBox12.BackgroundImageLayout = ImageLayout.Stretch;
             pictureBox12.Location = new Point(215, 764);
@@ -1627,6 +1638,7 @@
             // 
             // pictureBox11
             // 
+            pictureBox11.BackColor = Color.DimGray;
             pictureBox11.BackgroundImage = (Image)resources.GetObject("pictureBox11.BackgroundImage");
             pictureBox11.BackgroundImageLayout = ImageLayout.Stretch;
             pictureBox11.Location = new Point(751, 284);
@@ -1637,6 +1649,7 @@
             // 
             // pictureBox10
             // 
+            pictureBox10.BackColor = Color.DimGray;
             pictureBox10.BackgroundImage = (Image)resources.GetObject("pictureBox10.BackgroundImage");
             pictureBox10.BackgroundImageLayout = ImageLayout.Stretch;
             pictureBox10.Location = new Point(398, 479);
@@ -1647,6 +1660,7 @@
             // 
             // pictureBox9
             // 
+            pictureBox9.BackColor = Color.DimGray;
             pictureBox9.BackgroundImage = (Image)resources.GetObject("pictureBox9.BackgroundImage");
             pictureBox9.BackgroundImageLayout = ImageLayout.Stretch;
             pictureBox9.Location = new Point(575, 284);
@@ -1657,6 +1671,7 @@
             // 
             // pictureBox8
             // 
+            pictureBox8.BackColor = Color.DimGray;
             pictureBox8.BackgroundImage = (Image)resources.GetObject("pictureBox8.BackgroundImage");
             pictureBox8.BackgroundImageLayout = ImageLayout.Stretch;
             pictureBox8.Location = new Point(215, 284);
@@ -1667,6 +1682,7 @@
             // 
             // pictureBox6
             // 
+            pictureBox6.BackColor = Color.DimGray;
             pictureBox6.BackgroundImage = (Image)resources.GetObject("pictureBox6.BackgroundImage");
             pictureBox6.BackgroundImageLayout = ImageLayout.Stretch;
             pictureBox6.Location = new Point(396, 284);
@@ -1677,6 +1693,7 @@
             // 
             // pictureBox5
             // 
+            pictureBox5.BackColor = Color.DimGray;
             pictureBox5.BackgroundImage = (Image)resources.GetObject("pictureBox5.BackgroundImage");
             pictureBox5.BackgroundImageLayout = ImageLayout.Stretch;
             pictureBox5.Location = new Point(751, 531);
@@ -1687,6 +1704,7 @@
             // 
             // pictureBox7
             // 
+            pictureBox7.BackColor = Color.DimGray;
             pictureBox7.BackgroundImage = (Image)resources.GetObject("pictureBox7.BackgroundImage");
             pictureBox7.BackgroundImageLayout = ImageLayout.Zoom;
             pictureBox7.Location = new Point(34, 284);
@@ -1887,7 +1905,7 @@
             // LLA
             // 
             LLA.AutoSize = true;
-            LLA.BackColor = Color.Magenta;
+            LLA.BackColor = Color.Black;
             LLA.ForeColor = Color.Magenta;
             LLA.Location = new Point(13, 816);
             LLA.Name = "LLA";
@@ -2028,7 +2046,7 @@
             // FireShaman
             // 
             FireShaman.AutoSize = true;
-            FireShaman.BackColor = Color.Magenta;
+            FireShaman.BackColor = Color.Black;
             FireShaman.ForeColor = Color.Magenta;
             FireShaman.Location = new Point(13, 857);
             FireShaman.Name = "FireShaman";
@@ -2037,10 +2055,38 @@
             FireShaman.UseVisualStyleBackColor = false;
             FireShaman.CheckedChanged += checkBox1_CheckedChanged;
             // 
+            // pictureBox13
+            // 
+            pictureBox13.BackColor = Color.DimGray;
+            pictureBox13.Location = new Point(12, 11);
+            pictureBox13.Name = "pictureBox13";
+            pictureBox13.Size = new Size(939, 695);
+            pictureBox13.TabIndex = 262;
+            pictureBox13.TabStop = false;
+            // 
+            // pictureBox14
+            // 
+            pictureBox14.BackColor = Color.DimGray;
+            pictureBox14.Location = new Point(12, 674);
+            pictureBox14.Name = "pictureBox14";
+            pictureBox14.Size = new Size(353, 292);
+            pictureBox14.TabIndex = 263;
+            pictureBox14.TabStop = false;
+            // 
+            // pictureBox15
+            // 
+            pictureBox15.BackColor = Color.DimGray;
+            pictureBox15.Location = new Point(613, 674);
+            pictureBox15.Name = "pictureBox15";
+            pictureBox15.Size = new Size(338, 292);
+            pictureBox15.TabIndex = 264;
+            pictureBox15.TabStop = false;
+            // 
             // Worldbosses
             // 
             AutoScaleMode = AutoScaleMode.None;
             AutoValidate = AutoValidate.EnablePreventFocusChange;
+            BackColor = Color.Magenta;
             ClientSize = new Size(963, 968);
             ControlBox = false;
             Controls.Add(FireShaman);
@@ -2195,6 +2241,9 @@
             Controls.Add(button4);
             Controls.Add(button2);
             Controls.Add(Symbols);
+            Controls.Add(pictureBox13);
+            Controls.Add(pictureBox14);
+            Controls.Add(pictureBox15);
             Cursor = Cursors.Hand;
             Icon = (Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
@@ -2205,8 +2254,7 @@
             ShowIcon = false;
             ShowInTaskbar = false;
             SizeGripStyle = SizeGripStyle.Hide;
-            StartPosition = FormStartPosition.CenterScreen;
-            WindowState = FormWindowState.Maximized;
+            StartPosition = FormStartPosition.Manual;
             Load += Worldbosses_Load_1;
             ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
@@ -2220,6 +2268,9 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox6).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox7).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox13).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox14).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox15).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -2377,5 +2428,8 @@
         private Button LyssaButton;
         private Button DwanyButton;
         private CheckBox FireShaman;
+        private PictureBox pictureBox13;
+        private PictureBox pictureBox14;
+        private PictureBox pictureBox15;
     }
 }
