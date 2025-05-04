@@ -40,7 +40,7 @@ namespace GW2FOX
             DataContext = this;
             _instance = this;
 
-            this.Left = 1320;
+            this.Left = 1330;
             this.Top = 710;
 
             PreviewMouseWheel += OverlayWindow_PreviewMouseWheel;
