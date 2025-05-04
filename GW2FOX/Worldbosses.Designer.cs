@@ -1685,7 +1685,7 @@
             pictureBox6.BackColor = Color.DimGray;
             pictureBox6.BackgroundImage = (Image)resources.GetObject("pictureBox6.BackgroundImage");
             pictureBox6.BackgroundImageLayout = ImageLayout.Stretch;
-            pictureBox6.Location = new Point(396, 284);
+            pictureBox6.Location = new Point(398, 284);
             pictureBox6.Name = "pictureBox6";
             pictureBox6.Size = new Size(140, 23);
             pictureBox6.TabIndex = 215;
@@ -1706,7 +1706,7 @@
             // 
             pictureBox7.BackColor = Color.DimGray;
             pictureBox7.BackgroundImage = (Image)resources.GetObject("pictureBox7.BackgroundImage");
-            pictureBox7.BackgroundImageLayout = ImageLayout.Zoom;
+            pictureBox7.BackgroundImageLayout = ImageLayout.Stretch;
             pictureBox7.Location = new Point(34, 284);
             pictureBox7.Name = "pictureBox7";
             pictureBox7.Size = new Size(140, 23);
@@ -1785,7 +1785,7 @@
             Quantity.Name = "Quantity";
             Quantity.Size = new Size(34, 27);
             Quantity.TabIndex = 230;
-            Quantity.Text = "8";
+            Quantity.Text = "7";
             Quantity.TextAlign = HorizontalAlignment.Center;
             // 
             // button67
