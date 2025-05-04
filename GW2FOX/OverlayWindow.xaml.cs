@@ -203,7 +203,7 @@ namespace GW2FOX
                         ? $"{remaining.Hours}h {displayMinutes % 60}min"
                         : $"{displayMinutes}min";
 
-                    clipboardText = $"\"{item.BossName}\" at {item.Waypoint} in ca {timeFormatted}";
+                    clipboardText = $"\"{item.BossName}\" at {item.Waypoint} in ca {timeFormatted}min";
                 }
 
 
@@ -226,6 +226,7 @@ namespace GW2FOX
                     timer.Stop();
                 };
                 timer.Start();
+                BaseForm.BringGw2ToFront();
             }
         }
 
