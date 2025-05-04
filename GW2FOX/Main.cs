@@ -18,6 +18,14 @@ namespace GW2FOX
         public Main()
         {
             InitializeComponent();
+            InitializeWorldbosses();
+        }
+
+        private void InitializeWorldbosses()
+        {
+            _worldbossesForm = new Worldbosses();
+            _worldbossesForm.FormClosed += (s, args) => _worldbossesForm = null;
+            BossTimerService.WorldbossesInstance = _worldbossesForm;
         }
 
         private void HandleException(Exception ex)
@@ -178,10 +186,6 @@ namespace GW2FOX
             return null;
         }
 
- 
-
-
-       
 
         protected void ShowAndHideForm(Form newForm)
         {
@@ -208,22 +212,6 @@ namespace GW2FOX
                 _miniOverlay.Activate();
             }
 
-            // 2. Worldbosses öffnen und anzeigen (WinForms)
-            if (_worldbossesForm == null || _worldbossesForm.IsDisposed)
-            {
-                _worldbossesForm = new Worldbosses();
-                _worldbossesForm.FormClosed += (s, args) =>
-                {
-                    _worldbossesForm = null;
-                };
-                _worldbossesForm.Show();
-            }
-            else if (!_worldbossesForm.Visible)
-            {
-                _worldbossesForm.Show();
-                _worldbossesForm.BringToFront();
-            }
-
             // 3. OverlayWindow starten (WPF Singleton)
             _overlayWindow = OverlayWindow.GetInstance();
             if (!_overlayWindow.IsVisible)
@@ -235,8 +223,9 @@ namespace GW2FOX
                 _overlayWindow.Activate();
             }
 
-            // 4. Main-Fenster ausblenden (du befindest dich hier in einem WinForms-Form)
+            // 4. Main-Fenster ausblenden
             this.Hide();
         }
+
     }
 }

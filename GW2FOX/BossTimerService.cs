@@ -6,6 +6,7 @@ namespace GW2FOX
 {
     public static class BossTimerService
     {
+        public static Worldbosses? WorldbossesInstance { get; set; }
         public static OverlayWindow? _overlayWindow;
         public static BossTimer? _bossTimer;
         public static ObservableCollection<BossEventRun> BossListItems { get; private set; } = new();
@@ -73,10 +74,6 @@ namespace GW2FOX
 
             return overlayItems;
         }
-
-
-
-
 
         public static List<BossEventRun> GetBossRunsForOverlay()
         {

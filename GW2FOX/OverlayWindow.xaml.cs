@@ -339,6 +339,7 @@ namespace GW2FOX
             _overlayWindow.ToggleAllWindows();
         }
 
+
         private void Icon_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Right)
@@ -366,12 +367,14 @@ namespace GW2FOX
             var topMostStates = new Dictionary<Forms.Form, bool>();
             bool anyToggled = false;
 
+            // Alle offenen Forms entsperren (TopMost deaktivieren)
             foreach (Forms.Form f in Forms.Application.OpenForms)
             {
                 topMostStates[f] = f.TopMost;
                 f.TopMost = false;
             }
 
+            // Alle Forms durchgehen und anzeigen/verstecken
             foreach (Forms.Form openForm in Forms.Application.OpenForms)
             {
                 if (!excludedTypes.Contains(openForm.GetType()))
@@ -391,9 +394,31 @@ namespace GW2FOX
                 }
             }
 
+            // Spezielle Behandlung für Worldbosses, falls noch nie angezeigt
+            if (BossTimerService.WorldbossesInstance is { } wb && !excludedTypes.Contains(wb.GetType()))
+            {
+                if (!Forms.Application.OpenForms.Cast<Forms.Form>().Contains(wb))
+                {
+                    if (wb.Visible)
+                    {
+                        wb.Hide();
+                        anyToggled = true;
+                    }
+                    else
+                    {
+                        wb.Show();
+                        wb.BringToFront();
+                        wb.Activate();
+                        anyToggled = true;
+                    }
+                }
+            }
+
+            // Ursprüngliche TopMost-Werte wiederherstellen
             foreach (var kvp in topMostStates)
                 kvp.Key.TopMost = kvp.Value;
 
+            // GW2 in den Vordergrund bringen, falls etwas getoggelt wurde
             if (anyToggled)
             {
                 var gw2Proc = Process.GetProcessesByName("Gw2-64").FirstOrDefault();
@@ -405,11 +430,11 @@ namespace GW2FOX
             else
             {
                 System.Windows.MessageBox.Show(
-    "No toggleable windows found.\nMaybe they're already gone? 🧐",
-    "Nothing To Toggle", MessageBoxButton.OK, MessageBoxImage.Information);
-
+                    "No toggleable windows found.\nMaybe they're already gone? 🧐",
+                    "Nothing To Toggle", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
+
 
 
 
