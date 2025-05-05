@@ -39,9 +39,10 @@ namespace GW2FOX
         private void MiniOverlay_Load(object sender, RoutedEventArgs e)
         {
             var screen = Forms.Screen.PrimaryScreen.WorkingArea;
-            Left = (screen.Width - Width) / 2;
+            Left = 350; // ca. 12 cm vom linken Rand bei 96 DPI
             Top = 0;
         }
+
 
         [DllImport("user32.dll")]
         private static extern bool AttachThreadInput(uint idAttach, uint idAttachTo, bool fAttach);
