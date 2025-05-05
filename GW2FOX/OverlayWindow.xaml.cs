@@ -451,6 +451,26 @@ namespace GW2FOX
             }
         }
 
+        private void SchedulerIcon_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (sender is WpfImage img)
+            {
+                AnimateScale(img, 0.90);
+                img.Opacity = 0.7;
+            }
+
+            Worldbosses wb = new Worldbosses(); // Falls button67_Click nicht static ist
+            wb.button67_Click(null, EventArgs.Empty);
+
+            var gw2Proc = Process.GetProcessesByName("Gw2-64").FirstOrDefault();
+            if (gw2Proc != null && gw2Proc.MainWindowHandle != IntPtr.Zero)
+            {
+                SetForegroundWindow(gw2Proc.MainWindowHandle);
+            }
+        }
+
+
+
         private void GuildAdvertisingIcon_MouseDown(object sender, RoutedEventArgs e)
         {
             try
@@ -558,6 +578,88 @@ namespace GW2FOX
                 WpfMessageBox.Show("Error loading Guild info: " + ex.Message);
             }
         }
+
+        private void SchedulerIcon_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            if (sender is WpfImage img)
+                AnimateScale(img, 1.10);
+        }
+
+        private void SchedulerIcon_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            if (sender is WpfImage img)
+                AnimateScale(img, 1.0);
+        }
+
+        private void SchedulerIcon_MouseUp(object sender, WpfMouseButtonEventArgs e)
+        {
+            if (sender is WpfImage img)
+            {
+                AnimateScale(img, 1.10);
+                img.Opacity = 1.0;
+            }
+        }
+
+        private void GuildAdvertisingIcon_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            if (sender is WpfImage img)
+                AnimateScale(img, 1.10);
+        }
+
+        private void GuildAdvertisingIcon_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            if (sender is WpfImage img)
+                AnimateScale(img, 1.0);
+        }
+
+        private void GuildAdvertisingIcon_MouseDown(object sender, WpfMouseButtonEventArgs e)
+        {
+            if (sender is WpfImage img)
+            {
+                AnimateScale(img, 0.90);
+                img.Opacity = 0.7;
+            }
+        }
+
+        private void GuildAdvertisingIcon_MouseUp(object sender, WpfMouseButtonEventArgs e)
+        {
+            if (sender is WpfImage img)
+            {
+                AnimateScale(img, 1.10);
+                img.Opacity = 1.0;
+            }
+        }
+
+        private void GuildWelcomeIcon_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            if (sender is WpfImage img)
+                AnimateScale(img, 1.10);
+        }
+
+        private void GuildWelcomeIcon_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            if (sender is WpfImage img)
+                AnimateScale(img, 1.0);
+        }
+
+        private void GuildWelcomeIcon_MouseDown(object sender, WpfMouseButtonEventArgs e)
+        {
+            if (sender is WpfImage img)
+            {
+                AnimateScale(img, 0.90);
+                img.Opacity = 0.7;
+            }
+        }
+
+        private void GuildWelcomeIcon_MouseUp(object sender, WpfMouseButtonEventArgs e)
+        {
+            if (sender is WpfImage img)
+            {
+                AnimateScale(img, 1.10);
+                img.Opacity = 1.0;
+            }
+        }
+
 
 
 

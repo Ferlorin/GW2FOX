@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 <PropertyGroup>
-  <OutputType>WinExe</OutputType>
+  <OutputType>Exe</OutputType>
   <TargetFramework>net8.0-windows</TargetFramework>
   <Nullable>enable</Nullable>
   <UseWindowsForms>true</UseWindowsForms>
@@ -30,6 +30,7 @@
   <None Remove="Resources\GuildAdvertising.png" />
   <None Remove="Resources\GuildWelcome.png" />
   <None Remove="Resources\OpenChest.png" />
+  <None Remove="Resources\Scheduler.png" />
   <None Remove="Resources\Tacomini.bmp" />
   <None Remove="Resources\Thumb.png" />
   <None Remove="Thumb.png" />
@@ -76,6 +77,9 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\OpenChest.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Scheduler.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Tacomini.bmp" />

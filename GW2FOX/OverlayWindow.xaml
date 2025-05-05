@@ -22,44 +22,13 @@
         <local:ItalicConverter x:Key="ItalicConverter" />
         <local:CategoryColorConverter x:Key="CategoryColorConverter" />
         <BitmapImage x:Key="WaypointImage" UriSource="/Waypoint.png" />
-
         <Style x:Key="StandardScrollBar" TargetType="ScrollBar">
-            <Setter Property="SnapsToDevicePixels" Value="True"/>
-            <Setter Property="OverridesDefaultStyle" Value="True"/>
-            <Setter Property="IsTabStop" Value="False"/>
-            <Setter Property="Focusable" Value="False"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="ScrollBar">
-                        <Grid>
-                            <Track x:Name="PART_Track" IsDirectionReversed="True">
-                                <Track.DecreaseRepeatButton>
-                                    <RepeatButton Visibility="Collapsed" IsEnabled="False"/>
-                                </Track.DecreaseRepeatButton>
-                                <Track.Thumb>
-                                    <Thumb Width="9" Height="25">
-                                        <Thumb.Template>
-                                            <ControlTemplate TargetType="Thumb">
-                                                <Border Width="9" Height="25" Background="GhostWhite" 
-                                                        CornerRadius="4.5" BorderBrush="Gray" BorderThickness="1"/>
-                                            </ControlTemplate>
-                                        </Thumb.Template>
-                                    </Thumb>
-                                </Track.Thumb>
-                                <Track.IncreaseRepeatButton>
-                                    <RepeatButton Visibility="Collapsed" IsEnabled="False"/>
-                                </Track.IncreaseRepeatButton>
-                            </Track>
-                        </Grid>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
+            <!-- Style definition here -->
         </Style>
     </Window.Resources>
 
     <Canvas Background="Transparent">
 
-        <!-- Kopierte Nachricht -->
         <TextBlock x:Name="CopiedMessage"
                    Visibility="Collapsed"
                    Opacity="1"
@@ -74,14 +43,12 @@
             </TextBlock.Effect>
         </TextBlock>
 
-        <!-- Grid-Struktur für restlichen Inhalt -->
         <Grid Canvas.Left="0" Canvas.Top="0" Width="250" Height="375">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <!-- Header -->
             <Border Grid.Row="0" Background="Transparent" BorderThickness="0">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -89,43 +56,52 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
 
                     <!-- Icon links -->
                     <Image x:Name="Com" Source="/Com.png" Width="20" Height="20" Margin="6,5,4,5"
-               MouseDown="Icon_MouseDown"/>
+                           MouseDown="Icon_MouseDown"/>
 
                     <!-- Überschrift -->
                     <TextBlock Grid.Column="1" VerticalAlignment="Center" Foreground="White"
-                   FontFamily="Segoe UI" FontWeight="Bold" FontSize="14" Text="Boss-Timer">
+                               FontFamily="Segoe UI" FontWeight="Bold" FontSize="14" Text="Boss-Timer">
                         <TextBlock.Effect>
                             <DropShadowEffect Color="Black" BlurRadius="0" ShadowDepth="0" Opacity="1"/>
                         </TextBlock.Effect>
                     </TextBlock>
 
-                    <!-- GuildAdvertising Icon -->
-                    <Image x:Name="GuildAdvertisingIcon"
-       Grid.Column="2"
-       Source="/Resources/GuildAdvertising.png"
-       Width="18"
-       Height="18"
-       Margin="6,5,2,5"
-       Cursor="Hand"
-       MouseDown="GuildAdvertisingIcon_MouseDown"/>
+                    <!-- Scheduler Icon -->
+                    <Image x:Name="SchedulerIcon" Grid.Column="2"
+                           Source="/Resources/Scheduler.png"
+                           Width="24" Height="19" Margin="2,5,0,5"
+                           Cursor="Hand"
+                           MouseEnter="SchedulerIcon_MouseEnter"
+                           MouseLeave="SchedulerIcon_MouseLeave"
+                           MouseDown="SchedulerIcon_MouseDown"
+                           MouseUp="SchedulerIcon_MouseUp"/>
 
+                    <!-- GuildAdvertising Icon -->
+                    <Image x:Name="GuildAdvertisingIcon" Grid.Column="3"
+                           Source="/Resources/GuildAdvertising.png"
+                           Width="18" Height="18" Margin="6,5,2,5"
+                           Cursor="Hand"
+                           MouseEnter="GuildAdvertisingIcon_MouseEnter"
+                           MouseLeave="GuildAdvertisingIcon_MouseLeave"
+                           MouseDown="GuildAdvertisingIcon_MouseDown"
+                           MouseUp="GuildAdvertisingIcon_MouseUp"/>
 
                     <!-- GuildWelcome Icon -->
-                    <Image x:Name="GuildWelcomeIcon"
-Grid.Column="3"
-Source="/Resources/GuildWelcome.png"
-Width="18"
-Height="18"
-Margin="6,5,2,5"
-Cursor="Hand"
-MouseDown="GuildWelcomeIcon_MouseDown"/>
+                    <Image x:Name="GuildWelcomeIcon" Grid.Column="4"
+                           Source="/Resources/GuildWelcome.png"
+                           Width="18" Height="18" Margin="6,5,2,5"
+                           Cursor="Hand"
+                           MouseEnter="GuildWelcomeIcon_MouseEnter"
+                           MouseLeave="GuildWelcomeIcon_MouseLeave"
+                           MouseDown="GuildWelcomeIcon_MouseDown"
+                           MouseUp="GuildWelcomeIcon_MouseUp"/>
                 </Grid>
             </Border>
-
 
             <!-- Linie unter Titelleiste -->
             <Border Grid.Row="0" Height="1" VerticalAlignment="Bottom" Margin="0,0,0,0">
@@ -175,15 +151,11 @@ MouseDown="GuildWelcomeIcon_MouseDown"/>
                             <DataTemplate>
                                 <Grid Background="Transparent" VerticalAlignment="Center" Height="20">
                                     <Grid.ColumnDefinitions>
-                                        <!-- Beide Icons (Waypoint + Chest) in einer Spalte -->
                                         <ColumnDefinition Width="Auto"/>
-                                        <!-- Bossname -->
                                         <ColumnDefinition Width="*"/>
-                                        <!-- Zeit -->
                                         <ColumnDefinition Width="60"/>
                                     </Grid.ColumnDefinitions>
 
-                                    <!-- Waypoint + Chest Icons nebeneinander -->
                                     <Grid Grid.Column="0">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="Auto"/>
@@ -192,13 +164,13 @@ MouseDown="GuildWelcomeIcon_MouseDown"/>
 
                                         <!-- Waypoint Icon -->
                                         <Image Grid.Column="0" Source="{StaticResource WaypointImage}"
-                       Width="20" Height="20" Margin="0,0,2,0"
-                       Cursor="Hand"
-                       MouseLeftButtonDown="Waypoint_MouseLeftButtonDown"
-                       MouseEnter="Waypoint_MouseEnter"
-                       MouseLeave="Waypoint_MouseLeave"
-                       MouseDown="Waypoint_MouseDown"
-                       MouseUp="Waypoint_MouseUp">
+                                               Width="20" Height="20" Margin="0,0,2,0"
+                                               Cursor="Hand"
+                                               MouseLeftButtonDown="Waypoint_MouseLeftButtonDown"
+                                               MouseEnter="Waypoint_MouseEnter"
+                                               MouseLeave="Waypoint_MouseLeave"
+                                               MouseDown="Waypoint_MouseDown"
+                                               MouseUp="Waypoint_MouseUp">
                                             <Image.RenderTransform>
                                                 <ScaleTransform ScaleX="1.0" ScaleY="1.0"/>
                                             </Image.RenderTransform>
@@ -207,31 +179,30 @@ MouseDown="GuildWelcomeIcon_MouseDown"/>
 
                                         <!-- Chest Icon -->
                                         <Image Grid.Column="1"
-       Width="20" Height="20" Margin="0,0,6,0"
-       Cursor="Hand"
-       Source="{Binding ChestImagePath}"
-       MouseLeftButtonDown="Chest_MouseLeftButtonDown"
-       MouseDown="Chest_MouseDown"
-       MouseUp="Chest_MouseUp"
-       MouseEnter="Chest_MouseEnter"
-       MouseLeave="Chest_MouseLeave"
-       Stretch="Uniform"
-       SnapsToDevicePixels="True"
-       UseLayoutRounding="True">
+                                               Width="20" Height="20" Margin="0,0,6,0"
+                                               Cursor="Hand"
+                                               Source="{Binding ChestImagePath}"
+                                               MouseLeftButtonDown="Chest_MouseLeftButtonDown"
+                                               MouseDown="Chest_MouseDown"
+                                               MouseUp="Chest_MouseUp"
+                                               MouseEnter="Chest_MouseEnter"
+                                               MouseLeave="Chest_MouseLeave"
+                                               Stretch="Uniform"
+                                               SnapsToDevicePixels="True"
+                                               UseLayoutRounding="True">
                                             <Image.RenderTransform>
                                                 <ScaleTransform ScaleX="1.0" ScaleY="1.0"/>
                                             </Image.RenderTransform>
                                             <Image.RenderTransformOrigin>0.5,0.5</Image.RenderTransformOrigin>
                                         </Image>
-
                                     </Grid>
 
                                     <!-- Bossname -->
                                     <TextBlock Grid.Column="1" Text="{Binding BossName}"
-                       Foreground="{Binding Category, Converter={StaticResource CategoryColorConverter}}"
-                       TextDecorations="{Binding IsPastEvent, Converter={StaticResource StrikeConverter}}"
-                       VerticalAlignment="Center"
-                       TextTrimming="CharacterEllipsis">
+                                               Foreground="{Binding Category, Converter={StaticResource CategoryColorConverter}}"
+                                               TextDecorations="{Binding IsPastEvent, Converter={StaticResource StrikeConverter}}"
+                                               VerticalAlignment="Center"
+                                               TextTrimming="CharacterEllipsis">
                                         <TextBlock.Effect>
                                             <DropShadowEffect Color="Black" BlurRadius="0" ShadowDepth="0" Opacity="1"/>
                                         </TextBlock.Effect>
@@ -239,12 +210,12 @@ MouseDown="GuildWelcomeIcon_MouseDown"/>
 
                                     <!-- Zeit -->
                                     <TextBlock Grid.Column="2" Text="{Binding TimeRemainingFormatted}"
-                       Foreground="{Binding Category, Converter={StaticResource CategoryColorConverter}}"
-                       TextDecorations="{Binding IsPastEvent, Converter={StaticResource StrikeConverter}}"
-                       VerticalAlignment="Center"
-                       HorizontalAlignment="Right"
-                       Padding="4,0,0,0"
-                       TextAlignment="Right">
+                                               Foreground="{Binding Category, Converter={StaticResource CategoryColorConverter}}"
+                                               TextDecorations="{Binding IsPastEvent, Converter={StaticResource StrikeConverter}}"
+                                               VerticalAlignment="Center"
+                                               HorizontalAlignment="Right"
+                                               Padding="4,0,0,0"
+                                               TextAlignment="Right">
                                         <TextBlock.Effect>
                                             <DropShadowEffect Color="Black" BlurRadius="0" ShadowDepth="0" Opacity="1"/>
                                         </TextBlock.Effect>
@@ -252,9 +223,6 @@ MouseDown="GuildWelcomeIcon_MouseDown"/>
                                 </Grid>
                             </DataTemplate>
                         </ListView.ItemTemplate>
-
-
-
                     </ListView>
                 </ScrollViewer>
 

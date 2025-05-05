@@ -1655,7 +1655,7 @@ namespace GW2FOX
 
 
 
-        private void button67_Click(object sender, EventArgs e)
+        public void button67_Click(object sender, EventArgs e)
         {
             try
             {
