@@ -214,23 +214,6 @@ namespace GW2FOX
 
                 WpfClipboard.SetText(clipboardText);
 
-                var position = fe.TransformToAncestor(this).Transform(new WpfPoint(0, 0));
-                CopiedMessage.Measure(new WpfSize(double.PositiveInfinity, double.PositiveInfinity));
-
-                double left = position.X + (fe.ActualWidth / 2) - (CopiedMessage.DesiredSize.Width / 2);
-                double top = position.Y - CopiedMessage.DesiredSize.Height - 18;
-
-                Canvas.SetLeft(CopiedMessage, left);
-                Canvas.SetTop(CopiedMessage, top);
-                CopiedMessage.Visibility = Visibility.Visible;
-
-                var timer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(300) };
-                timer.Tick += (s, _) =>
-                {
-                    CopiedMessage.Visibility = Visibility.Collapsed;
-                    timer.Stop();
-                };
-                timer.Start();
                 var gw2Proc = Process.GetProcessesByName("Gw2-64").FirstOrDefault();
                 if (gw2Proc != null && gw2Proc.MainWindowHandle != IntPtr.Zero)
                 {
@@ -473,6 +456,11 @@ namespace GW2FOX
 
         private void GuildAdvertisingIcon_MouseDown(object sender, RoutedEventArgs e)
         {
+            if (sender is WpfImage img)
+            {
+                AnimateScale(img, 0.90);
+                img.Opacity = 0.7;
+            }
             try
             {
                 string exeDir = AppDomain.CurrentDomain.BaseDirectory;
@@ -488,27 +476,6 @@ namespace GW2FOX
                     {
                         WpfClipboard.SetText(guildText);
 
-                        if (sender is FrameworkElement fe)
-                        {
-                            var position = fe.TransformToAncestor(this).Transform(new WpfPoint(0, 0));
-                            CopiedMessage.Measure(new WpfSize(double.PositiveInfinity, double.PositiveInfinity));
-
-                            double left = position.X + fe.ActualWidth - 70; // 6 px Abstand nach rechts
-                            double top = position.Y + (fe.ActualHeight - CopiedMessage.DesiredSize.Height) / 2; // vertikal zentriert
-                           
-
-                            Canvas.SetLeft(CopiedMessage, left);
-                            Canvas.SetTop(CopiedMessage, top);
-                            CopiedMessage.Visibility = Visibility.Visible;
-
-                            var timer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(300) };
-                            timer.Tick += (s, _) =>
-                            {
-                                CopiedMessage.Visibility = Visibility.Collapsed;
-                                timer.Stop();
-                            };
-                            timer.Start();
-                        }
 
                         var gw2Proc = Process.GetProcessesByName("Gw2-64").FirstOrDefault();
                         if (gw2Proc != null && gw2Proc.MainWindowHandle != IntPtr.Zero)
@@ -527,6 +494,11 @@ namespace GW2FOX
 
         private void GuildWelcomeIcon_MouseDown(object sender, RoutedEventArgs e)
         {
+            if (sender is WpfImage img)
+            {
+                AnimateScale(img, 0.90);
+                img.Opacity = 0.7;
+            }
             try
             {
                 string exeDir = AppDomain.CurrentDomain.BaseDirectory;
@@ -541,29 +513,6 @@ namespace GW2FOX
                     if (!string.IsNullOrWhiteSpace(guildText))
                     {
                         WpfClipboard.SetText(guildText);
-
-                        if (sender is FrameworkElement fe)
-                        {
-                            var position = fe.TransformToAncestor(this).Transform(new WpfPoint(0, 0));
-                            CopiedMessage.Measure(new WpfSize(double.PositiveInfinity, double.PositiveInfinity));
-
-                            double left = position.X + fe.ActualWidth - 70; // 6 px Abstand nach rechts
-                            double top = position.Y + (fe.ActualHeight - CopiedMessage.DesiredSize.Height) / 2; // vertikal zentriert
-
-                            
-
-                            Canvas.SetLeft(CopiedMessage, left);
-                            Canvas.SetTop(CopiedMessage, top);
-                            CopiedMessage.Visibility = Visibility.Visible;
-
-                            var timer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(300) };
-                            timer.Tick += (s, _) =>
-                            {
-                                CopiedMessage.Visibility = Visibility.Collapsed;
-                                timer.Stop();
-                            };
-                            timer.Start();
-                        }
 
                         var gw2Proc = Process.GetProcessesByName("Gw2-64").FirstOrDefault();
                         if (gw2Proc != null && gw2Proc.MainWindowHandle != IntPtr.Zero)
@@ -612,15 +561,6 @@ namespace GW2FOX
                 AnimateScale(img, 1.0);
         }
 
-        private void GuildAdvertisingIcon_MouseDown(object sender, WpfMouseButtonEventArgs e)
-        {
-            if (sender is WpfImage img)
-            {
-                AnimateScale(img, 0.90);
-                img.Opacity = 0.7;
-            }
-        }
-
         private void GuildAdvertisingIcon_MouseUp(object sender, WpfMouseButtonEventArgs e)
         {
             if (sender is WpfImage img)
@@ -642,15 +582,6 @@ namespace GW2FOX
                 AnimateScale(img, 1.0);
         }
 
-        private void GuildWelcomeIcon_MouseDown(object sender, WpfMouseButtonEventArgs e)
-        {
-            if (sender is WpfImage img)
-            {
-                AnimateScale(img, 0.90);
-                img.Opacity = 0.7;
-            }
-        }
-
         private void GuildWelcomeIcon_MouseUp(object sender, WpfMouseButtonEventArgs e)
         {
             if (sender is WpfImage img)
@@ -659,9 +590,6 @@ namespace GW2FOX
                 img.Opacity = 1.0;
             }
         }
-
-
-
 
 
         private void StartBossTimer()

@@ -23,8 +23,42 @@
         <local:CategoryColorConverter x:Key="CategoryColorConverter" />
         <BitmapImage x:Key="WaypointImage" UriSource="/Waypoint.png" />
         <Style x:Key="StandardScrollBar" TargetType="ScrollBar">
-            <!-- Style definition here -->
+            <Setter Property="SnapsToDevicePixels" Value="True"/>
+            <Setter Property="OverridesDefaultStyle" Value="True"/>
+            <Setter Property="IsTabStop" Value="False"/>
+            <Setter Property="Focusable" Value="False"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ScrollBar">
+                        <Grid Background="Transparent">
+                            <Track x:Name="PART_Track" IsDirectionReversed="True">
+                                <Track.DecreaseRepeatButton>
+                                    <RepeatButton Visibility="Collapsed" IsEnabled="False"/>
+                                </Track.DecreaseRepeatButton>
+                                <Track.Thumb>
+                                    <Thumb Width="9" Height="25">
+                                        <Thumb.Template>
+                                            <ControlTemplate TargetType="Thumb">
+                                                <Border Width="9" Height="25"
+                                                Background="GhostWhite"
+                                                BorderBrush="Gray"
+                                                BorderThickness="1"
+                                                CornerRadius="4.5"/>
+                                            </ControlTemplate>
+                                        </Thumb.Template>
+                                    </Thumb>
+                                </Track.Thumb>
+                                <Track.IncreaseRepeatButton>
+                                    <RepeatButton Visibility="Collapsed" IsEnabled="False"/>
+                                </Track.IncreaseRepeatButton>
+                            </Track>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
+
+
     </Window.Resources>
 
     <Canvas Background="Transparent">
@@ -73,33 +107,50 @@
 
                     <!-- Scheduler Icon -->
                     <Image x:Name="SchedulerIcon" Grid.Column="2"
-                           Source="/Resources/Scheduler.png"
-                           Width="24" Height="19" Margin="2,5,0,5"
-                           Cursor="Hand"
-                           MouseEnter="SchedulerIcon_MouseEnter"
-                           MouseLeave="SchedulerIcon_MouseLeave"
-                           MouseDown="SchedulerIcon_MouseDown"
-                           MouseUp="SchedulerIcon_MouseUp"/>
+       Source="/Resources/Scheduler.png"
+       Width="24" Height="19" Margin="2,5,0,5"
+       Cursor="Hand"
+       MouseEnter="SchedulerIcon_MouseEnter"
+       MouseLeave="SchedulerIcon_MouseLeave"
+       MouseDown="SchedulerIcon_MouseDown"
+       MouseUp="SchedulerIcon_MouseUp">
+                        <Image.RenderTransform>
+                            <ScaleTransform ScaleX="1.0" ScaleY="1.0"/>
+                        </Image.RenderTransform>
+                        <Image.RenderTransformOrigin>0.5,0.5</Image.RenderTransformOrigin>
+                    </Image>
+
 
                     <!-- GuildAdvertising Icon -->
                     <Image x:Name="GuildAdvertisingIcon" Grid.Column="3"
-                           Source="/Resources/GuildAdvertising.png"
-                           Width="18" Height="18" Margin="6,5,2,5"
-                           Cursor="Hand"
-                           MouseEnter="GuildAdvertisingIcon_MouseEnter"
-                           MouseLeave="GuildAdvertisingIcon_MouseLeave"
-                           MouseDown="GuildAdvertisingIcon_MouseDown"
-                           MouseUp="GuildAdvertisingIcon_MouseUp"/>
+       Source="/Resources/GuildAdvertising.png"
+       Width="18" Height="18" Margin="6,5,2,5"
+       Cursor="Hand"
+       MouseEnter="GuildAdvertisingIcon_MouseEnter"
+       MouseLeave="GuildAdvertisingIcon_MouseLeave"
+       MouseDown="GuildAdvertisingIcon_MouseDown"
+       MouseUp="GuildAdvertisingIcon_MouseUp">
+                        <Image.RenderTransform>
+                            <ScaleTransform ScaleX="1.0" ScaleY="1.0"/>
+                        </Image.RenderTransform>
+                        <Image.RenderTransformOrigin>0.5,0.5</Image.RenderTransformOrigin>
+                    </Image>
 
-                    <!-- GuildWelcome Icon -->
+
                     <Image x:Name="GuildWelcomeIcon" Grid.Column="4"
-                           Source="/Resources/GuildWelcome.png"
-                           Width="18" Height="18" Margin="6,5,2,5"
-                           Cursor="Hand"
-                           MouseEnter="GuildWelcomeIcon_MouseEnter"
-                           MouseLeave="GuildWelcomeIcon_MouseLeave"
-                           MouseDown="GuildWelcomeIcon_MouseDown"
-                           MouseUp="GuildWelcomeIcon_MouseUp"/>
+       Source="/Resources/GuildWelcome.png"
+       Width="18" Height="18" Margin="6,5,2,5"
+       Cursor="Hand"
+       MouseEnter="GuildWelcomeIcon_MouseEnter"
+       MouseLeave="GuildWelcomeIcon_MouseLeave"
+       MouseDown="GuildWelcomeIcon_MouseDown"
+       MouseUp="GuildWelcomeIcon_MouseUp">
+                        <Image.RenderTransform>
+                            <ScaleTransform ScaleX="1.0" ScaleY="1.0"/>
+                        </Image.RenderTransform>
+                        <Image.RenderTransformOrigin>0.5,0.5</Image.RenderTransformOrigin>
+                    </Image>
+
                 </Grid>
             </Border>
 
