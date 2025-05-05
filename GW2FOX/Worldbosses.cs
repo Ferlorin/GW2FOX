@@ -1717,6 +1717,15 @@ namespace GW2FOX
         { "Defense of Amnytas", Amnytas },
         { "Convergences", Convergence },
         { "FireShaman", FireShaman },
+        { "Captain Rotbeard", RotbeardBox },
+        { "Dredge Commissar", CommissarBox },
+        { "Branded Generals", GeneralsBox },
+        { "Gates of Arah", ArahBox },
+        { "Rhendak", RhendakBox },
+        { "Priestess of Lyssa", LyssaBox },
+        { "The Eye of Zhaitan", EyeBox },
+        { "Statue of Dwanya", DwanyaBox },
+        { "Ogrewars", OgreBox },
         };
         }
 
