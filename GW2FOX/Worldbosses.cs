@@ -21,10 +21,10 @@ namespace GW2FOX
         {
             InitializeComponent();
             InitializeBossCheckBoxMap();
-            bossCheckBoxMap = new Dictionary<string, CheckBox>(); 
+            bossCheckBoxMap = new Dictionary<string, CheckBox>();
             UpdateBossUiBosses();
             LoadConfigText(Runinfo, Guild, Welcome, Symbols);
-            Load += Worldbosses_Load_1;         
+            Load += Worldbosses_Load_1;
         }
 
         private void Worldbosses_Load_1(object? sender, EventArgs e)
@@ -85,10 +85,6 @@ namespace GW2FOX
             JungleWurm.Checked = !JungleWurm.Checked;
         }
 
-        private void Rhendak_Click(object sender, EventArgs e)
-        {
-            ShowAndHideForm(new Rhendak());
-        }
 
         private void Ulgoth_Click(object sender, EventArgs e)
         {
@@ -210,20 +206,6 @@ namespace GW2FOX
             Convergence.Checked = !Convergence.Checked;
         }
 
-        private void Eye_Click(object sender, EventArgs e)
-        {
-            ShowAndHideForm(new Eye());
-        }
-
-        private void Dwayna_Click(object sender, EventArgs e)
-        {
-            ShowAndHideForm(new Dwayna());
-        }
-
-        private void Ogrewars_Click(object sender, EventArgs e)
-        {
-            ShowAndHideForm(new Ogrewars());
-        }
 
         private void Tequatl_Click(object sender, EventArgs e)
         {
@@ -243,11 +225,6 @@ namespace GW2FOX
         private void Clawjormag_Click(object sender, EventArgs e)
         {
             Claw.Checked = Claw.Checked;
-        }
-
-        private void Lyssa_Click(object sender, EventArgs e)
-        {
-            ShowAndHideForm(new Lyssa());
         }
 
         private void Maw_Click(object sender, EventArgs e)
@@ -289,31 +266,6 @@ namespace GW2FOX
             BringGw2ToFront();
         }
 
-        private void button68_Click(object sender, EventArgs e)
-        {
-            LLA.Checked = !LLA.Checked;
-        }
-
-        private void button65_Click(object sender, EventArgs e)
-        {
-            ShowAndHideForm(new CaptainRotbeard());
-        }
-
-        private void button63_Click(object sender, EventArgs e)
-        {
-            ShowAndHideForm(new DredgeComissar());
-        }
-
-        private void button42_Click(object sender, EventArgs e)
-        {
-            ShowAndHideForm(new BrandedGenerals());
-        }
-
-        private void button31_Click(object sender, EventArgs e)
-        {
-            ShowAndHideForm(new GatesOfArah());
-        }
-
         private void button30_Click(object sender, EventArgs e)
         {
             Clipboard.SetText(Runinfo.Text);
@@ -332,53 +284,11 @@ namespace GW2FOX
             BringGw2ToFront();
         }
 
-        private void EyeButton_Click(object sender, EventArgs e)
+        private void button68_Click(object sender, EventArgs e)
         {
-            DynamicEventManager.TriggerIt("The Eye of Zhaitan");
-            UpdateBossUiBosses();
+            LLA.Checked = !LLA.Checked;
         }
 
-        private void DwanyButton_Click(object sender, EventArgs e)
-        {
-            DynamicEventManager.TriggerIt("Statue of Dwanya");
-            UpdateBossUiBosses();
-        }
-
-        private void LyssaButton_Click(object sender, EventArgs e)
-        {
-            DynamicEventManager.TriggerIt("Priestess of Lyssa");
-            UpdateBossUiBosses();
-        }
-
-        private void OgresButton_Click(object sender, EventArgs e)
-        {
-            DynamicEventManager.TriggerIt("Ogrewars");
-            UpdateBossUiBosses();
-        }
-
-        private void RhendakButton_Click(object sender, EventArgs e)
-        {
-            DynamicEventManager.TriggerIt("Rhendak");
-            UpdateBossUiBosses();
-        }
-
-        private void CommissarButton_Click(object sender, EventArgs e)
-        {
-            DynamicEventManager.TriggerIt("Dredge Commissar");
-            UpdateBossUiBosses();
-        }
-
-        private void GeneralsButton_Click(object sender, EventArgs e)
-        {
-            DynamicEventManager.TriggerIt("Branded Generals");
-            UpdateBossUiBosses();
-        }
-
-        private void ArahButton_Click(object sender, EventArgs e)
-        {
-            DynamicEventManager.TriggerIt("Gates of Arah");
-            UpdateBossUiBosses();
-        }
 
         private void MawsOfTorment_Click(object sender, EventArgs e)
         {
@@ -1336,65 +1246,6 @@ namespace GW2FOX
             UpdateBossUiBosses();
         }
 
-        private void InitializeBossCheckBoxMap()
-        {
-            bossCheckBoxMap = new Dictionary<string, CheckBox>
-        {
-        { "LLA Timberline", LLA },
-        { "LLA Iron Marches", LLA },
-        { "LLA Gendarran", LLA },
-        { "The frozen Maw", Maw },
-        { "Shadow Behemoth", Behemoth },
-        { "Fire Elemental", Fire_Elemental },
-        { "Great Jungle Wurm", JungleWurm },
-        { "Ulgoth the Modniir", Ulgoth },
-        { "Taidha Covington", Thaida },
-        { "Megadestroyer", Megadestroyer },
-        { "Inquest Golem M2", MarkTwo },
-        { "Tequatl the Sunless", Tequatl },
-        { "The Shatterer", Shatterer },
-        { "Karka Queen", Karka },
-        { "Claw of Jormag", Claw },
-        { "Chak Gerent", Chak },
-        { "Battle in Tarir", Tarir },
-        { "Nightbosses", Mascen },
-        { "Dragon's Stand", DS },
-        { "DB Shatterer", DBS },
-        { "Junundu Rising", Junundu },
-        { "Path to Ascension", PTA },
-        { "Doppelganger", Doppelganger },
-        { "Forged with Fire", Doggies },
-        { "Choya Piñata", Pinata },
-        { "Serpents' Ire", SerpentsIre },
-        { "Palawadan", Palawadan },
-        { "Thunderhead Keep", ThunderheadKeep },
-        { "Maws of Torment", MawsOfTorment },
-        { "The Oil Floes", Oil },
-        { "Drakkar", Drakkar },
-        { "Metal Concert", Metalconcert },
-        { "Dragonstorm", Dragonstorm },
-        { "Ooze Pits", OozePits },
-        { "Effigy", Effigy },
-        { "Doomlore Shrine", Doomlore },
-        { "Storms of Winter", SormsOfWinter },
-        { "Defend Jora's Keep", JorasKeep },
-        { "Sandstorm", Sandstorm },
-        { "Saidra's Haven", SaidrasHeaven },
-        { "New Loamhurst", Loamhurst },
-        { "Noran's Homestead", Homestead },
-        { "Aetherblade Assault", Atherblade },
-        { "Kaineng Blackout", Blackout },
-        { "Gang War", GangWar },
-        { "Aspenwood", Aspenwood },
-        { "Battle for Jade Sea", JadeSea },
-        { "Wizard's Tower", WizzardsTower },
-        { "Fly by Night", Flybynigtht },
-        { "Defense of Amnytas", Amnytas },
-        { "Convergences", Convergence },
-        { "FireShaman", FireShaman },
-        };
-        }
-
         public static CheckBox FindCheckBoxByName(string bossName)
         {
             if (bossCheckBoxMap != null && bossCheckBoxMap.TryGetValue(bossName, out var checkBox))
@@ -1808,6 +1659,119 @@ namespace GW2FOX
             {
                 MessageBox.Show($"Fehler beim Laden von ChoosenOnes: {ex.Message}", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void InitializeBossCheckBoxMap()
+        {
+            bossCheckBoxMap = new Dictionary<string, CheckBox>
+        {
+        { "LLA Timberline", LLA },
+        { "LLA Iron Marches", LLA },
+        { "LLA Gendarran", LLA },
+        { "The frozen Maw", Maw },
+        { "Shadow Behemoth", Behemoth },
+        { "Fire Elemental", Fire_Elemental },
+        { "Great Jungle Wurm", JungleWurm },
+        { "Ulgoth the Modniir", Ulgoth },
+        { "Taidha Covington", Thaida },
+        { "Megadestroyer", Megadestroyer },
+        { "Inquest Golem M2", MarkTwo },
+        { "Tequatl the Sunless", Tequatl },
+        { "The Shatterer", Shatterer },
+        { "Karka Queen", Karka },
+        { "Claw of Jormag", Claw },
+        { "Chak Gerent", Chak },
+        { "Battle in Tarir", Tarir },
+        { "Nightbosses", Mascen },
+        { "Dragon's Stand", DS },
+        { "DB Shatterer", DBS },
+        { "Junundu Rising", Junundu },
+        { "Path to Ascension", PTA },
+        { "Doppelganger", Doppelganger },
+        { "Forged with Fire", Doggies },
+        { "Choya Piñata", Pinata },
+        { "Serpents' Ire", SerpentsIre },
+        { "Palawadan", Palawadan },
+        { "Thunderhead Keep", ThunderheadKeep },
+        { "Maws of Torment", MawsOfTorment },
+        { "The Oil Floes", Oil },
+        { "Drakkar", Drakkar },
+        { "Metal Concert", Metalconcert },
+        { "Dragonstorm", Dragonstorm },
+        { "Ooze Pits", OozePits },
+        { "Effigy", Effigy },
+        { "Doomlore Shrine", Doomlore },
+        { "Storms of Winter", SormsOfWinter },
+        { "Defend Jora's Keep", JorasKeep },
+        { "Sandstorm", Sandstorm },
+        { "Saidra's Haven", SaidrasHeaven },
+        { "New Loamhurst", Loamhurst },
+        { "Noran's Homestead", Homestead },
+        { "Aetherblade Assault", Atherblade },
+        { "Kaineng Blackout", Blackout },
+        { "Gang War", GangWar },
+        { "Aspenwood", Aspenwood },
+        { "Battle for Jade Sea", JadeSea },
+        { "Wizard's Tower", WizzardsTower },
+        { "Fly by Night", Flybynigtht },
+        { "Defense of Amnytas", Amnytas },
+        { "Convergences", Convergence },
+        { "FireShaman", FireShaman },
+        };
+        }
+
+        private void button65_Click(object sender, EventArgs e)
+        {
+            DynamicEventManager.TriggerIt("Captain Rotbeard");
+            UpdateBossUiBosses();
+        }
+
+        private void button63_Click(object sender, EventArgs e)
+        {
+            DynamicEventManager.TriggerIt("Dredge Commissar");
+            UpdateBossUiBosses();
+        }
+
+        private void button42_Click(object sender, EventArgs e)
+        {
+            DynamicEventManager.TriggerIt("Branded Generals");
+            UpdateBossUiBosses();
+        }
+
+        private void button31_Click(object sender, EventArgs e)
+        {
+            DynamicEventManager.TriggerIt("Gates of Arah");
+            UpdateBossUiBosses();
+        }
+
+        private void Rhendak_Click(object sender, EventArgs e)
+        {
+            DynamicEventManager.TriggerIt("Rhendak");
+            UpdateBossUiBosses();
+        }
+
+        private void Lyssa_Click(object sender, EventArgs e)
+        {
+            DynamicEventManager.TriggerIt("Priestess of Lyssa");
+            UpdateBossUiBosses();
+        }
+
+        private void Eye_Click(object sender, EventArgs e)
+        {
+            DynamicEventManager.TriggerIt("The Eye of Zhaitan");
+            UpdateBossUiBosses();
+        }
+
+        private void Dwayna_Click(object sender, EventArgs e)
+        {
+            DynamicEventManager.TriggerIt("Statue of Dwanya");
+            UpdateBossUiBosses();
+        }
+
+        private void Ogrewars_Click(object sender, EventArgs e)
+        {
+            DynamicEventManager.TriggerIt("Ogrewars");
+            UpdateBossUiBosses();
         }
     }
 }
