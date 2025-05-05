@@ -26,6 +26,7 @@ namespace GW2FOX
         }
         public string ChestImagePath => ChestOpened ? "/Resources/OpenChest.png" : "/Resources/Black_Lion_Chest.png";
         public string BossName { get; set; }
+        public string Level { get; set; } = "";
         public string Waypoint { get; set; }
         public string Category { get; set; }
         public string TimeRemainingFormatted { get; set; }

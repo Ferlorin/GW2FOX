@@ -1439,6 +1439,7 @@ namespace GW2FOX
         public List<string> Timings { get; set; }
         public string Category { get; set; }
         public string Waypoint { get; set; }
+        public string Level { get; set; } = "";
 
 
         private static void SaveBossNameToConfig(string bossName)
@@ -1513,14 +1514,15 @@ namespace GW2FOX
         }
 
 
-        public static void AddBossEvent(string bossName, string[] timings, string category, string waypoint = "")
+        public static void AddBossEvent(string bossName, string[] timings, string category, string waypoint = "", string level = "")
         {
             foreach (var timing in timings)
             {
                 var utcTime = ConvertToUtcFromConfigTime(timing);
-                BossEventsList.Add(new BossEvent(bossName, utcTime.TimeOfDay, category, waypoint));
+                BossEventsList.Add(new BossEvent(bossName, utcTime.TimeOfDay, category, waypoint, level));
             }
         }
+
 
         public static DateTime ConvertToUtcFromConfigTime(string configTime)
         {
@@ -1636,7 +1638,8 @@ namespace GW2FOX
                 {
                     if (boss.Name != null && boss.Timings != null)
                     {
-                        BossTimings.AddBossEvent(boss.Name, boss.Timings.ToArray(), boss.Category ?? "WBs", boss.Waypoint ?? "");
+                        BossTimings.AddBossEvent(boss.Name, boss.Timings.ToArray(), boss.Category ?? "WBs", boss.Waypoint ?? "", boss.Level ?? "");
+
                     }
                 }
 
@@ -1790,7 +1793,7 @@ namespace GW2FOX
                     var boss = config.Bosses.FirstOrDefault(b => b.Name.Equals(bossName, StringComparison.OrdinalIgnoreCase));
                     if (boss != null)
                     {
-                        AddBossEvent(boss.Name, boss.Timings.ToArray(), boss.Category ?? "WBs", boss.Waypoint ?? "");
+                        AddBossEvent(boss.Name, boss.Timings.ToArray(), boss.Category ?? "WBs", boss.Waypoint ?? "", boss.Level ?? "");
                     }
                     else
                     {

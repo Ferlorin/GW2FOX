@@ -198,7 +198,7 @@ namespace GW2FOX
                 if (item.IsPastEvent)
                 {
                     int minutesAgo = (int)Math.Round((DateTime.Now - item.NextRunTime).TotalMinutes);
-                    clipboardText = $"\"{item.BossName}\" at {item.Waypoint} started before {minutesAgo}min";
+                    clipboardText = $"Level {item.Level} \"{item.BossName}\" at {item.Waypoint} started before {minutesAgo}min";
                 }
                 else
                 {
@@ -208,7 +208,7 @@ namespace GW2FOX
                         ? $"{remaining.Hours}h {displayMinutes % 60}min"
                         : $"{displayMinutes}min";
 
-                    clipboardText = $"\"{item.BossName}\" at {item.Waypoint} in ca {timeFormatted}";
+                    clipboardText = $"Level {item.Level} \"{item.BossName}\" at {item.Waypoint} in ca {timeFormatted}";
                 }
 
 

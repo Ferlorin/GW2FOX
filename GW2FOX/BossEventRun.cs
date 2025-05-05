@@ -9,11 +9,12 @@ namespace GW2FOX
 
         public DateTime NextRunTime { get; set; }
 
-        public BossEventRun(string bossName, TimeSpan timing, string category, DateTime nextRunTime, string waypoint = "")
-            : base(bossName, timing, category, waypoint)
+        public BossEventRun(string bossName, TimeSpan timing, string category, DateTime nextRunTime, string waypoint = "", string level = "")
+    : base(bossName, timing, category, waypoint, level)
         {
             NextRunTime = nextRunTime;
         }
+
 
         public DateTime TimeToShow => NextRunTime;
 

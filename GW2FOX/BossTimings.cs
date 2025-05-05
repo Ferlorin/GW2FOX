@@ -119,7 +119,7 @@ namespace GW2FOX
             return config ?? new BossConfig();
         }
 
-        public static void AddBossEvent(string bossName, string[] timings, string category, string waypoint = "")
+        public static void AddBossEvent(string bossName, string[] timings, string category, string waypoint = "", string level = "")
         {
             try
             {
@@ -127,7 +127,7 @@ namespace GW2FOX
                 foreach (var timing in timings)
                 {
                     var utcTime = ConvertToUtcFromConfigTime(timing);
-                    BossEventsList.Add(new BossEvent(bossName, utcTime.TimeOfDay, category, waypoint));
+                    BossEventsList.Add(new BossEvent(bossName, utcTime.TimeOfDay, category, waypoint, level));
                 }
             }
             catch (Exception ex)
@@ -314,7 +314,7 @@ namespace GW2FOX
 
 
                     newBossList.Add(boss.Name);
-                    AddBossEvent(boss.Name, boss.Timings.ToArray(), boss.Category ?? "ChoosenOnes", boss.Waypoint ?? "");
+                    AddBossEvent(boss.Name, boss.Timings.ToArray(), boss.Category ?? "ChoosenOnes", boss.Waypoint ?? "", boss.Level ?? "");
                 }
 
                 BossList23 = newBossList;

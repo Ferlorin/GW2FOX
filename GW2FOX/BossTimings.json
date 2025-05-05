@@ -1,68 +1,91 @@
 {
   "Runinfo": "«Meta-Train» with the old [FOX]",
-  "Squadinfo": "• InstanceCheck:• right click on me & join map• Don’t cancel invites!• No 3ple Trouble• https://gw2fox.wixsite.com/about",
-  "Guild": "☠ Young or old [FOX], we take every stray. Humor, respect and fun at the game are what distinguish us. No Obligations! Infos: wsp me or https://gw2fox.wixsite.com/about ☻",
+  "Squadinfo": "\nInstanceCheck:\n• right click on me & join map\n• Don’t cancel invites!\n• No 3ple Trouble\n• https://gw2fox.wixsite.com/about",
+  "Guild": "☠ Young or old [FOX], we take every stray. Humor, respect and fun at the game are what distinguish us. No Obligations! Infos: https://gw2fox.wixsite.com/about",
   "Welcome": "Welcome to the FOXhole. Read the Message of the Day for Infos - Questions, ask us! Guides & Tools on our Homepage: https://gw2fox.wixsite.com/about",
   "Symbols": "☠ ★ ☣ ☮ ☢ ♪ ☜ ☞ ┌ ∩ ┐ ( ●̮̃ • ) ۶ ( • ◡ • ) ☿ ♀ ♂ ☀ ☁ ☂ ☃ ☄ ☾ ☽ ☇ ☉ ☐ ☒ ☑ ☝ ☚ • ☟ ☆ ♕ ♖ ♘ ♙ ♛ ♜ ♞ ♟ † ☨ ☥ ☦ ☓ ☩ ☯ ☧ ☬ ☸ ♁ ♆ ☭ ☪ ☫ © ™ ® ☎ ♥ 凸",
   "World": "FireShaman, LLA Timberline, LLA Iron Marches, LLA Gendarran, The frozen Maw, Shadow Behemoth, Fire Elemental, Great Jungle Wurm, Ulgoth the Modniir, Taidha Covington, Megadestroyer, Inquest Golem M2, Tequatl the Sunless, The Shatterer, Karka Queen, Claw of Jormag",
   "Fido": "Tequatl the Sunless, Effigy, Karka Queen, LLA Timberline, Chak Gerent, Doomlore Shrine, The Oil Floes, Battle in Tarir, DB Shatterer, Path to Ascension, Doppelganger, Palawadan, Choya Piñata, Nightbosses, Dragonstorm, Forged with Fire, Ooze Pits, Aetherblade Assault",
-  "Meta": "Chak Gerent, Battle in Tarir, Death-Branded Shatterer, Junundu Rising, Path to Ascension, Doppelganger, Forged with Fire, Choya Piñata, Nightbosses, Drakkar, Dragonstorm, Claw of Jormag",
-  "Mixed": "FireShaman, Battle in Tarir, Chak Gerent, Death-Branded Shatterer, Junundu Rising, Path to Ascension, Doppelganger, Forged with Fire, Choya Piñata, Nightbosses, Drakkar, Dragonstorm, LLA Timberline, LLA Iron Marches, LLA Gendarran, The frozen Maw, Shadow Behemoth, Fire Elemental, Great Jungle Wurm, Ulgoth the Modniir, Taidha Covington, Megadestroyer, Inquest Golem M2, Tequatl the Sunless, The Shatterer, Karka Queen, Claw of Jormag",
-  "ChoosenOnes": "",
+  "Meta": "Chak Gerent, Battle in Tarir, DB Shatterer, Junundu Rising, Path to Ascension, Doppelganger, Forged with Fire, Choya Piñata, Nightbosses, Drakkar, Dragonstorm, Claw of Jormag",
+  "Mixed": "FireShaman, Battle in Tarir, Chak Gerent, DB Shatterer, Junundu Rising, Path to Ascension, Doppelganger, Forged with Fire, Choya Piñata, Nightbosses, Drakkar, Dragonstorm, LLA Timberline, LLA Iron Marches, LLA Gendarran, The frozen Maw, Shadow Behemoth, Fire Elemental, Great Jungle Wurm, Ulgoth the Modniir, Taidha Covington, Megadestroyer, Inquest Golem M2, Tequatl the Sunless, The Shatterer, Karka Queen, Claw of Jormag",
+  "ChoosenOnes": [
+    "Claw of Jormag",
+    "Chak Gerent",
+    "Battle in Tarir",
+    "Nightbosses",
+    "DB Shatterer",
+    "Junundu Rising",
+    "Path to Ascension",
+    "Doppelganger",
+    "Forged with Fire",
+    "Choya Piñata",
+    "Drakkar",
+    "Dragonstorm",
+    "Spellmaster Macsen"
+  ],
   "Bosses": [
     {
       "Name": "The Eye of Zhaitan",
       "Timings": [],
       "Category": "Treasures",
-      "Waypoint": "[&BPgCAAA=]"
+      "Waypoint": "[&BPgCAAA=]",
+      "chestOpened": false
     },
     {
       "Name": "Gates of Arah",
       "Timings": [],
       "Category": "Treasures",
-      "Waypoint": "[&BA8DAAA=]"
+      "Waypoint": "[&BA8DAAA=]",
+      "chestOpened": false
     },
     {
       "Name": "Branded Generals",
       "Timings": [],
       "Category": "Treasures",
-      "Waypoint": "[&BIMLAAA=]"
+      "Waypoint": "[&BIMLAAA=]",
+      "chestOpened": false
     },
     {
       "Name": "Dredge Commissar",
       "Timings": [],
       "Category": "Treasures",
-      "Waypoint": "[&BFYCAAA=]"
+      "Waypoint": "[&BFYCAAA=]",
+      "chestOpened": false
     },
     {
       "Name": "Captain Rotbeard",
       "Timings": [],
       "Category": "Treasures",
-      "Waypoint": "[&BOQGAAA=]"
+      "Waypoint": "[&BOQGAAA=]",
+      "chestOpened": false
     },
     {
       "Name": "Rhendak",
       "Timings": [],
       "Category": "Treasures",
-      "Waypoint": "[&BNwAAAA=]"
+      "Waypoint": "[&BNwAAAA=]",
+      "chestOpened": false
     },
     {
       "Name": "Ogrewars",
       "Timings": [],
       "Category": "Treasures",
-      "Waypoint": "[&BDwEAAA=]"
+      "Waypoint": "[&BDwEAAA=]",
+      "chestOpened": false
     },
     {
       "Name": "Statue of Dwanya",
       "Timings": [],
       "Category": "Treasures",
-      "Waypoint": "[&BLICAAA=]"
+      "Waypoint": "[&BLICAAA=]",
+      "chestOpened": false
     },
     {
       "Name": "Priestess of Lyssa",
       "Timings": [],
       "Category": "Treasures",
-      "Waypoint": "[&BKsCAAA=]"
+      "Waypoint": "[&BKsCAAA=]",
+      "chestOpened": false
     },
     {
       "Name": "The frozen Maw",
@@ -80,8 +103,10 @@
         "21:15:00",
         "23:15:00"
       ],
+      "Level": "10",
       "Category": "WBs",
-      "Waypoint": "[&BMIDAAA=]"
+      "Waypoint": "[&BMIDAAA=]",
+      "chestOpened": false
     },
     {
       "Name": "FireShaman",
@@ -99,8 +124,10 @@
         "21:10:00",
         "23:10:00"
       ],
+      "Level": "60",
       "Category": "WBs",
-      "Waypoint": "[&BO4BAAA=]"
+      "Waypoint": "[&BO4BAAA=]",
+      "chestOpened": false
     },
     {
       "Name": "LLA Timberline",
@@ -110,7 +137,10 @@
         "13:20:00",
         "19:20:00"
       ],
-      "Category": "WBs"
+      "Level": "55",
+      "Category": "WBs",
+      "Waypoint": "[&BEwCAAA=]",
+      "chestOpened": false
     },
     {
       "Name": "LLA Iron Marches",
@@ -120,8 +150,10 @@
         "15:20:00",
         "21:20:00"
       ],
+      "Level": "55",
       "Category": "WBs",
-      "Waypoint": "[&BOcBAAA=]"
+      "Waypoint": "[&BOcBAAA=]",
+      "chestOpened": false
     },
     {
       "Name": "LLA Gendarran",
@@ -131,7 +163,10 @@
         "17:20:00",
         "23:20:00"
       ],
-      "Category": "WBs"
+      "Level": "30",
+      "Category": "WBs",
+      "Waypoint": "[&BOQAAAA=]",
+      "chestOpened": false
     },
     {
       "Name": "Fire Elemental",
@@ -149,8 +184,10 @@
         "21:45:00",
         "23:45:00"
       ],
+      "Level": "15",
       "Category": "WBs",
-      "Waypoint": "[&BEcAAAA=]"
+      "Waypoint": "[&BEcAAAA=]",
+      "chestOpened": false
     },
     {
       "Name": "Great Jungle Wurm",
@@ -168,8 +205,10 @@
         "20:15:00",
         "22:15:00"
       ],
+      "Level": "15",
       "Category": "WBs",
-      "Waypoint": "[&BEEFAAA=]"
+      "Waypoint": "[&BEEFAAA=]",
+      "chestOpened": false
     },
     {
       "Name": "Ulgoth the Modniir",
@@ -183,8 +222,10 @@
         "20:30:00",
         "23:30:00"
       ],
+      "Level": "43",
       "Category": "WBs",
-      "Waypoint": "[&BLAAAAA=]"
+      "Waypoint": "[&BLAAAAA=]",
+      "chestOpened": false
     },
     {
       "Name": "Taidha Covington",
@@ -198,8 +239,10 @@
         "19:00:00",
         "22:00:00"
       ],
+      "Level": "50",
       "Category": "WBs",
-      "Waypoint": "[&BKgBAAA=]"
+      "Waypoint": "[&BKgBAAA=]",
+      "chestOpened": false
     },
     {
       "Name": "The Shatterer",
@@ -213,8 +256,10 @@
         "20:00:00",
         "23:00:00"
       ],
+      "Level": "50",
       "Category": "WBs",
-      "Waypoint": "[&BE4DAAA=]"
+      "Waypoint": "[&BE4DAAA=]",
+      "chestOpened": false
     },
     {
       "Name": "Shadow Behemoth",
@@ -232,8 +277,10 @@
         "20:45:00",
         "22:45:00"
       ],
+      "Level": "15",
       "Category": "WBs",
-      "Waypoint": "[&BPcAAAA=]"
+      "Waypoint": "[&BPcAAAA=]",
+      "chestOpened": false
     },
     {
       "Name": "Tequatl the Sunless",
@@ -245,8 +292,10 @@
         "17:00:00",
         "20:00:00"
       ],
+      "Level": "65",
       "Category": "WBs",
-      "Waypoint": "[&BNABAAA=]"
+      "Waypoint": "[&BNABAAA=]",
+      "chestOpened": false
     },
     {
       "Name": "Megadestroyer",
@@ -260,8 +309,10 @@
         "19:30:00",
         "22:30:00"
       ],
+      "Level": "66",
       "Category": "WBs",
-      "Waypoint": "[&BM0CAAA=]"
+      "Waypoint": "[&BM0CAAA=]",
+      "chestOpened": false
     },
     {
       "Name": "Inquest Golem M2",
@@ -275,8 +326,10 @@
         "18:03:00",
         "21:03:00"
       ],
+      "Level": "68",
       "Category": "WBs",
-      "Waypoint": "[&BNQCAAA=]"
+      "Waypoint": "[&BNQCAAA=]",
+      "chestOpened": false
     },
     {
       "Name": "Karka Queen",
@@ -288,8 +341,10 @@
         "16:00:00",
         "19:00:00"
       ],
+      "Level": "80",
       "Category": "WBs",
-      "Waypoint": "[&BNUGAAA=]"
+      "Waypoint": "[&BNgGAAA=]",
+      "chestOpened": false
     },
     {
       "Name": "Claw of Jormag",
@@ -303,8 +358,10 @@
         "18:30:00",
         "21:30:00"
       ],
+      "Level": "80",
       "Category": "WBs",
-      "Waypoint": "[&BHoCAAA=]"
+      "Waypoint": "[&BHoCAAA=]",
+      "chestOpened": false
     },
     {
       "Name": "Sandstorm",
@@ -335,7 +392,8 @@
         "23:40:00"
       ],
       "Category": "LWS2",
-      "Waypoint": "[&BIAHAAA=]"
+      "Waypoint": "[&BIAHAAA=]",
+      "chestOpened": false
     },
     {
       "Name": "Saidra's Haven",
@@ -354,7 +412,8 @@
         "22:00:00"
       ],
       "Category": "LWS3",
-      "Waypoint": "[&BK0JAAA=]"
+      "Waypoint": "[&BK0JAAA=]",
+      "chestOpened": false
     },
     {
       "Name": "New Loamhurst",
@@ -373,7 +432,8 @@
         "22:45:00"
       ],
       "Category": "LWS3",
-      "Waypoint": "[&BLQJAAA=]"
+      "Waypoint": "[&BLQJAAA=]",
+      "chestOpened": false
     },
     {
       "Name": "Noran's Homestead",
@@ -392,7 +452,8 @@
         "23:40:00"
       ],
       "Category": "LWS3",
-      "Waypoint": "[&BK8JAAA=]"
+      "Waypoint": "[&BK8JAAA=]",
+      "chestOpened": false
     },
     {
       "Name": "Defend Jora's Keep",
@@ -411,7 +472,8 @@
         "22:45:00"
       ],
       "Category": "Ice",
-      "Waypoint": "[&BCcMAAA=]"
+      "Waypoint": "[&BCcMAAA=]",
+      "chestOpened": false
     },
     {
       "Name": "Doomlore Shrine",
@@ -430,7 +492,8 @@
         "23:38:00"
       ],
       "Category": "Ice",
-      "Waypoint": "[&BA4MAAA=]"
+      "Waypoint": "[&BA4MAAA=]",
+      "chestOpened": false
     },
     {
       "Name": "Storms of Winter",
@@ -449,7 +512,8 @@
         "23:00:00"
       ],
       "Category": "Ice",
-      "Waypoint": "[&BCcMAAA=]"
+      "Waypoint": "[&BCcMAAA=]",
+      "chestOpened": false
     },
     {
       "Name": "Effigy",
@@ -468,7 +532,8 @@
         "23:10:00"
       ],
       "Category": "Ice",
-      "Waypoint": "[&BA4MAAA=]"
+      "Waypoint": "[&BA4MAAA=]",
+      "chestOpened": false
     },
     {
       "Name": "Ooze Pits",
@@ -487,7 +552,8 @@
         "22:05:00"
       ],
       "Category": "Ice",
-      "Waypoint": "[&BPgLAAA=]"
+      "Waypoint": "[&BPgLAAA=]",
+      "chestOpened": false
     },
     {
       "Name": "Dragonstorm",
@@ -506,7 +572,8 @@
         "22:00:00"
       ],
       "Category": "Ice",
-      "Waypoint": "[&BAkMAAA=]"
+      "Waypoint": "[&BAkMAAA=]",
+      "chestOpened": false
     },
     {
       "Name": "Drakkar",
@@ -525,7 +592,8 @@
         "22:05:00"
       ],
       "Category": "Ice",
-      "Waypoint": "[&BDkMAAA=]"
+      "Waypoint": "[&BDkMAAA=]",
+      "chestOpened": false
     },
     {
       "Name": "Metal Concert",
@@ -544,7 +612,8 @@
         "22:40:00"
       ],
       "Category": "Ice",
-      "Waypoint": "[&BPgLAAA=]"
+      "Waypoint": "[&BPgLAAA=]",
+      "chestOpened": false
     },
     {
       "Name": "Chak Gerent",
@@ -563,7 +632,8 @@
         "23:30:00"
       ],
       "Category": "Maguuma",
-      "Waypoint": "[&BPUHAAA=]"
+      "Waypoint": "[&BPUHAAA=]",
+      "chestOpened": false
     },
     {
       "Name": "Battle in Tarir",
@@ -582,7 +652,8 @@
         "23:45:00"
       ],
       "Category": "Maguuma",
-      "Waypoint": "[&BN0HAAA=][&BGwIAAA=][&BAIIAAA=][&BAYIAAA=]"
+      "Waypoint": "[&BN0HAAA=][&BGwIAAA=][&BAIIAAA=][&BAYIAAA=]",
+      "chestOpened": false
     },
     {
       "Name": "Octovine",
@@ -601,7 +672,8 @@
         "00:00:00"
       ],
       "Category": "Maguuma",
-      "Waypoint": "[&BN0HAAA=][&BGwIAAA=][&BAIIAAA=][&BAYIAAA=]"
+      "Waypoint": "[&BN0HAAA=][&BGwIAAA=][&BAIIAAA=][&BAYIAAA=]",
+      "chestOpened": false
     },
     {
       "Name": "Nightbosses",
@@ -620,7 +692,8 @@
         "23:10:00"
       ],
       "Category": "Maguuma",
-      "Waypoint": "[&BO8HAAA=]"
+      "Waypoint": "[&BNUHAAA=]",
+      "chestOpened": false
     },
     {
       "Name": "Dragon's Stand",
@@ -639,7 +712,8 @@
         "22:30:00"
       ],
       "Category": "Maguuma",
-      "Waypoint": "[&BBAIAAA=]"
+      "Waypoint": "[&BBAIAAA=]",
+      "chestOpened": false
     },
     {
       "Name": "The Oil Floes",
@@ -658,7 +732,8 @@
         "23:45:00"
       ],
       "Category": "Desert",
-      "Waypoint": "[&BKYLAAA=]"
+      "Waypoint": "[&BKYLAAA=]",
+      "chestOpened": false
     },
     {
       "Name": "Maws of Torment",
@@ -677,7 +752,8 @@
         "22:00:00"
       ],
       "Category": "Desert",
-      "Waypoint": "[&BKMKAAA=]"
+      "Waypoint": "[&BKMKAAA=]",
+      "chestOpened": false
     },
     {
       "Name": "Palawadan",
@@ -696,7 +772,8 @@
         "22:45:00"
       ],
       "Category": "Desert",
-      "Waypoint": "[&BAkLAAA=]"
+      "Waypoint": "[&BAkLAAA=]",
+      "chestOpened": false
     },
     {
       "Name": "Thunderhead Keep",
@@ -715,7 +792,8 @@
         "22:45:00"
       ],
       "Category": "Desert",
-      "Waypoint": "[&BLsLAAA=]"
+      "Waypoint": "[&BLsLAAA=]",
+      "chestOpened": false
     },
     {
       "Name": "Serpents' Ire",
@@ -734,7 +812,8 @@
         "23:30:00"
       ],
       "Category": "Desert",
-      "Waypoint": "[&BHQKAAA=]"
+      "Waypoint": "[&BHQKAAA=]",
+      "chestOpened": false
     },
     {
       "Name": "DB Shatterer",
@@ -753,7 +832,8 @@
         "22:00:00"
       ],
       "Category": "Desert",
-      "Waypoint": "[&BJMLAAA=]"
+      "Waypoint": "[&BJMLAAA=]",
+      "chestOpened": false
     },
     {
       "Name": "Junundu Rising",
@@ -784,7 +864,8 @@
         "23:30:00"
       ],
       "Category": "Desert",
-      "Waypoint": "[&BMEKAAA=]"
+      "Waypoint": "[&BMEKAAA=]",
+      "chestOpened": false
     },
     {
       "Name": "Path to Ascension",
@@ -803,7 +884,8 @@
         "22:30:00"
       ],
       "Category": "Desert",
-      "Waypoint": "[&BFMKAAA=]"
+      "Waypoint": "[&BFMKAAA=]",
+      "chestOpened": false
     },
     {
       "Name": "Doppelganger",
@@ -822,7 +904,8 @@
         "22:55:00"
       ],
       "Category": "Desert",
-      "Waypoint": "[&BFMKAAA=]"
+      "Waypoint": "[&BFMKAAA=]",
+      "chestOpened": false
     },
     {
       "Name": "Forged with Fire",
@@ -853,7 +936,8 @@
         "00:00:00"
       ],
       "Category": "Desert",
-      "Waypoint": "[&BO0KAAA=]"
+      "Waypoint": "[&BO0KAAA=]",
+      "chestOpened": false
     },
     {
       "Name": "Choya Piñata",
@@ -872,7 +956,8 @@
         "23:20:00"
       ],
       "Category": "Desert",
-      "Waypoint": "[&BLsKAAA=]"
+      "Waypoint": "[&BLsKAAA=]",
+      "chestOpened": false
     },
     {
       "Name": "Aetherblade Assault",
@@ -891,7 +976,8 @@
         "22:30:00"
       ],
       "Category": "Cantha",
-      "Waypoint": "[&BGUNAAA=]"
+      "Waypoint": "[&BGUNAAA=]",
+      "chestOpened": false
     },
     {
       "Name": "Kaineng Blackout",
@@ -910,7 +996,8 @@
         "23:00:00"
       ],
       "Category": "Cantha",
-      "Waypoint": "[&BBkNAAA=]"
+      "Waypoint": "[&BBkNAAA=]",
+      "chestOpened": false
     },
     {
       "Name": "Gang War",
@@ -929,7 +1016,8 @@
         "23:30:00"
       ],
       "Category": "Cantha",
-      "Waypoint": "[&BMwMAAA=]"
+      "Waypoint": "[&BMwMAAA=]",
+      "chestOpened": false
     },
     {
       "Name": "Aspenwood",
@@ -948,7 +1036,8 @@
         "22:40:00"
       ],
       "Category": "Cantha",
-      "Waypoint": "[&BPkMAAA=]"
+      "Waypoint": "[&BPkMAAA=]",
+      "chestOpened": false
     },
     {
       "Name": "Battle for Jade Sea",
@@ -967,7 +1056,8 @@
         "22:00:00"
       ],
       "Category": "Cantha",
-      "Waypoint": "[&BKIMAAA=]"
+      "Waypoint": "[&BKIMAAA=]",
+      "chestOpened": false
     },
     {
       "Name": "Wizard's Tower",
@@ -986,7 +1076,8 @@
         "22:00:00"
       ],
       "Category": "SotO",
-      "Waypoint": "[&BL4NAAA=]"
+      "Waypoint": "[&BL4NAAA=]",
+      "chestOpened": false
     },
     {
       "Name": "Fly by Night",
@@ -1005,7 +1096,8 @@
         "22:55:00"
       ],
       "Category": "SotO",
-      "Waypoint": "[&BB8OAAA=]"
+      "Waypoint": "[&BB8OAAA=]",
+      "chestOpened": false
     },
     {
       "Name": "Defense of Amnytas",
@@ -1024,7 +1116,8 @@
         "23:00:00"
       ],
       "Category": "SotO",
-      "Waypoint": "[&BDQOAAA=]"
+      "Waypoint": "[&BDQOAAA=]",
+      "chestOpened": false
     },
     {
       "Name": "Convergences",
@@ -1039,7 +1132,8 @@
         "23:30:00"
       ],
       "Category": "SotO",
-      "Waypoint": "[&BB8OAAA=]"
+      "Waypoint": "[&BB8OAAA=]",
+      "chestOpened": false
     }
   ]
 }

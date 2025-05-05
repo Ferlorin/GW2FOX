@@ -42,7 +42,9 @@ namespace GW2FOX
                         TimeRemainingFormatted = formatted,
                         SecondsRemaining = (int)(isPast ? -remaining.TotalSeconds : remaining.TotalSeconds),
                         NextRunTime = eventTime,
+                        Level = run.Level
                     };
+
 
                     // Setze ChestOpened korrekt
                     item.ChestOpened = BossTimings.IsChestOpened(run.BossName);
@@ -106,6 +108,7 @@ namespace GW2FOX
         public class BossListItem
         {
             public string BossName { get; set; } = string.Empty;
+            public string Level { get; set; } = string.Empty; // <-- HINZUGEFÜGT
             public string Waypoint { get; set; } = string.Empty;
             public string Category { get; set; } = string.Empty;
             public bool IsPastEvent { get; set; }
@@ -115,12 +118,13 @@ namespace GW2FOX
             public bool IsConcurrentEvent { get; set; }
             public DateTime TimeToShow => IsPastEvent ? NextRunTime.AddMinutes(15) : NextRunTime;
             public bool ChestOpened { get; set; }
+
             public void UpdateCountdown()
             {
                 var timeLeft = TimeToShow - DateTime.Now;
                 TimeRemainingFormatted = timeLeft.ToString(@"hh\:mm\:ss");
             }
-
         }
+
     }
 }

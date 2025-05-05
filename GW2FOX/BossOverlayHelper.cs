@@ -37,8 +37,10 @@ public static class BossOverlayHelper
                     IsPastEvent = isPast,
                     TimeRemainingFormatted = formatted,
                     SecondsRemaining = (int)(isPast ? -remaining.TotalSeconds : remaining.TotalSeconds),
-                    NextRunTime = eventTime
+                    NextRunTime = eventTime,
+                    Level = (run as BossEvent)?.Level ?? "" // oder direkt run.Level falls du es durchreichst
                 };
+
             })
             .Where(item => item != null)
             .ToList();

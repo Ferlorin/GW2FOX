@@ -61,6 +61,9 @@ public class Boss
     [JsonProperty("Category")]
     public string Category { get; set; }
 
+    [JsonProperty("Level")]
+    public string Level { get; set; } = "";
+
     [JsonProperty("Waypoint")]
     public string? Waypoint { get; set; } = "";
 
@@ -81,8 +84,9 @@ public static class BossTimings
 
             foreach (var boss in bossConfig.Bosses)
             {
-                AddBossEvent(boss.Name, boss.Timings.ToArray(), boss.Category, boss.Waypoint);
+                AddBossEvent(boss.Name, boss.Timings.ToArray(), boss.Category, boss.Waypoint ?? "", boss.Level);
             }
+
         }
         catch (Exception ex)
         {
@@ -93,14 +97,15 @@ public static class BossTimings
     public static BossConfigInfos LoadedConfigInfos { get; set; } = new();
 
 
-    public static void AddBossEvent(string bossName, string[] timings, string category, string waypoint = "")
+    public static void AddBossEvent(string bossName, string[] timings, string category, string waypoint = "", string level = "")
     {
         foreach (var timing in timings)
         {
             var utcTime = ConvertToUtcFromConfigTime(timing);
-            BossEventsList.Add(new BossEvent(bossName, utcTime.TimeOfDay, category, waypoint));
+            BossEventsList.Add(new BossEvent(bossName, utcTime.TimeOfDay, category, waypoint, level));
         }
     }
+
 
 
     public static List<BossEvent> BossEventsList { get; set; } = new();

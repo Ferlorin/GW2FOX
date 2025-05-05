@@ -29,12 +29,14 @@ public class BossEventGroup
         for (int i = -1; i <= DaysExtraToCalculate; i++)
         {
             result.AddRange(_timings.Select(e => new BossEventRun(
-                e.BossName,
-                e.Timing,
-                e.Category,
-                GlobalVariables.CURRENT_DATE_TIME.Date.AddDays(i) + e.Timing,
-                e.Waypoint
-            )));
+    e.BossName,
+    e.Timing,
+    e.Category,
+    GlobalVariables.CURRENT_DATE_TIME.Date.AddDays(i) + e.Timing,
+    e.Waypoint,
+    e.Level // <-- HIER ergänzt
+)));
+
         }
 
         DateTime now = GlobalVariables.CURRENT_DATE_TIME;
@@ -64,12 +66,14 @@ public class BossEventGroup
         for (int i = -1; i <= DaysExtraToCalculate; i++)
         {
             result.AddRange(_timings.Select(e => new BossEventRun(
-                e.BossName,
-                e.Timing,
-                e.Category,
-                GlobalVariables.CURRENT_DATE_TIME.Date.AddDays(i) + e.Timing,
-                e.Waypoint
-            )));
+     e.BossName,
+     e.Timing,
+     e.Category,
+     GlobalVariables.CURRENT_DATE_TIME.Date.AddDays(i) + e.Timing,
+     e.Waypoint,
+     e.Level // <-- HIER ergänzt
+ )));
+
         }
 
         return result.OrderBy(run => run.TimeToShow);
