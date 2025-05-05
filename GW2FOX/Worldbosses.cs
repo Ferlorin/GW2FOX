@@ -1731,54 +1731,63 @@ namespace GW2FOX
 
         private void button65_Click(object sender, EventArgs e)
         {
+            RotbeardBox.Checked = !RotbeardBox.Checked;
             DynamicEventManager.TriggerIt("Captain Rotbeard");
             UpdateBossUiBosses();
         }
 
         private void button63_Click(object sender, EventArgs e)
         {
+            CommissarBox.Checked = !CommissarBox.Checked;
             DynamicEventManager.TriggerIt("Dredge Commissar");
             UpdateBossUiBosses();
         }
 
         private void button42_Click(object sender, EventArgs e)
         {
+            GeneralsBox.Checked = !GeneralsBox.Checked;
             DynamicEventManager.TriggerIt("Branded Generals");
             UpdateBossUiBosses();
         }
 
         private void button31_Click(object sender, EventArgs e)
         {
+            ArahBox.Checked = !ArahBox.Checked;
             DynamicEventManager.TriggerIt("Gates of Arah");
             UpdateBossUiBosses();
         }
 
         private void Rhendak_Click(object sender, EventArgs e)
         {
+            RhendakBox.Checked = !RhendakBox.Checked;
             DynamicEventManager.TriggerIt("Rhendak");
             UpdateBossUiBosses();
         }
 
         private void Lyssa_Click(object sender, EventArgs e)
         {
+            LyssaBox.Checked = !LyssaBox.Checked;
             DynamicEventManager.TriggerIt("Priestess of Lyssa");
             UpdateBossUiBosses();
         }
 
         private void Eye_Click(object sender, EventArgs e)
         {
+            EyeBox.Checked = !EyeBox.Checked;
             DynamicEventManager.TriggerIt("The Eye of Zhaitan");
             UpdateBossUiBosses();
         }
 
         private void Dwayna_Click(object sender, EventArgs e)
         {
+            DwanyaBox.Checked = !DwanyaBox.Checked;
             DynamicEventManager.TriggerIt("Statue of Dwanya");
             UpdateBossUiBosses();
         }
 
         private void Ogrewars_Click(object sender, EventArgs e)
         {
+            OgreBox.Checked = !OgreBox.Checked;
             DynamicEventManager.TriggerIt("Ogrewars");
             UpdateBossUiBosses();
         }
