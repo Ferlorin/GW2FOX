@@ -27,6 +27,8 @@
   <None Remove="Resources\BloodyCom.bmp" />
   <None Remove="Resources\Clock.bmp" />
   <None Remove="Resources\Discord.bmp" />
+  <None Remove="Resources\GuildAdvertising.png" />
+  <None Remove="Resources\GuildWelcome.png" />
   <None Remove="Resources\OpenChest.png" />
   <None Remove="Resources\Tacomini.bmp" />
   <None Remove="Resources\Thumb.png" />
@@ -67,6 +69,12 @@
     <Resource Include="Resources\BloodyCom.bmp" />
     <Resource Include="Resources\Clock.bmp" />
     <Resource Include="Resources\Discord.bmp" />
+    <Resource Include="Resources\GuildAdvertising.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\GuildWelcome.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\OpenChest.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
