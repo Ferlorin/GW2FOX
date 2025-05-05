@@ -195,10 +195,18 @@ namespace GW2FOX
             {
                 string clipboardText;
 
+                // Kategorieabhängiger Level-Text
+                string levelText = item.Category switch
+                {
+                    "WBs" => $"Level {item.Level} ",
+                    "Treasures" => $"\"Treasure Hunter\" Achievement - Level {item.Level} ",
+                    _ => ""
+                };
+
                 if (item.IsPastEvent)
                 {
                     int minutesAgo = (int)Math.Round((DateTime.Now - item.NextRunTime).TotalMinutes);
-                    clipboardText = $"Level {item.Level} \"{item.BossName}\" at {item.Waypoint} started before {minutesAgo}min";
+                    clipboardText = $"{levelText}\"{item.BossName}\" at {item.Waypoint} started before {minutesAgo}min";
                 }
                 else
                 {
@@ -208,9 +216,8 @@ namespace GW2FOX
                         ? $"{remaining.Hours}h {displayMinutes % 60}min"
                         : $"{displayMinutes}min";
 
-                    clipboardText = $"Level {item.Level} \"{item.BossName}\" at {item.Waypoint} in ca {timeFormatted}";
+                    clipboardText = $"{levelText}\"{item.BossName}\" at {item.Waypoint} in ca {timeFormatted}";
                 }
-
 
                 WpfClipboard.SetText(clipboardText);
 
@@ -221,6 +228,8 @@ namespace GW2FOX
                 }
             }
         }
+
+
 
 
 
