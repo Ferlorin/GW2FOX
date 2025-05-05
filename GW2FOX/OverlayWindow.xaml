@@ -87,17 +87,45 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
+
+                    <!-- Icon links -->
                     <Image x:Name="Com" Source="/Com.png" Width="20" Height="20" Margin="6,5,4,5"
-                          MouseDown="Icon_MouseDown"/>
+               MouseDown="Icon_MouseDown"/>
+
+                    <!-- Überschrift -->
                     <TextBlock Grid.Column="1" VerticalAlignment="Center" Foreground="White"
-                               FontFamily="Segoe UI" FontWeight="Bold" FontSize="14" Text="Boss-Timer">
+                   FontFamily="Segoe UI" FontWeight="Bold" FontSize="14" Text="Boss-Timer">
                         <TextBlock.Effect>
                             <DropShadowEffect Color="Black" BlurRadius="0" ShadowDepth="0" Opacity="1"/>
                         </TextBlock.Effect>
                     </TextBlock>
+
+                    <!-- GuildAdvertising Icon -->
+                    <Image x:Name="GuildAdvertisingIcon"
+       Grid.Column="2"
+       Source="/Resources/GuildAdvertising.png"
+       Width="18"
+       Height="18"
+       Margin="6,5,2,5"
+       Cursor="Hand"
+       MouseDown="GuildAdvertisingIcon_MouseDown"/>
+
+
+                    <!-- GuildWelcome Icon -->
+                    <Image x:Name="GuildWelcomeIcon"
+Grid.Column="3"
+Source="/Resources/GuildWelcome.png"
+Width="18"
+Height="18"
+Margin="6,5,2,5"
+Cursor="Hand"
+MouseDown="GuildWelcomeIcon_MouseDown"/>
                 </Grid>
             </Border>
+
 
             <!-- Linie unter Titelleiste -->
             <Border Grid.Row="0" Height="1" VerticalAlignment="Bottom" Margin="0,0,0,0">

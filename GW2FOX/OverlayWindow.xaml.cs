@@ -8,6 +8,8 @@ using System.Windows.Input;
 using System.Windows.Threading;
 using System.Windows.Media;
 using static GW2FOX.BossTimerService;
+using System.IO;
+using Newtonsoft.Json;
 
 // Aliases für eindeutige Verweise
 using WpfImage = System.Windows.Controls.Image;
@@ -16,12 +18,15 @@ using WpfPoint = System.Windows.Point;
 using WpfMouseEventArgs = System.Windows.Input.MouseWheelEventArgs;
 using WpfMouseButtonEventArgs = System.Windows.Input.MouseButtonEventArgs;
 using WpfSize = System.Windows.Size;
+using WpfButton = System.Windows.Controls.Button;
+using WpfMessageBox = System.Windows.MessageBox;
 using Forms = System.Windows.Forms;
 using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows.Media.Animation;
 using System.Diagnostics;
+using Newtonsoft.Json.Linq;
 
 namespace GW2FOX
 {
@@ -443,6 +448,114 @@ namespace GW2FOX
                 System.Windows.MessageBox.Show(
                     "No toggleable windows found.\nMaybe they're already gone? 🧐",
                     "Nothing To Toggle", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+        }
+
+        private void GuildAdvertisingIcon_MouseDown(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                string exeDir = AppDomain.CurrentDomain.BaseDirectory;
+                string jsonPath = Path.Combine(exeDir, "BossTimings.json");
+
+                if (File.Exists(jsonPath))
+                {
+                    string jsonContent = File.ReadAllText(jsonPath);
+                    var jsonObject = JObject.Parse(jsonContent);
+
+                    string? guildText = jsonObject["Guild"]?.ToString();
+                    if (!string.IsNullOrWhiteSpace(guildText))
+                    {
+                        WpfClipboard.SetText(guildText);
+
+                        if (sender is FrameworkElement fe)
+                        {
+                            var position = fe.TransformToAncestor(this).Transform(new WpfPoint(0, 0));
+                            CopiedMessage.Measure(new WpfSize(double.PositiveInfinity, double.PositiveInfinity));
+
+                            double left = position.X + fe.ActualWidth - 70; // 6 px Abstand nach rechts
+                            double top = position.Y + (fe.ActualHeight - CopiedMessage.DesiredSize.Height) / 2; // vertikal zentriert
+                           
+
+                            Canvas.SetLeft(CopiedMessage, left);
+                            Canvas.SetTop(CopiedMessage, top);
+                            CopiedMessage.Visibility = Visibility.Visible;
+
+                            var timer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(300) };
+                            timer.Tick += (s, _) =>
+                            {
+                                CopiedMessage.Visibility = Visibility.Collapsed;
+                                timer.Stop();
+                            };
+                            timer.Start();
+                        }
+
+                        var gw2Proc = Process.GetProcessesByName("Gw2-64").FirstOrDefault();
+                        if (gw2Proc != null && gw2Proc.MainWindowHandle != IntPtr.Zero)
+                        {
+                            SetForegroundWindow(gw2Proc.MainWindowHandle);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                WpfMessageBox.Show("Error loading Guild info: " + ex.Message);
+            }
+        }
+
+
+        private void GuildWelcomeIcon_MouseDown(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                string exeDir = AppDomain.CurrentDomain.BaseDirectory;
+                string jsonPath = Path.Combine(exeDir, "BossTimings.json");
+
+                if (File.Exists(jsonPath))
+                {
+                    string jsonContent = File.ReadAllText(jsonPath);
+                    var jsonObject = JObject.Parse(jsonContent);
+
+                    string? guildText = jsonObject["Welcome"]?.ToString();
+                    if (!string.IsNullOrWhiteSpace(guildText))
+                    {
+                        WpfClipboard.SetText(guildText);
+
+                        if (sender is FrameworkElement fe)
+                        {
+                            var position = fe.TransformToAncestor(this).Transform(new WpfPoint(0, 0));
+                            CopiedMessage.Measure(new WpfSize(double.PositiveInfinity, double.PositiveInfinity));
+
+                            double left = position.X + fe.ActualWidth - 70; // 6 px Abstand nach rechts
+                            double top = position.Y + (fe.ActualHeight - CopiedMessage.DesiredSize.Height) / 2; // vertikal zentriert
+
+                            
+
+                            Canvas.SetLeft(CopiedMessage, left);
+                            Canvas.SetTop(CopiedMessage, top);
+                            CopiedMessage.Visibility = Visibility.Visible;
+
+                            var timer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(300) };
+                            timer.Tick += (s, _) =>
+                            {
+                                CopiedMessage.Visibility = Visibility.Collapsed;
+                                timer.Stop();
+                            };
+                            timer.Start();
+                        }
+
+                        var gw2Proc = Process.GetProcessesByName("Gw2-64").FirstOrDefault();
+                        if (gw2Proc != null && gw2Proc.MainWindowHandle != IntPtr.Zero)
+                        {
+                            SetForegroundWindow(gw2Proc.MainWindowHandle);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                WpfMessageBox.Show("Error loading Guild info: " + ex.Message);
             }
         }
 
