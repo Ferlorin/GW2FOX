@@ -192,8 +192,7 @@ namespace GW2FOX
         private async void Waypoint_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (!bossDataManager.IsLootLoaded)
-            {
-                WpfMessageBox.Show("Loot data is still loading. Please wait a moment.");
+            {;
                 return;
             }
 
@@ -225,7 +224,6 @@ namespace GW2FOX
                     clipboardText = $"{levelText}\"{item.BossName}\" at {item.Waypoint} {timePrefix}{timeFormatted}";
                 }
 
-                // ➕ Loot-Infos anhängen
                 string lootSuffix = "";
                 if (bossDataManager.GroupedLoot.TryGetValue(item.BossName, out var lootItems))
                 {
