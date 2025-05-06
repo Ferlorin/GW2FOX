@@ -198,7 +198,7 @@ namespace GW2FOX
                 // Kategorieabhängiger Level-Text
                 string levelText = item.Category switch
                 {
-                    "WBs" => $"Level {item.Level} ",
+                    "WBs" => $"Next Worldboss - Level {item.Level} ",
                     "Treasures" => $"\"Treasure Hunter\" Achievement - Level {item.Level} ",
                     _ => ""
                 };
@@ -216,7 +216,10 @@ namespace GW2FOX
                         ? $"{remaining.Hours}h {displayMinutes % 60}min"
                         : $"{displayMinutes}min";
 
-                    clipboardText = $"{levelText}\"{item.BossName}\" at {item.Waypoint} in ca {timeFormatted}";
+                    // Falls die Kategorie "Treasures" ist, wird der Text vor der Zeit gesetzt
+                    string timePrefix = item.Category == "Treasures" ? "is running about the next " : "in ca ";
+
+                    clipboardText = $"{levelText}\"{item.BossName}\" at {item.Waypoint} {timePrefix}{timeFormatted}";
                 }
 
                 WpfClipboard.SetText(clipboardText);
@@ -228,6 +231,8 @@ namespace GW2FOX
                 }
             }
         }
+
+
 
 
 
