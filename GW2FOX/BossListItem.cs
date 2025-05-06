@@ -8,7 +8,7 @@ namespace GW2FOX
         public event PropertyChangedEventHandler PropertyChanged;
 
         // Benachrichtigt das UI, wenn sich eine Eigenschaft ändert
-        protected void OnPropertyChanged(string name) =>
+        public void OnPropertyChanged(string name) =>
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 
         private string _countdown;

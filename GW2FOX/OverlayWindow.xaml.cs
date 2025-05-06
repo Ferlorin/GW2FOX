@@ -33,7 +33,7 @@ namespace GW2FOX
 {
     public partial class OverlayWindow : Window, INotifyPropertyChanged
     {
-        private readonly BossDataManager bossDataManager = new();
+        public readonly BossDataManager bossDataManager = new();
         private static OverlayWindow? _instance;
         private DispatcherTimer _bossTimer;
         private DateTime _lastResetDate = DateTime.MinValue;
@@ -69,10 +69,10 @@ namespace GW2FOX
 
         public class BossDataManager
         {
-            public Dictionary<string, List<LootHelper.LootResult>> GroupedLoot { get; private set; } = new();
-            public bool IsLootLoaded { get; private set; } = false;
+            public Dictionary<string, List<LootHelper.LootResult>> GroupedLoot { get; set; }
+            public bool IsLootLoaded { get; set; }
 
-            private readonly LootHelper lootHelper = new();
+            public readonly LootHelper lootHelper = new();
 
             public async Task InitializeAsync()
             {
@@ -119,18 +119,6 @@ namespace GW2FOX
                 var runs = await Task.Run(() => GetBossRunsForOverlay());
                 var items = await Task.Run(() => BossOverlayHelper.GetBossOverlayItems(runs, DateTime.Now));
 
-                // ⬇️ LootHelper-Daten laden
-                var lootHelper = new LootHelper("BossTimings.json");
-                var lootByBoss = await lootHelper.LoadLootGroupedByBossAsync();
-
-                foreach (var bossItem in items)
-                {
-                    if (lootByBoss.TryGetValue(bossItem.BossName, out var lootList))
-                    {
-                        bossItem.LootItems = lootList;
-                    }
-                }
-
                 Dispatcher.Invoke(() =>
                 {
                     double oldOffset = BossScrollViewer.VerticalOffset;
@@ -141,7 +129,6 @@ namespace GW2FOX
                     foreach (var item in items)
                     {
                         var previous = previousItems.FirstOrDefault(x => x.BossName == item.BossName);
-
                         if (previous != null)
                         {
                             item.ChestOpened = previous.ChestOpened;
@@ -156,12 +143,61 @@ namespace GW2FOX
 
                     BossScrollViewer.ScrollToVerticalOffset(oldOffset);
                 });
+
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"[ERROR] {ex.Message}");
             }
         }
+
+        private async Task UpdateTreasureDataAsync()
+        {
+            try
+            {
+                var lootHelper = new LootHelper(); // Liest IDs aus BossTimings.json
+                var groupedLoot = await lootHelper.LoadLootGroupedByBossAsync();
+
+                var jObject = new JObject();
+
+                foreach (var bossGroup in groupedLoot)
+                {
+                    var lootArray = new JArray();
+                    foreach (var loot in bossGroup.Value)
+                    {
+                        lootArray.Add(new JObject
+                        {
+                            ["Name"] = loot.Name,
+                            ["ChatLink"] = loot.ChatLink,
+                            ["Price"] = loot.FormattedPrice,
+                            ["BossName"] = loot.BossName
+                        });
+                    }
+                    jObject[bossGroup.Key] = lootArray;
+                }
+
+                string filePath = "BossTimings.json";
+                JObject json;
+
+                if (File.Exists(filePath))
+                {
+                    var text = await File.ReadAllTextAsync(filePath);
+                    json = JObject.Parse(text);
+                }
+                else
+                {
+                    json = new JObject();
+                }
+
+                json["Treasures"] = jObject;
+                await File.WriteAllTextAsync(filePath, json.ToString(Formatting.Indented));
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"[ERROR] Treasure-Update: {ex.Message}");
+            }
+        }
+
 
 
         private void AnimateScale(WpfImage img, double toScale, double durationMs = 100)
@@ -527,7 +563,7 @@ namespace GW2FOX
             }
         }
 
-        private void TreasureHunterIcon_MouseDown(object sender, RoutedEventArgs e)
+        private async void TreasureHunterIcon_MouseDown(object sender, RoutedEventArgs e)
         {
             if (sender is WpfImage img)
             {
@@ -536,21 +572,19 @@ namespace GW2FOX
 
                 if (_miniOverlay == null || !_miniOverlay.IsLoaded)
                 {
-                    // Das Hauptfenster (dieses Fenster) als Argument an den Konstruktor übergeben
-                    _miniOverlay = new TreasureHunterMiniOverlay(this); // 'this' als Argument
-
-                    // Positionierung
+                    _miniOverlay = new TreasureHunterMiniOverlay(this);
                     WpfPoint iconPosition = img.PointToScreen(new WpfPoint(0, 0));
                     double iconWidth = img.ActualWidth;
                     double overlayWidth = _miniOverlay.Width;
 
                     double targetLeft = iconPosition.X + (iconWidth / 2) - (overlayWidth / 2);
-                    double targetTop = iconPosition.Y - 190; // 1 cm über dem Icon
+                    double targetTop = iconPosition.Y - 190;
 
                     _miniOverlay.Left = targetLeft;
                     _miniOverlay.Top = targetTop;
 
                     _miniOverlay.Show();
+                    await UpdateTreasureDataAsync();
                 }
                 else
                 {
@@ -559,6 +593,8 @@ namespace GW2FOX
                 }
             }
         }
+
+
 
         private void Image_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
         {
@@ -570,6 +606,24 @@ namespace GW2FOX
         {
             if (sender is WpfImage img)
                 AnimateScale(img, 1.0);
+        }
+
+        private void Image_MouseDown(object sender, WpfMouseButtonEventArgs e)
+        {
+            if (sender is WpfImage img)
+            {
+                AnimateScale(img, 0.90);
+                img.Opacity = 0.7;
+            }
+        }
+
+        private void Image_MouseUp(object sender, WpfMouseButtonEventArgs e)
+        {
+            if (sender is WpfImage img)
+            {
+                AnimateScale(img, 1.10);
+                img.Opacity = 1.0;
+            }
         }
 
 

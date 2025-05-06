@@ -25,16 +25,14 @@ namespace GW2FOX
         {
             InitializeComponent();
 
-            // Positionieren: direkt oberhalb von OverlayWindow
             if (overlayWindow != null)
             {
                 this.Left = overlayWindow.Left;
-                this.Top = overlayWindow.Top - this.Height; // Mini-Overlay oberhalb von OverlayWindow
+                this.Top = overlayWindow.Top - this.Height;
             }
 
             this.Show();
 
-            // Sicherstellen, dass das Mini-Overlay bei Bewegung des Hauptfensters mitbewegt wird
             overlayWindow.LocationChanged += (s, e) =>
             {
                 this.Left = overlayWindow.Left;
@@ -47,7 +45,6 @@ namespace GW2FOX
         {
             if (sender is WpfListViewItem item && item.DataContext is string bossName)
             {
-                // "☠" und Leerzeichen entfernen
                 bossName = bossName.TrimStart('☠', ' ');
 
                 switch (bossName)
