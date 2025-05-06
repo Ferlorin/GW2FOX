@@ -116,38 +116,51 @@ namespace GW2FOX
 
         public static void TriggerIt(string bossName)
         {
-            // Zuerst die Event-Instanz für das Triggern erstellen
+            // 1. Holen oder Erstellen der Event-Instanz
             var dynamicEvent = Events.FirstOrDefault(e => e.BossName.Equals(bossName, StringComparison.OrdinalIgnoreCase));
 
             if (dynamicEvent == null)
             {
-                // Falls das Event noch nicht existiert, erstelle es
                 dynamicEvent = new DynamicEvent(bossName, TimeSpan.FromMinutes(30), "Unknown", "[&UNKNOWN=]");
                 Events.Add(dynamicEvent);
             }
 
-            // Event auslösen
+            // 2. Event auslösen
             dynamicEvent.Trigger();
 
-            // In BossTimings.json -> ChoosenOnes eintragen
             string configPath = "BossTimings.json";
             if (!File.Exists(configPath)) return;
 
             var json = File.ReadAllText(configPath);
             var jObj = JObject.Parse(json);
 
+            // 3. Entfernen des Bosses aus "ChoosenOnes"
             var choosen = jObj["ChoosenOnes"] as JArray ?? new JArray();
-            if (!choosen.Any(x => x.ToString().Equals(bossName, StringComparison.OrdinalIgnoreCase)))
+            var existing = choosen.FirstOrDefault(x => x.ToString().Equals(bossName, StringComparison.OrdinalIgnoreCase));
+
+            if (existing != null)
             {
+                // Boss existiert: Entfernen (abwählen)
+                choosen.Remove(existing);
+            }
+            else
+            {
+                // Boss existiert nicht: Hinzufügen (auswählen)
                 choosen.Add(bossName);
-                jObj["ChoosenOnes"] = choosen;
-                File.WriteAllText(configPath, jObj.ToString());
             }
 
-            // Auch die aktuelle Event-Liste speichern
+            jObj["ChoosenOnes"] = choosen;
+            File.WriteAllText(configPath, jObj.ToString());
+
+            // 4. Entfernen des Events aus der persistierten Liste, falls der Boss abgewählt wurde
+            if (existing != null) // Boss wurde entfernt
+            {
+                Events.RemoveAll(e => e.BossName.Equals(bossName, StringComparison.OrdinalIgnoreCase));
+            }
+
+            // 5. Speichern der aktualisierten Events
             SavePersistedEvents();
         }
-
 
 
 
@@ -266,18 +279,49 @@ namespace GW2FOX
         /// </summary>
         private static void LoadDefaultEvents()
         {
-            Events = new List<DynamicEvent>
+            const string configPath = "BossTimings.json";
+
+            if (!File.Exists(configPath))
             {
-                new("The Eye of Zhaitan", TimeSpan.FromMinutes(15), "Treasures", "[&BPgCAAA=]", "75"),
-                new("Gates of Arah", TimeSpan.FromMinutes(15), "Treasures", "[&BA8DAAA=]", "80"),
-                new("Branded Generals", TimeSpan.FromMinutes(15), "Treasures", "[&BIMLAAA=]", "80"),
-                new("Dredge Commissar", TimeSpan.FromMinutes(10), "Treasures", "[&BFYCAAA=]", "50"),
-                new("Captain Rotbeard", TimeSpan.FromMinutes(10), "Treasures", "[&BOQGAAA=]", "80"),
-                new("Rhendak", TimeSpan.FromMinutes(10), "Treasures", "[&BNwAAAA=]", "28"),
-                new("Ogrewars", TimeSpan.FromMinutes(15), "Treasures", "[&BDwEAAA=]", "34"),
-                new("Statue of Dwanya", TimeSpan.FromMinutes(15), "Treasures", "[&BLICAAA=]", "79"),
-                new("Priestess of Lyssa", TimeSpan.FromMinutes(15), "Treasures", "[&BKsCAAA=]", "78")
-            };
+                Console.WriteLine("[LoadDefaultEvents] BossTimings.json not found.");
+                Events = new List<DynamicEvent>();
+                return;
+            }
+
+            try
+            {
+                var json = File.ReadAllText(configPath);
+                var jObj = JObject.Parse(json);
+                var bossesArray = jObj["Bosses"] as JArray;
+
+                if (bossesArray == null)
+                {
+                    Console.WriteLine("[LoadDefaultEvents] No 'Bosses' array found in BossTimings.json.");
+                    Events = new List<DynamicEvent>();
+                    return;
+                }
+
+                Events = bossesArray
+                    .Select(b =>
+                    {
+                        string name = b["Name"]?.ToString() ?? "Unknown";
+                        string category = b["Category"]?.ToString() ?? "Unknown";
+                        string waypoint = b["Waypoint"]?.ToString() ?? "[&UNKNOWN=]";
+                        string level = b["Level"]?.ToString() ?? "";
+
+                        // Default duration if none provided
+                        TimeSpan defaultDuration = TimeSpan.FromMinutes(15);
+
+                        return new DynamicEvent(name, defaultDuration, category, waypoint, level);
+                    })
+                    .ToList();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"[LoadDefaultEvents] Failed to parse BossTimings.json: {ex.Message}");
+                Events = new List<DynamicEvent>();
+            }
         }
+
     }
 }
