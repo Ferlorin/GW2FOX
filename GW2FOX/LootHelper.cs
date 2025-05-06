@@ -72,21 +72,18 @@ public class LootHelper
             try
             {
 
-                // First, fetch item details
                 var itemDetails = await GetItemDetailsAsync(item.Id);
                 if (itemDetails == null)
                 {
                     continue;
                 }
 
-                // Then, fetch price data
                 var priceDetails = await GetItemPriceAsync(item.Id);
                 if (priceDetails == null)
                 {
                     continue;
                 }
 
-                // Combine data into result
                 var lootResult = CreateLootResult(itemDetails, priceDetails, item.BossName);
                 results[item.Id] = lootResult;
             }

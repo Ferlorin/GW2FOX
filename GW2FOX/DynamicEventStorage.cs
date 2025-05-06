@@ -7,9 +7,6 @@ using Newtonsoft.Json.Linq;
 
 namespace GW2FOX
 {
-    /// <summary>
-    /// Zustand eines dynamischen Events – wird als JSON gespeichert.
-    /// </summary>
     public class DynamicEventState
     {
         public string BossName { get; set; } = "";
@@ -21,12 +18,6 @@ namespace GW2FOX
         public List<int> LootItemId { get; set; } = new(); // ✅ NEU
     }
 
-
-
-
-    /// <summary>
-    /// Ein dynamisches Event – beginnt erst nach Trigger().
-    /// </summary>
     public class DynamicEvent
     {
         public string BossName { get; }
@@ -91,8 +82,6 @@ namespace GW2FOX
     }
     internal static class DynamicEventManager
     {
-        private const string PersistFile = "dynamic_events.json";
-
         public static List<DynamicEvent> Events { get; private set; } = new();
 
         static DynamicEventManager()
@@ -128,26 +117,21 @@ namespace GW2FOX
 
             var json = File.ReadAllText(configPath);
             var jObj = JObject.Parse(json);
-
-            // 3. Entfernen oder Hinzufügen des Bosses aus/in "ChoosenOnes"
             var choosen = jObj["ChoosenOnes"] as JArray ?? new JArray();
             var existing = choosen.FirstOrDefault(x => x.ToString().Equals(bossName, StringComparison.OrdinalIgnoreCase));
 
             if (existing != null)
             {
-                // Boss wurde abgewählt → aus ChoosenOnes entfernen
                 choosen.Remove(existing);
             }
             else
             {
-                // Boss wurde ausgewählt → zu ChoosenOnes hinzufügen
                 choosen.Add(bossName);
             }
 
             jObj["ChoosenOnes"] = choosen;
             File.WriteAllText(configPath, jObj.ToString());
 
-            // 4. Entfernen des Events, wenn Boss abgewählt wurde
             if (existing != null)
             {
                 Events.RemoveAll(e => e.BossName.Equals(bossName, StringComparison.OrdinalIgnoreCase));
@@ -159,7 +143,6 @@ namespace GW2FOX
 
         public static IEnumerable<BossEventRun> GetActiveBossEventRuns()
         {
-            // 🕒 Zeitdefinitionen
             DateTime nowLocal = GlobalVariables.CURRENT_DATE_TIME;
             DateTime nowUtc = DateTime.UtcNow;
             DateTime minUtc = nowUtc - TimeSpan.FromMinutes(15);
@@ -167,7 +150,6 @@ namespace GW2FOX
 
             var result = new List<BossEventRun>();
 
-            // 1️⃣ Dynamische Events (nur wenn aktiv und im sichtbaren Zeitfenster)
             var dynamicEvents = Events
                 .Where(e => e.IsRunning)
                 .Select(e => e.ToBossEventRun())
@@ -176,7 +158,6 @@ namespace GW2FOX
 
             result.AddRange(dynamicEvents);
 
-            // 2️⃣ ChoosenOnes aus JSON-Konfiguration
             var config = BossTimings.LoadBossConfigFromFile("BossTimings.json");
             var choosenBossNames = config.ChoosenOnes
                 .ToHashSet(StringComparer.OrdinalIgnoreCase);
@@ -189,7 +170,6 @@ namespace GW2FOX
 
             result.AddRange(choosenRuns);
 
-            // 3️⃣ Fallback: Alle Bosse, falls keine Ergebnisse vorhanden
             if (result.Count == 0)
             {
                 result = BossTimings.BossEventGroups
@@ -198,7 +178,6 @@ namespace GW2FOX
                     .ToList();
             }
 
-            // 4️⃣ Sortierung und Duplikat-Entfernung
             return result
                 .GroupBy(r => new { r.BossName, r.NextRunTime })
                 .Select(g => g.First())
@@ -206,12 +185,6 @@ namespace GW2FOX
                 .ToList();
         }
 
-
-
-
-        /// <summary>
-        /// Lädt Events aus JSON-Datei, entfernt dabei abgelaufene (15+ Minuten vergangen).
-        /// </summary>
         public static void LoadPersistedEvents()
         {
             try
@@ -234,55 +207,6 @@ namespace GW2FOX
             catch (Exception ex)
             {
                 Console.WriteLine($"[LoadFromChoosenOnes] Error: {ex.Message}");
-                Events = new List<DynamicEvent>();
-            }
-        }
-
-        /// <summary>
-        /// Optional: Dynamische Events initial befüllen (z. B. für Test oder Defaults).
-        /// </summary>
-        private static void LoadDefaultEvents()
-        {
-            const string configPath = "BossTimings.json";
-
-            if (!File.Exists(configPath))
-            {
-                Console.WriteLine("[LoadDefaultEvents] BossTimings.json not found.");
-                Events = new List<DynamicEvent>();
-                return;
-            }
-
-            try
-            {
-                var json = File.ReadAllText(configPath);
-                var jObj = JObject.Parse(json);
-                var bossesArray = jObj["Bosses"] as JArray;
-
-                if (bossesArray == null)
-                {
-                    Console.WriteLine("[LoadDefaultEvents] No 'Bosses' array found in BossTimings.json.");
-                    Events = new List<DynamicEvent>();
-                    return;
-                }
-
-                Events = bossesArray
-                    .Select(b =>
-                    {
-                        string name = b["Name"]?.ToString() ?? "Unknown";
-                        string category = b["Category"]?.ToString() ?? "Unknown";
-                        string waypoint = b["Waypoint"]?.ToString() ?? "[&UNKNOWN=]";
-                        string level = b["Level"]?.ToString() ?? "";
-
-                        // Default duration if none provided
-                        TimeSpan defaultDuration = TimeSpan.FromMinutes(15);
-
-                        return new DynamicEvent(name, defaultDuration, category, waypoint, level);
-                    })
-                    .ToList();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"[LoadDefaultEvents] Failed to parse BossTimings.json: {ex.Message}");
                 Events = new List<DynamicEvent>();
             }
         }

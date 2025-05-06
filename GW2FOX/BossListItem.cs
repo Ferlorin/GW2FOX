@@ -49,7 +49,6 @@ namespace GW2FOX
                 if (_chestOpened != value)
                 {
                     _chestOpened = value;
-                    Console.WriteLine($"[DEBUG] SET ChestOpened for {BossName} = {value}");
                     OnPropertyChanged(nameof(ChestOpened));
                     OnPropertyChanged(nameof(ChestImagePath));
                 }
@@ -60,7 +59,6 @@ namespace GW2FOX
         public void LoadChestState()
         {
             var value = BossTimings.IsChestOpened(BossName);
-            Console.WriteLine($"[DEBUG] LOADED {BossName} chestOpened = {value}");
 
             if (ChestOpened != value)
             {
