@@ -11,14 +11,16 @@ namespace GW2FOX
     /// Zustand eines dynamischen Events – wird als JSON gespeichert.
     /// </summary>
     public class DynamicEventState
-        {
-            public string BossName { get; set; } = "";
-            public TimeSpan Duration { get; set; }
-            public string Category { get; set; } = "";
-            public string Waypoint { get; set; } = "";
-            public DateTime? StartTime { get; set; } // UTC
-            public string Level { get; set; } = ""; // ✅ Neu
-        }
+    {
+        public string BossName { get; set; } = "";
+        public TimeSpan Duration { get; set; }
+        public string Category { get; set; } = "";
+        public string Waypoint { get; set; } = "";
+        public DateTime? StartTime { get; set; }
+        public string Level { get; set; } = "";
+        public List<int> LootItemId { get; set; } = new(); // ✅ NEU
+    }
+
 
 
 
@@ -31,41 +33,29 @@ namespace GW2FOX
         public TimeSpan Duration { get; }
         public string Category { get; }
         public string Waypoint { get; }
-        public string Level { get; } // ✅ Neu
+        public string Level { get; }
         public DateTime? StartTime { get; private set; }
+        public List<int> LootItemId { get; } = new(); // ✅ NEU
 
-        public DynamicEvent(string bossName, TimeSpan duration, string category, string waypoint, string level = "")
+        public DynamicEvent(string bossName, TimeSpan duration, string category, string waypoint, string level = "", List<int>? lootItemId = null)
         {
             BossName = bossName;
             Duration = duration;
             Category = category;
             Waypoint = waypoint;
-            Level = level; // ✅ Neu
+            Level = level;
+            if (lootItemId != null)
+                LootItemId = lootItemId;
         }
 
-
-        /// <summary>
-        /// Event wurde ausgelöst – Startzeit wird gesetzt.
-        /// </summary>
         public void Trigger()
         {
             StartTime = DateTime.UtcNow;
         }
 
-
-        /// <summary>
-        /// Endzeit = Startzeit + Dauer (falls getriggert).
-        /// </summary>
         public DateTime? EndTime => StartTime?.Add(Duration);
-
-        /// <summary>
-        /// Ob das Event aktuell aktiv ist (d.h. nach Trigger & innerhalb der geschätzten Dauer).
-        /// </summary>
         public bool IsRunning => StartTime.HasValue && DateTime.UtcNow < EndTime;
 
-        /// <summary>
-        /// Wandelt in ein darstellbares Objekt für das Overlay um.
-        /// </summary>
         public BossEventRun ToBossEventRun()
         {
             return new BossEventRun(
@@ -79,7 +69,6 @@ namespace GW2FOX
 
         }
 
-
         public DynamicEventState ToState() => new()
         {
             BossName = BossName,
@@ -87,22 +76,19 @@ namespace GW2FOX
             Category = Category,
             Waypoint = Waypoint,
             StartTime = StartTime,
-            Level = Level // ✅ Neu
+            Level = Level,
+            LootItemId = LootItemId // ✅ NEU
         };
 
         public static DynamicEvent FromState(DynamicEventState state)
         {
-            var ev = new DynamicEvent(state.BossName, state.Duration, state.Category, state.Waypoint, state.Level); // ✅
+            var ev = new DynamicEvent(state.BossName, state.Duration, state.Category, state.Waypoint, state.Level, state.LootItemId);
             if (state.StartTime.HasValue)
                 ev.StartTime = state.StartTime;
             return ev;
         }
 
     }
-
-    /// <summary>
-    /// Zentrale Verwaltung aller dynamischen Events (inkl. Laden/Speichern).
-    /// </summary>
     internal static class DynamicEventManager
     {
         private const string PersistFile = "dynamic_events.json";
@@ -121,14 +107,16 @@ namespace GW2FOX
 
             if (dynamicEvent == null)
             {
-                // ...
+                // Bossdaten aus Konfigurationsdatei laden
                 var bossData = BossTimings.LoadBossConfigFromFile("BossTimings.json")
                     .Bosses.FirstOrDefault(b => b.Name.Equals(bossName, StringComparison.OrdinalIgnoreCase));
 
                 string level = bossData?.Level ?? "";
+                string category = bossData?.Category ?? "Unknown";
+                string waypoint = bossData?.Waypoint ?? "[&UNKNOWN=]";
+                List<int> lootItemId = bossData?.LootItemId?.ToList() ?? new List<int>(); // ✅ LootItemId berücksichtigen
 
-                dynamicEvent = new DynamicEvent(bossName, TimeSpan.FromMinutes(15), bossData?.Category ?? "Unknown", bossData?.Waypoint ?? "[&UNKNOWN=]", level);
-
+                dynamicEvent = new DynamicEvent(bossName, TimeSpan.FromMinutes(15), category, waypoint, level, lootItemId);
                 Events.Add(dynamicEvent);
             }
 
@@ -141,40 +129,35 @@ namespace GW2FOX
             var json = File.ReadAllText(configPath);
             var jObj = JObject.Parse(json);
 
-            // 3. Entfernen des Bosses aus "ChoosenOnes"
+            // 3. Entfernen oder Hinzufügen des Bosses aus/in "ChoosenOnes"
             var choosen = jObj["ChoosenOnes"] as JArray ?? new JArray();
             var existing = choosen.FirstOrDefault(x => x.ToString().Equals(bossName, StringComparison.OrdinalIgnoreCase));
 
             if (existing != null)
             {
-                // Boss existiert: Entfernen (abwählen)
+                // Boss wurde abgewählt → aus ChoosenOnes entfernen
                 choosen.Remove(existing);
             }
             else
             {
-                // Boss existiert nicht: Hinzufügen (auswählen)
+                // Boss wurde ausgewählt → zu ChoosenOnes hinzufügen
                 choosen.Add(bossName);
             }
 
             jObj["ChoosenOnes"] = choosen;
             File.WriteAllText(configPath, jObj.ToString());
 
-            // 4. Entfernen des Events aus der persistierten Liste, falls der Boss abgewählt wurde
-            if (existing != null) // Boss wurde entfernt
+            // 4. Entfernen des Events, wenn Boss abgewählt wurde
+            if (existing != null)
             {
                 Events.RemoveAll(e => e.BossName.Equals(bossName, StringComparison.OrdinalIgnoreCase));
             }
 
-            // 5. Speichern der aktualisierten Events
+            // 5. Persistierte Events speichern (inkl. LootItemId)
             SavePersistedEvents();
         }
 
 
-
-
-        /// <summary>
-        /// Gibt nur aktive dynamische Events für das Overlay zurück.
-        /// </summary>
         private static bool _choosenOnesLoaded = false;
 
         public static IEnumerable<BossEventRun> GetActiveBossEventRuns()

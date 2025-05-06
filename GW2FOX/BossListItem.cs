@@ -36,6 +36,8 @@ namespace GW2FOX
         public bool IsDynamicEvent { get; set; }
         public bool IsConcurrentEvent { get; set; }
         public DateTime TimeToShow => NextRunTime;
+        public List<LootHelper.LootResult> LootItems { get; set; } = new();
+
 
         // Eine Definition für ChestOpened
         private bool _chestOpened;

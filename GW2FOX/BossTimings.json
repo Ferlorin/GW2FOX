@@ -29,6 +29,7 @@
       "Timings": [],
       "Category": "Treasures",
       "Waypoint": "[&BPgCAAA=]",
+      "LootItemId": [ 39475 ],
       "chestOpened": false
     },
     {
@@ -36,6 +37,7 @@
       "Timings": [],
       "Category": "Treasures",
       "Waypoint": "[&BA8DAAA=]",
+      "LootItemId": [ 39471 ],
       "chestOpened": false
     },
     {
@@ -43,6 +45,7 @@
       "Timings": [],
       "Category": "Treasures",
       "Waypoint": "[&BIMLAAA=]",
+      "LootItemId": [ 88914 ],
       "chestOpened": false
     },
     {
@@ -50,6 +53,7 @@
       "Timings": [],
       "Category": "Treasures",
       "Waypoint": "[&BFYCAAA=]",
+      "LootItemId": [ 39468 ],
       "chestOpened": false
     },
     {
@@ -57,6 +61,7 @@
       "Timings": [],
       "Category": "Treasures",
       "Waypoint": "[&BOQGAAA=]",
+      "LootItemId": [ 39471 ],
       "chestOpened": false
     },
     {
@@ -64,6 +69,7 @@
       "Timings": [],
       "Category": "Treasures",
       "Waypoint": "[&BNwAAAA=]",
+      "LootItemId": [ 39481 ],
       "chestOpened": false
     },
     {
@@ -71,6 +77,7 @@
       "Timings": [],
       "Category": "Treasures",
       "Waypoint": "[&BDwEAAA=]",
+      "LootItemId": [ 46467 ],
       "chestOpened": false
     },
     {
@@ -78,6 +85,7 @@
       "Timings": [],
       "Category": "Treasures",
       "Waypoint": "[&BLICAAA=]",
+      "LootItemId": [ 39476, 39479 ],
       "chestOpened": false
     },
     {
@@ -85,6 +93,7 @@
       "Timings": [],
       "Category": "Treasures",
       "Waypoint": "[&BKsCAAA=]",
+      "LootItemId": [ 46468 ],
       "chestOpened": false
     },
     {
@@ -103,6 +112,7 @@
         "21:15:00",
         "23:15:00"
       ],
+      "LootItemId": [],
       "Level": "10",
       "Category": "WBs",
       "Waypoint": "[&BMIDAAA=]",
@@ -124,6 +134,7 @@
         "21:10:00",
         "23:10:00"
       ],
+      "LootItemId": [],
       "Level": "60",
       "Category": "WBs",
       "Waypoint": "[&BO4BAAA=]",
@@ -137,6 +148,7 @@
         "13:20:00",
         "19:20:00"
       ],
+      "LootItemId": [],
       "Level": "55",
       "Category": "WBs",
       "Waypoint": "[&BEwCAAA=]",
@@ -150,6 +162,7 @@
         "15:20:00",
         "21:20:00"
       ],
+      "LootItemId": [],
       "Level": "55",
       "Category": "WBs",
       "Waypoint": "[&BOcBAAA=]",
@@ -163,6 +176,7 @@
         "17:20:00",
         "23:20:00"
       ],
+      "LootItemId": [],
       "Level": "30",
       "Category": "WBs",
       "Waypoint": "[&BOQAAAA=]",
@@ -184,6 +198,7 @@
         "21:45:00",
         "23:45:00"
       ],
+      "LootItemId": [],
       "Level": "15",
       "Category": "WBs",
       "Waypoint": "[&BEcAAAA=]",
@@ -205,6 +220,7 @@
         "20:15:00",
         "22:15:00"
       ],
+      "LootItemId": [],
       "Level": "15",
       "Category": "WBs",
       "Waypoint": "[&BEEFAAA=]",
@@ -222,6 +238,7 @@
         "20:30:00",
         "23:30:00"
       ],
+      "LootItemId": [],
       "Level": "43",
       "Category": "WBs",
       "Waypoint": "[&BLAAAAA=]",
@@ -239,6 +256,7 @@
         "19:00:00",
         "22:00:00"
       ],
+      "LootItemId": [],
       "Level": "50",
       "Category": "WBs",
       "Waypoint": "[&BKgBAAA=]",
@@ -256,6 +274,7 @@
         "20:00:00",
         "23:00:00"
       ],
+      "LootItemId": [],
       "Level": "50",
       "Category": "WBs",
       "Waypoint": "[&BE4DAAA=]",
@@ -277,6 +296,7 @@
         "20:45:00",
         "22:45:00"
       ],
+      "LootItemId": [],
       "Level": "15",
       "Category": "WBs",
       "Waypoint": "[&BPcAAAA=]",
@@ -292,6 +312,7 @@
         "17:00:00",
         "20:00:00"
       ],
+      "LootItemId": [],
       "Level": "65",
       "Category": "WBs",
       "Waypoint": "[&BNABAAA=]",
@@ -309,6 +330,7 @@
         "19:30:00",
         "22:30:00"
       ],
+      "LootItemId": [],
       "Level": "66",
       "Category": "WBs",
       "Waypoint": "[&BM0CAAA=]",
@@ -326,6 +348,7 @@
         "18:03:00",
         "21:03:00"
       ],
+      "LootItemId": [],
       "Level": "68",
       "Category": "WBs",
       "Waypoint": "[&BNQCAAA=]",
@@ -341,6 +364,7 @@
         "16:00:00",
         "19:00:00"
       ],
+      "LootItemId": [],
       "Level": "80",
       "Category": "WBs",
       "Waypoint": "[&BNgGAAA=]",
@@ -358,6 +382,7 @@
         "18:30:00",
         "21:30:00"
       ],
+      "LootItemId": [],
       "Level": "80",
       "Category": "WBs",
       "Waypoint": "[&BHoCAAA=]",
@@ -391,6 +416,7 @@
         "22:40:00",
         "23:40:00"
       ],
+      "LootItemId": [],
       "Category": "LWS2",
       "Waypoint": "[&BIAHAAA=]",
       "chestOpened": false
@@ -411,6 +437,7 @@
         "20:00:00",
         "22:00:00"
       ],
+      "LootItemId": [],
       "Category": "LWS3",
       "Waypoint": "[&BK0JAAA=]",
       "chestOpened": false
@@ -431,6 +458,7 @@
         "20:45:00",
         "22:45:00"
       ],
+      "LootItemId": [],
       "Category": "LWS3",
       "Waypoint": "[&BLQJAAA=]",
       "chestOpened": false
@@ -451,6 +479,7 @@
         "21:40:00",
         "23:40:00"
       ],
+      "LootItemId": [],
       "Category": "LWS3",
       "Waypoint": "[&BK8JAAA=]",
       "chestOpened": false
@@ -471,6 +500,7 @@
         "20:45:00",
         "22:45:00"
       ],
+      "LootItemId": [],
       "Category": "Ice",
       "Waypoint": "[&BCcMAAA=]",
       "chestOpened": false
@@ -491,6 +521,7 @@
         "21:38:00",
         "23:38:00"
       ],
+      "LootItemId": [],
       "Category": "Ice",
       "Waypoint": "[&BA4MAAA=]",
       "chestOpened": false
@@ -511,6 +542,7 @@
         "21:00:00",
         "23:00:00"
       ],
+      "LootItemId": [],
       "Category": "Ice",
       "Waypoint": "[&BCcMAAA=]",
       "chestOpened": false
@@ -531,6 +563,7 @@
         "21:10:00",
         "23:10:00"
       ],
+      "LootItemId": [],
       "Category": "Ice",
       "Waypoint": "[&BA4MAAA=]",
       "chestOpened": false
@@ -551,6 +584,7 @@
         "20:05:00",
         "22:05:00"
       ],
+      "LootItemId": [],
       "Category": "Ice",
       "Waypoint": "[&BPgLAAA=]",
       "chestOpened": false
@@ -571,6 +605,7 @@
         "20:00:00",
         "22:00:00"
       ],
+      "LootItemId": [],
       "Category": "Ice",
       "Waypoint": "[&BAkMAAA=]",
       "chestOpened": false
@@ -591,6 +626,7 @@
         "20:05:00",
         "22:05:00"
       ],
+      "LootItemId": [],
       "Category": "Ice",
       "Waypoint": "[&BDkMAAA=]",
       "chestOpened": false
@@ -611,6 +647,7 @@
         "20:40:00",
         "22:40:00"
       ],
+      "LootItemId": [],
       "Category": "Ice",
       "Waypoint": "[&BPgLAAA=]",
       "chestOpened": false
@@ -631,6 +668,7 @@
         "21:30:00",
         "23:30:00"
       ],
+      "LootItemId": [],
       "Category": "Maguuma",
       "Waypoint": "[&BPUHAAA=]",
       "chestOpened": false
@@ -651,6 +689,7 @@
         "21:45:00",
         "23:45:00"
       ],
+      "LootItemId": [],
       "Category": "Maguuma",
       "Waypoint": "[&BN0HAAA=][&BGwIAAA=][&BAIIAAA=][&BAYIAAA=]",
       "chestOpened": false
@@ -671,6 +710,7 @@
         "22:00:00",
         "00:00:00"
       ],
+      "LootItemId": [],
       "Category": "Maguuma",
       "Waypoint": "[&BN0HAAA=][&BGwIAAA=][&BAIIAAA=][&BAYIAAA=]",
       "chestOpened": false
@@ -691,6 +731,7 @@
         "21:10:00",
         "23:10:00"
       ],
+      "LootItemId": [],
       "Category": "Maguuma",
       "Waypoint": "[&BNUHAAA=]",
       "chestOpened": false
@@ -711,6 +752,7 @@
         "20:30:00",
         "22:30:00"
       ],
+      "LootItemId": [],
       "Category": "Maguuma",
       "Waypoint": "[&BBAIAAA=]",
       "chestOpened": false
@@ -731,6 +773,7 @@
         "21:45:00",
         "23:45:00"
       ],
+      "LootItemId": [],
       "Category": "Desert",
       "Waypoint": "[&BKYLAAA=]",
       "chestOpened": false
@@ -751,6 +794,7 @@
         "20:00:00",
         "22:00:00"
       ],
+      "LootItemId": [],
       "Category": "Desert",
       "Waypoint": "[&BKMKAAA=]",
       "chestOpened": false
@@ -771,6 +815,7 @@
         "20:45:00",
         "22:45:00"
       ],
+      "LootItemId": [],
       "Category": "Desert",
       "Waypoint": "[&BAkLAAA=]",
       "chestOpened": false
@@ -791,6 +836,7 @@
         "20:45:00",
         "22:45:00"
       ],
+      "LootItemId": [],
       "Category": "Desert",
       "Waypoint": "[&BLsLAAA=]",
       "chestOpened": false
@@ -811,6 +857,7 @@
         "21:30:00",
         "23:30:00"
       ],
+      "LootItemId": [],
       "Category": "Desert",
       "Waypoint": "[&BHQKAAA=]",
       "chestOpened": false
@@ -831,6 +878,7 @@
         "20:00:00",
         "22:00:00"
       ],
+      "LootItemId": [],
       "Category": "Desert",
       "Waypoint": "[&BJMLAAA=]",
       "chestOpened": false
@@ -863,6 +911,7 @@
         "22:30:00",
         "23:30:00"
       ],
+      "LootItemId": [],
       "Category": "Desert",
       "Waypoint": "[&BMEKAAA=]",
       "chestOpened": false
@@ -883,6 +932,7 @@
         "20:30:00",
         "22:30:00"
       ],
+      "LootItemId": [],
       "Category": "Desert",
       "Waypoint": "[&BFMKAAA=]",
       "chestOpened": false
@@ -903,6 +953,7 @@
         "20:55:00",
         "22:55:00"
       ],
+      "LootItemId": [],
       "Category": "Desert",
       "Waypoint": "[&BFMKAAA=]",
       "chestOpened": false
@@ -935,6 +986,7 @@
         "23:00:00",
         "00:00:00"
       ],
+      "LootItemId": [],
       "Category": "Desert",
       "Waypoint": "[&BO0KAAA=]",
       "chestOpened": false
@@ -955,6 +1007,7 @@
         "21:20:00",
         "23:20:00"
       ],
+      "LootItemId": [],
       "Category": "Desert",
       "Waypoint": "[&BLsKAAA=]",
       "chestOpened": false
@@ -975,6 +1028,7 @@
         "20:30:00",
         "22:30:00"
       ],
+      "LootItemId": [],
       "Category": "Cantha",
       "Waypoint": "[&BGUNAAA=]",
       "chestOpened": false
@@ -995,6 +1049,7 @@
         "21:00:00",
         "23:00:00"
       ],
+      "LootItemId": [],
       "Category": "Cantha",
       "Waypoint": "[&BBkNAAA=]",
       "chestOpened": false
@@ -1015,6 +1070,7 @@
         "21:30:00",
         "23:30:00"
       ],
+      "LootItemId": [],
       "Category": "Cantha",
       "Waypoint": "[&BMwMAAA=]",
       "chestOpened": false
@@ -1035,6 +1091,7 @@
         "20:40:00",
         "22:40:00"
       ],
+      "LootItemId": [],
       "Category": "Cantha",
       "Waypoint": "[&BPkMAAA=]",
       "chestOpened": false
@@ -1055,6 +1112,7 @@
         "20:00:00",
         "22:00:00"
       ],
+      "LootItemId": [],
       "Category": "Cantha",
       "Waypoint": "[&BKIMAAA=]",
       "chestOpened": false
@@ -1075,6 +1133,7 @@
         "20:00:00",
         "22:00:00"
       ],
+      "LootItemId": [],
       "Category": "SotO",
       "Waypoint": "[&BL4NAAA=]",
       "chestOpened": false
@@ -1095,6 +1154,7 @@
         "20:55:00",
         "22:55:00"
       ],
+      "LootItemId": [],
       "Category": "SotO",
       "Waypoint": "[&BB8OAAA=]",
       "chestOpened": false
@@ -1115,6 +1175,7 @@
         "21:00:00",
         "23:00:00"
       ],
+      "LootItemId": [],
       "Category": "SotO",
       "Waypoint": "[&BDQOAAA=]",
       "chestOpened": false
@@ -1131,6 +1192,7 @@
         "20:30:00",
         "23:30:00"
       ],
+      "LootItemId": [],
       "Category": "SotO",
       "Waypoint": "[&BB8OAAA=]",
       "chestOpened": false

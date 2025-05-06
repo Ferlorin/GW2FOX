@@ -69,6 +69,9 @@ public class Boss
 
     [JsonProperty("chestOpened")]
     public bool ChestOpened { get; set; } = false; // ✅ HIER ergänzen!
+    
+    [JsonProperty("LootItemId")]  // 👈 HINZUGEFÜGT
+    public List<int> LootItemId { get; set; } = new();  // 👈 HINZUGEFÜGT
 }
 
 

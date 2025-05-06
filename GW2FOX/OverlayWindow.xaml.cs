@@ -98,11 +98,22 @@ namespace GW2FOX
                 var runs = await Task.Run(() => GetBossRunsForOverlay());
                 var items = await Task.Run(() => BossOverlayHelper.GetBossOverlayItems(runs, DateTime.Now));
 
+                // ⬇️ LootHelper-Daten laden
+                var lootHelper = new LootHelper("BossTimings.json");
+                var lootByBoss = await lootHelper.LoadLootGroupedByBossAsync();
+
+                foreach (var bossItem in items)
+                {
+                    if (lootByBoss.TryGetValue(bossItem.BossName, out var lootList))
+                    {
+                        bossItem.LootItems = lootList;
+                    }
+                }
+
                 Dispatcher.Invoke(() =>
                 {
                     double oldOffset = BossScrollViewer.VerticalOffset;
 
-                    // Vorherige Einträge merken
                     var previousItems = OverlayItems.ToList();
                     OverlayItems.Clear();
 
@@ -116,14 +127,13 @@ namespace GW2FOX
                         }
                         else
                         {
-                            item.LoadChestState(); // 🔥 Hier: Zustand aus JSON laden und UI zwingen zu aktualisieren
+                            item.LoadChestState();
                         }
 
                         OverlayItems.Add(item);
                     }
 
                     BossScrollViewer.ScrollToVerticalOffset(oldOffset);
-                    
                 });
             }
             catch (Exception ex)
@@ -131,6 +141,7 @@ namespace GW2FOX
                 Console.WriteLine($"[ERROR] {ex.Message}");
             }
         }
+
 
 
         private void Waypoint_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
@@ -216,11 +227,19 @@ namespace GW2FOX
                         ? $"{remaining.Hours}h {displayMinutes % 60}min"
                         : $"{displayMinutes}min";
 
-                    // Falls die Kategorie "Treasures" ist, wird der Text vor der Zeit gesetzt
                     string timePrefix = item.Category == "Treasures" ? "is running about the next " : "in ca ";
-
                     clipboardText = $"{levelText}\"{item.BossName}\" at {item.Waypoint} {timePrefix}{timeFormatted}";
                 }
+
+                // ➕ Loot-Infos anhängen
+                string lootSuffix = "";
+                if (item.LootItems != null && item.LootItems.Any())
+                {
+                    var lootInfo = item.LootItems.Select(l => $"[ - loot here maybe: {l.ChatLink} cost {l.FormattedPrice}]");
+                    lootSuffix = " " + string.Join(" ", lootInfo);
+                }
+
+                clipboardText += lootSuffix;
 
                 WpfClipboard.SetText(clipboardText);
 
@@ -231,6 +250,7 @@ namespace GW2FOX
                 }
             }
         }
+
 
 
         private void Chest_MouseDown(object sender, MouseButtonEventArgs e)

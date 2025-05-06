@@ -1,11 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 <PropertyGroup>
-  <OutputType>WinExe</OutputType>
+  <OutputType>Exe</OutputType>
   <TargetFramework>net8.0-windows</TargetFramework>
   <Nullable>enable</Nullable>
   <UseWindowsForms>true</UseWindowsForms>
-  <UseWPF>true</UseWPF> <!-- NEU -->
+  <UseWPF>true</UseWPF>
   <ImplicitUsings>enable</ImplicitUsings>
   <StartupObject>GW2FOX.Program</StartupObject>
   <ApplicationIcon>Resources\icon.ico</ApplicationIcon>
