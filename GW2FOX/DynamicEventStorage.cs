@@ -11,13 +11,16 @@ namespace GW2FOX
     /// Zustand eines dynamischen Events – wird als JSON gespeichert.
     /// </summary>
     public class DynamicEventState
-    {
-        public string BossName { get; set; } = "";
-        public TimeSpan Duration { get; set; }
-        public string Category { get; set; } = "";
-        public string Waypoint { get; set; } = "";
-        public DateTime? StartTime { get; set; } // UTC
-    }
+        {
+            public string BossName { get; set; } = "";
+            public TimeSpan Duration { get; set; }
+            public string Category { get; set; } = "";
+            public string Waypoint { get; set; } = "";
+            public DateTime? StartTime { get; set; } // UTC
+            public string Level { get; set; } = ""; // ✅ Neu
+        }
+
+
 
     /// <summary>
     /// Ein dynamisches Event – beginnt erst nach Trigger().
@@ -28,15 +31,18 @@ namespace GW2FOX
         public TimeSpan Duration { get; }
         public string Category { get; }
         public string Waypoint { get; }
+        public string Level { get; } // ✅ Neu
         public DateTime? StartTime { get; private set; }
 
-        public DynamicEvent(string bossName, TimeSpan duration, string category, string waypoint)
+        public DynamicEvent(string bossName, TimeSpan duration, string category, string waypoint, string level = "")
         {
             BossName = bossName;
             Duration = duration;
             Category = category;
             Waypoint = waypoint;
+            Level = level; // ✅ Neu
         }
+
 
         /// <summary>
         /// Event wurde ausgelöst – Startzeit wird gesetzt.
@@ -63,12 +69,14 @@ namespace GW2FOX
         public BossEventRun ToBossEventRun()
         {
             return new BossEventRun(
-                bossName: BossName,
-                timing: Duration,
-                category: Category,
-                nextRunTime: EndTime.Value.ToLocalTime(), // ✅ NUR HIER lokale Zeit berechnen!
-                waypoint: Waypoint
-            );
+    bossName: BossName,
+    timing: Duration,
+    category: Category,
+    nextRunTime: EndTime.Value.ToLocalTime(),
+    waypoint: Waypoint,
+    level: Level // ✅ falls vorhanden
+);
+
         }
 
 
@@ -78,16 +86,18 @@ namespace GW2FOX
             Duration = Duration,
             Category = Category,
             Waypoint = Waypoint,
-            StartTime = StartTime
+            StartTime = StartTime,
+            Level = Level // ✅ Neu
         };
 
         public static DynamicEvent FromState(DynamicEventState state)
         {
-            var ev = new DynamicEvent(state.BossName, state.Duration, state.Category, state.Waypoint);
+            var ev = new DynamicEvent(state.BossName, state.Duration, state.Category, state.Waypoint, state.Level); // ✅
             if (state.StartTime.HasValue)
                 ev.StartTime = state.StartTime;
             return ev;
         }
+
     }
 
     /// <summary>
@@ -219,8 +229,11 @@ namespace GW2FOX
                 var allEvents = states.Select(DynamicEvent.FromState).ToList();
 
                 Events = allEvents
-                    .Where(e => !e.StartTime.HasValue || e.EndTime >= now - TimeSpan.FromMinutes(15))
-                    .ToList();
+    .Where(e =>
+        !e.StartTime.HasValue ||
+        (e.EndTime.HasValue && e.EndTime.Value.AddMinutes(15) > DateTime.UtcNow)
+    )
+    .ToList();
 
                 if (Events.Count != allEvents.Count)
                 {
@@ -255,15 +268,15 @@ namespace GW2FOX
         {
             Events = new List<DynamicEvent>
             {
-                new("The Eye of Zhaitan", TimeSpan.FromMinutes(20), "Treasures", "[&BPgCAAA=]"),
-                new("Gates of Arah", TimeSpan.FromMinutes(90), "Treasures", "[&BA8DAAA=]"),
-                new("Branded Generals", TimeSpan.FromMinutes(90), "Treasures", "[&BIMLAAA=]"),
-                new("Dredge Commissar", TimeSpan.FromMinutes(20), "Treasures", "[&BFYCAAA=]"),
-                new("Captain Rotbeard", TimeSpan.FromMinutes(35), "Treasures", "[&BOQGAAA=]"),
-                new("Rhendak", TimeSpan.FromMinutes(10), "Treasures", "[&BNwAAAA=]"),
-                new("Ogrewars", TimeSpan.FromMinutes(20), "Treasures", "[&BDwEAAA=]"),
-                new("Statue of Dwanya", TimeSpan.FromMinutes(50), "Treasures", "[&BLICAAA=]"),
-                new("Priestess of Lyssa", TimeSpan.FromMinutes(90), "Treasures", "[&BKsCAAA=]")
+                new("The Eye of Zhaitan", TimeSpan.FromMinutes(15), "Treasures", "[&BPgCAAA=]", "75"),
+                new("Gates of Arah", TimeSpan.FromMinutes(15), "Treasures", "[&BA8DAAA=]", "80"),
+                new("Branded Generals", TimeSpan.FromMinutes(15), "Treasures", "[&BIMLAAA=]", "80"),
+                new("Dredge Commissar", TimeSpan.FromMinutes(10), "Treasures", "[&BFYCAAA=]", "50"),
+                new("Captain Rotbeard", TimeSpan.FromMinutes(10), "Treasures", "[&BOQGAAA=]", "80"),
+                new("Rhendak", TimeSpan.FromMinutes(10), "Treasures", "[&BNwAAAA=]", "28"),
+                new("Ogrewars", TimeSpan.FromMinutes(15), "Treasures", "[&BDwEAAA=]", "34"),
+                new("Statue of Dwanya", TimeSpan.FromMinutes(15), "Treasures", "[&BLICAAA=]", "79"),
+                new("Priestess of Lyssa", TimeSpan.FromMinutes(15), "Treasures", "[&BKsCAAA=]", "78")
             };
         }
     }
