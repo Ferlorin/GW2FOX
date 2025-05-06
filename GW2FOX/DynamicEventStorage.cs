@@ -121,7 +121,14 @@ namespace GW2FOX
 
             if (dynamicEvent == null)
             {
-                dynamicEvent = new DynamicEvent(bossName, TimeSpan.FromMinutes(30), "Unknown", "[&UNKNOWN=]");
+                // ...
+                var bossData = BossTimings.LoadBossConfigFromFile("BossTimings.json")
+                    .Bosses.FirstOrDefault(b => b.Name.Equals(bossName, StringComparison.OrdinalIgnoreCase));
+
+                string level = bossData?.Level ?? "";
+
+                dynamicEvent = new DynamicEvent(bossName, TimeSpan.FromMinutes(15), bossData?.Category ?? "Unknown", bossData?.Waypoint ?? "[&UNKNOWN=]", level);
+
                 Events.Add(dynamicEvent);
             }
 
