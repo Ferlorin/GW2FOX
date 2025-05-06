@@ -1,0 +1,54 @@
+﻿<Window x:Class="GW2FOX.TreasureHunterMiniOverlay"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:System="clr-namespace:System;assembly=mscorlib"
+        Title="TreasureHunterMiniOverlay" 
+        Height="210" 
+        Width="150"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        Topmost="True"
+        ShowInTaskbar="False"
+        ResizeMode="NoResize">
+
+    <Grid Background="Transparent">
+        <ListView x:Name="BossListView"
+                  Margin="1"
+                  Background="Transparent"
+                  BorderThickness="0"
+                  FontFamily="Segoe UI"
+                  FontWeight="Bold"
+                  FontSize="14"
+                  Foreground="White"
+                  ScrollViewer.VerticalScrollBarVisibility="Hidden">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="Background" Value="Transparent" />
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                    <Setter Property="VerticalContentAlignment" Value="Center"/>
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding}" TextTrimming="CharacterEllipsis">
+                        <TextBlock.Effect>
+                            <DropShadowEffect Color="Black" BlurRadius="0" ShadowDepth="0" Opacity="1"/>
+                        </TextBlock.Effect>
+                    </TextBlock>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+            <ListView.Items>
+                <System:String>The Eye of Zhaitan</System:String>
+                <System:String>Gates of Arah</System:String>
+                <System:String>Branded Generals</System:String>
+                <System:String>Dredge Commissar</System:String>
+                <System:String>Captain Rotbeard</System:String>
+                <System:String>Rhendak The Crazed</System:String>
+                <System:String>Ogrewars</System:String>
+                <System:String>Statue of Dwanya</System:String>
+                <System:String>Priestess of Lyssa</System:String>
+            </ListView.Items>
+        </ListView>
+    </Grid>
+</Window>

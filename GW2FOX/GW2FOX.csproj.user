@@ -40,6 +40,9 @@
     <Compile Update="OverlayWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="TreasureHunterMiniOverlay.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Worldbosses.cs">
       <SubType>Form</SubType>
     </Compile>
