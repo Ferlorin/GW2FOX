@@ -52,15 +52,14 @@ namespace GW2FOX
 
             PreviewMouseWheel += OverlayWindow_PreviewMouseWheel;
             StartBossTimer();
-            UpdateBossOverlayListAsync();
             StartResetTimer();
             _ = InitializeOverlayAsync();
         }
 
         private async Task InitializeOverlayAsync()
         {
-            await bossDataManager.InitializeAsync(); // Erst Loot-Daten vollständig laden
-            await UpdateBossOverlayListAsync();      // Dann Overlay aktualisieren
+            UpdateBossOverlayListAsync();
+            bossDataManager.InitializeAsync();
         }
 
 
@@ -77,12 +76,10 @@ namespace GW2FOX
 
             public async Task InitializeAsync()
             {
-                await Task.Delay(200); // Optional: artificial delay
                 GroupedLoot = await lootHelper.LoadLootGroupedByBossAsync();
                 IsLootLoaded = true;
             }
         }
-
 
         private void StartResetTimer()
         {
@@ -109,8 +106,6 @@ namespace GW2FOX
                 e.Handled = true;
             }
         }
-
-
 
         private void CustomScrollBar_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
@@ -168,38 +163,6 @@ namespace GW2FOX
             }
         }
 
-
-
-        private void Waypoint_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
-        {
-            if (sender is WpfImage img)
-                AnimateScale(img, 1.10);
-        }
-
-        private void Waypoint_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
-        {
-            if (sender is WpfImage img)
-                AnimateScale(img, 1.0);
-        }
-
-        private void Waypoint_MouseDown(object sender, WpfMouseButtonEventArgs e)
-        {
-            if (sender is WpfImage img)
-            {
-                AnimateScale(img, 0.90);
-                img.Opacity = 0.7;
-            }
-        }
-
-        private void Waypoint_MouseUp(object sender, WpfMouseButtonEventArgs e)
-        {
-            if (sender is WpfImage img)
-            {
-                AnimateScale(img, 1.10);
-                img.Opacity = 1.0;
-            }
-        }
-        
 
         private void AnimateScale(WpfImage img, double toScale, double durationMs = 100)
         {
@@ -282,17 +245,6 @@ namespace GW2FOX
             }
         }
 
-
-
-
-        private void Chest_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            if (sender is WpfImage img)
-            {
-                AnimateScale(img, 0.90);
-                img.Opacity = 0.7;
-            }
-        }
 
         private void Chest_MouseUp(object sender, MouseButtonEventArgs e)
         {
@@ -378,18 +330,6 @@ namespace GW2FOX
                     item.ChestOpened = false;
                 }
             }
-        }
-
-        private void Chest_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
-        {
-            if (sender is WpfImage img)
-                AnimateScale(img, 1.10);
-        }
-
-        private void Chest_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
-        {
-            if (sender is WpfImage img)
-                AnimateScale(img, 1.0);
         }
 
 
@@ -589,90 +529,6 @@ namespace GW2FOX
             }
         }
 
-        private void SchedulerIcon_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
-        {
-            if (sender is WpfImage img)
-                AnimateScale(img, 1.10);
-        }
-
-        private void SchedulerIcon_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
-        {
-            if (sender is WpfImage img)
-                AnimateScale(img, 1.0);
-        }
-
-        private void SchedulerIcon_MouseUp(object sender, WpfMouseButtonEventArgs e)
-        {
-            if (sender is WpfImage img)
-            {
-                AnimateScale(img, 1.10);
-                img.Opacity = 1.0;
-            }
-        }
-
-        private void GuildAdvertisingIcon_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
-        {
-            if (sender is WpfImage img)
-                AnimateScale(img, 1.10);
-        }
-
-        private void GuildAdvertisingIcon_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
-        {
-            if (sender is WpfImage img)
-                AnimateScale(img, 1.0);
-        }
-
-        private void GuildAdvertisingIcon_MouseUp(object sender, WpfMouseButtonEventArgs e)
-        {
-            if (sender is WpfImage img)
-            {
-                AnimateScale(img, 1.10);
-                img.Opacity = 1.0;
-            }
-        }
-
-        private void GuildWelcomeIcon_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
-        {
-            if (sender is WpfImage img)
-                AnimateScale(img, 1.10);
-        }
-
-        private void GuildWelcomeIcon_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
-        {
-            if (sender is WpfImage img)
-                AnimateScale(img, 1.0);
-        }
-
-        private void GuildWelcomeIcon_MouseUp(object sender, WpfMouseButtonEventArgs e)
-        {
-            if (sender is WpfImage img)
-            {
-                AnimateScale(img, 1.10);
-                img.Opacity = 1.0;
-            }
-        }
-
-        private void TreasureHunterIcon_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
-        {
-            if (sender is WpfImage img)
-                AnimateScale(img, 1.10);
-        }
-
-        private void TreasureHunterIcon_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
-        {
-            if (sender is WpfImage img)
-                AnimateScale(img, 1.0);
-        }
-
-        private void TreasureHunterIcon_MouseUp(object sender, WpfMouseButtonEventArgs e)
-        {
-            if (sender is WpfImage img)
-            {
-                AnimateScale(img, 1.10);
-                img.Opacity = 1.0;
-            }
-        }
-
         private void TreasureHunterIcon_MouseDown(object sender, RoutedEventArgs e)
         {
             if (sender is WpfImage img)
@@ -706,6 +562,17 @@ namespace GW2FOX
             }
         }
 
+        private void Image_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            if (sender is WpfImage img)
+                AnimateScale(img, 1.10);
+        }
+
+        private void Image_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            if (sender is WpfImage img)
+                AnimateScale(img, 1.0);
+        }
 
 
         private void StartBossTimer()

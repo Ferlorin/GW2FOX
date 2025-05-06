@@ -118,8 +118,8 @@
                         <!-- TreasureHunter -->
                         <Image x:Name="TreasureHunterIcon" Source="/Resources/TreasureHunter.png"
        Width="18" Height="18" Cursor="Hand" Margin="0,0,6,0"
-       MouseEnter="TreasureHunterIcon_MouseEnter"
-       MouseLeave="TreasureHunterIcon_MouseLeave"
+       MouseEnter="Image_MouseEnter"
+       MouseLeave="Image_MouseLeave"
        MouseDown="TreasureHunterIcon_MouseDown"
        MouseUp="TreasureHunterIcon_MouseUp">
                             <Image.RenderTransform>
@@ -131,8 +131,8 @@
                         <!-- Scheduler -->
                         <Image x:Name="SchedulerIcon" Source="/Resources/Scheduler.png"
        Width="18" Height="18" Cursor="Hand" Margin="0,0,6,0"
-       MouseEnter="SchedulerIcon_MouseEnter"
-       MouseLeave="SchedulerIcon_MouseLeave"
+       MouseEnter="Image_MouseEnter"
+       MouseLeave="Image_MouseLeave"
        MouseDown="SchedulerIcon_MouseDown"
        MouseUp="SchedulerIcon_MouseUp">
                             <Image.RenderTransform>
@@ -144,8 +144,8 @@
                         <!-- GuildAdvertising -->
                         <Image x:Name="GuildAdvertisingIcon" Source="/Resources/GuildAdvertising.png"
        Width="18" Height="18" Cursor="Hand" Margin="0,0,6,0"
-       MouseEnter="GuildAdvertisingIcon_MouseEnter"
-       MouseLeave="GuildAdvertisingIcon_MouseLeave"
+       MouseEnter="Image_MouseEnter"
+       MouseLeave="Image_MouseLeave"
        MouseDown="GuildAdvertisingIcon_MouseDown"
        MouseUp="GuildAdvertisingIcon_MouseUp">
                             <Image.RenderTransform>
@@ -157,8 +157,8 @@
                         <!-- GuildWelcome -->
                         <Image x:Name="GuildWelcomeIcon" Source="/Resources/GuildWelcome.png"
        Width="18" Height="18" Cursor="Hand" Margin="0,0,6,0"
-       MouseEnter="GuildWelcomeIcon_MouseEnter"
-       MouseLeave="GuildWelcomeIcon_MouseLeave"
+       MouseEnter="Image_MouseEnter"
+       MouseLeave="Image_MouseLeave"
        MouseDown="GuildWelcomeIcon_MouseDown"
        MouseUp="GuildWelcomeIcon_MouseUp">
                             <Image.RenderTransform>
@@ -234,8 +234,8 @@
                                                Width="20" Height="20" Margin="0,0,2,0"
                                                Cursor="Hand"
                                                MouseLeftButtonDown="Waypoint_MouseLeftButtonDown"
-                                               MouseEnter="Waypoint_MouseEnter"
-                                               MouseLeave="Waypoint_MouseLeave"
+                                               MouseEnter="Image_MouseEnter"
+                                               MouseLeave="Image_MouseLeave"
                                                MouseDown="Waypoint_MouseDown"
                                                MouseUp="Waypoint_MouseUp">
                                             <Image.RenderTransform>
@@ -252,8 +252,8 @@
                                                MouseLeftButtonDown="Chest_MouseLeftButtonDown"
                                                MouseDown="Chest_MouseDown"
                                                MouseUp="Chest_MouseUp"
-                                               MouseEnter="Chest_MouseEnter"
-                                               MouseLeave="Chest_MouseLeave"
+                                               MouseEnter="Image_MouseEnter"
+                                               MouseLeave="Image_MouseLeave"
                                                Stretch="Uniform"
                                                SnapsToDevicePixels="True"
                                                UseLayoutRounding="True">
