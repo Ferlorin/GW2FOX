@@ -3,8 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:System="clr-namespace:System;assembly=mscorlib"
         Title="TreasureHunterMiniOverlay" 
-        Height="190" 
-        Width="150"
+        Height="185" 
+        Width="145"
         WindowStyle="None"
         AllowsTransparency="True"
         Background="Transparent"
@@ -14,13 +14,13 @@
 
     <Grid Background="Transparent">
         <ListView x:Name="BossListView"
-                  Margin="1"
+                  Margin="0"
                   Background="Transparent"
                   BorderThickness="0"
                   FontFamily="Segoe UI"
-                  FontWeight="Bold"
+                  FontWeight="SemiBold"
                   FontSize="12"
-                  Foreground="White"
+                  Foreground="Red"
                   ScrollViewer.VerticalScrollBarVisibility="Hidden">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">

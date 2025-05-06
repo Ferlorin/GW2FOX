@@ -172,9 +172,6 @@
             LLA = new CheckBox();
             FidosSpecial = new Button();
             FireShaman = new CheckBox();
-            pictureBox13 = new PictureBox();
-            pictureBox14 = new PictureBox();
-            pictureBox15 = new PictureBox();
             DwanyaBox = new CheckBox();
             LyssaBox = new CheckBox();
             OgreBox = new CheckBox();
@@ -196,9 +193,6 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox6).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox7).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox13).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox14).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox15).BeginInit();
             SuspendLayout();
             // 
             // button2
@@ -1939,33 +1933,6 @@
             FireShaman.UseVisualStyleBackColor = false;
             FireShaman.CheckedChanged += checkBox1_CheckedChanged;
             // 
-            // pictureBox13
-            // 
-            pictureBox13.BackColor = Color.DimGray;
-            pictureBox13.Location = new Point(12, 11);
-            pictureBox13.Name = "pictureBox13";
-            pictureBox13.Size = new Size(939, 695);
-            pictureBox13.TabIndex = 262;
-            pictureBox13.TabStop = false;
-            // 
-            // pictureBox14
-            // 
-            pictureBox14.BackColor = Color.DimGray;
-            pictureBox14.Location = new Point(12, 674);
-            pictureBox14.Name = "pictureBox14";
-            pictureBox14.Size = new Size(371, 292);
-            pictureBox14.TabIndex = 263;
-            pictureBox14.TabStop = false;
-            // 
-            // pictureBox15
-            // 
-            pictureBox15.BackColor = Color.DimGray;
-            pictureBox15.Location = new Point(633, 674);
-            pictureBox15.Name = "pictureBox15";
-            pictureBox15.Size = new Size(318, 292);
-            pictureBox15.TabIndex = 264;
-            pictureBox15.TabStop = false;
-            // 
             // DwanyaBox
             // 
             DwanyaBox.AutoSize = true;
@@ -2215,9 +2182,6 @@
             Controls.Add(button4);
             Controls.Add(button2);
             Controls.Add(Symbols);
-            Controls.Add(pictureBox13);
-            Controls.Add(pictureBox14);
-            Controls.Add(pictureBox15);
             Cursor = Cursors.Hand;
             Icon = (Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
@@ -2242,9 +2206,6 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox6).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox7).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox13).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox14).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox15).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -2393,9 +2354,6 @@
         private CheckBox LLA;
         private Button FidosSpecial;
         private CheckBox FireShaman;
-        private PictureBox pictureBox13;
-        private PictureBox pictureBox14;
-        private PictureBox pictureBox15;
         private CheckBox DwanyaBox;
         private CheckBox LyssaBox;
         private CheckBox OgreBox;
