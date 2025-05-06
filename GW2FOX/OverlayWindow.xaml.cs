@@ -27,11 +27,13 @@ using System.Runtime.InteropServices;
 using System.Windows.Media.Animation;
 using System.Diagnostics;
 using Newtonsoft.Json.Linq;
+using static GW2FOX.OverlayWindow;
 
 namespace GW2FOX
 {
     public partial class OverlayWindow : Window, INotifyPropertyChanged
     {
+        private readonly BossDataManager bossDataManager = new();
         private static OverlayWindow? _instance;
         private DispatcherTimer _bossTimer;
         private DateTime _lastResetDate = DateTime.MinValue;
@@ -52,10 +54,36 @@ namespace GW2FOX
             StartBossTimer();
             UpdateBossOverlayListAsync();
             StartResetTimer();
+            _ = InitializeOverlayAsync();
         }
+
+        private async Task InitializeOverlayAsync()
+        {
+            await bossDataManager.InitializeAsync(); // Erst Loot-Daten vollständig laden
+            await UpdateBossOverlayListAsync();      // Dann Overlay aktualisieren
+        }
+
+
 
         [DllImport("user32.dll")]
         private static extern bool SetForegroundWindow(IntPtr hWnd);
+
+        public class BossDataManager
+        {
+            public Dictionary<string, List<LootHelper.LootResult>> GroupedLoot { get; private set; } = new();
+            public bool IsLootLoaded { get; private set; } = false;
+
+            private readonly LootHelper lootHelper = new();
+
+            public async Task InitializeAsync()
+            {
+                Console.WriteLine("Loading loot data... please wait.");
+                await Task.Delay(2000); // Optional: artificial delay
+                GroupedLoot = await lootHelper.LoadLootGroupedByBossAsync();
+                IsLootLoaded = true;
+                Console.WriteLine("✅ Loot data fully loaded.");
+            }
+        }
 
 
         private void StartResetTimer()
@@ -91,7 +119,7 @@ namespace GW2FOX
             BossScrollViewer.ScrollToVerticalOffset(e.NewValue);
         }
 
-        public async void UpdateBossOverlayListAsync()
+        public async Task UpdateBossOverlayListAsync()
         {
             try
             {
@@ -200,13 +228,18 @@ namespace GW2FOX
         }
 
 
-        private void Waypoint_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private async void Waypoint_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            if (!bossDataManager.IsLootLoaded)
+            {
+                WpfMessageBox.Show("Loot data is still loading. Please wait a moment.");
+                return;
+            }
+
             if (sender is FrameworkElement fe && fe.DataContext is BossListItem item)
             {
                 string clipboardText;
 
-                // Kategorieabhängiger Level-Text
                 string levelText = item.Category switch
                 {
                     "WBs" => $"Next Worldboss - Level {item.Level} ",
@@ -233,9 +266,9 @@ namespace GW2FOX
 
                 // ➕ Loot-Infos anhängen
                 string lootSuffix = "";
-                if (item.LootItems != null && item.LootItems.Any())
+                if (bossDataManager.GroupedLoot.TryGetValue(item.BossName, out var lootItems))
                 {
-                    var lootInfo = item.LootItems.Select(l => $"[ - loot here maybe: {l.ChatLink} cost {l.FormattedPrice}]");
+                    var lootInfo = lootItems.Select(l => $"[{l.ChatLink} cost {l.FormattedPrice}]");
                     lootSuffix = " " + string.Join(" ", lootInfo);
                 }
 
@@ -250,6 +283,7 @@ namespace GW2FOX
                 }
             }
         }
+
 
 
 

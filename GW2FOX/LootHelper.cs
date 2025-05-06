@@ -35,32 +35,25 @@ public class LootHelper
     {
         if (!File.Exists(path))
         {
-            Console.WriteLine($"⚠️ BossConfig-Datei nicht gefunden: {path}");
             return;
         }
 
         string json = File.ReadAllText(path);
-        Console.WriteLine("[INFO] BossConfig-Datei erfolgreich geladen.");
 
         var config = JsonConvert.DeserializeObject<BossConfig>(json);
         if (config == null || config.Bosses == null || !config.Bosses.Any())
         {
-            Console.WriteLine("[WARN] Keine Bosse in der BossConfig-Datei gefunden oder Fehler beim Deserialisieren.");
             return;
         }
 
-        Console.WriteLine("[INFO] Lade Boss-Konfigurationsdaten...");
-
         foreach (var boss in config.Bosses)
         {
-            Console.WriteLine($"[DEBUG] Prüfe Boss: {boss.Name}");
 
             if (boss.LootItemId != null && boss.LootItemId.Any())
             {
                 foreach (var id in boss.LootItemId)
                 {
                     items.Add((id, boss.Name));
-                    Console.WriteLine($"   [INFO] Hinzugefügt: ItemId {id} für Boss {boss.Name}");
                 }
             }
             else
@@ -78,43 +71,39 @@ public class LootHelper
         {
             try
             {
-                Console.WriteLine($"==> Bearbeite ItemId: {item.Id} ({item.BossName})");
 
-                // Optimierung: Zuerst Item-Details abfragen
+                // First, fetch item details
                 var itemDetails = await GetItemDetailsAsync(item.Id);
                 if (itemDetails == null)
                 {
-                    Console.WriteLine($"   Fehler beim Abrufen von Item-Daten für ID {item.Id}");
                     continue;
                 }
 
-                // Preis-Daten abfragen
+                // Then, fetch price data
                 var priceDetails = await GetItemPriceAsync(item.Id);
                 if (priceDetails == null)
                 {
-                    Console.WriteLine($"   Kein Preis verfügbar für ID {item.Id}");
                     continue;
                 }
 
-                // Verarbeitung der erhaltenen Daten
+                // Combine data into result
                 var lootResult = CreateLootResult(itemDetails, priceDetails, item.BossName);
                 results[item.Id] = lootResult;
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Fehler bei Item {item.Id} ({item.BossName}): {ex.Message}");
+                Console.WriteLine($"Error processing item {item.Id} (Boss: {item.BossName}): {ex.Message}");
             }
         }
 
-        // Ausgabe der Zusammenfassung
-        Console.WriteLine("\n=== Zusammenfassung der geladenen Loot-Daten ===");
         foreach (var result in results)
         {
-            Console.WriteLine($"ID: {result.Key}, Name: {result.Value.Name}, Preis: {result.Value.FormattedPrice}");
+            Console.WriteLine($"ID: {result.Key}, Name: {result.Value.Name}, Price: {result.Value.FormattedPrice}");
         }
 
         return results;
     }
+
 
     private async Task<JObject> GetItemDetailsAsync(int itemId)
     {
