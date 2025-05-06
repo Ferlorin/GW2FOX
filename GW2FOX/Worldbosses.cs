@@ -1433,16 +1433,8 @@ namespace GW2FOX
                     File.WriteAllText(configPath, json.ToString(Formatting.Indented));
                 }
 
-                // 2.5. dynamic_events.json löschen
-                string dynamicEventsPath = "dynamic_events.json";
-                if (File.Exists(dynamicEventsPath))
-                {
-                    File.Delete(dynamicEventsPath);
-                }
-
                 // 2.6. Runtime-DynamicEvents löschen
                 DynamicEventManager.Events.Clear();
-                DynamicEventManager.SavePersistedEvents();
 
 
                 // 3. Runtime-Listen leeren

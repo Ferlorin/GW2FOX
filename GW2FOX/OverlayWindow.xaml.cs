@@ -77,11 +77,9 @@ namespace GW2FOX
 
             public async Task InitializeAsync()
             {
-                Console.WriteLine("Loading loot data... please wait.");
-                await Task.Delay(2000); // Optional: artificial delay
+                await Task.Delay(200); // Optional: artificial delay
                 GroupedLoot = await lootHelper.LoadLootGroupedByBossAsync();
                 IsLootLoaded = true;
-                Console.WriteLine("✅ Loot data fully loaded.");
             }
         }
 

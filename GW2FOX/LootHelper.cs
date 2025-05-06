@@ -58,7 +58,7 @@ public class LootHelper
             }
             else
             {
-                Console.WriteLine($"   [WARN] Keine gültigen LootItemIds für Boss {boss.Name}");
+               // Console.WriteLine($"   [WARN] Keine gültigen LootItemIds für Boss {boss.Name}");
             }
         }
     }
@@ -98,7 +98,7 @@ public class LootHelper
 
         foreach (var result in results)
         {
-            Console.WriteLine($"ID: {result.Key}, Name: {result.Value.Name}, Price: {result.Value.FormattedPrice}");
+           // Console.WriteLine($"ID: {result.Key}, Name: {result.Value.Name}, Price: {result.Value.FormattedPrice}");
         }
 
         return results;
@@ -116,7 +116,6 @@ public class LootHelper
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Fehler beim Abrufen der Item-Details für ID {itemId}: {ex.Message}");
             return null;
         }
     }
@@ -132,7 +131,6 @@ public class LootHelper
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Fehler beim Abrufen des Preises für ItemId {itemId}: {ex.Message}");
             return null;
         }
     }

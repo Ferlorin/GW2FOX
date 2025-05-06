@@ -152,9 +152,6 @@ namespace GW2FOX
             {
                 Events.RemoveAll(e => e.BossName.Equals(bossName, StringComparison.OrdinalIgnoreCase));
             }
-
-            // 5. Persistierte Events speichern (inkl. LootItemId)
-            SavePersistedEvents();
         }
 
 
@@ -219,48 +216,25 @@ namespace GW2FOX
         {
             try
             {
-                if (!File.Exists(PersistFile))
-                {
-                    LoadDefaultEvents();
-                    return;
-                }
+                var config = BossTimings.LoadBossConfigFromFile("BossTimings.json");
 
-                var json = File.ReadAllText(PersistFile);
-                var states = JsonConvert.DeserializeObject<List<DynamicEventState>>(json) ?? new();
-
-                DateTime now = DateTime.UtcNow;
-                var allEvents = states.Select(DynamicEvent.FromState).ToList();
-
-                Events = allEvents
-    .Where(e =>
-        !e.StartTime.HasValue ||
-        (e.EndTime.HasValue && e.EndTime.Value.AddMinutes(15) > DateTime.UtcNow)
-    )
-    .ToList();
-
-                if (Events.Count != allEvents.Count)
-                {
-                    SavePersistedEvents();
-                }
+                Events = config.ChoosenOnes
+                    .Select(name => config.Bosses.FirstOrDefault(b => b.Name.Equals(name, StringComparison.OrdinalIgnoreCase)))
+                    .Where(b => b != null)
+                    .Select(b => new DynamicEvent(
+                        b.Name,
+                        TimeSpan.FromMinutes(15),
+                        b.Category,
+                        b.Waypoint,
+                        b.Level,
+                        b.LootItemId?.ToList() ?? new List<int>()
+                    ))
+                    .ToList();
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"[Load] Failed to load dynamic events: {ex.Message}");
-                LoadDefaultEvents();
-            }
-        }
-
-        public static void SavePersistedEvents()
-        {
-            try
-            {
-                var states = Events.Select(e => e.ToState()).ToList();
-                var json = JsonConvert.SerializeObject(states, Formatting.Indented);
-                File.WriteAllText(PersistFile, json);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"[Save] Failed to persist dynamic events: {ex.Message}");
+                Console.WriteLine($"[LoadFromChoosenOnes] Error: {ex.Message}");
+                Events = new List<DynamicEvent>();
             }
         }
 
