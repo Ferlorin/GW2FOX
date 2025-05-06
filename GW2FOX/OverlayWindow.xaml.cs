@@ -228,7 +228,7 @@ namespace GW2FOX
         private async void Waypoint_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (!bossDataManager.IsLootLoaded)
-            {;
+            {
                 return;
             }
 
@@ -238,9 +238,9 @@ namespace GW2FOX
 
                 string levelText = item.Category switch
                 {
-                    "WBs" => $"Next Worldboss - Level {item.Level} ",
-                    "Treasures" => $"\"Treasure Hunter\" Achievement - Level {item.Level} ",
-                    _ => ""
+                    "WBs" => $"Level {item.Level} - ",
+                    "Treasures" => $"Level {item.Level} - ",
+                    _ => string.Empty
                 };
 
                 if (item.IsPastEvent)
@@ -260,14 +260,11 @@ namespace GW2FOX
                     clipboardText = $"{levelText}\"{item.BossName}\" at {item.Waypoint} {timePrefix}{timeFormatted}";
                 }
 
-                string lootSuffix = "";
-                if (bossDataManager.GroupedLoot.TryGetValue(item.BossName, out var lootItems))
+                if (bossDataManager.GroupedLoot.TryGetValue(item.BossName, out var lootItems) && lootItems.Any())
                 {
                     var lootInfo = lootItems.Select(l => $"[{l.ChatLink} cost {l.FormattedPrice}]");
-                    lootSuffix = " " + string.Join(" ", lootInfo);
+                    clipboardText += ", loot here: " + string.Join(" ", lootInfo);
                 }
-
-                clipboardText += lootSuffix;
 
                 WpfClipboard.SetText(clipboardText);
 
@@ -278,6 +275,8 @@ namespace GW2FOX
                 }
             }
         }
+
+
 
 
         private void Chest_MouseUp(object sender, MouseButtonEventArgs e)
