@@ -36,7 +36,7 @@ namespace GW2FOX
         private DispatcherTimer _bossTimer;
         private DateTime _lastResetDate = DateTime.MinValue;
         public static OverlayWindow GetInstance() => _instance ??= new OverlayWindow();
-
+        private TreasureHunterMiniOverlay _miniOverlay;
         public ObservableCollection<BossListItem> OverlayItems { get; } = new ObservableCollection<BossListItem>();
 
         public OverlayWindow()
@@ -231,11 +231,6 @@ namespace GW2FOX
                 }
             }
         }
-
-
-
-
-
 
 
         private void Chest_MouseDown(object sender, MouseButtonEventArgs e)
@@ -604,6 +599,61 @@ namespace GW2FOX
                 img.Opacity = 1.0;
             }
         }
+
+        private void TreasureHunterIcon_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            if (sender is WpfImage img)
+                AnimateScale(img, 1.10);
+        }
+
+        private void TreasureHunterIcon_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            if (sender is WpfImage img)
+                AnimateScale(img, 1.0);
+        }
+
+        private void TreasureHunterIcon_MouseUp(object sender, WpfMouseButtonEventArgs e)
+        {
+            if (sender is WpfImage img)
+            {
+                AnimateScale(img, 1.10);
+                img.Opacity = 1.0;
+            }
+        }
+
+        private void TreasureHunterIcon_MouseDown(object sender, RoutedEventArgs e)
+        {
+            if (sender is WpfImage img)
+            {
+                AnimateScale(img, 0.90);
+                img.Opacity = 0.7;
+
+                if (_miniOverlay == null || !_miniOverlay.IsLoaded)
+                {
+                    // Das Hauptfenster (dieses Fenster) als Argument an den Konstruktor übergeben
+                    _miniOverlay = new TreasureHunterMiniOverlay(this); // 'this' als Argument
+
+                    // Positionierung
+                    WpfPoint iconPosition = img.PointToScreen(new WpfPoint(0, 0));
+                    double iconWidth = img.ActualWidth;
+                    double overlayWidth = _miniOverlay.Width;
+
+                    double targetLeft = iconPosition.X + (iconWidth / 2) - (overlayWidth / 2);
+                    double targetTop = iconPosition.Y - 190; // 1 cm über dem Icon
+
+                    _miniOverlay.Left = targetLeft;
+                    _miniOverlay.Top = targetTop;
+
+                    _miniOverlay.Show();
+                }
+                else
+                {
+                    _miniOverlay.Close();
+                    _miniOverlay = null;
+                }
+            }
+        }
+
 
 
         private void StartBossTimer()

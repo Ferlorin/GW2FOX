@@ -87,11 +87,19 @@
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
+                        <!-- 0: Com -->
                         <ColumnDefinition Width="*"/>
+                        <!-- 1: Überschrift -->
                         <ColumnDefinition Width="Auto"/>
+                        <!-- 2: TreasureHunter -->
                         <ColumnDefinition Width="Auto"/>
+                        <!-- 3: Scheduler -->
                         <ColumnDefinition Width="Auto"/>
+                        <!-- 4: GuildAdvertising -->
+                        <ColumnDefinition Width="Auto"/>
+                        <!-- 5: GuildWelcome -->
                     </Grid.ColumnDefinitions>
+
 
                     <!-- Icon links -->
                     <Image x:Name="Com" Source="/Com.png" Width="20" Height="20" Margin="6,5,4,5"
@@ -105,66 +113,72 @@
                         </TextBlock.Effect>
                     </TextBlock>
 
-                    <!-- Scheduler Icon -->
-                    <Image x:Name="SchedulerIcon" Grid.Column="2"
-       Source="/Resources/Scheduler.png"
-       Width="24" Height="19" Margin="2,5,0,5"
-       Cursor="Hand"
-       MouseEnter="SchedulerIcon_MouseEnter"
-       MouseLeave="SchedulerIcon_MouseLeave"
-       MouseDown="SchedulerIcon_MouseDown"
-       MouseUp="SchedulerIcon_MouseUp">
-                        <Image.RenderTransform>
-                            <ScaleTransform ScaleX="1.0" ScaleY="1.0"/>
-                        </Image.RenderTransform>
-                        <Image.RenderTransformOrigin>0.5,0.5</Image.RenderTransformOrigin>
-                    </Image>
+                    <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,5,6,5">
 
+                        <!-- GuildWelcome -->
+                        <Image x:Name="GuildWelcomeIcon" Source="/Resources/GuildWelcome.png"
+           Width="18" Height="18" Cursor="Hand" Margin="0,0,6,0"
+           MouseEnter="GuildWelcomeIcon_MouseEnter"
+           MouseLeave="GuildWelcomeIcon_MouseLeave"
+           MouseDown="GuildWelcomeIcon_MouseDown"
+           MouseUp="GuildWelcomeIcon_MouseUp">
+                            <Image.RenderTransform>
+                                <ScaleTransform ScaleX="1.0" ScaleY="1.0"/>
+                            </Image.RenderTransform>
+                            <Image.RenderTransformOrigin>0.5,0.5</Image.RenderTransformOrigin>
+                        </Image>
 
-                    <!-- GuildAdvertising Icon -->
-                    <Image x:Name="GuildAdvertisingIcon" Grid.Column="3"
-       Source="/Resources/GuildAdvertising.png"
-       Width="18" Height="18" Margin="6,5,2,5"
-       Cursor="Hand"
-       MouseEnter="GuildAdvertisingIcon_MouseEnter"
-       MouseLeave="GuildAdvertisingIcon_MouseLeave"
-       MouseDown="GuildAdvertisingIcon_MouseDown"
-       MouseUp="GuildAdvertisingIcon_MouseUp">
-                        <Image.RenderTransform>
-                            <ScaleTransform ScaleX="1.0" ScaleY="1.0"/>
-                        </Image.RenderTransform>
-                        <Image.RenderTransformOrigin>0.5,0.5</Image.RenderTransformOrigin>
-                    </Image>
+                        <!-- GuildAdvertising -->
+                        <Image x:Name="GuildAdvertisingIcon" Source="/Resources/GuildAdvertising.png"
+           Width="18" Height="18" Cursor="Hand" Margin="0,0,6,0"
+           MouseEnter="GuildAdvertisingIcon_MouseEnter"
+           MouseLeave="GuildAdvertisingIcon_MouseLeave"
+           MouseDown="GuildAdvertisingIcon_MouseDown"
+           MouseUp="GuildAdvertisingIcon_MouseUp">
+                            <Image.RenderTransform>
+                                <ScaleTransform ScaleX="1.0" ScaleY="1.0"/>
+                            </Image.RenderTransform>
+                            <Image.RenderTransformOrigin>0.5,0.5</Image.RenderTransformOrigin>
+                        </Image>
 
+                        <!-- Scheduler -->
+                        <Image x:Name="SchedulerIcon" Source="/Resources/Scheduler.png"
+           Width="18" Height="18" Cursor="Hand" Margin="0,0,6,0"
+           MouseEnter="SchedulerIcon_MouseEnter"
+           MouseLeave="SchedulerIcon_MouseLeave"
+           MouseDown="SchedulerIcon_MouseDown"
+           MouseUp="SchedulerIcon_MouseUp">
+                            <Image.RenderTransform>
+                                <ScaleTransform ScaleX="1.0" ScaleY="1.0"/>
+                            </Image.RenderTransform>
+                            <Image.RenderTransformOrigin>0.5,0.5</Image.RenderTransformOrigin>
+                        </Image>
 
-                    <Image x:Name="GuildWelcomeIcon" Grid.Column="4"
-       Source="/Resources/GuildWelcome.png"
-       Width="18" Height="18" Margin="6,5,2,5"
-       Cursor="Hand"
-       MouseEnter="GuildWelcomeIcon_MouseEnter"
-       MouseLeave="GuildWelcomeIcon_MouseLeave"
-       MouseDown="GuildWelcomeIcon_MouseDown"
-       MouseUp="GuildWelcomeIcon_MouseUp">
-                        <Image.RenderTransform>
-                            <ScaleTransform ScaleX="1.0" ScaleY="1.0"/>
-                        </Image.RenderTransform>
-                        <Image.RenderTransformOrigin>0.5,0.5</Image.RenderTransformOrigin>
-                    </Image>
+                        <!-- TreasureHunter -->
+                        <Image x:Name="TreasureHunterIcon" Source="/Resources/TreasureHunter.png"
+           Width="18" Height="18" Cursor="Hand" Margin="0,0,6,0"
+           MouseEnter="TreasureHunterIcon_MouseEnter"
+           MouseLeave="TreasureHunterIcon_MouseLeave"
+           MouseDown="TreasureHunterIcon_MouseDown"
+           MouseUp="TreasureHunterIcon_MouseUp">
+                            <Image.RenderTransform>
+                                <ScaleTransform ScaleX="1.0" ScaleY="1.0"/>
+                            </Image.RenderTransform>
+                            <Image.RenderTransformOrigin>0.5,0.5</Image.RenderTransformOrigin>
+                        </Image>
+                    </StackPanel>
 
+                    <Border Grid.ColumnSpan="6" Height="1" VerticalAlignment="Bottom" Margin="0,0,0,0">
+                        <Border.Background>
+                            <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
+                                <GradientStop Color="#00FFFFFF" Offset="0.0"/>
+                                <GradientStop Color="#80FFFFFF" Offset="0.5"/>
+                                <GradientStop Color="#00FFFFFF" Offset="1.0"/>
+                            </LinearGradientBrush>
+                        </Border.Background>
+                    </Border>
                 </Grid>
             </Border>
-
-            <!-- Linie unter Titelleiste -->
-            <Border Grid.Row="0" Height="1" VerticalAlignment="Bottom" Margin="0,0,0,0">
-                <Border.Background>
-                    <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
-                        <GradientStop Color="#00FFFFFF" Offset="0.0"/>
-                        <GradientStop Color="#80FFFFFF" Offset="0.5"/>
-                        <GradientStop Color="#00FFFFFF" Offset="1.0"/>
-                    </LinearGradientBrush>
-                </Border.Background>
-            </Border>
-
             <!-- Scrollbarer Inhalt -->
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>

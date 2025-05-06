@@ -33,6 +33,7 @@
   <None Remove="Resources\Scheduler.png" />
   <None Remove="Resources\Tacomini.bmp" />
   <None Remove="Resources\Thumb.png" />
+  <None Remove="Resources\TreasureHunter.png" />
   <None Remove="Thumb.png" />
   <None Remove="Waypoint.png" />
 </ItemGroup>
@@ -84,6 +85,9 @@
     </Resource>
     <Resource Include="Resources\Tacomini.bmp" />
     <Resource Include="Resources\Thumb.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\TreasureHunter.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Thumb.png">
