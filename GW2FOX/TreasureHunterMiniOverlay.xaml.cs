@@ -14,6 +14,8 @@ using WpfSize = System.Windows.Size;
 using WpfButton = System.Windows.Controls.Button;
 using WpfMessageBox = System.Windows.MessageBox;
 using WpfListViewItem = System.Windows.Controls.ListViewItem;
+using System.Diagnostics;
+using System.Runtime.InteropServices;
 
 namespace GW2FOX
 {
@@ -40,6 +42,9 @@ namespace GW2FOX
             };
 
         }
+
+        [DllImport("user32.dll")]
+        private static extern bool SetForegroundWindow(IntPtr hWnd);
 
         private void ListViewItem_Click(object sender, MouseButtonEventArgs e)
         {
@@ -85,47 +90,92 @@ namespace GW2FOX
         private void HandleEyeOfZhaitan()
         {
             worldbosses.Eye_Click(this, EventArgs.Empty);
+            var gw2Proc = Process.GetProcessesByName("Gw2-64").FirstOrDefault();
+            if (gw2Proc != null && gw2Proc.MainWindowHandle != IntPtr.Zero)
+            {
+                SetForegroundWindow(gw2Proc.MainWindowHandle);
+            }
         }
 
 
         private void HandleGatesOfArah()
         {
             worldbosses.button31_Click(this, EventArgs.Empty);
+            var gw2Proc = Process.GetProcessesByName("Gw2-64").FirstOrDefault();
+            if (gw2Proc != null && gw2Proc.MainWindowHandle != IntPtr.Zero)
+            {
+                SetForegroundWindow(gw2Proc.MainWindowHandle);
+            }
         }
 
         private void HandleBrandedGenerals()
         {
             worldbosses.button42_Click(this, EventArgs.Empty);
+            var gw2Proc = Process.GetProcessesByName("Gw2-64").FirstOrDefault();
+            if (gw2Proc != null && gw2Proc.MainWindowHandle != IntPtr.Zero)
+            {
+                SetForegroundWindow(gw2Proc.MainWindowHandle);
+            }
         }
 
         private void HandleDredgeCommissar()
         {
             worldbosses.button63_Click(this, EventArgs.Empty);
+            var gw2Proc = Process.GetProcessesByName("Gw2-64").FirstOrDefault();
+            if (gw2Proc != null && gw2Proc.MainWindowHandle != IntPtr.Zero)
+            {
+                SetForegroundWindow(gw2Proc.MainWindowHandle);
+            }
         }
 
         private void HandleCaptainRotbeard()
         {
             worldbosses.button65_Click(this, EventArgs.Empty);
+            var gw2Proc = Process.GetProcessesByName("Gw2-64").FirstOrDefault();
+            if (gw2Proc != null && gw2Proc.MainWindowHandle != IntPtr.Zero)
+            {
+                SetForegroundWindow(gw2Proc.MainWindowHandle);
+            }
         }
 
         private void HandleRhendak()
         {
             worldbosses.Rhendak_Click(this, EventArgs.Empty);
+            var gw2Proc = Process.GetProcessesByName("Gw2-64").FirstOrDefault();
+            if (gw2Proc != null && gw2Proc.MainWindowHandle != IntPtr.Zero)
+            {
+                SetForegroundWindow(gw2Proc.MainWindowHandle);
+            }
         }
 
         private void HandleOgrewars()
         {
             worldbosses.Ogrewars_Click(this, EventArgs.Empty);
+            var gw2Proc = Process.GetProcessesByName("Gw2-64").FirstOrDefault();
+            if (gw2Proc != null && gw2Proc.MainWindowHandle != IntPtr.Zero)
+            {
+                SetForegroundWindow(gw2Proc.MainWindowHandle);
+            }
         }
 
         private void HandleStatueOfDwanya()
         {
             worldbosses.Dwayna_Click(this, EventArgs.Empty);
+            var gw2Proc = Process.GetProcessesByName("Gw2-64").FirstOrDefault();
+            if (gw2Proc != null && gw2Proc.MainWindowHandle != IntPtr.Zero)
+            {
+                SetForegroundWindow(gw2Proc.MainWindowHandle);
+            }
         }
 
         private void HandlePriestessOfLyssa()
         {
             worldbosses.Lyssa_Click(this, EventArgs.Empty);
+            var gw2Proc = Process.GetProcessesByName("Gw2-64").FirstOrDefault();
+            if (gw2Proc != null && gw2Proc.MainWindowHandle != IntPtr.Zero)
+            {
+                SetForegroundWindow(gw2Proc.MainWindowHandle);
+            }
         }
     }
 }
