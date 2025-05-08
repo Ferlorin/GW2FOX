@@ -7,33 +7,6 @@
     <Compile Update="Main.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Metas\BrandedGenerals.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Metas\CaptainRotbeard.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Metas\DredgeComissar.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Metas\Dwayna.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Metas\Eye.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Metas\GatesOfArah.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Metas\Lyssa.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Metas\Ogrewars.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Metas\Rhendak.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Update="MiniOverlay.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

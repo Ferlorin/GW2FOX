@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:System="clr-namespace:System;assembly=mscorlib"
         Title="TreasureHunterMiniOverlay" 
-        Height="230" 
+        Height="205" 
         Width="155"
         WindowStyle="None"
         AllowsTransparency="True"
@@ -37,7 +37,7 @@
                   FontFamily="Segoe UI"
                   FontWeight="SemiBold"
                   FontSize="13"
-                  Foreground="Red"
+                  Foreground="DarkRed"
                   ScrollViewer.VerticalScrollBarVisibility="Hidden">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
@@ -50,27 +50,11 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid>
-                        <!-- Grauer Rand -->
-                        <TextBlock Text="{Binding}" 
+                        <TextBlock x:Name="BossNameText" Text="{Binding}" 
                                    FontFamily="Segoe UI"
                                    FontWeight="SemiBold"
                                    FontSize="13"
-                                   Foreground="Gray">
-                            <TextBlock.Effect>
-                                <DropShadowEffect 
-                                    Color="Gray" 
-                                    BlurRadius="0" 
-                                    ShadowDepth="0" 
-                                    Opacity="1"/>
-                            </TextBlock.Effect>
-                        </TextBlock>
-
-                        <!-- Weißer Auslauf (Glow) -->
-                        <TextBlock Text="{Binding}" 
-                                   FontFamily="Segoe UI"
-                                   FontWeight="SemiBold"
-                                   FontSize="13"
-                                   Foreground="White">
+                                   Foreground="{Binding RelativeSource={RelativeSource AncestorType=ListView}, Path=Foreground}">
                             <TextBlock.Effect>
                                 <DropShadowEffect 
                                     Color="White" 
@@ -79,13 +63,6 @@
                                     Opacity="0.8"/>
                             </TextBlock.Effect>
                         </TextBlock>
-
-                        <!-- Eigentlicher Text (rot) -->
-                        <TextBlock Text="{Binding}" 
-                                   FontFamily="Segoe UI"
-                                   FontWeight="SemiBold"
-                                   FontSize="13"
-                                   Foreground="Red"/>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>

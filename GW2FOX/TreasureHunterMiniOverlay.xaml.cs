@@ -31,6 +31,7 @@ namespace GW2FOX
             InitializeComponent();
 
             StartLoadingAnimation();
+            StartBossColorAnimation();
 
             if (overlayWindow != null)
             {
@@ -50,6 +51,18 @@ namespace GW2FOX
 
         [DllImport("user32.dll")]
         private static extern bool SetForegroundWindow(IntPtr hWnd);
+
+        private void StartBossColorAnimation()
+        {
+            var bossColorTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1.5) };
+            bossColorTimer.Tick += (s, e) =>
+            {
+                bossColorTimer.Stop();
+
+                BossListView.Foreground = new SolidColorBrush(Colors.Red);
+            };
+            bossColorTimer.Start();
+        }
 
         private void StartLoadingAnimation()
         {
