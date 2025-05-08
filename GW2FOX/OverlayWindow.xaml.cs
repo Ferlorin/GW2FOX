@@ -577,7 +577,7 @@ namespace GW2FOX
                     double overlayWidth = _miniOverlay.Width;
 
                     double targetLeft = iconPosition.X + (iconWidth / 2) - (overlayWidth / 2);
-                    double targetTop = iconPosition.Y - 230;
+                    double targetTop = iconPosition.Y - 250;
 
                     _miniOverlay.Left = targetLeft;
                     _miniOverlay.Top = targetTop;
