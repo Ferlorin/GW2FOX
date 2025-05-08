@@ -37,7 +37,7 @@
                   FontFamily="Segoe UI"
                   FontWeight="SemiBold"
                   FontSize="13"
-                  Foreground="DarkRed"
+                  Foreground="DimGray"
                   ScrollViewer.VerticalScrollBarVisibility="Hidden">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
