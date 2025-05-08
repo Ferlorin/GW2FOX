@@ -3,8 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:System="clr-namespace:System;assembly=mscorlib"
         Title="TreasureHunterMiniOverlay" 
-        Height="185" 
-        Width="145"
+        Height="230" 
+        Width="155"
         WindowStyle="None"
         AllowsTransparency="True"
         Background="Transparent"
@@ -13,13 +13,30 @@
         ResizeMode="NoResize">
 
     <Grid Background="Transparent">
+        <!-- Ladeanzeige als Überschrift -->
+        <TextBlock x:Name="LoadingText"
+                   Text="Loading Data..."
+                   FontFamily="Segoe UI"
+                   FontWeight="Bold"
+                   FontSize="14"
+                   Foreground="White"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Top"
+                   Margin="0,10,0,0"
+                   Opacity="1">
+            <TextBlock.Effect>
+                <DropShadowEffect Color="Black" BlurRadius="4" ShadowDepth="0" Opacity="0.6"/>
+            </TextBlock.Effect>
+        </TextBlock>
+
+        <!-- Boss-Liste -->
         <ListView x:Name="BossListView"
-                  Margin="0"
+                  Margin="0,30,0,0"
                   Background="Transparent"
                   BorderThickness="0"
                   FontFamily="Segoe UI"
                   FontWeight="SemiBold"
-                  FontSize="12"
+                  FontSize="13"
                   Foreground="Red"
                   ScrollViewer.VerticalScrollBarVisibility="Hidden">
             <ListView.ItemContainerStyle>
@@ -35,43 +52,42 @@
                     <Grid>
                         <!-- Grauer Rand -->
                         <TextBlock Text="{Binding}" 
-                   FontFamily="Segoe UI"
-                   FontWeight="SemiBold"
-                   FontSize="12"
-                   Foreground="Gray">
+                                   FontFamily="Segoe UI"
+                                   FontWeight="SemiBold"
+                                   FontSize="13"
+                                   Foreground="Gray">
                             <TextBlock.Effect>
                                 <DropShadowEffect 
-                    Color="Gray" 
-                    BlurRadius="0" 
-                    ShadowDepth="0" 
-                    Opacity="1"/>
+                                    Color="Gray" 
+                                    BlurRadius="0" 
+                                    ShadowDepth="0" 
+                                    Opacity="1"/>
                             </TextBlock.Effect>
                         </TextBlock>
 
                         <!-- Weißer Auslauf (Glow) -->
                         <TextBlock Text="{Binding}" 
-                   FontFamily="Segoe UI"
-                   FontWeight="SemiBold"
-                   FontSize="12"
-                   Foreground="White">
+                                   FontFamily="Segoe UI"
+                                   FontWeight="SemiBold"
+                                   FontSize="13"
+                                   Foreground="White">
                             <TextBlock.Effect>
                                 <DropShadowEffect 
-                    Color="White" 
-                    BlurRadius="4" 
-                    ShadowDepth="0" 
-                    Opacity="0.8"/>
+                                    Color="White" 
+                                    BlurRadius="4" 
+                                    ShadowDepth="0" 
+                                    Opacity="0.8"/>
                             </TextBlock.Effect>
                         </TextBlock>
 
-                        <!-- Eigentlicher Text (z. B. rot) -->
+                        <!-- Eigentlicher Text (rot) -->
                         <TextBlock Text="{Binding}" 
-                   FontFamily="Segoe UI"
-                   FontWeight="SemiBold"
-                   FontSize="12"
-                   Foreground="Red"/>
+                                   FontFamily="Segoe UI"
+                                   FontWeight="SemiBold"
+                                   FontSize="13"
+                                   Foreground="Red"/>
                     </Grid>
                 </DataTemplate>
-
             </ListView.ItemTemplate>
             <ListView.Items>
                 <System:String>☠ The Eye of Zhaitan</System:String>

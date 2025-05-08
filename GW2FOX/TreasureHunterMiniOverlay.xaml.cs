@@ -3,6 +3,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
+using System.Windows.Threading;
 
 // Aliases für eindeutige Verweise
 using WpfImage = System.Windows.Controls.Image;
@@ -16,6 +18,7 @@ using WpfMessageBox = System.Windows.MessageBox;
 using WpfListViewItem = System.Windows.Controls.ListViewItem;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
+using System.Windows.Threading;
 
 namespace GW2FOX
 {
@@ -26,6 +29,8 @@ namespace GW2FOX
         public TreasureHunterMiniOverlay(Window overlayWindow)
         {
             InitializeComponent();
+
+            StartLoadingAnimation();
 
             if (overlayWindow != null)
             {
@@ -45,6 +50,30 @@ namespace GW2FOX
 
         [DllImport("user32.dll")]
         private static extern bool SetForegroundWindow(IntPtr hWnd);
+
+        private void StartLoadingAnimation()
+        {
+            // Timer für den Textwechsel
+            var changeTextTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1.5) };
+            changeTextTimer.Tick += (s, e) =>
+            {
+                changeTextTimer.Stop();
+                LoadingText.Text = "Data Loaded!";
+
+                // Nach 1 Sekunde langsam ausblenden
+                var fadeOut = new DoubleAnimation
+                {
+                    From = 1.0,
+                    To = 0.0,
+                    Duration = TimeSpan.FromSeconds(1.5),
+                    FillBehavior = FillBehavior.HoldEnd
+                };
+                fadeOut.Completed += (s3, e3) => LoadingText.Visibility = Visibility.Collapsed;
+                LoadingText.BeginAnimation(OpacityProperty, fadeOut);
+            };
+            changeTextTimer.Start();
+        }
+
 
         private void ListViewItem_Click(object sender, MouseButtonEventArgs e)
         {
