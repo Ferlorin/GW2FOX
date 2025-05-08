@@ -19,7 +19,7 @@
 
     <Window.Resources>
         <local:StrikeConverter x:Key="StrikeConverter" />
-        <local:ItalicConverter x:Key="ItalicConverter" />
+        <local:ItalicMultiConverter x:Key="ItalicMultiConverter" />
         <local:CategoryColorConverter x:Key="CategoryColorConverter" />
         <BitmapImage x:Key="WaypointImage" UriSource="/Waypoint.png" />
         <Style x:Key="StandardScrollBar" TargetType="ScrollBar">
@@ -265,15 +265,26 @@
                                     </Grid>
 
                                     <!-- Bossname -->
-                                    <TextBlock Grid.Column="1" Text="{Binding BossName}"
-                                               Foreground="{Binding Category, Converter={StaticResource CategoryColorConverter}}"
-                                               TextDecorations="{Binding IsPastEvent, Converter={StaticResource StrikeConverter}}"
-                                               VerticalAlignment="Center"
-                                               TextTrimming="CharacterEllipsis">
+                                    <TextBlock Grid.Column="1"
+           Text="{Binding BossName}"
+           Foreground="{Binding Category, Converter={StaticResource CategoryColorConverter}}"
+           TextDecorations="{Binding IsPastEvent, Converter={StaticResource StrikeConverter}}"
+           VerticalAlignment="Center"
+           TextTrimming="CharacterEllipsis">
+
+                                        <TextBlock.FontStyle>
+                                            <MultiBinding Converter="{StaticResource ItalicMultiConverter}">
+                                                <Binding />
+                                                <!-- current BossListItem -->
+                                                <Binding Path="DataContext.OverlayItems" RelativeSource="{RelativeSource AncestorType=Window}" />
+                                            </MultiBinding>
+                                        </TextBlock.FontStyle>
+
                                         <TextBlock.Effect>
                                             <DropShadowEffect Color="Black" BlurRadius="0" ShadowDepth="0" Opacity="1"/>
                                         </TextBlock.Effect>
                                     </TextBlock>
+
 
                                     <!-- Zeit -->
                                     <TextBlock Grid.Column="2" Text="{Binding TimeRemainingFormatted}"

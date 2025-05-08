@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Collections;
 using System.Globalization;
+using System.Linq;
 using System.Windows;
 using System.Windows.Data;
-using System.Windows.Media;
 
 namespace GW2FOX
 {
@@ -21,21 +22,32 @@ namespace GW2FOX
         }
     }
 
-    public class ItalicConverter : IValueConverter
+    public class ItalicMultiConverter : IMultiValueConverter
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
-            return (value is bool b && b) ? FontStyles.Italic : FontStyles.Normal;
-        }
+            if (values.Length < 2 || values[0] is not BossListItem currentItem || values[1] is not IEnumerable items)
+                return FontStyles.Normal;
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
+            foreach (var other in items)
+            {
+                if (other is BossListItem otherItem &&
+                    otherItem != currentItem &&
+                    otherItem.NextRunTime == currentItem.NextRunTime)
+                {
+                    return FontStyles.Italic;
+                }
+            }
+
+            return FontStyles.Normal;
         }
 
         public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
             => throw new NotImplementedException();
     }
+
+
+
 
     public class CategoryColorConverter : IValueConverter
     {

@@ -584,11 +584,21 @@ namespace GW2FOX
 
                     _miniOverlay.Show();
                     await UpdateTreasureDataAsync();
+                    var gw2Proc = Process.GetProcessesByName("Gw2-64").FirstOrDefault();
+                    if (gw2Proc != null && gw2Proc.MainWindowHandle != IntPtr.Zero)
+                    {
+                        SetForegroundWindow(gw2Proc.MainWindowHandle);
+                    }
                 }
                 else
                 {
                     _miniOverlay.Close();
                     _miniOverlay = null;
+                    var gw2Proc = Process.GetProcessesByName("Gw2-64").FirstOrDefault();
+                    if (gw2Proc != null && gw2Proc.MainWindowHandle != IntPtr.Zero)
+                    {
+                        SetForegroundWindow(gw2Proc.MainWindowHandle);
+                    }
                 }
             }
         }

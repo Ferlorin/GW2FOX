@@ -32,12 +32,46 @@
             </ListView.ItemContainerStyle>
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding}" TextTrimming="CharacterEllipsis">
-                        <TextBlock.Effect>
-                            <DropShadowEffect Color="Black" BlurRadius="0" ShadowDepth="0" Opacity="1"/>
-                        </TextBlock.Effect>
-                    </TextBlock>
+                    <Grid>
+                        <!-- Grauer Rand -->
+                        <TextBlock Text="{Binding}" 
+                   FontFamily="Segoe UI"
+                   FontWeight="SemiBold"
+                   FontSize="12"
+                   Foreground="Gray">
+                            <TextBlock.Effect>
+                                <DropShadowEffect 
+                    Color="Gray" 
+                    BlurRadius="0" 
+                    ShadowDepth="0" 
+                    Opacity="1"/>
+                            </TextBlock.Effect>
+                        </TextBlock>
+
+                        <!-- Weißer Auslauf (Glow) -->
+                        <TextBlock Text="{Binding}" 
+                   FontFamily="Segoe UI"
+                   FontWeight="SemiBold"
+                   FontSize="12"
+                   Foreground="White">
+                            <TextBlock.Effect>
+                                <DropShadowEffect 
+                    Color="White" 
+                    BlurRadius="4" 
+                    ShadowDepth="0" 
+                    Opacity="0.8"/>
+                            </TextBlock.Effect>
+                        </TextBlock>
+
+                        <!-- Eigentlicher Text (z. B. rot) -->
+                        <TextBlock Text="{Binding}" 
+                   FontFamily="Segoe UI"
+                   FontWeight="SemiBold"
+                   FontSize="12"
+                   Foreground="Red"/>
+                    </Grid>
                 </DataTemplate>
+
             </ListView.ItemTemplate>
             <ListView.Items>
                 <System:String>☠ The Eye of Zhaitan</System:String>
