@@ -52,17 +52,25 @@ namespace GW2FOX
         [DllImport("user32.dll")]
         private static extern bool SetForegroundWindow(IntPtr hWnd);
 
+        private DispatcherTimer bossColorTimer;
+
         private void StartBossColorAnimation()
         {
-            var bossColorTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1.5) };
-            bossColorTimer.Tick += (s, e) =>
+            if (bossColorTimer == null)
             {
-                bossColorTimer.Stop();
+                bossColorTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1.5) };
+                bossColorTimer.Tick += (s, e) =>
+                {
+                    bossColorTimer.Stop();
+                    BossListView.Foreground = new SolidColorBrush(Colors.WhiteSmoke);
+                    BossListView.FontSize = 13;
+                    BossListView.FontWeight = FontWeights.SemiBold;  // hier FontWeights.Normal verwenden
+                };
+            }
 
-                BossListView.Foreground = new SolidColorBrush(Colors.Red);
-            };
             bossColorTimer.Start();
         }
+
 
         private void StartLoadingAnimation()
         {

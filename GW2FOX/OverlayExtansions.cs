@@ -63,7 +63,7 @@ namespace GW2FOX
                 "SotO" => System.Windows.Media.Brushes.Yellow,
                 "LWS2" => System.Windows.Media.Brushes.LightYellow,
                 "LWS3" => System.Windows.Media.Brushes.ForestGreen,
-                "Treasures" => System.Windows.Media.Brushes.Red,
+                "Treasures" => System.Windows.Media.Brushes.DarkRed,
                 _ => System.Windows.Media.Brushes.White
             };
         }

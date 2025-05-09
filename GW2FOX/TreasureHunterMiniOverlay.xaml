@@ -35,8 +35,8 @@
                   Background="Transparent"
                   BorderThickness="0"
                   FontFamily="Segoe UI"
-                  FontWeight="SemiBold"
-                  FontSize="13"
+                  FontWeight="Normal"
+                  FontSize="10"
                   Foreground="DimGray"
                   ScrollViewer.VerticalScrollBarVisibility="Hidden">
             <ListView.ItemContainerStyle>
@@ -52,15 +52,13 @@
                     <Grid>
                         <TextBlock x:Name="BossNameText" Text="{Binding}" 
                                    FontFamily="Segoe UI"
-                                   FontWeight="SemiBold"
-                                   FontSize="13"
                                    Foreground="{Binding RelativeSource={RelativeSource AncestorType=ListView}, Path=Foreground}">
                             <TextBlock.Effect>
                                 <DropShadowEffect 
-                                    Color="White" 
+                                    Color="Red" 
                                     BlurRadius="4" 
                                     ShadowDepth="0" 
-                                    Opacity="0.8"/>
+                                    Opacity="0.9"/>
                             </TextBlock.Effect>
                         </TextBlock>
                     </Grid>
