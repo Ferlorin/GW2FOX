@@ -7,16 +7,16 @@
         xmlns:local="clr-namespace:GW2FOX"
         mc:Ignorable="d"
         Title="MiniOverlay"
-        Width="23" Height="23"
+        Width="29" Height="29"
         Topmost="True"
         Background="Transparent"
-        Opacity="1"
+        Opacity="1.0"
         WindowStyle="None"
         AllowsTransparency="True"
         ResizeMode="NoResize"
         ShowInTaskbar="False">
     <StackPanel Orientation="Horizontal" Margin="0">
-        <Image Source="Resources/BloodyCom.bmp" Width="23" MouseLeftButtonUp="Clock_Click" Cursor="Hand"
+        <Image Source="Resources/BloodyCom.bmp" Width="28" MouseLeftButtonUp="Clock_Click" Cursor="Hand"
            MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave"
            MouseDown="Button_MouseDown" MouseUp="Button_MouseUp"/>
     </StackPanel>

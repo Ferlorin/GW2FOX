@@ -39,8 +39,27 @@ namespace GW2FOX
         private void MiniOverlay_Load(object sender, RoutedEventArgs e)
         {
             var screen = Forms.Screen.PrimaryScreen.WorkingArea;
-            Left = 350; // ca. 12 cm vom linken Rand bei 96 DPI
+            Left = 323;
             Top = 0;
+
+            foreach (var img in FindVisualChildren<WpfImage>(this))
+            {
+                AnimateScale(img, 0.8, 150);
+                img.Opacity = 0.7;
+            }
+        }
+        private static IEnumerable<T> FindVisualChildren<T>(DependencyObject depObj) where T : DependencyObject
+        {
+            if (depObj == null) yield break;
+            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(depObj); i++)
+            {
+                DependencyObject child = VisualTreeHelper.GetChild(depObj, i);
+                if (child is T t) yield return t;
+                foreach (T childOfChild in FindVisualChildren<T>(child))
+                {
+                    yield return childOfChild;
+                }
+            }
         }
 
 
@@ -137,13 +156,19 @@ namespace GW2FOX
         private void Button_MouseEnter(object sender, WpfMouseEventArgs e)
         {
             if (sender is WpfImage img)
-                AnimateScale(img, 1.1, 150);
+            {
+                AnimateScale(img, 1.0, 150);
+            img.Opacity = 1.0;
+            }
         }
 
         private void Button_MouseLeave(object sender, WpfMouseEventArgs e)
         {
             if (sender is WpfImage img)
-                AnimateScale(img, 1.0, 150);
+            {
+                AnimateScale(img, 0.8, 150);
+            img.Opacity = 0.7;
+            }
         }
 
         private void Button_MouseDown(object sender, WpfMouseButtonEventArgs e)
@@ -151,7 +176,7 @@ namespace GW2FOX
             if (sender is WpfImage img)
             {
                 AnimateScale(img, 0.9, 80);
-                img.Opacity = 0.7;
+                img.Opacity = 0.5;
             }
         }
 
@@ -159,7 +184,7 @@ namespace GW2FOX
         {
             if (sender is WpfImage img)
             {
-                AnimateScale(img, 1.1, 100);
+                AnimateScale(img, 1.0, 100);
                 img.Opacity = 1.0;
             }
         }
