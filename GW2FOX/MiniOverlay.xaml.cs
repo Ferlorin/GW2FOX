@@ -40,12 +40,12 @@ namespace GW2FOX
         {
             var screen = Forms.Screen.PrimaryScreen.WorkingArea;
             Left = 323;
-            Top = 0;
+            Top = 2;
 
             foreach (var img in FindVisualChildren<WpfImage>(this))
             {
                 AnimateScale(img, 0.8, 150);
-                img.Opacity = 0.7;
+                img.Opacity = 0.6;
             }
         }
         private static IEnumerable<T> FindVisualChildren<T>(DependencyObject depObj) where T : DependencyObject
@@ -167,7 +167,7 @@ namespace GW2FOX
             if (sender is WpfImage img)
             {
                 AnimateScale(img, 0.8, 150);
-            img.Opacity = 0.7;
+            img.Opacity = 0.6;
             }
         }
 
@@ -176,7 +176,7 @@ namespace GW2FOX
             if (sender is WpfImage img)
             {
                 AnimateScale(img, 0.9, 80);
-                img.Opacity = 0.5;
+                img.Opacity = 0.4;
             }
         }
 
