@@ -476,7 +476,7 @@ namespace GW2FOX
                 img.Opacity = 0.7;
             }
 
-            Worldbosses wb = new Worldbosses(); // Falls button67_Click nicht static ist
+            Textboxes wb = new Textboxes(); // Falls button67_Click nicht static ist
             wb.button67_Click(null, EventArgs.Empty);
 
             var gw2Proc = Process.GetProcessesByName("Gw2-64").FirstOrDefault();

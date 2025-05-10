@@ -13,13 +13,19 @@ using WpfImage = System.Windows.Controls.Image;
 using WpfMouseEventArgs = System.Windows.Input.MouseEventArgs;
 using WpfMouseButtonEventArgs = System.Windows.Input.MouseButtonEventArgs;
 using WpfPoint = System.Windows.Point;
+using System.Windows.Controls;
 
 namespace GW2FOX
 {
-    public partial class MiniOverlay : Window
+    /// <summary>
+    /// Interaktionslogik für MenuWindow.xaml
+    /// </summary>
+    public partial class MenuOverlay : Window
     {
+        private Worldbosses _worldbossesForm;
+        private Textboxes _textboxesForm;
         private readonly Forms.Form lastOpenedForm;
-        private MenuOverlay _menuOverlay;
+        private OverlayWindow _overlayWindow;
 
         [DllImport("user32.dll", SetLastError = true)]
         private static extern IntPtr GetForegroundWindow();
@@ -27,19 +33,21 @@ namespace GW2FOX
         [DllImport("user32.dll")]
         private static extern bool SetForegroundWindow(IntPtr hWnd);
 
-        public MiniOverlay()
+
+        public MenuOverlay()
         {
             InitializeComponent();
             Topmost = true;
+            _worldbossesForm = new Worldbosses();
+            _textboxesForm = new Textboxes();
             Loaded += MiniOverlay_Load;
-
         }
 
         private void MiniOverlay_Load(object sender, RoutedEventArgs e)
         {
             var screen = Forms.Screen.PrimaryScreen.WorkingArea;
             Left = 323;
-            Top = 2;
+            Top = 30;
 
             foreach (var img in FindVisualChildren<WpfImage>(this))
             {
@@ -91,23 +99,65 @@ namespace GW2FOX
             shortcut.Save();
         }
 
-        private void Icon_Click(object sender, MouseButtonEventArgs e)
+
+        private void BossNameText_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            // Toggle MenuOverlay visibility
-            if (_menuOverlay == null || !_menuOverlay.IsVisible)
+            if (sender is TextBlock textBlock)
             {
-                // Erstelle die MenuOverlay-Instanz, falls sie noch nicht existiert
-                _menuOverlay = new MenuOverlay();
+                switch (textBlock.Text)
+                {
+                    case "• Timer":
+                        Clock_Click(sender, e);
+                        break;
 
-                // Setze die Position: Unterhalb und zentriert zum MiniOverlay
-                _menuOverlay.Left = Left + (Width - _menuOverlay.Width) / 2;
-                _menuOverlay.Top = Top + Height;
+                    case "• Timermenu":
+                        if (_worldbossesForm == null || _worldbossesForm.IsDisposed)
+                        {
+                            _worldbossesForm = new Worldbosses();
+                            _worldbossesForm.Show();
+                        }
+                        else if (_worldbossesForm.Visible)
+                        {
+                            _worldbossesForm.Hide();
+                        }
+                        else
+                        {
+                            _worldbossesForm.Show();
+                            _worldbossesForm.BringToFront();
+                        }
+                        break;
 
-                _menuOverlay.Show();
+                    case "• Textmenu":
+                        if (_textboxesForm == null || _textboxesForm.IsDisposed)
+                        {
+                            _textboxesForm = new Textboxes();
+                            _textboxesForm.Show();
+                        }
+                        else if (_textboxesForm.Visible)
+                        {
+                            _textboxesForm.Hide();
+                        }
+                        else
+                        {
+                            _textboxesForm.Show();
+                            _textboxesForm.BringToFront();
+                        }
+                        break;
+                }
             }
+        }
+
+
+
+        private void Clock_Click(object sender, MouseButtonEventArgs e)
+        {
+            _overlayWindow = OverlayWindow.GetInstance();
+            if (_overlayWindow.IsVisible)
+                _overlayWindow.Hide();
             else
             {
-                _menuOverlay.Hide();
+                _overlayWindow.Show();
+                _overlayWindow.Activate();
             }
         }
 
@@ -165,7 +215,7 @@ namespace GW2FOX
             if (sender is WpfImage img)
             {
                 AnimateScale(img, 1.0, 150);
-            img.Opacity = 1.0;
+                img.Opacity = 1.0;
             }
         }
 
@@ -174,7 +224,7 @@ namespace GW2FOX
             if (sender is WpfImage img)
             {
                 AnimateScale(img, 0.8, 150);
-            img.Opacity = 0.6;
+                img.Opacity = 0.6;
             }
         }
 
@@ -195,7 +245,5 @@ namespace GW2FOX
                 img.Opacity = 1.0;
             }
         }
-
-
     }
 }

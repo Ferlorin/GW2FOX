@@ -199,7 +199,7 @@ namespace GW2FOX
             // 1. MiniOverlay öffnen und anzeigen (WPF)
             if (_miniOverlay == null || !_miniOverlay.IsLoaded)
             {
-                _miniOverlay = new MiniOverlay(_worldbossesForm);
+                _miniOverlay = new MiniOverlay();
                 _miniOverlay.Closed += (s, args) =>
                 {
                     _miniOverlay = null;

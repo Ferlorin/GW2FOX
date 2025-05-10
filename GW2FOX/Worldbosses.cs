@@ -23,7 +23,6 @@ namespace GW2FOX
             InitializeBossCheckBoxMap();
             bossCheckBoxMap = new Dictionary<string, CheckBox>();
             UpdateBossUiBosses();
-            LoadConfigText(Runinfo, Guild, Welcome, Symbols);
             Load += Worldbosses_Load_1;
         }
 
@@ -38,32 +37,11 @@ namespace GW2FOX
         protected override void AfterControlsLoaded()
         {
             base.AfterControlsLoaded();
-            LoadConfigText(Runinfo, Guild, Welcome, Symbols);
         }
 
         const int SW_RESTORE = 9;
 
 
-
-        private void Saverun_Click(object sender, EventArgs e)
-        {
-            SaveTextToFile(Runinfo.Text, "Runinfo");
-        }
-
-        private void Guild_Click(object sender, EventArgs e)
-        {
-            SaveTextToFile(Guild.Text, "Guild");
-        }
-
-        private void Welcome_Click(object sender, EventArgs e)
-        {
-            SaveTextToFile(Welcome.Text, "Welcome");
-        }
-
-        private void Symbols_Click(object sender, EventArgs e)
-        {
-            SaveTextToFile(Symbols.Text, "Symbols");
-        }
 
         private void TheOilFloes_Click(object sender, EventArgs e)
         {
@@ -237,52 +215,6 @@ namespace GW2FOX
             Metalconcert.Checked = !Metalconcert.Checked;
         }
 
-        private void Runinfo_Click(object sender, EventArgs e)
-        {
-            Clipboard.SetText(Runinfo.Text);
-
-            BringGw2ToFront();
-        }
-
-        private void Guildcopy_Click(object sender, EventArgs e)
-        {
-            Clipboard.SetText(Guild.Text);
-
-            // Bring the Gw2-64.exe window to the foreground
-            BringGw2ToFront();
-        }
-
-        private void Welcomecopy_Click(object sender, EventArgs e)
-        {
-            Clipboard.SetText(Welcome.Text);
-
-            // Bring the Gw2-64.exe window to the foreground
-            BringGw2ToFront();
-        }
-
-        private void button66_Click(object sender, EventArgs e)
-        {
-            Clipboard.SetText(SearchResults.Text);
-            BringGw2ToFront();
-        }
-
-        private void button30_Click(object sender, EventArgs e)
-        {
-            Clipboard.SetText(Runinfo.Text);
-            BringGw2ToFront();
-        }
-
-        private void button28_Click(object sender, EventArgs e)
-        {
-            Clipboard.SetText(Guild.Text);
-            BringGw2ToFront();
-        }
-
-        private void button27_Click(object sender, EventArgs e)
-        {
-            Clipboard.SetText(Welcome.Text);
-            BringGw2ToFront();
-        }
 
         private void button68_Click(object sender, EventArgs e)
         {
@@ -1496,48 +1428,6 @@ namespace GW2FOX
             catch (Exception ex)
             {
                 MessageBox.Show($"Fehler beim Anzeigen aller Bosse: {ex.Message}", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-
-
-        public void button67_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (int.TryParse(Quantity.Text, out int numberOfBosses) && numberOfBosses > 0)
-                {
-                    List<string> bossNamesFromConfig = BossList23;
-
-                    var bossEventGroups = BossEventGroups
-                        .Where(bossEventGroup => bossNamesFromConfig.Contains(bossEventGroup.BossName))
-                        .ToList();
-
-                    // Alle Runs sammeln
-                    var allBosses = bossEventGroups
-                        .SelectMany(bossEventGroup => bossEventGroup.GetNextRuns())
-                        .Where(run => run.TimeToShow > GlobalVariables.CURRENT_DATE_TIME) // Nur zukünftige Runs!
-                        .OrderBy(run => run.TimeToShow)
-                        .ToList();
-
-                    var bossInfo = allBosses
-                        .Take(numberOfBosses)
-                        .Select(bossEvent => $"{bossEvent.BossName} - {bossEvent.Waypoint}")
-                        .ToList();
-
-                    string bossNamesString = "Upcoming Meta:" + Environment.NewLine + string.Join(Environment.NewLine, bossInfo);
-
-                    Clipboard.SetText(bossNamesString);
-                    SearchResults.Text = bossNamesString;
-                }
-                else
-                {
-                    MessageBox.Show("A Number please!.", "Do you know the meaning of a NUMBER, try 10!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
