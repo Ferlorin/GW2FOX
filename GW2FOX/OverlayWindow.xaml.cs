@@ -377,7 +377,7 @@ namespace GW2FOX
         {
             if (e.ChangedButton == MouseButton.Right)
             {
-                BloodyCom_Click(sender, e);
+                //
             }
             else if (e.ChangedButton == MouseButton.Left)
             {

@@ -283,7 +283,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Magenta;
-            ClientSize = new Size(390, 702);
+            ClientSize = new Size(394, 702);
             Controls.Add(Quantity);
             Controls.Add(button67);
             Controls.Add(button66);
@@ -303,7 +303,14 @@
             Controls.Add(button4);
             Controls.Add(button2);
             Controls.Add(Symbols);
+            Location = new Point(400, 100);
+            MaximizeBox = false;
+            MinimizeBox = false;
             Name = "Textboxes";
+            Opacity = 0.85D;
+            ShowIcon = false;
+            ShowInTaskbar = false;
+            SizeGripStyle = SizeGripStyle.Hide;
             Text = "Textboxes";
             ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
