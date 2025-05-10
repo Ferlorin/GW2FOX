@@ -32,6 +32,7 @@ namespace GW2FOX
             this.Location = new System.Drawing.Point(screen.Width - this.Width, 0);
             InitializeBossCheckBoxMap();
             LoadBossBoxesFromJson();
+            UpdateBossUiBosses();
         }
 
         protected override void AfterControlsLoaded()
