@@ -476,8 +476,9 @@ namespace GW2FOX
                 img.Opacity = 0.7;
             }
 
-            Textboxes wb = new Textboxes(); // Falls button67_Click nicht static ist
-            wb.button67_Click(null, EventArgs.Empty);
+            // Hier eine Instanz der Klasse erstellen
+            var textboxesInstance = new Textboxes();
+            textboxesInstance.button67_Click(null, EventArgs.Empty);
 
             var gw2Proc = Process.GetProcessesByName("Gw2-64").FirstOrDefault();
             if (gw2Proc != null && gw2Proc.MainWindowHandle != IntPtr.Zero)
@@ -485,6 +486,7 @@ namespace GW2FOX
                 SetForegroundWindow(gw2Proc.MainWindowHandle);
             }
         }
+
 
         private void GroupSearchIcon_MouseDown(object sender, RoutedEventArgs e)
         {

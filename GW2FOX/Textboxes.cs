@@ -14,20 +14,19 @@ namespace GW2FOX
     {
         public static readonly char[] Separator = { ',' };
         public static System.Windows.Controls.ListView? CustomBossList { get; private set; }
-        public static List<string> BossList23 { get; set; }
+        public static List<string> BossList23 { get; set; } = new();
         public Textboxes()
         {
             InitializeComponent();
             LoadConfigText(Runinfo, Guild, Welcome, Symbols);
             Load += Textboxes_Load_1;
-            
+            UpdateBossUiBosses();
         }
 
         private void Textboxes_Load_1(object? sender, EventArgs e)
         {
             var screen = Screen.PrimaryScreen.WorkingArea;
             this.Location = new System.Drawing.Point(screen.Width - this.Width, 0);
-            UpdateBossUiBosses();
         }
 
 
@@ -49,9 +48,9 @@ namespace GW2FOX
             guildBox.Text = (config.Guild ?? "").Replace("\n", Environment.NewLine);
             welcomeBox.Text = (config.Welcome ?? "").Replace("\n", Environment.NewLine);
             symbolsBox.Text = (config.Symbols ?? "").Replace("\n", Environment.NewLine);
-            Console.WriteLine("LoadedConfigInfos: " + (config != null ? "OK" : "NULL"));
 
         }
+
 
         public void button67_Click(object sender, EventArgs e)
         {
