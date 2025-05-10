@@ -22,6 +22,13 @@ namespace GW2FOX
         {
             InitializeComponent();
             LoadConfigText(Runinfo, Guild, Welcome, Symbols);
+            Load += Textboxes_Load_1;
+        }
+
+        private void Textboxes_Load_1(object? sender, EventArgs e)
+        {
+            var screen = Screen.PrimaryScreen.WorkingArea;
+            this.Location = new System.Drawing.Point(screen.Width - this.Width, 0);
         }
 
         protected void LoadConfigText(
