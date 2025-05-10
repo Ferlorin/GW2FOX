@@ -93,6 +93,8 @@
                         <ColumnDefinition Width="Auto"/>
                         <!-- 2: TreasureHunter -->
                         <ColumnDefinition Width="Auto"/>
+                        <!-- GroupSearch -->
+                        <ColumnDefinition Width="Auto"/>
                         <!-- 3: Scheduler -->
                         <ColumnDefinition Width="Auto"/>
                         <!-- 4: GuildAdvertising -->
@@ -122,6 +124,19 @@
        MouseLeave="Image_MouseLeave"
        MouseDown="TreasureHunterIcon_MouseDown"
        MouseUp="Image_MouseUp">
+                            <Image.RenderTransform>
+                                <ScaleTransform ScaleX="1.0" ScaleY="1.0"/>
+                            </Image.RenderTransform>
+                            <Image.RenderTransformOrigin>0.5,0.5</Image.RenderTransformOrigin>
+                        </Image>
+
+                        <!-- GroupSearch Icon -->
+                        <Image x:Name="GroupSearchIcon" Source="/Resources/GroupSearch.png"
+Width="22" Height="19" Cursor="Hand" Margin="0,0,6,0"
+MouseEnter="Image_MouseEnter"
+MouseLeave="Image_MouseLeave"
+MouseDown="GroupSearchIcon_MouseDown"
+MouseUp="Image_MouseUp">
                             <Image.RenderTransform>
                                 <ScaleTransform ScaleX="1.0" ScaleY="1.0"/>
                             </Image.RenderTransform>
@@ -166,6 +181,8 @@
                             </Image.RenderTransform>
                             <Image.RenderTransformOrigin>0.5,0.5</Image.RenderTransformOrigin>
                         </Image>
+                        
+                  
 
                     </StackPanel>
 

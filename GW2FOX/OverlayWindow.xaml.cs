@@ -486,6 +486,43 @@ namespace GW2FOX
             }
         }
 
+        private void GroupSearchIcon_MouseDown(object sender, RoutedEventArgs e)
+        {
+            if (sender is WpfImage img)
+            {
+                AnimateScale(img, 0.90);
+                img.Opacity = 0.7;
+            }
+            try
+            {
+                string exeDir = AppDomain.CurrentDomain.BaseDirectory;
+                string jsonPath = Path.Combine(exeDir, "BossTimings.json");
+
+                if (File.Exists(jsonPath))
+                {
+                    string jsonContent = File.ReadAllText(jsonPath);
+                    var jsonObject = JObject.Parse(jsonContent);
+
+                    string? guildText = jsonObject["Runinfo"]?.ToString();
+                    if (!string.IsNullOrWhiteSpace(guildText))
+                    {
+                        WpfClipboard.SetText(guildText);
+
+
+                        var gw2Proc = Process.GetProcessesByName("Gw2-64").FirstOrDefault();
+                        if (gw2Proc != null && gw2Proc.MainWindowHandle != IntPtr.Zero)
+                        {
+                            SetForegroundWindow(gw2Proc.MainWindowHandle);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                WpfMessageBox.Show("Error loading Guild info: " + ex.Message);
+            }
+        }
+
 
 
         private void GuildAdvertisingIcon_MouseDown(object sender, RoutedEventArgs e)
