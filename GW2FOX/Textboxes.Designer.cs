@@ -303,7 +303,7 @@
             Controls.Add(button4);
             Controls.Add(button2);
             Controls.Add(Symbols);
-            Location = new Point(130, 80);
+            Location = new Point(130, 70);
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "Textboxes";

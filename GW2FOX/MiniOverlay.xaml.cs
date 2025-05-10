@@ -13,6 +13,7 @@ using WpfImage = System.Windows.Controls.Image;
 using WpfMouseEventArgs = System.Windows.Input.MouseEventArgs;
 using WpfMouseButtonEventArgs = System.Windows.Input.MouseButtonEventArgs;
 using WpfPoint = System.Windows.Point;
+using Accessibility;
 
 namespace GW2FOX
 {
@@ -20,6 +21,8 @@ namespace GW2FOX
     {
         private readonly Forms.Form lastOpenedForm;
         private MenuOverlay _menuOverlay;
+        private Textboxes _textboxes;
+        private Worldbosses _worldbosses;
 
         [DllImport("user32.dll", SetLastError = true)]
         private static extern IntPtr GetForegroundWindow();
@@ -93,23 +96,23 @@ namespace GW2FOX
 
         private void Icon_Click(object sender, MouseButtonEventArgs e)
         {
-            // Toggle MenuOverlay visibility
             if (_menuOverlay == null || !_menuOverlay.IsVisible)
             {
-                // Erstelle die MenuOverlay-Instanz, falls sie noch nicht existiert
                 _menuOverlay = new MenuOverlay();
-
-                // Setze die Position: Unterhalb und zentriert zum MiniOverlay
                 _menuOverlay.Left = Left + (Width - _menuOverlay.Width) / 2;
                 _menuOverlay.Top = Top + Height;
-
                 _menuOverlay.Show();
             }
             else
             {
                 _menuOverlay.Hide();
+                _menuOverlay.HideChildForms();
             }
         }
+
+
+
+
 
         private void LaunchExternalTool(string executableName)
         {
@@ -195,7 +198,5 @@ namespace GW2FOX
                 img.Opacity = 1.0;
             }
         }
-
-
     }
 }

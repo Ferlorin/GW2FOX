@@ -245,5 +245,15 @@ namespace GW2FOX
                 img.Opacity = 1.0;
             }
         }
+
+        public void HideChildForms()
+        {
+            if (_textboxesForm != null && !_textboxesForm.IsDisposed && _textboxesForm.Visible)
+                _textboxesForm.Hide();
+
+            if (_worldbossesForm != null && !_worldbossesForm.IsDisposed && _worldbossesForm.Visible)
+                _worldbossesForm.Hide();
+        }
+
     }
 }

@@ -1885,7 +1885,7 @@
             AutoScaleMode = AutoScaleMode.None;
             AutoValidate = AutoValidate.EnablePreventFocusChange;
             BackColor = Color.Magenta;
-            ClientSize = new Size(1148, 994);
+            ClientSize = new Size(1282, 994);
             ControlBox = false;
             Controls.Add(button66);
             Controls.Add(button29);
