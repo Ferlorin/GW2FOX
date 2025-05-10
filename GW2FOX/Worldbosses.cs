@@ -1697,7 +1697,6 @@ namespace GW2FOX
                 // Textbox-Namen ebenfalls speichern
                 jObj["BossBox1"] = BossBox1.Text;
                 jObj["BossBox2"] = BossBox2.Text;
-                jObj["BossBox3"] = BossBox3.Text;
 
                 File.WriteAllText(configPath, jObj.ToString(Formatting.Indented));
                 MessageBox.Show($"Saved under '{boxText}'!", "Saved!", MessageBoxButtons.OK, MessageBoxIcon.Information);

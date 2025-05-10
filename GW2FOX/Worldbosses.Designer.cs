@@ -163,13 +163,10 @@
             ArahBox = new CheckBox();
             BossBox1 = new TextBox();
             BossBox2 = new TextBox();
-            BossBox3 = new TextBox();
             button4 = new Button();
             button1 = new Button();
-            button3 = new Button();
             button67 = new Button();
             button29 = new Button();
-            button66 = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox12).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox11).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox10).BeginInit();
@@ -1524,7 +1521,7 @@
             World.BackgroundImageLayout = ImageLayout.Stretch;
             World.Cursor = Cursors.Hand;
             World.FlatStyle = FlatStyle.Flat;
-            World.Location = new Point(12, 77);
+            World.Location = new Point(33, 77);
             World.Name = "World";
             World.Size = new Size(127, 32);
             World.TabIndex = 222;
@@ -1537,7 +1534,7 @@
             Mixed.BackgroundImageLayout = ImageLayout.Stretch;
             Mixed.Cursor = Cursors.Hand;
             Mixed.FlatStyle = FlatStyle.Flat;
-            Mixed.Location = new Point(278, 77);
+            Mixed.Location = new Point(299, 77);
             Mixed.Name = "Mixed";
             Mixed.Size = new Size(127, 32);
             Mixed.TabIndex = 225;
@@ -1550,7 +1547,7 @@
             ClearAll.BackgroundImageLayout = ImageLayout.Stretch;
             ClearAll.Cursor = Cursors.Hand;
             ClearAll.FlatStyle = FlatStyle.Flat;
-            ClearAll.Location = new Point(623, 83);
+            ClearAll.Location = new Point(644, 83);
             ClearAll.Name = "ClearAll";
             ClearAll.Size = new Size(73, 21);
             ClearAll.TabIndex = 224;
@@ -1563,7 +1560,7 @@
             Meta.BackgroundImageLayout = ImageLayout.Stretch;
             Meta.Cursor = Cursors.Hand;
             Meta.FlatStyle = FlatStyle.Flat;
-            Meta.Location = new Point(145, 77);
+            Meta.Location = new Point(166, 77);
             Meta.Name = "Meta";
             Meta.Size = new Size(127, 32);
             Meta.TabIndex = 223;
@@ -1576,7 +1573,7 @@
             ShowAll.BackgroundImageLayout = ImageLayout.Stretch;
             ShowAll.Cursor = Cursors.Hand;
             ShowAll.FlatStyle = FlatStyle.Flat;
-            ShowAll.Location = new Point(544, 83);
+            ShowAll.Location = new Point(565, 83);
             ShowAll.Name = "ShowAll";
             ShowAll.Size = new Size(73, 21);
             ShowAll.TabIndex = 226;
@@ -1666,7 +1663,7 @@
             FidosSpecial.BackgroundImageLayout = ImageLayout.Stretch;
             FidosSpecial.Cursor = Cursors.Hand;
             FidosSpecial.FlatStyle = FlatStyle.Flat;
-            FidosSpecial.Location = new Point(411, 77);
+            FidosSpecial.Location = new Point(432, 77);
             FidosSpecial.Name = "FidosSpecial";
             FidosSpecial.Size = new Size(127, 32);
             FidosSpecial.TabIndex = 239;
@@ -1780,7 +1777,7 @@
             BossBox1.BorderStyle = BorderStyle.None;
             BossBox1.Cursor = Cursors.IBeam;
             BossBox1.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold);
-            BossBox1.Location = new Point(712, 68);
+            BossBox1.Location = new Point(723, 68);
             BossBox1.Name = "BossBox1";
             BossBox1.Size = new Size(127, 20);
             BossBox1.TabIndex = 274;
@@ -1790,27 +1787,17 @@
             BossBox2.BorderStyle = BorderStyle.None;
             BossBox2.Cursor = Cursors.IBeam;
             BossBox2.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold);
-            BossBox2.Location = new Point(845, 68);
+            BossBox2.Location = new Point(864, 68);
             BossBox2.Name = "BossBox2";
             BossBox2.Size = new Size(127, 20);
             BossBox2.TabIndex = 275;
-            // 
-            // BossBox3
-            // 
-            BossBox3.BorderStyle = BorderStyle.None;
-            BossBox3.Cursor = Cursors.IBeam;
-            BossBox3.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold);
-            BossBox3.Location = new Point(978, 68);
-            BossBox3.Name = "BossBox3";
-            BossBox3.Size = new Size(127, 20);
-            BossBox3.TabIndex = 277;
             // 
             // button4
             // 
             button4.BackgroundImage = (Image)resources.GetObject("button4.BackgroundImage");
             button4.BackgroundImageLayout = ImageLayout.Stretch;
             button4.FlatStyle = FlatStyle.Flat;
-            button4.Location = new Point(740, 92);
+            button4.Location = new Point(730, 92);
             button4.Name = "button4";
             button4.Size = new Size(48, 17);
             button4.TabIndex = 282;
@@ -1822,23 +1809,12 @@
             button1.BackgroundImage = (Image)resources.GetObject("button1.BackgroundImage");
             button1.BackgroundImageLayout = ImageLayout.Stretch;
             button1.FlatStyle = FlatStyle.Flat;
-            button1.Location = new Point(873, 92);
+            button1.Location = new Point(871, 92);
             button1.Name = "button1";
             button1.Size = new Size(48, 17);
             button1.TabIndex = 283;
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click_1;
-            // 
-            // button3
-            // 
-            button3.BackgroundImage = (Image)resources.GetObject("button3.BackgroundImage");
-            button3.BackgroundImageLayout = ImageLayout.Stretch;
-            button3.FlatStyle = FlatStyle.Flat;
-            button3.Location = new Point(1006, 92);
-            button3.Name = "button3";
-            button3.Size = new Size(48, 17);
-            button3.TabIndex = 284;
-            button3.UseVisualStyleBackColor = true;
             // 
             // button67
             // 
@@ -1846,7 +1822,7 @@
             button67.BackgroundImageLayout = ImageLayout.Stretch;
             button67.Cursor = Cursors.Hand;
             button67.FlatStyle = FlatStyle.Flat;
-            button67.Location = new Point(791, 92);
+            button67.Location = new Point(781, 92);
             button67.Name = "button67";
             button67.Size = new Size(48, 17);
             button67.TabIndex = 290;
@@ -1859,24 +1835,12 @@
             button29.BackgroundImageLayout = ImageLayout.Stretch;
             button29.Cursor = Cursors.Hand;
             button29.FlatStyle = FlatStyle.Flat;
-            button29.Location = new Point(924, 92);
+            button29.Location = new Point(922, 92);
             button29.Name = "button29";
             button29.Size = new Size(48, 17);
             button29.TabIndex = 291;
             button29.UseVisualStyleBackColor = true;
             button29.Click += button29_Click;
-            // 
-            // button66
-            // 
-            button66.BackgroundImage = (Image)resources.GetObject("button66.BackgroundImage");
-            button66.BackgroundImageLayout = ImageLayout.Stretch;
-            button66.Cursor = Cursors.Hand;
-            button66.FlatStyle = FlatStyle.Flat;
-            button66.Location = new Point(1057, 92);
-            button66.Name = "button66";
-            button66.Size = new Size(48, 17);
-            button66.TabIndex = 292;
-            button66.UseVisualStyleBackColor = true;
             // 
             // Worldbosses
             // 
@@ -1885,13 +1849,10 @@
             BackColor = Color.Magenta;
             ClientSize = new Size(1282, 994);
             ControlBox = false;
-            Controls.Add(button66);
             Controls.Add(button29);
             Controls.Add(button67);
-            Controls.Add(button3);
             Controls.Add(button1);
             Controls.Add(button4);
-            Controls.Add(BossBox3);
             Controls.Add(BossBox2);
             Controls.Add(BossBox1);
             Controls.Add(ArahBox);
@@ -2185,12 +2146,9 @@
         private CheckBox ArahBox;
         private TextBox BossBox1;
         private TextBox BossBox2;
-        private TextBox BossBox3;
         private Button button4;
         private Button button1;
-        private Button button3;
         private Button button67;
         private Button button29;
-        private Button button66;
     }
 }
