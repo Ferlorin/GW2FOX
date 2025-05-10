@@ -209,10 +209,24 @@ namespace GW2FOX
         {
             var config = LoadBossConfigAndReturn();
 
+            // Ensure the Bosses list is not null
+            if (config.Bosses == null)
+            {
+                Console.WriteLine("[Error] Bosses list is null in the configuration file.");
+                return;
+            }
+
             var chosenBossNames = config.Bosses
                 .Where(b => b.Category == "ChoosenOnes")
                 .Select(b => b.Name)
                 .ToHashSet(StringComparer.OrdinalIgnoreCase);
+
+            // Ensure bossCheckBoxMap is not null
+            if (bossCheckBoxMap == null)
+            {
+                Console.WriteLine("[Error] bossCheckBoxMap is null.");
+                return;
+            }
 
             foreach (var entry in bossCheckBoxMap)
             {
@@ -222,6 +236,7 @@ namespace GW2FOX
 
             BossList23 = chosenBossNames.ToList();
         }
+
 
 
         public static BossConfig LoadBossConfigAndReturn()

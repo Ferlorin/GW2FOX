@@ -12,24 +12,24 @@ namespace GW2FOX
 {
     public partial class Textboxes : BaseForm
     {
-        public static System.Windows.Controls.ListView? CustomBossList { get; private set; }
-        public static Dictionary<string, CheckBox> bossCheckBoxMap;
         public static readonly char[] Separator = { ',' };
-        public static List<string> BossList23 { get; set; } = new();
-
-
+        public static System.Windows.Controls.ListView? CustomBossList { get; private set; }
+        public static List<string> BossList23 { get; set; }
         public Textboxes()
         {
             InitializeComponent();
             LoadConfigText(Runinfo, Guild, Welcome, Symbols);
             Load += Textboxes_Load_1;
+            
         }
 
         private void Textboxes_Load_1(object? sender, EventArgs e)
         {
             var screen = Screen.PrimaryScreen.WorkingArea;
             this.Location = new System.Drawing.Point(screen.Width - this.Width, 0);
+            UpdateBossUiBosses();
         }
+
 
         protected void LoadConfigText(
    System.Windows.Forms.TextBox runinfoBox,
@@ -57,15 +57,20 @@ namespace GW2FOX
         {
             try
             {
+                if (BossList23 == null || BossList23.Count == 0)
+                {
+                    MessageBox.Show("BossList23 ist leer. Bitte überprüfe die Konfigurationsdatei.", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
                 if (int.TryParse(Quantity.Text, out int numberOfBosses) && numberOfBosses > 0)
                 {
-                    List<string> bossNamesFromConfig = BossList23;
-
                     var bossEventGroups = BossEventGroups
-                        .Where(bossEventGroup => bossNamesFromConfig.Contains(bossEventGroup.BossName))
+                        .Where(bossEventGroup => BossList23.Contains(bossEventGroup.BossName))
                         .ToList();
 
-                    // Alle Runs sammeln
+                    Console.WriteLine($"[DEBUG] {bossEventGroups.Count} BossEventGroups gefunden.");
+
                     var allBosses = bossEventGroups
                         .SelectMany(bossEventGroup => bossEventGroup.GetNextRuns())
                         .Where(run => run.TimeToShow > GlobalVariables.CURRENT_DATE_TIME) // Nur zukünftige Runs!
@@ -92,6 +97,8 @@ namespace GW2FOX
                 MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+
 
         private void button66_Click(object sender, EventArgs e)
         {
@@ -135,6 +142,61 @@ namespace GW2FOX
         private void button6_Click(object sender, EventArgs e)
         {
             SaveTextToFile(Symbols.Text, "Symbols");
+        }
+
+        private void UpdateBossUiBosses()
+        {
+            string configPath = "BossTimings.json";
+            if (!File.Exists(configPath)) return;
+
+            try
+            {
+                var json = File.ReadAllText(configPath);
+                var jObj = JObject.Parse(json);
+
+                // 1. Lade ChoosenOnes
+                var selectedBossNames = jObj["ChoosenOnes"] is JArray array
+                    ? array.Select(x => x.ToString()).ToHashSet(StringComparer.OrdinalIgnoreCase)
+                    : new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+
+                // 3. BossList23 aktualisieren
+                BossList23 = selectedBossNames.ToList();
+
+                // 4. Events und Gruppen neu aufbauen
+                BossEventsList.Clear();
+                BossEventGroups.Clear();
+
+                var config = BossTimings.LoadBossConfigAndReturn();
+
+                foreach (var bossName in BossList23)
+                {
+                    var boss = config.Bosses.FirstOrDefault(b => b.Name.Equals(bossName, StringComparison.OrdinalIgnoreCase));
+                    if (boss != null)
+                    {
+                        AddBossEvent(boss.Name, boss.Timings.ToArray(), boss.Category ?? "WBs", boss.Waypoint ?? "", boss.Level ?? "");
+                    }
+                    else
+                    {
+                        //Console.WriteLine($"⚠ Boss '{bossName}' nicht in Bosses gefunden.");
+                    }
+                }
+
+                GenerateBossEventGroups();
+                UpdateBossOverlayList();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Fehler beim Laden von ChoosenOnes: {ex.Message}", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        public static void AddBossEvent(string bossName, string[] timings, string category, string waypoint = "", string level = "")
+        {
+            foreach (var timing in timings)
+            {
+                var utcTime = ConvertToUtcFromConfigTime(timing);
+                BossEventsList.Add(new BossEvent(bossName, utcTime.TimeOfDay, category, waypoint, level));
+            }
         }
     }
 }

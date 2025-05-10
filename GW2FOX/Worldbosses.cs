@@ -7,6 +7,7 @@ using System.IO;
 using System.Globalization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.DirectoryServices;
 
 namespace GW2FOX
 {
@@ -20,9 +21,7 @@ namespace GW2FOX
         public Worldbosses()
         {
             InitializeComponent();
-            InitializeBossCheckBoxMap();
             bossCheckBoxMap = new Dictionary<string, CheckBox>();
-            UpdateBossUiBosses();
             Load += Worldbosses_Load_1;
         }
 
@@ -1775,6 +1774,7 @@ namespace GW2FOX
         {
             Application.Restart();
         }
+
     }
 }
 
