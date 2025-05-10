@@ -109,7 +109,7 @@
 
                     <!-- Überschrift -->
                     <TextBlock Grid.Column="1" VerticalAlignment="Center" Foreground="White"
-                               FontFamily="Segoe UI" FontWeight="Bold" FontSize="14" Text="Boss-Timer">
+                               FontFamily="Segoe UI" FontWeight="Bold" FontSize="14" Text="FoXXy">
                         <TextBlock.Effect>
                             <DropShadowEffect Color="Black" BlurRadius="0" ShadowDepth="0" Opacity="1"/>
                         </TextBlock.Effect>

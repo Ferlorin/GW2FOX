@@ -161,27 +161,6 @@ namespace GW2FOX
                 // 3. BossList23 aktualisieren
                 BossList23 = selectedBossNames.ToList();
 
-                // 4. Events und Gruppen neu aufbauen
-                BossEventsList.Clear();
-                BossEventGroups.Clear();
-
-                var config = BossTimings.LoadBossConfigAndReturn();
-
-                foreach (var bossName in BossList23)
-                {
-                    var boss = config.Bosses.FirstOrDefault(b => b.Name.Equals(bossName, StringComparison.OrdinalIgnoreCase));
-                    if (boss != null)
-                    {
-                        AddBossEvent(boss.Name, boss.Timings.ToArray(), boss.Category ?? "WBs", boss.Waypoint ?? "", boss.Level ?? "");
-                    }
-                    else
-                    {
-                        //Console.WriteLine($"⚠ Boss '{bossName}' nicht in Bosses gefunden.");
-                    }
-                }
-
-                GenerateBossEventGroups();
-                UpdateBossOverlayList();
             }
             catch (Exception ex)
             {
