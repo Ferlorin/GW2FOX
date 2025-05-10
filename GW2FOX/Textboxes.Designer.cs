@@ -57,7 +57,7 @@
             // Quantity
             // 
             Quantity.Font = new Font("Segoe UI", 9F);
-            Quantity.Location = new Point(329, 48);
+            Quantity.Location = new Point(484, 136);
             Quantity.Name = "Quantity";
             Quantity.Size = new Size(34, 23);
             Quantity.TabIndex = 249;
@@ -70,7 +70,7 @@
             button67.BackgroundImageLayout = ImageLayout.Stretch;
             button67.Cursor = Cursors.Hand;
             button67.FlatStyle = FlatStyle.Flat;
-            button67.Location = new Point(318, 77);
+            button67.Location = new Point(473, 165);
             button67.Name = "button67";
             button67.Size = new Size(60, 18);
             button67.TabIndex = 248;
@@ -83,7 +83,7 @@
             button66.BackgroundImageLayout = ImageLayout.Stretch;
             button66.Cursor = Cursors.Hand;
             button66.FlatStyle = FlatStyle.Flat;
-            button66.Location = new Point(318, 101);
+            button66.Location = new Point(473, 189);
             button66.Name = "button66";
             button66.Size = new Size(60, 18);
             button66.TabIndex = 247;
@@ -94,7 +94,7 @@
             // 
             SearchResults.Cursor = Cursors.IBeam;
             SearchResults.Font = new Font("Segoe UI", 9F);
-            SearchResults.Location = new Point(12, 48);
+            SearchResults.Location = new Point(167, 136);
             SearchResults.Multiline = true;
             SearchResults.Name = "SearchResults";
             SearchResults.ScrollBars = ScrollBars.Vertical;
@@ -106,7 +106,7 @@
             pictureBox4.BackColor = Color.DimGray;
             pictureBox4.BackgroundImage = (Image)resources.GetObject("pictureBox4.BackgroundImage");
             pictureBox4.BackgroundImageLayout = ImageLayout.Zoom;
-            pictureBox4.Location = new Point(12, 12);
+            pictureBox4.Location = new Point(167, 100);
             pictureBox4.Name = "pictureBox4";
             pictureBox4.Size = new Size(350, 30);
             pictureBox4.TabIndex = 245;
@@ -117,7 +117,7 @@
             pictureBox3.BackColor = Color.DimGray;
             pictureBox3.BackgroundImage = (Image)resources.GetObject("pictureBox3.BackgroundImage");
             pictureBox3.BackgroundImageLayout = ImageLayout.Zoom;
-            pictureBox3.Location = new Point(12, 215);
+            pictureBox3.Location = new Point(167, 303);
             pictureBox3.Name = "pictureBox3";
             pictureBox3.Size = new Size(350, 30);
             pictureBox3.TabIndex = 244;
@@ -128,7 +128,7 @@
             pictureBox2.BackColor = Color.DimGray;
             pictureBox2.BackgroundImage = (Image)resources.GetObject("pictureBox2.BackgroundImage");
             pictureBox2.BackgroundImageLayout = ImageLayout.Zoom;
-            pictureBox2.Location = new Point(12, 337);
+            pictureBox2.Location = new Point(167, 425);
             pictureBox2.Name = "pictureBox2";
             pictureBox2.Size = new Size(350, 30);
             pictureBox2.TabIndex = 243;
@@ -139,7 +139,7 @@
             pictureBox1.BackColor = Color.DimGray;
             pictureBox1.BackgroundImage = (Image)resources.GetObject("pictureBox1.BackgroundImage");
             pictureBox1.BackgroundImageLayout = ImageLayout.Zoom;
-            pictureBox1.Location = new Point(11, 459);
+            pictureBox1.Location = new Point(166, 547);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(350, 30);
             pictureBox1.TabIndex = 242;
@@ -151,7 +151,7 @@
             button27.BackgroundImageLayout = ImageLayout.Stretch;
             button27.Cursor = Cursors.Hand;
             button27.FlatStyle = FlatStyle.Flat;
-            button27.Location = new Point(318, 373);
+            button27.Location = new Point(473, 461);
             button27.Name = "button27";
             button27.Size = new Size(60, 18);
             button27.TabIndex = 241;
@@ -164,7 +164,7 @@
             button28.BackgroundImageLayout = ImageLayout.Stretch;
             button28.Cursor = Cursors.Hand;
             button28.FlatStyle = FlatStyle.Flat;
-            button28.Location = new Point(318, 251);
+            button28.Location = new Point(473, 339);
             button28.Name = "button28";
             button28.Size = new Size(60, 18);
             button28.TabIndex = 240;
@@ -176,7 +176,7 @@
             button30.BackgroundImage = (Image)resources.GetObject("button30.BackgroundImage");
             button30.BackgroundImageLayout = ImageLayout.Stretch;
             button30.FlatStyle = FlatStyle.Flat;
-            button30.Location = new Point(316, 495);
+            button30.Location = new Point(471, 583);
             button30.Name = "button30";
             button30.Size = new Size(60, 18);
             button30.TabIndex = 239;
@@ -187,7 +187,7 @@
             // 
             Welcome.Cursor = Cursors.IBeam;
             Welcome.Font = new Font("Segoe UI", 8F);
-            Welcome.Location = new Point(12, 373);
+            Welcome.Location = new Point(167, 461);
             Welcome.MaxLength = 255;
             Welcome.Multiline = true;
             Welcome.Name = "Welcome";
@@ -199,7 +199,7 @@
             // 
             Guild.Cursor = Cursors.IBeam;
             Guild.Font = new Font("Segoe UI", 8F);
-            Guild.Location = new Point(12, 251);
+            Guild.Location = new Point(167, 339);
             Guild.MaxLength = 255;
             Guild.Multiline = true;
             Guild.Name = "Guild";
@@ -211,7 +211,7 @@
             // 
             Runinfo.Cursor = Cursors.IBeam;
             Runinfo.Font = new Font("Segoe UI", 8F);
-            Runinfo.Location = new Point(12, 495);
+            Runinfo.Location = new Point(167, 583);
             Runinfo.MaxLength = 243;
             Runinfo.Multiline = true;
             Runinfo.Name = "Runinfo";
@@ -224,7 +224,7 @@
             button6.BackgroundImage = (Image)resources.GetObject("button6.BackgroundImage");
             button6.BackgroundImageLayout = ImageLayout.Stretch;
             button6.FlatStyle = FlatStyle.Flat;
-            button6.Location = new Point(316, 587);
+            button6.Location = new Point(471, 675);
             button6.Name = "button6";
             button6.Size = new Size(45, 16);
             button6.TabIndex = 234;
@@ -236,7 +236,7 @@
             button5.BackgroundImage = (Image)resources.GetObject("button5.BackgroundImage");
             button5.BackgroundImageLayout = ImageLayout.Stretch;
             button5.FlatStyle = FlatStyle.Flat;
-            button5.Location = new Point(318, 397);
+            button5.Location = new Point(473, 485);
             button5.Name = "button5";
             button5.Size = new Size(45, 16);
             button5.TabIndex = 233;
@@ -248,7 +248,7 @@
             button4.BackgroundImage = (Image)resources.GetObject("button4.BackgroundImage");
             button4.BackgroundImageLayout = ImageLayout.Stretch;
             button4.FlatStyle = FlatStyle.Flat;
-            button4.Location = new Point(318, 275);
+            button4.Location = new Point(473, 363);
             button4.Name = "button4";
             button4.Size = new Size(45, 16);
             button4.TabIndex = 232;
@@ -260,7 +260,7 @@
             button2.BackgroundImage = (Image)resources.GetObject("button2.BackgroundImage");
             button2.BackgroundImageLayout = ImageLayout.Stretch;
             button2.FlatStyle = FlatStyle.Flat;
-            button2.Location = new Point(316, 519);
+            button2.Location = new Point(471, 607);
             button2.Name = "button2";
             button2.Size = new Size(45, 16);
             button2.TabIndex = 231;
@@ -271,7 +271,7 @@
             // 
             Symbols.Cursor = Cursors.IBeam;
             Symbols.Font = new Font("Segoe UI", 11F);
-            Symbols.Location = new Point(13, 581);
+            Symbols.Location = new Point(168, 669);
             Symbols.Multiline = true;
             Symbols.Name = "Symbols";
             Symbols.ScrollBars = ScrollBars.Vertical;
@@ -283,7 +283,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Magenta;
-            ClientSize = new Size(394, 702);
+            ClientSize = new Size(546, 788);
             Controls.Add(Quantity);
             Controls.Add(button67);
             Controls.Add(button66);
@@ -303,7 +303,7 @@
             Controls.Add(button4);
             Controls.Add(button2);
             Controls.Add(Symbols);
-            Location = new Point(130, 70);
+            Location = new Point(5, 5);
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "Textboxes";

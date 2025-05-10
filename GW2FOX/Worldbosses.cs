@@ -1431,8 +1431,6 @@ namespace GW2FOX
         }
 
 
-
-
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
             string bossName = "FireShaman";
@@ -1760,7 +1758,6 @@ namespace GW2FOX
 
                 BossBox1.Text = jObj["BossBox1"]?.ToString() ?? "Empty";
                 BossBox2.Text = jObj["BossBox2"]?.ToString() ?? "Empty";
-                BossBox3.Text = jObj["BossBox3"]?.ToString() ?? "Empty";
             }
             catch (Exception ex)
             {
@@ -1771,11 +1768,14 @@ namespace GW2FOX
         // Button-Handler
         private void button4_Click(object sender, EventArgs e) => SaveBossSelection(BossBox1.Text.Trim());
         private void button1_Click_1(object sender, EventArgs e) => SaveBossSelection(BossBox2.Text.Trim());
-        private void button3_Click(object sender, EventArgs e) => SaveBossSelection(BossBox3.Text.Trim());
 
         private void button67_Click(object sender, EventArgs e) => LoadBossSelection(BossBox1.Text.Trim());
         private void button29_Click(object sender, EventArgs e) => LoadBossSelection(BossBox2.Text.Trim());
-        private void button66_Click(object sender, EventArgs e) => LoadBossSelection(BossBox3.Text.Trim());
+
+        public static void RestartApplication()
+        {
+            Application.Restart();
+        }
     }
 }
 

@@ -110,7 +110,7 @@ namespace GW2FOX
                         Clock_Click(sender, e);
                         break;
 
-                    case "• Timermenu":
+                    case "• Timer Menu":
                         if (_worldbossesForm == null || _worldbossesForm.IsDisposed)
                         {
                             _worldbossesForm = new Worldbosses();
@@ -127,7 +127,7 @@ namespace GW2FOX
                         }
                         break;
 
-                    case "• Textmenu":
+                    case "• Text Menu":
                         if (_textboxesForm == null || _textboxesForm.IsDisposed)
                         {
                             _textboxesForm = new Textboxes();
@@ -143,6 +143,11 @@ namespace GW2FOX
                             _textboxesForm.BringToFront();
                         }
                         break;
+
+                    case "• Main Menu":
+                        Worldbosses.RestartApplication();
+                        break;
+
                 }
             }
         }

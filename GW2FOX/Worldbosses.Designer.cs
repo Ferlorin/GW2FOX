@@ -1839,7 +1839,6 @@
             button3.Size = new Size(48, 17);
             button3.TabIndex = 284;
             button3.UseVisualStyleBackColor = true;
-            button3.Click += button3_Click;
             // 
             // button67
             // 
@@ -1878,7 +1877,6 @@
             button66.Size = new Size(48, 17);
             button66.TabIndex = 292;
             button66.UseVisualStyleBackColor = true;
-            button66.Click += button66_Click;
             // 
             // Worldbosses
             // 
