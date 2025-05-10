@@ -32,6 +32,7 @@ namespace GW2FOX
             this.Location = new System.Drawing.Point(screen.Width - this.Width, 0);
             InitializeBossCheckBoxMap();
             UpdateBossUiBosses();
+            LoadBossBoxesFromJson();
         }
 
         protected override void AfterControlsLoaded()
@@ -40,8 +41,6 @@ namespace GW2FOX
         }
 
         const int SW_RESTORE = 9;
-
-
 
         private void TheOilFloes_Click(object sender, EventArgs e)
         {
@@ -1673,6 +1672,110 @@ namespace GW2FOX
             DynamicEventManager.TriggerIt("Ogrewars");
             UpdateBossUiBosses();
         }
+
+        private void SaveBossSelection(string boxText)
+        {
+            string configPath = "BossTimings.json";
+
+            if (string.IsNullOrEmpty(boxText))
+            {
+                MessageBox.Show("Give a Name!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            try
+            {
+                var json = File.Exists(configPath) ? File.ReadAllText(configPath) : "{}";
+                var jObj = JObject.Parse(json);
+
+                // Auswahl speichern
+                var selectedBossNames = bossCheckBoxMap
+                    .Where(entry => entry.Value.Checked)
+                    .Select(entry => entry.Key)
+                    .ToList();
+
+                jObj[boxText] = new JArray(selectedBossNames);
+
+                // Textbox-Namen ebenfalls speichern
+                jObj["BossBox1"] = BossBox1.Text;
+                jObj["BossBox2"] = BossBox2.Text;
+                jObj["BossBox3"] = BossBox3.Text;
+
+                File.WriteAllText(configPath, jObj.ToString(Formatting.Indented));
+                MessageBox.Show($"Saved under '{boxText}'!", "Saved!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void LoadBossSelection(string boxText)
+        {
+            string configPath = "BossTimings.json";
+
+            if (string.IsNullOrEmpty(boxText))
+            {
+                MessageBox.Show("First a Name!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            try
+            {
+                if (!File.Exists(configPath))
+                {
+                    MessageBox.Show("Json is Missing.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                var json = File.ReadAllText(configPath);
+                var jObj = JObject.Parse(json);
+
+                var selectedBossNames = jObj[boxText] is JArray array
+                    ? array.Select(x => x.ToString()).ToHashSet(StringComparer.OrdinalIgnoreCase)
+                    : new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+
+                foreach (var entry in bossCheckBoxMap)
+                {
+                    var checkBox = entry.Value;
+                    checkBox.Checked = selectedBossNames.Contains(entry.Key);
+                    checkBox.ForeColor = checkBox.Checked ? System.Drawing.Color.White : System.Drawing.Color.Gray;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void LoadBossBoxesFromJson()
+        {
+            string configPath = "BossTimings.json";
+            if (!File.Exists(configPath)) return;
+
+            try
+            {
+                var json = File.ReadAllText(configPath);
+                var jObj = JObject.Parse(json);
+
+                BossBox1.Text = jObj["BossBox1"]?.ToString() ?? "Empty";
+                BossBox2.Text = jObj["BossBox2"]?.ToString() ?? "Empty";
+                BossBox3.Text = jObj["BossBox3"]?.ToString() ?? "Empty";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Fehler beim Laden der BossBoxen: {ex.Message}", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        // Button-Handler
+        private void button4_Click(object sender, EventArgs e) => SaveBossSelection(BossBox1.Text.Trim());
+        private void button1_Click_1(object sender, EventArgs e) => SaveBossSelection(BossBox2.Text.Trim());
+        private void button3_Click(object sender, EventArgs e) => SaveBossSelection(BossBox3.Text.Trim());
+
+        private void button67_Click(object sender, EventArgs e) => LoadBossSelection(BossBox1.Text.Trim());
+        private void button29_Click(object sender, EventArgs e) => LoadBossSelection(BossBox2.Text.Trim());
+        private void button66_Click(object sender, EventArgs e) => LoadBossSelection(BossBox3.Text.Trim());
     }
 }
 
