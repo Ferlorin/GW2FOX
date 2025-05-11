@@ -33,6 +33,8 @@ namespace GW2FOX
 {
     public partial class OverlayWindow : Window, INotifyPropertyChanged
     {
+        private bool isResizing = false;
+        private WpfPoint clickPosition;
         public readonly BossDataManager bossDataManager = new();
         private static OverlayWindow? _instance;
         private DispatcherTimer _bossTimer;
@@ -50,6 +52,8 @@ namespace GW2FOX
 
             this.Left = 1330;
             this.Top = 710;
+            this.Width = 250;
+            this.Height = 355;
 
             PreviewMouseWheel += OverlayWindow_PreviewMouseWheel;
             StartBossTimer();
@@ -386,11 +390,27 @@ namespace GW2FOX
 
         private void Icon_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (e.ChangedButton == MouseButton.Right)
+            if (sender is WpfImage img)
             {
-                //
+                AnimateScale(img, 0.90);
+                img.Opacity = 0.7;
             }
-            else if (e.ChangedButton == MouseButton.Left)
+
+            if (e.ChangedButton == MouseButton.Left)
+            {
+                BloodyCom_Click(sender, e);
+            }
+
+            var gw2Proc = Process.GetProcessesByName("Gw2-64").FirstOrDefault();
+            if (gw2Proc != null && gw2Proc.MainWindowHandle != IntPtr.Zero)
+            {
+                SetForegroundWindow(gw2Proc.MainWindowHandle);
+            }
+        }
+
+        private void FoXXy_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
             {
                 try
                 {
@@ -398,7 +418,7 @@ namespace GW2FOX
                 }
                 catch (InvalidOperationException)
                 {
-                    // Optional: Log oder ignorieren
+                    // Falls das Fenster während des Drag-Vorgangs geschlossen wird.
                 }
             }
         }
@@ -740,6 +760,37 @@ namespace GW2FOX
                 AnimateScale(img, 1.10);
                 img.Opacity = 1.0;
             }
+        }
+
+        private void ResizeTriangle_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                isResizing = true;
+                clickPosition = e.GetPosition(this);
+                ResizeTriangle.CaptureMouse();
+            }
+        }
+
+        private void ResizeTriangle_MouseMove(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            if (isResizing)
+            {
+                WpfPoint currentPosition = e.GetPosition(this);
+                double newWidth = Math.Max(this.MinWidth, this.Width + (currentPosition.X - clickPosition.X));
+                double newHeight = Math.Max(this.MinHeight, this.Height + (currentPosition.Y - clickPosition.Y));
+
+                this.Width = newWidth;
+                this.Height = newHeight;
+
+                clickPosition = currentPosition;
+            }
+        }
+
+        private void ResizeTriangle_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            isResizing = false;
+            ResizeTriangle.ReleaseMouseCapture();
         }
 
 

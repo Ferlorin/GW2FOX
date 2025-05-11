@@ -26,6 +26,7 @@
   <None Remove="Resources\BlishHUDmini.bmp" />
   <None Remove="Resources\BloodyCom.bmp" />
   <None Remove="Resources\Clock.bmp" />
+  <None Remove="Resources\Com.png" />
   <None Remove="Resources\Discord.bmp" />
   <None Remove="Resources\GroupSearch.png" />
   <None Remove="Resources\GuildAdvertising.png" />
@@ -72,6 +73,9 @@
     <Resource Include="Resources\BlishHUDmini.bmp" />
     <Resource Include="Resources\BloodyCom.bmp" />
     <Resource Include="Resources\Clock.bmp" />
+    <Resource Include="Resources\Com.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\Discord.bmp" />
     <Resource Include="Resources\GroupSearch.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
