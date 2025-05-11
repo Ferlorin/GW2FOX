@@ -252,10 +252,19 @@ namespace GW2FOX
                 else
                 {
                     TimeSpan remaining = item.NextRunTime - DateTime.Now;
-                    int displayMinutes = Math.Max(1, (int)Math.Ceiling(remaining.TotalMinutes));
-                    string timeFormatted = remaining.Hours > 0
-                        ? $"{remaining.Hours}h {displayMinutes % 60}min"
-                        : $"{displayMinutes}min";
+                    int displayMinutes = (int)Math.Ceiling(remaining.TotalMinutes);
+
+                    string timeFormatted;
+                    if (displayMinutes >= -1 && displayMinutes <= 1)
+                    {
+                        timeFormatted = "is about to start now";
+                    }
+                    else
+                    {
+                        timeFormatted = remaining.Hours > 0
+                            ? $"{remaining.Hours}h {displayMinutes % 60}min"
+                            : $"{displayMinutes}min";
+                    }
 
                     string timePrefix = item.Category == "Treasures" ? "is running about the next " : "in ca ";
                     clipboardText = $"{levelText}\"{item.BossName}\" at {item.Waypoint} {timePrefix}{timeFormatted}";
@@ -263,7 +272,7 @@ namespace GW2FOX
 
                 if (bossDataManager.GroupedLoot.TryGetValue(item.BossName, out var lootItems) && lootItems.Any())
                 {
-                    var lootInfo = lootItems.Select(l => $"[{l.ChatLink} cost {l.FormattedPrice}]");
+                    var lootInfo = lootItems.Select(l => $"{l.ChatLink} cost {l.FormattedPrice}");
                     clipboardText += ", loot here: " + string.Join(" ", lootInfo);
                 }
 
@@ -276,6 +285,7 @@ namespace GW2FOX
                 }
             }
         }
+
 
 
 
