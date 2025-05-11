@@ -53,7 +53,7 @@ namespace GW2FOX
             this.Left = 1330;
             this.Top = 710;
             this.Width = 250;
-            this.Height = 355;
+            this.Height = 350;
 
             PreviewMouseWheel += OverlayWindow_PreviewMouseWheel;
             StartBossTimer();
