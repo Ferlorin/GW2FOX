@@ -495,6 +495,10 @@ namespace GW2FOX
                 AnimateScale(img, 0.90);
                 img.Opacity = 0.7;
 
+                // Schließe das andere Overlay, wenn es geöffnet ist
+                _miniOverlay?.Close();
+                _miniOverlay = null;
+
                 if (_miniOverlay2 == null || !_miniOverlay2.Visible)
                 {
                     _miniOverlay2 = new Smilies(this);
@@ -506,7 +510,7 @@ namespace GW2FOX
                     double overlayWidth = _miniOverlay2.Width;
 
                     double targetLeft = iconPosition.X + (iconWidth / 2) - (overlayWidth / 2);
-                    double targetTop = iconPosition.Y - 130;
+                    double targetTop = iconPosition.Y - 215;
 
                     _miniOverlay2.Left = (int)targetLeft;
                     _miniOverlay2.Top = (int)targetTop;
@@ -534,15 +538,16 @@ namespace GW2FOX
             }
         }
 
-
-
-
         private async void TreasureHunterIcon_MouseDown(object sender, RoutedEventArgs e)
         {
             if (sender is WpfImage img)
             {
                 AnimateScale(img, 0.90);
                 img.Opacity = 0.7;
+
+                // Schließe das andere Overlay, wenn es geöffnet ist
+                _miniOverlay2?.Close();
+                _miniOverlay2 = null;
 
                 if (_miniOverlay == null || !_miniOverlay.IsLoaded)
                 {
@@ -558,18 +563,20 @@ namespace GW2FOX
                     _miniOverlay.Top = targetTop;
 
                     _miniOverlay.Show();
+
                     var gw2Proc = Process.GetProcessesByName("Gw2-64").FirstOrDefault();
                     if (gw2Proc != null && gw2Proc.MainWindowHandle != IntPtr.Zero)
                     {
                         SetForegroundWindow(gw2Proc.MainWindowHandle);
                     }
-                    await UpdateTreasureDataAsync();
 
+                    await UpdateTreasureDataAsync();
                 }
                 else
                 {
                     _miniOverlay.Close();
                     _miniOverlay = null;
+
                     var gw2Proc = Process.GetProcessesByName("Gw2-64").FirstOrDefault();
                     if (gw2Proc != null && gw2Proc.MainWindowHandle != IntPtr.Zero)
                     {
@@ -578,6 +585,7 @@ namespace GW2FOX
                 }
             }
         }
+
 
 
         private void GroupSearchIcon_MouseDown(object sender, RoutedEventArgs e)

@@ -39,7 +39,7 @@
             Symbols.Multiline = true;
             Symbols.Name = "Symbols";
             Symbols.ScrollBars = ScrollBars.Vertical;
-            Symbols.Size = new Size(299, 110);
+            Symbols.Size = new Size(213, 187);
             Symbols.TabIndex = 239;
             // 
             // Smilies
@@ -47,7 +47,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Magenta;
-            ClientSize = new Size(320, 133);
+            ClientSize = new Size(237, 208);
             Controls.Add(Symbols);
             Name = "Smilies";
             ShowIcon = false;
