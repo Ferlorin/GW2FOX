@@ -129,7 +129,7 @@ MouseUp="Image_MouseUp">
 
                     <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,5,6,5">
 
-                        <Image x:Name="Com" Source="/Com.png" Cursor="Hand" Width="18" Height="18" Margin="5,0,5,0"
+                        <Image x:Name="Com" Source="/Com.png" Cursor="Hand" Width="19" Height="19" Margin="5,0,3,0"
                         MouseDown="Icon_MouseDown"
                         MouseEnter="Image_MouseEnter"
                         MouseLeave="Image_MouseLeave"
@@ -142,7 +142,7 @@ MouseUp="Image_MouseUp">
 
                         <!-- Smilie -->
                         <Image x:Name="SmilieIcon" Source="/Resources/Smilie.png"
-Width="21" Height="18" Cursor="Hand" Margin="0,0,5,0"
+Width="22" Height="19" Cursor="Hand" Margin="0,0,3,0"
 MouseEnter="Image_MouseEnter"
 MouseLeave="Image_MouseLeave"
 MouseDown="SmilieIcon_MouseDown"
@@ -156,7 +156,7 @@ MouseUp="Image_MouseUp">
 
                         <!-- TreasureHunter -->
                         <Image x:Name="TreasureHunterIcon" Source="/Resources/TreasureHunter.png"
-       Width="18" Height="18" Cursor="Hand" Margin="0,0,5,0"
+       Width="19" Height="19" Cursor="Hand" Margin="0,0,3,0"
        MouseEnter="Image_MouseEnter"
        MouseLeave="Image_MouseLeave"
        MouseDown="TreasureHunterIcon_MouseDown"
@@ -169,7 +169,7 @@ MouseUp="Image_MouseUp">
 
                         <!-- GroupSearch Icon -->
                         <Image x:Name="GroupSearchIcon" Source="/Resources/GroupSearch.png"
-Width="21" Height="18" Cursor="Hand" Margin="0,0,5,0"
+Width="22" Height="19" Cursor="Hand" Margin="0,0,3,0"
 MouseEnter="Image_MouseEnter"
 MouseLeave="Image_MouseLeave"
 MouseDown="GroupSearchIcon_MouseDown"
@@ -182,7 +182,7 @@ MouseUp="Image_MouseUp">
 
                         <!-- Scheduler -->
                         <Image x:Name="SchedulerIcon" Source="/Resources/Scheduler.png"
-       Width="18" Height="18" Cursor="Hand" Margin="0,0,5,0"
+       Width="19" Height="19" Cursor="Hand" Margin="0,0,3,0"
        MouseEnter="Image_MouseEnter"
        MouseLeave="Image_MouseLeave"
        MouseDown="SchedulerIcon_MouseDown"
@@ -195,7 +195,7 @@ MouseUp="Image_MouseUp">
 
                         <!-- GuildAdvertising -->
                         <Image x:Name="GuildAdvertisingIcon" Source="/Resources/GuildAdvertising.png"
-       Width="18" Height="18" Cursor="Hand" Margin="0,0,5,0"
+       Width="19" Height="19" Cursor="Hand" Margin="0,0,3,0"
        MouseEnter="Image_MouseEnter"
        MouseLeave="Image_MouseLeave"
        MouseDown="GuildAdvertisingIcon_MouseDown"
@@ -208,7 +208,7 @@ MouseUp="Image_MouseUp">
 
                         <!-- GuildWelcome -->
                         <Image x:Name="GuildWelcomeIcon" Source="/Resources/GuildWelcome.png"
-       Width="18" Height="18" Cursor="Hand" Margin="0,0,0,0"
+       Width="19" Height="19" Cursor="Hand" Margin="0,0,0,0"
        MouseEnter="Image_MouseEnter"
        MouseLeave="Image_MouseLeave"
        MouseDown="GuildWelcomeIcon_MouseDown"
