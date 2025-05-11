@@ -16,6 +16,9 @@
     <Compile Update="OverlayWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Smilies.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Textboxes.cs">
       <SubType>Form</SubType>
     </Compile>

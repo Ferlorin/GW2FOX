@@ -18,7 +18,6 @@ using WpfMessageBox = System.Windows.MessageBox;
 using WpfListViewItem = System.Windows.Controls.ListViewItem;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
-using System.Windows.Threading;
 
 namespace GW2FOX
 {

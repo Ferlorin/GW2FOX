@@ -39,6 +39,7 @@ namespace GW2FOX
         private DateTime _lastResetDate = DateTime.MinValue;
         public static OverlayWindow GetInstance() => _instance ??= new OverlayWindow();
         private TreasureHunterMiniOverlay _miniOverlay;
+        private Smilies _miniOverlay2;
         public ObservableCollection<BossListItem> OverlayItems { get; } = new ObservableCollection<BossListItem>();
 
         public OverlayWindow()
@@ -487,6 +488,97 @@ namespace GW2FOX
             }
         }
 
+        private void SmilieIcon_MouseDown(object sender, RoutedEventArgs e)
+        {
+            if (sender is WpfImage img)
+            {
+                AnimateScale(img, 0.90);
+                img.Opacity = 0.7;
+
+                if (_miniOverlay2 == null || !_miniOverlay2.Visible)
+                {
+                    _miniOverlay2 = new Smilies(this);
+
+                    // Bildschirmkoordinaten des Icons ermitteln
+                    WpfPoint iconPosition = img.PointToScreen(new WpfPoint(0, 0));
+
+                    double iconWidth = img.ActualWidth;
+                    double overlayWidth = _miniOverlay2.Width;
+
+                    double targetLeft = iconPosition.X + (iconWidth / 2) - (overlayWidth / 2);
+                    double targetTop = iconPosition.Y - 130;
+
+                    _miniOverlay2.Left = (int)targetLeft;
+                    _miniOverlay2.Top = (int)targetTop;
+
+                    _miniOverlay2.Show();
+
+                    // Fokus auf das GW2-Fenster setzen
+                    var gw2Proc = Process.GetProcessesByName("Gw2-64").FirstOrDefault();
+                    if (gw2Proc != null && gw2Proc.MainWindowHandle != IntPtr.Zero)
+                    {
+                        SetForegroundWindow(gw2Proc.MainWindowHandle);
+                    }
+                }
+                else
+                {
+                    _miniOverlay2.Close();
+                    _miniOverlay2 = null;
+
+                    var gw2Proc = Process.GetProcessesByName("Gw2-64").FirstOrDefault();
+                    if (gw2Proc != null && gw2Proc.MainWindowHandle != IntPtr.Zero)
+                    {
+                        SetForegroundWindow(gw2Proc.MainWindowHandle);
+                    }
+                }
+            }
+        }
+
+
+
+
+        private async void TreasureHunterIcon_MouseDown(object sender, RoutedEventArgs e)
+        {
+            if (sender is WpfImage img)
+            {
+                AnimateScale(img, 0.90);
+                img.Opacity = 0.7;
+
+                if (_miniOverlay == null || !_miniOverlay.IsLoaded)
+                {
+                    _miniOverlay = new TreasureHunterMiniOverlay(this);
+                    WpfPoint iconPosition = img.PointToScreen(new WpfPoint(0, 0));
+                    double iconWidth = img.ActualWidth;
+                    double overlayWidth = _miniOverlay.Width;
+
+                    double targetLeft = iconPosition.X + (iconWidth / 2) - (overlayWidth / 2);
+                    double targetTop = iconPosition.Y - 230;
+
+                    _miniOverlay.Left = targetLeft;
+                    _miniOverlay.Top = targetTop;
+
+                    _miniOverlay.Show();
+                    var gw2Proc = Process.GetProcessesByName("Gw2-64").FirstOrDefault();
+                    if (gw2Proc != null && gw2Proc.MainWindowHandle != IntPtr.Zero)
+                    {
+                        SetForegroundWindow(gw2Proc.MainWindowHandle);
+                    }
+                    await UpdateTreasureDataAsync();
+
+                }
+                else
+                {
+                    _miniOverlay.Close();
+                    _miniOverlay = null;
+                    var gw2Proc = Process.GetProcessesByName("Gw2-64").FirstOrDefault();
+                    if (gw2Proc != null && gw2Proc.MainWindowHandle != IntPtr.Zero)
+                    {
+                        SetForegroundWindow(gw2Proc.MainWindowHandle);
+                    }
+                }
+            }
+        }
+
 
         private void GroupSearchIcon_MouseDown(object sender, RoutedEventArgs e)
         {
@@ -600,49 +692,6 @@ namespace GW2FOX
                 WpfMessageBox.Show("Error loading Guild info: " + ex.Message);
             }
         }
-
-        private async void TreasureHunterIcon_MouseDown(object sender, RoutedEventArgs e)
-        {
-            if (sender is WpfImage img)
-            {
-                AnimateScale(img, 0.90);
-                img.Opacity = 0.7;
-
-                if (_miniOverlay == null || !_miniOverlay.IsLoaded)
-                {
-                    _miniOverlay = new TreasureHunterMiniOverlay(this);
-                    WpfPoint iconPosition = img.PointToScreen(new WpfPoint(0, 0));
-                    double iconWidth = img.ActualWidth;
-                    double overlayWidth = _miniOverlay.Width;
-
-                    double targetLeft = iconPosition.X + (iconWidth / 2) - (overlayWidth / 2);
-                    double targetTop = iconPosition.Y - 230;
-
-                    _miniOverlay.Left = targetLeft;
-                    _miniOverlay.Top = targetTop;
-
-                    _miniOverlay.Show();
-                    var gw2Proc = Process.GetProcessesByName("Gw2-64").FirstOrDefault();
-                    if (gw2Proc != null && gw2Proc.MainWindowHandle != IntPtr.Zero)
-                    {
-                        SetForegroundWindow(gw2Proc.MainWindowHandle);
-                    }
-                    await UpdateTreasureDataAsync();
-                   
-                }
-                else
-                {
-                    _miniOverlay.Close();
-                    _miniOverlay = null;
-                    var gw2Proc = Process.GetProcessesByName("Gw2-64").FirstOrDefault();
-                    if (gw2Proc != null && gw2Proc.MainWindowHandle != IntPtr.Zero)
-                    {
-                        SetForegroundWindow(gw2Proc.MainWindowHandle);
-                    }
-                }
-            }
-        }
-
 
 
         private void Image_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
