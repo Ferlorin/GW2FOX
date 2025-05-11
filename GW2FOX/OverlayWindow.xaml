@@ -11,7 +11,7 @@
         Background="Transparent"
         Topmost="True"
         ResizeMode="NoResize"
-        Width="250" MinWidth="28"
+        Width="250" MinWidth="30"
         Height="Auto" MinHeight="30"
         ShowInTaskbar="False"
         Title="OverlayWindow"
@@ -75,7 +75,7 @@
             </TextBlock.Effect>
         </TextBlock>
 
-        <Grid Canvas.Left="0" Canvas.Top="0" Width="250" Height="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType=Window}}">
+        <Grid Canvas.Left="0" Canvas.Top="0" Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Window}}" Height="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType=Window}}">
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -244,21 +244,19 @@ MouseUp="Image_MouseUp">
 
                 <!-- Liste -->
                 <ScrollViewer x:Name="BossScrollViewer"
-                  VerticalScrollBarVisibility="Hidden"
-                  HorizontalScrollBarVisibility="Disabled"
-                  Background="Transparent"
-                  Grid.Column="0">
+                   VerticalScrollBarVisibility="Hidden"
+                   HorizontalScrollBarVisibility="Disabled"
+                   Background="Transparent">
                     <ListView x:Name="BossListView"
-                  ItemsSource="{Binding OverlayItems}"
-                  Background="Transparent"
-                  BorderThickness="0"
-                  FontFamily="Segoe UI"
-                  FontWeight="Bold"
-                  FontSize="14"
-                  ScrollViewer.CanContentScroll="True"
-                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                  ScrollViewer.VerticalScrollBarVisibility="Hidden"
-                  Height="Auto">
+                   ItemsSource="{Binding OverlayItems}"
+                   Background="Transparent"
+                   BorderThickness="0"
+                   FontFamily="Segoe UI"
+                   FontWeight="Bold"
+                   FontSize="14"
+                   ScrollViewer.CanContentScroll="True"
+                   ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                   ScrollViewer.VerticalScrollBarVisibility="Hidden">
                         <ListView.ItemContainerStyle>
                             <Style TargetType="ListViewItem">
                                 <Setter Property="Padding" Value="0"/>
@@ -279,13 +277,68 @@ MouseUp="Image_MouseUp">
                                         <ColumnDefinition Width="60"/>
                                     </Grid.ColumnDefinitions>
 
+                                    <Grid Grid.Column="0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <!-- Waypoint Icon -->
+                                        <Image Grid.Column="0" Source="{StaticResource WaypointImage}"
+                                    Width="20" Height="20" Margin="0,0,2,0"
+                                    Cursor="Hand"
+                                    MouseLeftButtonDown="Waypoint_MouseLeftButtonDown"
+                                    MouseEnter="Image_MouseEnter"
+                                    MouseLeave="Image_MouseLeave"
+                                    MouseDown="Image_MouseDown"
+                                    MouseUp="Image_MouseUp">
+                                            <Image.RenderTransform>
+                                                <ScaleTransform ScaleX="1.0" ScaleY="1.0"/>
+                                            </Image.RenderTransform>
+                                            <Image.RenderTransformOrigin>0.5,0.5</Image.RenderTransformOrigin>
+                                        </Image>
+
+                                        <!-- Chest Icon -->
+                                        <Image Grid.Column="1"
+                                    Width="20" Height="20" Margin="0,0,6,0"
+                                    Cursor="Hand"
+                                    Source="{Binding ChestImagePath}"
+                                    MouseLeftButtonDown="Chest_MouseLeftButtonDown"
+                                    MouseDown="Image_MouseDown"
+                                    MouseUp="Chest_MouseUp"
+                                    MouseEnter="Image_MouseEnter"
+                                    MouseLeave="Image_MouseLeave"
+                                    Stretch="Uniform"
+                                    SnapsToDevicePixels="True"
+                                    UseLayoutRounding="True">
+                                            <Image.RenderTransform>
+                                                <ScaleTransform ScaleX="1.0" ScaleY="1.0"/>
+                                            </Image.RenderTransform>
+                                            <Image.RenderTransformOrigin>0.5,0.5</Image.RenderTransformOrigin>
+                                        </Image>
+                                    </Grid>
+
                                     <!-- Bossname -->
                                     <TextBlock Grid.Column="1"
-                                   Text="{Binding BossName}"
-                                   Foreground="{Binding Category, Converter={StaticResource CategoryColorConverter}}"
-                                   TextDecorations="{Binding IsPastEvent, Converter={StaticResource StrikeConverter}}"
-                                   VerticalAlignment="Center"
-                                   TextTrimming="CharacterEllipsis"/>
+Text="{Binding BossName}"
+Foreground="{Binding Category, Converter={StaticResource CategoryColorConverter}}"
+TextDecorations="{Binding IsPastEvent, Converter={StaticResource StrikeConverter}}"
+VerticalAlignment="Center"
+TextTrimming="CharacterEllipsis">
+
+                                        <TextBlock.FontStyle>
+                                            <MultiBinding Converter="{StaticResource ItalicMultiConverter}">
+                                                <Binding />
+                                                <!-- current BossListItem -->
+                                                <Binding Path="DataContext.OverlayItems" RelativeSource="{RelativeSource AncestorType=Window}" />
+                                            </MultiBinding>
+                                        </TextBlock.FontStyle>
+
+                                        <TextBlock.Effect>
+                                            <DropShadowEffect Color="Black" BlurRadius="0" ShadowDepth="0" Opacity="1"/>
+                                        </TextBlock.Effect>
+                                    </TextBlock>
+
 
                                     <!-- Zeit -->
                                     <TextBlock Grid.Column="2"
