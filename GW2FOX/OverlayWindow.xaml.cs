@@ -258,20 +258,19 @@ namespace GW2FOX
                     TimeSpan remaining = item.NextRunTime - DateTime.Now;
                     int displayMinutes = (int)Math.Ceiling(remaining.TotalMinutes);
 
-                    string timeFormatted;
                     if (displayMinutes >= -1 && displayMinutes <= 1)
                     {
-                        timeFormatted = "is about to start now";
+                        clipboardText = $"{levelText}\"{item.BossName}\" at {item.Waypoint} is about to start now";
                     }
                     else
                     {
-                        timeFormatted = remaining.Hours > 0
+                        string timeFormatted = remaining.Hours > 0
                             ? $"{remaining.Hours}h {displayMinutes % 60}min"
                             : $"{displayMinutes}min";
-                    }
 
-                    string timePrefix = item.Category == "Treasures" ? "is running about the next " : "in ca ";
-                    clipboardText = $"{levelText}\"{item.BossName}\" at {item.Waypoint} {timePrefix}{timeFormatted}";
+                        string timePrefix = item.Category == "Treasures" ? "is running about the next " : "in ca ";
+                        clipboardText = $"{levelText}\"{item.BossName}\" at {item.Waypoint} {timePrefix}{timeFormatted}";
+                    }
                 }
 
                 if (bossDataManager.GroupedLoot.TryGetValue(item.BossName, out var lootItems) && lootItems.Any())
@@ -289,7 +288,6 @@ namespace GW2FOX
                 }
             }
         }
-
 
 
 
