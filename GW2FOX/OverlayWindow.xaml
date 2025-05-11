@@ -12,7 +12,7 @@
         Topmost="True"
         ResizeMode="NoResize"
         Width="250"
-        Height="350"
+        Height="355"
         ShowInTaskbar="False"
         Title="OverlayWindow"
         PreviewMouseWheel="OverlayWindow_PreviewMouseWheel">
