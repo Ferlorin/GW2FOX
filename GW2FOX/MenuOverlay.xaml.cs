@@ -30,9 +30,6 @@ namespace GW2FOX
         [DllImport("user32.dll", SetLastError = true)]
         private static extern IntPtr GetForegroundWindow();
 
-        [DllImport("user32.dll")]
-        private static extern bool SetForegroundWindow(IntPtr hWnd);
-
 
         public MenuOverlay()
         {
@@ -69,6 +66,8 @@ namespace GW2FOX
             }
         }
 
+        [DllImport("user32.dll")]
+        private static extern bool SetForegroundWindow(IntPtr hWnd);
 
         [DllImport("user32.dll")]
         private static extern bool AttachThreadInput(uint idAttach, uint idAttachTo, bool fAttach);
@@ -78,16 +77,6 @@ namespace GW2FOX
 
         [DllImport("kernel32.dll")]
         private static extern uint GetCurrentThreadId();
-
-        private void FocusGw2Window()
-        {
-            var gw2Proc = Process.GetProcessesByName("Gw2-64").FirstOrDefault();
-            if (gw2Proc != null && gw2Proc.MainWindowHandle != IntPtr.Zero)
-            {
-                SetForegroundWindow(gw2Proc.MainWindowHandle);
-            }
-            // Else: GW2 not running → do nothing, keep focus where it is
-        }
 
         private void CreateShortcut(string shortcutPath, string targetPath, string arguments, string description)
         {
@@ -146,13 +135,23 @@ namespace GW2FOX
 
                     case "• Main Menu":
                         Worldbosses.RestartApplication();
-                        break;
-
+                        return; // GW2 wird hier vermutlich neu gestartet – kein Fokus nötig
                 }
+
+                // Fokus am Ende wieder auf GW2
+                FocusGw2Window();
             }
         }
 
 
+        private void FocusGw2Window()
+        {
+            var gw2Proc = Process.GetProcessesByName("Gw2-64").FirstOrDefault();
+            if (gw2Proc != null && gw2Proc.MainWindowHandle != IntPtr.Zero)
+            {
+                SetForegroundWindow(gw2Proc.MainWindowHandle);
+            }
+        }
 
         private void Clock_Click(object sender, MouseButtonEventArgs e)
         {

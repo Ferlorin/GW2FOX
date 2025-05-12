@@ -556,7 +556,7 @@ namespace GW2FOX
 
         private void Mascen_CheckedChanged(object sender, EventArgs e)
         {
-            string bossName = "Spellmaster Macsen";
+            string bossName = "Nightbosses";
 
 
 
@@ -1120,6 +1120,8 @@ namespace GW2FOX
             }
             UpdateBossUiBosses();
         }
+
+
 
 
         private void Amnytas_CheckedChanged(object sender, EventArgs e)

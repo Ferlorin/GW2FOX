@@ -28,6 +28,7 @@ using System.Windows.Media.Animation;
 using System.Diagnostics;
 using Newtonsoft.Json.Linq;
 using static GW2FOX.OverlayWindow;
+using static System.Windows.Forms.AxHost;
 
 namespace GW2FOX
 {
@@ -232,6 +233,12 @@ namespace GW2FOX
 
         private async void Waypoint_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            if (sender is WpfImage img)
+            {
+                AnimateScale(img, 0.90);
+                img.Opacity = 0.7;
+            }
+
             if (!bossDataManager.IsLootLoaded)
             {
                 return;
@@ -290,8 +297,6 @@ namespace GW2FOX
         }
 
 
-
-
         private void Chest_MouseUp(object sender, MouseButtonEventArgs e)
         {
             if (sender is WpfImage img)
@@ -323,6 +328,12 @@ namespace GW2FOX
 
         private void Chest_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            if (sender is WpfImage img)
+            {
+                AnimateScale(img, 0.90);
+                img.Opacity = 0.7;
+            }
+
             if (e.ChangedButton != MouseButton.Left)
                 return;
 
@@ -408,6 +419,12 @@ namespace GW2FOX
 
         private void FoXXy_MouseDown(object sender, MouseButtonEventArgs e)
         {
+            if (sender is WpfImage img)
+            {
+                AnimateScale(img, 0.90);
+                img.Opacity = 0.7;
+            }
+
             if (e.LeftButton == MouseButtonState.Pressed)
             {
                 try
