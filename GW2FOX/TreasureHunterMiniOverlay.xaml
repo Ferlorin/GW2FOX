@@ -3,8 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:System="clr-namespace:System;assembly=mscorlib"
         Title="TreasureHunterMiniOverlay" 
-        Height="230" 
-        Width="155"
+        Height="280" 
+        Width="160"
         WindowStyle="None"
         AllowsTransparency="True"
         Background="Transparent"
@@ -41,6 +41,8 @@
                   ScrollViewer.VerticalScrollBarVisibility="Hidden">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
+                    <Setter Property="Cursor" Value="Hand"/>
+                    <Setter Property="Background" Value="Transparent" />
                     <Setter Property="Background" Value="Transparent" />
                     <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
                     <Setter Property="VerticalContentAlignment" Value="Center"/>
@@ -49,31 +51,67 @@
             </ListView.ItemContainerStyle>
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Grid>
-                        <TextBlock x:Name="BossNameText" Text="{Binding}" 
+                    <StackPanel Orientation="Horizontal">
+                        <!-- Dynamische Bildzuweisung -->
+                        <Image x:Name="bossImage" Width="18" Height="18" Margin="0,0,5,0" Visibility="Collapsed" />
+                        <TextBlock x:Name="bossNameText" Text="{Binding}"
                                    FontFamily="Segoe UI"
                                    Foreground="{Binding RelativeSource={RelativeSource AncestorType=ListView}, Path=Foreground}">
                             <TextBlock.Effect>
-                                <DropShadowEffect 
-                                    Color="Red" 
-                                    BlurRadius="4" 
-                                    ShadowDepth="0" 
-                                    Opacity="0.9"/>
+                                <DropShadowEffect Color="Red" BlurRadius="4" ShadowDepth="0" Opacity="0.9"/>
                             </TextBlock.Effect>
                         </TextBlock>
-                    </Grid>
+                    </StackPanel>
+                    <DataTemplate.Triggers>
+                        <DataTrigger Binding="{Binding}" Value="The Eye of Zhaitan">
+                            <Setter TargetName="bossImage" Property="Source" Value="/GW2FOX;component/Resources/Pendant_of_Arah.bmp" />
+                            <Setter TargetName="bossImage" Property="Visibility" Value="Visible" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding}" Value="Gates of Arah">
+                            <Setter TargetName="bossImage" Property="Source" Value="/GW2FOX;component/Resources/Bottle.png" />
+                            <Setter TargetName="bossImage" Property="Visibility" Value="Visible" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding}" Value="Captain Rotbeard">
+                            <Setter TargetName="bossImage" Property="Source" Value="/GW2FOX;component/Resources/Bottle.png" />
+                            <Setter TargetName="bossImage" Property="Visibility" Value="Visible" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding}" Value="Branded Generals">
+                            <Setter TargetName="bossImage" Property="Source" Value="/GW2FOX;component/Resources/Branded_Eye_of_Argon.png" />
+                            <Setter TargetName="bossImage" Property="Visibility" Value="Visible" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding}" Value="Dredge Commissar">
+                            <Setter TargetName="bossImage" Property="Source" Value="/GW2FOX;component/Resources/Dredge_Manifesto.png" />
+                            <Setter TargetName="bossImage" Property="Visibility" Value="Visible" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding}" Value="Rhendak The Crazed">
+                            <Setter TargetName="bossImage" Property="Source" Value="/GW2FOX;component/Resources/Rhendaksiegel.bmp" />
+                            <Setter TargetName="bossImage" Property="Visibility" Value="Visible" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding}" Value="Ogrewars">
+                            <Setter TargetName="bossImage" Property="Source" Value="/GW2FOX;component/Resources/Sam.bmp" />
+                            <Setter TargetName="bossImage" Property="Visibility" Value="Visible" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding}" Value="Statue of Dwanya">
+                            <Setter TargetName="bossImage" Property="Source" Value="/GW2FOX;component/Resources/Star_of_Dwayna.png" />
+                            <Setter TargetName="bossImage" Property="Visibility" Value="Visible" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding}" Value="Priestess of Lyssa">
+                            <Setter TargetName="bossImage" Property="Source" Value="/GW2FOX;component/Resources/Deputy_Peacemaker_Badge.bmp" />
+                            <Setter TargetName="bossImage" Property="Visibility" Value="Visible" />
+                        </DataTrigger>
+                    </DataTemplate.Triggers>
                 </DataTemplate>
             </ListView.ItemTemplate>
             <ListView.Items>
-                <System:String>☠ The Eye of Zhaitan</System:String>
-                <System:String>☠ Gates of Arah</System:String>
-                <System:String>☠ Branded Generals</System:String>
-                <System:String>☠ Dredge Commissar</System:String>
-                <System:String>☠ Captain Rotbeard</System:String>
-                <System:String>☠ Rhendak The Crazed</System:String>
-                <System:String>☠ Ogrewars</System:String>
-                <System:String>☠ Statue of Dwanya</System:String>
-                <System:String>☠ Priestess of Lyssa</System:String>
+                <System:String>The Eye of Zhaitan</System:String>
+                <System:String>Gates of Arah</System:String>
+                <System:String>Branded Generals</System:String>
+                <System:String>Dredge Commissar</System:String>
+                <System:String>Captain Rotbeard</System:String>
+                <System:String>Rhendak The Crazed</System:String>
+                <System:String>Ogrewars</System:String>
+                <System:String>Statue of Dwanya</System:String>
+                <System:String>Priestess of Lyssa</System:String>
             </ListView.Items>
         </ListView>
     </Grid>

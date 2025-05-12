@@ -25,15 +25,23 @@
   <None Remove="Resources\Black_Lion_Chest.png" />
   <None Remove="Resources\BlishHUDmini.bmp" />
   <None Remove="Resources\BloodyCom.bmp" />
+  <None Remove="Resources\Bottle.png" />
+  <None Remove="Resources\Branded_Eye_of_Argon.png" />
   <None Remove="Resources\Clock.bmp" />
   <None Remove="Resources\Com.png" />
+  <None Remove="Resources\Deputy_Peacemaker_Badge.bmp" />
   <None Remove="Resources\Discord.bmp" />
+  <None Remove="Resources\Dredge_Manifesto.png" />
   <None Remove="Resources\GroupSearch.png" />
   <None Remove="Resources\GuildAdvertising.png" />
   <None Remove="Resources\GuildWelcome.png" />
   <None Remove="Resources\OpenChest.png" />
+  <None Remove="Resources\Pendant_of_Arah.bmp" />
+  <None Remove="Resources\Rhendaksiegel.bmp" />
+  <None Remove="Resources\Sam.bmp" />
   <None Remove="Resources\Scheduler.png" />
   <None Remove="Resources\Smilie.png" />
+  <None Remove="Resources\Star_of_Dwayna.png" />
   <None Remove="Resources\Tacomini.bmp" />
   <None Remove="Resources\Thumb.png" />
   <None Remove="Resources\TreasureHunter.png" />
@@ -58,6 +66,21 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Resources\Bottle.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Deputy_Peacemaker_Badge.bmp">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Pendant_of_Arah.bmp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Star_of_Dwayna.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="GW2FOX.csproj.user" />
   </ItemGroup>
 
@@ -74,11 +97,17 @@
     </Resource>
     <Resource Include="Resources\BlishHUDmini.bmp" />
     <Resource Include="Resources\BloodyCom.bmp" />
+    <Resource Include="Resources\Branded_Eye_of_Argon.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\Clock.bmp" />
     <Resource Include="Resources\Com.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Discord.bmp" />
+    <Resource Include="Resources\Dredge_Manifesto.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\GroupSearch.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
@@ -89,6 +118,12 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\OpenChest.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Rhendaksiegel.bmp">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sam.bmp">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Scheduler.png">

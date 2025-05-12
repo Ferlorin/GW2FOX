@@ -99,8 +99,6 @@ namespace GW2FOX
         {
             if (sender is WpfListViewItem item && item.DataContext is string bossName)
             {
-                bossName = bossName.TrimStart('☠', ' ');
-
                 switch (bossName)
                 {
                     case "The Eye of Zhaitan":
@@ -226,5 +224,13 @@ namespace GW2FOX
                 SetForegroundWindow(gw2Proc.MainWindowHandle);
             }
         }
+
+        public class BossItem
+        {
+            public string Name { get; set; }
+            public string IconPath { get; set; } // optional, kann null sein
+        }
+
+
     }
 }

@@ -108,14 +108,7 @@
                     <!-- Com -->
                     <Image x:Name="ComiIcon" Source="/Resources/Com.png"
 Width="25" Height="25" Cursor="Hand" Margin="0,0,0,0"
-MouseEnter="Image_MouseEnter"
-MouseLeave="Image_MouseLeave"
-MouseDown="FoXXy_MouseDown"
-MouseUp="Image_MouseUp">
-                        <Image.RenderTransform>
-                            <ScaleTransform ScaleX="1.0" ScaleY="1.0"/>
-                        </Image.RenderTransform>
-                        <Image.RenderTransformOrigin>0.5,0.5</Image.RenderTransformOrigin>
+MouseDown="FoXXy_MouseDown">
                     </Image>
 
                     <!-- Überschrift -->
@@ -370,10 +363,10 @@ TextTrimming="CharacterEllipsis">
         </Grid>
         <!-- Resizing-Dreieck -->
             <Path x:Name="ResizeTriangle"
-              Width="30" Height="30"
+              Width="15" Height="15"
               Stretch="Fill"
               Fill="White"
-              Opacity="0.7"
+              Opacity="0.5"
               Cursor="SizeNWSE"
               Margin="0,0,0,0"
               MouseLeftButtonDown="ResizeTriangle_MouseLeftButtonDown"

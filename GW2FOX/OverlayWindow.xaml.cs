@@ -419,11 +419,6 @@ namespace GW2FOX
 
         private void FoXXy_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (sender is WpfImage img)
-            {
-                AnimateScale(img, 0.90);
-                img.Opacity = 0.7;
-            }
 
             if (e.LeftButton == MouseButtonState.Pressed)
             {
