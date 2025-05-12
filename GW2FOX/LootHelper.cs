@@ -141,7 +141,7 @@ public class LootHelper
         int gold = priceCopper / 10000;
         int silver = (priceCopper % 10000) / 100;
         int copper = priceCopper % 100;
-        string formattedPrice = $"{gold}g {silver}s {copper}c";
+        string formattedPrice = $"{gold}g";
 
         return new LootResult
         {

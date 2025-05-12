@@ -250,15 +250,15 @@ namespace GW2FOX
 
                 string levelText = item.Category switch
                 {
-                    "WBs" => $"Level {item.Level} - ",
-                    "Treasures" => $"Level {item.Level} - ",
+                    "WBs" => $"☠ Level {item.Level} ",
+                    "Treasures" => $"☠ Level {item.Level} ",
                     _ => string.Empty
                 };
 
                 if (item.IsPastEvent)
                 {
                     int minutesAgo = (int)Math.Round((DateTime.Now - item.NextRunTime).TotalMinutes);
-                    clipboardText = $"{levelText}\"{item.BossName}\" at {item.Waypoint} started before {minutesAgo}min";
+                    clipboardText = $"{levelText}\"{item.BossName}\" @ {item.Waypoint} started before {minutesAgo}min";
                 }
                 else
                 {
@@ -267,7 +267,7 @@ namespace GW2FOX
 
                     if (displayMinutes >= -1 && displayMinutes <= 1)
                     {
-                        clipboardText = $"{levelText}\"{item.BossName}\" at {item.Waypoint} is about to start now";
+                        clipboardText = $"{levelText}\"{item.BossName}\" @ {item.Waypoint} is about to start soon";
                     }
                     else
                     {
@@ -276,14 +276,14 @@ namespace GW2FOX
                             : $"{displayMinutes}min";
 
                         string timePrefix = item.Category == "Treasures" ? "is running about the next " : "in ca ";
-                        clipboardText = $"{levelText}\"{item.BossName}\" at {item.Waypoint} {timePrefix}{timeFormatted}";
+                        clipboardText = $"{levelText}\"{item.BossName}\" @ {item.Waypoint} {timePrefix}{timeFormatted}";
                     }
                 }
 
                 if (bossDataManager.GroupedLoot.TryGetValue(item.BossName, out var lootItems) && lootItems.Any())
                 {
                     var lootInfo = lootItems.Select(l => $"{l.ChatLink} cost {l.FormattedPrice}");
-                    clipboardText += ", loot here: " + string.Join(" ", lootInfo);
+                    clipboardText += " ♥♥♥ Loot here: " + string.Join(" ", lootInfo);
                 }
 
                 WpfClipboard.SetText(clipboardText);
