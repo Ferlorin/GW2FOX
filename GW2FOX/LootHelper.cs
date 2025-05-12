@@ -63,29 +63,35 @@ public class LootHelper
         }
     }
 
-    public async Task<Dictionary<int, LootResult>> LoadLootDataAsync()
+    public async Task<List<LootResult>> LoadLootDataAsync()
     {
-        Dictionary<int, LootResult> results = new();
+        var result = new List<LootResult>();
+
+        // Cache, damit API nur einmal je ID abgefragt wird
+        Dictionary<int, JObject> itemDetailsCache = new();
+        Dictionary<int, JObject> priceDetailsCache = new();
 
         foreach (var item in items)
         {
             try
             {
-
-                var itemDetails = await GetItemDetailsAsync(item.Id);
-                if (itemDetails == null)
+                if (!itemDetailsCache.TryGetValue(item.Id, out var itemDetails))
                 {
-                    continue;
+                    itemDetails = await GetItemDetailsAsync(item.Id);
+                    itemDetailsCache[item.Id] = itemDetails;
                 }
 
-                var priceDetails = await GetItemPriceAsync(item.Id);
-                if (priceDetails == null)
+                if (!priceDetailsCache.TryGetValue(item.Id, out var priceDetails))
                 {
-                    continue;
+                    priceDetails = await GetItemPriceAsync(item.Id);
+                    priceDetailsCache[item.Id] = priceDetails;
                 }
+
+                if (itemDetails == null || priceDetails == null)
+                    continue;
 
                 var lootResult = CreateLootResult(itemDetails, priceDetails, item.BossName);
-                results[item.Id] = lootResult;
+                result.Add(lootResult);
             }
             catch (Exception ex)
             {
@@ -93,13 +99,9 @@ public class LootHelper
             }
         }
 
-        foreach (var result in results)
-        {
-           // Console.WriteLine($"ID: {result.Key}, Name: {result.Value.Name}, Price: {result.Value.FormattedPrice}");
-        }
-
-        return results;
+        return result;
     }
+
 
 
     private async Task<JObject> GetItemDetailsAsync(int itemId)
@@ -154,9 +156,10 @@ public class LootHelper
     public async Task<Dictionary<string, List<LootResult>>> LoadLootGroupedByBossAsync()
     {
         var flatResults = await LoadLootDataAsync();
-        return flatResults.Values
-                          .GroupBy(r => r.BossName)
-                          .ToDictionary(g => g.Key, g => g.ToList());
+        return flatResults
+                .GroupBy(r => r.BossName)
+                .ToDictionary(g => g.Key, g => g.ToList());
     }
+
 
 }

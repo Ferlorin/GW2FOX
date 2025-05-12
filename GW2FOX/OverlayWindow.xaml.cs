@@ -157,7 +157,7 @@ namespace GW2FOX
             }
         }
 
-        private async Task UpdateTreasureDataAsync()
+        public async Task UpdateTreasureDataAsync()
         {
             try
             {
