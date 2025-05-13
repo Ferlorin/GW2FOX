@@ -283,7 +283,6 @@ MouseUp="Image_MouseUp">
                                     MouseLeftButtonDown="Waypoint_MouseLeftButtonDown"
                                     MouseEnter="Image_MouseEnter"
                                     MouseLeave="Image_MouseLeave"
-                                    MouseDown="Image_MouseDown"
                                     MouseUp="Image_MouseUp">
                                             <Image.RenderTransform>
                                                 <ScaleTransform ScaleX="1.0" ScaleY="1.0"/>
