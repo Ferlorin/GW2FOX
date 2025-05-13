@@ -258,7 +258,16 @@ namespace GW2FOX
                 if (item.IsPastEvent)
                 {
                     int minutesAgo = (int)Math.Round((DateTime.Now - item.NextRunTime).TotalMinutes);
-                    clipboardText = $"{levelText}\"{item.BossName}\" @ {item.Waypoint} started before {minutesAgo}min";
+
+                    // Angepasste Ausgabe für Events, die vor weniger als einer Minute gestartet sind
+                    if (minutesAgo == 0)
+                    {
+                        clipboardText = $"{levelText}\"{item.BossName}\" @ {item.Waypoint} started now";
+                    }
+                    else
+                    {
+                        clipboardText = $"{levelText}\"{item.BossName}\" @ {item.Waypoint} started before {minutesAgo}min";
+                    }
                 }
                 else
                 {
@@ -295,6 +304,7 @@ namespace GW2FOX
                 }
             }
         }
+
 
 
         private void Chest_MouseUp(object sender, MouseButtonEventArgs e)
