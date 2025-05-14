@@ -27,7 +27,7 @@ namespace GW2FOX
 
                     if (isPast && timeRemaining.TotalMinutes <= -15)
                         return null;
-                    if (!isPast && timeRemaining.TotalHours > 4)
+                    if (!isPast && timeRemaining.TotalHours > 8)
                         return null;
 
                     var remaining = isPast ? -timeRemaining : timeRemaining;

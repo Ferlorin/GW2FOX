@@ -166,7 +166,7 @@ namespace GW2FOX
                                                  .OrderBy(run => run.TimeToShow)
                                                  .ToList();
 
-                var items = BossOverlayHelper.GetBossOverlayItems(combinedBosses, now);
+                var items = BossTimerService.GetBossOverlayItems(combinedBosses, now);
 
                 BossListView.Dispatcher.Invoke(() =>
                 {

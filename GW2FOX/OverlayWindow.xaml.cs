@@ -130,7 +130,7 @@ namespace GW2FOX
 
                 var items = await Task.Run(() =>
                 {
-                    return BossOverlayHelper.GetBossOverlayItems(runs, DateTime.Now);
+                    return BossTimerService.GetBossOverlayItems(runs, DateTime.Now);
                 });
 
                 Dispatcher.Invoke(() =>
