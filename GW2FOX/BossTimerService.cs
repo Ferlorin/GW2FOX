@@ -25,7 +25,7 @@ namespace GW2FOX
                     var timeRemaining = eventTime - now;
                     bool isPast = timeRemaining.TotalSeconds < 0;
 
-                    if (isPast && timeRemaining.TotalMinutes <= -15)
+                    if (isPast && Math.Abs(timeRemaining.TotalSeconds) >= 899)
                         return null;
                     if (!isPast && timeRemaining.TotalHours > 8)
                         return null;

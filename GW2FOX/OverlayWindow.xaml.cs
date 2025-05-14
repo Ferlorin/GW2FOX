@@ -854,16 +854,27 @@ namespace GW2FOX
             _bossTimer.Start();
         }
 
-          private void RefreshTimesOnly()
-          {
+        private void RefreshTimesOnly()
+        {
             var now = DateTime.Now;
-            foreach (var item in OverlayItems)
-            {
-             item.UpdateTimeProperties(now);
-            }
-          }
 
-public event PropertyChangedEventHandler? PropertyChanged;
+            // erst Zeiten updaten
+            foreach (var item in OverlayItems.ToList())
+            {
+                item.UpdateTimeProperties(now);
+            }
+
+            // dann alle Einträge entfernen, die älter als 15 Minuten sind
+            var toRemove = OverlayItems
+     .Where(item => item.IsPastEvent && item.SecondsRemaining < -15 * 60)
+     .ToList();
+
+            foreach (var item in toRemove)
+                OverlayItems.Remove(item);
+        }
+
+
+        public event PropertyChangedEventHandler? PropertyChanged;
         protected void OnPropertyChanged(string name) =>
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
     }
