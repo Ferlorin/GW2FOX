@@ -82,8 +82,8 @@ namespace GW2FOX
             var selectedBosses = BossTimings.BossList23 ?? new List<string>();
 
             var staticBosses = BossTimings.BossEventGroups
-                .Where(group => selectedBosses.Contains(group.BossName))
-                .SelectMany(group => group.GetNextRuns());
+                .SelectMany(group => group.GetNextRuns())
+                .Where(run => selectedBosses.Contains(run.BossName)); // <-- FIXED
 
             var dynamicBosses = DynamicEventManager.GetActiveBossEventRuns();
 
@@ -91,6 +91,7 @@ namespace GW2FOX
                                .OrderBy(run => run.TimeToShow)
                                .ToList();
         }
+
 
         public static void Timer_Click(object? sender, EventArgs e)
         {

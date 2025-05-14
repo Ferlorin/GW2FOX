@@ -201,7 +201,7 @@ namespace GW2FOX
 
         private void Clawjormag_Click(object sender, EventArgs e)
         {
-            Claw.Checked = Claw.Checked;
+            Claw.Checked = !Claw.Checked;
         }
 
         private void Maw_Click(object sender, EventArgs e)
@@ -1442,7 +1442,7 @@ namespace GW2FOX
                 // 5. UI & Overlay aktualisieren
                 BossTimer.UpdateBossList();
                 BossTimings.UpdateBossOverlayList();
-                UpdateBossUiBosses();
+                
             }
             catch (Exception ex)
             {
@@ -1488,7 +1488,7 @@ namespace GW2FOX
             }
         }
 
-        private void UpdateBossUiBosses()
+        private async Task UpdateBossUiBosses()
         {
             string configPath = "BossTimings.json";
             if (!File.Exists(configPath)) return;
@@ -1498,12 +1498,10 @@ namespace GW2FOX
                 var json = File.ReadAllText(configPath);
                 var jObj = JObject.Parse(json);
 
-                // 1. Lade ChoosenOnes
                 var selectedBossNames = jObj["ChoosenOnes"] is JArray array
                     ? array.Select(x => x.ToString()).ToHashSet(StringComparer.OrdinalIgnoreCase)
                     : new HashSet<string>(StringComparer.OrdinalIgnoreCase);
 
-                // 2. Checkboxen setzen
                 foreach (var entry in bossCheckBoxMap)
                 {
                     var checkBox = entry.Value;
@@ -1514,10 +1512,8 @@ namespace GW2FOX
                     }
                 }
 
-                // 3. BossList23 aktualisieren
                 BossList23 = selectedBossNames.ToList();
 
-                // 4. Events und Gruppen neu aufbauen
                 BossEventsList.Clear();
                 BossEventGroups.Clear();
 
@@ -1528,22 +1524,25 @@ namespace GW2FOX
                     var boss = config.Bosses.FirstOrDefault(b => b.Name.Equals(bossName, StringComparison.OrdinalIgnoreCase));
                     if (boss != null)
                     {
+                        Console.WriteLine($"[DEBUG] Füge Boss hinzu: {boss.Name}");
                         AddBossEvent(boss.Name, boss.Timings.ToArray(), boss.Category ?? "WBs", boss.Waypoint ?? "", boss.Level ?? "");
                     }
                     else
                     {
-                        //Console.WriteLine($"⚠ Boss '{bossName}' nicht in Bosses gefunden.");
+                        Console.WriteLine($"[WARN] Boss nicht gefunden in config.Bosses: {bossName}");
                     }
                 }
 
                 GenerateBossEventGroups();
-                UpdateBossOverlayList();
+                if (BossTimerService._overlayWindow != null)
+                    await BossTimerService._overlayWindow.UpdateBossOverlayListAsync();
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Fehler beim Laden von ChoosenOnes: {ex.Message}", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
 
         private void InitializeBossCheckBoxMap()
         {

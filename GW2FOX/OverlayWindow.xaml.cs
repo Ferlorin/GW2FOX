@@ -122,31 +122,23 @@ namespace GW2FOX
         {
             try
             {
-                Console.WriteLine("[DEBUG] Starte UpdateBossOverlayListAsync()");
 
                 var runs = await Task.Run(() =>
                 {
-                    Console.WriteLine("[DEBUG] Hole BossRuns");
                     return GetBossRunsForOverlay();
                 });
-                Console.WriteLine($"[DEBUG] Gefundene Runs: {runs.Count}");
 
                 var items = await Task.Run(() =>
                 {
-                    Console.WriteLine("[DEBUG] Erzeuge Overlay-Items");
                     return BossOverlayHelper.GetBossOverlayItems(runs, DateTime.Now);
                 });
-                Console.WriteLine($"[DEBUG] Items für Overlay: {items.Count}");
 
                 Dispatcher.Invoke(() =>
                 {
-                    Console.WriteLine("[DEBUG] Dispatcher.Invoke gestartet");
                     double oldOffset = BossScrollViewer.VerticalOffset;
-                    Console.WriteLine($"[DEBUG] Alte Scroll-Position: {oldOffset}");
 
                     // 1) Schnappschuss:
                     var overlaySnapshot = OverlayItems.ToList();
-                    Console.WriteLine($"[DEBUG] Snapshot erstellt, Count={overlaySnapshot.Count}");
 
                     // 2) ChestStates sammeln:
                     var chestStates = new Dictionary<string, bool>(StringComparer.OrdinalIgnoreCase);
@@ -155,10 +147,8 @@ namespace GW2FOX
                         if (!chestStates.ContainsKey(oldItem.BossName))
                         {
                             chestStates[oldItem.BossName] = oldItem.ChestOpened;
-                            Console.WriteLine($"[DEBUG] ChestState: {oldItem.BossName} = {oldItem.ChestOpened}");
                         }
                     }
-                    Console.WriteLine($"[DEBUG] ChestStates insgesamt: {chestStates.Count}");
 
                     // 3) Neue Liste bauen:
                     var updatedItems = new ObservableCollection<BossListItem>();
@@ -175,27 +165,20 @@ namespace GW2FOX
                             newItem.LoadChestState();
                         }
                         updatedItems.Add(newItem);
-                        Console.WriteLine($"[DEBUG] Hinzugefügt: {newItem.BossName} (ChestOpened restored={restored})");
                     }
-                    Console.WriteLine($"[DEBUG] UpdatedItems Count: {updatedItems.Count}");
 
                     // 4) Collection austauschen:
-                    Console.WriteLine("[DEBUG] OverlayItems.Clear()");
                     OverlayItems.Clear();
-                    Console.WriteLine("[DEBUG] OverlayItems.Clear() fertig");
 
                     foreach (var uiItem in updatedItems)
                     {
                         OverlayItems.Add(uiItem);
                     }
-                    Console.WriteLine("[DEBUG] OverlayItems neu befüllt, Count=" + OverlayItems.Count);
 
                     // 5) Scroll-Position:
                     BossScrollViewer.ScrollToVerticalOffset(oldOffset);
-                    Console.WriteLine($"[DEBUG] Scroll-Position wiederhergestellt: {oldOffset}");
                 });
 
-                Console.WriteLine("[DEBUG] UpdateBossOverlayListAsync() beendet");
             }
             catch (Exception ex)
             {
