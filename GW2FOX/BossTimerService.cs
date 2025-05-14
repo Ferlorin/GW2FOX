@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 
 namespace GW2FOX
@@ -29,25 +31,22 @@ namespace GW2FOX
                         return null;
 
                     var remaining = isPast ? -timeRemaining : timeRemaining;
-                    string formatted = $"{(int)remaining.TotalHours:D2}:{remaining.Minutes:D2}:{remaining.Seconds:D2}";
-                    if (isPast)
-                        formatted = $"-{remaining.Minutes:D2}:{remaining.Seconds:D2}";
+                    string formatted = isPast
+                        ? $"-{remaining.Minutes:D2}:{remaining.Seconds:D2}"
+                        : $"{(int)remaining.TotalHours:D2}:{remaining.Minutes:D2}:{remaining.Seconds:D2}";
 
                     var item = new BossListItem
                     {
                         BossName = run.BossName,
                         Waypoint = run.Waypoint,
                         Category = run.Category,
+                        Level = run.Level,
                         IsPastEvent = isPast,
                         TimeRemainingFormatted = formatted,
                         SecondsRemaining = (int)(isPast ? -remaining.TotalSeconds : remaining.TotalSeconds),
                         NextRunTime = eventTime,
-                        Level = run.Level
+                        ChestOpened = BossTimings.IsChestOpened(run.BossName)
                     };
-
-
-                    // Setze ChestOpened korrekt
-                    item.ChestOpened = BossTimings.IsChestOpened(run.BossName);
 
                     return item;
                 })
@@ -83,7 +82,7 @@ namespace GW2FOX
 
             var staticBosses = BossTimings.BossEventGroups
                 .SelectMany(group => group.GetNextRuns())
-                .Where(run => selectedBosses.Contains(run.BossName)); // <-- FIXED
+                .Where(run => selectedBosses.Contains(run.BossName));
 
             var dynamicBosses = DynamicEventManager.GetActiveBossEventRuns();
 
@@ -91,7 +90,6 @@ namespace GW2FOX
                                .OrderBy(run => run.TimeToShow)
                                .ToList();
         }
-
 
         public static void Timer_Click(object? sender, EventArgs e)
         {
@@ -104,28 +102,153 @@ namespace GW2FOX
                 Console.WriteLine($"Fehler bei Timer_Click: {ex.Message}");
             }
         }
+    }
 
+    public class BossListItem : INotifyPropertyChanged
+    {
+        public event PropertyChangedEventHandler? PropertyChanged;
 
-        public class BossListItem
+        protected void OnPropertyChanged(string name) =>
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+
+        private string _countdown = "";
+        public string Countdown
         {
-            public string BossName { get; set; } = string.Empty;
-            public string Level { get; set; } = string.Empty; // <-- HINZUGEFÜGT
-            public string Waypoint { get; set; } = string.Empty;
-            public string Category { get; set; } = string.Empty;
-            public bool IsPastEvent { get; set; }
-            public string TimeRemainingFormatted { get; set; } = string.Empty;
-            public int SecondsRemaining { get; set; }
-            public DateTime NextRunTime { get; set; }
-            public bool IsConcurrentEvent { get; set; }
-            public DateTime TimeToShow => IsPastEvent ? NextRunTime.AddMinutes(15) : NextRunTime;
-            public bool ChestOpened { get; set; }
-
-            public void UpdateCountdown()
+            get => _countdown;
+            set
             {
-                var timeLeft = TimeToShow - DateTime.Now;
-                TimeRemainingFormatted = timeLeft.ToString(@"hh\:mm\:ss");
+                if (_countdown != value)
+                {
+                    _countdown = value;
+                    OnPropertyChanged(nameof(Countdown));
+                }
             }
         }
 
+        public string ChestImagePath => ChestOpened ? "/Resources/OpenChest.png" : "/Resources/Black_Lion_Chest.png";
+
+        public string BossName { get; set; } = string.Empty;
+        public string Level { get; set; } = string.Empty;
+        public string Waypoint { get; set; } = string.Empty;
+        public string Category { get; set; } = string.Empty;
+
+        private string _timeRemainingFormatted = string.Empty;
+        public string TimeRemainingFormatted
+        {
+            get => _timeRemainingFormatted;
+            set
+            {
+                if (_timeRemainingFormatted != value)
+                {
+                    _timeRemainingFormatted = value;
+                    OnPropertyChanged(nameof(TimeRemainingFormatted));
+                }
+            }
+        }
+
+        private int _secondsRemaining;
+        public int SecondsRemaining
+        {
+            get => _secondsRemaining;
+            set
+            {
+                if (_secondsRemaining != value)
+                {
+                    _secondsRemaining = value;
+                    OnPropertyChanged(nameof(SecondsRemaining));
+                }
+            }
+        }
+
+        public DateTime NextRunTime { get; set; }
+
+        private bool _isPastEvent;
+        public bool IsPastEvent
+        {
+            get => _isPastEvent;
+            set
+            {
+                if (_isPastEvent != value)
+                {
+                    _isPastEvent = value;
+                    OnPropertyChanged(nameof(IsPastEvent));
+                }
+            }
+        }
+
+        public bool IsDynamicEvent { get; set; }
+
+        private bool _isConcurrentEvent;
+        public bool IsConcurrentEvent
+        {
+            get => _isConcurrentEvent;
+            set
+            {
+                if (_isConcurrentEvent != value)
+                {
+                    _isConcurrentEvent = value;
+                    OnPropertyChanged(nameof(IsConcurrentEvent));
+                }
+            }
+        }
+
+        public DateTime TimeToShow => IsPastEvent ? NextRunTime.AddMinutes(15) : NextRunTime;
+        public List<LootHelper.LootResult> LootItems { get; set; } = new();
+
+        private bool _chestOpened;
+        public bool ChestOpened
+        {
+            get => _chestOpened;
+            set
+            {
+                if (_chestOpened != value)
+                {
+                    _chestOpened = value;
+                    OnPropertyChanged(nameof(ChestOpened));
+                    OnPropertyChanged(nameof(ChestImagePath));
+                }
+            }
+        }
+
+        public void LoadChestState()
+        {
+            var value = BossTimings.IsChestOpened(BossName);
+
+            if (ChestOpened != value)
+            {
+                ChestOpened = value;
+            }
+            else
+            {
+                OnPropertyChanged(nameof(ChestOpened));
+                OnPropertyChanged(nameof(ChestImagePath));
+            }
+        }
+
+        public void TriggerIconUpdate()
+        {
+            OnPropertyChanged(nameof(ChestImagePath));
+        }
+
+        public void UpdateCountdown()
+        {
+            var timeLeft = NextRunTime - GlobalVariables.CURRENT_DATE_TIME;
+            Countdown = timeLeft > TimeSpan.Zero
+                ? timeLeft.ToString(@"hh\:mm\:ss")
+                : "Runs";
+        }
+
+        public void UpdateTimeProperties(DateTime now)
+        {
+            var remaining = NextRunTime - now;
+            IsPastEvent = remaining.TotalSeconds < 0;
+
+            var abs = remaining.Duration();
+            SecondsRemaining = (int)(IsPastEvent ? -abs.TotalSeconds : abs.TotalSeconds);
+
+            TimeRemainingFormatted = IsPastEvent
+                ? $"-{(int)abs.TotalHours:D2}:{abs.Minutes:D2}:{abs.Seconds:D2}"
+                : $"{(int)abs.TotalHours:D2}:{abs.Minutes:D2}:{abs.Seconds:D2}";
+        }
     }
 }
