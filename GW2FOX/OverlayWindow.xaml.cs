@@ -266,11 +266,18 @@ namespace GW2FOX
 
         private async void Waypoint_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (sender is WpfImage img)
+            if (sender is WpfImage img) // Ensure 'img' is assigned before use
             {
                 AnimateScale(img, 0.90);
                 img.Opacity = 0.7;
-            }
+
+                await Task.Delay(100); // Short delay to complete the animation
+                AnimateScale(img, 1.10);
+                img.Opacity = 1.0;
+
+                await Task.Delay(100); // Short delay to complete the animation
+                AnimateScale(img, 1.0);
+            
 
             if (!bossDataManager.IsLootLoaded)
             {
@@ -337,45 +344,23 @@ namespace GW2FOX
                 }
             }
         }
-
-
-
-        private void Chest_MouseUp(object sender, MouseButtonEventArgs e)
-        {
-            if (sender is WpfImage img)
-            {
-                AnimateScale(img, 1.10);
-                img.Opacity = 1.0;
-
-                if (e.ChangedButton == MouseButton.Right)
-                {
-                    var result = System.Windows.MessageBox.Show("Reset all chests?", "Confirm Reset", MessageBoxButton.YesNo, MessageBoxImage.Question);
-
-                    if (result == MessageBoxResult.Yes)
-                    {
-                        BossTimings.ResetAllChestStates();
-                        foreach (var item in OverlayItems)
-                        {
-                            item.ChestOpened = false;
-                        }
-                    }
-                    var gw2Proc = Process.GetProcessesByName("Gw2-64").FirstOrDefault();
-                    if (gw2Proc != null && gw2Proc.MainWindowHandle != IntPtr.Zero)
-                    {
-                        SetForegroundWindow(gw2Proc.MainWindowHandle);
-                    }
-                }
-            }
         }
 
 
-        private void Chest_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private async void Chest_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (sender is WpfImage img)
+            if (sender is WpfImage img) // Ensure 'img' is assigned before use
             {
                 AnimateScale(img, 0.90);
                 img.Opacity = 0.7;
-            }
+
+                await Task.Delay(100); // Short delay to complete the animation
+                AnimateScale(img, 1.10);
+                img.Opacity = 1.0;
+
+                await Task.Delay(100); // Short delay to complete the animation
+                AnimateScale(img, 1.0);
+            
 
             if (e.ChangedButton != MouseButton.Left)
                 return;
@@ -410,6 +395,7 @@ namespace GW2FOX
                 }
             }
         }
+        }
 
 
 
@@ -440,13 +426,20 @@ namespace GW2FOX
         }
 
 
-        private void Icon_MouseDown(object sender, MouseButtonEventArgs e)
+        private async void Icon_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (sender is WpfImage img)
+            if (sender is WpfImage img) // Ensure 'img' is assigned before use
             {
                 AnimateScale(img, 0.90);
                 img.Opacity = 0.7;
-            }
+
+                await Task.Delay(100); // Short delay to complete the animation
+                AnimateScale(img, 1.10);
+                img.Opacity = 1.0;
+
+                await Task.Delay(100); // Short delay to complete the animation
+                AnimateScale(img, 1.0);
+            
 
             if (e.ChangedButton == MouseButton.Left)
             {
@@ -458,6 +451,7 @@ namespace GW2FOX
             {
                 SetForegroundWindow(gw2Proc.MainWindowHandle);
             }
+        }
         }
 
         private void FoXXy_MouseDown(object sender, MouseButtonEventArgs e)
@@ -552,13 +546,20 @@ namespace GW2FOX
             }
         }
 
-        private void SchedulerIcon_MouseDown(object sender, MouseButtonEventArgs e)
+        private async void SchedulerIcon_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (sender is WpfImage img)
+            if (sender is WpfImage img) // Ensure 'img' is assigned before use
             {
                 AnimateScale(img, 0.90);
                 img.Opacity = 0.7;
-            }
+
+                await Task.Delay(100); // Short delay to complete the animation
+                AnimateScale(img, 1.10);
+                img.Opacity = 1.0;
+
+                await Task.Delay(100); // Short delay to complete the animation
+                AnimateScale(img, 1.0);
+            
 
             // Hier eine Instanz der Klasse erstellen
             var textboxesInstance = new Textboxes();
@@ -570,16 +571,25 @@ namespace GW2FOX
                 SetForegroundWindow(gw2Proc.MainWindowHandle);
             }
         }
+        }
 
-        private void SmilieIcon_MouseDown(object sender, RoutedEventArgs e)
+        private async void SmilieIcon_MouseDown(object sender, RoutedEventArgs e)
         {
-            if (sender is WpfImage img)
+            if (sender is WpfImage img) // Ensure 'img' is assigned before use
             {
                 AnimateScale(img, 0.90);
                 img.Opacity = 0.7;
 
-                // Schließe das andere Overlay, wenn es geöffnet ist
-                _miniOverlay?.Close();
+                await Task.Delay(100); // Short delay to complete the animation
+                AnimateScale(img, 1.10);
+                img.Opacity = 1.0;
+
+                await Task.Delay(100); // Short delay to complete the animation
+                AnimateScale(img, 1.0);
+            
+
+            // Schließe das andere Overlay, wenn es geöffnet ist
+            _miniOverlay?.Close();
                 _miniOverlay = null;
 
                 if (_miniOverlay2 == null || !_miniOverlay2.Visible)
@@ -623,13 +633,21 @@ namespace GW2FOX
 
         private async void TreasureHunterIcon_MouseDown(object sender, RoutedEventArgs e)
         {
-            if (sender is WpfImage img)
+            if (sender is WpfImage img) // Ensure 'img' is assigned before use
             {
                 AnimateScale(img, 0.90);
                 img.Opacity = 0.7;
 
-                // Schließe das andere Overlay, wenn es geöffnet ist
-                _miniOverlay2?.Close();
+                await Task.Delay(100); // Short delay to complete the animation
+                AnimateScale(img, 1.10);
+                img.Opacity = 1.0;
+
+                await Task.Delay(100); // Short delay to complete the animation
+                AnimateScale(img, 1.0);
+            
+
+            // Schließe das andere Overlay, wenn es geöffnet ist
+            _miniOverlay2?.Close();
                 _miniOverlay2 = null;
 
                 if (_miniOverlay == null || !_miniOverlay.IsLoaded)
@@ -671,12 +689,19 @@ namespace GW2FOX
 
 
 
-        private void GroupSearchIcon_MouseDown(object sender, RoutedEventArgs e)
+        private async void GroupSearchIcon_MouseDown(object sender, RoutedEventArgs e)
         {
-            if (sender is WpfImage img)
+            if (sender is WpfImage img) // Ensure 'img' is assigned before use
             {
                 AnimateScale(img, 0.90);
                 img.Opacity = 0.7;
+
+                await Task.Delay(100); // Short delay to complete the animation
+                AnimateScale(img, 1.10);
+                img.Opacity = 1.0;
+
+                await Task.Delay(100); // Short delay to complete the animation
+                AnimateScale(img, 1.0);
             }
             try
             {
@@ -710,12 +735,19 @@ namespace GW2FOX
 
 
 
-        private void GuildAdvertisingIcon_MouseDown(object sender, RoutedEventArgs e)
+        private async void GuildAdvertisingIcon_MouseDown(object sender, RoutedEventArgs e)
         {
-            if (sender is WpfImage img)
+            if (sender is WpfImage img) // Ensure 'img' is assigned before use
             {
                 AnimateScale(img, 0.90);
                 img.Opacity = 0.7;
+
+                await Task.Delay(100); // Short delay to complete the animation
+                AnimateScale(img, 1.10);
+                img.Opacity = 1.0;
+
+                await Task.Delay(100); // Short delay to complete the animation
+                AnimateScale(img, 1.0);
             }
             try
             {
@@ -748,12 +780,19 @@ namespace GW2FOX
         }
 
 
-        private void GuildWelcomeIcon_MouseDown(object sender, RoutedEventArgs e)
+        private async void GuildWelcomeIcon_MouseDown(object sender, RoutedEventArgs e)
         {
-            if (sender is WpfImage img)
+            if (sender is WpfImage img) // Ensure 'img' is assigned before use
             {
                 AnimateScale(img, 0.90);
                 img.Opacity = 0.7;
+
+                await Task.Delay(100); // Short delay to complete the animation
+                AnimateScale(img, 1.10);
+                img.Opacity = 1.0;
+
+                await Task.Delay(100); // Short delay to complete the animation
+                AnimateScale(img, 1.0);
             }
             try
             {
@@ -797,23 +836,23 @@ namespace GW2FOX
                 AnimateScale(img, 1.0);
         }
 
-        private void Image_MouseDown(object sender, WpfMouseButtonEventArgs e)
+        private async Task Image_MouseDown(object sender, WpfMouseButtonEventArgs e)
         {
-            if (sender is WpfImage img)
+            if (sender is WpfImage img) // Ensure 'img' is assigned before use
             {
                 AnimateScale(img, 0.90);
                 img.Opacity = 0.7;
+
+                await Task.Delay(100); // Short delay to complete the animation
+                AnimateScale(img, 1.10);
+                img.Opacity = 1.0;
+
+                await Task.Delay(100); // Short delay to complete the animation
+                AnimateScale(img, 1.0);
             }
         }
 
-        private void Image_MouseUp(object sender, WpfMouseButtonEventArgs e)
-        {
-            if (sender is WpfImage img)
-            {
-                AnimateScale(img, 1.10);
-                img.Opacity = 1.0;
-            }
-        }
+       
 
         private void ResizeTriangle_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {

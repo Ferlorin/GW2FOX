@@ -125,8 +125,7 @@ MouseDown="FoXXy_MouseDown">
                         <Image x:Name="Com" Source="/Com.png" Cursor="Hand" Width="19" Height="19" Margin="5,0,3,0"
                         MouseDown="Icon_MouseDown"
                         MouseEnter="Image_MouseEnter"
-                        MouseLeave="Image_MouseLeave"
-                        MouseUp="Image_MouseUp">
+                        MouseLeave="Image_MouseLeave">
                             <Image.RenderTransform>
                                 <ScaleTransform ScaleX="1.0" ScaleY="1.0"/>
                             </Image.RenderTransform>
@@ -138,8 +137,7 @@ MouseDown="FoXXy_MouseDown">
 Width="22" Height="19" Cursor="Hand" Margin="0,0,3,0"
 MouseEnter="Image_MouseEnter"
 MouseLeave="Image_MouseLeave"
-MouseDown="SmilieIcon_MouseDown"
-MouseUp="Image_MouseUp">
+MouseDown="SmilieIcon_MouseDown">
                             <Image.RenderTransform>
                                 <ScaleTransform ScaleX="1.0" ScaleY="1.0"/>
                             </Image.RenderTransform>
@@ -152,8 +150,7 @@ MouseUp="Image_MouseUp">
        Width="19" Height="19" Cursor="Hand" Margin="0,0,3,0"
        MouseEnter="Image_MouseEnter"
        MouseLeave="Image_MouseLeave"
-       MouseDown="TreasureHunterIcon_MouseDown"
-       MouseUp="Image_MouseUp">
+       MouseDown="TreasureHunterIcon_MouseDown">
                             <Image.RenderTransform>
                                 <ScaleTransform ScaleX="1.0" ScaleY="1.0"/>
                             </Image.RenderTransform>
@@ -165,8 +162,7 @@ MouseUp="Image_MouseUp">
 Width="22" Height="19" Cursor="Hand" Margin="0,0,3,0"
 MouseEnter="Image_MouseEnter"
 MouseLeave="Image_MouseLeave"
-MouseDown="GroupSearchIcon_MouseDown"
-MouseUp="Image_MouseUp">
+MouseDown="GroupSearchIcon_MouseDown">
                             <Image.RenderTransform>
                                 <ScaleTransform ScaleX="1.0" ScaleY="1.0"/>
                             </Image.RenderTransform>
@@ -178,8 +174,7 @@ MouseUp="Image_MouseUp">
        Width="19" Height="19" Cursor="Hand" Margin="0,0,3,0"
        MouseEnter="Image_MouseEnter"
        MouseLeave="Image_MouseLeave"
-       MouseDown="SchedulerIcon_MouseDown"
-       MouseUp="Image_MouseUp">
+       MouseDown="SchedulerIcon_MouseDown">
                             <Image.RenderTransform>
                                 <ScaleTransform ScaleX="1.0" ScaleY="1.0"/>
                             </Image.RenderTransform>
@@ -191,8 +186,7 @@ MouseUp="Image_MouseUp">
        Width="19" Height="19" Cursor="Hand" Margin="0,0,3,0"
        MouseEnter="Image_MouseEnter"
        MouseLeave="Image_MouseLeave"
-       MouseDown="GuildAdvertisingIcon_MouseDown"
-       MouseUp="Image_MouseUp">
+       MouseDown="GuildAdvertisingIcon_MouseDown">
                             <Image.RenderTransform>
                                 <ScaleTransform ScaleX="1.0" ScaleY="1.0"/>
                             </Image.RenderTransform>
@@ -204,8 +198,7 @@ MouseUp="Image_MouseUp">
        Width="19" Height="19" Cursor="Hand" Margin="0,0,0,0"
        MouseEnter="Image_MouseEnter"
        MouseLeave="Image_MouseLeave"
-       MouseDown="GuildWelcomeIcon_MouseDown"
-       MouseUp="Image_MouseUp">
+       MouseDown="GuildWelcomeIcon_MouseDown">
                             <Image.RenderTransform>
                                 <ScaleTransform ScaleX="1.0" ScaleY="1.0"/>
                             </Image.RenderTransform>
@@ -287,8 +280,7 @@ MouseUp="Image_MouseUp">
                                     Cursor="Hand"
                                     MouseLeftButtonDown="Waypoint_MouseLeftButtonDown"
                                     MouseEnter="Image_MouseEnter"
-                                    MouseLeave="Image_MouseLeave"
-                                    MouseUp="Image_MouseUp">
+                                    MouseLeave="Image_MouseLeave">
                                             <Image.RenderTransform>
                                                 <ScaleTransform ScaleX="1.0" ScaleY="1.0"/>
                                             </Image.RenderTransform>
@@ -301,8 +293,6 @@ MouseUp="Image_MouseUp">
                                     Cursor="Hand"
                                     Source="{Binding ChestImagePath}"
                                     MouseLeftButtonDown="Chest_MouseLeftButtonDown"
-                                    MouseDown="Image_MouseDown"
-                                    MouseUp="Chest_MouseUp"
                                     MouseEnter="Image_MouseEnter"
                                     MouseLeave="Image_MouseLeave"
                                     Stretch="Uniform"
