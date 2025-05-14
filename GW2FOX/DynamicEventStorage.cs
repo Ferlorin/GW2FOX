@@ -148,42 +148,55 @@ namespace GW2FOX
             DateTime minUtc = nowUtc - TimeSpan.FromMinutes(15);
             DateTime minLocal = nowLocal - TimeSpan.FromMinutes(15);
 
-            var result = new List<BossEventRun>();
+            // 1) Snapshot aller DynamicEvents
+            List<DynamicEvent> eventSnapshot;
+            lock (Events)  // optional, falls andere Threads Events hinzufügen/entfernen
+            {
+                eventSnapshot = Events.ToList();
+            }
 
-            var dynamicEvents = Events
+            // 2) Laufende DynamicEvents zu BossEventRuns konvertieren & filtern
+            var dynamicRuns = eventSnapshot
                 .Where(e => e.IsRunning)
                 .Select(e => e.ToBossEventRun())
-                .Where(e => e.NextRunTime.ToUniversalTime() >= minUtc)
+                .Where(run => run.NextRunTime.ToUniversalTime() >= minUtc)
                 .ToList();
 
-            result.AddRange(dynamicEvents);
+            // 3) Snapshot aller statischen Gruppen
+            var groupSnapshot = BossTimings.BossEventGroups.ToList();
 
+            // 4) ChoosenOnes aus Config holen
             var config = BossTimings.LoadBossConfigFromFile("BossTimings.json");
-            var choosenBossNames = config.ChoosenOnes
-                .ToHashSet(StringComparer.OrdinalIgnoreCase);
+            var choosenNames = config.ChoosenOnes
+                                      .ToHashSet(StringComparer.OrdinalIgnoreCase);
 
-            var choosenRuns = BossTimings.BossEventGroups
-                .Where(g => choosenBossNames.Contains(g.BossName))
+            // 5) Runs aus den gewählten Gruppen
+            var chosenRuns = groupSnapshot
+                .Where(g => choosenNames.Contains(g.BossName))
                 .SelectMany(g => g.GetNextRuns())
-                .Where(r => r.NextRunTime >= minLocal)
+                .Where(run => run.NextRunTime >= minLocal)
                 .ToList();
 
-            result.AddRange(choosenRuns);
-
-            if (result.Count == 0)
+            // 6) Fallback: wenn nichts gewählt, alle Gruppen
+            if (!dynamicRuns.Any() && !chosenRuns.Any())
             {
-                result = BossTimings.BossEventGroups
+                chosenRuns = groupSnapshot
                     .SelectMany(g => g.GetNextRuns())
-                    .Where(r => r.NextRunTime >= minLocal)
+                    .Where(run => run.NextRunTime >= minLocal)
                     .ToList();
             }
 
-            return result
+            // 7) Ergebnisse zusammenführen, Duplikate aussortieren und sortieren
+            var result = dynamicRuns
+                .Concat(chosenRuns)
                 .GroupBy(r => new { r.BossName, r.NextRunTime })
                 .Select(g => g.First())
                 .OrderBy(r => r.NextRunTime)
                 .ToList();
+
+            return result;
         }
+
 
         public static void LoadPersistedEvents()
         {

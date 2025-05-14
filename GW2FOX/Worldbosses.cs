@@ -1158,6 +1158,24 @@ namespace GW2FOX
             UpdateBossUiBosses();
         }
 
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            string bossName = "FireShaman";
+
+
+
+            if (FireShaman.Checked)
+            {
+                SaveBossNameToConfig(bossName);
+            }
+            else
+            {
+                RemoveBossNameFromConfig(bossName);
+            }
+            UpdateBossUiBosses();
+        }
+
         private void LLA_CheckedChanged(object sender, EventArgs e)
         {
             string[] bossNames = { "LLA Timberline", "LLA Iron Marches", "LLA Gendarran" };
@@ -1433,22 +1451,7 @@ namespace GW2FOX
         }
 
 
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
-            string bossName = "FireShaman";
-
-
-
-            if (FireShaman.Checked)
-            {
-                SaveBossNameToConfig(bossName);
-            }
-            else
-            {
-                RemoveBossNameFromConfig(bossName);
-            }
-
-        }
+        
 
         private void button1_Click(object sender, EventArgs e)
         {
