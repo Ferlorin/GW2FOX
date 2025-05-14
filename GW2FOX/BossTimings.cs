@@ -442,10 +442,6 @@ namespace GW2FOX
             var state = boss["chestOpened"]?.ToObject<bool>() == true;
             return state;
         }
-
-      
-
-
     }
 
 }
