@@ -241,15 +241,20 @@ MouseUp="Image_MouseUp">
                    HorizontalScrollBarVisibility="Disabled"
                    Background="Transparent">
                     <ListView x:Name="BossListView"
-                   ItemsSource="{Binding OverlayItems}"
-                   Background="Transparent"
-                   BorderThickness="0"
-                   FontFamily="Segoe UI"
-                   FontWeight="Bold"
-                   FontSize="14"
-                   ScrollViewer.CanContentScroll="True"
-                   ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                   ScrollViewer.VerticalScrollBarVisibility="Hidden">
+          VirtualizingPanel.IsVirtualizing="True"
+          VirtualizingPanel.VirtualizationMode="Recycling"
+          ScrollViewer.CanContentScroll="True"
+          ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+          ScrollViewer.VerticalScrollBarVisibility="Hidden"
+          ItemsSource="{Binding OverlayItems}"
+          Background="Transparent"
+          BorderThickness="0"
+          FontFamily="Segoe UI"
+          FontWeight="Bold"
+          FontSize="14">
+
+
+
                         <ListView.ItemContainerStyle>
                             <Style TargetType="ListViewItem">
                                 <Setter Property="Padding" Value="0"/>

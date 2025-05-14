@@ -817,11 +817,21 @@ namespace GW2FOX
         private void StartBossTimer()
         {
             _bossTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
-            _bossTimer.Tick += (s, e) => UpdateBossOverlayListAsync();
+            _bossTimer.Tick += (s, e) => RefreshTimesOnly();
             _bossTimer.Start();
         }
 
-        public event PropertyChangedEventHandler? PropertyChanged;
+        private void RefreshTimesOnly()
+        {
+            var now = DateTime.Now;
+            foreach (var item in OverlayItems)
+            {
+                // Entferne die fehlerhafte Zuweisung, da UpdateTimeProperties void zurückgibt
+                item.UpdateTimeProperties(now);
+            }
+        }
+
+public event PropertyChangedEventHandler? PropertyChanged;
         protected void OnPropertyChanged(string name) =>
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
     }

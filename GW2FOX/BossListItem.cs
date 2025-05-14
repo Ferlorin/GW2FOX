@@ -1,14 +1,14 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Collections.Generic;
 
 namespace GW2FOX
 {
     public class BossListItem : INotifyPropertyChanged
     {
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
-        // Benachrichtigt das UI, wenn sich eine Eigenschaft ändert
-        public void OnPropertyChanged(string name) =>
+        protected void OnPropertyChanged(string name) =>
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 
         private string _countdown;
@@ -29,12 +29,60 @@ namespace GW2FOX
         public string Level { get; set; } = "";
         public string Waypoint { get; set; }
         public string Category { get; set; }
-        public string TimeRemainingFormatted { get; set; }
-        public int SecondsRemaining { get; set; }
+        private string _timeRemainingFormatted = "";
+        public string TimeRemainingFormatted
+        {
+            get => _timeRemainingFormatted;
+            set
+            {
+                if (_timeRemainingFormatted != value)
+                {
+                    _timeRemainingFormatted = value;
+                    OnPropertyChanged(nameof(TimeRemainingFormatted));
+                }
+            }
+        }
+        private int _secondsRemaining;
+        public int SecondsRemaining
+        {
+            get => _secondsRemaining;
+            set
+            {
+                if (_secondsRemaining != value)
+                {
+                    _secondsRemaining = value;
+                    OnPropertyChanged(nameof(SecondsRemaining));
+                }
+            }
+        }
         public DateTime NextRunTime { get; set; }
-        public bool IsPastEvent { get; set; }
+        private bool _isPastEvent;
+        public bool IsPastEvent
+        {
+            get => _isPastEvent;
+            set
+            {
+                if (_isPastEvent != value)
+                {
+                    _isPastEvent = value;
+                    OnPropertyChanged(nameof(IsPastEvent));
+                }
+            }
+        }
         public bool IsDynamicEvent { get; set; }
-        public bool IsConcurrentEvent { get; set; }
+        private bool _isConcurrentEvent;
+        public bool IsConcurrentEvent
+        {
+            get => _isConcurrentEvent;
+            set
+            {
+                if (_isConcurrentEvent != value)
+                {
+                    _isConcurrentEvent = value;
+                    OnPropertyChanged(nameof(IsConcurrentEvent));
+                }
+            }
+        }
         public DateTime TimeToShow => NextRunTime;
         public List<LootHelper.LootResult> LootItems { get; set; } = new();
 
@@ -83,5 +131,19 @@ namespace GW2FOX
                 ? timeLeft.ToString(@"hh\:mm\:ss")
                 : "Runs";
         }
+
+        public void UpdateTimeProperties(DateTime now)
+        {
+            var remaining = NextRunTime - now;
+            IsPastEvent = remaining.TotalSeconds < 0;
+
+            var abs = remaining.Duration(); // absoluter Wert (für Formatierung)
+            SecondsRemaining = (int)(IsPastEvent ? -abs.TotalSeconds : abs.TotalSeconds);
+
+            TimeRemainingFormatted = IsPastEvent
+                ? $"-{(int)abs.TotalHours:D2}:{abs.Minutes:D2}:{abs.Seconds:D2}"
+                : $"{(int)abs.TotalHours:D2}:{abs.Minutes:D2}:{abs.Seconds:D2}";
+        }
+
     }
 }
