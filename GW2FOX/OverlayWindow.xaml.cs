@@ -64,6 +64,12 @@ namespace GW2FOX
 
         private async Task InitializeOverlayAsync()
         {
+            DispatcherTimer timer = new DispatcherTimer
+            {
+                Interval = TimeSpan.FromSeconds(1)
+            };
+            timer.Tick += (s, e) => DynamicEventManager.CleanupExpiredEvents();
+            timer.Start();
             UpdateBossOverlayListAsync();
             bossDataManager.InitializeAsync();
         }

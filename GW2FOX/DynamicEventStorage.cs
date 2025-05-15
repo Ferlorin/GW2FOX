@@ -223,6 +223,39 @@ namespace GW2FOX
                 Events = new List<DynamicEvent>();
             }
         }
+        public static void CleanupExpiredEvents()
+        {
+            var now = DateTime.UtcNow;
+            var expiredEvents = Events
+                .Where(e => e.StartTime.HasValue && now >= e.EndTime)
+                .ToList();
+
+            if (!expiredEvents.Any()) return;
+
+            // Lade aktuelle BossTimings.json
+            string configPath = "BossTimings.json";
+            if (!File.Exists(configPath)) return;
+
+            var json = File.ReadAllText(configPath);
+            var jObj = JObject.Parse(json);
+            var choosen = jObj["ChoosenOnes"] as JArray ?? new JArray();
+
+            foreach (var expired in expiredEvents)
+            {
+                // Entferne aus Events
+                Events.Remove(expired);
+
+                // Entferne aus ChoosenOnes falls enthalten
+                var existing = choosen.FirstOrDefault(x => x.ToString().Equals(expired.BossName, StringComparison.OrdinalIgnoreCase));
+                if (existing != null)
+                {
+                    choosen.Remove(existing);
+                }
+            }
+
+            jObj["ChoosenOnes"] = choosen;
+            File.WriteAllText(configPath, jObj.ToString());
+        }
 
     }
 }
