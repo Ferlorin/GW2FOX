@@ -24,11 +24,6 @@ namespace GW2FOX
         public static List<BossEventGroup> BossEventGroups { get; private set; } = new();
 
 
-        private static void Init()
-        {
-            BossEventsList.Clear();
-            BossEventGroups.Clear();
-        }
 
         public static void RegisterListView(System.Windows.Controls.ListView listView)
         {
@@ -194,11 +189,6 @@ namespace GW2FOX
             
         }
 
-        public static List<BossEventRun> GetCombinedBossEvents()
-        {
-            return StaticBossEvents.Concat(DynamicBossEvents).ToList();
-        }
-
         public static void GenerateBossEventGroups()
         {
             BossEventGroups = BossEventsList
@@ -206,41 +196,6 @@ namespace GW2FOX
                 .Select(g => new BossEventGroup(g.Key, g))
                 .ToList();
         }
-
-
-        public static void LoadChosenBossesToUI(Dictionary<string, CheckBox> bossCheckBoxMap)
-        {
-            var config = LoadBossConfigAndReturn();
-
-            // Ensure the Bosses list is not null
-            if (config.Bosses == null)
-            {
-                Console.WriteLine("[Error] Bosses list is null in the configuration file.");
-                return;
-            }
-
-            var chosenBossNames = config.Bosses
-                .Where(b => b.Category == "ChoosenOnes")
-                .Select(b => b.Name)
-                .ToHashSet(StringComparer.OrdinalIgnoreCase);
-
-            // Ensure bossCheckBoxMap is not null
-            if (bossCheckBoxMap == null)
-            {
-                Console.WriteLine("[Error] bossCheckBoxMap is null.");
-                return;
-            }
-
-            foreach (var entry in bossCheckBoxMap)
-            {
-                entry.Value.Checked = chosenBossNames.Contains(entry.Key);
-                entry.Value.ForeColor = entry.Value.Checked ? System.Drawing.Color.White : System.Drawing.Color.Gray;
-            }
-
-            BossList23 = chosenBossNames.ToList();
-        }
-
-
 
         public static BossConfig LoadBossConfigAndReturn()
         {
@@ -288,64 +243,7 @@ namespace GW2FOX
             }
         }
 
-        public static void LoadBossConfig(string filePath)
-        {
-            Init();
-
-            try
-            {
-                if (!File.Exists(filePath))
-                {
-                    return;
-                }
-
-                var json = File.ReadAllText(filePath);
-
-                var bossConfig = JsonConvert.DeserializeObject<BossConfig>(json);
-
-                if (bossConfig == null)
-                {
-                    return;
-                }
-
-                LoadedConfig = bossConfig;
-
-                if (bossConfig.Bosses == null)
-                {
-                    return;
-                }
-
-                if (bossConfig.Bosses.Count == 0)
-                {
-                    return;
-                }
-
-
-                var newBossList = new List<string>();
-
-                foreach (var boss in bossConfig.Bosses)
-                {
-                    if (boss?.Name == null || boss.Timings == null)
-                    {
-                        continue;
-                    }
-
-
-                    newBossList.Add(boss.Name);
-                    AddBossEvent(boss.Name, boss.Timings.ToArray(), boss.Category ?? "ChoosenOnes", boss.Waypoint ?? "", boss.Level ?? "");
-                }
-
-                BossList23 = newBossList;
-
-                GenerateBossEventGroups();
-                UpdateBossOverlayList();
-
-            }
-            catch (Exception ex)
-            {
-                //Console.WriteLine($"[Error] Fehler beim Laden der Boss-JSON: {ex.Message}");
-            }
-        }
+        
 
         public static void ResetAllChestStates()
         {
@@ -446,54 +344,6 @@ namespace GW2FOX
             return state;
         }
 
-        /// <summary>
-        /// Lädt die BossTimings.json neu, baut alle internen Datenstrukturen neu auf,
-        /// aktualisiert die Worldbosses-UI und das Overlay.
-        /// </summary>
-        public static async Task ReloadConfigAsync()
-        {
-            const string configPath = "BossTimings.json";
-            if (!File.Exists(configPath))
-                return;
-
-            // 1. Config laden
-            var config = LoadBossConfigFromFile(configPath);
-            LoadedConfig = config;
-            BossList23 = config.ChoosenOnes?.ToList() ?? new List<string>();
-
-            // 2. Alte Events löschen und neu befüllen
-            BossEventsList.Clear();
-            BossEventGroups.Clear();
-            if (config.Bosses != null)
-            {
-                foreach (var b in config.Bosses)
-                {
-                    AddBossEvent(
-                        bossName: b.Name,
-                        timings: b.Timings.ToArray(),
-                        category: b.Category,
-                        waypoint: b.Waypoint ?? "",
-                        level: b.Level ?? ""
-                    );
-                }
-            }
-
-            // 3. Gruppen regenerieren
-            GenerateBossEventGroups();
-
-            // 4. Worldbosses-UI aktualisieren
-            //    Vorausgesetzt, du setzt beim Start irgendwo:
-            //    BossTimerService.WorldbossesInstance = this;
-            if (BossTimerService.WorldbossesInstance != null)
-            {
-                await BossTimerService.WorldbossesInstance.UpdateBossUiBosses();
-            }
-
-            // 5. Overlay neu aktualisieren
-            await OverlayWindow.GetInstance().UpdateBossOverlayListAsync();
-        }
-
-
-
+       
     }
 }

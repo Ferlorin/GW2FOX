@@ -833,6 +833,7 @@ namespace GW2FOX
             var now = DateTime.Now;
             bool dynamicEventExpired = false;
 
+            // Erstelle eine Kopie der Liste, um während der Iteration Änderungen zu vermeiden
             foreach (var item in OverlayItems.ToList())
             {
                 item.UpdateTimeProperties(now);
@@ -859,6 +860,24 @@ namespace GW2FOX
                 var runs = await Task.Run(() => GetBossRunsForOverlay());
                 var items = await Task.Run(() => GetBossOverlayItems(runs, DateTime.Now));
 
+                // Use a temporary list to avoid modifying the collection while enumerating
+                var updatedItems = new List<BossListItem>();
+
+                foreach (var item in items)
+                {
+                    var previousItem = OverlayItems.FirstOrDefault(x => x.BossName == item.BossName);
+                    if (previousItem != null)
+                    {
+                        item.ChestOpened = previousItem.ChestOpened;
+                    }
+                    else
+                    {
+                        item.LoadChestState();
+                    }
+
+                    updatedItems.Add(item);
+                }
+
                 Dispatcher.Invoke(() =>
                 {
                     double oldOffset = BossScrollViewer.VerticalOffset;
@@ -882,15 +901,17 @@ namespace GW2FOX
                     }
 
                     BossScrollViewer.ScrollToVerticalOffset(oldOffset);
-                    BossListView.Items.Refresh();
                 });
+
 
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"[ERROR] {ex.Message}");
+                Console.WriteLine($"[ERRÖR] Exception in UpdateBossOverlayListAsync: {ex.GetType().Name}: {ex.Message}");
+                Console.WriteLine(ex.StackTrace);
             }
         }
+
 
 
         public event PropertyChangedEventHandler? PropertyChanged;

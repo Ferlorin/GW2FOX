@@ -1363,56 +1363,75 @@ namespace GW2FOX
             }
         }
 
-        private void ClearAll_Click(object sender, EventArgs e)
+        private async void ClearAll_Click(object sender, EventArgs e)
         {
+            string configPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "BossTimings.json");
+
             try
             {
-                // 1. Checkboxen deaktivieren
-                foreach (var checkBox in Worldbosses.bossCheckBoxMap.Values)
-                {
-                    checkBox.Checked = false;
-                    checkBox.ForeColor = System.Drawing.Color.Gray;
-                    checkBox.Invalidate();
-                }
-
-                // 2. "ChoosenOnes" in der JSON leeren
-                string configPath = "BossTimings.json";
+                JObject json;
                 if (File.Exists(configPath))
                 {
-                    var json = JObject.Parse(File.ReadAllText(configPath));
-                    json["ChoosenOnes"] = new JArray(); // Liste leeren
-                    File.WriteAllText(configPath, json.ToString(Formatting.Indented));
+                    json = JObject.Parse(await File.ReadAllTextAsync(configPath));
+                }
+                else
+                {
+                    json = new JObject();
                 }
 
-                // 2.6. Runtime-DynamicEvents löschen
-                DynamicEventManager.Events.Clear();
+                json["ChoosenOnes"] = new JArray();
 
+                // Sicheres Schreiben mit Retry (für Edge-Fälle, z. B. Datei noch in Benutzung)
+                const int maxRetries = 5;
+                int retries = 0;
+                bool writeSuccess = false;
 
-                // 3. Runtime-Listen leeren
+                while (!writeSuccess && retries < maxRetries)
+                {
+                    try
+                    {
+                        await File.WriteAllTextAsync(configPath, json.ToString(Formatting.Indented));
+                        writeSuccess = true;
+                    }
+                    catch (IOException)
+                    {
+                        retries++;
+                        await Task.Delay(100); // kurz warten und nochmal versuchen
+                    }
+                }
+
+                if (!writeSuccess)
+                {
+                    MessageBox.Show("Konnte die Bossliste nicht speichern. Versuche es erneut.", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                // Daten im Speicher leeren
                 BossTimings.BossList23.Clear();
                 BossTimings.BossEventsList.Clear();
                 BossTimings.BossEventGroups.Clear();
+                DynamicEventManager.Events.Clear();
 
-                // 4. Overlay und Timer aktualisieren
-                BossTimer.UpdateBossList();
-                BossTimings.UpdateBossOverlayList();
+                // Overlay manuell leeren
+                OverlayWindow.GetInstance().OverlayItems.Clear();
 
+                // Danach UI neu laden
+                await UpdateBossUiBosses();
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Fehler beim Deaktivieren aller Bosse: {ex.Message}", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Fehler beim Leeren der Bossliste: " + ex.Message);
             }
         }
 
 
-
-        private void ShowAll_Click(object sender, EventArgs e)
+        private async void ShowAll_Click(object sender, EventArgs e)
         {
             try
             {
                 var config = BossTimings.LoadBossConfigAndReturn();
 
-                // 1. Alle Namen aus JSON
+                // 1. Alle Boss-Namen aus der Konfiguration holen
                 var allBossNames = config.Bosses
                     .Where(b => !string.IsNullOrWhiteSpace(b.Name))
                     .Select(b => b.Name)
@@ -1420,29 +1439,19 @@ namespace GW2FOX
                     .ToList();
 
                 // 2. Checkboxen aktivieren
-                BossTimings.CheckBossCheckboxes(allBossNames.ToArray(), Worldbosses.bossCheckBoxMap);
+                CheckAllBossCheckboxesAll();
 
-                // 3. BossList23 setzen
-                BossList23.Clear();
-
-                // 4. Events neu aufbauen
-                BossTimings.BossEventsList.Clear();
-                BossTimings.BossEventGroups.Clear();
-                foreach (var boss in config.Bosses)
+                // 3. "ChoosenOnes" in der JSON setzen
+                string configPath = "BossTimings.json";
+                if (File.Exists(configPath))
                 {
-                    if (boss.Name != null && boss.Timings != null)
-                    {
-                        BossTimings.AddBossEvent(boss.Name, boss.Timings.ToArray(), boss.Category ?? "WBs", boss.Waypoint ?? "", boss.Level ?? "");
-
-                    }
+                    var json = JObject.Parse(File.ReadAllText(configPath));
+                    json["ChoosenOnes"] = new JArray(allBossNames);
+                    File.WriteAllText(configPath, json.ToString(Formatting.Indented));
                 }
 
-                BossTimings.GenerateBossEventGroups();
-
-                // 5. UI & Overlay aktualisieren
-                BossTimer.UpdateBossList();
-                BossTimings.UpdateBossOverlayList();
-                
+                // 4. Update durchführen
+                await UpdateBossUiBosses();
             }
             catch (Exception ex)
             {
@@ -1451,7 +1460,8 @@ namespace GW2FOX
         }
 
 
-        
+
+
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -1768,8 +1778,8 @@ namespace GW2FOX
                 }
 
                 GenerateBossEventGroups();
-                if (BossTimerService._overlayWindow != null)
-                    await BossTimerService._overlayWindow.UpdateBossOverlayListAsync();
+                await OverlayWindow.GetInstance()
+                                 .UpdateBossOverlayListAsync();
             }
             catch (Exception ex)
             {

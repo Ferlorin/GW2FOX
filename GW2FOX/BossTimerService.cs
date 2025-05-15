@@ -85,23 +85,22 @@ namespace GW2FOX
             return overlayItems;
         }
 
-
-
-
         public static List<BossEventRun> GetBossRunsForOverlay()
         {
             var selectedBosses = BossTimings.BossList23 ?? new List<string>();
 
             DateTime now = GlobalVariables.CURRENT_DATE_TIME;
-            DateTime minTime = now.AddHours(-1); // 🔁 Events bis 1h zurück berücksichtigen
 
-            var staticBosses = BossTimings.BossEventGroups
-                .SelectMany(group => group.GetNextRuns())
-                .Where(run => selectedBosses.Contains(run.BossName) &&
-                              run.NextRunTime >= minTime) // 🔁 hier erweitert
+            // Kopie der Gruppen erstellen, um Modifikationen während der Iteration zu vermeiden
+            var bossEventGroupsCopy = BossTimings.BossEventGroups.ToList();
+
+            // Auch die Runs in jeder Gruppe in eine Kopie umwandeln
+            var staticBosses = bossEventGroupsCopy
+                .SelectMany(group => group.GetNextRuns().ToList())
+                .Where(run => selectedBosses.Contains(run.BossName))
                 .ToList();
 
-            var dynamicBosses = DynamicEventManager.GetActiveBossEventRuns(); // enthält eigene Filterung
+            var dynamicBosses = DynamicEventManager.GetActiveBossEventRuns();
 
             return staticBosses.Concat(dynamicBosses)
                                .OrderBy(run => run.TimeToShow)
