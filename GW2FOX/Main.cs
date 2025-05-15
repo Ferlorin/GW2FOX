@@ -18,6 +18,7 @@ namespace GW2FOX
         public Main()
         {
             InitializeComponent();
+            DynamicEventManager.KickEvents();
             InitializeWorldbosses();
         }
 

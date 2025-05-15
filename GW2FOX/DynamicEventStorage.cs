@@ -1,9 +1,10 @@
-﻿using System;
+﻿using GW2FOX;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace GW2FOX
 {
@@ -196,6 +197,41 @@ namespace GW2FOX
 
             return result;
         }
+
+
+        public static void KickEvents()
+        {
+            try
+            {
+                string configPath = "BossTimings.json";
+                if (!File.Exists(configPath)) return;
+
+                var json = File.ReadAllText(configPath);
+                var jObj = JObject.Parse(json);
+
+                var choosen = jObj["ChoosenOnes"] as JArray ?? new JArray();
+                var bosses = jObj["Bosses"] as JArray ?? new JArray();
+
+                // Finde alle Bossnamen mit Kategorie "Treasures"
+                var treasureBossNames = bosses
+                    .Where(b => b["Category"]?.ToString().Equals("Treasures", StringComparison.OrdinalIgnoreCase) == true)
+                    .Select(b => b["Name"]?.ToString())
+                    .Where(name => !string.IsNullOrWhiteSpace(name))
+                    .ToHashSet(StringComparer.OrdinalIgnoreCase);
+
+                // Entferne diese Bosse aus ChoosenOnes
+                var cleanedChoosen = new JArray(choosen.Where(x => !treasureBossNames.Contains(x.ToString())));
+
+                jObj["ChoosenOnes"] = cleanedChoosen;
+                File.WriteAllText(configPath, jObj.ToString());
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"[KickEvents] Fehler beim Bereinigen von ChoosenOnes (Treasures): {ex.Message}");
+            }
+        }
+
+
 
 
         public static void LoadPersistedEvents()
