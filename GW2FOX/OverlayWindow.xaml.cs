@@ -122,68 +122,38 @@ namespace GW2FOX
         {
             try
             {
-
-                var runs = await Task.Run(() =>
-                {
-                    return GetBossRunsForOverlay();
-                });
-
-                var items = await Task.Run(() =>
-                {
-                    return BossTimerService.GetBossOverlayItems(runs, DateTime.Now);
-                });
+                var runs = await Task.Run(() => GetBossRunsForOverlay());
+                var items = await Task.Run(() => GetBossOverlayItems(runs, DateTime.Now));
 
                 Dispatcher.Invoke(() =>
                 {
                     double oldOffset = BossScrollViewer.VerticalOffset;
 
-                    // 1) Schnappschuss:
-                    var overlaySnapshot = OverlayItems.ToList();
+                    var previousItems = OverlayItems.ToList();
+                    OverlayItems.Clear();
 
-                    // 2) ChestStates sammeln:
-                    var chestStates = new Dictionary<string, bool>(StringComparer.OrdinalIgnoreCase);
-                    foreach (var oldItem in overlaySnapshot)
+                    foreach (var item in items)
                     {
-                        if (!chestStates.ContainsKey(oldItem.BossName))
+                        var previous = previousItems.FirstOrDefault(x => x.BossName == item.BossName);
+                        if (previous != null)
                         {
-                            chestStates[oldItem.BossName] = oldItem.ChestOpened;
-                        }
-                    }
-
-                    // 3) Neue Liste bauen:
-                    var updatedItems = new ObservableCollection<BossListItem>();
-                    foreach (var newItem in items)
-                    {
-                        bool restored = false;
-                        if (chestStates.TryGetValue(newItem.BossName, out var state))
-                        {
-                            newItem.ChestOpened = state;
-                            restored = true;
+                            item.ChestOpened = previous.ChestOpened;
                         }
                         else
                         {
-                            newItem.LoadChestState();
+                            item.LoadChestState();
                         }
-                        updatedItems.Add(newItem);
+
+                        OverlayItems.Add(item);
                     }
 
-                    // 4) Collection austauschen:
-                    OverlayItems.Clear();
-
-                    foreach (var uiItem in updatedItems)
-                    {
-                        OverlayItems.Add(uiItem);
-                    }
-
-                    // 5) Scroll-Position:
                     BossScrollViewer.ScrollToVerticalOffset(oldOffset);
                 });
 
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"[ERRÖR] Exception in UpdateBossOverlayListAsync: {ex.GetType().Name}: {ex.Message}");
-                Console.WriteLine(ex.StackTrace);
+                Console.WriteLine($"[ERROR] {ex.Message}");
             }
         }
 
@@ -889,27 +859,8 @@ namespace GW2FOX
         private void StartBossTimer()
         {
             _bossTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
-            _bossTimer.Tick += (s, e) => RefreshTimesOnly();
+            _bossTimer.Tick += (s, e) => UpdateBossOverlayListAsync();
             _bossTimer.Start();
-        }
-
-        private void RefreshTimesOnly()
-        {
-            var now = DateTime.Now;
-
-            // erst Zeiten updaten
-            foreach (var item in OverlayItems.ToList())
-            {
-                item.UpdateTimeProperties(now);
-            }
-
-            // dann alle Einträge entfernen, die älter als 15 Minuten sind
-            var toRemove = OverlayItems
-     .Where(item => item.IsPastEvent && item.SecondsRemaining < -15 * 60)
-     .ToList();
-
-            foreach (var item in toRemove)
-                OverlayItems.Remove(item);
         }
 
 
