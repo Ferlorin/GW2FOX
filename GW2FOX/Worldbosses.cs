@@ -1488,62 +1488,7 @@ namespace GW2FOX
             }
         }
 
-        private async Task UpdateBossUiBosses()
-        {
-            string configPath = "BossTimings.json";
-            if (!File.Exists(configPath)) return;
-
-            try
-            {
-                var json = File.ReadAllText(configPath);
-                var jObj = JObject.Parse(json);
-
-                var selectedBossNames = jObj["ChoosenOnes"] is JArray array
-                    ? array.Select(x => x.ToString()).ToHashSet(StringComparer.OrdinalIgnoreCase)
-                    : new HashSet<string>(StringComparer.OrdinalIgnoreCase);
-
-                foreach (var entry in bossCheckBoxMap)
-                {
-                    var checkBox = entry.Value;
-                    if (checkBox != null)
-                    {
-                        checkBox.Checked = selectedBossNames.Contains(entry.Key);
-                        checkBox.ForeColor = checkBox.Checked ? System.Drawing.Color.White : System.Drawing.Color.Gray;
-                    }
-                }
-
-                BossList23 = selectedBossNames.ToList();
-
-                BossEventsList.Clear();
-                BossEventGroups.Clear();
-
-                var config = BossTimings.LoadBossConfigAndReturn();
-
-                foreach (var bossName in BossList23)
-                {
-                    var boss = config.Bosses.FirstOrDefault(b => b.Name.Equals(bossName, StringComparison.OrdinalIgnoreCase));
-                    if (boss != null)
-                    {
-                        Console.WriteLine($"[DEBUG] Füge Boss hinzu: {boss.Name}");
-                        AddBossEvent(boss.Name, boss.Timings.ToArray(), boss.Category ?? "WBs", boss.Waypoint ?? "", boss.Level ?? "");
-                    }
-                    else
-                    {
-                        Console.WriteLine($"[WARN] Boss nicht gefunden in config.Bosses: {bossName}");
-                    }
-                }
-
-                GenerateBossEventGroups();
-                if (BossTimerService._overlayWindow != null)
-                    await BossTimerService._overlayWindow.UpdateBossOverlayListAsync();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Fehler beim Laden von ChoosenOnes: {ex.Message}", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-
+        
         private void InitializeBossCheckBoxMap()
         {
             bossCheckBoxMap = new Dictionary<string, CheckBox>
@@ -1774,6 +1719,63 @@ namespace GW2FOX
 
         private void button67_Click(object sender, EventArgs e) => LoadBossSelection(BossBox1.Text.Trim());
         private void button29_Click(object sender, EventArgs e) => LoadBossSelection(BossBox2.Text.Trim());
+
+
+
+        public async Task UpdateBossUiBosses()
+        {
+            string configPath = "BossTimings.json";
+            if (!File.Exists(configPath)) return;
+
+            try
+            {
+                var json = File.ReadAllText(configPath);
+                var jObj = JObject.Parse(json);
+
+                var selectedBossNames = jObj["ChoosenOnes"] is JArray array
+                    ? array.Select(x => x.ToString()).ToHashSet(StringComparer.OrdinalIgnoreCase)
+                    : new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+
+                foreach (var entry in bossCheckBoxMap)
+                {
+                    var checkBox = entry.Value;
+                    if (checkBox != null)
+                    {
+                        checkBox.Checked = selectedBossNames.Contains(entry.Key);
+                        checkBox.ForeColor = checkBox.Checked ? System.Drawing.Color.White : System.Drawing.Color.Gray;
+                    }
+                }
+
+                BossList23 = selectedBossNames.ToList();
+
+                BossEventsList.Clear();
+                BossEventGroups.Clear();
+
+                var config = BossTimings.LoadBossConfigAndReturn();
+
+                foreach (var bossName in BossList23)
+                {
+                    var boss = config.Bosses.FirstOrDefault(b => b.Name.Equals(bossName, StringComparison.OrdinalIgnoreCase));
+                    if (boss != null)
+                    {
+                        Console.WriteLine($"[DEBUG] Füge Boss hinzu: {boss.Name}");
+                        AddBossEvent(boss.Name, boss.Timings.ToArray(), boss.Category ?? "WBs", boss.Waypoint ?? "", boss.Level ?? "");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"[WARN] Boss nicht gefunden in config.Bosses: {bossName}");
+                    }
+                }
+
+                GenerateBossEventGroups();
+                if (BossTimerService._overlayWindow != null)
+                    await BossTimerService._overlayWindow.UpdateBossOverlayListAsync();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Fehler beim Laden von ChoosenOnes: {ex.Message}", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
 
         public static void RestartApplication()
         {

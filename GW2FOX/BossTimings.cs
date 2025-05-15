@@ -147,7 +147,7 @@ namespace GW2FOX
             return TimeZoneInfo.ConvertTimeToUtc(unspecifiedTime, GlobalVariables.TIMEZONE_TO_USE);
         }
 
-        public static void UpdateBossOverlayList()
+        public static async Task UpdateBossOverlayList()
         {
             try
             {
@@ -179,6 +179,8 @@ namespace GW2FOX
                         window.OverlayItems.Add(item);
                     }
                 });
+                if (BossTimerService._overlayWindow != null)
+                    await BossTimerService._overlayWindow.UpdateBossOverlayListAsync();
 
                 foreach (var boss in combinedBosses.OrderBy(b => b.TimeToShow))
                 {
@@ -189,6 +191,7 @@ namespace GW2FOX
             {
                 Console.WriteLine($"Fehler beim Aktualisieren der BossOverlay-Liste: {ex.Message}");
             }
+            
         }
 
         public static List<BossEventRun> GetCombinedBossEvents()
@@ -442,6 +445,55 @@ namespace GW2FOX
             var state = boss["chestOpened"]?.ToObject<bool>() == true;
             return state;
         }
-    }
 
+        /// <summary>
+        /// Lädt die BossTimings.json neu, baut alle internen Datenstrukturen neu auf,
+        /// aktualisiert die Worldbosses-UI und das Overlay.
+        /// </summary>
+        public static async Task ReloadConfigAsync()
+        {
+            const string configPath = "BossTimings.json";
+            if (!File.Exists(configPath))
+                return;
+
+            // 1. Config laden
+            var config = LoadBossConfigFromFile(configPath);
+            LoadedConfig = config;
+            BossList23 = config.ChoosenOnes?.ToList() ?? new List<string>();
+
+            // 2. Alte Events löschen und neu befüllen
+            BossEventsList.Clear();
+            BossEventGroups.Clear();
+            if (config.Bosses != null)
+            {
+                foreach (var b in config.Bosses)
+                {
+                    AddBossEvent(
+                        bossName: b.Name,
+                        timings: b.Timings.ToArray(),
+                        category: b.Category,
+                        waypoint: b.Waypoint ?? "",
+                        level: b.Level ?? ""
+                    );
+                }
+            }
+
+            // 3. Gruppen regenerieren
+            GenerateBossEventGroups();
+
+            // 4. Worldbosses-UI aktualisieren
+            //    Vorausgesetzt, du setzt beim Start irgendwo:
+            //    BossTimerService.WorldbossesInstance = this;
+            if (BossTimerService.WorldbossesInstance != null)
+            {
+                await BossTimerService.WorldbossesInstance.UpdateBossUiBosses();
+            }
+
+            // 5. Overlay neu aktualisieren
+            await OverlayWindow.GetInstance().UpdateBossOverlayListAsync();
+        }
+
+
+
+    }
 }

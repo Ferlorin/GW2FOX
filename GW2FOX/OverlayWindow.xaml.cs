@@ -124,48 +124,6 @@ namespace GW2FOX
             BossScrollViewer.ScrollToVerticalOffset(e.NewValue);
         }
 
-        public async Task UpdateBossOverlayListAsync()
-        {
-            try
-            {
-                var runs = await Task.Run(() => GetBossRunsForOverlay());
-                var items = await Task.Run(() => GetBossOverlayItems(runs, DateTime.Now));
-
-                Dispatcher.Invoke(() =>
-                {
-                    double oldOffset = BossScrollViewer.VerticalOffset;
-
-                    var previousItems = OverlayItems.ToList();
-                    OverlayItems.Clear();
-
-                    foreach (var item in items)
-                    {
-                        var previous = previousItems.FirstOrDefault(x => x.BossName == item.BossName);
-                        if (previous != null)
-                        {
-                            item.ChestOpened = previous.ChestOpened;
-                        }
-                        else
-                        {
-                            item.LoadChestState();
-                        }
-
-                        OverlayItems.Add(item);
-                    }
-
-                    BossScrollViewer.ScrollToVerticalOffset(oldOffset);
-                });
-
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"[ERROR] {ex.Message}");
-            }
-        }
-
-
-
-
         public async Task UpdateTreasureDataAsync()
         {
             try
@@ -862,11 +820,76 @@ namespace GW2FOX
         }
 
 
+
         private void StartBossTimer()
         {
             _bossTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
-            _bossTimer.Tick += (s, e) => UpdateBossOverlayListAsync();
+            _bossTimer.Tick += (s, e) => RefreshTimesOnly();
             _bossTimer.Start();
+        }
+
+        private void RefreshTimesOnly()
+        {
+            var now = DateTime.Now;
+            bool dynamicEventExpired = false;
+
+            foreach (var item in OverlayItems.ToList())
+            {
+                item.UpdateTimeProperties(now);
+
+                // Dynamische Events prüfen: ist abgelaufen?
+                if (item.IsDynamicEvent && item.NextRunTime <= now)
+                {
+                    dynamicEventExpired = true;
+                }
+            }
+
+            // Wenn ein dynamisches Event abgelaufen ist → Overlay aktualisieren
+            if (dynamicEventExpired)
+            {
+                _ = UpdateBossOverlayListAsync(); // Fire & Forget
+            }
+        }
+
+
+        public async Task UpdateBossOverlayListAsync()
+        {
+            try
+            {
+                var runs = await Task.Run(() => GetBossRunsForOverlay());
+                var items = await Task.Run(() => GetBossOverlayItems(runs, DateTime.Now));
+
+                Dispatcher.Invoke(() =>
+                {
+                    double oldOffset = BossScrollViewer.VerticalOffset;
+
+                    var previousItems = OverlayItems.ToList();
+                    OverlayItems.Clear();
+
+                    foreach (var item in items)
+                    {
+                        var previous = previousItems.FirstOrDefault(x => x.BossName == item.BossName);
+                        if (previous != null)
+                        {
+                            item.ChestOpened = previous.ChestOpened;
+                        }
+                        else
+                        {
+                            item.LoadChestState();
+                        }
+
+                        OverlayItems.Add(item);
+                    }
+
+                    BossScrollViewer.ScrollToVerticalOffset(oldOffset);
+                    BossListView.Items.Refresh();
+                });
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"[ERROR] {ex.Message}");
+            }
         }
 
 

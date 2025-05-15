@@ -23,7 +23,8 @@ namespace GW2FOX
 {
     public partial class TreasureHunterMiniOverlay : Window
     {
-        private Worldbosses worldbosses = new Worldbosses();
+        private Worldbosses worldbosses = BossTimerService.WorldbossesInstance;
+
 
         public TreasureHunterMiniOverlay(Window overlayWindow)
         {
@@ -134,9 +135,11 @@ namespace GW2FOX
 
 
 
-        private void HandleEyeOfZhaitan()
+        private async void HandleEyeOfZhaitan()
         {
             worldbosses.Eye_Click(this, EventArgs.Empty);
+            await OverlayWindow.GetInstance()
+                               .UpdateBossOverlayListAsync();
             var gw2Proc = Process.GetProcessesByName("Gw2-64").FirstOrDefault();
             if (gw2Proc != null && gw2Proc.MainWindowHandle != IntPtr.Zero)
             {
@@ -145,9 +148,11 @@ namespace GW2FOX
         }
 
 
-        private void HandleGatesOfArah()
+        private async void HandleGatesOfArah()
         {
             worldbosses.button31_Click(this, EventArgs.Empty);
+            await OverlayWindow.GetInstance()
+                               .UpdateBossOverlayListAsync();
             var gw2Proc = Process.GetProcessesByName("Gw2-64").FirstOrDefault();
             if (gw2Proc != null && gw2Proc.MainWindowHandle != IntPtr.Zero)
             {
@@ -155,9 +160,11 @@ namespace GW2FOX
             }
         }
 
-        private void HandleBrandedGenerals()
+        private async void HandleBrandedGenerals()
         {
             worldbosses.button42_Click(this, EventArgs.Empty);
+            await OverlayWindow.GetInstance()
+                               .UpdateBossOverlayListAsync();
             var gw2Proc = Process.GetProcessesByName("Gw2-64").FirstOrDefault();
             if (gw2Proc != null && gw2Proc.MainWindowHandle != IntPtr.Zero)
             {
@@ -165,9 +172,11 @@ namespace GW2FOX
             }
         }
 
-        private void HandleDredgeCommissar()
+        private async void HandleDredgeCommissar()
         {
             worldbosses.button63_Click(this, EventArgs.Empty);
+            await OverlayWindow.GetInstance()
+                               .UpdateBossOverlayListAsync();
             var gw2Proc = Process.GetProcessesByName("Gw2-64").FirstOrDefault();
             if (gw2Proc != null && gw2Proc.MainWindowHandle != IntPtr.Zero)
             {
@@ -175,9 +184,11 @@ namespace GW2FOX
             }
         }
 
-        private void HandleCaptainRotbeard()
+        private async void HandleCaptainRotbeard()
         {
             worldbosses.button65_Click(this, EventArgs.Empty);
+            await OverlayWindow.GetInstance()
+                               .UpdateBossOverlayListAsync();
             var gw2Proc = Process.GetProcessesByName("Gw2-64").FirstOrDefault();
             if (gw2Proc != null && gw2Proc.MainWindowHandle != IntPtr.Zero)
             {
@@ -185,9 +196,11 @@ namespace GW2FOX
             }
         }
 
-        private void HandleRhendak()
+        private async void HandleRhendak()
         {
             worldbosses.Rhendak_Click(this, EventArgs.Empty);
+            await OverlayWindow.GetInstance()
+                               .UpdateBossOverlayListAsync();
             var gw2Proc = Process.GetProcessesByName("Gw2-64").FirstOrDefault();
             if (gw2Proc != null && gw2Proc.MainWindowHandle != IntPtr.Zero)
             {
@@ -195,9 +208,11 @@ namespace GW2FOX
             }
         }
 
-        private void HandleOgrewars()
+        private async void HandleOgrewars()
         {
             worldbosses.Ogrewars_Click(this, EventArgs.Empty);
+            await OverlayWindow.GetInstance()
+                               .UpdateBossOverlayListAsync();
             var gw2Proc = Process.GetProcessesByName("Gw2-64").FirstOrDefault();
             if (gw2Proc != null && gw2Proc.MainWindowHandle != IntPtr.Zero)
             {
@@ -205,9 +220,11 @@ namespace GW2FOX
             }
         }
 
-        private void HandleStatueOfDwanya()
+        private async void HandleStatueOfDwanya()
         {
             worldbosses.Dwayna_Click(this, EventArgs.Empty);
+            await OverlayWindow.GetInstance()
+                               .UpdateBossOverlayListAsync();
             var gw2Proc = Process.GetProcessesByName("Gw2-64").FirstOrDefault();
             if (gw2Proc != null && gw2Proc.MainWindowHandle != IntPtr.Zero)
             {
@@ -215,15 +232,18 @@ namespace GW2FOX
             }
         }
 
-        private void HandlePriestessOfLyssa()
+        private async void HandlePriestessOfLyssa()
         {
             worldbosses.Lyssa_Click(this, EventArgs.Empty);
+            await OverlayWindow.GetInstance()
+                               .UpdateBossOverlayListAsync();
             var gw2Proc = Process.GetProcessesByName("Gw2-64").FirstOrDefault();
             if (gw2Proc != null && gw2Proc.MainWindowHandle != IntPtr.Zero)
             {
                 SetForegroundWindow(gw2Proc.MainWindowHandle);
             }
         }
+
 
         public class BossItem
         {

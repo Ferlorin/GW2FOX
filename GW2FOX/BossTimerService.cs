@@ -25,9 +25,19 @@ namespace GW2FOX
                     var timeRemaining = eventTime - now;
                     bool isPast = timeRemaining.TotalSeconds < 0;
 
-                    if (isPast && Math.Abs(timeRemaining.TotalSeconds) >= 899)
+                    bool isDynamic = DynamicEventManager.Events
+                        .Any(e => e.BossName.Equals(run.BossName, StringComparison.OrdinalIgnoreCase));
+
+                    // 🟥 Dynamische Events: exakt bei Ablauf (0 Sekunden übrig) ausblenden
+                    if (isDynamic && eventTime <= now)
                         return null;
-                    if (!isPast && timeRemaining.TotalHours > 8)
+
+                    // 🟩 Normale Events: nur anzeigen, wenn nicht älter als 15 Minuten
+                    if (!isDynamic && eventTime < now.AddMinutes(-15))
+                        return null;
+
+                    // Optional: sehr ferne zukünftige ignorieren
+                    if (eventTime > now.AddHours(8))
                         return null;
 
                     var remaining = isPast ? -timeRemaining : timeRemaining;
@@ -35,20 +45,19 @@ namespace GW2FOX
                         ? $"-{remaining.Minutes:D2}:{remaining.Seconds:D2}"
                         : $"{(int)remaining.TotalHours:D2}:{remaining.Minutes:D2}:{remaining.Seconds:D2}";
 
-                    var item = new BossListItem
+                    return new BossListItem
                     {
                         BossName = run.BossName,
                         Waypoint = run.Waypoint,
                         Category = run.Category,
                         Level = run.Level,
                         IsPastEvent = isPast,
+                        IsDynamicEvent = isDynamic,
                         TimeRemainingFormatted = formatted,
                         SecondsRemaining = (int)(isPast ? -remaining.TotalSeconds : remaining.TotalSeconds),
                         NextRunTime = eventTime,
                         ChestOpened = BossTimings.IsChestOpened(run.BossName)
                     };
-
-                    return item;
                 })
                 .Where(item => item != null)
                 .ToList();
@@ -76,20 +85,29 @@ namespace GW2FOX
             return overlayItems;
         }
 
+
+
+
         public static List<BossEventRun> GetBossRunsForOverlay()
         {
             var selectedBosses = BossTimings.BossList23 ?? new List<string>();
 
+            DateTime now = GlobalVariables.CURRENT_DATE_TIME;
+            DateTime minTime = now.AddHours(-1); // 🔁 Events bis 1h zurück berücksichtigen
+
             var staticBosses = BossTimings.BossEventGroups
                 .SelectMany(group => group.GetNextRuns())
-                .Where(run => selectedBosses.Contains(run.BossName));
+                .Where(run => selectedBosses.Contains(run.BossName) &&
+                              run.NextRunTime >= minTime) // 🔁 hier erweitert
+                .ToList();
 
-            var dynamicBosses = DynamicEventManager.GetActiveBossEventRuns();
+            var dynamicBosses = DynamicEventManager.GetActiveBossEventRuns(); // enthält eigene Filterung
 
             return staticBosses.Concat(dynamicBosses)
                                .OrderBy(run => run.TimeToShow)
                                .ToList();
         }
+
 
         public static void Timer_Click(object? sender, EventArgs e)
         {
