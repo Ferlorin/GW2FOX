@@ -42,9 +42,24 @@ namespace GW2FOX
                         return null;
 
                     var remaining = isPast ? -timeRemaining : timeRemaining;
-                    string formatted = isPast
-                        ? $"-{remaining.Minutes:D2}:{remaining.Seconds:D2}"
-                        : $"{(int)remaining.TotalHours:D2}:{remaining.Minutes:D2}:{remaining.Seconds:D2}";
+                    string formatted;
+                    if (isPast)
+                    {
+                        if (remaining.TotalHours >= 1)
+                        {
+                            formatted = $"-{remaining.Minutes:D2}:{remaining.Seconds:D2}";
+                        }
+                        else
+                        {
+                            // Vergangen und weniger als 1h → nur Minuten:Sekunden
+                            formatted = $"-{remaining.Minutes:D2}:{remaining.Seconds:D2}";
+                        }
+                    }
+                    else
+                    {
+                        formatted = $"{(int)remaining.TotalHours:D2}:{remaining.Minutes:D2}:{remaining.Seconds:D2}";
+                    }
+
 
                     return new BossListItem
                     {
@@ -283,9 +298,19 @@ namespace GW2FOX
             var abs = remaining.Duration();
             SecondsRemaining = (int)(IsPastEvent ? -abs.TotalSeconds : abs.TotalSeconds);
 
-            TimeRemainingFormatted = IsPastEvent
-                ? $"-{(int)abs.TotalHours:D2}:{abs.Minutes:D2}:{abs.Seconds:D2}"
-                : $"{(int)abs.TotalHours:D2}:{abs.Minutes:D2}:{abs.Seconds:D2}";
+            if (IsPastEvent && abs.TotalHours < 1)
+            {
+                TimeRemainingFormatted = $"-{abs.Minutes:D2}:{abs.Seconds:D2}";
+            }
+            else if (IsPastEvent)
+            {
+                TimeRemainingFormatted = $"-{abs.Minutes:D2}:{abs.Seconds:D2}";
+            }
+            else
+            {
+                TimeRemainingFormatted = $"{(int)abs.TotalHours:D2}:{abs.Minutes:D2}:{abs.Seconds:D2}";
+            }
+
         }
 
 
