@@ -105,8 +105,7 @@ namespace GW2FOX
             }
             else
             {
-                _menuOverlay.Hide();
-                _menuOverlay.HideChildForms();
+                _menuOverlay?.HideMenuAndChildren();
             }
         }
 

@@ -88,6 +88,17 @@ namespace GW2FOX
             shortcut.Save();
         }
 
+        public void HideMenuAndChildren()
+        {
+            this.Hide();
+
+            if (BossTimerService.WorldbossesInstance != null && !BossTimerService.WorldbossesInstance.IsDisposed)
+                BossTimerService.WorldbossesInstance.Hide();
+
+            if (_textboxesForm != null && !_textboxesForm.IsDisposed)
+                _textboxesForm.Hide();
+        }
+
 
         private void BossNameText_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
