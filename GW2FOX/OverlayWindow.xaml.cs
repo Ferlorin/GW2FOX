@@ -846,6 +846,7 @@ namespace GW2FOX
                 if (!item.IsDynamicEvent && item.NextRunTime < now.AddMinutes(-15))
                 {
                     OverlayItems.Remove(item);
+                    needsRefresh = true;
                 }
             }
 
