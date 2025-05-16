@@ -259,7 +259,26 @@ namespace GW2FOX
         public void UpdateTimeProperties(DateTime now)
         {
             var remaining = NextRunTime - now;
-            IsPastEvent = remaining.TotalSeconds < 0;
+
+            // Standardwert
+            IsPastEvent = false;
+
+            if (remaining.TotalSeconds < 0)
+            {
+                // Für dynamische Events: immer IsPastEvent, solange in der Vergangenheit
+                if (IsDynamicEvent)
+                {
+                    IsPastEvent = true;
+                }
+                else
+                {
+                    // Für normale Events: nur wenn nicht länger als 15 Minuten her
+                    if (remaining.TotalMinutes >= -15)
+                    {
+                        IsPastEvent = true;
+                    }
+                }
+            }
 
             var abs = remaining.Duration();
             SecondsRemaining = (int)(IsPastEvent ? -abs.TotalSeconds : abs.TotalSeconds);
@@ -268,5 +287,7 @@ namespace GW2FOX
                 ? $"-{(int)abs.TotalHours:D2}:{abs.Minutes:D2}:{abs.Seconds:D2}"
                 : $"{(int)abs.TotalHours:D2}:{abs.Minutes:D2}:{abs.Seconds:D2}";
         }
+
+
     }
 }

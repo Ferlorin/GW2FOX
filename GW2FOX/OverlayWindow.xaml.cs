@@ -830,26 +830,31 @@ namespace GW2FOX
         private void RefreshTimesOnly()
         {
             var now = GlobalVariables.CURRENT_DATE_TIME;
-            bool dynamicEventExpired = false;
+            bool needsRefresh = false;
 
-            // Erstelle eine Kopie der Liste, um während der Iteration Änderungen zu vermeiden
             foreach (var item in OverlayItems.ToList())
             {
                 item.UpdateTimeProperties(now);
 
-                // Dynamische Events prüfen: ist abgelaufen?
+                // Dynamisches Event abgelaufen → trigger Refresh
                 if (item.IsDynamicEvent && item.NextRunTime <= now)
                 {
-                    dynamicEventExpired = true;
+                    needsRefresh = true;
+                }
+
+                // Normales Event verjährt (> 15 Minuten in der Vergangenheit) → entfernen
+                if (!item.IsDynamicEvent && item.NextRunTime < now.AddMinutes(-15))
+                {
+                    OverlayItems.Remove(item);
                 }
             }
 
-            // Wenn ein dynamisches Event abgelaufen ist → Overlay aktualisieren
-            if (dynamicEventExpired)
+            if (needsRefresh)
             {
                 _ = UpdateBossOverlayListAsync(); // Fire & Forget
             }
         }
+
 
 
         public async Task UpdateBossOverlayListAsync()
