@@ -16,7 +16,8 @@ namespace GW2FOX
         public static ObservableCollection<BossListItem> GetBossOverlayItems(IEnumerable<BossEventRun> bossRuns, DateTime _)
         {
             var overlayItems = new ObservableCollection<BossListItem>();
-            var now = DateTime.Now;
+            var now = GlobalVariables.CURRENT_DATE_TIME;
+
 
             var items = bossRuns
                 .Select(run =>

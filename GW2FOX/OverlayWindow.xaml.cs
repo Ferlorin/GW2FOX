@@ -786,7 +786,6 @@ namespace GW2FOX
             }
         }
 
-       
 
         private void ResizeTriangle_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -830,7 +829,7 @@ namespace GW2FOX
 
         private void RefreshTimesOnly()
         {
-            var now = DateTime.Now;
+            var now = GlobalVariables.CURRENT_DATE_TIME;
             bool dynamicEventExpired = false;
 
             // Erstelle eine Kopie der Liste, um während der Iteration Änderungen zu vermeiden
@@ -858,7 +857,7 @@ namespace GW2FOX
             try
             {
                 var runs = await Task.Run(() => GetBossRunsForOverlay());
-                var items = await Task.Run(() => GetBossOverlayItems(runs, DateTime.Now));
+                var items = await Task.Run(() => GetBossOverlayItems(runs, GlobalVariables.CURRENT_DATE_TIME));
 
                 // Use a temporary list to avoid modifying the collection while enumerating
                 var updatedItems = new List<BossListItem>();

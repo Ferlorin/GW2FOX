@@ -1424,7 +1424,6 @@ namespace GW2FOX
             }
         }
 
-
         private async void ShowAll_Click(object sender, EventArgs e)
         {
             try
@@ -1458,9 +1457,6 @@ namespace GW2FOX
                 MessageBox.Show($"Fehler beim Anzeigen aller Bosse: {ex.Message}", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-
-
 
 
         private void button1_Click(object sender, EventArgs e)
@@ -1768,7 +1764,6 @@ namespace GW2FOX
                     var boss = config.Bosses.FirstOrDefault(b => b.Name.Equals(bossName, StringComparison.OrdinalIgnoreCase));
                     if (boss != null)
                     {
-                        Console.WriteLine($"[DEBUG] Füge Boss hinzu: {boss.Name}");
                         AddBossEvent(boss.Name, boss.Timings.ToArray(), boss.Category ?? "WBs", boss.Waypoint ?? "", boss.Level ?? "");
                     }
                     else
