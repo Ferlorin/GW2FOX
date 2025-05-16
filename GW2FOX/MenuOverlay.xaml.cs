@@ -100,21 +100,24 @@ namespace GW2FOX
                         break;
 
                     case "• Timer Menu":
-                        if (_worldbossesForm == null || _worldbossesForm.IsDisposed)
+                        var wbForm = BossTimerService.WorldbossesInstance;
+                        if (wbForm == null || wbForm.IsDisposed)
                         {
-                            _worldbossesForm = new Worldbosses();
-                            _worldbossesForm.Show();
+                            wbForm = new Worldbosses();
+                            BossTimerService.WorldbossesInstance = wbForm;
+                            wbForm.Show();
                         }
-                        else if (_worldbossesForm.Visible)
+                        else if (wbForm.Visible)
                         {
-                            _worldbossesForm.Hide();
+                            wbForm.Hide();
                         }
                         else
                         {
-                            _worldbossesForm.Show();
-                            _worldbossesForm.BringToFront();
+                            wbForm.Show();
+                            wbForm.BringToFront();
                         }
                         break;
+
 
                     case "• Text Menu":
                         if (_textboxesForm == null || _textboxesForm.IsDisposed)
@@ -135,10 +138,8 @@ namespace GW2FOX
 
                     case "• Main Menu":
                         Worldbosses.RestartApplication();
-                        return; // GW2 wird hier vermutlich neu gestartet – kein Fokus nötig
+                        return; 
                 }
-
-                // Fokus am Ende wieder auf GW2
                 FocusGw2Window();
             }
         }
@@ -186,6 +187,8 @@ namespace GW2FOX
                 Forms.MessageBox.Show($"{executableName} not found in directory:\n{exeDirectory}", "File not found", Forms.MessageBoxButtons.OK, Forms.MessageBoxIcon.Error);
             }
         }
+
+
         private void AnimateScale(WpfImage image, double toScale, double durationMs = 100)
         {
             if (image.RenderTransform is not ScaleTransform scaleTransform)

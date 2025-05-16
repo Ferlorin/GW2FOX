@@ -112,8 +112,6 @@ namespace GW2FOX
 
 
 
-
-
         private void LaunchExternalTool(string executableName)
         {
             string exeDirectory = Path.GetDirectoryName(Forms.Application.ExecutablePath);

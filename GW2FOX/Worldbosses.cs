@@ -32,7 +32,7 @@ namespace GW2FOX
             this.Location = new System.Drawing.Point(screen.Width - this.Width, 0);
             InitializeBossCheckBoxMap();
             LoadBossBoxesFromJson();
-            UpdateBossUiBosses();
+            UpdateBoxes();
         }
 
         protected override void AfterControlsLoaded()
@@ -1726,6 +1726,36 @@ namespace GW2FOX
         private void button67_Click(object sender, EventArgs e) => LoadBossSelection(BossBox1.Text.Trim());
         private void button29_Click(object sender, EventArgs e) => LoadBossSelection(BossBox2.Text.Trim());
 
+        public async Task UpdateBoxes()
+        {
+            string configPath = "BossTimings.json";
+            if (!File.Exists(configPath)) return;
+
+            try
+            {
+                var json = await File.ReadAllTextAsync(configPath);
+                var jObj = JObject.Parse(json);
+
+                var selectedBossNames = jObj["ChoosenOnes"] is JArray array
+                    ? array.Select(x => x.ToString()).ToHashSet(StringComparer.OrdinalIgnoreCase)
+                    : new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+
+                foreach (var entry in bossCheckBoxMap)
+                {
+                    var checkBox = entry.Value;
+                    if (checkBox != null)
+                    {
+                        checkBox.Checked = selectedBossNames.Contains(entry.Key);
+                        checkBox.ForeColor = checkBox.Checked ? System.Drawing.Color.White : System.Drawing.Color.Gray;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Optional: Logge den Fehler oder zeige eine Nachricht
+                Console.WriteLine("Fehler beim Lesen der Boss-Konfiguration: " + ex.Message);
+            }
+        }
 
 
         public async Task UpdateBossUiBosses()

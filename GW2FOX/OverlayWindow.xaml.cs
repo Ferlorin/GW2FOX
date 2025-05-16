@@ -404,79 +404,23 @@ namespace GW2FOX
             }
         }
 
-
-
         public void ToggleAllWindows()
         {
-            var excludedTypes = new[] { typeof(MiniOverlay), typeof(Main) };
-            var topMostStates = new Dictionary<Forms.Form, bool>();
-            bool anyToggled = false;
-
-            // Alle offenen Forms entsperren (TopMost deaktivieren)
-            foreach (Forms.Form f in Forms.Application.OpenForms)
+            var wbForm = BossTimerService.WorldbossesInstance;
+            if (wbForm == null || wbForm.IsDisposed)
             {
-                topMostStates[f] = f.TopMost;
-                f.TopMost = false;
+                wbForm = new Worldbosses();
+                BossTimerService.WorldbossesInstance = wbForm;
+                wbForm.Show();
             }
-
-            // Alle Forms durchgehen und anzeigen/verstecken
-            foreach (Forms.Form openForm in Forms.Application.OpenForms)
+            else if (wbForm.Visible)
             {
-                if (!excludedTypes.Contains(openForm.GetType()))
-                {
-                    if (openForm.Visible)
-                    {
-                        openForm.Hide();
-                        anyToggled = true;
-                    }
-                    else
-                    {
-                        openForm.Show();
-                        openForm.BringToFront();
-                        openForm.Activate();
-                        anyToggled = true;
-                    }
-                }
-            }
-
-            // Spezielle Behandlung für Worldbosses, falls noch nie angezeigt
-            if (BossTimerService.WorldbossesInstance is { } wb && !excludedTypes.Contains(wb.GetType()))
-            {
-                if (!Forms.Application.OpenForms.Cast<Forms.Form>().Contains(wb))
-                {
-                    if (wb.Visible)
-                    {
-                        wb.Hide();
-                        anyToggled = true;
-                    }
-                    else
-                    {
-                        wb.Show();
-                        wb.BringToFront();
-                        wb.Activate();
-                        anyToggled = true;
-                    }
-                }
-            }
-
-            // Ursprüngliche TopMost-Werte wiederherstellen
-            foreach (var kvp in topMostStates)
-                kvp.Key.TopMost = kvp.Value;
-
-            // GW2 in den Vordergrund bringen, falls etwas getoggelt wurde
-            if (anyToggled)
-            {
-                var gw2Proc = Process.GetProcessesByName("Gw2-64").FirstOrDefault();
-                if (gw2Proc != null && gw2Proc.MainWindowHandle != IntPtr.Zero)
-                {
-                    SetForegroundWindow(gw2Proc.MainWindowHandle);
-                }
+                wbForm.Hide();
             }
             else
             {
-                System.Windows.MessageBox.Show(
-                    "No toggleable windows found.\nMaybe they're already gone? 🧐",
-                    "Nothing To Toggle", MessageBoxButton.OK, MessageBoxImage.Information);
+                wbForm.Show();
+                wbForm.BringToFront();
             }
         }
 
