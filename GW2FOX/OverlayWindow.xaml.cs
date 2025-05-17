@@ -353,13 +353,6 @@ namespace GW2FOX
         }
 
 
-        private void BloodyCom_Click(object sender, MouseButtonEventArgs e)
-        {
-            _overlayWindow = OverlayWindow.GetInstance();
-            _overlayWindow.ToggleAllWindows();
-        }
-
-
         private async void Icon_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (sender is WpfImage img) // Ensure 'img' is assigned before use
@@ -377,7 +370,23 @@ namespace GW2FOX
 
             if (e.ChangedButton == MouseButton.Left)
             {
-                BloodyCom_Click(sender, e);
+                    var wbForm = BossTimerService.WorldbossesInstance;
+                    if (wbForm == null || wbForm.IsDisposed)
+                    {
+                        wbForm = new Worldbosses();
+                        BossTimerService.WorldbossesInstance = wbForm;
+                        wbForm.Show();
+                    }
+                    else if (wbForm.Visible)
+                    {
+                        wbForm.Hide();
+                    }
+                    else
+                    {
+                        wbForm.Show();
+                        wbForm.BringToFront();
+                    }
+                  
             }
 
             var gw2Proc = Process.GetProcessesByName("Gw2-64").FirstOrDefault();
@@ -404,25 +413,7 @@ namespace GW2FOX
             }
         }
 
-        public void ToggleAllWindows()
-        {
-            var wbForm = BossTimerService.WorldbossesInstance;
-            if (wbForm == null || wbForm.IsDisposed)
-            {
-                wbForm = new Worldbosses();
-                BossTimerService.WorldbossesInstance = wbForm;
-                wbForm.Show();
-            }
-            else if (wbForm.Visible)
-            {
-                wbForm.Hide();
-            }
-            else
-            {
-                wbForm.Show();
-                wbForm.BringToFront();
-            }
-        }
+    
 
         private async void SchedulerIcon_MouseDown(object sender, MouseButtonEventArgs e)
         {
