@@ -1726,6 +1726,7 @@ namespace GW2FOX
         private void button67_Click(object sender, EventArgs e) => LoadBossSelection(BossBox1.Text.Trim());
         private void button29_Click(object sender, EventArgs e) => LoadBossSelection(BossBox2.Text.Trim());
 
+
         public async Task UpdateBoxes()
         {
             string configPath = "BossTimings.json";
@@ -1749,6 +1750,7 @@ namespace GW2FOX
                         checkBox.ForeColor = checkBox.Checked ? System.Drawing.Color.White : System.Drawing.Color.Gray;
                     }
                 }
+                SaveChoosenOnesToConfig();
             }
             catch (Exception ex)
             {
