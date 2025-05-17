@@ -1,34 +1,34 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
+using System.Diagnostics;
+using System.IO;
+using System.Linq;
+using System.Runtime.InteropServices;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Threading;
 using System.Windows.Media;
-using static GW2FOX.BossTimerService;
-using System.IO;
-using Newtonsoft.Json;
-
-// Aliases für eindeutige Verweise
-using WpfImage = System.Windows.Controls.Image;
-using WpfClipboard = System.Windows.Clipboard;
-using WpfPoint = System.Windows.Point;
-using WpfMouseEventArgs = System.Windows.Input.MouseWheelEventArgs;
-using WpfMouseButtonEventArgs = System.Windows.Input.MouseButtonEventArgs;
-using WpfSize = System.Windows.Size;
-using WpfButton = System.Windows.Controls.Button;
-using WpfMessageBox = System.Windows.MessageBox;
-using Forms = System.Windows.Forms;
-using System.Diagnostics;
-using System.Linq;
-using System.Runtime.InteropServices;
 using System.Windows.Media.Animation;
-using System.Diagnostics;
-using Newtonsoft.Json.Linq;
+using System.Windows.Threading;
+using static GW2FOX.BossTimerService;
 using static GW2FOX.OverlayWindow;
 using static System.Windows.Forms.AxHost;
+using Forms = System.Windows.Forms;
+using WpfButton = System.Windows.Controls.Button;
+using WpfClipboard = System.Windows.Clipboard;
+// Aliases für eindeutige Verweise
+using WpfImage = System.Windows.Controls.Image;
+using WpfMessageBox = System.Windows.MessageBox;
+using WpfMouseButtonEventArgs = System.Windows.Input.MouseButtonEventArgs;
+using WpfMouseEventArgs = System.Windows.Input.MouseWheelEventArgs;
+using WpfPoint = System.Windows.Point;
+using WpfSize = System.Windows.Size;
 
 namespace GW2FOX
 {
@@ -72,6 +72,48 @@ namespace GW2FOX
             timer.Start();
             UpdateBossOverlayListAsync();
             bossDataManager.InitializeAsync();
+        }
+
+
+        public async Task UpdateBosses()
+        {
+            string configPath = "BossTimings.json";
+            if (!File.Exists(configPath)) return;
+
+            try
+            {
+                var json = await File.ReadAllTextAsync(configPath);
+                var jObj = JObject.Parse(json);
+
+                var selectedBossNames = jObj["ChoosenOnes"] is JArray array
+                    ? array.Select(x => x.ToString()).ToHashSet(StringComparer.OrdinalIgnoreCase)
+                    : new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+
+                var config = JsonConvert.DeserializeObject<BossConfig>(jObj.ToString()) ?? new BossConfig();
+
+                // Listen leeren
+                BossTimings.BossList23.Clear();
+                BossTimings.BossEventsList.Clear();
+                BossTimings.BossEventGroups.Clear();
+
+                // Bosse aus config laden, wenn sie in ChoosenOnes sind
+                var matched = config.Bosses
+                    .Where(b => selectedBossNames.Contains(b.Name))
+                    .ToList();
+
+                foreach (var boss in matched)
+                {
+                    BossTimings.AddBossEvent(boss.Name, boss.Timings.ToArray(), boss.Category, boss.Waypoint ?? "");
+                }
+
+                // Gruppen neu generieren und UI aktualisieren
+                BossTimings.GenerateBossEventGroups();
+                BossTimer.UpdateBossList();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Fehler beim Lesen der Boss-Konfiguration: " + ex.Message);
+            }
         }
 
 
@@ -797,6 +839,7 @@ namespace GW2FOX
         {
             try
             {
+                await UpdateBosses();
                 var runs = await Task.Run(() => GetBossRunsForOverlay());
                 var items = await Task.Run(() => GetBossOverlayItems(runs, GlobalVariables.CURRENT_DATE_TIME));
 

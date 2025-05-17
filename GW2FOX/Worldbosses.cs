@@ -20,19 +20,18 @@ namespace GW2FOX
         public Worldbosses()
         {
             InitializeComponent();
-            InitializeBossCheckBoxMap();
-            bossCheckBoxMap = new Dictionary<string, CheckBox>();
-            UpdateBossUiBosses();
             Load += Worldbosses_Load_1;
         }
 
-        private void Worldbosses_Load_1(object? sender, EventArgs e)
+        private async void Worldbosses_Load_1(object? sender, EventArgs e)
         {
             var screen = Screen.PrimaryScreen.WorkingArea;
             this.Location = new System.Drawing.Point(screen.Width - this.Width, 0);
-            InitializeBossCheckBoxMap();
+            if (bossCheckBoxMap == null || bossCheckBoxMap.Count == 0)
+                InitializeBossCheckBoxMap();
+
             LoadBossBoxesFromJson();
-            UpdateBoxes();
+            await UpdateBoxes();
         }
 
         protected override void AfterControlsLoaded()
@@ -1750,7 +1749,6 @@ namespace GW2FOX
                         checkBox.ForeColor = checkBox.Checked ? System.Drawing.Color.White : System.Drawing.Color.Gray;
                     }
                 }
-                SaveChoosenOnesToConfig();
             }
             catch (Exception ex)
             {
