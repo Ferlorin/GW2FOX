@@ -12,7 +12,6 @@ namespace GW2FOX
 {
     public partial class Worldbosses : BaseForm
     {
-        public static System.Windows.Controls.ListView? CustomBossList { get; private set; }
         public static Dictionary<string, CheckBox> bossCheckBoxMap;
         public static readonly char[] Separator = { ',' };
         public static List<string> BossList23 { get; set; } = new();
@@ -20,18 +19,19 @@ namespace GW2FOX
         public Worldbosses()
         {
             InitializeComponent();
+            InitializeBossCheckBoxMap();
+            bossCheckBoxMap = new Dictionary<string, CheckBox>();
+            UpdateBossUiBosses();
             Load += Worldbosses_Load_1;
         }
 
-        private async void Worldbosses_Load_1(object? sender, EventArgs e)
+        private void Worldbosses_Load_1(object? sender, EventArgs e)
         {
             var screen = Screen.PrimaryScreen.WorkingArea;
             this.Location = new System.Drawing.Point(screen.Width - this.Width, 0);
-            if (bossCheckBoxMap == null || bossCheckBoxMap.Count == 0)
-                InitializeBossCheckBoxMap();
-
+            InitializeBossCheckBoxMap();
+            UpdateBossUiBosses();
             LoadBossBoxesFromJson();
-            await UpdateBoxes();
         }
 
         protected override void AfterControlsLoaded()

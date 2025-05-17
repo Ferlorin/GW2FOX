@@ -75,48 +75,6 @@ namespace GW2FOX
         }
 
 
-        public async Task UpdateBosses()
-        {
-            string configPath = "BossTimings.json";
-            if (!File.Exists(configPath)) return;
-
-            try
-            {
-                var json = await File.ReadAllTextAsync(configPath);
-                var jObj = JObject.Parse(json);
-
-                var selectedBossNames = jObj["ChoosenOnes"] is JArray array
-                    ? array.Select(x => x.ToString()).ToHashSet(StringComparer.OrdinalIgnoreCase)
-                    : new HashSet<string>(StringComparer.OrdinalIgnoreCase);
-
-                var config = JsonConvert.DeserializeObject<BossConfig>(jObj.ToString()) ?? new BossConfig();
-
-                // Listen leeren
-                BossTimings.BossList23.Clear();
-                BossTimings.BossEventsList.Clear();
-                BossTimings.BossEventGroups.Clear();
-
-                // Bosse aus config laden, wenn sie in ChoosenOnes sind
-                var matched = config.Bosses
-                    .Where(b => selectedBossNames.Contains(b.Name))
-                    .ToList();
-
-                foreach (var boss in matched)
-                {
-                    BossTimings.AddBossEvent(boss.Name, boss.Timings.ToArray(), boss.Category, boss.Waypoint ?? "");
-                }
-
-                // Gruppen neu generieren und UI aktualisieren
-                BossTimings.GenerateBossEventGroups();
-                BossTimer.UpdateBossList();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Fehler beim Lesen der Boss-Konfiguration: " + ex.Message);
-            }
-        }
-
-
 
         [DllImport("user32.dll")]
         private static extern bool SetForegroundWindow(IntPtr hWnd);
@@ -839,7 +797,6 @@ namespace GW2FOX
         {
             try
             {
-                await UpdateBosses();
                 var runs = await Task.Run(() => GetBossRunsForOverlay());
                 var items = await Task.Run(() => GetBossOverlayItems(runs, GlobalVariables.CURRENT_DATE_TIME));
 
