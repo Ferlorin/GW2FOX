@@ -30,7 +30,7 @@ namespace GW2FOX
             var screen = Screen.PrimaryScreen.WorkingArea;
             this.Location = new System.Drawing.Point(screen.Width - this.Width, 0);
             InitializeBossCheckBoxMap();
-            UpdateBossUiBosses();
+            UpdateBoxes();
             LoadBossBoxesFromJson();
         }
 
@@ -1312,25 +1312,6 @@ namespace GW2FOX
                     checkBox.ForeColor = System.Drawing.Color.White;
                 }
             }
-        }
-
-
-        public static void AddBossEvent(string bossName, string[] timings, string category, string waypoint = "", string level = "")
-        {
-            foreach (var timing in timings)
-            {
-                var utcTime = ConvertToUtcFromConfigTime(timing);
-                BossEventsList.Add(new BossEvent(bossName, utcTime.TimeOfDay, category, waypoint, level));
-            }
-        }
-
-
-        public static DateTime ConvertToUtcFromConfigTime(string configTime)
-        {
-            return DateTime.SpecifyKind(
-                DateTime.ParseExact(configTime, "HH:mm:ss", CultureInfo.InvariantCulture),
-                DateTimeKind.Utc
-            );
         }
 
 

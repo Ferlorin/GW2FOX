@@ -7,7 +7,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System;
 
-public class LootHelper
+namespace GW2FOX
+{
+    public class LootHelper
 {
     private static readonly HttpClient client = new HttpClient();
 
@@ -160,6 +162,6 @@ public class LootHelper
                 .GroupBy(r => r.BossName)
                 .ToDictionary(g => g.Key, g => g.ToList());
     }
-
+    }
 
 }
