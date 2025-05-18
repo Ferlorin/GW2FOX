@@ -59,46 +59,6 @@ namespace GW2FOX
 
         private const int SW_RESTORE = 9;
 
-        public void BackButton()
-       {
-    if (this.Owner != null)
-    {
-            this.Owner.Show();
-            this.Owner.WindowState = FormWindowState.Maximized;
-            this.Owner.BringToFront();
-            this.Owner.Activate();
-            this.Owner.TopMost = true;
-            }
-
-    this.Dispose();
-            BringGw2ToFront();
-        }
-
-        protected void ShowAndHideForm(Form newForm)
-        {
-            if (lastOpenedBoss != null && !lastOpenedBoss.IsDisposed)
-            {
-                lastOpenedBoss.Hide();
-            }
-
-            lastOpenedBoss = newForm;
-
-            newForm.Owner = this;
-            ShowFormWithoutActivation(newForm);
-
-            if (newForm.WindowState == FormWindowState.Minimized)
-                newForm.WindowState = FormWindowState.Maximized;
-
-            newForm.BringToFront();
-            newForm.Activate();
-
-            SetForegroundWindow(newForm.Handle);
-
-            if (this is Worldbosses || this is Main)
-            {
-                this.Hide();
-            }
-        }
 
         protected void SetFormTransparency()
         {
@@ -108,13 +68,6 @@ namespace GW2FOX
             this.TransparencyKey = Color.Magenta;
             this.Opacity = 0.90;
             this.TopMost = true;
-        }
-
-        private void ShowFormWithoutActivation(Form form)
-        {
-            var style = NativeMethods.GetWindowLong(form.Handle, NativeMethods.GWL_EXSTYLE);
-            NativeMethods.SetWindowLong(form.Handle, NativeMethods.GWL_EXSTYLE, style | NativeMethods.WS_EX_NOACTIVATE);
-            form.Show();
         }
 
         internal static class NativeMethods
