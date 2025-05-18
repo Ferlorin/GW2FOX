@@ -21,13 +21,11 @@ namespace GW2FOX
         protected OverlayWindow overlayWindow;
         protected System.Windows.Controls.ListView customBossList;
         protected BossTimer bossTimer;
-        private GlobalKeyboardHook? _globalKeyboardHook;
         protected Form lastOpenedBoss = null;
         public static System.Windows.Controls.ListView CustomBossList { get; private set; } = new System.Windows.Controls.ListView();
 
         public BaseForm()
         {
-            InitializeGlobalKeyboardHook();
             SetFormTransparency();
         }
 
@@ -60,23 +58,6 @@ namespace GW2FOX
         private static extern bool AttachThreadInput(uint idAttach, uint idAttachTo, bool fAttach);
 
         private const int SW_RESTORE = 9;
-
-        private void InitializeGlobalKeyboardHook()
-        {
-            _globalKeyboardHook = new GlobalKeyboardHook();
-            _globalKeyboardHook.KeyPressed += GlobalKeyboardHook_KeyPressed;
-        }
-
-        private void GlobalKeyboardHook_KeyPressed(object sender, KeyPressedEventArgs e)
-        {
-            if (ModifierKeys == Keys.Alt && e.Key == Keys.T)
-            {
-                if (this is Main)
-                {
-                    Timer_Click(sender, e);
-                }
-            }
-        }
 
         public void BackButton()
        {
@@ -344,7 +325,8 @@ namespace GW2FOX
 
         private Dictionary<System.Windows.Forms.Button, System.Drawing.Image> originalImages = new();
 
-        private void Button_MouseDown(object sender, MouseEventArgs e)
+
+        private async void Button_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
         {
             if (sender is System.Windows.Forms.Button button)
             {
@@ -352,18 +334,23 @@ namespace GW2FOX
                 {
                     originalImages[button] = button.BackgroundImage;
                 }
+                if (!originalSizes.ContainsKey(button))
+                {
+                    originalSizes[button] = button.Size;
+                }
 
                 button.BackgroundImage = DarkenImage(originalImages[button]);
                 button.Size = new System.Drawing.Size((int)(button.Width * 0.95), (int)(button.Height * 0.95));
-            }
-        }
 
-        private void Button_MouseUp(object sender, MouseEventArgs e)
-        {
-            if (sender is System.Windows.Forms.Button button && originalImages.TryGetValue(button, out System.Drawing.Image originalImage))
-            {
-                button.BackgroundImage = originalImage;
-                button.Size = originalSizes[button];
+                await Task.Delay(100);
+
+                // Wiederherstellung
+                if (originalImages.TryGetValue(button, out System.Drawing.Image originalImage) &&
+                    originalSizes.TryGetValue(button, out System.Drawing.Size originalSize))
+                {
+                    button.BackgroundImage = originalImage;
+                    button.Size = originalSize;
+                }
             }
         }
 
@@ -377,7 +364,6 @@ namespace GW2FOX
                     button.MouseEnter += Button_MouseEnter;
                     button.MouseLeave += Button_MouseLeave;
                     button.MouseDown += Button_MouseDown;
-                    button.MouseUp += Button_MouseUp;
                 }
 
                 if (c.HasChildren)

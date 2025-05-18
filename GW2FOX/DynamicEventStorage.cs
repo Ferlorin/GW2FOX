@@ -231,9 +231,6 @@ namespace GW2FOX
             }
         }
 
-
-
-
         public static void LoadPersistedEvents()
         {
             try
