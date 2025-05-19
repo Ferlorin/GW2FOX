@@ -106,7 +106,7 @@ namespace GW2FOX
             {
                 switch (textBlock.Text)
                 {
-                    case "• Timer":
+                    case "• Hide Timer":
                         Clock_Click(sender, e);
                         break;
 
@@ -144,6 +144,30 @@ namespace GW2FOX
                         {
                             _textboxesForm.Show();
                             _textboxesForm.BringToFront();
+                        }
+                        break;
+                    case "• Close":
+                        {
+                            try
+                            {
+                                // Timer und Ressourcen stoppen
+                                BossTimerService._bossTimer?.Stop();
+                                BossTimerService._bossTimer?.Dispose();
+
+                                // Fenster schließen
+                                BossTimerService.WorldbossesInstance?.Close();
+                                BossTimerService._overlayWindow?.Close();
+                                _textboxesForm?.Close();
+                                _worldbossesForm?.Close();
+                                this.Close(); // MenuOverlay selbst
+
+                                // WPF-Anwendung sauber beenden
+                                System.Windows.Application.Current.Shutdown();
+                            }
+                            catch (Exception ex)
+                            {
+                                System.Windows.MessageBox.Show($"Fehler beim Schließen: {ex.Message}", "Fehler", MessageBoxButton.OK, MessageBoxImage.Error);
+                            }
                         }
                         break;
 

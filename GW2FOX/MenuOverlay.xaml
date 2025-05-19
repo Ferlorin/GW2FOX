@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:System="clr-namespace:System;assembly=mscorlib"
         Title="MenuOverlay" 
-        Height="90" 
+        Height="110" 
         Width="90"
         WindowStyle="None"
         AllowsTransparency="True"
@@ -53,8 +53,9 @@
             <ListView.Items>
                 <System:String>• Text Menu</System:String>
                 <System:String>• Timer Menu</System:String>
-                <System:String>• Timer</System:String>
+                <System:String>• Hide Timer</System:String>
                 <System:String>• Main Menu</System:String>
+                <System:String>• Close</System:String>
             </ListView.Items>
         </ListView>
     </Grid>
