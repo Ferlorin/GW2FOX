@@ -70,7 +70,7 @@ namespace GW2FOX
             };
             timer.Tick += (s, e) => DynamicEventManager.CleanupExpiredEvents();
             timer.Start();
-            UpdateBossOverlayListAsync();
+            UpdateBosses();
             bossDataManager.InitializeAsync();
         }
 
@@ -798,7 +798,15 @@ namespace GW2FOX
             try
             {
                 var runs = await Task.Run(() => GetBossRunsForOverlay());
+
+                // 🔁 Duplikate entfernen: gleiche BossName + NextRunTime
+                runs = runs
+                    .GroupBy(r => new { r.BossName, r.NextRunTime })
+                    .Select(g => g.First())
+                    .ToList();
+
                 var items = await Task.Run(() => GetBossOverlayItems(runs, GlobalVariables.CURRENT_DATE_TIME));
+
 
                 // Use a temporary list to avoid modifying the collection while enumerating
                 var updatedItems = new List<BossListItem>();
@@ -822,26 +830,17 @@ namespace GW2FOX
                 {
                     double oldOffset = BossScrollViewer.VerticalOffset;
 
-                    var previousItems = OverlayItems.ToList();
                     OverlayItems.Clear();
 
-                    foreach (var item in items)
+                    foreach (var item in updatedItems)  // ✅ Nutze jetzt "updatedItems"
                     {
-                        var previous = previousItems.FirstOrDefault(x => x.BossName == item.BossName);
-                        if (previous != null)
-                        {
-                            item.ChestOpened = previous.ChestOpened;
-                        }
-                        else
-                        {
-                            item.LoadChestState();
-                        }
-
                         OverlayItems.Add(item);
                     }
 
                     BossScrollViewer.ScrollToVerticalOffset(oldOffset);
                 });
+
+
 
 
             }
@@ -851,6 +850,62 @@ namespace GW2FOX
                 Console.WriteLine(ex.StackTrace);
             }
         }
+
+        public async Task UpdateBosses()
+        {
+            BossTimings.BossList23.Clear();
+            BossTimings.BossEventsList.Clear();
+            BossTimings.BossEventGroups.Clear();
+            DynamicEventManager.Events.Clear();
+
+            string configPath = "BossTimings.json";
+            if (!File.Exists(configPath)) return;
+
+            try
+            {
+                var json = File.ReadAllText(configPath);
+                var jObj = JObject.Parse(json);
+
+                var selectedBossNames = jObj["ChoosenOnes"] is JArray array
+                    ? array.Select(x => x.ToString()).ToHashSet(StringComparer.OrdinalIgnoreCase)
+                    : new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+
+                BossTimings.BossList23 = selectedBossNames.ToList();
+
+                BossTimings.BossEventsList.Clear();
+                BossTimings.BossEventGroups.Clear();
+
+                var config = BossTimings.LoadBossConfigAndReturn();
+
+                foreach (var bossName in BossTimings.BossList23)
+                {
+                    var boss = config.Bosses.FirstOrDefault(b => b.Name.Equals(bossName, StringComparison.OrdinalIgnoreCase));
+                    if (boss != null)
+                    {
+                        BossTimings.AddBossEvent(
+                            boss.Name,
+                            boss.Timings?.ToArray() ?? Array.Empty<string>(),
+                            boss.Category ?? "WBs",
+                            boss.Waypoint ?? "",
+                            boss.Level ?? ""
+                        );
+                    }
+                    else
+                    {
+                        Console.WriteLine($"[WARN] Boss nicht gefunden in config.Bosses: {bossName}");
+                    }
+                }
+
+                BossTimings.GenerateBossEventGroups();
+
+                await OverlayWindow.GetInstance().UpdateBossOverlayListAsync();
+            }
+            catch (Exception ex)
+            {
+               // MessageBox.Show($"Fehler beim Laden von ChoosenOnes: {ex.Message}", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
 
 
 

@@ -14,14 +14,12 @@ namespace GW2FOX
     {
         public static Dictionary<string, CheckBox> bossCheckBoxMap;
         public static readonly char[] Separator = { ',' };
-        public static List<string> BossList23 { get; set; } = new();
 
         public Worldbosses()
         {
             InitializeComponent();
             InitializeBossCheckBoxMap();
             bossCheckBoxMap = new Dictionary<string, CheckBox>();
-            UpdateBossUiBosses();
             Load += Worldbosses_Load_1;
         }
 

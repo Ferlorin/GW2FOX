@@ -24,11 +24,6 @@ namespace GW2FOX
 
         private void InitializeWorldbosses()
         {
-            BossTimings.BossList23.Clear();
-            BossTimings.BossEventsList.Clear();
-            BossTimings.BossEventGroups.Clear();
-            DynamicEventManager.Events.Clear();
-
             _worldbossesForm = new Worldbosses();
             _worldbossesForm.FormClosed += (s, args) => _worldbossesForm = null;
             BossTimerService.WorldbossesInstance = _worldbossesForm;
