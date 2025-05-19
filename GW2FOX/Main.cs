@@ -128,20 +128,16 @@ namespace GW2FOX
             }
         }
 
-        private void CloseAll_Click(object sender, EventArgs e)
+        public static void CloseAll_Click(object sender, EventArgs e)
         {
-            try
-            {
+            
                 BossTimerService._bossTimer?.Stop();
                 BossTimerService._bossTimer?.Dispose();
                 BossTimerService._overlayWindow?.Close();
 
                 System.Windows.Forms.Application.Exit();
-            }
-            catch (Exception ex)
-            {
-                HandleException(ex);
-            }
+           
+            
         }
 
         private void LaunchExternalTool(string relativePath)

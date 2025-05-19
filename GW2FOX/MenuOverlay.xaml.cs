@@ -145,26 +145,7 @@ namespace GW2FOX
                         break;
                     case "• Close":
                         {
-                            try
-                            {
-                                // Timer und Ressourcen stoppen
-                                BossTimerService._bossTimer?.Stop();
-                                BossTimerService._bossTimer?.Dispose();
-
-                                // Fenster schließen
-                                BossTimerService.WorldbossesInstance?.Close();
-                                BossTimerService._overlayWindow?.Close();
-                                _textboxesForm?.Close();
-                                _worldbossesForm?.Close();
-                                this.Close(); // MenuOverlay selbst
-
-                                // WPF-Anwendung sauber beenden
-                                System.Windows.Application.Current.Shutdown();
-                            }
-                            catch (Exception ex)
-                            {
-                                System.Windows.MessageBox.Show($"Fehler beim Schließen: {ex.Message}", "Fehler", MessageBoxButton.OK, MessageBoxImage.Error);
-                            }
+                            Main.CloseAll_Click(sender, e);
                         }
                         break;
 
@@ -246,43 +227,6 @@ namespace GW2FOX
 
             scaleTransform.BeginAnimation(ScaleTransform.ScaleXProperty, animX);
             scaleTransform.BeginAnimation(ScaleTransform.ScaleYProperty, animY);
-        }
-
-
-        private void Button_MouseEnter(object sender, WpfMouseEventArgs e)
-        {
-            if (sender is WpfImage img)
-            {
-                AnimateScale(img, 1.0, 150);
-                img.Opacity = 1.0;
-            }
-        }
-
-        private void Button_MouseLeave(object sender, WpfMouseEventArgs e)
-        {
-            if (sender is WpfImage img)
-            {
-                AnimateScale(img, 0.8, 150);
-                img.Opacity = 0.6;
-            }
-        }
-
-        private void Button_MouseDown(object sender, WpfMouseButtonEventArgs e)
-        {
-            if (sender is WpfImage img)
-            {
-                AnimateScale(img, 0.9, 80);
-                img.Opacity = 0.4;
-            }
-        }
-
-        private void Button_MouseUp(object sender, WpfMouseButtonEventArgs e)
-        {
-            if (sender is WpfImage img)
-            {
-                AnimateScale(img, 1.0, 100);
-                img.Opacity = 1.0;
-            }
         }
 
         public void HideChildForms()

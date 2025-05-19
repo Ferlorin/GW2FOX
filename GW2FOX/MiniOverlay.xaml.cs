@@ -178,21 +178,19 @@ namespace GW2FOX
             }
         }
 
-        private void Button_MouseDown(object sender, WpfMouseButtonEventArgs e)
+        private async void Button_MouseDown(object sender, WpfMouseButtonEventArgs e)
         {
             if (sender is WpfImage img)
             {
-                AnimateScale(img, 0.9, 80);
-                img.Opacity = 0.4;
-            }
-        }
+                AnimateScale(img, 0.90);
+                img.Opacity = 0.7;
 
-        private void Button_MouseUp(object sender, WpfMouseButtonEventArgs e)
-        {
-            if (sender is WpfImage img)
-            {
-                AnimateScale(img, 1.0, 100);
+                await Task.Delay(100); // Short delay to complete the animation
+                AnimateScale(img, 1.10);
                 img.Opacity = 1.0;
+
+                await Task.Delay(100); // Short delay to complete the animation
+                AnimateScale(img, 1.0);
             }
         }
     }

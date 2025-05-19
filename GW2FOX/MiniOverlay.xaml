@@ -18,7 +18,7 @@
     <StackPanel Orientation="Horizontal" Margin="0">
         <Image Source="/Resources/BloodyCom.bmp" Width="28" MouseLeftButtonUp="Icon_Click" Cursor="Hand"
            MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave"
-           MouseDown="Button_MouseDown" MouseUp="Button_MouseUp"/>
+           MouseDown="Button_MouseDown"/>
     </StackPanel>
 
 </Window>
