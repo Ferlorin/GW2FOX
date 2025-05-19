@@ -17,9 +17,6 @@ using System.Windows.Controls;
 
 namespace GW2FOX
 {
-    /// <summary>
-    /// Interaktionslogik für MenuWindow.xaml
-    /// </summary>
     public partial class MenuOverlay : Window
     {
         private Worldbosses _worldbossesForm;
