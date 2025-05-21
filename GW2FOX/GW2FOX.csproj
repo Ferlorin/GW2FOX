@@ -25,6 +25,7 @@
   <None Remove="Resources\Black_Lion_Chest.png" />
   <None Remove="Resources\BlishHUDmini.bmp" />
   <None Remove="Resources\BloodyCom.bmp" />
+  <None Remove="Resources\BloodyCom.png" />
   <None Remove="Resources\Bottle.png" />
   <None Remove="Resources\Branded_Eye_of_Argon.png" />
   <None Remove="Resources\Clock.bmp" />
@@ -66,6 +67,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Resources\BloodyCom.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\Bottle.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>

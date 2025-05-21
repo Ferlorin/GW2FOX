@@ -106,7 +106,7 @@
                     </Grid.ColumnDefinitions>
 
                     <!-- Com -->
-                    <Image x:Name="ComiIcon" Source="/Resources/Com.png"
+                    <Image x:Name="ComiIcon" Source="/Resources/BloodyCom.png"
 Width="25" Height="25" Cursor="Hand" Margin="0,0,0,0"
 MouseDown="FoXXy_MouseDown">
                     </Image>
