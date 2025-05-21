@@ -62,40 +62,43 @@ namespace GW2FOX
                     return;
                 }
 
-                if (int.TryParse(Quantity.Text, out int numberOfBosses) && numberOfBosses > 0)
-                {
-                    var bossEventGroups = BossEventGroups
-                        .Where(bossEventGroup => BossList23.Contains(bossEventGroup.BossName))
-                        .ToList();
-
-                    Console.WriteLine($"[DEBUG] {bossEventGroups.Count} BossEventGroups gefunden.");
-
-                    var allBosses = bossEventGroups
-                        .SelectMany(bossEventGroup => bossEventGroup.GetNextRuns())
-                        .Where(run => run.TimeToShow > GlobalVariables.CURRENT_DATE_TIME) // Nur zukünftige Runs!
-                        .OrderBy(run => run.TimeToShow)
-                        .ToList();
-
-                    var bossInfo = allBosses
-                        .Take(numberOfBosses)
-                        .Select(bossEvent => $"{bossEvent.BossName} - {bossEvent.Waypoint}")
-                        .ToList();
-
-                    string bossNamesString = "Upcoming Meta:" + Environment.NewLine + string.Join(Environment.NewLine, bossInfo);
-
-                    Clipboard.SetText(bossNamesString);
-                    SearchResults.Text = bossNamesString;
-                }
-                else
+                if (!int.TryParse(Quantity.Text, out int numberOfBosses) || numberOfBosses <= 0)
                 {
                     MessageBox.Show("A Number please!.", "Do you know the meaning of a NUMBER, try 10!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
                 }
+
+                // 1. Nur die ausgewählten Boss-Gruppen laden
+                var bossEventGroups = BossEventGroups
+                    .Where(beg => BossList23.Contains(beg.BossName))
+                    .ToList();
+
+                Console.WriteLine($"[DEBUG] {bossEventGroups.Count} BossEventGroups gefunden.");
+
+                // 2. Pro Boss nur den ersten anstehenden Run holen
+                var nextRuns = bossEventGroups
+                    .Select(g => g.GetNextRuns().FirstOrDefault())               // erster Run pro Boss
+                    .Where(run => run != null && run.TimeToShow > GlobalVariables.CURRENT_DATE_TIME)  // gültig und in der Zukunft
+                    .OrderBy(run => run.TimeToShow)
+                    .Take(numberOfBosses)
+                    .ToList();
+
+                // 3. Ausgabe zusammenbauen
+                var bossInfo = nextRuns
+                    .Select(run => $"{run.BossName} - {run.Waypoint}")
+                    .ToList();
+
+                string bossNamesString = "Upcoming Meta:" + Environment.NewLine + string.Join(Environment.NewLine, bossInfo);
+
+                Clipboard.SetText(bossNamesString);
+                SearchResults.Text = bossNamesString;
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
 
 
 
