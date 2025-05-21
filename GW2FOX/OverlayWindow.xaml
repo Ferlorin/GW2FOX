@@ -114,7 +114,7 @@ MouseDown="FoXXy_MouseDown">
                     <!-- Überschrift -->
                     <TextBlock Grid.Column="1" VerticalAlignment="Center" Foreground="White"
            FontFamily="Segoe UI" FontWeight="Bold" FontSize="18" Cursor="Hand" Text="FoXXy"
-           MouseDown="FoXXy_MouseDown">
+           MouseDown="FoXXyTextMouseDown">
                         <TextBlock.Effect>
                             <DropShadowEffect Color="Black" BlurRadius="0" ShadowDepth="0" Opacity="1"/>
                         </TextBlock.Effect>

@@ -34,6 +34,7 @@ namespace GW2FOX
 {
     public partial class OverlayWindow : Window, INotifyPropertyChanged
     {
+        private Textboxes _textboxesForm;
         private bool isResizing = false;
         private WpfPoint clickPosition;
         public readonly BossDataManager bossDataManager = new();
@@ -98,6 +99,24 @@ namespace GW2FOX
             DispatcherTimer resetTimer = new() { Interval = TimeSpan.FromMinutes(1) };
             resetTimer.Tick += (s, e) => CheckDailyChestReset();
             resetTimer.Start();
+        }
+
+        private void FoXXyTextMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (_textboxesForm == null || _textboxesForm.IsDisposed)
+                        {
+                            _textboxesForm = new Textboxes();
+        _textboxesForm.Show();
+                        }
+                        else if (_textboxesForm.Visible)
+                        {
+                            _textboxesForm.Hide();
+                        }
+                        else
+{
+    _textboxesForm.Show();
+    _textboxesForm.BringToFront();
+}
         }
 
         private void OverlayWindow_PreviewMouseWheel(object sender, WpfMouseEventArgs e)
