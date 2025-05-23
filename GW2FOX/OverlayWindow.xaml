@@ -159,7 +159,7 @@ MouseDown="SmilieIcon_MouseDown">
 
                         <!-- GroupSearch Icon -->
                         <Image x:Name="GroupSearchIcon" Source="/Resources/GroupSearch.png"
-Width="22" Height="19" Cursor="Hand" Margin="0,0,3,0"
+Width="23" Height="20" Cursor="Hand" Margin="0,0,3,0"
 MouseEnter="Image_MouseEnter"
 MouseLeave="Image_MouseLeave"
 MouseDown="GroupSearchIcon_MouseDown">
@@ -171,7 +171,7 @@ MouseDown="GroupSearchIcon_MouseDown">
 
                         <!-- Scheduler -->
                         <Image x:Name="SchedulerIcon" Source="/Resources/Scheduler.png"
-       Width="19" Height="19" Cursor="Hand" Margin="0,0,3,0"
+       Width="24" Height="19" Cursor="Hand" Margin="0,0,3,0"
        MouseEnter="Image_MouseEnter"
        MouseLeave="Image_MouseLeave"
        MouseDown="SchedulerIcon_MouseDown">
@@ -183,7 +183,7 @@ MouseDown="GroupSearchIcon_MouseDown">
 
                         <!-- GuildAdvertising -->
                         <Image x:Name="GuildAdvertisingIcon" Source="/Resources/GuildAdvertising.png"
-       Width="19" Height="19" Cursor="Hand" Margin="0,0,3,0"
+       Width="18" Height="19" Cursor="Hand" Margin="0,0,3,0"
        MouseEnter="Image_MouseEnter"
        MouseLeave="Image_MouseLeave"
        MouseDown="GuildAdvertisingIcon_MouseDown">
@@ -195,7 +195,7 @@ MouseDown="GroupSearchIcon_MouseDown">
 
                         <!-- GuildWelcome -->
                         <Image x:Name="GuildWelcomeIcon" Source="/Resources/GuildWelcome.png"
-       Width="19" Height="19" Cursor="Hand" Margin="0,0,0,0"
+       Width="18" Height="19" Cursor="Hand" Margin="0,0,0,0"
        MouseEnter="Image_MouseEnter"
        MouseLeave="Image_MouseLeave"
        MouseDown="GuildWelcomeIcon_MouseDown">
