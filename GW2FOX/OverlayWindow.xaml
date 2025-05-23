@@ -134,7 +134,7 @@ MouseDown="FoXXy_MouseDown">
 
                         <!-- Smilie -->
                         <Image x:Name="SmilieIcon" Source="/Resources/Smilie.png"
-Width="22" Height="19" Cursor="Hand" Margin="0,0,3,0"
+Width="22" Height="20" Cursor="Hand" Margin="0,0,3,0"
 MouseEnter="Image_MouseEnter"
 MouseLeave="Image_MouseLeave"
 MouseDown="SmilieIcon_MouseDown">
