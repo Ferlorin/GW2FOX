@@ -1313,12 +1313,12 @@ namespace GW2FOX
         }
 
 
-        private void FidosSpecial_Click(object sender, EventArgs e)
+        private async void FidosSpecial_Click(object sender, EventArgs e)
         {
             try
             {
                 BossTimings.ApplyBossGroupFromConfig("Fido");
-                UpdateBossUiBosses();
+                await UpdateBossUiBosses();
             }
             catch (Exception ex)
             {
@@ -1328,12 +1328,12 @@ namespace GW2FOX
 
 
 
-        private void World_Click(object sender, EventArgs e)
+        private async void World_Click(object sender, EventArgs e)
         {
             try
             {
                 BossTimings.ApplyBossGroupFromConfig("World");
-                UpdateBossUiBosses();
+                await UpdateBossUiBosses();
             }
             catch (Exception ex)
             {
@@ -1444,12 +1444,12 @@ namespace GW2FOX
 
 
 
-        private void Mixed_Click_1(object sender, EventArgs e)
+        private async void Mixed_Click_1(object sender, EventArgs e)
         {
             try
             {
                 BossTimings.ApplyBossGroupFromConfig("Mixed");
-                UpdateBossUiBosses();
+                await UpdateBossUiBosses();
             }
             catch (Exception ex)
             {
@@ -1459,12 +1459,12 @@ namespace GW2FOX
 
 
 
-        private void Meta_Click_1(object sender, EventArgs e)
+        private async void Meta_Click_1(object sender, EventArgs e)
         {
             try
             {
                 BossTimings.ApplyBossGroupFromConfig("Meta");
-                SaveChoosenOnesToConfig();
+                await UpdateBossUiBosses();
             }
             catch (Exception ex)
             {
